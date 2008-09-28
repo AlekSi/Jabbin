@@ -75,7 +75,7 @@ bool YaLastMailInformer::isPersistent() const
 
 QString YaLastMailInformer::jid() const
 {
-	return "lastmail.ya.ru";
+	return "mail.jabberout.com";
 }
 
 QIcon YaLastMailInformer::icon() const

@@ -424,9 +424,9 @@ QDomElement BasicProtocol::docElement()
 		e.setAttribute("version", QString::number(version.major) + '.' + QString::number(version.minor));
 
 #ifdef YAPSI
-	if(to == "ya.ru") {
-		e.setAttribute("xmlns:yandex", "ns:yandex:let:me:in");
-	}
+//	if(to == "ya.ru") {
+//		e.setAttribute("xmlns:yandex", "ns:yandex:let:me:in");
+//	}
 #endif
 
 	return e;

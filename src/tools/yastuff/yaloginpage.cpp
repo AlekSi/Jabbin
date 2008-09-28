@@ -237,7 +237,7 @@ QString YaLoginPage::login() const
 {
 	QString result = ui_.login->text().trimmed();
 	if (!result.isEmpty() && !result.contains("@"))
-		result += "@ya.ru";
+		result += "@jabberout.com";
 	return result;
 }
 

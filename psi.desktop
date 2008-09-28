@@ -2,11 +2,11 @@
 # This is the spec version, *not* the application version
 Version=1.0
 Type=Application
-Name=Ya.Online
+Name=Joim
 GenericName=Jabber Client
 Comment=Communicate over the Jabber network
-Icon=yachat
-Exec=yachat
+Icon=joim
+Exec=joim
 Terminal=false
 Categories=Network;InstantMessaging;Qt;
 

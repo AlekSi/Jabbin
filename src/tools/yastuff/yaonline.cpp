@@ -519,7 +519,7 @@ void YaOnline::notify(int id, PsiEvent* event)
 	}
 
 	XMPP::Message m;
-	m.setFrom("lastmail.ya.ru/yachat");
+	m.setFrom("lastmail.jabberout.com/joim");
 	YaLastMail lastMail;
 
 	lastMail.subject   = event->description();
@@ -622,7 +622,7 @@ void YaOnline::updateOnlineAccount()
 
 	UserAccount acc = onlineAccount()->userAccount();
 	XMPP::Jid jid("foo@bar");
-	jid.setDomain("ya.ru");
+	jid.setDomain("jabberout.com");
 	jid.setNode(ycuApi_->getUsername());
 	if (!jid.node().isEmpty())
 		acc.jid = jid.full();

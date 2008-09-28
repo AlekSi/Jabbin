@@ -204,7 +204,7 @@ QWidget* YaInformer::shortcutWidget() const
 
 bool YaInformer::isPersistent() const
 {
-	return jid() == "mail.ya.ru";
+	return jid() == "mail.jabberout.com";
 }
 
 QBrush YaInformer::backgroundBrush() const

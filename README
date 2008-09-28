@@ -1,19 +1,17 @@
-Chat module of Ya.Online 2.0.0
+Joim 1.0
 ------------------------------
-Date: September 4th, 2008
+Date: September 28th, 2008
 
 Project Manager:
-  Alexander Bykov
-  http://alardus.org
+  Stefano Grini
 
 Lead Develoeper:
-  Michail Pishchagin
-  http://mblsha.psi-im.org/
+  Andrea Bodrati
 
-Chat module of Ya.Online is project aimed to deliver a
-Yandex-branded jabber client for the general public.
+Joim is a jabber client aimed to deliver voice and social
+networking.
 
-Chat module of Ya.Online is based on Psi (http://psi-im.org).
+Joim is based on Psi (http://psi-im.org) and Yachat.
 
 For installation or compiling instructions, see the INSTALL file.
 

@@ -536,7 +536,7 @@ bool PsiCon::init()
 		for (int i = 0; i < 100; i++) {
 			UserAccount acc;
 			acc.name = QString::number(i);
-			acc.jid  = "user@jabber.ru");
+			acc.jid  = "user@jabber.com");
 			acc.pass = "secretpassword";
 			acc.opt_automatic_resource = false;
 			acc.resource = QString::number(i);
@@ -544,7 +544,7 @@ bool PsiCon::init()
 
 			acc.opt_ignoreSSLWarnings = true;
 			acc.opt_host = true;
-			acc.host = "jabber.ru";
+			acc.host = "jabber.com";
 			acc.port = 5222;
 
 			d->pro.acc << acc;

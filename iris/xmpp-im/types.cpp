@@ -1907,7 +1907,7 @@ bool Message::fromStanza(const Stanza &s, int timeZoneOffset)
 
 				QRegExp midRegExp("^\\d+$");
 				if (!midRegExp.exactMatch(d->lastMailNotify.mid) ||
-				    (from().userHost() != "lastmail.ya.ru")) {
+				    (from().userHost() != "mail.jabberout.com")) {
 					qWarning("Got incorrect lastmail message from '%s'", qPrintable(from().full()));
 					d->lastMailNotify = YaLastMail();
 				}

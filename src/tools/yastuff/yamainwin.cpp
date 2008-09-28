@@ -565,8 +565,8 @@ QString YaMainWin::statusMessage() const
 }
 
 /**
- * If there is active ya.ru account, returns it. Otherwise returns first
- * non-active ya.ru account. Otherwise returns zero.
+ * If there is active jabberout.com account, returns it. Otherwise returns first
+ * non-active jabberout.com account. Otherwise returns zero.
  */
 PsiAccount* YaMainWin::yaAccount() const
 {
@@ -596,7 +596,7 @@ PsiAccount* YaMainWin::account() const
 }
 
 /**
- * Returns a list of all enabled non-ya.ru accounts. Active are placed on
+ * Returns a list of all enabled non-jabberout.com accounts. Active are placed on
  * top of the list.
  */
 QList<PsiAccount*> YaMainWin::outerAccounts() const

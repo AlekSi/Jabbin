@@ -394,7 +394,7 @@ void YaSelfMoodExtra::showYaruWarning()
 		return;
 
 	PsiToolTip::showText(mapToGlobal(rect().bottomLeft()) + QPoint(15, -15),
-	                     tr("This mood will be published on Ya.ru and all your contacts will be able to see it."),
+	                     tr("This mood will be published on Jabberout.com and all your contacts will be able to see it."),
 	                     0);
 	PsiOptions::instance()->setOption(showYaruWarningOptionPath, false);
 }
