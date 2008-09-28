@@ -1,0 +1,16 @@
+/yachat
+/config.h
+/Makefile.Debug
+/Makefile.Release
+/debug
+/release
+/mocinclude.tmp
+/object_script.*
+/_rcc
+/_obj
+/vc70.pdb
+/vc70.idb
+/yachat.ncb
+/yachat.sln
+/yachat.suo
+/yachat.vcproj

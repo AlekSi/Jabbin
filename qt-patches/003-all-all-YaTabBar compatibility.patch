@@ -1,0 +1,12 @@
+diff -urN qt-x11-opensource-src-4.3.5.orig/src/gui/widgets/qtabbar.h qt-x11-opensource-src-4.3.5/src/gui/widgets/qtabbar.h
+--- qt-x11-opensource-src-4.3.5.orig/src/gui/widgets/qtabbar.h	2008-09-02 16:12:14.000000000 +0400
++++ qt-x11-opensource-src-4.3.5/src/gui/widgets/qtabbar.h	2008-09-02 16:13:08.000000000 +0400
+@@ -140,7 +140,7 @@
+     void setUsesScrollButtons(bool useButtons);
+ 
+ public Q_SLOTS:
+-    void setCurrentIndex(int index);
++    virtual void setCurrentIndex(int index);
+ 
+ Q_SIGNALS:
+     void currentChanged(int index);

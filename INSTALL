@@ -1,0 +1,44 @@
+Installation
+------------
+
+-=[ Important ]=-
+
+  For best experience, use of patched Qt is adviced: all required patches
+  are provided in qt-patches directory.
+
+-=[ Linux / Unix ]=-
+
+  For instructions on how to build and install Psi on Unix systems, see 
+  the 'Compiling' section below.
+
+-=[ Windows ]=-
+
+  No installation required for Windows.  You can simply just
+  run the Psi executable.  You might want to move everything into
+  C:\Program Files\Psi
+
+-=[ MacOS X ]=-
+
+  Drag the Psi application file from the disk image into the Applications dir.
+
+
+Compiling
+---------
+
+Requirements:
+  - Qt 4.3.5
+  - QCA 2.0 beta 4 or higher. This can either be installed system-wide,
+    or you can download the tarball and unpack it in third-party/qca dir
+    of the Psi source tree, and Psi will auto-detect it at configure time. 
+    The different QCA packages should be unpacked in the following locations:
+        - QCA 2.0: third-party/qca/qca
+        - QCA OpenSSL (optional): third-party/qca/qca-openssl
+        - QCA GnuPG (optional): third-party/qca/qca-gnupg
+
+You can obtain Qt at http://www.trolltech.com/
+
+You can obtain QCA at http://delta.affinix.com/qca/2.0/beta4
+
+For information about building Psi on Unix, see doc/build-unix.txt.
+For information about building Psi on Mac OS X, see doc/build-mac.txt.
+For information about building Psi on Windows, see doc/build-win.txt.

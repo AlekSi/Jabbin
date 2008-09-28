@@ -1,0 +1,13 @@
+diff -urN qt-x11-opensource-src-4.3.5.orig/src/gui/widgets/qmenu.h qt-x11-opensource-src-4.3.5/src/gui/widgets/qmenu.h
+--- qt-x11-opensource-src-4.3.5.orig/src/gui/widgets/qmenu.h	2008-09-02 16:12:14.000000000 +0400
++++ qt-x11-opensource-src-4.3.5/src/gui/widgets/qmenu.h	2008-09-02 16:37:57.000000000 +0400
+@@ -161,7 +161,8 @@
+     void timerEvent(QTimerEvent *);
+     bool event(QEvent *);
+     bool focusNextPrevChild(bool next);
+-    void initStyleOption(QStyleOptionMenuItem *option, const QAction *action) const;
++    virtual void initStyleOption(QStyleOptionMenuItem *option, const QAction *action) const;
++
+ 
+ private Q_SLOTS:
+     void internalSetSloppyAction();

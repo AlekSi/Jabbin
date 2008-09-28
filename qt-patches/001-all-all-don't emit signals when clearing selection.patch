@@ -1,0 +1,20 @@
+diff -urN qt-x11-opensource-src-4.3.5.orig/src/gui/itemviews/qitemselectionmodel.cpp qt-x11-opensource-src-4.3.5/src/gui/itemviews/qitemselectionmodel.cpp
+--- qt-x11-opensource-src-4.3.5.orig/src/gui/itemviews/qitemselectionmodel.cpp	2008-09-02 16:12:14.000000000 +0400
++++ qt-x11-opensource-src-4.3.5/src/gui/itemviews/qitemselectionmodel.cpp	2008-09-02 18:08:15.000000000 +0400
+@@ -1058,10 +1058,14 @@
+     if (d->ranges.count() == 0 && d->currentSelection.count() == 0)
+         return;
+     QItemSelection selection = d->ranges;
+-    selection.merge(d->currentSelection, d->currentCommand);
++    if (!signalsBlocked()) {
++        selection.merge(d->currentSelection, d->currentCommand);
++    }
+     d->ranges.clear();
+     d->currentSelection.clear();
+-    emit selectionChanged(QItemSelection(), selection);
++    if (!signalsBlocked()) {
++        emit selectionChanged(QItemSelection(), selection);
++    }
+ }
+ 
+ 

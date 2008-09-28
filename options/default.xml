@@ -1,0 +1,364 @@
+<!DOCTYPE psi>
+<!--
+	CONVENTIONS / RULES
+	===================
+	Three top-level entries should be observed:
+	options : This is the catch-all for client options. 
+	accounts : This is used for account data in Psi.
+	plugins : This is reserved for plugin options and so there's not a terribly good reason to be defining anything in the default option file; it may be interesting for the system defaults file, however.
+	
+	Naming: All tags should use lower case throughout, please use dashes ("-") to seperate words.
+	
+	Comments: please add a "comment" attribute to every option you add, describing its use and, if appropriate, possible values.
+	
+	-->
+<psi version="defaults" >
+	<options comment="Client options">
+		<account comment="Default account options">
+			<domain comment="Always use the same domain to register with. Leave this empty to allow the user to choose his server." type="QString"></domain>
+		</account>
+		<enable-multicast comment="Enable multicasting messages to multiple recipients" type="bool">false</enable-multicast>
+		<html comment="Hypertext markup options">
+			<chat comment="HTML in chats">
+				<render comment="Display received HTML" type="bool">true</render>
+			</chat>
+		</html>
+		<extended-presence comment="Extended presence options">
+			<notify comment="Get notified of extended presence changes" type="bool">true</notify>
+			<tune comment="Tune options">
+				<publish comment="Publish user tune information" type="bool">false</publish>
+			</tune>
+		</extended-presence>
+		<muc comment="Multi-User Chat options">
+			<bookmarks comment="Options for bookmarked conference rooms">
+				<auto-join comment="Automatically join bookmarked conference rooms that are configured for auto-joining." type="bool">false</auto-join>
+			</bookmarks>
+			<show-joins comment="Display notices of users joining and leaving conferences" type="bool">true</show-joins>
+			<show-role-affiliation comment="Include role and affiliation changes in join messages, and display notices of changes" type="bool">true</show-role-affiliation>
+			<show-status-changes comment="Show status changes in groupchat window" type="bool">false</show-status-changes>
+			<accept-defaults comment="Automatically accept the default room configuration when a new room is created." type="bool">true</accept-defaults>
+			<auto-configure comment="Automatically open the configuration dialog when a new room is created. This option only has effect if accept-defaults is false." type="bool">true</auto-configure>
+			<context comment="Options regarding the context being sent when joining a room">
+				<maxchars comment="The maximum number of characters of context that should be sent when entering a room. Use a negative number for an unlimited amount." type="int">-1</maxchars>
+				<maxstanzas comment="The maximum number of context items that should be sent when entering a room. Use a negative number for an unlimited amount." type="int">-1</maxstanzas>
+				<seconds comment="The maximum number of context seconds that should be sent when entering a room. Use a negative number for an unlimited amount." type="int">-1</seconds>
+			</context>
+			<recent-joins>
+				<maximum comment="The maximum number of recently joined rooms that should be remembered" type="int">10</maximum>
+			</recent-joins>
+		</muc> 
+		<pgp comment="PGP encryption options">
+			<enable comment="Enable PGP globally" type="bool">true</enable>
+		</pgp>
+		<ui comment="User interface options">
+			<account comment="Account options">
+				<data-proxy comment="Allow changing the data transfer proxy" type="bool">true</data-proxy>
+				<ignore-ssl-warnings comment="Show the ignore SSL warnings option" type="bool">true</ignore-ssl-warnings>
+				<keepalive comment="Show the keepalive option" type="bool">true</keepalive>
+				<legacy-ssl-probe comment="Show legacy SSL probe option" type="bool">true</legacy-ssl-probe>
+				<manual-host comment="Enable manual host configuration" type="bool">true</manual-host>
+				<priority comment="Allow changing the priority" type="bool">true</priority>
+				<privacy comment="Options related to the privacy UI">
+					<show comment="Show the privacy UI" type="bool">true</show>
+				</privacy>
+				<proxy comment="Options related to the proxy UI">
+					<show comment="Show the proxy UI" type="bool">true</show>
+				</proxy>
+				<resource comment="Allow changing the resource" type="bool">true</resource>
+				<custom-authid comment="Allow changing the authentication identity" type="bool">true</custom-authid>
+				<security comment="Options related to the seciruty UI">
+					<show comment="Show the security UI" type="bool">true</show>
+				</security>
+				<single comment="Limit the client to a single account" type="bool">false</single>
+			</account>
+			<message comment="Message options">
+				<enabled comment="Enable message (i.e. non-chat) functionality" type="bool">false</enabled>
+			</message>
+			<chat comment="Chat dialog options">
+				<central-toolbar comment="Have a central toolbar" type="bool">false</central-toolbar>
+				<size comment="Remembered window size" type="QSize">
+					<width>100</width>
+					<height>100</height>
+				</size>
+				<opacity comment="Opacity percentage of chat dialogs" type="int">100</opacity>
+				<legacy-formatting comment="This enables legacy usenet-style formatting (// ** __)" type="bool">true</legacy-formatting>
+				<avatars comment="Avatar options">
+					<size comment="Maximum size of the avatar" type="int">32</size>
+					<show comment="Show avatars in the chat dialog" type="bool">true</show>
+				</avatars>
+			</chat>
+			<contactlist comment="Contact list options">
+				<auto-delete-unlisted comment="Automatically remove an unlisted contact from the contact list if it does not have any pending messages anymore" type="bool">false</auto-delete-unlisted>
+				<opacity comment="Opacity percentage of the contact list" type="int">100</opacity>
+				<status-messages comment="Status messages for contacts">
+					<single-line comment="Show status messages on the same line as the nickname" type="bool">true</single-line>
+					<show comment="Show status messages" type="bool">false</show>
+				</status-messages>
+				<tooltip comment="Display options for the contact list tooltips">
+					<avatar comment="Display avatar" type="bool">true</avatar>
+					<client-version comment="Display client version information" type="bool">true</client-version>
+					<last-status comment="Display the last status" type="bool">true</last-status>
+					<pgp comment="Display PGP information" type="bool">true</pgp>
+				</tooltip>
+				<temp-no-roster-animation comment="Disable animated icons. This option will be removed as soon as the contactlist code is optimized enough" type="bool">false</temp-no-roster-animation>
+			</contactlist>
+			<menu comment="Options for the menu">
+				<account comment="Options for the account-specific menu">
+					<admin comment="Show the 'admin' menu" type="bool">true</admin>
+				</account>
+				<contact comment="Options for the contact-specific menu">
+					<active-chats comment="Show the 'active chats' menu" type="bool">false</active-chats>
+					<custom-picture comment="Show the 'picture' menu" type="bool">true</custom-picture>
+					<custom-pgp-key comment="Show the 'assign pgp key' menu" type="bool">true</custom-pgp-key>
+				</contact>
+				<main comment="Options for the main menu">
+					<change-profile comment="Show the 'change profile' menu" type="bool">true</change-profile>
+				</main>
+				<status comment="Options for the status menu">
+					<chat comment="Enable free for chat" type="bool">false</chat>
+					<xa comment="Enable extended away/not available" type="bool">false</xa>
+					<invisible comment="Enable invisibility" type="bool">false</invisible>
+				</status>
+				<view comment="Options for the view menu">
+					<show-away comment="Show the 'show away/xa' toggle" type="bool">false</show-away>
+				</view>
+			</menu>
+			<muc comment="Multi-User Chat options">
+				<enabled comment="Enable multi-user chat functionality" type="bool">false</enabled>
+				<size comment="Remembered window size" type="QSize">
+					<width>580</width>
+					<height>420</height>
+				</size>
+			</muc>
+			<show-deprecated comment="Deprecated functionality or protocols">
+				<service-discovery comment="Service discovery dialog">
+					<protocol-selector comment="Show the iq:browse and iq:agents service discovery protocol selector." type="bool">false</protocol-selector>
+				</service-discovery>
+			</show-deprecated>
+			<spell-check comment="Options related to the spell checker">
+				<enabled comment="Whether the spell checker is enabled" type="bool">true</enabled>
+			</spell-check>
+			<systemtray comment="Options related to the system tray">
+				<use-old comment="Use the old system tray code (deprecated)" type="bool">false</use-old>
+			</systemtray>
+			<tip comment="Tip of the day options">
+				<show comment="Show the tip of the day upon startup" type="bool">true</show>
+				<number comment="The next tip to show" type="int">0</number>
+			</tip>
+			<flash-windows comment="Allow windows to flash upon activity" type="bool">true</flash-windows>
+		</ui>
+		<shortcuts comment="Shortcuts">
+			<chat comment="Shortcuts in the chat dialog">
+				<next-tab type="QVariantList" comment="Switch to the next tab">
+					<item type="QKeySequence">Ctrl+PgDown</item>
+					<item type="QKeySequence">Ctrl+Tab</item>
+				</next-tab>
+				<previous-tab type="QVariantList" comment="Switch to the previous tab">
+					<item type="QKeySequence">Ctrl+PgUp</item>
+					<item type="QKeySequence">Ctrl+Shift+Tab</item>
+				</previous-tab>
+				<find type="QKeySequence" comment="Find text">Ctrl+F</find>
+				<send type="QVariantList" comment="Sends the message">
+					<item type="QKeySequence">Ctrl+Return</item>
+					<item type="QKeySequence">Ctrl+Enter</item>
+				</send>
+				<clear type="QKeySequence" comment="Clear the text" />
+			</chat>
+			<contactlist comment="Shortcuts in the contactlist" >
+				<whiteboard type="QKeySequence" comment="Open a whiteboard to the selected contact" />
+				<assign-custom-avatar type="QKeySequence" comment="Assign a custom avatar to the selected contact" />
+				<clear-custom-avatar type="QKeySequence" comment="Remove custom avatar from the selected contact" />
+				<delete type="QKeySequence" comment="Delete the selected contact">Del</delete>
+				<chat type="QKeySequence" comment="Open a chat to the selected contact">Ctrl+C</chat>
+				<message type="QKeySequence" comment="Send a message to the selected contact">Ctrl+M</message>
+				<event type="QKeySequence" comment="Receive incoming event">Ctrl+R</event>
+				<rename type="QKeySequence" comment="Rename the selected contact">F2</rename>
+				<login-transport type="QKeySequence" comment="Log on to the selected transport">Ctrl+L</login-transport>
+			</contactlist>
+			<common comment="Common actions" >
+				<scroll-up type="QVariantList" comment="Scroll up">
+					<item type="QKeySequence">PgUp</item>
+					<item type="QKeySequence">Shift+PgUp</item>
+				</scroll-up>
+				<scroll-down type="QVariantList" comment="Scroll down">
+					<item type="QKeySequence">PgDown</item>
+					<item type="QKeySequence">Shift+PgDown</item>
+				</scroll-down>
+				<close type="QVariantList" comment="Close the current window/tab">
+					<item type="QKeySequence">Esc</item>
+				</close>
+				<history type="QKeySequence" comment="Open the message history">Ctrl+H</history>
+				<user-info type="QKeySequence" comment="Show the user info of the contact">Ctrl+I</user-info>
+			</common>
+			<appwide comment="Shortcuts available from any window within the application">
+				<filter-contacts type="QKeySequence" comment="Enable contact filtering mode">F3</filter-contacts>
+				<status-online type="QKeySequence" comment="Set online status"></status-online>
+				<status-dnd type="QKeySequence" comment="Set do not disturb status"></status-dnd>
+				<status-offline type="QKeySequence" comment="Set offline status"></status-offline>
+				<show-about-dialog type="QVariantList" comment="Shows the about dialog">
+					<item type="QKeySequence">Ctrl+Shift+V</item>
+					<item type="QKeySequence">Ctrl+Shift+М</item>
+				</show-about-dialog>
+				<activate-event-notifier type="QVariantList" comment="Activates event notifier informer">
+					<item type="QKeySequence">Ctrl+Shift+E</item>
+					<item type="QKeySequence">Ctrl+Shift+У</item>
+				</activate-event-notifier>
+				<activate-account-informer type="QVariantList" comment="Activates account informer">
+					<item type="QKeySequence">Ctrl+Shift+A</item>
+					<item type="QKeySequence">Ctrl+Shift+Ф</item>
+				</activate-account-informer>
+				<activate-lastmail-informer type="QVariantList" comment="Activates lastmail informer">
+					<item type="QKeySequence">Ctrl+Shift+M</item>
+					<item type="QKeySequence">Ctrl+Shift+Ь</item>
+				</activate-lastmail-informer>
+				<activate-connection-informer type="QVariantList" comment="Activates connection informer">
+					<item type="QKeySequence">Ctrl+Shift+C</item>
+					<item type="QKeySequence">Ctrl+Shift+С</item>
+				</activate-connection-informer>
+			</appwide>
+			<global comment="Shortcuts available from outside of the application">
+				<event type="QKeySequence" comment="Receive incoming event" />
+				<toggle-visibility type="QKeySequence" comment="Show/hide the application" />
+				<bring-to-front type="QKeySequence" comment="Bring the application to front" />
+				<new-blank-message type="QKeySequence" comment="Send new message" />
+				<filter-contacts type="QKeySequence" comment="Enable contact filtering mode">Ctrl+Shift+F3</filter-contacts>
+			</global>
+			<message comment="Shortcuts in the message dialog">
+				<send type="QVariantList" comment="Send the message">
+					<item type="QKeySequence">Ctrl+Return</item>
+					<item type="QKeySequence">Ctrl+Enter</item>
+					<item type="QKeySequence">Alt+Return</item>
+					<item type="QKeySequence">Alt+Enter</item>
+				</send>
+			</message>
+			<status comment="Shortcuts in the status dialog">
+				<set type="QVariantList" comment="Set the status message">
+					<item type="QKeySequence">Ctrl+Return</item>
+					<item type="QKeySequence">Ctrl+Enter</item>
+					<item type="QKeySequence">Alt+Return</item>
+					<item type="QKeySequence">Alt+Enter</item>
+				</set>	
+			</status>
+			<service-discovery comment="Shortcuts in the service discovery dialog"/>
+		</shortcuts>
+		<ya comment="Yandex-specific options">
+			<emoticons-enabled type="bool" comment="Enable emoticons">true</emoticons-enabled>
+			<last-event-id type="int">0</last-event-id>
+			<last-logged-in-status-type type="int" comment="Last online status type user selected">-1</last-logged-in-status-type>
+			<custom-frame type="bool" comment="Use custom compact frame style for roster and chat windows">true</custom-frame>
+			<office-background type="bool" comment="Use gray 'office' background in roster and chat windows">true</office-background>
+			<chat-background type="QString" comment="Specifies file name of background for chats">office.png</chat-background>
+			<chat-window>
+				<emoticons-enabled type="bool" comment="Enable emoticon selector">false</emoticons-enabled>
+				<last-geometry type="QRect" comment="Remembered window geometry">
+					<x>0</x>
+					<y>0</y>
+					<width>0</width>
+					<height>0</height>
+				</last-geometry>
+				<last-opened-tabs type="QString" comment="List of contacts you've chatted with last time">
+				</last-opened-tabs>
+				<editor-height type="int" comment="Minimum number of lines visible in editor area">1</editor-height>
+			</chat-window>
+			<main-window>
+				<always-on-top type="bool">false</always-on-top>
+				<last-geometry type="QRect" comment="Remembered window geometry">
+					<x>0</x>
+					<y>0</y>
+					<width>0</width>
+					<height>0</height>
+				</last-geometry>
+				<status-bar comment="Options related to the status bar">
+					<show comment="Show the status bar" type="bool">false</show>
+				</status-bar>
+				<contact-list>
+					<show-groups type="bool" comment="Show groups in contact list">true</show-groups>
+					<avatar-style type="int" comment="0: Disable avatars, 1: Auto-sized avatars, 2: Big avatars, 3: Small avatars">1</avatar-style>
+				</contact-list>
+				<tab-index type="int" comment="Index of last open tab in contact list">1</tab-index>
+			</main-window>
+			<popups>
+				<message>
+					<enable type="bool" comment="Show incoming message popup notifications">true</enable>
+					<show-text type="bool" comment="Show message text in incoming message popup notifications">true</show-text>
+				</message>
+				<moods>
+					<enable type="bool" comment="Show mood popup notifications">true</enable>
+					<disable-notifications-for-contacts type="QVariantList" comment="Per-contact override of contacts' mood change notifications">
+					</disable-notifications-for-contacts>
+				</moods>
+			</popups>
+			<moods>
+				<show-yaru-warning type="bool" comment="Show the tooltip first time user tries to edit a mood">true</show-yaru-warning>
+				<all type="QVariantList" comment="User-specified moods">
+				</all>
+				<current type="QString" comment="Currently chosen mood"></current>
+			</moods>
+			<typography>
+				<enable type="bool" comment="Enable simple typography as-you-type and auto-replacing">true</enable>
+			</typography>
+			<auto-replace type="QVariantList">
+				<item type="QVariantList">
+					<item type="QString">♣</item>
+					<item type="QString">(club)</item>
+				</item>
+				<item type="QVariantList">
+					<item type="QString">♦</item>
+					<item type="QString">(diamond)</item>
+				</item>
+				<item type="QVariantList">
+					<item type="QString">♥</item>
+					<item type="QString">(heart)</item>
+				</item>
+				<item type="QVariantList">
+					<item type="QString">♠</item>
+					<item type="QString">(spade)</item>
+				</item>
+				<item type="QVariantList">
+					<item type="QString">π</item>
+					<item type="QString">(pi)</item>
+				</item>
+				<item type="QVariantList">
+					<item type="QString">ψ</item>
+					<item type="QString">(psi)</item>
+				</item>
+				<item type="QVariantList">
+					<item type="QString">Ψ</item>
+					<item type="QString">(Psi)</item>
+				</item>
+				<item type="QVariantList">
+					<item type="QString">©</item>
+					<item type="QString">(c)</item>
+					<item type="QString">(C)</item>
+					<item type="QString">(с)</item>
+					<item type="QString">(С)</item>
+				</item>
+				<item type="QVariantList">
+					<item type="QString">®</item>
+					<item type="QString">(r)</item>
+					<item type="QString">(R)</item>
+					<item type="QString">(р)</item>
+					<item type="QString">(Р)</item>
+				</item>
+				<item type="QVariantList">
+					<item type="QString">™</item>
+					<item type="QString">(tm)</item>
+				</item>
+				<item type="QVariantList">
+					<item type="QString">→</item>
+					<item type="QString">--&gt;</item>
+				</item>
+				<item type="QVariantList">
+					<item type="QString">←</item>
+					<item type="QString">&lt;--</item>
+				</item>
+				<item type="QVariantList">
+					<item type="QString">…</item>
+					<item type="QString">...</item>
+				</item>
+			</auto-replace>
+		</ya>
+	</options>
+	<accounts comment="Account definitions and options"></accounts>
+	<plugins comment="Plugin options"></plugins>
+</psi>

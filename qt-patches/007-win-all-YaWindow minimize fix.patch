@@ -1,0 +1,19 @@
+diff -urN qt-all-opensource-src-4.3.5.orig/src/gui/kernel/qwidget_win.cpp qt-all-opensource-src-4.3.5/src/gui/kernel/qwidget_win.cpp
+--- qt-all-opensource-src-4.3.5.orig/src/gui/kernel/qwidget_win.cpp	2008-05-26 13:06:56.000000000 +0400
++++ qt-all-opensource-src-4.3.5/src/gui/kernel/qwidget_win.cpp	2008-09-04 18:24:04.000000000 +0400
+@@ -260,11 +260,15 @@
+     if (popup)
+         flags |= Qt::WindowStaysOnTopHint; // a popup stays on top
+ 
++// mblsha: we disable this in order to get truly borderless windows
++// that could be minimized via taskbar button clicking
++#if 0
+     if (flags & (Qt::WindowMinMaxButtonsHint | Qt::WindowContextHelpButtonHint)) {
+         flags |= Qt::WindowSystemMenuHint;
+         flags |= Qt::WindowTitleHint;
+         flags &= ~Qt::FramelessWindowHint;
+     }
++#endif
+ 
+     if (sw < 0) {                                // get the (primary) screen size
+         sw = GetSystemMetrics(SM_CXSCREEN);

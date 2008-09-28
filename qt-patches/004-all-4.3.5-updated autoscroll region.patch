@@ -1,0 +1,12 @@
+diff -urN qt-x11-opensource-src-4.3.5.orig/src/gui/itemviews/qabstractitemview.cpp qt-x11-opensource-src-4.3.5/src/gui/itemviews/qabstractitemview.cpp
+--- qt-x11-opensource-src-4.3.5.orig/src/gui/itemviews/qabstractitemview.cpp	2008-09-02 16:12:14.000000000 +0400
++++ qt-x11-opensource-src-4.3.5/src/gui/itemviews/qabstractitemview.cpp	2008-09-02 16:36:50.000000000 +0400
+@@ -85,7 +85,7 @@
+         dropIndicatorPosition(QAbstractItemView::OnItem),
+ #endif
+         autoScroll(true),
+-        autoScrollMargin(16),
++        autoScrollMargin(50),
+         autoScrollCount(0),
+         alternatingColors(false),
+         textElideMode(Qt::ElideRight),
