@@ -1,0 +1,251 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<icondef>
+	<meta>
+		<name>YaEmo Smilies</name>
+		<version>1.0</version>
+		<description>Icons © Yandex</description>
+		<creation>2008-08-28</creation>
+		<home>http://yandex.ru</home>
+		<author www='http://www.yandex.ru'>Yandex</author>
+	</meta>
+
+	<!-- Normal icons -->
+	<icon>
+		<text>:-)</text>
+		<text>:)</text>
+		<text>(-:</text>
+		<text>(:</text>
+		<text>=)</text>
+		<text>:smile:</text>
+		<text>(smile)</text>
+		<object mime='image/png'>smile.png</object>
+	</icon>
+
+	<icon>
+		<text>;-)</text>
+		<text>;)</text>
+		<text>(-;</text>
+		<text>(;</text>
+		<text>:wink:</text>
+		<text>(wink)</text>
+		<object mime='image/png'>wink.png</object>
+	</icon>
+
+	<icon>
+		<text>:-P</text>
+		<text>:-p</text>
+		<text>:P</text>
+		<text>:p</text>
+		<text>:razz:</text>
+		<text>(razz)</text>
+		<object mime='image/png'>tongue.png</object>
+	</icon>
+
+	<icon>
+		<text>:-D</text>
+		<text>:-d</text>
+		<text>:D</text>
+		<text>:d</text>
+		<text>:-></text>
+		<text>:></text>
+		<text>:-))</text>
+		<text>:-)))</text>
+		<text>:-))))</text>
+		<text>:-)))))</text>
+		<text>:-))))))</text>
+		<text>:-)))))))</text>
+		<text>:-))))))))</text>
+		<text>:-)))))))))</text>
+		<text>:-))))))))))</text>
+		<text>:))</text>
+		<text>:)))</text>
+		<text>:))))</text>
+		<text>:)))))</text>
+		<text>:))))))</text>
+		<text>:)))))))</text>
+		<text>:))))))))</text>
+		<text>:)))))))))</text>
+		<text>:))))))))))</text>
+		<text>:grin:</text>
+		<text>(grin)</text>
+		<text>:lol:</text>
+		<text>(lol)</text>
+		<object mime='image/png'>lol.png</object>
+	</icon>
+
+	<icon>
+		<text>:-(</text>
+		<text>:(</text>
+		<text>)-:</text>
+		<text>):</text>
+		<text>:sad:</text>
+		<text>(sad)</text>
+		<object mime='image/png'>sad.png</object>
+	</icon>
+
+	<icon>
+		<text>;-(</text>
+		<text>;(</text>
+		<text>)-;</text>
+		<text>);</text>
+		<object mime='image/png'>sad_wink.png</object>
+	</icon>
+
+	<icon>
+		<text>:-O</text>
+		<text>:-o</text>
+		<text>:O</text>
+		<text>:o</text>
+		<text>8-O</text>
+		<text>8-o</text>
+		<text>:O</text>
+		<text>:eek:</text>
+		<text>:surprised:</text>
+		<text>(eek)</text>
+		<text>(surprised)</text>
+		<object mime='image/png'>woot.png</object>
+	</icon>
+
+	<icon>
+		<text>:-@</text>
+		<text>:@</text>
+		<object mime='image/png'>wow.png</object>
+	</icon>
+
+	<icon>
+		<text>:-$</text>
+		<text>:$</text>
+		<text>(D)</text>
+		<text>(d)</text>
+		<text>%)</text>
+		<object mime='image/png'>sick.png</object>
+	</icon>
+
+	<icon>
+		<text>B-)</text>
+		<text>B)</text>
+		<text>8-)</text>
+		<text>8)</text>
+		<text>:cool:</text>
+		<text>(cool)</text>
+		<object mime='image/png'>glasses.png</object>
+	</icon>
+
+	<icon>
+		<text>o_O</text>
+		<text>O_o</text>
+		<text>o_o</text>
+		<text>O_O</text>
+		<text>:oops:</text>
+		<text>(oops)</text>
+		<object mime='image/png'>brainsucker.png</object>
+	</icon>
+
+	<icon>
+		<text>:-|</text>
+		<text>:|</text>
+		<text>:-/</text>
+		<text>:/</text>
+		<text>:-\</text>
+		<text>:\</text>
+		<object mime='image/png'>hmm.png</object>
+	</icon>
+
+	<icon>
+		<text>|~|D</text>
+		<text>(H)</text>
+		<text>(h)</text>
+		<text>(B)</text>
+		<text>(b)</text>
+		<text>:beer:</text>
+		<text>(beer)</text>
+		<object mime='image/png'>beer.png</object>
+	</icon>
+
+	<icon>
+		<text>&gt;:-)</text>
+		<text>&gt;:)</text>
+		<text>:evil:</text>
+		<text>(evil)</text>
+		<text>:mad:</text>
+		<text>(mad)</text>
+		<object mime='image/png'>evil.png</object>
+	</icon>
+
+	<icon>
+		<text>&lt;3</text>
+		<text>:-*</text>
+		<text>(L)</text>
+		<text>(l)</text>
+		<text>(U)</text>
+		<text>(u)</text>
+		<text>:love:</text>
+		<text>:loved:</text>
+		<text>(love)</text>
+		<text>(loved)</text>
+		<object mime='image/png'>love.png</object>
+	</icon>
+
+	<!-- <icon>
+		<text>:'-(</text>
+		<text>:'(</text>
+		<text>;-(</text>
+		<text>;(</text>
+
+		<object mime='image/png'>smile_18.png</object>
+	</icon> -->
+
+	<icon>
+		<text>(+1)</text>
+		<text>+1!</text>
+		<object mime='image/png'>+1.png</object>
+	</icon>
+
+	<icon>
+		<text>(-1)</text>
+		<text>-1!</text>
+		<object mime='image/png'>-1.png</object>
+	</icon>
+
+	<icon>
+		<text>[:]||[:]</text>
+		<text>[:]|||[:]</text>
+		<text>[:]||||[:]</text>
+		<text>:]||[:</text>
+		<text>:]|||[:</text>
+		<text>:]||||[:</text>
+		<text>:||:</text>
+		<text>:|||:</text>
+		<text>:||||:</text>
+		<object mime='image/png'>boyan1.png</object>
+	</icon>
+
+	<icon>
+		<text>[:]|||||[:]</text>
+		<text>[:]||||||[:]</text>
+		<text>[:]|||||||[:]</text>
+		<text>:]|||||[:</text>
+		<text>:]||||||[:</text>
+		<text>:]|||||||[:</text>
+		<text>:|||||:</text>
+		<text>:||||||:</text>
+		<text>:|||||||:</text>
+		<x xmlns='ya:user-selectable'>false</x>
+		<object mime='image/png'>boyan2.png</object>
+	</icon>
+
+	<icon>
+		<text>[:]||||||||[:]</text>
+		<text>[:]|||||||||[:]</text>
+		<text>[:]||||||||||[:]</text>
+		<text>:]||||||||[:</text>
+		<text>:]|||||||||[:</text>
+		<text>:]||||||||||[:</text>
+		<text>:||||||||:</text>
+		<text>:|||||||||:</text>
+		<text>:||||||||||:</text>
+		<x xmlns='ya:user-selectable'>false</x>
+		<object mime='image/png'>boyan3.png</object>
+	</icon>
+
+</icondef>

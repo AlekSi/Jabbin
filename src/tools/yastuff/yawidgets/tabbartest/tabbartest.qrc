@@ -1,0 +1,12 @@
+<!DOCTYPE RCC><RCC version="1.0">
+	<qresource>
+		<file>../../iconsets/roster/roster-small/icon-away.png</file>
+		<file>../../iconsets/roster/roster-small/icon-busy.png</file>
+		<file>../../iconsets/roster/roster-small/icon-offline.png</file>
+		<file>../../iconsets/roster/roster-small/icon-online.png</file>
+
+		<file>../../images/closetab.png</file>
+		<file>../../images/closetab_hover.png</file>
+		<file>../../images/closetab_pressed.png</file>
+	</qresource>
+</RCC>

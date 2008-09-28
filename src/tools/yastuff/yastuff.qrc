@@ -1,0 +1,205 @@
+<!DOCTYPE RCC><RCC version="1.0">
+	<qresource>
+		<file>yapsi.qss</file>
+
+		<file>images/filter.png</file>
+		<file>images/addcontact.png</file>
+		<file>images/addcontactok.png</file>
+		<file>images/addcontactok_over.png</file>
+		<file>images/rostertab_background.png</file>
+		<file>images/rostertab_background2.png</file>
+		<file>images/rostertab_background_inactive.png</file>
+
+		<file>images/group/background.png</file>
+		<file>images/group/open_normal.png</file>
+		<file>images/group/open_hover.png</file>
+		<file>images/group/closed_normal.png</file>
+		<file>images/group/closed_hover.png</file>
+
+		<file>images/window/close.png</file>
+		<file>images/window/sidebar_normal.png</file>
+		<file>images/window/sidebar_hovered.png</file>
+		<file>images/window/gear_hovered.png</file>
+		<file>images/window/gear_normal.png</file>
+		<file>images/window/gear_selected.png</file>
+		<file>images/window/gear_selected_background.png</file>
+		<file>images/window/maximize.png</file>
+		<file>images/window/minimize.png</file>
+		<file>images/window/top_left_corner_mask_4px.bmp</file>
+		<file>images/window/top_left_corner_mask_6px.bmp</file>
+		<file>images/window/top_left_corner_mask_8px.bmp</file>
+
+		<file>images/chatview.png</file>
+		<file>images/chatedit.png</file>
+		<file>images/chevron.png</file>
+		<file>images/chevron_pressed.png</file>
+		<file>images/chevron_blinking.png</file>
+		<file>images/closetab.png</file>
+		<file>images/closetab_chat.png</file>
+		<!-- <file>images/closetab_hover.png</file> -->
+		<file>images/closetab_pressed.png</file>
+		<file>images/okbutton.png</file>
+		<file>images/okbutton_pressed.png</file>
+
+		<file>images/chat-window/carbon.png</file>
+		<file>images/chat-window/orange.png</file>
+		<file>images/chat-window/pinky.png</file>
+		<file>images/chat-window/seawater.png</file>
+		<file>images/chat-window/silver.png</file>
+		<file>images/chat-window/sky.png</file>
+		<file>images/chat-window/office.png</file>
+		<file>images/envelope_overlay.png</file>
+		<file>images/chat_windowicon.png</file>
+
+		<file>images/chat/button.png</file>
+		<file>images/chat/button_pressed.png</file>
+		<file>images/chat/button_pressed_background.png</file>
+		<file>images/chat/emoticon_overlay.png</file>
+		<file>images/chat/emoticon_background.png</file>
+		<file>images/chat/tooltip_area.png</file>
+		<file>images/chat/typo_disabled.png</file>
+		<file>images/chat/typo_disabled_hover.png</file>
+		<file>images/chat/typo_enabled.png</file>
+		<file>images/chat/typo_enabled_hover.png</file>
+		<file>images/chat/send_button/funny/send_background.png</file>
+		<file>images/chat/send_button/funny/send_background_pressed.png</file>
+		<file>images/chat/send_button/funny/send_glyph.png</file>
+		<file>images/chat/send_button/funny/send_glyph_hover.png</file>
+		<file>images/chat/send_button/office/send_background.png</file>
+		<file>images/chat/send_button/office/send_background_pressed.png</file>
+		<file>images/chat/send_button/office/send_glyph.png</file>
+		<file>images/chat/send_button/office/send_glyph_hover.png</file>
+		<file>images/chat_tofriends.png</file>
+		<file>images/chat_send.png</file>
+		<file>images/user-actions/button_glyph_add.png</file>
+		<file>images/user-actions/button_glyph_block.png</file>
+		<file>images/user-actions/button_glyph_fotki.png</file>
+		<file>images/user-actions/button_glyph_history.png</file>
+		<file>images/user-actions/button_glyph_online.png</file>
+		<file>images/user-actions/button_glyph_profile.png</file>
+		<file>images/user-actions/button_glyph_remove.png</file>
+		<file>images/user-actions/button_glyph_rename.png</file>
+
+		<file>images/no-contacts/yaru.png</file>
+
+		<file>images/mail.png</file>
+		<file>images/jabber.png</file>
+
+		<file>images/gender/gw.gif</file>
+		<file>images/gender/gm.gif</file>
+		<file>images/gender/gn.gif</file>
+		<file>images/gender/default_avatar.png</file>
+
+		<file>images/expand_opened.png</file>
+		<file>images/expand_closed.png</file>
+
+		<file>images/busy/0.png</file>
+		<file>images/busy/1.png</file>
+		<file>images/busy/2.png</file>
+		<file>images/busy/3.png</file>
+		<file>images/busy/4.png</file>
+		<file>images/busy/5.png</file>
+		<file>images/busy/6.png</file>
+
+		<file>images/main-window/contact-list/bottom_center.png</file>
+		<file>images/main-window/contact-list/bottom_left.png</file>
+		<file>images/main-window/contact-list/bottom_right.png</file>
+		<file>images/main-window/contact-list/middle_center.png</file>
+		<file>images/main-window/contact-list/middle_left.png</file>
+		<file>images/main-window/contact-list/middle_right.png</file>
+		<file>images/main-window/contact-list/top_center.png</file>
+		<file>images/main-window/contact-list/top_left.png</file>
+		<file>images/main-window/contact-list/top_right.png</file>
+
+		<file>images/down-arrow/hover.png</file>
+		<file>images/down-arrow/normal.png</file>
+		<file>images/down-arrow/pressed.png</file>
+
+		<file>images/balloon/selfmood/arrow.png</file>
+		<file>images/balloon/selfmood/bottom_center.png</file>
+		<file>images/balloon/selfmood/bottom_left.png</file>
+		<file>images/balloon/selfmood/bottom_right.png</file>
+		<file>images/balloon/selfmood/middle_center.png</file>
+		<file>images/balloon/selfmood/middle_left.png</file>
+		<file>images/balloon/selfmood/middle_right.png</file>
+		<file>images/balloon/selfmood/top_center.png</file>
+		<file>images/balloon/selfmood/top_left.png</file>
+		<file>images/balloon/selfmood/top_right.png</file>
+
+		<file>images/status-icons/away_over.png</file>
+		<file>images/status-icons/dnd_over.png</file>
+		<file>images/status-icons/offline_over.png</file>
+		<file>images/status-icons/online_over.png</file>
+		<file>images/status-icons/violet_over.png</file>
+		<file>images/status-icons/yellow_over.png</file>
+
+		<file>images/avatars/avatar01.png</file>
+		<file>images/avatars/avatar02.png</file>
+		<file>images/avatars/avatar03.png</file>
+		<file>images/avatars/avatar04.png</file>
+		<file>images/avatars/avatar05.png</file>
+		<file>images/avatars/avatar06.png</file>
+		<file>images/avatars/avatar07.png</file>
+		<file>images/avatars/avatar08.png</file>
+		<file>images/avatars/avatar09.png</file>
+		<file>images/avatars/avatar10.png</file>
+		<file>images/avatars/avatar11.png</file>
+		<file>images/avatars/avatar12.png</file>
+		<file>images/avatars/avatar13.png</file>
+		<file>images/avatars/avatar14.png</file>
+		<file>images/avatars/avatar15.png</file>
+		<file>images/avatars/avatar16.png</file>
+		<file>images/avatars/avatar17.png</file>
+		<file>images/avatars/avatar18.png</file>
+		<file>images/avatars/avatar19.png</file>
+		<file>images/avatars/avatar20.png</file>
+		<file>images/avatars/avatar21.png</file>
+		<file>images/avatars/avatar22.png</file>
+		<file>images/avatars/avatar23.png</file>
+		<file>images/avatars/avatar24.png</file>
+
+		<file>images/checkbox_checked_disabled.png</file>
+		<file>images/checkbox_unchecked_disabled.png</file>
+		<file>images/checkbox_checked.png</file>
+		<file>images/checkbox_checked_hover.png</file>
+		<file>images/checkbox_checked_pressed.png</file>
+		<file>images/checkbox_unchecked.png</file>
+		<file>images/checkbox_unchecked_hover.png</file>
+		<file>images/checkbox_unchecked_pressed.png</file>
+		<file>images/contacts.png</file>
+		<file>images/down_arrow.png</file>
+		<file>images/down_arrow_disabled.png</file>
+		<file>images/eventnotifier_close.png</file>
+		<file>images/eventnotifier_close_informer.png</file>
+		<file>images/pushbutton/green/pushbutton.png</file>
+		<file>images/pushbutton/green/pushbutton_hover.png</file>
+		<file>images/pushbutton/green/pushbutton_pressed.png</file>
+		<file>images/pushbutton/red/pushbutton.png</file>
+		<file>images/pushbutton/red/pushbutton_hover.png</file>
+		<file>images/pushbutton/red/pushbutton_pressed.png</file>
+		<file>images/pushbutton/preferences_tab/pushbutton.png</file>
+		<file>images/pushbutton/preferences_tab/pushbutton_hover.png</file>
+		<file>images/pushbutton/preferences_tab/pushbutton_pressed.png</file>
+		<file>images/pushbutton/silver_profile/pushbutton.png</file>
+		<file>images/pushbutton/silver_profile/pushbutton_hover.png</file>
+		<file>images/pushbutton/silver_profile/pushbutton_pressed.png</file>
+		<file>images/radiobutton_checked.png</file>
+		<file>images/radiobutton_checked_hover.png</file>
+		<file>images/radiobutton_checked_pressed.png</file>
+		<file>images/radiobutton_unchecked.png</file>
+		<file>images/radiobutton_unchecked_hover.png</file>
+		<file>images/radiobutton_unchecked_pressed.png</file>
+		<file>images/roster_lineedit.png</file>
+		<file>images/sizegrip.png</file>
+		<file>images/spindown.png</file>
+		<file>images/spindown_hover.png</file>
+		<file>images/spindown_off.png</file>
+		<file>images/spindown_pressed.png</file>
+		<file>images/spinup.png</file>
+		<file>images/spinup_hover.png</file>
+		<file>images/spinup_off.png</file>
+		<file>images/spinup_pressed.png</file>
+		<file>images/up_arrow.png</file>
+		<file>images/up_arrow_disabled.png</file>
+	</qresource>
+</RCC>
