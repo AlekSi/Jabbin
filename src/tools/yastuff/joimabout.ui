@@ -53,7 +53,7 @@
      <item row="1" column="1" >
       <widget class="QLabel" name="appName" >
        <property name="text" >
-        <string>Ya.Online for %1</string>
+        <string>Joim for %1</string>
        </property>
       </widget>
      </item>

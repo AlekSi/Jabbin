@@ -77,6 +77,7 @@ public:
 
 #ifdef YAPSI
 	QAction* openChat_;
+	QAction* openCall_;
 	QAction* openHistory_;
 	QAction* yaProfile_;
 	QAction* yaPhotos_;
@@ -106,6 +107,9 @@ public:
 #ifdef YAPSI
 		openChat_ = new QAction(tr("&Chat"), this);
 		connect(openChat_, SIGNAL(activated()), contact_, SLOT(openChat()));
+
+		openCall_ = new QAction(tr("&Call"), this);
+		connect(openCall_, SIGNAL(activated()), contact_, SLOT(openCall()));
 
 		openHistory_ = new QAction(tr("&History"), this);
 		connect(openHistory_, SIGNAL(activated()), contact_, SLOT(history()));
@@ -139,6 +143,8 @@ public:
 		updateActions();
 
 		menu->addAction(openChat_);
+		// Voice call
+		menu->addAction(openCall_);
 		menu->addAction(openHistory_);
 		menu->addAction(yaProfile_);
 		menu->addAction(yaPhotos_);
@@ -344,6 +350,14 @@ private slots:
 		YaProfile* profile = YaProfile::create(contact_->account(), contact_->jid());
 		openHistory_->setEnabled(profile->haveHistory());
 		delete profile;
+
+//		FIXME! Check if the user has voice capabilities		
+//		bool hasVoice = false;
+// 		const UserResourceList &rl = d->u_.userResourceList();
+// 		for (UserResourceList::ConstIterator it = rl.begin(); it != rl.end() && !hasVoice; ++it) {
+//	 			hasVoice = psiAccount()->capsManager()->features(u->jid().withResource((*it).name())).canVoice();
+//		}
+//		openCall_->setEnabled(hasVoice);
 
 		rename_->setEnabled(contact_->isEditable());
 		yaProfile_->setEnabled(contact_->isYaJid());

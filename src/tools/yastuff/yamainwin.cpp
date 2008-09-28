@@ -981,7 +981,7 @@ void YaMainWin::paintOnlineLogo(QPainter* p)
 	f.setPixelSize(14);
 	f.setBold(true);
 	p->setFont(f);
-	p->drawText(QRect(13 + 16 + 2, 4, width(), 23), Qt::AlignLeft | Qt::AlignVCenter, tr("Online"));
+	p->drawText(QRect(13 + 16 + 2, 4, width(), 23), Qt::AlignLeft | Qt::AlignVCenter, tr("Joim"));
 }
 
 void YaMainWin::paintEvent(QPaintEvent*)

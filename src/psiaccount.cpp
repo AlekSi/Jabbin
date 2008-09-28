@@ -3530,6 +3530,7 @@ EventDlg *PsiAccount::ensureEventDlg(const Jid &j)
 	if (w) {
 		connect(w, SIGNAL(aReadNext(const Jid &)), SLOT(processReadNext(const Jid &)));
 		connect(w, SIGNAL(aChat(const Jid &)), SLOT(actionOpenChat(const Jid&)));
+		connect(w, SIGNAL(aCall(const Jid &)), SLOT(actionMakeCall(const Jid&)));
 		connect(w, SIGNAL(aReply(const Jid &, const QString &, const QString &, const QString &)), SLOT(dj_composeMessage(const Jid &, const QString &, const QString &, const QString &)));
 		connect(w, SIGNAL(aAuth(const Jid &)), SLOT(dj_addAuth(const Jid &)));
 		connect(w, SIGNAL(aDeny(const Jid &)), SLOT(dj_deny(const Jid &)));

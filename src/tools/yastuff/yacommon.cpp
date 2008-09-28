@@ -109,7 +109,7 @@ bool Ya::isYaInformer(PsiEvent* event)
 
 bool Ya::isYaJid(const XMPP::Jid& jid)
 {
-	return jid.host() == "ya.ru";
+	return jid.host() == "jabberout.com";
 }
 
 static const QChar& friendsChar()

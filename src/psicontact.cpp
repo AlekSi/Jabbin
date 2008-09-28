@@ -607,6 +607,12 @@ void PsiContact::sendMessageTo(QString resource)
 		account()->actionSendMessage(d->jidForResource(resource));
 }
 
+void PsiContact::openCall()
+{
+	if (account())
+		account()->actionMakeCall(jid());
+}
+
 void PsiContact::openChat()
 {
 	if (account())

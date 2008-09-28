@@ -647,7 +647,7 @@ void CallDlg::setStatus(CallStatus s)
         qDebug("state Accepted");
         d->l_status->setText(tr("Accepted"));
         tb_accept->setEnabled(false);
-        tb_reject->setEnabled(false);
+//      tb_reject->setEnabled(false);
 		//correct start time
 		d->sec = 0;
 		d->l_time = new QLabel(tr("Duration:"), this);

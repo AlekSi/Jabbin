@@ -112,6 +112,7 @@ public slots:
 	virtual void sendMessage();
 	virtual void sendMessageTo(QString resource);
 	virtual void openChat();
+	virtual void openCall();
 	virtual void openChatTo(QString resource);
 #ifdef WHITEBOARDING
 	virtual void openWhiteboard();
