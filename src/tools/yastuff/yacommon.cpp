@@ -516,14 +516,14 @@ QString Ya::messageNotifierText(const QString& messageText)
 QString Ya::yaRuAliasing(const QString& jid)
 {
 	QString tmp = jid;
-	tmp.replace(QRegExp("@(narod|yandex|ya)\\.(ru|ua)$"), "@ya.ru");
+	tmp.replace(QRegExp("@(joim|jabbin|jabberout)\\.(com|net)$"), "@jabberout.com");
 	return tmp;
 }
 
 QString Ya::stripYaRuHostname(const QString& jid)
 {
 	QString tmp = jid;
-	tmp.replace(QRegExp("@(narod|yandex|ya)\\.(ru|ua)$"), "");
+	tmp.replace(QRegExp("@(joim|jabbin|jabberout)\\.(com|net)$"), "");
 	return tmp;
 }
 
