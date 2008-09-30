@@ -225,7 +225,7 @@ QString YaPsiServer::getBuildNumber()
 
 QString YaPsiServer::getUninstallPath()
 {
-	QSettings sUser(QSettings::UserScope, "Yandex", "Ya.Chat");
+	QSettings sUser(QSettings::UserScope, "Jabberout", "Joim");
 	QDir programDir(sUser.value("ProgramDir").toString());
 	QStringList filters;
 	filters << "unins*.exe";

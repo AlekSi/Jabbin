@@ -184,16 +184,16 @@ QString YaDayUse::uiPath() const
 	if (SHGetSpecialFolderPathW(0, str, CSIDL_APPDATA, true))
 		base = QString::fromWCharArray(str);
 
-	QDir uihome(base + "/Yandex");
+	QDir uihome(base + "/Joim");
 	if(!uihome.exists()) {
 		QDir home(base);
-		home.mkdir("Yandex");
+		home.mkdir("Joim");
 	}
 #else
-	QDir uihome(QDir::homeDirPath() + "/.yandex");
+	QDir uihome(QDir::homeDirPath() + "/.joim");
 	if(!uihome.exists()) {
 		QDir home = QDir::home();
-		home.mkdir(".yandex");
+		home.mkdir(".joim");
 		chmod(QFile::encodeName(uihome.path()), 0700);
 	}
 #endif

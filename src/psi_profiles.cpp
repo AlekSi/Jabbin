@@ -131,7 +131,7 @@ void UserAccount::reset()
 
 #ifdef YAPSI
 	opt_automatic_resource = false;
-	resource = "YaOnline";
+	resource = "phone";
 #endif
 }
 

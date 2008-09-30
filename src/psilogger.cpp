@@ -38,7 +38,7 @@ PsiLogger::PsiLogger():QObject(QCoreApplication::instance()), file_(0), stream_(
 	bool enableLogging = false;
 #ifdef Q_WS_WIN
 	{
-		QSettings sUser(QSettings::UserScope, "Yandex", "Ya.Chat");
+		QSettings sUser(QSettings::UserScope, "Jabberout", "Joim");
 		QString log = sUser.value("log").toString();
 		if (!log.isEmpty())
 			enableLogging = true;

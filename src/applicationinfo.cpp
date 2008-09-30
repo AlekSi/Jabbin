@@ -34,11 +34,11 @@
 
 #define PROG_NAME QString::fromUtf8("Joim")
 #define PROG_VERSION JOIMPSI_VERSION;
-#define PROG_CAPS_NODE "http://online.yandex.ru/caps";
+#define PROG_CAPS_NODE "http://www.jabberout.com/caps";
 #define PROG_CAPS_VERSION JOIMPSI_VERSION;
-#define PROG_IPC_NAME "ru.yandex.online"
-#define PROG_OPTIONS_NS "http://online.yandex.ru/options";
-#define PROG_STORAGE_NS "http://online.yandex.ru/storage";
+#define PROG_IPC_NAME "com.jabberout.joim"
+#define PROG_OPTIONS_NS "http://www.jabberout.com/options";
+#define PROG_STORAGE_NS "http://www.jabberout.com/storage";
 
 #if defined(Q_WS_X11) && !defined(PSI_DATADIR)
 #define PSI_DATADIR "/usr/local/share/psi"
