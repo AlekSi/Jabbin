@@ -3,7 +3,7 @@
 #include <QFile>
 #include <QSettings>
 
-#if defined(Q_WS_X11) or defined(Q_WS_MAC)
+#if defined(Q_WS_X11) || defined(Q_WS_MAC)
 #include <sys/stat.h> // chmod
 #endif
 

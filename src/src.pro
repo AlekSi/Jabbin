@@ -57,23 +57,23 @@ exists(../conf.pri) {
 
 	# icons and desktop files
 	dt.path=$$PREFIX/share/applications/
-	dt.extra    = cp -f ../psi.desktop $(INSTALL_ROOT)$$dt.path/yachat.desktop
+	dt.extra    = cp -f ../psi.desktop $(INSTALL_ROOT)$$dt.path/joim.desktop
 	icon1.path=$$PREFIX/share/icons/hicolor/16x16/apps
-	icon1.extra = cp -f ../iconsets/system/default/logo_16.png $(INSTALL_ROOT)$$icon1.path/yachat.png
+	icon1.extra = cp -f ../iconsets/system/default/logo_16.png $(INSTALL_ROOT)$$icon1.path/joim.png
 	icon2.path=$$PREFIX/share/icons/hicolor/32x32/apps
-	icon2.extra = cp -f ../iconsets/system/default/logo_32.png $(INSTALL_ROOT)$$icon2.path/yachat.png
+	icon2.extra = cp -f ../iconsets/system/default/logo_32.png $(INSTALL_ROOT)$$icon2.path/joim.png
 	icon3.path=$$PREFIX/share/icons/hicolor/48x48/apps
-	icon3.extra = cp -f ../iconsets/system/default/logo_48.png $(INSTALL_ROOT)$$icon3.path/yachat.png
+	icon3.extra = cp -f ../iconsets/system/default/logo_48.png $(INSTALL_ROOT)$$icon3.path/joim.png
 	icon4.path=$$PREFIX/share/icons/hicolor/64x64/apps
-	icon4.extra = cp -f ../iconsets/system/default/logo_64.png $(INSTALL_ROOT)$$icon4.path/yachat.png
+	icon4.extra = cp -f ../iconsets/system/default/logo_64.png $(INSTALL_ROOT)$$icon4.path/joim.png
 	icon5.path=$$PREFIX/share/icons/hicolor/128x128/apps
-	icon5.extra = cp -f ../iconsets/system/default/logo_128.png $(INSTALL_ROOT)$$icon5.path/yachat.png
+	icon5.extra = cp -f ../iconsets/system/default/logo_128.png $(INSTALL_ROOT)$$icon5.path/joim.png
 	INSTALLS += dt icon1 icon2 icon3 icon4 icon5
 }
 
 windows {
 	LIBS += -lWSock32 -lUser32 -lShell32 -lGdi32 -lAdvAPI32 -lsecur32 -lWS2_32 -liphlpapi -lwinmm
-	LIBS += $$EXPATPATH\win32\bin\debug\libexpat.lib
+	LIBS += $$EXPATPATH\win32\bin\release\libexpat.lib
 	DEFINES += QT_STATICPLUGIN
 	INCLUDEPATH += . # otherwise MSVC will fail to find "common.h" when compiling options/* stuff
 #	QTPLUGIN += qjpeg qgif
@@ -165,18 +165,20 @@ win32-msvc.net:debug {
 
 # Platform specifics
 unix:!mac {
-	QMAKE_POST_LINK = rm -f ../yachat ; ln -s src/yachat ../yachat
+	QMAKE_POST_LINK = rm -f ../joim ; ln -s src/joim ../joim
 }
-win32 {
-	# generate program debug detabase
-	win32-msvc|win32-msvc.net|win32-msvc2005 {
-		QMAKE_CFLAGS += /Zi
-		QMAKE_LFLAGS += /DEBUG
-	}
 
-	# buggy MSVC workaround
-	#win32-msvc|win32-msvc.net|win32-msvc2005: QMAKE_LFLAGS += /FORCE:MULTIPLE /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:msvcrtd.lib
-}
+#win32 {
+#	# generate program debug detabase
+#	win32-msvc|win32-msvc.net|win32-msvc2005 {
+#		QMAKE_CFLAGS += /Zi
+#		QMAKE_LFLAGS += /DEBUG
+#	}
+#
+#	# buggy MSVC workaround
+#	#win32-msvc|win32-msvc.net|win32-msvc2005: QMAKE_LFLAGS += /FORCE:MULTIPLE /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:msvcrtd.lib
+#}
+
 mac {
 	# Universal binaries
 	qc_universal:contains(QT_CONFIG,x86):contains(QT_CONFIG,ppc) {

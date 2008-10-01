@@ -1,6 +1,6 @@
 # Windows build settings
-CONFIG += debug
-#CONFIG += release
+#CONFIG += debug
+CONFIG += release
 CONFIG += qca-static
 CONFIG += jingle
 

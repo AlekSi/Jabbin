@@ -19,7 +19,7 @@ unix:LIBS += -lssl
 win32 {
   INCLUDEPATH += $$SPEEXPATH\include
   LIBS += $$SPEEXPATH\lib\libspeex.lib
-  LIBS += ..\third-party\jrtplib\Debug\jrtp.lib
+  LIBS += ..\third-party\jrtplib\release\jrtp.lib
 #  LIBS += ..\third-party\iLBC\iLBC.lib
 }
 

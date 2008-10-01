@@ -88,7 +88,7 @@ jingle {
 	DEFINES += HAVE_JINGLE
 
 	JINGLE_CPP = $$PWD/../third-party/libjingle-0.4.0
-	LIBS += ../third-party/libjingle-0.4.0/Debug/jingle.lib
+	LIBS += ../third-party/libjingle-0.4.0/Release/jingle.lib
 
 	include($$PWD/voip/voip.pri)
 
