@@ -147,7 +147,7 @@
             <enum>QFrame::StyledPanel</enum>
            </property>
            <property name="text" >
-            <string>Александр Пушкин</string>
+            <string>Andrea Bodrati</string>
            </property>
           </widget>
          </item>

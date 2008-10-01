@@ -46,7 +46,7 @@
       </size>
      </property>
      <property name="text" stdset="0" >
-      <string>Описание текущего статуса</string>
+      <string>Current status</string>
      </property>
     </widget>
    </item>
@@ -401,7 +401,7 @@
          </sizepolicy>
         </property>
         <property name="text" >
-         <string>66 лет</string>
+         <string>66 anni</string>
         </property>
        </widget>
       </item>
@@ -497,7 +497,7 @@
    <item row="0" column="0" colspan="2" >
     <widget class="YaContactLabel" name="contactName" >
      <property name="text" >
-      <string>Иван Иванов</string>
+      <string>Mario Rossi</string>
      </property>
     </widget>
    </item>
