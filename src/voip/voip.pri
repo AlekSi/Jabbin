@@ -9,7 +9,8 @@ tins:{
 
 INCLUDEPATH += $$VOIP_CPP ../third-party/jrtplib $$VOIP_CPP/portaudio
 
-unix:LIBS += -L../third-party/jrtplib -ljrtp 
+# unix:LIBS += -L../third-party/jrtplib -ljrtp
+unix:LIBS += ../third-party/jrtplib/libjrtp.a
 # -L../third-party/iLBC -liLBC
 unix:LIBS += -lspeex
 unix:LIBS += -lssl
@@ -37,7 +38,7 @@ HEADERS += \
     $$VOIP_CPP/ringbuffer.h \
     $$VOIP_CPP/mediastream.h \
     $$VOIP_CPP/joimmediaengine.h \
-    $$VOIP_CPP/callslogdialogbase.h 
+    $$VOIP_CPP/callslogdialogbase.h
 
 SOURCES += \
     $$VOIP_CPP/callslog.cpp \
@@ -53,7 +54,7 @@ SOURCES += \
     $$VOIP_CPP/ringbuffer.cpp \
     $$VOIP_CPP/mediastream.cpp \
     $$VOIP_CPP/joimmediaengine.cpp \
-    $$VOIP_CPP/callslogdialogbase.cpp 
+    $$VOIP_CPP/callslogdialogbase.cpp
 
 #portaudio
 
@@ -63,13 +64,13 @@ HEADERS += \
     $$VOIP_CPP/portaudio/portaudio.h
 
 unix: HEADERS += $$VOIP_CPP/portaudio/pa_unix.h
-    
+
 SOURCES += \
     $$VOIP_CPP/portaudio/pa_convert.c \
     $$VOIP_CPP/portaudio/pa_lib.c \
-    $$VOIP_CPP/portaudio/pa_trace.c 
+    $$VOIP_CPP/portaudio/pa_trace.c
 
 unix: SOURCES += $$VOIP_CPP/portaudio/pa_unix.c $$VOIP_CPP/portaudio/pa_unix_oss.c
 win32:SOURCES += $$VOIP_CPP/portaudio/pa_win_wmme.c
-    
+
 INTERFACES += $$VOIP_CPP/callslogdialogbase.ui

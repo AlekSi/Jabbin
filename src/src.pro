@@ -30,8 +30,8 @@ CONFIG += pep
 CONFIG += jingle
 DEFINES += QT_STATICPLUGIN
 
-# Import several very useful Makefile targets 
-# as well as set up default directories for 
+# Import several very useful Makefile targets
+# as well as set up default directories for
 # generated files
 include(../qa/valgrind/valgrind.pri)
 include(../qa/oldtest/unittest.pri)
@@ -79,6 +79,11 @@ windows {
 #	QTPLUGIN += qjpeg qgif
 	QMAKE_CFLAGS	+= -GR -GX -DWIN32
 	QMAKE_CXXFLAGS	+= -GR -GX -DWIN32
+}
+
+unix {
+        DEFINES += DEVRAND
+        DEFINES += POSIX
 }
 
 # Configuration

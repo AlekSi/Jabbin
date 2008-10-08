@@ -1,0 +1,1193 @@
+Index: third-party/jrtplib/jabbintransmitter.h
+===================================================================
+--- third-party/jrtplib/jabbintransmitter.h	(revision 299)
++++ third-party/jrtplib/jabbintransmitter.h	(working copy)
+@@ -3,7 +3,7 @@
+ #define JABBIN_TRANSMITTER_H
+ 
+ #include "rtptransmitter.h"
+-#include <Qt3Support/Q3Cstring>
++#include <Qt3Support/Q3CString>
+ #include <Qt3Support/Q3PtrQueue>
+ 
+ namespace cricket {
+@@ -34,18 +34,18 @@
+ 
+ 	virtual bool ComesFromThisTransmitter(const RTPAddress *addr);
+ 	virtual size_t GetHeaderOverhead();
+-	
++
+ 	virtual int Poll();
+ 	virtual int WaitForIncomingData(const RTPTime &delay);
+ 	virtual int AbortWait();
+-	
+-	virtual int SendRTPData(const void *data,size_t len);	
++
++	virtual int SendRTPData(const void *data,size_t len);
+ 	virtual int SendRTCPData(const void *data,size_t len);
+ 
+ 	virtual void ResetPacketCount();
+ 	virtual u_int32_t GetNumRTPPacketsSent();
+ 	virtual u_int32_t GetNumRTCPPacketsSent();
+-	
++
+ 	virtual int AddDestination(const RTPAddress &addr);
+ 	virtual int DeleteDestination(const RTPAddress &addr);
+ 	virtual void ClearDestinations();
+@@ -63,8 +63,8 @@
+ 	virtual int AddToAcceptList(const RTPAddress &addr);
+ 	virtual int DeleteFromAcceptList(const RTPAddress &addr);
+ 	virtual void ClearAcceptList();
+-	virtual int SetMaximumPacketSize(size_t s);	
+-	
++	virtual int SetMaximumPacketSize(size_t s);
++
+ 	virtual bool NewDataAvailable();
+ 	virtual RTPRawPacket *GetNextPacket();
+ #ifdef RTPDEBUG
+@@ -91,7 +91,7 @@
+     cricket::MediaChannel *mediaChannel;
+ 
+     //bool sendPacketsFlag;
+-    
++
+ };
+ 
+ 
+Index: third-party/jrtplib/rtprandom.cpp
+===================================================================
+--- third-party/jrtplib/rtprandom.cpp	(revision 299)
++++ third-party/jrtplib/rtprandom.cpp	(working copy)
+@@ -7,7 +7,7 @@
+ 
+   This library was developed at the "Expertisecentrum Digitale Media"
+   (http://www.edm.luc.ac.be), a research center of the "Limburgs Universitair
+-  Centrum" (http://www.luc.ac.be). The library is based upon work done for 
++  Centrum" (http://www.luc.ac.be). The library is based upon work done for
+   my thesis at the School for Knowledge Technology (Belgium/The Netherlands).
+ 
+   Permission is hereby granted, free of charge, to any person obtaining a
+@@ -49,18 +49,21 @@
+ {
+ #if defined(RTP_SUPPORT_GNUDRAND) || defined(RTP_SUPPORT_RANDR)
+ 	u_int32_t x;
++	void * addr = this;
++	void * ptr = &addr;
++	u_int32_t y = *((u_int32_t *) ptr);
+ 
+ 	x = (u_int32_t)getpid();
+ 	x += (u_int32_t)time(0);
+ 	x -= (u_int32_t)clock();
+-	x ^= (u_int32_t)(this);
++	x ^= (u_int32_t)(y);
+ 
+ #ifdef RTP_SUPPORT_GNUDRAND
+ 	srand48_r(x,&drandbuffer);
+ #else
+ 	state = (unsigned int)x;
+ #endif
+-	
++
+ #else // use simple rand and srand functions
+ 	if (init)
+ 		return;
+@@ -114,7 +117,7 @@
+ 	return x;
+ }
+ 
+-#else 
++#else
+ #ifdef RTP_SUPPORT_RANDR
+ 
+ u_int8_t RTPRandom::GetRandom8()
+Index: third-party/jrtplib/rtcpcompoundpacketbuilder.cpp
+===================================================================
+--- third-party/jrtplib/rtcpcompoundpacketbuilder.cpp	(revision 299)
++++ third-party/jrtplib/rtcpcompoundpacketbuilder.cpp	(working copy)
+@@ -7,7 +7,7 @@
+ 
+   This library was developed at the "Expertisecentrum Digitale Media"
+   (http://www.edm.luc.ac.be), a research center of the "Limburgs Universitair
+-  Centrum" (http://www.luc.ac.be). The library is based upon work done for 
++  Centrum" (http://www.luc.ac.be). The library is based upon work done for
+   my thesis at the School for Knowledge Technology (Belgium/The Netherlands).
+ 
+   Permission is hereby granted, free of charge, to any person obtaining a
+@@ -36,6 +36,7 @@
+ #include "rtcpsdespacket.h"
+ #include "rtcpbyepacket.h"
+ #include "rtcpapppacket.h"
++#include <string.h>
+ #ifndef WIN32
+ 	#include <netinet/in.h>
+ #else
+@@ -70,7 +71,7 @@
+ 	for (it = byepackets.begin() ; it != byepackets.end() ; it++)
+ 		if ((*it).packetdata)
+ 			delete [] (*it).packetdata;
+-	
++
+ 	for (it = apppackets.begin() ; it != apppackets.end() ; it++)
+ 		if ((*it).packetdata)
+ 			delete [] (*it).packetdata;
+@@ -90,13 +91,13 @@
+ 
+ 	if (maxpacketsize < RTP_MINPACKETSIZE)
+ 		return ERR_RTP_RTCPCOMPPACKBUILDER_MAXPACKETSIZETOOSMALL;
+-	
++
+ 	maximumpacketsize = maxpacketsize;
+ 	buffer = 0;
+ 	external = false;
+ 	byesize = 0;
+ 	appsize = 0;
+-	
++
+ 	arebuilding = true;
+ 	return 0;
+ }
+@@ -133,15 +134,15 @@
+ 	size_t totalsize = byesize+appsize+sdes.NeededBytes();
+ 	size_t sizeleft = maximumpacketsize-totalsize;
+ 	size_t neededsize = sizeof(RTCPCommonHeader)+sizeof(u_int32_t)+sizeof(RTCPSenderReport);
+-	
++
+ 	if (neededsize > sizeleft)
+ 		return ERR_RTP_RTCPCOMPPACKBUILDER_NOTENOUGHBYTESLEFT;
+-	
++
+ 	// fill in some things
+ 
+ 	report.headerlength = sizeof(u_int32_t)+sizeof(RTCPSenderReport);
+-	report.isSR = true;	
+-	
++	report.isSR = true;
++
+ 	u_int32_t *ssrc = (u_int32_t *)report.headerdata;
+ 	*ssrc = htonl(senderssrc);
+ 
+@@ -165,15 +166,15 @@
+ 	size_t totalsize = byesize+appsize+sdes.NeededBytes();
+ 	size_t sizeleft = maximumpacketsize-totalsize;
+ 	size_t neededsize = sizeof(RTCPCommonHeader)+sizeof(u_int32_t);
+-	
++
+ 	if (neededsize > sizeleft)
+ 		return ERR_RTP_RTCPCOMPPACKBUILDER_NOTENOUGHBYTESLEFT;
+-	
++
+ 	// fill in some things
+ 
+ 	report.headerlength = sizeof(u_int32_t);
+ 	report.isSR = false;
+-	
++
+ 	u_int32_t *ssrc = (u_int32_t *)report.headerdata;
+ 	*ssrc = htonl(senderssrc);
+ 
+@@ -190,18 +191,18 @@
+ 
+ 	size_t totalothersize = byesize+appsize+sdes.NeededBytes();
+ 	size_t reportsizewithextrablock = report.NeededBytesWithExtraReportBlock();
+-	
++
+ 	if ((totalothersize+reportsizewithextrablock) > maximumpacketsize)
+ 		return ERR_RTP_RTCPCOMPPACKBUILDER_NOTENOUGHBYTESLEFT;
+ 
+ 	u_int8_t *buf = new u_int8_t[sizeof(RTCPReceiverReport)];
+ 	if (buf == 0)
+ 		return ERR_RTP_OUTOFMEM;
+-	
++
+ 	RTCPReceiverReport *rr = (RTCPReceiverReport *)buf;
+ 	u_int32_t *packlost = (u_int32_t *)&packetslost;
+ 	u_int32_t packlost2 = (*packlost);
+-		
++
+ 	rr->ssrc = htonl(ssrc);
+ 	rr->fractionlost = fractionlost;
+ 	rr->packetslost[2] = (u_int8_t)(packlost2&0xFF);
+@@ -242,7 +243,7 @@
+ 		return ERR_RTP_RTCPCOMPPACKBUILDER_NOCURRENTSOURCE;
+ 
+ 	u_int8_t itemid;
+-	
++
+ 	switch(t)
+ 	{
+ 	case RTCPSDESPacket::CNAME:
+@@ -307,7 +308,7 @@
+ 	size_t itemlength = ((size_t)prefixlength)+1+((size_t)valuelength);
+ 	if (itemlength > 255)
+ 		return ERR_RTP_RTCPCOMPPACKBUILDER_TOTALITEMLENGTHTOOBIG;
+-	
++
+ 	size_t totalotherbytes = byesize+appsize+report.NeededBytes();
+ 	size_t sdessizewithextraitem = sdes.NeededBytesWithExtraItem(itemlength);
+ 
+@@ -326,7 +327,7 @@
+ 
+ 	sdeshdr->id = RTCP_SDES_ID_PRIVATE;
+ 	sdeshdr->length = itemlength;
+-	
++
+ 	buf[sizeof(RTCPSDESHeader)] = prefixlength;
+ 	if (prefixlength != 0)
+ 		memcpy((buf+sizeof(RTCPSDESHeader)+1),prefixdata,(size_t)prefixlength);
+@@ -345,10 +346,10 @@
+ 
+ 	if (numssrcs > 31)
+ 		return ERR_RTP_RTCPCOMPPACKBUILDER_TOOMANYSSRCS;
+-	
++
+ 	size_t packsize = sizeof(RTCPCommonHeader)+sizeof(u_int32_t)*((size_t)numssrcs);
+ 	size_t zerobytes = 0;
+-	
++
+ 	if (reasonlength > 0)
+ 	{
+ 		packsize += 1; // 1 byte for the length;
+@@ -369,7 +370,7 @@
+ 
+ 	u_int8_t *buf;
+ 	size_t numwords;
+-	
++
+ 	buf = new u_int8_t[packsize];
+ 	if (buf == 0)
+ 		return ERR_RTP_OUTOFMEM;
+@@ -379,14 +380,14 @@
+ 	hdr->version = 2;
+ 	hdr->padding = 0;
+ 	hdr->count = numssrcs;
+-	
++
+ 	numwords = packsize/sizeof(u_int32_t);
+ 	hdr->length = htons((u_int16_t)(numwords-1));
+ 	hdr->packettype = RTP_RTCPTYPE_BYE;
+-	
++
+ 	u_int32_t *sources = (u_int32_t *)(buf+sizeof(RTCPCommonHeader));
+ 	u_int8_t srcindex;
+-	
++
+ 	for (srcindex = 0 ; srcindex < numssrcs ; srcindex++)
+ 		sources[srcindex] = htonl(ssrcs[srcindex]);
+ 
+@@ -402,7 +403,7 @@
+ 
+ 	byepackets.push_back(Buffer(buf,packsize));
+ 	byesize += packsize;
+-	
++
+ 	return 0;
+ }
+ 
+@@ -419,7 +420,7 @@
+ 
+ 	if ((appdatawords+2) > 65535)
+ 		return ERR_RTP_RTCPCOMPPACKBUILDER_APPDATALENTOOBIG;
+-	
++
+ 	size_t packsize = sizeof(RTCPCommonHeader)+sizeof(u_int32_t)*2+appdatalen;
+ 	size_t totalotherbytes = appsize+byesize+sdes.NeededBytes()+report.NeededBytes();
+ 
+@@ -427,7 +428,7 @@
+ 		return ERR_RTP_RTCPCOMPPACKBUILDER_NOTENOUGHBYTESLEFT;
+ 
+ 	u_int8_t *buf;
+-	
++
+ 	buf = new u_int8_t[packsize];
+ 	if (buf == 0)
+ 		return ERR_RTP_OUTOFMEM;
+@@ -437,10 +438,10 @@
+ 	hdr->version = 2;
+ 	hdr->padding = 0;
+ 	hdr->count = subtype;
+-	
++
+ 	hdr->length = htons((u_int16_t)(appdatawords+2));
+ 	hdr->packettype = RTP_RTCPTYPE_APP;
+-	
++
+ 	u_int32_t *source = (u_int32_t *)(buf+sizeof(RTCPCommonHeader));
+ 	*source = htonl(ssrc);
+ 
+@@ -454,7 +455,7 @@
+ 
+ 	apppackets.push_back(Buffer(buf,packsize));
+ 	appsize += packsize;
+-	
++
+ 	return 0;
+ }
+ 
+@@ -464,12 +465,12 @@
+ 		return ERR_RTP_RTCPCOMPPACKBUILDER_NOTBUILDING;
+ 	if (report.headerlength == 0)
+ 		return ERR_RTP_RTCPCOMPPACKBUILDER_NOREPORTPRESENT;
+-	
++
+ 	u_int8_t *buf;
+ 	size_t len;
+-	
++
+ 	len = appsize+byesize+report.NeededBytes()+sdes.NeededBytes();
+-	
++
+ 	if (!external)
+ 	{
+ 		buf = new u_int8_t[len];
+@@ -478,12 +479,12 @@
+ 	}
+ 	else
+ 		buf = buffer;
+-	
++
+ 	u_int8_t *curbuf = buf;
+ 	RTCPPacket *p;
+ 
+ 	// first, we'll add all report info
+-	
++
+ 	{
+ 		bool firstpacket = true;
+ 		bool done = false;
+@@ -492,7 +493,7 @@
+ 		{
+ 			RTCPCommonHeader *hdr = (RTCPCommonHeader *)curbuf;
+ 			size_t offset;
+-			
++
+ 			hdr->version = 2;
+ 			hdr->padding = 0;
+ 
+@@ -509,7 +510,7 @@
+ 				offset = sizeof(RTCPCommonHeader)+sizeof(u_int32_t);
+ 			}
+ 			firstpacket = false;
+-			
++
+ 			u_int8_t count = 0;
+ 
+ 			while (it != report.reportblocks.end() && count < 31)
+@@ -544,31 +545,31 @@
+ 				done = true;
+ 		} while (!done);
+ 	}
+-		
++
+ 	// then, we'll add the sdes info
+ 
+ 	if (!sdes.sdessources.empty())
+ 	{
+ 		bool done = false;
+ 		std::list<SDESSource *>::const_iterator sourceit = sdes.sdessources.begin();
+-		
++
+ 		do
+ 		{
+ 			RTCPCommonHeader *hdr = (RTCPCommonHeader *)curbuf;
+ 			size_t offset = sizeof(RTCPCommonHeader);
+-			
++
+ 			hdr->version = 2;
+ 			hdr->padding = 0;
+ 			hdr->packettype = RTP_RTCPTYPE_SDES;
+ 
+ 			u_int8_t sourcecount = 0;
+-			
++
+ 			while (sourceit != sdes.sdessources.end() && sourcecount < 31)
+ 			{
+ 				u_int32_t *ssrc = (u_int32_t *)(curbuf+offset);
+ 				*ssrc = htonl((*sourceit)->ssrc);
+ 				offset += sizeof(u_int32_t);
+-				
++
+ 				std::list<Buffer>::const_iterator itemit,itemend;
+ 
+ 				itemit = (*sourceit)->items.begin();
+@@ -593,13 +594,13 @@
+ 						curbuf[offset+i] = 0;
+ 					offset += num;
+ 				}
+-				
++
+ 				sourceit++;
+ 				sourcecount++;
+ 			}
+ 
+ 			size_t numwords = offset/4;
+-			
++
+ 			hdr->count = sourcecount;
+ 			hdr->length = htons((u_int16_t)(numwords-1));
+ 
+@@ -612,22 +613,22 @@
+ 				return ERR_RTP_OUTOFMEM;
+ 			}
+ 			rtcppacklist.push_back(p);
+-			
++
+ 			curbuf += offset;
+ 			if (sourceit == sdes.sdessources.end())
+ 				done = true;
+ 		} while (!done);
+ 	}
+-	
++
+ 	// adding the app data
+-	
++
+ 	{
+ 		std::list<Buffer>::const_iterator it;
+ 
+ 		for (it = apppackets.begin() ; it != apppackets.end() ; it++)
+ 		{
+ 			memcpy(curbuf,(*it).packetdata,(*it).packetlength);
+-			
++
+ 			p = new RTCPAPPPacket(curbuf,(*it).packetlength);
+ 			if (p == 0)
+ 			{
+@@ -637,20 +638,20 @@
+ 				return ERR_RTP_OUTOFMEM;
+ 			}
+ 			rtcppacklist.push_back(p);
+-	
++
+ 			curbuf += (*it).packetlength;
+ 		}
+ 	}
+-	
++
+ 	// adding bye packets
+-	
++
+ 	{
+ 		std::list<Buffer>::const_iterator it;
+ 
+ 		for (it = byepackets.begin() ; it != byepackets.end() ; it++)
+ 		{
+ 			memcpy(curbuf,(*it).packetdata,(*it).packetlength);
+-			
++
+ 			p = new RTCPBYEPacket(curbuf,(*it).packetlength);
+ 			if (p == 0)
+ 			{
+@@ -660,11 +661,11 @@
+ 				return ERR_RTP_OUTOFMEM;
+ 			}
+ 			rtcppacklist.push_back(p);
+-	
++
+ 			curbuf += (*it).packetlength;
+ 		}
+ 	}
+-	
++
+ 	compoundpacket = buf;
+ 	compoundpacketlength = len;
+ 	arebuilding = false;
+Index: third-party/jrtplib/rtppacket.cpp
+===================================================================
+--- third-party/jrtplib/rtppacket.cpp	(revision 299)
++++ third-party/jrtplib/rtppacket.cpp	(working copy)
+@@ -7,7 +7,7 @@
+ 
+   This library was developed at the "Expertisecentrum Digitale Media"
+   (http://www.edm.luc.ac.be), a research center of the "Limburgs Universitair
+-  Centrum" (http://www.luc.ac.be). The library is based upon work done for 
++  Centrum" (http://www.luc.ac.be). The library is based upon work done for
+   my thesis at the School for Knowledge Technology (Belgium/The Netherlands).
+ 
+   Permission is hereby granted, free of charge, to any person obtaining a
+@@ -46,6 +46,7 @@
+ #endif // RTPDEBUG
+ 
+ #include "rtpdebug.h"
++#include <string.h>
+ 
+ void RTPPacket::Clear()
+ {
+@@ -57,7 +58,7 @@
+ 	timestamp = 0;
+ 	ssrc = 0;
+ 	packet = 0;
+-	payload = 0; 
++	payload = 0;
+ 	packetlength = 0;
+ 	payloadlength = 0;
+ 	extid = 0;
+@@ -111,22 +112,22 @@
+ 	int numpadbytes;
+ 	RTPExtensionHeader *rtpextheader;
+ 	u_int16_t exthdrlen;
+-	
++
+ 	if (!rawpack.IsRTP()) // If we didn't receive it on the RTP port, we'll ignore it
+ 		return ERR_RTP_PACKET_INVALIDPACKET;
+-	
++
+ 	// The length should be at least the size of the RTP header
+ 	packetlen = rawpack.GetDataLength();
+ 	if (packetlen < sizeof(RTPHeader))
+ 		return ERR_RTP_PACKET_INVALIDPACKET;
+-	
++
+ 	packetbytes = (u_int8_t *)rawpack.GetData();
+ 	rtpheader = (RTPHeader *)packetbytes;
+-	
++
+ 	// The version number should be correct
+ 	if (rtpheader->version != RTP_VERSION)
+ 		return ERR_RTP_PACKET_INVALIDPACKET;
+-	
++
+ 	// We'll check if this is possibly a RTCP packet. For this to be possible
+ 	// the marker bit and payload type combined should be either an SR or RR
+ 	// identifier
+@@ -142,7 +143,7 @@
+ 
+ 	csrccount = rtpheader->csrccount;
+ 	payloadoffset = sizeof(RTPHeader)+(int)(csrccount*sizeof(u_int32_t));
+-	
++
+ 	if (rtpheader->padding) // adjust payload length to take padding into account
+ 	{
+ 		numpadbytes = (int)packetbytes[packetlen-1]; // last byte contains number of padding bytes
+@@ -164,15 +165,15 @@
+ 	{
+ 		rtpextheader = 0;
+ 		exthdrlen = 0;
+-	}	
+-	
++	}
++
+ 	payloadlength = packetlen-numpadbytes-payloadoffset;
+ 	if (payloadlength < 0)
+ 		return ERR_RTP_PACKET_INVALIDPACKET;
+ 
+ 	// Now, we've got a valid packet, so we can create a new instance of RTPPacket
+ 	// and fill in the members
+-	
++
+ 	RTPPacket::hasextension = hasextension;
+ 	if (hasextension)
+ 	{
+@@ -184,7 +185,7 @@
+ 	RTPPacket::hasmarker = marker;
+ 	RTPPacket::numcsrcs = csrccount;
+ 	RTPPacket::payloadtype = payloadtype;
+-	
++
+ 	// Note: we don't fill in the EXTENDED sequence number here, since we
+ 	// don't have information about the source here. We just fill in the low
+ 	// 16 bits
+@@ -211,7 +212,7 @@
+ 	u_int8_t *csrcpos;
+ 	u_int32_t *csrcval_nbo;
+ 	u_int32_t csrcval_hbo;
+-	
++
+ 	csrcpos = packet+sizeof(RTPHeader)+num*sizeof(u_int32_t);
+ 	csrcval_nbo = (u_int32_t *)csrcpos;
+ 	csrcval_hbo = ntohl(*csrcval_nbo);
+@@ -230,7 +231,7 @@
+ 		return ERR_RTP_PACKET_BADPAYLOADTYPE;
+ 	if (payloadtype == 72 || payloadtype == 73) // could cause confusion with rtcp types
+ 		return ERR_RTP_PACKET_BADPAYLOADTYPE;
+-	
++
+ 	packetlength = sizeof(RTPHeader);
+ 	packetlength += sizeof(u_int32_t)*((size_t)numcsrcs);
+ 	if (gotextension)
+@@ -247,9 +248,9 @@
+ 	}
+ 
+ 	// Ok, now we'll just fill in...
+-	
++
+ 	RTPHeader *rtphdr;
+-	
++
+ 	if (buffer == 0)
+ 	{
+ 		packet = new u_int8_t [packetlength];
+@@ -265,7 +266,7 @@
+ 		packet = (u_int8_t *)buffer;
+ 		externalbuffer = true;
+ 	}
+-	
++
+ 	RTPPacket::hasmarker = gotmarker;
+ 	RTPPacket::hasextension = gotextension;
+ 	RTPPacket::numcsrcs = numcsrcs;
+@@ -276,7 +277,7 @@
+ 	RTPPacket::payloadlength = payloadlen;
+ 	RTPPacket::extid = extensionid;
+ 	RTPPacket::extensionlength = ((size_t)extensionlen_numwords)*sizeof(u_int32_t);
+-	
++
+ 	rtphdr = (RTPHeader *)packet;
+ 	rtphdr->version = RTP_VERSION;
+ 	rtphdr->padding = 0;
+@@ -293,7 +294,7 @@
+ 	rtphdr->sequencenumber = htons(seqnr);
+ 	rtphdr->timestamp = htonl(timestamp);
+ 	rtphdr->ssrc = htonl(ssrc);
+-	
++
+ 	u_int32_t *curcsrc;
+ 	int i;
+ 
+@@ -301,28 +302,28 @@
+ 	for (i = 0 ; i < numcsrcs ; i++,curcsrc++)
+ 		*curcsrc = htonl(csrcs[i]);
+ 
+-	payload = packet+sizeof(RTPHeader)+((size_t)numcsrcs)*sizeof(u_int32_t); 
++	payload = packet+sizeof(RTPHeader)+((size_t)numcsrcs)*sizeof(u_int32_t);
+ 	if (gotextension)
+ 	{
+ 		RTPExtensionHeader *rtpexthdr = (RTPExtensionHeader *)payload;
+ 
+ 		rtpexthdr->id = htons(extensionid);
+ 		rtpexthdr->length = htons((u_int16_t)extensionlen_numwords);
+-		
++
+ 		payload += sizeof(RTPExtensionHeader);
+ 		memcpy(payload,extensiondata,RTPPacket::extensionlength);
+-		
++
+ 		payload += RTPPacket::extensionlength;
+ 	}
+ 	memcpy(payload,payloaddata,payloadlen);
+ 	return 0;
+ }
+ 
+-#ifdef RTPDEBUG	
++#ifdef RTPDEBUG
+ void RTPPacket::Dump()
+ {
+ 	int i;
+-	
++
+ 	printf("Payload type:                %d\n",(int)GetPayloadType());
+ 	printf("Extended sequence number:    0x%08x\n",GetExtendedSequenceNumber());
+ 	printf("Timestamp:                   0x%08x\n",GetTimestamp());
+Index: third-party/jrtplib/jabbintransmitter.cpp
+===================================================================
+--- third-party/jrtplib/jabbintransmitter.cpp	(revision 299)
++++ third-party/jrtplib/jabbintransmitter.cpp	(working copy)
+@@ -20,7 +20,7 @@
+ 
+ #include "jabbintransmitter.h"
+ 
+-#include <Qt3Support/Q3Cstring>
++#include <Qt3Support/Q3CString>
+ #include <Qt3Support/Q3PtrQueue>
+ 
+ #include <string>
+@@ -48,7 +48,7 @@
+     cricket::MediaChannel *mediaChannel;
+ 
+     int rtpPacketsCount;
+-    
++
+ };
+ 
+ 
+@@ -137,7 +137,7 @@
+ 
+         //qDebug( "packet of length %d was intended to be sent via %d", len, int( networkInterface ) );
+         //networkInterface->SendPacket(data,len);
+-        // 
++        //
+         d->mediaChannel->network_interface()->SendPacket(data,len);
+     }
+     //d->iface->SendPacket(data, len);
+@@ -202,7 +202,7 @@
+ {
+     if ( !NewDataAvailable() )
+         return 0;
+-    
++
+     QByteArray *data = d->incomingPackets->dequeue();
+     int recvlen = data->size();
+     u_int8_t *datacopy =  new u_int8_t[recvlen+1];
+Index: third-party/libjingle-0.4.0/talk/p2p/base/stun.cc
+===================================================================
+--- third-party/libjingle-0.4.0/talk/p2p/base/stun.cc	(revision 299)
++++ third-party/libjingle-0.4.0/talk/p2p/base/stun.cc	(working copy)
+@@ -2,29 +2,30 @@
+  * libjingle
+  * Copyright 2004--2005, Google Inc.
+  *
+- * Redistribution and use in source and binary forms, with or without 
++ * Redistribution and use in source and binary forms, with or without
+  * modification, are permitted provided that the following conditions are met:
+  *
+- *  1. Redistributions of source code must retain the above copyright notice, 
++ *  1. Redistributions of source code must retain the above copyright notice,
+  *     this list of conditions and the following disclaimer.
+  *  2. Redistributions in binary form must reproduce the above copyright notice,
+  *     this list of conditions and the following disclaimer in the documentation
+  *     and/or other materials provided with the distribution.
+- *  3. The name of the author may not be used to endorse or promote products 
++ *  3. The name of the author may not be used to endorse or promote products
+  *     derived from this software without specific prior written permission.
+  *
+  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
++ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+- * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
++ * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
+- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
++ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
++ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  */
+ 
++#include "talk/base/common.h"
+ #include "talk/base/logging.h"
+ #include "talk/p2p/base/stun.h"
+ #include <iostream>
+@@ -180,7 +181,7 @@
+ 
+   if (buf->Length() != rest) {
+     // fixme: shouldn't be doing this
+-    LOG(LERROR) << "wrong message length" 
++    LOG(LERROR) << "wrong message length"
+                << " (" << (int)rest << " != " << (int)buf->Length() << ")";
+     return false;
+   }
+@@ -494,7 +495,7 @@
+ 
+ StunTransportPrefsAttribute::StunTransportPrefsAttribute(
+     uint16 type, uint16 length)
+-    : StunAttribute(type, length), preallocate_(false), prefs_(0), addr_(0) { 
++    : StunAttribute(type, length), preallocate_(false), prefs_(0), addr_(0) {
+ }
+ 
+ StunTransportPrefsAttribute::~StunTransportPrefsAttribute() {
+Index: third-party/libjingle-0.4.0/talk/p2p/base/common.h
+===================================================================
+--- third-party/libjingle-0.4.0/talk/p2p/base/common.h	(revision 299)
++++ third-party/libjingle-0.4.0/talk/p2p/base/common.h	(working copy)
+@@ -30,6 +30,12 @@
+ 
+ #include "talk/base/logging.h"
+ 
++#ifdef POSIX
++#include <cstring>
++#include <string>
++#include <cstdlib>
++#endif
++
+ // Common log description format for jingle messages
+ #define LOG_J(sev,obj) LOG(sev) << "Jingle:" << obj->ToString() << ": "
+ 
+Index: third-party/libjingle-0.4.0/talk/base/urlencode.cc
+===================================================================
+--- third-party/libjingle-0.4.0/talk/base/urlencode.cc	(revision 299)
++++ third-party/libjingle-0.4.0/talk/base/urlencode.cc	(working copy)
+@@ -1,3 +1,4 @@
++#include "talk/base/common.h"
+ #include "talk/base/urlencode.h"
+ 
+ static int HexPairValue(const char * code) {
+@@ -52,12 +53,12 @@
+     }
+     source++;
+   }
+-  
++
+   *dest = 0;
+   return dest - start;
+-}  
++}
+ 
+-int UrlEncode(const char *source, char *dest, unsigned max)  
++int UrlEncode(const char *source, char *dest, unsigned max)
+ {
+   static const char *digits = "0123456789ABCDEF";
+   unsigned char ch;
+@@ -77,7 +78,7 @@
+       *dest++ = '%';
+       *dest++ = digits[(ch >> 4) & 0x0F];
+       *dest++ = digits[       ch & 0x0F];
+-    }  
++    }
+     source++;
+   }
+   *dest = 0;
+Index: third-party/libjingle-0.4.0/talk/base/common.h
+===================================================================
+--- third-party/libjingle-0.4.0/talk/base/common.h	(revision 299)
++++ third-party/libjingle-0.4.0/talk/base/common.h	(working copy)
+@@ -2,26 +2,26 @@
+  * libjingle
+  * Copyright 2004--2005, Google Inc.
+  *
+- * Redistribution and use in source and binary forms, with or without 
++ * Redistribution and use in source and binary forms, with or without
+  * modification, are permitted provided that the following conditions are met:
+  *
+- *  1. Redistributions of source code must retain the above copyright notice, 
++ *  1. Redistributions of source code must retain the above copyright notice,
+  *     this list of conditions and the following disclaimer.
+  *  2. Redistributions in binary form must reproduce the above copyright notice,
+  *     this list of conditions and the following disclaimer in the documentation
+  *     and/or other materials provided with the distribution.
+- *  3. The name of the author may not be used to endorse or promote products 
++ *  3. The name of the author may not be used to endorse or promote products
+  *     derived from this software without specific prior written permission.
+  *
+  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
++ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+- * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
++ * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
+- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
++ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
++ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  */
+ 
+@@ -54,6 +54,11 @@
+ #define stdmax(x,y) max(x,y)
+ #endif
+ 
++#ifdef POSIX
++#include <cstring>
++#include <string>
++#include <cstdlib>
++#endif
+ 
+ #define ARRAY_SIZE(x) (static_cast<int>((sizeof(x)/sizeof(x[0]))))
+ 
+Index: third-party/libjingle-0.4.0/talk/base/logging.cc
+===================================================================
+--- third-party/libjingle-0.4.0/talk/base/logging.cc	(revision 299)
++++ third-party/libjingle-0.4.0/talk/base/logging.cc	(working copy)
+@@ -2,26 +2,26 @@
+  * libjingle
+  * Copyright 2004--2005, Google Inc.
+  *
+- * Redistribution and use in source and binary forms, with or without 
++ * Redistribution and use in source and binary forms, with or without
+  * modification, are permitted provided that the following conditions are met:
+  *
+- *  1. Redistributions of source code must retain the above copyright notice, 
++ *  1. Redistributions of source code must retain the above copyright notice,
+  *     this list of conditions and the following disclaimer.
+  *  2. Redistributions in binary form must reproduce the above copyright notice,
+  *     this list of conditions and the following disclaimer in the documentation
+  *     and/or other materials provided with the distribution.
+- *  3. The name of the author may not be used to endorse or promote products 
++ *  3. The name of the author may not be used to endorse or promote products
+  *     derived from this software without specific prior written permission.
+  *
+  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
++ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+- * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
++ * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
+- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
++ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
++ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  */
+ 
+@@ -35,6 +35,7 @@
+ #include <iostream>
+ #include <iomanip>
+ 
++#include "talk/base/common.h"
+ #include "talk/base/logging.h"
+ #include "talk/base/stream.h"
+ #include "talk/base/stringencode.h"
+@@ -64,9 +65,9 @@
+     if (const char * value = FindLabel(err, err_table))
+       return value;
+   }
+-  
++
+   char buffer[16];
+-  snprintf(buffer, sizeof(buffer), "0x%08lx", err);  
++  snprintf(buffer, sizeof(buffer), "0x%08lx", err);
+   return buffer;
+ }
+ 
+@@ -269,7 +270,7 @@
+       }
+       asc_line[sizeof(asc_line)-1] = 0;
+       hex_line[sizeof(hex_line)-1] = 0;
+-      LOG_V(level) << label << direction 
++      LOG_V(level) << label << direction
+                    << asc_line << " " << hex_line << " ";
+       data += line_len;
+       len -= line_len;
+Index: third-party/libjingle-0.4.0/talk/base/network.cc
+===================================================================
+--- third-party/libjingle-0.4.0/talk/base/network.cc	(revision 299)
++++ third-party/libjingle-0.4.0/talk/base/network.cc	(working copy)
+@@ -2,26 +2,26 @@
+  * libjingle
+  * Copyright 2004--2005, Google Inc.
+  *
+- * Redistribution and use in source and binary forms, with or without 
++ * Redistribution and use in source and binary forms, with or without
+  * modification, are permitted provided that the following conditions are met:
+  *
+- *  1. Redistributions of source code must retain the above copyright notice, 
++ *  1. Redistributions of source code must retain the above copyright notice,
+  *     this list of conditions and the following disclaimer.
+  *  2. Redistributions in binary form must reproduce the above copyright notice,
+  *     this list of conditions and the following disclaimer in the documentation
+  *     and/or other materials provided with the distribution.
+- *  3. The name of the author may not be used to endorse or promote products 
++ *  3. The name of the author may not be used to endorse or promote products
+  *     derived from this software without specific prior written permission.
+  *
+  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
++ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+- * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
++ * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
+- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
++ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
++ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  */
+ 
+@@ -47,6 +47,7 @@
+ #include <Iphlpapi.h>
+ #endif
+ 
++#include "talk/base/common.h"
+ #include "talk/base/host.h"
+ #include "talk/base/logging.h"
+ #include "talk/base/network.h"
+@@ -211,7 +212,7 @@
+ void NetworkManager::CreateNetworks(std::vector<Network*>& networks) {
+   IP_ADAPTER_INFO info_temp;
+   ULONG len = 0;
+-  
++
+   if (GetAdaptersInfo(&info_temp, &len) != ERROR_BUFFER_OVERFLOW)
+     return;
+   IP_ADAPTER_INFO *infos = new IP_ADAPTER_INFO[len];
+@@ -338,7 +339,7 @@
+   std::stringstream ss;
+   // Print out the first space-terminated token of the network name, plus
+   // the IP address.
+-  ss << "Net[" << name_.substr(0, name_.find(' ')) 
++  ss << "Net[" << name_.substr(0, name_.find(' '))
+      << ":" << SocketAddress::IPToString(ip_) << "]";
+   return ss.str();
+ }
+Index: third-party/libjingle-0.4.0/talk/base/messagequeue.h
+===================================================================
+--- third-party/libjingle-0.4.0/talk/base/messagequeue.h	(revision 299)
++++ third-party/libjingle-0.4.0/talk/base/messagequeue.h	(working copy)
+@@ -2,26 +2,26 @@
+  * libjingle
+  * Copyright 2004--2005, Google Inc.
+  *
+- * Redistribution and use in source and binary forms, with or without 
++ * Redistribution and use in source and binary forms, with or without
+  * modification, are permitted provided that the following conditions are met:
+  *
+- *  1. Redistributions of source code must retain the above copyright notice, 
++ *  1. Redistributions of source code must retain the above copyright notice,
+  *     this list of conditions and the following disclaimer.
+  *  2. Redistributions in binary form must reproduce the above copyright notice,
+  *     this list of conditions and the following disclaimer in the documentation
+  *     and/or other materials provided with the distribution.
+- *  3. The name of the author may not be used to endorse or promote products 
++ *  3. The name of the author may not be used to endorse or promote products
+  *     derived from this software without specific prior written permission.
+  *
+  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
++ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+- * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
++ * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
+- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
++ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
++ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  */
+ 
+@@ -31,6 +31,7 @@
+ #include <vector>
+ #include <queue>
+ #include <algorithm>
++#include "talk/base/common.h"
+ #include "talk/base/basictypes.h"
+ #include "talk/base/criticalsection.h"
+ #include "talk/base/socketserver.h"
+Index: third-party/libjingle-0.4.0/talk/base/bytebuffer.cc
+===================================================================
+--- third-party/libjingle-0.4.0/talk/base/bytebuffer.cc	(revision 299)
++++ third-party/libjingle-0.4.0/talk/base/bytebuffer.cc	(working copy)
+@@ -2,32 +2,33 @@
+  * libjingle
+  * Copyright 2004--2005, Google Inc.
+  *
+- * Redistribution and use in source and binary forms, with or without 
++ * Redistribution and use in source and binary forms, with or without
+  * modification, are permitted provided that the following conditions are met:
+  *
+- *  1. Redistributions of source code must retain the above copyright notice, 
++ *  1. Redistributions of source code must retain the above copyright notice,
+  *     this list of conditions and the following disclaimer.
+  *  2. Redistributions in binary form must reproduce the above copyright notice,
+  *     this list of conditions and the following disclaimer in the documentation
+  *     and/or other materials provided with the distribution.
+- *  3. The name of the author may not be used to endorse or promote products 
++ *  3. The name of the author may not be used to endorse or promote products
+  *     derived from this software without specific prior written permission.
+  *
+  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
++ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+- * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
++ * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
+- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
++ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
++ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  */
+ 
+ #include <algorithm>
+ #include <cassert>
+ 
++#include "talk/base/common.h"
+ #include "talk/base/basictypes.h"
+ #include "talk/base/bytebuffer.h"
+ #include "talk/base/byteorder.h"
+Index: third-party/libjingle-0.4.0/talk/base/cryptstring.h
+===================================================================
+--- third-party/libjingle-0.4.0/talk/base/cryptstring.h	(revision 299)
++++ third-party/libjingle-0.4.0/talk/base/cryptstring.h	(working copy)
+@@ -2,26 +2,26 @@
+  * libjingle
+  * Copyright 2004--2005, Google Inc.
+  *
+- * Redistribution and use in source and binary forms, with or without 
++ * Redistribution and use in source and binary forms, with or without
+  * modification, are permitted provided that the following conditions are met:
+  *
+- *  1. Redistributions of source code must retain the above copyright notice, 
++ *  1. Redistributions of source code must retain the above copyright notice,
+  *     this list of conditions and the following disclaimer.
+  *  2. Redistributions in binary form must reproduce the above copyright notice,
+  *     this list of conditions and the following disclaimer in the documentation
+  *     and/or other materials provided with the distribution.
+- *  3. The name of the author may not be used to endorse or promote products 
++ *  3. The name of the author may not be used to endorse or promote products
+  *     derived from this software without specific prior written permission.
+  *
+  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
++ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+- * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
++ * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
+- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
++ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
++ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  */
+ 
+@@ -29,6 +29,7 @@
+ #define _TALK_BASE_CRYPTSTRING_H_
+ 
+ #include <string>
++#include "talk/base/common.h"
+ #include "talk/base/linked_ptr.h"
+ #include "talk/base/scoped_ptr.h"
+ 
+@@ -71,7 +72,7 @@
+   }
+   void Clear() { impl_.reset(new EmptyCryptStringImpl()); }
+   std::string UrlEncode() const { return impl_->UrlEncode(); }
+-  
++
+ private:
+   scoped_ptr<const CryptStringImpl> impl_;
+ };
+@@ -87,7 +88,7 @@
+     length_ = 0;
+     storage_[0] = 0;
+   }
+-  
++
+   void Append(const std::string & text) {
+     Append(text.data(), text.length());
+   }
+@@ -98,7 +99,7 @@
+     length_ += length;
+     storage_[length_] = '\0';
+   }
+-  
++
+   void Append(const CryptString * password) {
+     size_t len = password->GetLength();
+     EnsureStorage(length_ + len + 1);
+@@ -134,7 +135,7 @@
+ 
+     if (old_capacity) {
+       memcpy(storage_, old_storage, length_);
+-    
++
+       // zero memory in a way that an optimizer won't optimize it out
+       old_storage[0] = 0;
+       for (size_t i = 1; i < old_capacity; i++) {
+@@ -142,7 +143,7 @@
+       }
+       delete[] old_storage;
+     }
+-  }  
++  }
+ 
+   ~FormatCryptString() {
+     if (capacity_) {

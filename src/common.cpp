@@ -293,7 +293,7 @@ void SoundPlayer::playNext()
         timer->stop();
         return;
     }
-    
+
     if(file == "!beep") {
         play(file);
         return;
@@ -302,13 +302,14 @@ void SoundPlayer::playNext()
     if (sound && !sound->isFinished()) return;
     play(file);
 #else
-    if (process && process->isRunning()) return;
+    // if (process && process->isRunning()) return;
     play(file);
 #endif
 }
 
 void SoundPlayer::play(QString file)
 {
+/*
     this->file = file;
     if(file == "!beep") {
 		QApplication::beep();
@@ -317,7 +318,7 @@ void SoundPlayer::play(QString file)
 
 	if(!QFile::exists(file))
 		return;
-    
+
 #if defined(Q_WS_WIN) || defined(Q_WS_MAC)
     if (!sound || (sound && sound->fileName() != file)) {
         if (sound) delete sound;
@@ -326,17 +327,18 @@ void SoundPlayer::play(QString file)
     sound->play();
 #else
  	if (SJabbinOptions::instance()->player.isEmpty()) return;
-    
+
     if (!process || (process && !process->arguments().contains(file))) {
         if (process) delete process;
 		QStringList args;
  		args = QStringList::split(' ', SJabbinOptions::instance()->player);
 		args += file;
-		process = new QProcess(args);
+		process = new QProcess(this);
     }
     if(!process->start())
         wait3(NULL,WNOHANG,NULL);
 #endif
+*/
 }
 
 void SoundPlayer::stop()

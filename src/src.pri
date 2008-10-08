@@ -57,7 +57,7 @@ qca-static {
 	contains(DEFINES, HAVE_OPENSSL) {
 		include(../third-party/qca/qca-ossl.pri)
 	}
-	
+
 	# QCA-SASL
 	contains(DEFINES, HAVE_CYRUSSASL) {
 		include(../third-party/qca/qca-cyrus-sasl.pri)
@@ -67,7 +67,7 @@ qca-static {
 	include(../third-party/qca/qca-gnupg.pri)
 }
 else {
-	CONFIG += crypto	
+	CONFIG += crypto
 }
 
 # Widgets
@@ -88,7 +88,12 @@ jingle {
 	DEFINES += HAVE_JINGLE
 
 	JINGLE_CPP = $$PWD/../third-party/libjingle-0.4.0
-	LIBS += ../third-party/libjingle-0.4.0/Release/jingle.lib
+	win32 {
+	    LIBS += ../third-party/libjingle-0.4.0/Release/jingle.lib
+	}
+	unix {
+	    LIBS += ../third-party/libjingle-0.4.0/libjingle.a
+        }
 
 	include($$PWD/voip/voip.pri)
 
@@ -105,9 +110,9 @@ include($$PWD/../iris/iris.pri)
 # Header files
 HEADERS += \
 	$$PWD/psilogger.h \
-	$$PWD/varlist.h \ 
+	$$PWD/varlist.h \
 	$$PWD/jidutil.h \
-	$$PWD/showtextdlg.h \ 
+	$$PWD/showtextdlg.h \
 	$$PWD/profiles.h \
 	$$PWD/activeprofiles.h \
 	$$PWD/profiledlg.h \
@@ -215,7 +220,7 @@ HEADERS += \
 	$$PWD/accountlabel.h \
 	$$PWD/psiactions.h \
 	$$PWD/buzzer.h \
-	$$PWD/dummystream.h 
+	$$PWD/dummystream.h
 
 # Source files
 SOURCES += \
@@ -417,8 +422,8 @@ whiteboarding {
 
 mac {
 	contains( DEFINES, HAVE_GROWL ) {
-		HEADERS += $$PWD/psigrowlnotifier.h 
-		SOURCES += $$PWD/psigrowlnotifier.cpp 
+		HEADERS += $$PWD/psigrowlnotifier.h
+		SOURCES += $$PWD/psigrowlnotifier.cpp
 	}
 
 	HEADERS += $$PWD/cocoautil.h

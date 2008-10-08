@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
  */
- 
+
 #include "joimmediaengine.h"
 
 #include <sys/types.h>
@@ -43,13 +43,13 @@
 using namespace cricket;
 
 JabbinMediaChannel::JabbinMediaChannel()
-: MediaChannel() 
+: MediaChannel()
 {
   pt_ = -1;
   dying_ = false;
   SetInterface( NULL );
 
-  qDebug( "Network interface: %d", (int)network_interface() );
+  qDebug( "Network interface: %d", (void *)network_interface() );
 
   mediaStream = new MediaStream(0);
 }
@@ -57,7 +57,7 @@ JabbinMediaChannel::JabbinMediaChannel()
 JabbinMediaChannel::~JabbinMediaChannel() {
   dying_ = true;
   SetInterface( NULL );
-  
+
   mediaStream->stop();
   delete mediaStream;
 }
@@ -68,14 +68,14 @@ void JabbinMediaChannel::SetCodec(int pt) {
   if (!strcmp(codec, "iLBC"))
     pt_ = 102;
   else if (!strcmp(codec, "speex"))
-    pt_ = 98; 
+    pt_ = 98;
   else
     pt_ = 0;
 
 */
   pt_ = pt;
   qDebug("set codec: , payload type: %d", pt_);
-  qDebug( "Network interface: %d", (int)network_interface() );
+  qDebug( "Network interface: %d", (void *)network_interface() );
 
   mediaStream->stop();
   mediaStream->start( &incomingPackets, this, pt_ );
@@ -88,12 +88,12 @@ void JabbinMediaChannel::SetCodecs(const std::vector<Codec> &codecs)
     }
 }
 
-void JabbinMediaChannel::OnPacketReceived(const void *data, int len) 
+void JabbinMediaChannel::OnPacketReceived(const void *data, int len)
 {
 
   char buf[4096];
   memcpy(buf, data, len);
-  
+
   if (buf[1] == pt_) {
   } else {
       SetCodec(buf[1]);
@@ -107,12 +107,12 @@ void JabbinMediaChannel::OnPacketReceived(const void *data, int len)
         SetCodec("PCMU");
       }*/
   }
-  
+
   if (play_ && buf[1] != 13) { // 13 == comfort noise
       QByteArray *ba = new QByteArray(len);
       memcpy( ba->data(), data, len );
       incomingPackets.enqueue( ba );
-      //DKZM:to free debug log  
+      //DKZM:to free debug log
       //qDebug("enqueue incoming packet, size %d", len);
   }
 }
@@ -136,13 +136,13 @@ bool JabbinMediaEngine::Init() {
   // codecs_.push_back(Codec(102, "iLBC", 4));
   // codecs_.push_back(Codec(98, "speex", 4));
   // codecs_.push_back(Codec(0, "PCMU", 2));
-  
+
 return true;
 }
 
 void JabbinMediaEngine::Terminate() {
 }
-  
+
 MediaChannel *JabbinMediaEngine::CreateChannel() {
   return new JabbinMediaChannel();
 }
@@ -162,8 +162,8 @@ std::vector<Codec> JabbinMediaEngine::codecs()
     for ( int i=0; i<manager->payloads().count(); i++ ) {
         VoiceCodecFactory *f = manager->codecFactory( manager->payloads()[i] );
 
-        Codec codec( f->payload(), 
-                     std::string(f->name().ascii()), 
+        Codec codec( f->payload(),
+                     std::string(f->name().ascii()),
                      8000, //clockrate
                      int( f->bandwidth()*1000 ), // bitrate
                      1, // channels

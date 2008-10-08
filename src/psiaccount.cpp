@@ -366,14 +366,14 @@ public:
 
 	// Voice Call
 	VoiceCaller* voiceCaller;
-	
+
 	TabManager *tabManager;
 
 #ifdef GOOGLE_FT
 	// Google file transfer manager
 	GoogleFTManager* googleFTManager;
 #endif
-	
+
 #ifdef WHITEBOARDING
 	// Whiteboard
 	WbManager* wbManager;
@@ -697,7 +697,7 @@ public:
 	{
 		while (!dialogList.isEmpty()) {
 			item_dialog2* i = dialogList.takeFirst();
-			
+
 			delete i->widget;
 			delete i;
 		}
@@ -1708,10 +1708,10 @@ void PsiAccount::cs_needAuthParams(bool user, bool pass, bool realm)
 			d->stream->setRealm(d->jid.domain());
 		}
 	}
-	else if (d->acc.customAuth && !d->acc.realm.isEmpty()) 
+	else if (d->acc.customAuth && !d->acc.realm.isEmpty())
 		qWarning("Custom authentication realm not used");
-	
-	if(d->acc.customAuth) 
+
+	if(d->acc.customAuth)
 		d->stream->setAuthzid(d->jid.bare());
 	d->stream->continueAfterParams();
 }
@@ -2267,7 +2267,7 @@ void PsiAccount::client_rosterItemRemoved(const RosterItem &r)
 
 void PsiAccount::tryVerify(UserListItem *u, UserResource *ur)
 {
-	if(PGPUtil::instance().pgpAvailable()) 
+	if(PGPUtil::instance().pgpAvailable())
 		verifyStatus(u->jid().withResource(ur->name()), ur->status());
 }
 
@@ -2679,7 +2679,7 @@ void PsiAccount::incomingGoogleFileTransfer(GoogleFileTransfer* ft)
 		d->show();
 		ft->accept();
 	}
-	else 
+	else
 		ft->reject();
 }
 #endif
@@ -3352,7 +3352,7 @@ void PsiAccount::itemRetracted(const Jid& j, const QString& n, const PubSubRetra
 			// FIXME: try to find the right resource using JEP-33 'replyto'
 			//UserResourceList::Iterator rit = u->userResourceList().find(<resource>);
 			//bool found = (rit == u->userResourceList().end()) ? false: true;
-			//if(found) 
+			//if(found)
 			//	(*rit).setTune(tune);
 			u->setTune(QString());
 			cpUpdate(*u);
@@ -3453,7 +3453,7 @@ QList<UserListItem*> PsiAccount::findRelevant(const Jid &j) const
 				if(u->jid().resource() != j.resource())
 					continue;
 			} else {
-				// skip status changes from muc participants 
+				// skip status changes from muc participants
 				// if the MUC somehow got into userList.
 				if (!j.resource().isEmpty() && d->groupchats.contains(j.bare())) continue;
 			}
@@ -3610,9 +3610,9 @@ CallDlg *PsiAccount::ensureCallDlg(const Jid &j)
 	else {
 		// on X11, do a special reparent to open on the right desktop
 #ifdef Q_WS_X11
-		/* KIS added an exception for tabs here. We do *not* want chats flying 
-		 * randomlyi, it pulls them out of tabsets. So instead, we move the 
-		 * tabset instead. It's just as filthy, unfortunately, but it's the 
+		/* KIS added an exception for tabs here. We do *not* want chats flying
+		 * randomlyi, it pulls them out of tabsets. So instead, we move the
+		 * tabset instead. It's just as filthy, unfortunately, but it's the
 		 * only way */
 		//TODO: This doesn't work as expected atm, it doesn't seem to reparent the tabset
 		QWidget *window = c;
@@ -3621,7 +3621,7 @@ CallDlg *PsiAccount::ensureCallDlg(const Jid &j)
 			QPixmap p;
 			if(pp)
 				p = *pp;
-			reparent_good(window, 0, false);
+			//reparent_good(window, 0, false);
 			if(!p.isNull())
 				c->setIcon(p);
 		}
@@ -3972,7 +3972,7 @@ void PsiAccount::actionMakeCall(const Jid &j)
 		qDebug( tr("PsiAccount::actionMakeCall, u %1 not found").arg( j.full() ) );
 		return;
 	}
-		
+
     qDebug( tr("jid %1").arg(j.full()) );
 
 	// if 'j' is bare, we might want to switch to a specific resource
@@ -3987,7 +3987,7 @@ void PsiAccount::actionMakeCall(const Jid &j)
 	}
 
     qDebug( tr("resource").arg(res) );
-    
+
 	if(!res.isEmpty())
 		openCall(j.withResource(res));
 	else
@@ -4342,7 +4342,7 @@ void PsiAccount::dj_formSubmit(const XData& data, const QString& thread, const J
 	m.setTo(jid);
 	m.setThread(thread, true);
 	m.setForm(data);
-	
+
 	d->client->sendMessage(m);
 }
 
@@ -4353,7 +4353,7 @@ void PsiAccount::dj_formCancel(const XData& data, const QString& thread, const J
 	m.setTo(jid);
 	m.setThread(thread, true);
 	m.setForm(data);
-  
+
 	d->client->sendMessage(m);
 }
 
@@ -4543,7 +4543,7 @@ void PsiAccount::handleEvent(PsiEvent* e, ActivationType activationType)
 		delete e;
 		return;
 	}
-	//FIXME(KIS): must now cause the event to be recreated from this xml or such. Horrid. 	
+	//FIXME(KIS): must now cause the event to be recreated from this xml or such. Horrid.
 #endif
 
 	if (d->psi->filterEvent(this, e)) {
@@ -4933,7 +4933,7 @@ void PsiAccount::queueEvent(PsiEvent* e, ActivationType activationType)
 		}
 		else if (e->type() == PsiEvent::Auth && !EventDlg::messagingEnabled())
 			doPopup = false;
-		} 
+		}
 		else if (e->type() == PsiEvent::Call) {
 			doPopup = option.popupCalls;
 		}
@@ -5334,7 +5334,7 @@ void PsiAccount::client_groupChatPresence(const Jid &j, const Status &s)
 	w->presence(j.resource(), s);
 
 	// pass through the core presence handling also (so that roster items
-	// from groupchat contacts get a resource as well 
+	// from groupchat contacts get a resource as well
 	Resource r;
 	r.setName(j.resource());
 	r.setStatus(s);

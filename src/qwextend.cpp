@@ -2,21 +2,23 @@
 
 #ifdef Q_WS_X11
 
-#define protected public
-#define private public
+//#define protected public
+//#define private public
 #include <qwidget.h>
-#undef protected
-#undef private
+//#undef protected
+//#undef private
 
-#include <qcursor.h>
+/*#include <qcursor.h>
 #include <qobject.h>
 #include <qpixmap.h>
 #include <X11/Xlib.h>
-#include <X11/Xutil.h>
+#include <X11/Xutil.h>*/
 
 // taken from qt/x11 (doing this sucks sucks sucks sucks sucks)
 void reparent_good(QWidget *that, Qt::WFlags f, bool showIt)
 {
+}
+/*
     extern void qPRCreate( const QWidget *, Window );
     extern void qt_XDestroyWindow( const QWidget *destroyer, Display *display, Window window );
     extern bool qt_dnd_enable( QWidget* w, bool on );
@@ -140,6 +142,6 @@ void reparent_good(QWidget *that, Qt::WFlags f, bool showIt)
     // re-enable mouse tracking
     if (mouse_tracking)
 	that->setMouseTracking(mouse_tracking);
-}
+}*/
 
 #endif
