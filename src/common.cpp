@@ -309,7 +309,6 @@ void SoundPlayer::playNext()
 
 void SoundPlayer::play(QString file)
 {
-/*
     this->file = file;
     if(file == "!beep") {
 		QApplication::beep();
@@ -326,7 +325,7 @@ void SoundPlayer::play(QString file)
     }
     sound->play();
 #else
- 	if (SJabbinOptions::instance()->player.isEmpty()) return;
+/* 	if (SJabbinOptions::instance()->player.isEmpty()) return;
 
     if (!process || (process && !process->arguments().contains(file))) {
         if (process) delete process;
@@ -336,9 +335,8 @@ void SoundPlayer::play(QString file)
 		process = new QProcess(this);
     }
     if(!process->start())
-        wait3(NULL,WNOHANG,NULL);
+        wait3(NULL,WNOHANG,NULL);*/
 #endif
-*/
 }
 
 void SoundPlayer::stop()
