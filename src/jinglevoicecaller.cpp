@@ -48,7 +48,6 @@
 #include "jinglevoicecaller.h"
 #include "psiaccount.h"
 #include "dtmfsender.h"
-//#include "pathdir.h"
 
 #include "callslog.h"
 
@@ -70,7 +69,7 @@ public:
  * \class JingleIQResponder
  * \brief A task that responds to jingle candidate queries with an empty reply.
  */
- 
+
 JingleIQResponder::JingleIQResponder(Task *parent) :Task(parent)
 {
 }
@@ -83,14 +82,14 @@ bool JingleIQResponder::take(const QDomElement &e)
 {
 	if(e.tagName() != "iq")
 		return false;
-	
+
 	QDomElement first = e.firstChild().toElement();
 	if (!first.isNull() && first.attribute("xmlns") == JINGLE_NS) {
 		QDomElement iq = createIQ(doc(), "result", e.attribute("from"), e.attribute("id"));
 		send(iq);
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -99,7 +98,7 @@ bool JingleIQResponder::take(const QDomElement &e)
 /**
  * \brief A class for handling signals from libjingle.
  */
-class JingleClientSlots : public sigslot::has_slots<> 
+class JingleClientSlots : public sigslot::has_slots<>
 {
 public:
 	JingleClientSlots(JingleVoiceCaller *voiceCaller);
@@ -126,7 +125,7 @@ JingleClientSlots::JingleClientSlots(JingleVoiceCaller *voiceCaller) : voiceCall
 {
 }
 
-void JingleClientSlots::callCreated(cricket::Call *call) 
+void JingleClientSlots::callCreated(cricket::Call *call)
 {
 	call->SignalSessionState.connect(this, &JingleClientSlots::stateChanged);
 }
@@ -145,7 +144,7 @@ void JingleClientSlots::callDestroyed(cricket::Call *call)
 }
 
 /*
-void JingleClientSlots::sendStanza(cricket::SessionClient*, const buzz::XmlElement *stanza, bool response ) 
+void JingleClientSlots::sendStanza(cricket::SessionClient*, const buzz::XmlElement *stanza, bool response )
 {
 	QString st(stanza->Str().c_str());
 	st.replace("cli:iq","iq");
@@ -156,7 +155,7 @@ void JingleClientSlots::sendStanza(cricket::SessionClient*, const buzz::XmlEleme
 	//fprintf(stderr,"Sending stanza \n%s\n\n",st.latin1());
 } */
 
-void JingleClientSlots::sendStanza( const buzz::XmlElement *stanza ) 
+void JingleClientSlots::sendStanza( const buzz::XmlElement *stanza )
 {
 	QString st( stanza->Str().c_str() );
 
@@ -168,12 +167,12 @@ void JingleClientSlots::sendStanza( const buzz::XmlElement *stanza )
 	//fprintf(stderr,"Sending stanza \n%s\n\n",st.latin1());
 }
 
-void JingleClientSlots::requestSignaling() 
+void JingleClientSlots::requestSignaling()
 {
 	voiceCaller_->session_manager_->OnSignalingReady();
 }
 
-void JingleClientSlots::stateChanged(cricket::Call *call, cricket::Session *session, cricket::Session::State state) 
+void JingleClientSlots::stateChanged(cricket::Call *call, cricket::Session *session, cricket::Session::State state)
 {
     char* stateNames[] = {
         "STATE_INIT = 0",
@@ -197,9 +196,9 @@ void JingleClientSlots::stateChanged(cricket::Call *call, cricket::Session *sess
 	// Why is c_str() stuff needed to make it compile on OS X ?
 	Jid jid(session->remote_name().c_str());
 
-	
+
 	if (state == cricket::Session::STATE_INIT) { }
-	else if (state == cricket::Session::STATE_SENTINITIATE) { 
+	else if (state == cricket::Session::STATE_SENTINITIATE) {
 		voiceCaller_->registerCall(jid,call);
 	}
 	else if (state == cricket::Session::STATE_RECEIVEDINITIATE) {
@@ -235,7 +234,7 @@ void JingleClientSlots::stateChanged(cricket::Call *call, cricket::Session *sess
 
 void JingleClientSlots::setJingleInfo(const std::string &relay_token,
 		              const std::vector<std::string> &relay_addresses,
-                      const std::vector<talk_base::SocketAddress> &stun_addresses) 
+                      const std::vector<talk_base::SocketAddress> &stun_addresses)
 {
   voiceCaller_->port_allocator_->SetStunHosts(stun_addresses);
   voiceCaller_->port_allocator_->SetRelayHosts(relay_addresses);
@@ -288,8 +287,8 @@ void JingleVoiceCaller::initialize()
 		//stun_addr_ = new cricket::SocketAddress("stun.fwdnet.net",19302);
 		network_manager_ = new talk_base::NetworkManager();
 
-        /*port_allocator_ = new cricket::BasicPortAllocator(network_manager_, 
-                                                          stun_addr_, 
+        /*port_allocator_ = new cricket::BasicPortAllocator(network_manager_,
+                                                          stun_addr_,
                                                           NULL); // relay server
         */
         port_allocator_ = new cricket::HttpPortAllocator( network_manager_, "call" );
@@ -301,7 +300,7 @@ void JingleVoiceCaller::initialize()
 
 	}
 
-	slots_ = new JingleClientSlots(this); 
+	slots_ = new JingleClientSlots(this);
 
 	// Session manager
 	session_manager_ = new cricket::SessionManager( port_allocator_, thread_ );
@@ -349,7 +348,7 @@ void JingleVoiceCaller::deinitialize()
 	// Disconnect signals (is this needed)
 	//phone_client_->SignalCallCreate.disconnect(slots_);
 	//phone_client_->SignalSendStanza.disconnect(slots_);
-	
+
 	// Delete objects
 	delete phone_client_;
 	delete session_manager_;
@@ -375,7 +374,7 @@ bool JingleVoiceCaller::calling(const Jid& jid)
 
 void JingleVoiceCaller::call(const Jid& jid)
 {
-    if ( !initialized_) 
+    if ( !initialized_)
         return;
 
     qDebug(QString("jinglevoicecaller.cpp: Calling %1").arg(jid.full()));
@@ -473,7 +472,7 @@ void JingleVoiceCaller::receiveStanza(const QString& stanza)
 		}
 		return;
 	}
-	
+
 	// Check if the packet is destined for libjingle.
 	// We could use Session::IsClientStanza to check this, but this one crashes
 	// for some reason.
@@ -486,7 +485,7 @@ void JingleVoiceCaller::receiveStanza(const QString& stanza)
 		}
 		n = n.nextSibling();
 	}
-	
+
 	// Spread the word
 	if (ok) {
 		qDebug(QString("jinglevoicecaller.cpp: Handing down \n%1").arg(stanza));
