@@ -155,6 +155,10 @@ protected slots:
 		"	color: black;"
 		"}"
 		""
+		"QPushButton:focus {"
+		"	border-image: url(:/images/pushbutton/silver_profile/pushbutton_focus.png) 12px 0px 12px 10px;"
+		"}"
+		""
 		"QPushButton:hover {"
 		"	border-image: url(:/images/pushbutton/silver_profile/pushbutton_hover.png) 12px 0px 12px 10px;"
 		"}"
@@ -242,12 +246,12 @@ void YaChatDlg::initUi()
 	// connect(ui_.profileButton, SIGNAL(clicked()), SLOT(doInfo()));
 	// connect(account()->psi()->iconSelectPopup(), SIGNAL(textSelected(QString)), SLOT(addEmoticon(QString)));
 	// ui_.smileysButton->setMenu(account()->psi()->iconSelectPopup());
-	// 
+	//
 	// ui_.selfUserpic->setMode(YaSelfAvatarLabel::OpenProfile);
-	// 
+	//
 	// ui_.fontButton->hide();
 	// ui_.backgroundButton->hide();
-	// 
+	//
 	// ui_.selfUserpic->setContactList(account()->psi()->contactList());
 	// ui_.selfName->setContactList(account()->psi()->contactList());
 	ui_.contactUserpic->setProfile(contactProfile_);

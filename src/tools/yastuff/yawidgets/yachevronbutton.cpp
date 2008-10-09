@@ -48,7 +48,7 @@ YaChevronButton::YaChevronButton(QWidget* parent)
 // 	"	border: 0px;"
 // 	"	background: url(:/images/chevron.png) center center no-repeat;"
 // 	"}"
-// 	"QToolButton:pressed, QToolButton:hover {"
+// 	"QToolButton:pressed, QToolButton:hover, QToolButton:focus {"
 // 	"	background: url(:/images/chevron_pressed.png) center center no-repeat;"
 // 	"}"
 // 	"*::down-arrow, *::menu-indicator {"

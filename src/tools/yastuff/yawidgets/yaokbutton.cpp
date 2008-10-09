@@ -34,7 +34,7 @@ YaOkButton::YaOkButton(QWidget* parent)
 	"	border: 0px;"
 	"	background: url(:/images/okbutton.png) center center no-repeat;"
 	"}"
-	"QToolButton:pressed, QToolButton:hover {"
+	"QToolButton:pressed, QToolButton:hover, QToolButton:focus {"
 	"	background: url(:/images/okbutton_pressed.png) center center no-repeat;"
 	"}"
 	);

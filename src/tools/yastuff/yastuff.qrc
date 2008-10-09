@@ -173,15 +173,19 @@
 		<file>images/eventnotifier_close_informer.png</file>
 		<file>images/pushbutton/green/pushbutton.png</file>
 		<file>images/pushbutton/green/pushbutton_hover.png</file>
+		<file>images/pushbutton/green/pushbutton_focus.png</file>
 		<file>images/pushbutton/green/pushbutton_pressed.png</file>
 		<file>images/pushbutton/red/pushbutton.png</file>
 		<file>images/pushbutton/red/pushbutton_hover.png</file>
+		<file>images/pushbutton/red/pushbutton_focus.png</file>
 		<file>images/pushbutton/red/pushbutton_pressed.png</file>
 		<file>images/pushbutton/preferences_tab/pushbutton.png</file>
 		<file>images/pushbutton/preferences_tab/pushbutton_hover.png</file>
+		<file>images/pushbutton/preferences_tab/pushbutton_focus.png</file>
 		<file>images/pushbutton/preferences_tab/pushbutton_pressed.png</file>
 		<file>images/pushbutton/silver_profile/pushbutton.png</file>
 		<file>images/pushbutton/silver_profile/pushbutton_hover.png</file>
+		<file>images/pushbutton/silver_profile/pushbutton_focus.png</file>
 		<file>images/pushbutton/silver_profile/pushbutton_pressed.png</file>
 		<file>images/radiobutton_checked.png</file>
 		<file>images/radiobutton_checked_hover.png</file>

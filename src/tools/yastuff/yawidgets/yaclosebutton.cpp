@@ -54,7 +54,7 @@ void YaCloseButton::setChatButton(bool chatButton)
 	"	border: 0px;"
 	"	background: url(:/images/%1) center center no-repeat;"
 	"}"
-	"QToolButton:pressed, QToolButton:hover {"
+	"QToolButton:pressed, QToolButton:hover, QToolButton:focus {"
 	"	background: url(:/images/closetab_pressed.png) center center no-repeat;"
 	"}"
 	).arg(normal)
