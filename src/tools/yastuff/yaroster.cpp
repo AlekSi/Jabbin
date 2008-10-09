@@ -402,7 +402,7 @@ public:
 
 		vbox()->addSpacing(10);
 
-		addYaRuLabel(QString::fromUtf8("You can find new frinds on <a href=\"yachat://find-friends\"></a> — Jabberout service."));
+		addYaRuLabel(QString::fromUtf8("You can find new friends on <a href=\"yachat://find-friends\"></a> — Jabberout service."));
 
 		vbox()->addStretch();
 
