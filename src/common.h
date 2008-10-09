@@ -29,6 +29,7 @@
 #include <QColor>
 
 #include "statuspreset.h"
+#include "phononsoundplayer.h"
 
 class QSound;
 class QTimer;
@@ -38,17 +39,17 @@ class QProcess;
 // Options
 // -----------------------------------------------------------------------------
 
-enum { 
-	cOnline, 
-	cOffline, 
-	cAway, 
-	cDND, 
-	cProfileFore, 
-	cProfileBack, 
-	cGroupFore, 
-	cGroupBack, 
-	cListBack, 
-	cAnimFront, 
+enum {
+	cOnline,
+	cOffline,
+	cAway,
+	cDND,
+	cProfileFore,
+	cProfileBack,
+	cGroupFore,
+	cGroupBack,
+	cListBack,
+	cAnimFront,
 	cAnimBack,
 	cStatus,
 	cNumColors // A guard to store the number of colors
@@ -81,7 +82,7 @@ struct Options
 
 	bool oldSmallChats; //Filthy hack, see chat code.
 	int delChats, browser;
-	
+
 	bool useRC;
 
 	int defaultAction;
@@ -263,6 +264,7 @@ void soundPlay(const QString &);
 extern Qt::WFlags psi_dialog_flags;
 extern bool useSound;
 
+/*
 class SoundPlayer: public QObject {
 Q_OBJECT
 public:
@@ -275,7 +277,7 @@ public:
 protected slots:
     void playNext();
     void play(QString file);
-    
+
 private:
     int msec;
     int interval;
@@ -285,5 +287,6 @@ private:
     QSound * sound;
     QProcess * process;
 };
+*/
 
 #endif

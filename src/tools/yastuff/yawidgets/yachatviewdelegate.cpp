@@ -95,18 +95,18 @@ YaChatViewDelegate::YaChatViewDelegate(QAbstractItemView* parent)
 	timeFont_ = QFont("Verdana");
 
 	contentsFont_ = QFont("Arial");
-	contentsFont_.setPixelSize(11);
+	contentsFont_.setPixelSize(10);
 
 	dateHeaderFont_ = QFont("Arial");
 
 #ifdef Q_WS_WIN
 	nameFont_.setPixelSize(13);
 	timeFont_.setPixelSize(11);
-	dateHeaderFont_.setPixelSize(18);
+	dateHeaderFont_.setPixelSize(16);
 #else
 	nameFont_.setPixelSize(11);
 	timeFont_.setPixelSize(10);
-	dateHeaderFont_.setPixelSize(16);
+	dateHeaderFont_.setPixelSize(14);
 #endif
 
 	nameFontMetrics_ = new QFontMetrics(nameFont_);

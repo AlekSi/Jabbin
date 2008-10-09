@@ -139,6 +139,7 @@ HEADERS += \
 	$$PWD/rtparse.h \
 	$$PWD/systeminfo.h \
 	$$PWD/common.h \
+	$$PWD/phononsoundplayer.h \
 	$$PWD/proxy.h \
 	$$PWD/miniclient.h \
 	$$PWD/accountmanagedlg.h \
@@ -253,6 +254,7 @@ SOURCES += \
 	$$PWD/rtparse.cpp \
 	$$PWD/systeminfo.cpp \
 	$$PWD/common.cpp \
+	$$PWD/phononsoundplayer.cpp \
 	$$PWD/proxy.cpp \
 	$$PWD/miniclient.cpp \
 	$$PWD/accountmanagedlg.cpp \

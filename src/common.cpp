@@ -249,6 +249,7 @@ void soundPlay(const QString &str)
 #endif
 }
 
+/*
 SoundPlayer * soundPlayerInstance = 0;
 
 SoundPlayer::SoundPlayer(QObject * parent)
@@ -318,14 +319,14 @@ void SoundPlayer::play(QString file)
 	if(!QFile::exists(file))
 		return;
 
-#if defined(Q_WS_WIN) || defined(Q_WS_MAC)
+//#if defined(Q_WS_WIN) || defined(Q_WS_MAC)
     if (!sound || (sound && sound->fileName() != file)) {
         if (sound) delete sound;
 	    sound = new QSound(file);
     }
     sound->play();
-#else
-/* 	if (SJabbinOptions::instance()->player.isEmpty()) return;
+//#else
+* 	if (SJabbinOptions::instance()->player.isEmpty()) return;
 
     if (!process || (process && !process->arguments().contains(file))) {
         if (process) delete process;
@@ -335,15 +336,15 @@ void SoundPlayer::play(QString file)
 		process = new QProcess(this);
     }
     if(!process->start())
-        wait3(NULL,WNOHANG,NULL);*/
-#endif
+        wait3(NULL,WNOHANG,NULL);*
+//#endif
 }
 
 void SoundPlayer::stop()
 {
     timer->stop();
     if (process) process->kill();
-}
+}*/
 
 XMPP::Status makeStatus(int x, const QString &str, int priority)
 {
