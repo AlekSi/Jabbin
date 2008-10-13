@@ -4683,6 +4683,7 @@ void PsiAccount::handleEvent(PsiEvent* e, ActivationType activationType)
 	}
 	else if(e->type() == PsiEvent::Call) {
 // 		playContinuosSound(SJabbinOptions::instance()->onevent[eIncomingCall]);
+//
 		doPopup = true;
 		popupType = PsiPopup::AlertCall;
 	}

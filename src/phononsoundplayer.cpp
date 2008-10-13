@@ -90,6 +90,9 @@ void SoundPlayer::playContinuosSound(QString file, int msec)
 
 void SoundPlayer::totalTimeChanged(qint64 i)
 {
+    // This is called when Phonon loads
+    // our sound file - provides info about
+    // the length of the sound
     d->soundLength = (i < MIN_REPEAT_INTERVAL) ?
         MIN_REPEAT_INTERVAL : i;
     d->timer.start(d->soundLength);
@@ -101,6 +104,11 @@ void SoundPlayer::rewind()
         return;
     }
 
+    // If we are playing a sound file using Phonon,
+    // when it is finished, we pause the playback
+    // and seek the sound to beginning. This way
+    // Phonon doesn't remove currently playing sound
+    // from the queue.
     d->music->pause();
     d->music->seek(0);
 }

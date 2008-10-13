@@ -15,7 +15,8 @@ ShortcutManager::ShortcutManager() : QObject(QCoreApplication::instance())
 	if (shortcuts("chat.send").isEmpty()) {
 		qWarning("Restoring chat.send shortcut");
 		QVariantList vl;
-		vl << qVariantFromValue(QKeySequence(Qt::Key_Enter)) << qVariantFromValue(QKeySequence(Qt::Key_Return));
+		vl  << qVariantFromValue(QKeySequence(Qt::Key_Enter/* + Qt::CTRL*/))
+		    << qVariantFromValue(QKeySequence(Qt::Key_Return/* + Qt::CTRL*/));
 		PsiOptions::instance()->setOption("options.shortcuts.chat.send",vl);
 	}
 }
@@ -28,7 +29,7 @@ ShortcutManager* ShortcutManager::instance_ = NULL;
 /**
  * \brief The Instantiator of the Shortcutmanager
  */
-ShortcutManager* ShortcutManager::instance() 
+ShortcutManager* ShortcutManager::instance()
 {
 	if(!instance_)
 		instance_ = new ShortcutManager();
@@ -42,7 +43,7 @@ ShortcutManager* ShortcutManager::instance()
  * \return QKeySequence, the Keysequence associated with the keyname, or
  *   the first key sequence if there are multiple
  */
-QKeySequence ShortcutManager::shortcut(const QString& name) 
+QKeySequence ShortcutManager::shortcut(const QString& name)
 {
 	QVariant variant = PsiOptions::instance()->getOption(QString("options.shortcuts.%1").arg(name));
 	QString type = variant.typeName();
@@ -81,7 +82,7 @@ QList<QKeySequence> ShortcutManager::shortcuts(const QString& name)
  * \brief this function connects the Key or Keys associated with the keyname "path" with the slot "slot"
  *        of the Widget "parent"
  * \param path, the shortcut name e.g. "misc.sendmessage" which is in the options xml then
- *        mirrored as options.shortcuts.misc.sendmessage 
+ *        mirrored as options.shortcuts.misc.sendmessage
  * \param parent, the widget to which the new QAction should be connected to
  * \param slot, the SLOT() of the parent which should be triggerd if the KeySequence is activated
  */

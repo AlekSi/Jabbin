@@ -250,7 +250,7 @@ void YaPreferences::restore()
 	ui_.useOfficeBackground->setChecked(PsiOptions::instance()->getOption("options.ya.office-background").toBool());
 	// ui_.chatBackgroundComboBox->setEnabled(!ui_.useOfficeBackground->isChecked());
 
-	ui_.ctrlEnterSendsChatMessages->setChecked(!ShortcutManager::instance()->shortcuts("chat.send").contains(QKeySequence(Qt::Key_Return)));
+	ui_.ctrlEnterSendsChatMessages->setChecked(ShortcutManager::instance()->shortcuts("chat.send").contains(QKeySequence(Qt::CTRL + Qt::Key_Return)));
 	ui_.enableEmoticons->setChecked(option.useEmoticons);
 	ui_.showContactListGroups->setChecked(PsiOptions::instance()->getOption("options.ya.main-window.contact-list.show-groups").toBool());
 	ui_.showMoodChangePopups->setChecked(PsiOptions::instance()->getOption("options.ya.popups.moods.enable").toBool());

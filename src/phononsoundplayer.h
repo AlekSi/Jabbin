@@ -28,12 +28,37 @@
 class SoundPlayer: public QObject {
     Q_OBJECT
 public:
+    /**
+     * Creates a new instance of SoundPlayer
+     */
     SoundPlayer(QObject * parent);
+
+    /**
+     * Destroys this SoundPlayer
+     */
     virtual ~SoundPlayer();
 
+    /**
+     * @returns a static (shared) instance of
+     * SoundPlayer (analogous to the singleton pattern,
+     * but the constructor remains public)
+     */
     static SoundPlayer * instance();
 
+    /**
+     * Plays the specified sound for no less than
+     * msec milliseconds. If the sound is shorter,
+     * it will be repeated.
+     * @param file file to be played. If file is '!beep',
+     * then instead of playing a file, a system beep
+     * will be produced
+     * @param msec for how long to play
+     */
     void playContinuosSound(QString file, int msec);
+
+    /**
+     * Stopping the active playback
+     */
     void stop();
 
 protected slots:

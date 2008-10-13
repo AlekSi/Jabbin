@@ -177,7 +177,7 @@ QDomElement UserAccount::toXml(QDomDocument &doc, const QString &tagName)
 #ifdef YAPSI_ACTIVEX_SERVER
 	}
 #endif
-	
+
 	QDomElement customauth = doc.createElement("custom-auth");
 	setBoolAttribute(customauth, "use", customAuth);
 	QDomElement ac = textTag(doc, "authid", authid);
@@ -205,7 +205,7 @@ QDomElement UserAccount::toXml(QDomDocument &doc, const QString &tagName)
 		a.appendChild(textTag(doc, "pgpSecretKeyID", pgpSecretKey.keyId()));
 	}
 	a.appendChild(textTag(doc, "allow-plain", allow_plain));
-	
+
 	QDomElement r = doc.createElement("roster");
 	a.appendChild(r);
 	Roster::ConstIterator rit = roster.begin();
@@ -307,13 +307,13 @@ void UserAccount::fromXml(const QDomElement &a)
 	else {
 		opt_automatic_resource = false;
 	}
-	
+
 	// Will be overwritten if there is a new option
 	bool opt_plain = false;
 	readBoolAttribute(a, "plain", &opt_plain);
 	allow_plain = (opt_plain ? XMPP::ClientStream::AllowPlain : XMPP::ClientStream::NoAllowPlain);
 	readNumEntry(a, "allow-plain", (int*) &allow_plain);
-	
+
 	// Will be overwritten if there is a new option
 	bool opt_ssl = true;
 	readBoolAttribute(a, "ssl", &opt_ssl);
@@ -645,7 +645,7 @@ void UserProfile::reset()
 		tb[1].name = QObject::tr("Show contacts");
 		tb[1].on = false;
 		tb[1].locked = true;
-		tb[1].keys << "show_offline" << "show_hidden" << "show_agents" << "show_self" << "show_statusmsg"; 
+		tb[1].keys << "show_offline" << "show_hidden" << "show_agents" << "show_self" << "show_statusmsg";
 
 		tb[2].name = QObject::tr("Event notifier");
 		tb[2].on = false;
@@ -1217,7 +1217,7 @@ bool UserProfile::toFile(const QString &fname)
 		pp.appendChild(textTag(doc, "hideTime", prefs.ppHideTime));
 		pp.appendChild(textTag(doc, "borderColor", prefs.ppBorderColor.name()));
 	}
-	
+
 	{
 		// Bouncing dock (on Mac OS X)
 		QDomElement dock = doc.createElement("dock");
@@ -1503,7 +1503,7 @@ bool UserProfile::fromFile(const QString &fname)
 				readBoolEntry(tag, "autoCopy", &prefs.autoCopy);
 				readBoolEntry(tag, "useCaps", &prefs.useCaps);
 				readBoolEntry(tag, "rc", &prefs.useRC);
-				
+
 				// Migrating for soft return option
 				bool found;
 				findSubTag(tag, "chatSoftReturn", &found);
@@ -1511,9 +1511,9 @@ bool UserProfile::fromFile(const QString &fname)
 					bool soft;
 					readBoolEntry(tag, "chatSoftReturn", &soft);
 					QVariantList vl;
-					if (soft) 
+					if (soft)
 						vl << qVariantFromValue(QKeySequence(Qt::Key_Enter)) << qVariantFromValue(QKeySequence(Qt::Key_Return));
-					else 
+					else
 						vl << qVariantFromValue(QKeySequence(Qt::Key_Enter+Qt::CTRL)) << qVariantFromValue(QKeySequence(Qt::CTRL+Qt::Key_Return));
 					PsiOptions::instance()->setOption("options.shortcuts.chat.send",vl);
 				}
@@ -1625,7 +1625,7 @@ bool UserProfile::fromFile(const QString &fname)
 				prefs.sp.clear();
 				for(QDomNode n = tag.firstChild(); !n.isNull(); n = n.nextSibling()) {
 					StatusPreset preset(n.toElement());
-					if (!preset.name().isEmpty()) 
+					if (!preset.name().isEmpty())
 						prefs.sp[preset.name()] = preset;
 				}
 			}

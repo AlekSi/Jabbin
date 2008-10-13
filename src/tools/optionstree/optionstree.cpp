@@ -31,7 +31,7 @@
 OptionsTree::OptionsTree(QObject *parent)
 	: QObject(parent)
 {
-	
+
 }
 
 /**
@@ -39,7 +39,7 @@ OptionsTree::OptionsTree(QObject *parent)
  */
 OptionsTree::~OptionsTree()
 {
-	
+
 }
 
 /**
@@ -50,6 +50,7 @@ OptionsTree::~OptionsTree()
 QVariant OptionsTree::getOption(const QString& name) const
 {
 	QVariant value=tree_.getValue(name);
+	qDebug() << "Accessing option " << name << " and the value is " << value;
 	if (value==VariantTree::missingValue) {
 		value=QVariant(QVariant::Invalid);
 		qDebug() << "Accessing missing option " << name;
@@ -59,7 +60,7 @@ QVariant OptionsTree::getOption(const QString& name) const
 
 /**
  * \brief Sets the value of the named option.
- * If the option or any parents in the 
+ * If the option or any parents in the
  * hierachy do not exist, they are created and optionAboutToBeInserted and
  * optionInserted will be emited.
  *
@@ -69,6 +70,7 @@ QVariant OptionsTree::getOption(const QString& name) const
  */
 void OptionsTree::setOption(const QString& name, const QVariant& value)
 {
+	qDebug() << "Setting the option " << name << " and the value is " << value;
 	const QVariant &prev = tree_.getValue(name);
 	if ( prev == value ) {
 		return;
@@ -170,7 +172,7 @@ QString OptionsTree::mapPut(const QString &basename, const QVariant &key)
 		}
 	}
 	// FIXME performance?
-	
+
 	// allocate first unused index
 	QString path;
 	int i = 0;
@@ -179,7 +181,7 @@ QString OptionsTree::mapPut(const QString &basename, const QVariant &key)
 		++i;
 	} while (children.contains(path));
 	setOption(path + ".key", key);
-	return path;	
+	return path;
 }
 
 QVariantList OptionsTree::mapKeyList(const QString &basename) const
@@ -211,7 +213,7 @@ bool OptionsTree::saveOptions(const QString& fileName, const QString& configName
 	if (!configNS.isEmpty())
 		base.setAttribute("xmlns", configNS);
 	doc.appendChild(base);
-	
+
 	tree_.toXml(doc, base);
 	AtomicXmlFile f(fileName);
 	if (!f.saveDocument(doc))
@@ -250,7 +252,7 @@ bool OptionsTree::loadOptions(const QDomElement& base, const QString& configName
 	Q_UNUSED(configName);
 	Q_UNUSED(configNS);
 	Q_UNUSED(configVersion);
-	
+
 	// Version check
 	//if(base.tagName() != configName)
 	//	return false;
