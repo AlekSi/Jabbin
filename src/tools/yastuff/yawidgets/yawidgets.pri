@@ -3,12 +3,21 @@ DEPENDPATH  += $$PWD $$PWD/private $$PWD/settingsbuttontest
 
 INCLUDEPATH += $$PWD/newselfavatar
 DEPENDPATH += $$PWD/newselfavatar
+INCLUDEPATH += $$PWD/../../customwidgets
+DEPENDPATH += $$PWD/../../customwidgets
 SOURCES += \
 	$$PWD/newselfavatar/yaselfmood.cpp \
-	$$PWD/newselfavatar/yaselfmoodaction.cpp
+	$$PWD/newselfavatar/yaselfmoodaction.cpp \
+	$$PWD/../../customwidgets/selfmood.cpp \
+	$$PWD/../../customwidgets/generic/advancedlineedit.cpp \
+	$$PWD/../../customwidgets/generic/widgetexpander.cpp
+
 HEADERS += \
 	$$PWD/newselfavatar/yaselfmood.h \
-	$$PWD/newselfavatar/yaselfmoodaction.h
+	$$PWD/newselfavatar/yaselfmoodaction.h \
+	$$PWD/../../customwidgets/selfmood.h \
+	$$PWD/../../customwidgets/generic/advancedlineedit.h \
+	$$PWD/../../customwidgets/generic/widgetexpander.h
 
 HEADERS += \
 	$$PWD/visibletext.h

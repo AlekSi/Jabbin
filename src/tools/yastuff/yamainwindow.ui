@@ -163,7 +163,7 @@
             <number>2</number>
            </property>
            <item>
-            <widget class="YaSelfMood" name="selfMood" >
+            <widget class="SelfMood" name="selfMood" >
              <property name="sizePolicy" >
               <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
                <horstretch>0</horstretch>
@@ -301,9 +301,9 @@
    <header>yaselflabel.h</header>
   </customwidget>
   <customwidget>
-   <class>YaSelfMood</class>
+   <class>SelfMood</class>
    <extends>QFrame</extends>
-   <header>yaselfmood.h</header>
+   <header>selfmood.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

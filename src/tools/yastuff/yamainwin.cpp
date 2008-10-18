@@ -302,10 +302,10 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 
 	// YaSelfMood must always be created the last, otherwise interaction with its
 	// expanding menus will be severely limited on non-osx platforms
-	YaSelfMood *selfMoodOld = ui_.selfMood;
-	ui_.selfMood = new YaSelfMood(selfMoodOld->parentWidget());
-	replaceWidget(selfMoodOld, ui_.selfMood);
-	ui_.selfMood->raiseExtraInWidgetStack();
+	// YaSelfMood *selfMoodOld = ui_.selfMood;
+	// ui_.selfMood = new YaSelfMood(selfMoodOld->parentWidget());
+	// replaceWidget(selfMoodOld, ui_.selfMood);
+	// ui_.selfMood->raiseExtraInWidgetStack();
 
 	ShortcutManager::connect("appwide.status-online",  this, SLOT(setStatusOnline()));
 	ShortcutManager::connect("appwide.status-dnd",     this, SLOT(setStatusDND()));
@@ -949,7 +949,7 @@ void YaMainWin::accountContactsChanged()
 // 			}
 // 		}
 // 	}
-// 
+//
 // 	ui_.friendsFrame->setVisible(enableFriends);
 // }
 

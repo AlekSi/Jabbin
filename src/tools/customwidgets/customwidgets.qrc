@@ -1,0 +1,11 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/customwidgets">
+    <file>generic/data/advancedlineedit_background.png</file>
+    <file>generic/data/advancedlineedit_beginbackground.png</file>
+    <file>generic/data/advancedlineedit_beginbutton_style.css</file>
+    <file>generic/data/advancedlineedit_beginicon.png</file>
+    <file>generic/data/advancedlineedit_endbutton_style.css</file>
+    <file>generic/data/advancedlineedit_endicon.png</file>
+    <file>generic/data/advancedlineedit_style.css</file>
+</qresource>
+</RCC>

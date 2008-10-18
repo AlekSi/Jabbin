@@ -1,0 +1,7 @@
+QLineEdit {
+  padding-right: %1px;
+  padding-left: %2px;
+  border: 2px solid gray;
+  border-width: 6px;
+  border-image: url(:/customwidgets/generic/data/advancedlineedit_background.png) 6 6 6 6 stretch stretch;
+}

@@ -1,0 +1,8 @@
+QToolButton {
+  border: 0px solid black;
+  padding: 0px;
+  padding-right: 6px;
+  background-image: url(:/customwidgets/generic/data/advancedlineedit_beginbackground.png);
+  background-position: right center;
+  background-repeat: no-repeat;
+}

@@ -112,6 +112,7 @@ SOURCES += \
 	$$PWD/yalicense.cpp
 
 RESOURCES += \
+	$$PWD/../customwidgets/customwidgets.qrc \
 	$$PWD/yastuff.qrc \
 	$$PWD/yaiconsets.qrc
 
