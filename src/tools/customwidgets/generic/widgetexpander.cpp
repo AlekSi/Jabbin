@@ -27,13 +27,17 @@
 class WidgetExpander::Private {
 public:
     Private()
-        : timeline(NULL), fullwidth(100), minwidth(50)
+        : timeline(NULL),
+          fullwidth(100),
+          minwidth(50),
+          ratio(0.667)
     {
     }
 
     QTimeLine * timeline;
     int fullwidth, minwidth;
     QWidget * child;
+    qreal ratio;
 };
 
 WidgetExpander::WidgetExpander(QWidget * child, QWidget * parent)
@@ -48,6 +52,11 @@ WidgetExpander::WidgetExpander(QWidget * child, QWidget * parent)
 
     setChildWidget(child);
     setParent(parent);
+}
+
+void WidgetExpander::setMinimumWidthRatio(qreal ratio)
+{
+    d->ratio = ratio;
 }
 
 void WidgetExpander::setChildWidget(QWidget * child)
@@ -67,14 +76,22 @@ void WidgetExpander::setChildWidget(QWidget * child)
 
 void WidgetExpander::expand()
 {
-    d->timeline->setStartFrame(d->minwidth);
+    if (d->timeline->state() == QTimeLine::Running) {
+        d->timeline->setStartFrame(d->timeline->currentFrame());
+    } else {
+        d->timeline->setStartFrame(d->minwidth);
+    }
     d->timeline->setEndFrame(d->fullwidth);
     d->timeline->start();
 }
 
 void WidgetExpander::contract()
 {
-    d->timeline->setStartFrame(d->fullwidth);
+    if (d->timeline->state() == QTimeLine::Running) {
+        d->timeline->setStartFrame(d->timeline->currentFrame());
+    } else {
+        d->timeline->setStartFrame(d->fullwidth);
+    }
     d->timeline->setEndFrame(d->minwidth);
     d->timeline->start();
 }
@@ -94,7 +111,7 @@ void WidgetExpander::setChildWidth(int i)
 
 void WidgetExpander::resizeEvent(QResizeEvent *)
 {
-    d->minwidth = width() / 2;
+    d->minwidth = qRound(width() * d->ratio);
     d->fullwidth = width();
 
     if (d->child) {

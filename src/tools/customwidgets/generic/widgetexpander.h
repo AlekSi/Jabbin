@@ -24,6 +24,10 @@
 #include <QWidget>
 #include <QEvent>
 
+/**
+ * This class expands a widget when it has the focus, and
+ * collapses it when it doesn't have it.
+ */
 class WidgetExpander : public QWidget
 {
 Q_OBJECT
@@ -31,7 +35,17 @@ public:
     WidgetExpander(QWidget * child = 0, QWidget * parent = 0);
     ~WidgetExpander();
 
+    /**
+     * Sets the widget to expand/collapse based on its
+     * focus
+     * @param child child widget
+     */
     void setChildWidget(QWidget * child);
+
+    /**
+     * Sets the minimum width / full width ratio
+     */
+    void setMinimumWidthRatio(qreal ratio);
 
 protected:
     void resizeEvent(QResizeEvent *);

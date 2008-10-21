@@ -1,4 +1,4 @@
-QToolButton {
+QToolButton, QPushButton {
   border: 0px solid black;
   padding: 0px;
   padding-right: 6px;

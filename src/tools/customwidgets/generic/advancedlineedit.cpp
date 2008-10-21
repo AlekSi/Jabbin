@@ -18,7 +18,7 @@
  */
 
 #include "advancedlineedit.h"
-#include <QToolButton>
+#include <QPushButton>
 #include <QStyle>
 #include <QDebug>
 #include <QFile>
@@ -37,8 +37,8 @@ public:
         flags[EndButton] = Hide;
     }
 
-    QToolButton * beginButton;
-    QToolButton * endButton;
+    QPushButton * beginButton;
+    QPushButton * endButton;
     QString emptyText;
     QMap < AdvancedLineEdit::Button, AdvancedLineEdit::ButtonFlag > flags;
     QString mainstyle;
@@ -95,12 +95,12 @@ public:
 AdvancedLineEdit::AdvancedLineEdit(QWidget *parent)
     : QLineEdit(parent), d(new Private(this))
 {
-    d->beginButton = new QToolButton(this);
-    d->endButton = new QToolButton(this);
+    d->beginButton = new QPushButton(this);
+    d->endButton = new QPushButton(this);
 
     connect(d->beginButton, SIGNAL(clicked()),
         this, SIGNAL(beginButtonClicked()));
-    connect(d->endButton, SIGNAL(clicked()),
+    connect(d->endButton, SIGNAL(pressed()),
         this, SIGNAL(endButtonClicked()));
 
     d->beginButton->setIcon(QIcon(":/customwidgets/generic/data/advancedlineedit_beginicon.png"));

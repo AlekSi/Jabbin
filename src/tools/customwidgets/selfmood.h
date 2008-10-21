@@ -34,13 +34,20 @@ public:
     XMPP::Status::Type statusType() const;
 
 protected:
+    // Overridden
     void resizeEvent(QResizeEvent *);
+
+    // Overridden
+    bool eventFilter(QObject * object, QEvent * event);
 
 public Q_SLOTS:
     void setStatusText(const QString&);
     void setStatusType(XMPP::Status::Type type);
     void setHaveConnectingAccounts(bool haveConnectingAccounts);
     void clearMoods();
+
+    void acceptMoodText();
+    void popupMenu();
 
 Q_SIGNALS:
     void statusChanged(const QString & status);
