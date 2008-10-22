@@ -21,8 +21,11 @@
 #define ADVANCED_LIENEDIT_H
 
 #include <QLineEdit>
+#include "customwidgetscommon.h"
 
 class QToolButton;
+
+namespace CustomWidgets {
 
 /**
  * This class is implementing a line edit with a few custom functions
@@ -129,6 +132,8 @@ private:
     class Private;
     Private * const d;
 };
+
+} // namespace CustomWidgets
 
 #endif // ADVANCED_LIENEDIT_H
 

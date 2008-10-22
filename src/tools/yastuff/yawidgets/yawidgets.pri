@@ -10,14 +10,16 @@ SOURCES += \
 	$$PWD/newselfavatar/yaselfmoodaction.cpp \
 	$$PWD/../../customwidgets/selfmood.cpp \
 	$$PWD/../../customwidgets/generic/advancedlineedit.cpp \
-	$$PWD/../../customwidgets/generic/widgetexpander.cpp
+	$$PWD/../../customwidgets/generic/widgetexpander.cpp \
+	$$PWD/../../customwidgets/generic/customwidgetscommon.cpp
 
 HEADERS += \
 	$$PWD/newselfavatar/yaselfmood.h \
 	$$PWD/newselfavatar/yaselfmoodaction.h \
 	$$PWD/../../customwidgets/selfmood.h \
 	$$PWD/../../customwidgets/generic/advancedlineedit.h \
-	$$PWD/../../customwidgets/generic/widgetexpander.h
+	$$PWD/../../customwidgets/generic/widgetexpander.h \
+	$$PWD/../../customwidgets/generic/customwidgetscommon.h
 
 HEADERS += \
 	$$PWD/visibletext.h

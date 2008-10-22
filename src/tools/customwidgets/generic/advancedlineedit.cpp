@@ -20,10 +20,12 @@
 #include "advancedlineedit.h"
 #include <QPushButton>
 #include <QStyle>
-#include <QDebug>
-#include <QFile>
 #include <QPainter>
 #include <QColor>
+#include <QMap>
+#include <QDebug>
+
+namespace CustomWidgets {
 
 class AdvancedLineEdit::Private {
 public:
@@ -43,26 +45,6 @@ public:
     QMap < AdvancedLineEdit::Button, AdvancedLineEdit::ButtonFlag > flags;
     QString mainstyle;
     AdvancedLineEdit * q;
-
-    QString readFile(QString fileName)
-    {
-        QFile file(fileName);
-        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            qDebug() << "File not found " << fileName;
-            return QString();
-        }
-
-        QString result;
-
-        QTextStream in(&file);
-        QString line = in.readLine();
-        while (!line.isNull()) {
-            result += line;
-            line = in.readLine();
-        }
-
-        return result;
-    }
 
     void invalidateButtons()
     {
@@ -107,13 +89,13 @@ AdvancedLineEdit::AdvancedLineEdit(QWidget *parent)
     d->beginButton->setIconSize(QSize(16, 16));
     d->beginButton->setCursor(Qt::ArrowCursor);
     d->beginButton->setStyleSheet(
-        d->readFile(":/customwidgets/generic/data/advancedlineedit_beginbutton_style.css"));
+        Common::readFile(":/customwidgets/generic/data/advancedlineedit_beginbutton_style.css"));
 
     d->endButton->setIcon(QIcon(":/customwidgets/generic/data/advancedlineedit_endicon.png"));
     d->endButton->setIconSize(QSize(16, 16));
     d->endButton->setCursor(Qt::ArrowCursor);
     d->endButton->setStyleSheet(
-        d->readFile(":/customwidgets/generic/data/advancedlineedit_endbutton_style.css"));
+        Common::readFile(":/customwidgets/generic/data/advancedlineedit_endbutton_style.css"));
 
     int frameWidth = style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
 
@@ -126,7 +108,7 @@ AdvancedLineEdit::AdvancedLineEdit(QWidget *parent)
                    qMax(msz.height(), d->endButton->sizeHint().height() + frameWidth * 2 + 2));
 
     d->mainstyle =
-        d->readFile(":/customwidgets/generic/data/advancedlineedit_style.css");
+        Common::readFile(":/customwidgets/generic/data/advancedlineedit_style.css");
 
     d->invalidateButtons();
 }
@@ -235,3 +217,6 @@ void AdvancedLineEdit::focusOutEvent(QFocusEvent * event)
     d->invalidateButtons();
     QLineEdit::focusOutEvent(event);
 }
+
+} // namespace CustomWidgets
+

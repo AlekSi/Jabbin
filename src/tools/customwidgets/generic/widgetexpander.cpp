@@ -24,6 +24,8 @@
 
 #define ANIMATION_DURATION 500
 
+namespace CustomWidgets {
+
 class WidgetExpander::Private {
 public:
     Private()
@@ -131,3 +133,6 @@ bool WidgetExpander::eventFilter(QObject * object, QEvent * event)
     }
     return QObject::eventFilter(object, event);
 }
+
+} // namespace CustomWidgets
+

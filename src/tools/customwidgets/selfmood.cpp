@@ -29,6 +29,9 @@
 
 #define SET_CUSTOM_MOOD -1
 
+using CustomWidgets::AdvancedLineEdit;
+using CustomWidgets::WidgetExpander;
+
 class SelfMood::Private {
 public:
     Private(SelfMood * parent)

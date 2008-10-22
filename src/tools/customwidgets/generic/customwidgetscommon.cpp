@@ -17,55 +17,32 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef WIDGET_EXPANDER_H
-#define WIDGET_EXPANDER_H
-
-#include <QFrame>
-#include <QWidget>
-#include <QEvent>
 #include "customwidgetscommon.h"
+#include <QFile>
+#include <QTextStream>
+#include <QDebug>
 
 namespace CustomWidgets {
 
-/**
- * This class expands a widget when it has the focus, and
- * collapses it when it doesn't have it.
- */
-class WidgetExpander : public QWidget
+QString Common::readFile(const QString & fileName)
 {
-Q_OBJECT
-public:
-    WidgetExpander(QWidget * child = 0, QWidget * parent = 0);
-    ~WidgetExpander();
+    QFile file(fileName);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug() << "File not found " << fileName;
+        return QString();
+    }
 
-    /**
-     * Sets the widget to expand/collapse based on its
-     * focus
-     * @param child child widget
-     */
-    void setChildWidget(QWidget * child);
+    QString result;
 
-    /**
-     * Sets the minimum width / full width ratio
-     */
-    void setMinimumWidthRatio(qreal ratio);
+    QTextStream in(&file);
+    QString line = in.readLine();
+    while (!line.isNull()) {
+        result += line;
+        line = in.readLine();
+    }
 
-protected:
-    void resizeEvent(QResizeEvent *);
-    bool eventFilter(QObject * object, QEvent * event);
-
-
-public Q_SLOTS:
-    void expand();
-    void contract();
-    void setChildWidth(int i);
-
-private:
-    class Private;
-    Private * const d;
-};
+    return result;
+}
 
 } // namespace CustomWidgets
-
-#endif // WIDGET_EXPANDER_H
 

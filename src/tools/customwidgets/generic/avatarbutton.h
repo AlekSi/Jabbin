@@ -17,48 +17,53 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef WIDGET_EXPANDER_H
-#define WIDGET_EXPANDER_H
+#ifndef AVATAR_BUTTON_H
+#define AVATAR_BUTTON_H
 
-#include <QFrame>
-#include <QWidget>
-#include <QEvent>
+#include <QPushButton>
 #include "customwidgetscommon.h"
 
 namespace CustomWidgets {
 
 /**
- * This class expands a widget when it has the focus, and
- * collapses it when it doesn't have it.
+ * This class is implementing a button that displays an image
+ * and has a few custom signals
  */
-class WidgetExpander : public QWidget
+class AvatarButton : public QPushButton
 {
-Q_OBJECT
+    Q_OBJECT
+
 public:
-    WidgetExpander(QWidget * child = 0, QWidget * parent = 0);
-    ~WidgetExpander();
+    /**
+     * Creates a new AvatarButton
+     */
+    AvatarButton(QWidget *parent = 0);
 
     /**
-     * Sets the widget to expand/collapse based on its
-     * focus
-     * @param child child widget
+     * Destroys this AvatarButton
      */
-    void setChildWidget(QWidget * child);
-
-    /**
-     * Sets the minimum width / full width ratio
-     */
-    void setMinimumWidthRatio(qreal ratio);
+    ~AvatarButton();
 
 protected:
+    // Overridden
     void resizeEvent(QResizeEvent *);
-    bool eventFilter(QObject * object, QEvent * event);
+    // Overridden
+    void enterEvent(QEvent *);
+    // Overridden
+    void leaveEvent(QEvent *);
 
+Q_SIGNALS:
+    /**
+     * This signal is emitted when the user
+     * hovers the button with the mouse
+     */
+    void mouseHovered();
 
-public Q_SLOTS:
-    void expand();
-    void contract();
-    void setChildWidth(int i);
+    /**
+     * This signal is emitted when the user
+     * moves the mouse away from the button
+     */
+    void mouseLeft();
 
 private:
     class Private;
@@ -67,5 +72,5 @@ private:
 
 } // namespace CustomWidgets
 
-#endif // WIDGET_EXPANDER_H
+#endif // AVATAR_BUTTON_H
 
