@@ -1,5 +1,5 @@
 /*
- * yalabel.cpp 
+ * yalabel.cpp
  * Copyright (C) 2008  Yandex LLC (Alexei Matiouchkine)
  *
  * This program is free software; you can redistribute it and/or
@@ -44,7 +44,7 @@ YaLabel::YaLabel(QWidget* parent)
 
 void YaLabel::paintEvent(QPaintEvent*)
 {
-	QPainter p(this);	
+	QPainter p(this);
 
 	// Deal with empty names
 	QString txt = text();
@@ -54,6 +54,10 @@ void YaLabel::paintEvent(QPaintEvent*)
 
 	// Deal with veryveryveryveryveryveryveryveryveryverylong names
 	QRect rectNorm(rect());
+
+	// Temporary hack before replacing this component
+	rectNorm.setLeft(rectNorm.left() + 8);
+
 	int w = rectNorm.width();
 	if (effectiveWidth_ > 0) {
 		w = qMin(effectiveWidth_, w);
@@ -67,12 +71,12 @@ void YaLabel::paintEvent(QPaintEvent*)
 
 	// QRect firstChar = rectNorm;
 	// firstChar.setWidth(fontMetrics().width(txt.at(0)));
-	// 
+	//
 	// p.save();
 	// p.setPen(Qt::red);
 	// p.drawText(rectNorm.x(), rectNorm.y() + fontMetrics().ascent(), txt.at(0));
 	// p.restore();
-	// 
+	//
 	// if (txt.length() > 1) {
 	// 	QRect theRest = rectNorm;
 	// 	theRest.adjust(firstChar.width(), 0, 0, 0);

@@ -68,15 +68,12 @@
        <item>
         <layout class="QGridLayout" >
          <property name="leftMargin" >
-          <number>9</number>
+          <number>0</number>
          </property>
          <property name="topMargin" >
           <number>7</number>
          </property>
-         <property name="horizontalSpacing" >
-          <number>9</number>
-         </property>
-         <property name="verticalSpacing" >
+         <property name="spacing" >
           <number>0</number>
          </property>
          <item row="2" column="1" >
@@ -143,6 +140,12 @@
            </property>
            <property name="text" >
             <string>Andrea Bodrati</string>
+           </property>
+           <property name="alignment" >
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+           <property name="margin" >
+            <number>0</number>
            </property>
           </widget>
          </item>
@@ -247,7 +250,6 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <zorder>verticalSpacer</zorder>
       </widget>
      </item>
     </layout>
