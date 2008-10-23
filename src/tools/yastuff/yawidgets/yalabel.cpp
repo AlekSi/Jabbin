@@ -67,7 +67,8 @@ void YaLabel::paintEvent(QPaintEvent*)
 		txt = fontMetrics().elidedText(txt, Qt::ElideRight, w);
 	}
 
-	p.drawText(rectNorm.x(), rectNorm.y() + fontMetrics().ascent(), txt);
+	//p.drawText(rectNorm.x(), rectNorm.y() + fontMetrics().ascent(), txt); // vv ivan
+	p.drawText(rectNorm, txt, QTextOption(Qt::AlignVCenter | Qt::AlignLeft));
 
 	// QRect firstChar = rectNorm;
 	// firstChar.setWidth(fontMetrics().width(txt.at(0)));
