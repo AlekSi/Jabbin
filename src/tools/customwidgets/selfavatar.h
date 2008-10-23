@@ -17,46 +17,31 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef SELFMOOD_H
-#define SELFMOOD_H
+#ifndef SELFAVATAR_H
+#define SELFAVATAR_H
 
 #include <QWidget>
 #include "xmpp_status.h"
+#include "generic/avatarbutton.h"
+#include "psicontact.h"
+#include "psicontactlist.h"
 
-class SelfMood : public QWidget
-{
+class SelfAvatar : public CustomWidgets::AvatarButton {
     Q_OBJECT
 public:
-    SelfMood(QWidget * parent = 0);
-    ~SelfMood();
+    SelfAvatar(QWidget * parent = 0);
+    ~SelfAvatar();
 
-    QString statusText() const;
-    XMPP::Status::Type statusType() const;
-
-protected:
-    // Overridden
-    void resizeEvent(QResizeEvent *);
-
-    // Overridden
-    bool eventFilter(QObject * object, QEvent * event);
+    virtual void setContactList(const PsiContactList * contactList);
+    virtual void setSelfContact(PsiContact * contact);
 
 public Q_SLOTS:
-    void setStatusText(const QString&);
-    void setStatusType(XMPP::Status::Type type);
-    void setHaveConnectingAccounts(bool haveConnectingAccounts);
-    void clearMoods();
-
-    void acceptMoodText();
-    void popupMenu();
-
-Q_SIGNALS:
-    void statusChanged(const QString & status);
-    void statusChanged(XMPP::Status::Type type);
+    void popupAvatarsMenu();
 
 private:
     class Private;
     Private * const d;
 };
 
-#endif // SELFMOOD_H
+#endif // SELFAVATAR_H
 

@@ -1,0 +1,11 @@
+QPushButton {
+  border: 2px solid gray;
+  border-width: 6px;
+  border-image: url(:/customwidgets/generic/data/avatarbutton_background.png) 6 6 6 6 stretch stretch;
+}
+
+QPushButton:pressed {
+  border: 2px solid gray;
+  border-width: 6px;
+  border-image: url(:/customwidgets/generic/data/avatarbutton_background_pressed.png) 6 6 6 6 stretch stretch;
+}

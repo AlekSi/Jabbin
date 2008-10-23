@@ -37,7 +37,7 @@ AvatarButton::AvatarButton(QWidget *parent)
     : QPushButton(parent), d(new Private())
 {
     d->mainstyle =
-        Common::readFile("images/avatarbutton-style.css");
+        Common::readFile(":/customwidgets/generic/data/avatarbutton_style.css");
     setStyleSheet(d->mainstyle);
     setFocusPolicy(Qt::NoFocus);
 }

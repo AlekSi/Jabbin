@@ -17,46 +17,37 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef SELFMOOD_H
-#define SELFMOOD_H
+#include "selfavatar.h"
 
-#include <QWidget>
-#include "xmpp_status.h"
-
-class SelfMood : public QWidget
-{
-    Q_OBJECT
+class SelfAvatar::Private {
 public:
-    SelfMood(QWidget * parent = 0);
-    ~SelfMood();
-
-    QString statusText() const;
-    XMPP::Status::Type statusType() const;
-
-protected:
-    // Overridden
-    void resizeEvent(QResizeEvent *);
-
-    // Overridden
-    bool eventFilter(QObject * object, QEvent * event);
-
-public Q_SLOTS:
-    void setStatusText(const QString&);
-    void setStatusType(XMPP::Status::Type type);
-    void setHaveConnectingAccounts(bool haveConnectingAccounts);
-    void clearMoods();
-
-    void acceptMoodText();
-    void popupMenu();
-
-Q_SIGNALS:
-    void statusChanged(const QString & status);
-    void statusChanged(XMPP::Status::Type type);
-
-private:
-    class Private;
-    Private * const d;
+    Private()
+    {
+    }
 };
 
-#endif // SELFMOOD_H
+SelfAvatar::SelfAvatar(QWidget * parent)
+    : CustomWidgets::AvatarButton(parent), d(new Private())
+{
+}
+
+SelfAvatar::~SelfAvatar()
+{
+    delete d;
+}
+
+void SelfAvatar::setContactList(const PsiContactList * contactList)
+{
+    // TODO
+}
+
+void SelfAvatar::setSelfContact(PsiContact * contact)
+{
+    setIcon(contact->picture());
+}
+
+void SelfAvatar::popupAvatarsMenu()
+{
+    // TODO
+}
 

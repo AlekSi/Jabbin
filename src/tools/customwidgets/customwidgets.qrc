@@ -7,5 +7,9 @@
     <file>generic/data/advancedlineedit_endbutton_style.css</file>
     <file>generic/data/advancedlineedit_endicon.png</file>
     <file>generic/data/advancedlineedit_style.css</file>
+
+    <file>generic/data/avatarbutton_style.css</file>
+    <file>generic/data/avatarbutton_background.png</file>
+    <file>generic/data/avatarbutton_background_pressed.png</file>
 </qresource>
 </RCC>
