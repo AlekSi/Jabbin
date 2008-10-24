@@ -41,6 +41,10 @@ public Q_SLOTS:
     void accountCountChanged();
     void accountActivityChanged();
 
+protected:
+    // Overridden
+    void enterEvent(QEvent *);
+
 private:
     class Private;
     Private * const d;

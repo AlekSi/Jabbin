@@ -30,6 +30,7 @@
 #include "vcardfactory.h"
 #include "xmpp_vcard.h"
 #include "applicationinfo.h"
+#include "yarostertooltip.h"
 
 #define MENU_AVATAR_ICON_SIZE QSize(32, 32)
 #define MENU_AVATAR_COLUMN_COUNT 5
@@ -143,6 +144,16 @@ public:
         return result;
     }
 
+    bool isConnected()
+    {
+        foreach (const PsiAccount * account, accounts()) {
+            if (account->isAvailable()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     SelfAvatarMenu * menu;
     PsiContact * contact;
     PsiContactList * contactList;
@@ -230,6 +241,20 @@ void SelfAvatar::accountCountChanged()
 
 void SelfAvatar::accountActivityChanged()
 {
-    // TODO
+    setEnabled(d->isConnected());
 }
 
+void SelfAvatar::enterEvent(QEvent *)
+{
+    /* copyright by Michail Pishchagin */
+
+    QRect windowRect = QRect(window()->mapToGlobal(window()->rect().topLeft()),
+            window()->mapToGlobal(window()->rect().bottomRight()));
+    QRect globalRect = QRect(mapToGlobal(rect().topLeft()),
+            mapToGlobal(rect().bottomRight()));
+
+    globalRect.setRight(windowRect.right());
+
+    YaRosterToolTip::instance()->showText(globalRect,
+            d->contact, this, 0);
+}
