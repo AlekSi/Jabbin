@@ -11,5 +11,7 @@
     <file>generic/data/avatarbutton_style.css</file>
     <file>generic/data/avatarbutton_background.png</file>
     <file>generic/data/avatarbutton_background_pressed.png</file>
+
+    <file>data/selfavatarmenu_button_style.css</file>
 </qresource>
 </RCC>

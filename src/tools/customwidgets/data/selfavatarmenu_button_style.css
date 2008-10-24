@@ -1,0 +1,10 @@
+QToolButton {
+    border: none;
+    margin: 4px;
+}
+
+QToolButton:hover {
+    background-color: white;
+    border: 4px solid white;
+    margin: 0px;
+}
