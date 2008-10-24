@@ -23,6 +23,13 @@
 #include <QDir>
 #include <QDebug>
 #include <QList>
+#include <QFileDialog>
+
+#include "psiaccount.h"
+#include "psicontactlist.h"
+#include "vcardfactory.h"
+#include "xmpp_vcard.h"
+#include "applicationinfo.h"
 
 #define MENU_AVATAR_ICON_SIZE QSize(32, 32)
 #define MENU_AVATAR_COLUMN_COUNT 5
@@ -40,6 +47,7 @@ public:
         custom = new QToolButton(this);
         custom->setText(tr("Choose a custom avatar..."));
         custom->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        custom->installEventFilter(this);
 
         buttonStyle = CustomWidgets::Common::readFile(":/customwidgets/data/selfavatarmenu_button_style.css");
     }
@@ -52,6 +60,7 @@ public:
     {
         QList < QDir > dirs;
         dirs << QDir(":images/avatars");
+        // dirs << QDir(ApplicationInfo::yavatarsDir());
 
         int count = 0;
 
@@ -94,7 +103,14 @@ public:
         if (event->type() == QEvent::MouseButtonRelease) {
             QToolButton * button = static_cast < QToolButton * > (object);
             if (buttons.contains(button)) {
-                q->setIcon(button->icon());
+                q->setAvatar(button->icon());
+            } else if (button == custom) {
+                QString file = QFileDialog::getOpenFileName(0, trUtf8("Choose an image"),
+                    ApplicationInfo::documentsDir(),
+                    trUtf8("All files (*.png *.jpg *.jpeg *.gif)"));
+                if (!file.isNull()) {
+                    q->setAvatar(QIcon(file));
+                }
             }
         }
         return QMenu::eventFilter(object, event);
@@ -112,11 +128,25 @@ private:
 class SelfAvatar::Private {
 public:
     Private()
-        : menu(NULL)
+        : menu(NULL), contact(NULL), contactList(NULL), skipAvatarChange(false)
     {
     }
 
+    QList < PsiAccount * > accounts()
+    {
+        QList < PsiAccount * > result;
+
+        if (contactList) {
+            result += contactList->enabledAccounts();
+        }
+
+        return result;
+    }
+
     SelfAvatarMenu * menu;
+    PsiContact * contact;
+    PsiContactList * contactList;
+    bool skipAvatarChange;
 };
 
 SelfAvatar::SelfAvatar(QWidget * parent)
@@ -133,12 +163,29 @@ SelfAvatar::~SelfAvatar()
 
 void SelfAvatar::setContactList(const PsiContactList * contactList)
 {
-    // TODO
+    qDebug() << "### setContactList" << contactList << contactList->enabledAccounts();
+
+    if (d->contactList) {
+        disconnect(d->contactList, 0, this, 0);
+    }
+
+    d->contactList = (PsiContactList *) contactList;
+
+    if (d->contactList) {
+        connect(d->contactList, SIGNAL(accountCountChanged()),
+                this, SLOT(accountCountChanged()));
+        connect(d->contactList, SIGNAL(accountActivityChanged()),
+                this, SLOT(accountActivityChanged()));
+    }
 }
 
 void SelfAvatar::setSelfContact(PsiContact * contact)
 {
-    setIcon(contact->picture());
+    d->contact = contact;
+    if (!d->skipAvatarChange) {
+        setIcon(contact->picture());
+        d->skipAvatarChange = false;
+    }
 }
 
 void SelfAvatar::popupAvatarsMenu()
@@ -151,4 +198,38 @@ void SelfAvatar::popupAvatarsMenu()
     d->menu->exec(mapToGlobal(rect().bottomLeft()));
 }
 
+void SelfAvatar::setAvatar(const QIcon & avatar)
+{
+    d->skipAvatarChange = true; // there is no point in setting the icon twice
+    setIcon(avatar);
+    if (!avatar.isNull()) {
+        foreach(const PsiAccount * account, d->accounts()) {
+            qDebug() << "### setting avatar for account";
+
+            if (!account->isAvailable()) continue;
+
+            VCard vcard;
+            const VCard * currentVCard = VCardFactory::instance()->vcard(account->jid());
+
+            if (currentVCard) {
+                vcard = *currentVCard;
+            }
+
+            vcard.setPhoto(avatar.pixmap(64, 64).toImage());
+
+            VCardFactory::instance()->setVCard(account, vcard,
+                    this, SLOT(setVCardFinished()));
+        }
+    }
+}
+
+void SelfAvatar::accountCountChanged()
+{
+    // TODO
+}
+
+void SelfAvatar::accountActivityChanged()
+{
+    // TODO
+}
 

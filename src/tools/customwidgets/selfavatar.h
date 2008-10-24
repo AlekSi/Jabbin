@@ -37,6 +37,9 @@ public:
 
 public Q_SLOTS:
     void popupAvatarsMenu();
+    void setAvatar(const QIcon & avatar);
+    void accountCountChanged();
+    void accountActivityChanged();
 
 private:
     class Private;
