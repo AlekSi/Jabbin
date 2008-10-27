@@ -127,16 +127,16 @@ public:
 	{
 		// setFixedHeight(30 + 5);
 		// setCursor(Qt::PointingHandCursor);
-		setText(tr("Profile"));
+		setText(tr("Info"));
 	}
 
 	// reimplemented
-	QSize minimumSizeHint() const
-	{
-		QSize sh = YaPushButton::minimumSizeHint();
-		sh.setWidth(75);
-		return sh;
-	}
+	//QSize minimumSizeHint() const
+	//{
+	//	QSize sh = YaPushButton::minimumSizeHint();
+	//	sh.setWidth(75);
+	//	return sh;
+	//}
 
 protected slots:
 	// reimplemented
@@ -181,19 +181,19 @@ protected:
 	// }
 
 	// reimplemented
-	virtual int iconPopOut() const
-	{
-		return 0;
-	}
+	//virtual int iconPopOut() const
+	//{
+	//	return 0;
+	//}
 
 	// reimplemented
-	virtual void adjustRect(const QStyleOptionButton* btn, QRect* rect) const
-	{
-		Q_UNUSED(btn);
-		rect->translate(0, 1);
-		rect->adjust(4, 0, 0, 0);
-		YaPushButton::adjustRect(btn, rect);
-	}
+	//virtual void adjustRect(const QStyleOptionButton* btn, QRect* rect) const
+	//{
+	//	Q_UNUSED(btn);
+	//	rect->translate(0, 1);
+	//	rect->adjust(4, 0, 0, 0);
+	//	YaPushButton::adjustRect(btn, rect);
+	//}
 };
 
 //----------------------------------------------------------------------------
@@ -232,12 +232,45 @@ void YaChatDlg::initUi()
 	// connect(ui_.mle, SIGNAL(textEditCreated(QTextEdit*)), SLOT(chatEditCreated()));
 	chatEditCreated();
 
-	QPushButton *contactToolTipAreaOld = ui_.contactToolTipArea;
-	ui_.contactToolTipArea = new YaContactToolTipArea(contactToolTipAreaOld->parentWidget());
-	static_cast<YaContactToolTipArea*>(ui_.contactToolTipArea)->init();
-	replaceWidget(contactToolTipAreaOld, ui_.contactToolTipArea);
+	//QPushButton *contactToolTipAreaOld = ui_.contactToolTipArea;
+	//ui_.contactToolTipArea = new YaContactToolTipArea(contactToolTipAreaOld->parentWidget());
+	//static_cast<YaContactToolTipArea*>(ui_.contactToolTipArea)->init();
+	//replaceWidget(contactToolTipAreaOld, ui_.contactToolTipArea);
 	// ui_.contactToolTipArea->installEventFilter(this);
+
 	connect(ui_.contactToolTipArea, SIGNAL(clicked()), SLOT(showContactProfile()));
+
+	// TODO: connect this button to start a call
+	ui_.contactToolTipArea->setText(tr("Info"));
+	ui_.buttonCall->setText(tr("Call"));
+	#ifndef YAPSI_NO_STYLESHEETS
+		QString styleSheet = QString(
+		"QPushButton {"
+		"	font-size: 12px;"
+		"	color: black;"
+		"	border-image: url(:/images/pushbutton/silver_profile/pushbutton.png) 12px 0px 12px 10px;"
+		"	border-width: 0px 7px 0px 15px;"
+		"}"
+		""
+		"QPushButton:disabled {"
+		"	color: black;"
+		"}"
+		""
+		"QPushButton:focus {"
+		"	border-image: url(:/images/pushbutton/silver_profile/pushbutton_focus.png) 12px 0px 12px 10px;"
+		"}"
+		""
+		"QPushButton:hover {"
+		"	border-image: url(:/images/pushbutton/silver_profile/pushbutton_hover.png) 12px 0px 12px 10px;"
+		"}"
+		""
+		"QPushButton:pressed {"
+		"	border-image: url(:/images/pushbutton/silver_profile/pushbutton_pressed.png) 12px 0px 12px 10px;"
+		"}"
+		);
+		ui_.buttonCall->setStyleSheet(styleSheet);
+		ui_.contactToolTipArea->setStyleSheet(styleSheet);
+	#endif
 
 	// connect(ui_.sendButton, SIGNAL(clicked()), SLOT(doSend()));
 	// connect(ui_.historyButton, SIGNAL(clicked()), SLOT(doHistory()));

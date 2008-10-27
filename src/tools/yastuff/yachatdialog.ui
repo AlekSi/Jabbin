@@ -33,12 +33,6 @@
        <height>69</height>
       </size>
      </property>
-     <property name="frameShape" >
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow" >
-      <enum>QFrame::Raised</enum>
-     </property>
      <layout class="QHBoxLayout" >
       <property name="spacing" >
        <number>0</number>
@@ -162,45 +156,63 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="contactToolTipArea" >
+         <widget class="QPushButton" name="buttonCall" >
           <property name="sizePolicy" >
            <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
             <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
+            <verstretch>1</verstretch>
            </sizepolicy>
           </property>
           <property name="minimumSize" >
            <size>
-            <width>0</width>
-            <height>27</height>
+            <width>60</width>
+            <height>20</height>
            </size>
           </property>
           <property name="maximumSize" >
            <size>
-            <width>1000</width>
-            <height>27</height>
+            <width>75</width>
+            <height>20</height>
            </size>
           </property>
           <property name="cursor" >
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
+          <property name="text" >
+           <string/>
+          </property>
+          <property name="flat" >
+           <bool>false</bool>
+          </property>
          </widget>
         </item>
         <item>
-         <spacer>
-          <property name="orientation" >
-           <enum>Qt::Vertical</enum>
+         <widget class="QPushButton" name="contactToolTipArea" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
           </property>
-          <property name="sizeType" >
-           <enum>QSizePolicy::Preferred</enum>
-          </property>
-          <property name="sizeHint" stdset="0" >
+          <property name="minimumSize" >
            <size>
-            <width>20</width>
-            <height>14</height>
+            <width>60</width>
+            <height>20</height>
            </size>
           </property>
-         </spacer>
+          <property name="maximumSize" >
+           <size>
+            <width>75</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="cursor" >
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="flat" >
+           <bool>false</bool>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

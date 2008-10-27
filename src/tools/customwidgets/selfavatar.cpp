@@ -192,6 +192,9 @@ void SelfAvatar::setContactList(const PsiContactList * contactList)
 
 void SelfAvatar::setSelfContact(PsiContact * contact)
 {
+    if (contact == NULL)
+        return;
+
     d->contact = contact;
     if (!d->skipAvatarChange) {
         setIcon(contact->picture());
