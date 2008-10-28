@@ -1,5 +1,11 @@
 <RCC>
   <qresource prefix="/customwidgets" >
+    <file>generic/data/arrow_right.png</file>
+    <file>generic/data/arrow_right_hover.png</file>
+    <file>generic/data/arrow_down.png</file>
+    <file>generic/data/arrow_down_hover.png</file>
+    <file>generic/data/speaker.png</file>
+    <file>generic/data/microphone.png</file>
     <file>generic/data/dialbutton_pound_pressed.png</file>
     <file>generic/data/dialbutton_asterisk_pressed.png</file>
     <file>generic/data/dialbutton_9_pressed.png</file>
