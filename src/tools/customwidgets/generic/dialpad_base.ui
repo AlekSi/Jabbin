@@ -1,0 +1,555 @@
+<ui version="4.0" >
+ <class>DialPad</class>
+ <widget class="QFrame" name="DialPad" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>332</width>
+    <height>359</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <property name="frameShape" >
+   <enum>QFrame::StyledPanel</enum>
+  </property>
+  <property name="frameShadow" >
+   <enum>QFrame::Raised</enum>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2" >
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout" >
+     <item>
+      <widget class="QLabel" name="label" >
+       <property name="text" >
+        <string>Enter a phone number</string>
+       </property>
+       <property name="buddy" >
+        <cstring>lineEdit</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit" />
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2" >
+       <property name="enabled" >
+        <bool>false</bool>
+       </property>
+       <property name="text" >
+        <string>Example: 00 + country code + area code + number</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout" >
+     <item>
+      <spacer name="horizontalSpacer" >
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <layout class="QGridLayout" name="gridLayout" >
+       <property name="spacing" >
+        <number>0</number>
+       </property>
+       <item row="0" column="0" >
+        <widget class="QPushButton" name="btnDial1" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet" >
+          <string notr="true" >QPushButton {
+    color: argb(0, 0, 0, 0);
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(:/customwidgets/generic/data/dialbutton_1.png)
+}
+
+QPushButton::pressed {
+    background-image: url(:/customwidgets/generic/data/dialbutton_1_pressed.png)
+}</string>
+         </property>
+         <property name="text" >
+          <string>1</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" >
+        <widget class="QPushButton" name="btnDial2" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet" >
+          <string notr="true" >QPushButton {
+    color: argb(0, 0, 0, 0);
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(:/customwidgets/generic/data/dialbutton_2.png)
+}</string>
+         </property>
+         <property name="text" >
+          <string>2</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" >
+        <widget class="QPushButton" name="btnDial3" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet" >
+          <string notr="true" >QPushButton {
+    color: argb(0, 0, 0, 0);
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(:/customwidgets/generic/data/dialbutton_3.png)
+}</string>
+         </property>
+         <property name="text" >
+          <string>3</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QPushButton" name="btnDial4" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet" >
+          <string notr="true" >QPushButton {
+    color: argb(0, 0, 0, 0);
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(:/customwidgets/generic/data/dialbutton_4.png)
+}</string>
+         </property>
+         <property name="text" >
+          <string>4</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" >
+        <widget class="QPushButton" name="btnDial5" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet" >
+          <string notr="true" >QPushButton {
+    color: argb(0, 0, 0, 0);
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(:/customwidgets/generic/data/dialbutton_5.png)
+}</string>
+         </property>
+         <property name="text" >
+          <string>5</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2" >
+        <widget class="QPushButton" name="btnDial6" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet" >
+          <string notr="true" >QPushButton {
+    color: argb(0, 0, 0, 0);
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(:/customwidgets/generic/data/dialbutton_6.png)
+}</string>
+         </property>
+         <property name="text" >
+          <string>6</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <widget class="QPushButton" name="btnDial7" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet" >
+          <string notr="true" >QPushButton {
+    color: argb(0, 0, 0, 0);
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(:/customwidgets/generic/data/dialbutton_7.png)
+}</string>
+         </property>
+         <property name="text" >
+          <string>7</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" >
+        <widget class="QPushButton" name="btnDial8" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet" >
+          <string notr="true" >QPushButton {
+    color: argb(0, 0, 0, 0);
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(:/customwidgets/generic/data/dialbutton_8.png)
+}</string>
+         </property>
+         <property name="text" >
+          <string>8</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2" >
+        <widget class="QPushButton" name="btnDial9" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet" >
+          <string notr="true" >QPushButton {
+    color: argb(0, 0, 0, 0);
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(:/customwidgets/generic/data/dialbutton_9.png)
+}</string>
+         </property>
+         <property name="text" >
+          <string>9</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" >
+        <widget class="QPushButton" name="btnDialAsterisk" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet" >
+          <string notr="true" >QPushButton {
+    color: argb(0, 0, 0, 0);
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(:/customwidgets/generic/data/dialbutton_asterisk.png)
+}</string>
+         </property>
+         <property name="text" >
+          <string>*</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" >
+        <widget class="QPushButton" name="btnDial0" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet" >
+          <string notr="true" >QPushButton {
+    color: argb(0, 0, 0, 0);
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(:/customwidgets/generic/data/dialbutton_0.png)
+}</string>
+         </property>
+         <property name="text" >
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2" >
+        <widget class="QPushButton" name="btnDialPound" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet" >
+          <string notr="true" >QPushButton {
+    color: argb(0, 0, 0, 0);
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(:/customwidgets/generic/data/dialbutton_pound.png)
+}</string>
+         </property>
+         <property name="text" >
+          <string>#</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2" >
+       <property name="orientation" >
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0" >
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2" >
+     <item>
+      <widget class="QPushButton" name="pushButton_13" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Call</string>
+       </property>
+       <property name="default" >
+        <bool>true</bool>
+       </property>
+       <property name="flat" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_14" >
+       <property name="minimumSize" >
+        <size>
+         <width>0</width>
+         <height>48</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Hangup</string>
+       </property>
+       <property name="flat" >
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>btnDial1</tabstop>
+  <tabstop>btnDial2</tabstop>
+  <tabstop>btnDial3</tabstop>
+  <tabstop>btnDial4</tabstop>
+  <tabstop>btnDial5</tabstop>
+  <tabstop>btnDial6</tabstop>
+  <tabstop>btnDial7</tabstop>
+  <tabstop>btnDial8</tabstop>
+  <tabstop>btnDial9</tabstop>
+  <tabstop>btnDialAsterisk</tabstop>
+  <tabstop>btnDial0</tabstop>
+  <tabstop>btnDialPound</tabstop>
+  <tabstop>pushButton_13</tabstop>
+  <tabstop>pushButton_14</tabstop>
+  <tabstop>lineEdit</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../customwidgets.qrc" />
+ </resources>
+ <connections/>
+</ui>

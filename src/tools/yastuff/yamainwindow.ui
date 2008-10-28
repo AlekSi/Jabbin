@@ -1,4 +1,5 @@
 <ui version="4.0" >
+ <author>Ivan Čukić</author>
  <class>MainWindow</class>
  <widget class="QWidget" name="MainWindow" >
   <property name="geometry" >
@@ -184,16 +185,9 @@
            </layout>
           </item>
          </layout>
-         <zorder>selfUserpic</zorder>
-         <zorder>selfName</zorder>
-         <zorder>selfMood</zorder>
-         <zorder>topStack</zorder>
         </widget>
        </item>
       </layout>
-      <zorder>frame</zorder>
-      <zorder>frame</zorder>
-      <zorder>tabWidget</zorder>
      </widget>
      <widget class="QWidget" name="logoPage" >
       <property name="geometry" >
@@ -268,7 +262,7 @@ QTabWidget::tab-bar {
         <x>0</x>
         <y>0</y>
         <width>311</width>
-        <height>602</height>
+        <height>605</height>
        </rect>
       </property>
       <property name="styleSheet" >
@@ -308,7 +302,7 @@ QTabWidget::tab-bar {
         <x>0</x>
         <y>0</y>
         <width>311</width>
-        <height>597</height>
+        <height>605</height>
        </rect>
       </property>
       <property name="autoFillBackground" >
@@ -326,9 +320,16 @@ QTabWidget::tab-bar {
        <iconset resource="yaiconsets.qrc" >
         <normaloff>:/iconsets/roster/roster-tabs/call.png</normaloff>:/iconsets/roster/roster-tabs/call.png</iconset>
       </attribute>
-      <zorder>frame</zorder>
      </widget>
      <widget class="QWidget" name="tabServices" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>311</width>
+        <height>605</height>
+       </rect>
+      </property>
       <property name="styleSheet" >
        <string notr="true" >QWidget {
     background-color: white;
@@ -343,6 +344,14 @@ QTabWidget::tab-bar {
       </attribute>
      </widget>
      <widget class="QWidget" name="tabSocial" >
+      <property name="geometry" >
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>311</width>
+        <height>605</height>
+       </rect>
+      </property>
       <property name="styleSheet" >
        <string notr="true" >QWidget {
     background-color: white;
@@ -378,7 +387,6 @@ QTabWidget::tab-bar {
   <zorder>statusBar</zorder>
   <zorder>verticalSpacer</zorder>
   <zorder>topStack</zorder>
-  <zorder>roster</zorder>
   <zorder>tabWidget</zorder>
  </widget>
  <customwidgets>
@@ -418,6 +426,7 @@ QTabWidget::tab-bar {
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <includes/>
  <resources>
   <include location="yaiconsets.qrc" />
   <include location="../customwidgets/customwidgets.qrc" />

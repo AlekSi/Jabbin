@@ -1,5 +1,29 @@
 <RCC>
   <qresource prefix="/customwidgets" >
+    <file>generic/data/dialbutton_pound_pressed.png</file>
+    <file>generic/data/dialbutton_asterisk_pressed.png</file>
+    <file>generic/data/dialbutton_9_pressed.png</file>
+    <file>generic/data/dialbutton_8_pressed.png</file>
+    <file>generic/data/dialbutton_7_pressed.png</file>
+    <file>generic/data/dialbutton_6_pressed.png</file>
+    <file>generic/data/dialbutton_5_pressed.png</file>
+    <file>generic/data/dialbutton_4_pressed.png</file>
+    <file>generic/data/dialbutton_0_pressed.png</file>
+    <file>generic/data/dialbutton_3_pressed.png</file>
+    <file>generic/data/dialbutton_2_pressed.png</file>
+    <file>generic/data/dialbutton_1_pressed.png</file>
+    <file>generic/data/dialbutton_1.png</file>
+    <file>generic/data/dialbutton_pound.png</file>
+    <file>generic/data/dialbutton_asterisk.png</file>
+    <file>generic/data/dialbutton_9.png</file>
+    <file>generic/data/dialbutton_8.png</file>
+    <file>generic/data/dialbutton_7.png</file>
+    <file>generic/data/dialbutton_6.png</file>
+    <file>generic/data/dialbutton_5.png</file>
+    <file>generic/data/dialbutton_4.png</file>
+    <file>generic/data/dialbutton_3.png</file>
+    <file>generic/data/dialbutton_2.png</file>
+    <file>generic/data/dialbutton_0.png</file>
     <file>data/barbutton_normal.png</file>
     <file>data/barbutton_hover.png</file>
     <file>data/barbutton_active.png</file>
