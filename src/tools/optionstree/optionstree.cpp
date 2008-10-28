@@ -50,10 +50,8 @@ OptionsTree::~OptionsTree()
 QVariant OptionsTree::getOption(const QString& name) const
 {
 	QVariant value=tree_.getValue(name);
-	qDebug() << "Accessing option " << name << " and the value is " << value;
 	if (value==VariantTree::missingValue) {
 		value=QVariant(QVariant::Invalid);
-		qDebug() << "Accessing missing option " << name;
 	}
 	return value;
 }

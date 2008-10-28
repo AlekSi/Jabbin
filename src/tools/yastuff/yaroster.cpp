@@ -669,7 +669,7 @@ protected:
 		QPainter p(this);
 
 		// QRect g = ui_.stackedWidget->geometry();
-		Ya::VisualUtil::paintRosterBackground(this, &p);
+		//Ya::VisualUtil::paintRosterBackground(this, &p);
 
 		p.drawTiledPixmap(rect(), background_);
 		p.fillRect(QRect(0, background_.height(), width(), height()), Qt::white);

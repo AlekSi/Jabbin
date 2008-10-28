@@ -1,5 +1,8 @@
-<!DOCTYPE RCC><RCC version="1.0">
-<qresource prefix="/customwidgets">
+<RCC>
+  <qresource prefix="/customwidgets" >
+    <file>data/barbutton_normal.png</file>
+    <file>data/barbutton_hover.png</file>
+    <file>data/barbutton_active.png</file>
     <file>generic/data/advancedlineedit_background.png</file>
     <file>generic/data/advancedlineedit_beginbackground.png</file>
     <file>generic/data/advancedlineedit_beginbutton_style.css</file>
@@ -7,11 +10,9 @@
     <file>generic/data/advancedlineedit_endbutton_style.css</file>
     <file>generic/data/advancedlineedit_endicon.png</file>
     <file>generic/data/advancedlineedit_style.css</file>
-
     <file>generic/data/avatarbutton_style.css</file>
     <file>generic/data/avatarbutton_background.png</file>
     <file>generic/data/avatarbutton_background_pressed.png</file>
-
     <file>data/selfavatarmenu_button_style.css</file>
-</qresource>
+  </qresource>
 </RCC>

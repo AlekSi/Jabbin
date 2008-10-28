@@ -241,8 +241,8 @@ void YaChatDlg::initUi()
 	connect(ui_.contactToolTipArea, SIGNAL(clicked()), SLOT(showContactProfile()));
 
 	// TODO: connect this button to start a call
-	ui_.contactToolTipArea->setText(tr("Info"));
-	ui_.buttonCall->setText(tr("Call"));
+	// ui_.contactToolTipArea->setText(tr("Info"));
+	// ui_.buttonCall->setText(tr("Call"));
 	#ifndef YAPSI_NO_STYLESHEETS
 		QString styleSheet = QString(
 		"QPushButton {"

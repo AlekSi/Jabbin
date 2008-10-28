@@ -31,6 +31,8 @@
 #include "textutil.h"
 #include "yaeditorcontextmenu.h"
 
+#include <QDebug>
+
 class YaChatContactStatusExtraLabel : public QLabel
 {
 	Q_OBJECT
@@ -82,6 +84,19 @@ YaChatContactStatusExtra::YaChatContactStatusExtra(QWidget *parent)
 	QPalette pal = label_->palette();
 	pal = YaStyle::useNativeTextSelectionColors(pal);
 	label_->setPalette(pal);
+
+
+	QString style = "YaChatContactStatusExtra {\
+		padding-right: 10px;\
+		padding-left: 10px;\
+		border: 2px solid gray;\
+		border-width: 10px;\
+		border-image: url(/home/ivan/Projects/Joim/build/src/tools/customwidgets/generic/data/chatcontactstatus_background.png) 8 15 10 8 stretch stretch;\
+	}";
+
+	qDebug() << style;
+	setStyleSheet(style);
+
 }
 
 XMPP::Status::Type YaChatContactStatusExtra::status() const
@@ -154,7 +169,7 @@ QSize YaChatContactStatusExtra::sizeHint() const
 	return sh;
 }
 
-void YaChatContactStatusExtra::paintEvent(QPaintEvent*)
+void YaChatContactStatusExtra::paintEvent(QPaintEvent * event)
 {
 	QPainter p(this);
 	QColor c(Ya::VisualUtil::blueBackgroundColor());

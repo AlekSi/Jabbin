@@ -33,10 +33,7 @@
        <height>69</height>
       </size>
      </property>
-     <layout class="QHBoxLayout" >
-      <property name="spacing" >
-       <number>0</number>
-      </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3" >
       <property name="margin" >
        <number>0</number>
       </property>
@@ -111,14 +108,14 @@
            </widget>
           </item>
           <item>
-           <spacer>
+           <spacer name="verticalSpacer" >
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeHint" stdset="0" >
              <size>
               <width>20</width>
-              <height>0</height>
+              <height>5</height>
              </size>
             </property>
            </spacer>
@@ -133,15 +130,25 @@
             </property>
            </widget>
           </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>20</width>
+              <height>0</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
          </layout>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QVBoxLayout" >
-        <property name="spacing" >
-         <number>0</number>
-        </property>
+       <layout class="QVBoxLayout" name="verticalLayout" >
         <item>
          <spacer>
           <property name="orientation" >
@@ -156,63 +163,81 @@
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="buttonCall" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
-            <horstretch>0</horstretch>
-            <verstretch>1</verstretch>
-           </sizepolicy>
+         <layout class="QHBoxLayout" name="horizontalLayout_2" >
+          <property name="spacing" >
+           <number>0</number>
           </property>
-          <property name="minimumSize" >
-           <size>
-            <width>60</width>
-            <height>20</height>
-           </size>
-          </property>
-          <property name="maximumSize" >
-           <size>
-            <width>75</width>
-            <height>20</height>
-           </size>
-          </property>
-          <property name="cursor" >
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="text" >
-           <string/>
-          </property>
-          <property name="flat" >
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="contactToolTipArea" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
-            <horstretch>0</horstretch>
-            <verstretch>1</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize" >
-           <size>
-            <width>60</width>
-            <height>20</height>
-           </size>
-          </property>
-          <property name="maximumSize" >
-           <size>
-            <width>75</width>
-            <height>20</height>
-           </size>
-          </property>
-          <property name="cursor" >
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="flat" >
-           <bool>false</bool>
-          </property>
-         </widget>
+          <item>
+           <widget class="QPushButton" name="buttonCall" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>1</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize" >
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="maximumSize" >
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="cursor" >
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip" >
+             <string>Call</string>
+            </property>
+            <property name="text" >
+             <string/>
+            </property>
+            <property name="icon" >
+             <iconset resource="yaiconsets.qrc" >
+              <normaloff>:/iconsets/chatwindow/call.png</normaloff>:/iconsets/chatwindow/call.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="contactToolTipArea" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>1</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize" >
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="maximumSize" >
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="cursor" >
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="toolTip" >
+             <string>Info</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="yaiconsets.qrc" >
+              <normaloff>:/iconsets/chatwindow/profile.png</normaloff>:/iconsets/chatwindow/profile.png</iconset>
+            </property>
+            <property name="flat" >
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
@@ -260,6 +285,11 @@
           <horstretch>0</horstretch>
           <verstretch>255</verstretch>
          </sizepolicy>
+        </property>
+        <property name="styleSheet" >
+         <string notr="true" >QFrame {
+    background-color: white;
+}</string>
         </property>
         <property name="frameShape" >
          <enum>QFrame::NoFrame</enum>
@@ -331,6 +361,12 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="minimumSize" >
+              <size>
+               <width>0</width>
+               <height>50</height>
+              </size>
              </property>
              <property name="frameShape" >
               <enum>QFrame::NoFrame</enum>
@@ -417,6 +453,7 @@
  </customwidgets>
  <resources>
   <include location="yastuff.qrc" />
+  <include location="yaiconsets.qrc" />
  </resources>
  <connections/>
 </ui>

@@ -295,7 +295,7 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 	ui_.selfWidgetsPage->installEventFilter(this);
 
 	YaLogo* yaLogo = new YaLogo(ui_.logoPage);
-	replaceWidget(ui_.logoFrame, yaLogo);
+	// replaceWidget(ui_.logoFrame, yaLogo);
 	ui_.logoFrame = yaLogo;
 
 	ui_.applicationName->setText(QString());
