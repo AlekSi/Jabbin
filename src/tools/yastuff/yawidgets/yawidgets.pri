@@ -11,6 +11,7 @@ SOURCES += \
 	$$PWD/../../customwidgets/selfmood.cpp \
 	$$PWD/../../customwidgets/selfavatar.cpp \
 	$$PWD/../../customwidgets/generic/advancedlineedit.cpp \
+	$$PWD/../../customwidgets/generic/dialpad.cpp \
 	$$PWD/../../customwidgets/generic/widgetexpander.cpp \
 	$$PWD/../../customwidgets/generic/avatarbutton.cpp \
 	$$PWD/../../customwidgets/generic/customwidgetscommon.cpp
@@ -21,9 +22,14 @@ HEADERS += \
 	$$PWD/../../customwidgets/selfmood.h \
 	$$PWD/../../customwidgets/selfavatar.h \
 	$$PWD/../../customwidgets/generic/advancedlineedit.h \
+	$$PWD/../../customwidgets/generic/dialpad.h \
 	$$PWD/../../customwidgets/generic/widgetexpander.h \
 	$$PWD/../../customwidgets/generic/avatarbutton.h \
 	$$PWD/../../customwidgets/generic/customwidgetscommon.h
+
+INTERFACES += \
+	$$PWD/../../customwidgets/generic/dialpad_base.ui \
+
 
 HEADERS += \
 	$$PWD/visibletext.h

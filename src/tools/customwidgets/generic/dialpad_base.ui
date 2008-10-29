@@ -1,4 +1,5 @@
 <ui version="4.0" >
+ <author>Ivan Čukić</author>
  <class>DialPadBase</class>
  <widget class="QFrame" name="DialPadBase" >
   <property name="geometry" >
@@ -141,7 +142,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="editPhoneNumber" />
+      <widget class="CustomWidgets::AdvancedLineEdit" name="editPhoneNumber" />
      </item>
      <item>
       <widget class="QLabel" name="labelPhoneNumberSample" >
@@ -195,18 +196,6 @@
            <height>50</height>
           </size>
          </property>
-         <property name="styleSheet" >
-          <string notr="true" >QPushButton {
-    color: argb(0, 0, 0, 0);
-    border: none;
-    background-repeat: no-repeat;
-    background-image: url(:/customwidgets/generic/data/dialbutton_1.png)
-}
-
-QPushButton::pressed {
-    background-image: url(:/customwidgets/generic/data/dialbutton_1_pressed.png)
-}</string>
-         </property>
          <property name="text" >
           <string>1</string>
          </property>
@@ -231,14 +220,6 @@ QPushButton::pressed {
            <width>50</width>
            <height>50</height>
           </size>
-         </property>
-         <property name="styleSheet" >
-          <string notr="true" >QPushButton {
-    color: argb(0, 0, 0, 0);
-    border: none;
-    background-repeat: no-repeat;
-    background-image: url(:/customwidgets/generic/data/dialbutton_2.png)
-}</string>
          </property>
          <property name="text" >
           <string>2</string>
@@ -265,14 +246,6 @@ QPushButton::pressed {
            <height>50</height>
           </size>
          </property>
-         <property name="styleSheet" >
-          <string notr="true" >QPushButton {
-    color: argb(0, 0, 0, 0);
-    border: none;
-    background-repeat: no-repeat;
-    background-image: url(:/customwidgets/generic/data/dialbutton_3.png)
-}</string>
-         </property>
          <property name="text" >
           <string>3</string>
          </property>
@@ -297,14 +270,6 @@ QPushButton::pressed {
            <width>50</width>
            <height>50</height>
           </size>
-         </property>
-         <property name="styleSheet" >
-          <string notr="true" >QPushButton {
-    color: argb(0, 0, 0, 0);
-    border: none;
-    background-repeat: no-repeat;
-    background-image: url(:/customwidgets/generic/data/dialbutton_4.png)
-}</string>
          </property>
          <property name="text" >
           <string>4</string>
@@ -331,14 +296,6 @@ QPushButton::pressed {
            <height>50</height>
           </size>
          </property>
-         <property name="styleSheet" >
-          <string notr="true" >QPushButton {
-    color: argb(0, 0, 0, 0);
-    border: none;
-    background-repeat: no-repeat;
-    background-image: url(:/customwidgets/generic/data/dialbutton_5.png)
-}</string>
-         </property>
          <property name="text" >
           <string>5</string>
          </property>
@@ -363,14 +320,6 @@ QPushButton::pressed {
            <width>50</width>
            <height>50</height>
           </size>
-         </property>
-         <property name="styleSheet" >
-          <string notr="true" >QPushButton {
-    color: argb(0, 0, 0, 0);
-    border: none;
-    background-repeat: no-repeat;
-    background-image: url(:/customwidgets/generic/data/dialbutton_6.png)
-}</string>
          </property>
          <property name="text" >
           <string>6</string>
@@ -397,14 +346,6 @@ QPushButton::pressed {
            <height>50</height>
           </size>
          </property>
-         <property name="styleSheet" >
-          <string notr="true" >QPushButton {
-    color: argb(0, 0, 0, 0);
-    border: none;
-    background-repeat: no-repeat;
-    background-image: url(:/customwidgets/generic/data/dialbutton_7.png)
-}</string>
-         </property>
          <property name="text" >
           <string>7</string>
          </property>
@@ -429,14 +370,6 @@ QPushButton::pressed {
            <width>50</width>
            <height>50</height>
           </size>
-         </property>
-         <property name="styleSheet" >
-          <string notr="true" >QPushButton {
-    color: argb(0, 0, 0, 0);
-    border: none;
-    background-repeat: no-repeat;
-    background-image: url(:/customwidgets/generic/data/dialbutton_8.png)
-}</string>
          </property>
          <property name="text" >
           <string>8</string>
@@ -463,14 +396,6 @@ QPushButton::pressed {
            <height>50</height>
           </size>
          </property>
-         <property name="styleSheet" >
-          <string notr="true" >QPushButton {
-    color: argb(0, 0, 0, 0);
-    border: none;
-    background-repeat: no-repeat;
-    background-image: url(:/customwidgets/generic/data/dialbutton_9.png)
-}</string>
-         </property>
          <property name="text" >
           <string>9</string>
          </property>
@@ -495,14 +420,6 @@ QPushButton::pressed {
            <width>50</width>
            <height>50</height>
           </size>
-         </property>
-         <property name="styleSheet" >
-          <string notr="true" >QPushButton {
-    color: argb(0, 0, 0, 0);
-    border: none;
-    background-repeat: no-repeat;
-    background-image: url(:/customwidgets/generic/data/dialbutton_asterisk.png)
-}</string>
          </property>
          <property name="text" >
           <string>*</string>
@@ -529,14 +446,6 @@ QPushButton::pressed {
            <height>50</height>
           </size>
          </property>
-         <property name="styleSheet" >
-          <string notr="true" >QPushButton {
-    color: argb(0, 0, 0, 0);
-    border: none;
-    background-repeat: no-repeat;
-    background-image: url(:/customwidgets/generic/data/dialbutton_0.png)
-}</string>
-         </property>
          <property name="text" >
           <string>0</string>
          </property>
@@ -561,14 +470,6 @@ QPushButton::pressed {
            <width>50</width>
            <height>50</height>
           </size>
-         </property>
-         <property name="styleSheet" >
-          <string notr="true" >QPushButton {
-    color: argb(0, 0, 0, 0);
-    border: none;
-    background-repeat: no-repeat;
-    background-image: url(:/customwidgets/generic/data/dialbutton_pound.png)
-}</string>
          </property>
          <property name="text" >
           <string>#</string>
@@ -656,7 +557,15 @@ QPushButton::pressed {
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CustomWidgets::AdvancedLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>generic/advancedlineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <tabstops>
+  <tabstop>editPhoneNumber</tabstop>
   <tabstop>btnDial1</tabstop>
   <tabstop>btnDial2</tabstop>
   <tabstop>btnDial3</tabstop>
@@ -671,7 +580,9 @@ QPushButton::pressed {
   <tabstop>btnDialPound</tabstop>
   <tabstop>buttonCall</tabstop>
   <tabstop>buttonHangup</tabstop>
-  <tabstop>editPhoneNumber</tabstop>
+  <tabstop>checkVolumesShown</tabstop>
+  <tabstop>sliderSpeakerVolume</tabstop>
+  <tabstop>sliderMicrophoneVolume</tabstop>
  </tabstops>
  <resources>
   <include location="../customwidgets.qrc" />

@@ -1,0 +1,10 @@
+QPushButton {
+    color: argb(0, 0, 0, 0);
+    border: none;
+    background-repeat: no-repeat;
+    background-image: url(:/customwidgets/generic/data/dialbutton_%1.png)
+}
+
+QPushButton::pressed {
+    background-image: url(:/customwidgets/generic/data/dialbutton_%1_pressed.png)
+}

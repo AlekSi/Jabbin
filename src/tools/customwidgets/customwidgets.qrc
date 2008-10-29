@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="/customwidgets" >
+    <file>generic/data/blank.png</file>
+    <file>generic/data/clearlineedit.png</file>
+    <file>generic/data/dialpad_style.css</file>
     <file>generic/data/arrow_right.png</file>
     <file>generic/data/arrow_right_hover.png</file>
     <file>generic/data/arrow_down.png</file>

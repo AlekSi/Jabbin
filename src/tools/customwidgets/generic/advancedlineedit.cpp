@@ -149,14 +149,14 @@ void AdvancedLineEdit::paintEvent(QPaintEvent * event)
         QRect rect(QPoint(), size());
         rect.setLeft(d->beginButton->x() + 6 +
                 (d->beginButton->isVisible() ? d->beginButton->width() : 0));
-        rect.setTop(d->beginButton->y());
+        rect.setTop(8);
         rect.setHeight(d->beginButton->height());
 
         // If the end button is not visible, then we add it's width
         // to the rectangles right coordinate
         rect.setRight(d->endButton->x() - 6 +
                 (d->endButton->isVisible() ? 0 : d->beginButton->width()));
-        p.drawText(rect, Qt::AlignVCenter | Qt::AlignLeft, d->emptyText);
+        p.drawText(rect, Qt::AlignTop | Qt::AlignLeft, d->emptyText);
     }
 }
 

@@ -300,6 +300,11 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 
 	ui_.applicationName->setText(QString());
 
+	ui_.tabWidget->setCurrentIndex(0);
+	for (int tab = 0; tab < ui_.tabWidget->count(); tab++) {
+		ui_.tabWidget->setTabEnabled(tab, false);
+	}
+
 	// YaSelfMood must always be created the last, otherwise interaction with its
 	// expanding menus will be severely limited on non-osx platforms
 	// YaSelfMood *selfMoodOld = ui_.selfMood;
@@ -1015,6 +1020,9 @@ void YaMainWin::updateSelfWidgetsVisibility()
 {
 	bool visible = ui_.roster->selfWidgetsShouldBeVisible();
 	ui_.topStack->setCurrentWidget(visible ? ui_.selfWidgetsPage : ui_.logoPage);
+	for (int tab = 0; tab < ui_.tabWidget->count(); tab++) {
+		ui_.tabWidget->setTabEnabled(tab, visible);
+	}
 
 	ui_.statusBar->setShouldBeVisible(visible);
 	if (tray_) {
