@@ -26,7 +26,7 @@
 #include <QRegExp>
 #include <QDebug>
 
-#define JIDTEXT jid.full()
+#define JIDTEXT jid.bare()
 
 CallDialog::Private::Private(CallDialog * parent)
     : status(Normal), account(NULL), caller(NULL)
