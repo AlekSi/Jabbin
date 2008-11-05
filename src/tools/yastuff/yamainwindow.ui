@@ -264,7 +264,7 @@ QTabBar::tab:disabled {
 </string>
      </property>
      <property name="currentIndex" >
-      <number>0</number>
+      <number>3</number>
      </property>
      <property name="usesScrollButtons" >
       <bool>true</bool>
@@ -276,7 +276,7 @@ QTabBar::tab:disabled {
 }</string>
       </property>
       <attribute name="title" >
-       <string>Contacts</string>
+       <string>&amp;Contacts</string>
       </attribute>
       <attribute name="icon" >
        <iconset resource="yaiconsets.qrc" >
@@ -312,7 +312,7 @@ QTabBar::tab:disabled {
 }</string>
       </property>
       <attribute name="title" >
-       <string>Dial</string>
+       <string>&amp;Dial</string>
       </attribute>
       <attribute name="icon" >
        <iconset resource="yaiconsets.qrc" >
@@ -339,7 +339,7 @@ QTabBar::tab:disabled {
 }</string>
       </property>
       <attribute name="title" >
-       <string>Services</string>
+       <string>&amp;Services</string>
       </attribute>
       <attribute name="icon" >
        <iconset resource="yaiconsets.qrc" >
@@ -354,7 +354,7 @@ QTabBar::tab:disabled {
 }</string>
       </property>
       <attribute name="title" >
-       <string>Social</string>
+       <string>Socia&amp;l</string>
       </attribute>
       <attribute name="icon" >
        <iconset resource="yaiconsets.qrc" >
