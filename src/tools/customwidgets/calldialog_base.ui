@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>320</width>
-    <height>483</height>
+    <height>665</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -108,6 +108,10 @@
           </widget>
          </item>
         </layout>
+        <zorder>labelSpeakerVolume</zorder>
+        <zorder>sliderSpeakerVolume</zorder>
+        <zorder>sliderMicrophoneVolume</zorder>
+        <zorder>labelMicrophoneVolume</zorder>
        </widget>
       </item>
      </layout>
@@ -123,7 +127,7 @@
    <item>
     <widget class="QStackedWidget" name="stacked" >
      <property name="currentIndex" >
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="pageDialpad" >
       <layout class="QVBoxLayout" name="verticalLayout" >
@@ -138,7 +142,14 @@
         </widget>
        </item>
        <item>
-        <widget class="CustomWidgets::AdvancedLineEdit" name="editPhoneNumber" />
+        <widget class="CustomWidgets::AdvancedLineEdit" name="editPhoneNumber" >
+         <property name="minimumSize" >
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="labelPhoneNumberSample" >
@@ -169,8 +180,8 @@
           <widget class="CustomWidgets::Dialpad" name="dialpad" >
            <property name="minimumSize" >
             <size>
-             <width>100</width>
-             <height>100</height>
+             <width>150</width>
+             <height>200</height>
             </size>
            </property>
           </widget>
@@ -261,14 +272,7 @@
      <widget class="QWidget" name="pageIncomingCall" >
       <layout class="QVBoxLayout" name="verticalLayout_5" >
        <item>
-        <widget class="CustomWidgets::NotificationPanel" name="frameIncomingCall" >
-         <property name="minimumSize" >
-          <size>
-           <width>0</width>
-           <height>100</height>
-          </size>
-         </property>
-        </widget>
+        <widget class="CustomWidgets::NotificationPanel" name="frameIncomingCall" />
        </item>
        <item>
         <spacer name="verticalSpacer_3" >

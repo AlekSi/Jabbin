@@ -251,11 +251,13 @@ void JingleClientSlots::setJingleInfo(const std::string &relay_token,
 
 JingleVoiceCaller::JingleVoiceCaller(PsiAccount* acc) : VoiceCaller(acc)
 {
+	qDebug() << "Creating JingleVoiceCaller";
 	initialized_ = false;
 }
 
 void JingleVoiceCaller::initialize()
 {
+	qDebug() << "Initialising JingleVoiceCaller";
 	if (initialized_)
 		return;
 

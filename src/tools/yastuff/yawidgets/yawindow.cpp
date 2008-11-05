@@ -541,6 +541,12 @@ void YaWindowBase::setNewGeometry(const QPoint& _pos)
 	if (g.height() > availableGeometry.height())
 		g.setHeight(availableGeometry.height());
 
+	// Check whether it is sized properly according to hints
+	if (g.width() < minimumWidth())
+		g.setWidth(minimumWidth());
+	if (g.height() < minimumHeight())
+		g.setHeight(minimumHeight());
+
 	// check that window is not moved outside of screen, expecially on
 	// Mac OS X. On OSX title should never be higher than the menu bar.
 	if (g.top() < availableGeometry.top())

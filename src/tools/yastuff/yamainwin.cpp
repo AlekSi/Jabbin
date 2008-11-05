@@ -283,8 +283,6 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 	setAttribute(Qt::WA_AlwaysShowToolTips, true);
 
 	ui_.setupUi(this);
-	setMinimumWidth(200);
-	setMinimumHeight(155);
 
 	ui_.topStack->init();
 	ui_.topStack->setAnimationStyle(AnimatedStackedWidget::Animation_Push_Horizontal);
