@@ -12,6 +12,8 @@ SOURCES += \
 	$$PWD/../../customwidgets/selfavatar.cpp \
 	$$PWD/../../customwidgets/generic/advancedlineedit.cpp \
 	$$PWD/../../customwidgets/generic/dialpad.cpp \
+	$$PWD/../../customwidgets/generic/notificationpanel.cpp \
+	$$PWD/../../customwidgets/calldialog.cpp \
 	$$PWD/../../customwidgets/generic/widgetexpander.cpp \
 	$$PWD/../../customwidgets/generic/avatarbutton.cpp \
 	$$PWD/../../customwidgets/generic/customwidgetscommon.cpp
@@ -23,12 +25,17 @@ HEADERS += \
 	$$PWD/../../customwidgets/selfavatar.h \
 	$$PWD/../../customwidgets/generic/advancedlineedit.h \
 	$$PWD/../../customwidgets/generic/dialpad.h \
+	$$PWD/../../customwidgets/generic/notificationpanel.h \
+	$$PWD/../../customwidgets/calldialog.h \
+	$$PWD/../../customwidgets/calldialog_p.h \
 	$$PWD/../../customwidgets/generic/widgetexpander.h \
 	$$PWD/../../customwidgets/generic/avatarbutton.h \
 	$$PWD/../../customwidgets/generic/customwidgetscommon.h
 
 INTERFACES += \
 	$$PWD/../../customwidgets/generic/dialpad_base.ui \
+	$$PWD/../../customwidgets/generic/notificationpanel_base.ui \
+	$$PWD/../../customwidgets/calldialog_base.ui \
 
 
 HEADERS += \

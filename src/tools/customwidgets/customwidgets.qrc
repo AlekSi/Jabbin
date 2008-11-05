@@ -33,9 +33,6 @@
     <file>generic/data/dialbutton_3.png</file>
     <file>generic/data/dialbutton_2.png</file>
     <file>generic/data/dialbutton_0.png</file>
-    <file>data/barbutton_normal.png</file>
-    <file>data/barbutton_hover.png</file>
-    <file>data/barbutton_active.png</file>
     <file>generic/data/advancedlineedit_background.png</file>
     <file>generic/data/advancedlineedit_beginbackground.png</file>
     <file>generic/data/advancedlineedit_beginbutton_style.css</file>
@@ -46,6 +43,11 @@
     <file>generic/data/avatarbutton_style.css</file>
     <file>generic/data/avatarbutton_background.png</file>
     <file>generic/data/avatarbutton_background_pressed.png</file>
+    <file>generic/data/notificationpanel_button_style.css</file>
+    <file>data/barbutton_normal.png</file>
+    <file>data/barbutton_hover.png</file>
+    <file>data/barbutton_active.png</file>
     <file>data/selfavatarmenu_button_style.css</file>
+    <file>data/phone.png</file>
   </qresource>
 </RCC>

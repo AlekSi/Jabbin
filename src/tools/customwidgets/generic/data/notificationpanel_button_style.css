@@ -1,0 +1,23 @@
+QPushButton {
+   color: white;
+   border-image: url(:/images/pushbutton/green/pushbutton.png) 12px 11px 12px 10px;
+   border-width: 0px 11px 0px 10px;
+   min-width: 4em;
+   min-height: 1.5em;
+}
+
+QPushButton:disabled {
+   color: white;
+}
+
+QPushButton:hover {
+   border-image: url(:/images/pushbutton/green/pushbutton_hover.png) 12px 11px 12px 10px;
+}
+
+QPushButton:focus {
+   border-image: url(:/images/pushbutton/green/pushbutton_focus.png) 12px 11px 12px 10px;
+}
+
+QPushButton:pressed {
+   border-image: url(:/images/pushbutton/green/pushbutton_pressed.png) 12px 11px 12px 10px;
+}

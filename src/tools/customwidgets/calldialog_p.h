@@ -1,5 +1,6 @@
 /*
  *   Copyright (C) 2007 Ivan Cukic <ivan.cukic+kde@gmail.com>
+ *   Copyright (C) 2005 Oleksandr Yakovlyev <me@yshurik.kiev.ua>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Lesser/Library General Public License version 2,
@@ -17,55 +18,39 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef DIALPAD_H
-#define DIALPAD_H
+#include "calldialog.h"
+#include "ui_calldialog_base.h"
+#include "generic/customwidgetscommon.h"
 
-#include <QFrame>
+#include <QRegExpValidator>
+#include <QRegExp>
+#include <QBasicTimer>
+#include <QTime>
+#include "im.h"
+#include "psiaccount.h"
+#include "voicecaller.h"
 
-namespace CustomWidgets {
-
-/**
- * This class is implementing a dial pad with
- */
-class Dialpad : public QFrame {
+class CallDialog::Private : public QObject, public Ui::CallDialogBase {
     Q_OBJECT
-
 public:
-    enum CallStatus {
-        Default,
-        Calling, Accepting, Rejecting, Terminating,
-        Accepted, Rejected, InProgress, Terminated, Incoming
-    };
+    Private(CallDialog * parent);
+    void setStatus(Status value);
 
-    /**
-     * Creates a new Dialpad
-     */
-    Dialpad(QWidget * parent = 0);
+    QMap < QPushButton *, char > buttons;
+    Status status;
+    QBasicTimer timer;
+    QTime time;
 
-    /**
-     * Destroys this Dialpad
-     */
-    ~Dialpad();
+    PsiAccount * account;
+    VoiceCaller * caller;
+    Jid jid;
 
-Q_SIGNALS:
-    /**
-     * This signal is emitted when a button is clicked
-     */
-    void buttonClicked(char key);
+public Q_SLOTS:
+    void clicked(const QString & buttonData);
 
-protected Q_SLOTS:
-    /**
-     * One of the dialpad buttons is clicked
-     * sender() must be set for this to work
-     */
-    void dialpadButtonClicked();
-
-private:
-    class Private;
-    Private * const d;
+    void accepted(const Jid & );
+    void rejected(const Jid & );
+    void terminated(const Jid & );
+    void inProgress(const Jid & );
 };
-
-} // namespace CustomWidgets
-
-#endif // DIALPAD_H
 

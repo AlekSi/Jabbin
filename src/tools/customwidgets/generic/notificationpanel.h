@@ -17,17 +17,20 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef DIALPAD_H
-#define DIALPAD_H
+#ifndef NOTIFICATION_PANEL_H_
+#define NOTIFICATION_PANEL_H_
 
 #include <QFrame>
+#include <QPixmap>
+#include <QIcon>
 
 namespace CustomWidgets {
 
 /**
- * This class is implementing a dial pad with
+ * This class is implementing a notification panel with one icon,
+ * a title, a message, and action buttons
  */
-class Dialpad : public QFrame {
+class NotificationPanel : public QFrame {
     Q_OBJECT
 
 public:
@@ -38,27 +41,39 @@ public:
     };
 
     /**
-     * Creates a new Dialpad
+     * Creates a new NotificationPanel
      */
-    Dialpad(QWidget * parent = 0);
+    NotificationPanel(QWidget * parent = 0);
 
     /**
-     * Destroys this Dialpad
+     * Destroys this NotificationPanel
      */
-    ~Dialpad();
+    ~NotificationPanel();
+
+    /**
+     * Adds a button to the widget
+     * @param text button caption
+     * @param icon button icon
+     * @param data to be assigned to the button
+     */
+    void addButton(const QString & text, const QIcon & icon, const QString & data);
+
+    QString title() const;
+
+    void setTitle(const QString & title);
+
+    QString message() const;
+
+    void setMessage(const QString & message);
+
+    void setPixmap(const QPixmap & pixmap);
 
 Q_SIGNALS:
     /**
      * This signal is emitted when a button is clicked
+     * @param data data assigned to that button
      */
-    void buttonClicked(char key);
-
-protected Q_SLOTS:
-    /**
-     * One of the dialpad buttons is clicked
-     * sender() must be set for this to work
-     */
-    void dialpadButtonClicked();
+    void buttonClicked(const QString & data);
 
 private:
     class Private;
@@ -67,5 +82,5 @@ private:
 
 } // namespace CustomWidgets
 
-#endif // DIALPAD_H
+#endif // NOTIFICATION_PANEL_H_
 

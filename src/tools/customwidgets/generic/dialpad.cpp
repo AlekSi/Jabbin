@@ -19,14 +19,11 @@
 
 #include "dialpad.h"
 #include "ui_dialpad_base.h"
-#include "customwidgetscommon.h"
-
-#include <QRegExpValidator>
-#include <QRegExp>
+#include "generic/customwidgetscommon.h"
 
 namespace CustomWidgets {
 
-class DialPad::Private : public Ui::DialPadBase {
+class Dialpad::Private : public Ui::DialpadBase {
 public:
 
     // Associates a button with its character
@@ -36,10 +33,9 @@ public:
         Button->setStyleSheet(buttonStyle.arg(Name)); \
         connect( Button, SIGNAL(clicked()), parent, SLOT(dialpadButtonClicked()));
 
-    Private(DialPad * parent)
+    Private(Dialpad * parent)
     {
         setupUi(parent);
-        frameVolumes->hide();
         buttonStyle =
             Common::readFile(":/customwidgets/generic/data/dialpad_style.css");
 
@@ -55,34 +51,28 @@ public:
         SetButton(btnDial9, '9', "9");
         SetButton(btnDialAsterisk, '*', "asterisk");
         SetButton(btnDialPound, '#', "pound");
-
-        editPhoneNumber->setEmptyText(tr("Enter phone number"));
-        editPhoneNumber->setValidator(new QRegExpValidator(QRegExp("[+]?[0-9*#]*"), parent));
     }
 
     QString buttonStyle;
     QMap < QPushButton *, char > buttons;
 };
 
-DialPad::DialPad(QWidget *parent)
+Dialpad::Dialpad(QWidget *parent)
     : QFrame(parent), d(new Private(this))
 {
 }
 
-DialPad::~DialPad()
+Dialpad::~Dialpad()
 {
     delete d;
 }
 
-void DialPad::setInCall(bool value) {
-    d->buttonCall->setEnabled(!value);
-    d->buttonHangup->setEnabled(value);
-}
+void Dialpad::dialpadButtonClicked() {
+    if (sender() == NULL || !d->buttons.contains( (QPushButton *) sender())) {
+        return;
+    }
 
-void DialPad::dialpadButtonClicked() {
-    char symbol = d->buttons[ (QPushButton *) sender() ];
-    d->editPhoneNumber->setText(
-        d->editPhoneNumber->text() + symbol);
+    emit buttonClicked(d->buttons[ (QPushButton *) sender() ]);
 }
 
 } // namespace CustomWidgets

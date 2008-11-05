@@ -321,7 +321,7 @@ QTabBar::tab:disabled {
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_5" >
        <item>
-        <widget class="CustomWidgets::DialPad" name="frame_2" >
+        <widget class="CallDialog" name="frame_2" >
          <property name="frameShape" >
           <enum>QFrame::NoFrame</enum>
          </property>
@@ -423,9 +423,9 @@ QTabBar::tab:disabled {
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>CustomWidgets::DialPad</class>
+   <class>CallDialog</class>
    <extends>QFrame</extends>
-   <header>generic/dialpad.h</header>
+   <header>calldialog.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
