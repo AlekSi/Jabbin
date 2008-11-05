@@ -15,6 +15,12 @@
   <layout class="QVBoxLayout" name="verticalLayout" >
    <item>
     <widget class="QLabel" name="labelTitle" >
+     <property name="minimumSize" >
+      <size>
+       <width>0</width>
+       <height>20</height>
+      </size>
+     </property>
      <property name="text" >
       <string>Title</string>
      </property>
@@ -31,6 +37,12 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="minimumSize" >
+      <size>
+       <width>0</width>
+       <height>100</height>
+      </size>
+     </property>
      <property name="alignment" >
       <set>Qt::AlignCenter</set>
      </property>
@@ -38,6 +50,12 @@
    </item>
    <item>
     <widget class="QLabel" name="labelMessage" >
+     <property name="minimumSize" >
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
+     </property>
      <property name="font" >
       <font>
        <pointsize>14</pointsize>
@@ -53,6 +71,12 @@
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox" >
+     <property name="minimumSize" >
+      <size>
+       <width>0</width>
+       <height>30</height>
+      </size>
+     </property>
      <property name="standardButtons" >
       <set>QDialogButtonBox::NoButton</set>
      </property>
