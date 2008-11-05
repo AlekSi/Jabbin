@@ -42,6 +42,7 @@
 #include <QHostInfo>
 #include <Qt3Support/Q3PtrListIterator>
 
+#include "calldialog.h"
 #include "psiaccount.h"
 #include "psiiconset.h"
 #include "psicon.h"
@@ -2280,6 +2281,7 @@ void PsiAccount::incomingVoiceCall(const Jid& j)
     processCalls(j);
     bringToFront(c);
     c->incoming();
+    CallDialog::instance()->incoming();
 }
 
 void PsiAccount::client_resourceAvailable(const Jid &j, const Resource &r)
@@ -3606,6 +3608,7 @@ CallDlg *PsiAccount::ensureCallDlg(const Jid &j)
 	if(!c) {
 		// create the chatbox
 		c = new CallDlg(j, this, voiceCaller());
+		CallDialog::instance()->init(j, this, voiceCaller());
 	}
 	else {
 		// on X11, do a special reparent to open on the right desktop
@@ -5177,6 +5180,7 @@ void PsiAccount::openCall(const Jid &j)
 	processCalls(j);
 	bringToFront(c);
     c->call();
+    CallDialog::instance()->call();
 }
 
 void PsiAccount::chatMessagesRead(const Jid &j)

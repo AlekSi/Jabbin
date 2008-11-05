@@ -94,6 +94,11 @@ public Q_SLOTS:
     void hangup();
 
     /**
+     * Call is incoming
+     */
+    void incoming();
+
+    /**
      * Accepts incoming call
      * @param accept if true, the call is accepted, else the call is rejected
      */

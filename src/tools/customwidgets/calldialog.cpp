@@ -26,6 +26,8 @@
 #include <QRegExp>
 #include <QDebug>
 
+#define JIDTEXT jid.full()
+
 CallDialog::Private::Private(CallDialog * parent)
     : status(Normal), account(NULL), caller(NULL)
 {
@@ -44,7 +46,7 @@ CallDialog::Private::Private(CallDialog * parent)
     frameIncomingCall->addButton(tr("Accept"), QIcon("help"), QString());
     frameIncomingCall->addButton(tr("Reject"), QIcon("help"), QString());
     frameIncomingCall->setPixmap(QPixmap(":/customwidgets/data/phone.png"));
-    stacked->setCurrentIndex(1);
+    stacked->setCurrentIndex(0);
 
     time.start();
     timer.start(1000, parent);
@@ -52,6 +54,7 @@ CallDialog::Private::Private(CallDialog * parent)
 
 void CallDialog::Private::setStatus(Status value)
 {
+    qDebug() << "Status changed to: " << value;
     status = value;
 
     switch (status) {
@@ -60,27 +63,32 @@ void CallDialog::Private::setStatus(Status value)
             break;
         case Calling:
             frameInCall->setTitle(tr("Calling ..."));
+            frameInCall->setMessage(JIDTEXT);
             caller->call(jid);
             break;
         case InCall:
             frameInCall->setTitle(QString());
+            frameInCall->setMessage(JIDTEXT);
             time.start();
             timer.start(1000, this);
             break;
         case Terminating:
             frameInCall->setTitle(tr("Ending call ..."));
+            frameInCall->setMessage(JIDTEXT);
             caller->terminate(jid);
             break;
         case Incoming:
             frameIncomingCall->setTitle(tr("Incoming call"));
+            frameIncomingCall->setMessage(JIDTEXT);
             break;
         case Accepting:
             frameIncomingCall->setTitle(tr("Starting call..."));
+            frameIncomingCall->setMessage(JIDTEXT);
             caller->accept(jid);
             break;
         case Rejecting:
             frameIncomingCall->setTitle(tr("Rejecting call..."));
-            frameIncomingCall->setMessage(jid);
+            frameIncomingCall->setMessage(JIDTEXT);
             caller->reject(jid);
             break;
     }
@@ -206,6 +214,11 @@ void CallDialog::hangup()
 void CallDialog::call()
 {
     d->setStatus(Calling);
+}
+
+void CallDialog::incoming()
+{
+    d->setStatus(Incoming);
 }
 
 void CallDialog::timerEvent(QTimerEvent * event)
