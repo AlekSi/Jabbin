@@ -145,7 +145,7 @@ public:
 	ChatDlg* findChatDialog(const Jid& jid) const;
 
 	template<typename T>
-	inline T findDialog(const Jid& jid = Jid(), bool compareResource = true) const { 
+	inline T findDialog(const Jid& jid = Jid(), bool compareResource = true) const {
 		return static_cast<T>(findDialog(((T)0)->staticMetaObject, jid, compareResource));
 	}
 	template<typename T>
@@ -213,7 +213,7 @@ public:
 
 	void deleteQueueFile();
 	void sendFiles(const Jid&, const QStringList&, bool direct = false);
-	
+
 	PEPManager* pepManager();
 	ServerInfoManager* serverInfoManager();
 	BookmarkManager* bookmarkManager();
@@ -256,7 +256,7 @@ public slots:
 	void tunePlaying(const Tune&);
 
 	void incomingVoiceCall(const Jid&);
-	
+
 	void secondsIdle(int);
 	void openNextEvent(ActivationType activationType);
 	int forwardPendingEvents(const Jid &jid);
@@ -378,10 +378,10 @@ private slots:
 	void reconnect();
 	void disconnect();
 	void enableNotifyOnline();
-	
+
 	void itemPublished(const Jid&, const QString&, const PubSubItem&);
 	void itemRetracted(const Jid&, const QString&, const PubSubRetraction&);
-	
+
 	void chatMessagesRead(const Jid &);
 
 	void slotCheckVCard();
@@ -394,7 +394,7 @@ private slots:
 	void pgp_verifyFinished();
 	void pgp_encryptFinished();
 	void pgp_decryptFinished();
-	
+
 	void optionsUpdate();
 
 	void processReadNext(const UserListItem &);

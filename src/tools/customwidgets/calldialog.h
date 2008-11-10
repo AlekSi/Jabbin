@@ -127,6 +127,11 @@ public Q_SLOTS:
      */
     void dialpadButtonClicked(char key);
 
+    void accepted(const Jid & );
+    void rejected(const Jid & );
+    void terminated(const Jid & );
+    void inProgress(const Jid & );
+
 protected:
     void timerEvent(QTimerEvent * event);
 

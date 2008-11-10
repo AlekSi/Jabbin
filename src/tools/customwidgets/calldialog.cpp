@@ -28,6 +28,8 @@
 
 #define JIDTEXT jid.bare()
 
+using XMPP::Jid;
+
 CallDialog::Private::Private(CallDialog * parent)
     : status(Normal), account(NULL), caller(NULL)
 {
@@ -54,7 +56,7 @@ CallDialog::Private::Private(CallDialog * parent)
 
 void CallDialog::Private::setStatus(Status value)
 {
-    qDebug() << "Status changed to: " << value;
+    qDebug() << "CallDialog :: Status changed to: " << value;
     status = value;
 
     switch (status) {
@@ -111,24 +113,28 @@ void CallDialog::Private::setStatus(Status value)
 
 }
 
-void CallDialog::Private::accepted(const Jid & jid)
+void CallDialog::accepted(const Jid & jid)
 {
-    setStatus(InCall);
+    qDebug() << "CallDialog::Private::accepted";
+    d->setStatus(InCall);
 }
 
-void CallDialog::Private::rejected(const Jid & jid)
+void CallDialog::rejected(const Jid & jid)
 {
-    setStatus(Normal);
+    qDebug() << "CallDialog::Private::rejected";
+    d->setStatus(Normal);
 }
 
-void CallDialog::Private::terminated(const Jid & jid)
+void CallDialog::terminated(const Jid & jid)
 {
-    setStatus(Normal);
+    qDebug() << "CallDialog::Private::terminated";
+    d->setStatus(Normal);
 }
 
-void CallDialog::Private::inProgress(const Jid & jid)
+void CallDialog::inProgress(const Jid & jid)
 {
-    setStatus(InCall);
+    qDebug() << "CallDialog::Private::inProgress";
+    d->setStatus(InCall);
 }
 
 void CallDialog::Private::clicked(const QString & buttonData)
@@ -145,25 +151,32 @@ CallDialog * CallDialog::instance()
 
 void CallDialog::init(const Jid & jid, PsiAccount * account, VoiceCaller * caller)
 {
+    qDebug() << "CallDialog::Init " << jid.full() <<
+        (void *) caller;
     d->jid = jid;
     d->account = account;
 
     if (caller != d->caller) {
         if (d->caller) {
-            disconnect(caller, NULL, d, NULL);
+            qDebug() << "CallDialog::Disconnecting old JingleVoiceCaller";
+            // disconnect(caller, NULL, d, NULL);
         }
 
         d->caller = caller;
 
-        connect(caller, SIGNAL(accepted(const Jid & )),
-                d,      SLOT(accepted(const Jid & )));
+        qDebug() << "CallDialog::connecting " <<
+        connect(caller, SIGNAL(accepted(Jid)),
+                this,   SLOT(accepted(Jid)));
+        qDebug() << "CallDialog::connecting " <<
         connect(caller, SIGNAL(rejected(const Jid & )),
-                d,      SLOT(rejected(const Jid & )));
+                this,   SLOT(rejected(const Jid & )));
+        qDebug() << "CallDialog::connecting " <<
         connect(caller, SIGNAL(terminated(const Jid & )),
-                d,      SLOT(terminated(const Jid & )));
+                this,   SLOT(terminated(const Jid & )));
+        qDebug() << "CallDialog::connecting " <<
         connect(caller, SIGNAL(in_progress(const Jid & )),
-                d, SLOT(inProgress(const Jid & )));
-    }
+                this,   SLOT(inProgress(const Jid & )));
+        }
 }
 
 CallDialog::CallDialog(QWidget *parent)

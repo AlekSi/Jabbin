@@ -196,17 +196,18 @@ void JingleClientSlots::stateChanged(cricket::Call *call, cricket::Session *sess
 	// Why is c_str() stuff needed to make it compile on OS X ?
 	Jid jid(session->remote_name().c_str());
 
-
 	if (state == cricket::Session::STATE_INIT) { }
 	else if (state == cricket::Session::STATE_SENTINITIATE) {
 		voiceCaller_->registerCall(jid,call);
 	}
 	else if (state == cricket::Session::STATE_RECEIVEDINITIATE) {
 		voiceCaller_->registerCall(jid,call);
+                qDebug() << "JingleVoiceCaller emit incoming" << (void *) voiceCaller_;
 		emit voiceCaller_->incoming(jid);
 	}
 	else if (state == cricket::Session::STATE_SENTACCEPT) { }
 	else if (state == cricket::Session::STATE_RECEIVEDACCEPT) {
+                qDebug() << "JingleVoiceCaller emit accepted" << (void *) voiceCaller_;
 		emit voiceCaller_->accepted(jid);
 	}
 	else if (state == cricket::Session::STATE_SENTMODIFY) { }
@@ -216,18 +217,22 @@ void JingleClientSlots::stateChanged(cricket::Call *call, cricket::Session *sess
 	else if (state == cricket::Session::STATE_SENTREJECT) { }
 	else if (state == cricket::Session::STATE_RECEIVEDREJECT) {
 		voiceCaller_->removeCall(jid);
+                qDebug() << "JingleVoiceCaller emit rejected" << (void *) voiceCaller_;
 		emit voiceCaller_->rejected(jid);
 	}
 	else if (state == cricket::Session::STATE_SENTREDIRECT) { }
 	else if (state == cricket::Session::STATE_SENTTERMINATE) {
 		voiceCaller_->removeCall(jid);
+                qDebug() << "JingleVoiceCaller emit terminated" << (void *) voiceCaller_;
 		emit voiceCaller_->terminated(jid);
 	}
 	else if (state == cricket::Session::STATE_RECEIVEDTERMINATE) {
 		voiceCaller_->removeCall(jid);
+                qDebug() << "JingleVoiceCaller emit terminated" << (void *) voiceCaller_;
 		emit voiceCaller_->terminated(jid);
 	}
 	else if (state == cricket::Session::STATE_INPROGRESS) {
+                qDebug() << "JingleVoiceCaller emit in progress" << (void *) voiceCaller_;
 		emit voiceCaller_->in_progress(jid);
 	}
 }

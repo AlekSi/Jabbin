@@ -48,9 +48,5 @@ public:
 public Q_SLOTS:
     void clicked(const QString & buttonData);
 
-    void accepted(const Jid & );
-    void rejected(const Jid & );
-    void terminated(const Jid & );
-    void inProgress(const Jid & );
 };
 
