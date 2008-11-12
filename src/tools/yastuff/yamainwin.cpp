@@ -298,9 +298,9 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 
 	ui_.applicationName->setText(QString());
 
-	ui_.tabWidget->setCurrentIndex(0);
-	for (int tab = 0; tab < ui_.tabWidget->count(); tab++) {
-		ui_.tabWidget->setTabEnabled(tab, false);
+	ui_.mainTabWidget->setCurrentIndex(0);
+	for (int tab = 0; tab < ui_.mainTabWidget->count(); tab++) {
+		ui_.mainTabWidget->setTabEnabled(tab, false);
 	}
 
 	// YaSelfMood must always be created the last, otherwise interaction with its
@@ -1018,8 +1018,8 @@ void YaMainWin::updateSelfWidgetsVisibility()
 {
 	bool visible = ui_.roster->selfWidgetsShouldBeVisible();
 	ui_.topStack->setCurrentWidget(visible ? ui_.selfWidgetsPage : ui_.logoPage);
-	for (int tab = 0; tab < ui_.tabWidget->count(); tab++) {
-		ui_.tabWidget->setTabEnabled(tab, visible);
+	for (int tab = 0; tab < ui_.mainTabWidget->count(); tab++) {
+		ui_.mainTabWidget->setTabEnabled(tab, visible);
 	}
 
 	ui_.statusBar->setShouldBeVisible(visible);

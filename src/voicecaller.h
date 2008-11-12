@@ -1,6 +1,7 @@
 /*
  * voicecaller.h
  * Copyright (C) 2006  Remko Troncon
+ * Copyright (C) 2008  Ivan Cukic
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,13 +23,8 @@
 #define VOICECALLER_H
 
 #include <QObject>
-
-class PsiAccount;
-namespace XMPP {
-	class Jid;
-}
-
-using namespace XMPP;
+#include "im.h"
+#include "psiaccount.h"
 
 /**
  * \brief An abstract class for a voice call implementation.
@@ -38,17 +34,18 @@ class VoiceCaller : public QObject
 	Q_OBJECT
 
 public:
+
 	/**
 	 * \brief Base constructor.
 	 *
 	 * \param account the account to which this voice caller belongs
 	 */
-	VoiceCaller(PsiAccount* account) : account_(account) { };
+	VoiceCaller(PsiAccount* account);
 
 	/**
 	 * \brief Retrieves the account to which this voice caller belongs.
 	 */
-	PsiAccount* account() { return account_; }
+	PsiAccount* account();
 
 	/**
 	 * \brief Initializes the voice caller.
@@ -111,5 +108,67 @@ signals:
 private:
 	PsiAccount* account_;
 };
+
+// class VoiceCallerSignalPropagator: public QObject {
+//     Q_OBJECT
+// public:
+//     static VoiceCallerSignalPropagator * instance();
+//
+//     /**
+//      * Incoming call from the given JID.
+//      */
+//     void sendIncoming(const Jid&);
+//
+//     /**
+//      * Contact accepted an incoming call.
+//      */
+//     void sendAccepted(const Jid&);
+//
+//     /**
+//      * Contact rejected an incoming call.
+//      */
+//     void sendRejected(const Jid&);
+//
+//     /**
+//      * Call with given JID is in progress.
+//      */
+//     void sendInProgress(const Jid&);
+//
+//     /**
+//      * Call with given JID is terminated.
+//      */
+//     void sendTerminated(const Jid&);
+//
+//
+// signals:
+//     /**
+//      * Incoming call from the given JID.
+//      */
+//     void incoming(const Jid&);
+//
+//     /**
+//      * Contact accepted an incoming call.
+//      */
+//     void accepted(const Jid&);
+//
+//     /**
+//      * Contact rejected an incoming call.
+//      */
+//     void rejected(const Jid&);
+//
+//     /**
+//      * Call with given JID is in progress.
+//      */
+//     void inProgress(const Jid&);
+//
+//     /**
+//      * Call with given JID is terminated.
+//      */
+//     void terminated(const Jid&);
+//
+// private:
+//     static VoiceCallerSignalPropagator * m_instance;
+//     VoiceCallerSignalPropagator();
+// };
 
 #endif

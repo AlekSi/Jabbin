@@ -30,6 +30,12 @@
 
 #include "talk/base/logging.h"
 
+#ifdef POSIX
+#include <cstring>
+#include <string>
+#include <cstdlib>
+#endif
+
 // Common log description format for jingle messages
 #define LOG_J(sev,obj) LOG(sev) << "Jingle:" << obj->ToString() << ": "
 

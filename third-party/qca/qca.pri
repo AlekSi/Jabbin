@@ -1,4 +1,9 @@
 INCLUDEPATH += $$PWD/qca/include/QtCrypto
-LIBS += ../third-party/qca/qca_psi.lib
-windows:LIBS += -lcrypt32 
+win32 {
+    LIBS += ../third-party/qca/qca_psi.lib
+}
+unix {
+    LIBS += ../third-party/qca/libqca_psi.a
+}
+windows:LIBS += -lcrypt32
 mac:LIBS += -framework Security

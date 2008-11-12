@@ -7,7 +7,7 @@
 
   This library was developed at the "Expertisecentrum Digitale Media"
   (http://www.edm.luc.ac.be), a research center of the "Limburgs Universitair
-  Centrum" (http://www.luc.ac.be). The library is based upon work done for 
+  Centrum" (http://www.luc.ac.be). The library is based upon work done for
   my thesis at the School for Knowledge Technology (Belgium/The Netherlands).
 
   Permission is hereby granted, free of charge, to any person obtaining a
@@ -49,18 +49,21 @@ RTPRandom::RTPRandom()
 {
 #if defined(RTP_SUPPORT_GNUDRAND) || defined(RTP_SUPPORT_RANDR)
 	u_int32_t x;
+	void * addr = this;
+	void * ptr = &addr;
+	u_int32_t y = *((u_int32_t *) ptr);
 
 	x = (u_int32_t)getpid();
 	x += (u_int32_t)time(0);
 	x -= (u_int32_t)clock();
-	x ^= (u_int32_t)(this);
+	x ^= (u_int32_t)(y);
 
 #ifdef RTP_SUPPORT_GNUDRAND
 	srand48_r(x,&drandbuffer);
 #else
 	state = (unsigned int)x;
 #endif
-	
+
 #else // use simple rand and srand functions
 	if (init)
 		return;
@@ -114,7 +117,7 @@ double RTPRandom::GetRandomDouble()
 	return x;
 }
 
-#else 
+#else
 #ifdef RTP_SUPPORT_RANDR
 
 u_int8_t RTPRandom::GetRandom8()

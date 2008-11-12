@@ -20,7 +20,7 @@
 
 #include "jabbintransmitter.h"
 
-#include <Qt3Support/Q3Cstring>
+#include <Qt3Support/Q3CString>
 #include <Qt3Support/Q3PtrQueue>
 
 #include <string>
@@ -48,7 +48,7 @@ public:
     cricket::MediaChannel *mediaChannel;
 
     int rtpPacketsCount;
-    
+
 };
 
 
@@ -137,7 +137,7 @@ int JabbinTransmitter::SendRTPData(const void *data,size_t len)
 
         //qDebug( "packet of length %d was intended to be sent via %d", len, int( networkInterface ) );
         //networkInterface->SendPacket(data,len);
-        // 
+        //
         d->mediaChannel->network_interface()->SendPacket(data,len);
     }
     //d->iface->SendPacket(data, len);
@@ -202,7 +202,7 @@ RTPRawPacket*  JabbinTransmitter::GetNextPacket()
 {
     if ( !NewDataAvailable() )
         return 0;
-    
+
     QByteArray *data = d->incomingPackets->dequeue();
     int recvlen = data->size();
     u_int8_t *datacopy =  new u_int8_t[recvlen+1];

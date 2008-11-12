@@ -3,7 +3,7 @@
 #define JABBIN_TRANSMITTER_H
 
 #include "rtptransmitter.h"
-#include <Qt3Support/Q3Cstring>
+#include <Qt3Support/Q3CString>
 #include <Qt3Support/Q3PtrQueue>
 
 namespace cricket {
@@ -34,18 +34,18 @@ public:
 
 	virtual bool ComesFromThisTransmitter(const RTPAddress *addr);
 	virtual size_t GetHeaderOverhead();
-	
+
 	virtual int Poll();
 	virtual int WaitForIncomingData(const RTPTime &delay);
 	virtual int AbortWait();
-	
-	virtual int SendRTPData(const void *data,size_t len);	
+
+	virtual int SendRTPData(const void *data,size_t len);
 	virtual int SendRTCPData(const void *data,size_t len);
 
 	virtual void ResetPacketCount();
 	virtual u_int32_t GetNumRTPPacketsSent();
 	virtual u_int32_t GetNumRTCPPacketsSent();
-	
+
 	virtual int AddDestination(const RTPAddress &addr);
 	virtual int DeleteDestination(const RTPAddress &addr);
 	virtual void ClearDestinations();
@@ -63,8 +63,8 @@ public:
 	virtual int AddToAcceptList(const RTPAddress &addr);
 	virtual int DeleteFromAcceptList(const RTPAddress &addr);
 	virtual void ClearAcceptList();
-	virtual int SetMaximumPacketSize(size_t s);	
-	
+	virtual int SetMaximumPacketSize(size_t s);
+
 	virtual bool NewDataAvailable();
 	virtual RTPRawPacket *GetNextPacket();
 #ifdef RTPDEBUG
@@ -91,7 +91,7 @@ public:
     cricket::MediaChannel *mediaChannel;
 
     //bool sendPacketsFlag;
-    
+
 };
 
 

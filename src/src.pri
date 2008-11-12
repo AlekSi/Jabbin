@@ -323,6 +323,7 @@ SOURCES += \
 	$$PWD/serverlistquerier.cpp \
 	$$PWD/psioptions.cpp \
 	$$PWD/psioptionseditor.cpp \
+	$$PWD/voicecaller.cpp \
 	$$PWD/voicecalldlg.cpp \
 	$$PWD/resourcemenu.cpp \
 	$$PWD/groupmenu.cpp \

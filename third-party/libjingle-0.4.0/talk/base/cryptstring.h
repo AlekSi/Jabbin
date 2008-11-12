@@ -2,26 +2,26 @@
  * libjingle
  * Copyright 2004--2005, Google Inc.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *  1. Redistributions of source code must retain the above copyright notice, 
+ *  1. Redistributions of source code must retain the above copyright notice,
  *     this list of conditions and the following disclaimer.
  *  2. Redistributions in binary form must reproduce the above copyright notice,
  *     this list of conditions and the following disclaimer in the documentation
  *     and/or other materials provided with the distribution.
- *  3. The name of the author may not be used to endorse or promote products 
+ *  3. The name of the author may not be used to endorse or promote products
  *     derived from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
- * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
@@ -29,6 +29,7 @@
 #define _TALK_BASE_CRYPTSTRING_H_
 
 #include <string>
+#include "talk/base/common.h"
 #include "talk/base/linked_ptr.h"
 #include "talk/base/scoped_ptr.h"
 
@@ -71,7 +72,7 @@ public:
   }
   void Clear() { impl_.reset(new EmptyCryptStringImpl()); }
   std::string UrlEncode() const { return impl_->UrlEncode(); }
-  
+
 private:
   scoped_ptr<const CryptStringImpl> impl_;
 };
@@ -87,7 +88,7 @@ public:
     length_ = 0;
     storage_[0] = 0;
   }
-  
+
   void Append(const std::string & text) {
     Append(text.data(), text.length());
   }
@@ -98,7 +99,7 @@ public:
     length_ += length;
     storage_[length_] = '\0';
   }
-  
+
   void Append(const CryptString * password) {
     size_t len = password->GetLength();
     EnsureStorage(length_ + len + 1);
@@ -134,7 +135,7 @@ public:
 
     if (old_capacity) {
       memcpy(storage_, old_storage, length_);
-    
+
       // zero memory in a way that an optimizer won't optimize it out
       old_storage[0] = 0;
       for (size_t i = 1; i < old_capacity; i++) {
@@ -142,7 +143,7 @@ public:
       }
       delete[] old_storage;
     }
-  }  
+  }
 
   ~FormatCryptString() {
     if (capacity_) {

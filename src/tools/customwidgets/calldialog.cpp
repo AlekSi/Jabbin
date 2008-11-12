@@ -26,6 +26,8 @@
 #include <QRegExp>
 #include <QDebug>
 
+#include "models/callhistory.h"
+
 #define JIDTEXT jid.bare()
 
 using XMPP::Jid;
@@ -49,6 +51,10 @@ CallDialog::Private::Private(CallDialog * parent)
     frameIncomingCall->addButton(tr("Reject"), QIcon("help"), QString());
     frameIncomingCall->setPixmap(QPixmap(":/customwidgets/data/phone.png"));
     stacked->setCurrentIndex(0);
+
+    CallHistoryModel * model = new CallHistoryModel(listHistory);
+    // listHistory->setModel(model);
+    listHistory->setItemDelegate(new CallHistoryItemDelegate(model));
 
     time.start();
     timer.start(1000, parent);
@@ -166,16 +172,20 @@ void CallDialog::init(const Jid & jid, PsiAccount * account, VoiceCaller * calle
 
         qDebug() << "CallDialog::connecting " <<
         connect(caller, SIGNAL(accepted(Jid)),
-                this,   SLOT(accepted(Jid)));
+                this,   SLOT(accepted(Jid)),
+                Qt::QueuedConnection);
         qDebug() << "CallDialog::connecting " <<
         connect(caller, SIGNAL(rejected(const Jid & )),
-                this,   SLOT(rejected(const Jid & )));
+                this,   SLOT(rejected(const Jid & )),
+                Qt::QueuedConnection);
         qDebug() << "CallDialog::connecting " <<
         connect(caller, SIGNAL(terminated(const Jid & )),
-                this,   SLOT(terminated(const Jid & )));
+                this,   SLOT(terminated(const Jid & )),
+                Qt::QueuedConnection);
         qDebug() << "CallDialog::connecting " <<
-        connect(caller, SIGNAL(in_progress(const Jid & )),
-                this,   SLOT(inProgress(const Jid & )));
+        connect(caller, SIGNAL(inProgress(const Jid & )),
+                this,   SLOT(inProgress(const Jid & )),
+                Qt::QueuedConnection);
         }
 }
 

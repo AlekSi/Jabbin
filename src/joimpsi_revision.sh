@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# ivan: this updates joimpsi_revision file which leads to disabling
+# voip functions. So, I'm disabling this
+exit 0
+
 revision_file="tools/yastuff/joimpsi_revision.h"
 
 update_revision_file() {

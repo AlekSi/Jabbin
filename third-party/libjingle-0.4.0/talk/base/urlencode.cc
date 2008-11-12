@@ -1,3 +1,4 @@
+#include "talk/base/common.h"
 #include "talk/base/urlencode.h"
 
 static int HexPairValue(const char * code) {
@@ -52,12 +53,12 @@ int UrlDecode(const char *source, char *dest)
     }
     source++;
   }
-  
+
   *dest = 0;
   return dest - start;
-}  
+}
 
-int UrlEncode(const char *source, char *dest, unsigned max)  
+int UrlEncode(const char *source, char *dest, unsigned max)
 {
   static const char *digits = "0123456789ABCDEF";
   unsigned char ch;
@@ -77,7 +78,7 @@ int UrlEncode(const char *source, char *dest, unsigned max)
       *dest++ = '%';
       *dest++ = digits[(ch >> 4) & 0x0F];
       *dest++ = digits[       ch & 0x0F];
-    }  
+    }
     source++;
   }
   *dest = 0;

@@ -7,7 +7,7 @@
 
   This library was developed at the "Expertisecentrum Digitale Media"
   (http://www.edm.luc.ac.be), a research center of the "Limburgs Universitair
-  Centrum" (http://www.luc.ac.be). The library is based upon work done for 
+  Centrum" (http://www.luc.ac.be). The library is based upon work done for
   my thesis at the School for Knowledge Technology (Belgium/The Netherlands).
 
   Permission is hereby granted, free of charge, to any person obtaining a
@@ -46,6 +46,7 @@
 #endif // RTPDEBUG
 
 #include "rtpdebug.h"
+#include <string.h>
 
 void RTPPacket::Clear()
 {
@@ -57,7 +58,7 @@ void RTPPacket::Clear()
 	timestamp = 0;
 	ssrc = 0;
 	packet = 0;
-	payload = 0; 
+	payload = 0;
 	packetlength = 0;
 	payloadlength = 0;
 	extid = 0;
@@ -111,22 +112,22 @@ int RTPPacket::ParseRawPacket(RTPRawPacket &rawpack)
 	int numpadbytes;
 	RTPExtensionHeader *rtpextheader;
 	u_int16_t exthdrlen;
-	
+
 	if (!rawpack.IsRTP()) // If we didn't receive it on the RTP port, we'll ignore it
 		return ERR_RTP_PACKET_INVALIDPACKET;
-	
+
 	// The length should be at least the size of the RTP header
 	packetlen = rawpack.GetDataLength();
 	if (packetlen < sizeof(RTPHeader))
 		return ERR_RTP_PACKET_INVALIDPACKET;
-	
+
 	packetbytes = (u_int8_t *)rawpack.GetData();
 	rtpheader = (RTPHeader *)packetbytes;
-	
+
 	// The version number should be correct
 	if (rtpheader->version != RTP_VERSION)
 		return ERR_RTP_PACKET_INVALIDPACKET;
-	
+
 	// We'll check if this is possibly a RTCP packet. For this to be possible
 	// the marker bit and payload type combined should be either an SR or RR
 	// identifier
@@ -142,7 +143,7 @@ int RTPPacket::ParseRawPacket(RTPRawPacket &rawpack)
 
 	csrccount = rtpheader->csrccount;
 	payloadoffset = sizeof(RTPHeader)+(int)(csrccount*sizeof(u_int32_t));
-	
+
 	if (rtpheader->padding) // adjust payload length to take padding into account
 	{
 		numpadbytes = (int)packetbytes[packetlen-1]; // last byte contains number of padding bytes
@@ -164,15 +165,15 @@ int RTPPacket::ParseRawPacket(RTPRawPacket &rawpack)
 	{
 		rtpextheader = 0;
 		exthdrlen = 0;
-	}	
-	
+	}
+
 	payloadlength = packetlen-numpadbytes-payloadoffset;
 	if (payloadlength < 0)
 		return ERR_RTP_PACKET_INVALIDPACKET;
 
 	// Now, we've got a valid packet, so we can create a new instance of RTPPacket
 	// and fill in the members
-	
+
 	RTPPacket::hasextension = hasextension;
 	if (hasextension)
 	{
@@ -184,7 +185,7 @@ int RTPPacket::ParseRawPacket(RTPRawPacket &rawpack)
 	RTPPacket::hasmarker = marker;
 	RTPPacket::numcsrcs = csrccount;
 	RTPPacket::payloadtype = payloadtype;
-	
+
 	// Note: we don't fill in the EXTENDED sequence number here, since we
 	// don't have information about the source here. We just fill in the low
 	// 16 bits
@@ -211,7 +212,7 @@ u_int32_t RTPPacket::GetCSRC(int num) const
 	u_int8_t *csrcpos;
 	u_int32_t *csrcval_nbo;
 	u_int32_t csrcval_hbo;
-	
+
 	csrcpos = packet+sizeof(RTPHeader)+num*sizeof(u_int32_t);
 	csrcval_nbo = (u_int32_t *)csrcpos;
 	csrcval_hbo = ntohl(*csrcval_nbo);
@@ -230,7 +231,7 @@ int RTPPacket::BuildPacket(u_int8_t payloadtype,const void *payloaddata,size_t p
 		return ERR_RTP_PACKET_BADPAYLOADTYPE;
 	if (payloadtype == 72 || payloadtype == 73) // could cause confusion with rtcp types
 		return ERR_RTP_PACKET_BADPAYLOADTYPE;
-	
+
 	packetlength = sizeof(RTPHeader);
 	packetlength += sizeof(u_int32_t)*((size_t)numcsrcs);
 	if (gotextension)
@@ -247,9 +248,9 @@ int RTPPacket::BuildPacket(u_int8_t payloadtype,const void *payloaddata,size_t p
 	}
 
 	// Ok, now we'll just fill in...
-	
+
 	RTPHeader *rtphdr;
-	
+
 	if (buffer == 0)
 	{
 		packet = new u_int8_t [packetlength];
@@ -265,7 +266,7 @@ int RTPPacket::BuildPacket(u_int8_t payloadtype,const void *payloaddata,size_t p
 		packet = (u_int8_t *)buffer;
 		externalbuffer = true;
 	}
-	
+
 	RTPPacket::hasmarker = gotmarker;
 	RTPPacket::hasextension = gotextension;
 	RTPPacket::numcsrcs = numcsrcs;
@@ -276,7 +277,7 @@ int RTPPacket::BuildPacket(u_int8_t payloadtype,const void *payloaddata,size_t p
 	RTPPacket::payloadlength = payloadlen;
 	RTPPacket::extid = extensionid;
 	RTPPacket::extensionlength = ((size_t)extensionlen_numwords)*sizeof(u_int32_t);
-	
+
 	rtphdr = (RTPHeader *)packet;
 	rtphdr->version = RTP_VERSION;
 	rtphdr->padding = 0;
@@ -293,7 +294,7 @@ int RTPPacket::BuildPacket(u_int8_t payloadtype,const void *payloaddata,size_t p
 	rtphdr->sequencenumber = htons(seqnr);
 	rtphdr->timestamp = htonl(timestamp);
 	rtphdr->ssrc = htonl(ssrc);
-	
+
 	u_int32_t *curcsrc;
 	int i;
 
@@ -301,28 +302,28 @@ int RTPPacket::BuildPacket(u_int8_t payloadtype,const void *payloaddata,size_t p
 	for (i = 0 ; i < numcsrcs ; i++,curcsrc++)
 		*curcsrc = htonl(csrcs[i]);
 
-	payload = packet+sizeof(RTPHeader)+((size_t)numcsrcs)*sizeof(u_int32_t); 
+	payload = packet+sizeof(RTPHeader)+((size_t)numcsrcs)*sizeof(u_int32_t);
 	if (gotextension)
 	{
 		RTPExtensionHeader *rtpexthdr = (RTPExtensionHeader *)payload;
 
 		rtpexthdr->id = htons(extensionid);
 		rtpexthdr->length = htons((u_int16_t)extensionlen_numwords);
-		
+
 		payload += sizeof(RTPExtensionHeader);
 		memcpy(payload,extensiondata,RTPPacket::extensionlength);
-		
+
 		payload += RTPPacket::extensionlength;
 	}
 	memcpy(payload,payloaddata,payloadlen);
 	return 0;
 }
 
-#ifdef RTPDEBUG	
+#ifdef RTPDEBUG
 void RTPPacket::Dump()
 {
 	int i;
-	
+
 	printf("Payload type:                %d\n",(int)GetPayloadType());
 	printf("Extended sequence number:    0x%08x\n",GetExtendedSequenceNumber());
 	printf("Timestamp:                   0x%08x\n",GetTimestamp());
