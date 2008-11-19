@@ -46,7 +46,7 @@ public:
     Jid jid;
 
 public Q_SLOTS:
-    void clicked(const QString & buttonData);
+    void doAction(const QString & buttonData);
 
 };
 

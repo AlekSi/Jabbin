@@ -45,20 +45,22 @@ CallDialog::Private::Private(CallDialog * parent)
             parent, SLOT(dialpadButtonClicked(char)));
     stacked->setCurrentWidget(pageDialpad);
 
-    frameInCall->addButton("Hangup", QIcon("help"), QString());
+    frameInCall->addButton("Hangup", QIcon("help"), QString("hangup"));
     frameInCall->setPixmap(QPixmap(":/customwidgets/data/phone.png"));
+    connect(frameInCall, SIGNAL(buttonClicked(const QString & )),
+            this, SLOT(doAction(const QString & )));
 
-    frameIncomingCall->addButton(tr("Accept"), QIcon("help"), QString());
-    frameIncomingCall->addButton(tr("Reject"), QIcon("help"), QString());
+    frameIncomingCall->addButton(tr("Accept"), QIcon("help"), QString("accept"));
+    frameIncomingCall->addButton(tr("Reject"), QIcon("help"), QString("reject"));
     frameIncomingCall->setPixmap(QPixmap(":/customwidgets/data/phone.png"));
+    connect(frameIncomingCall, SIGNAL(buttonClicked(const QString & )),
+            this, SLOT(doAction(const QString & )));
     stacked->setCurrentIndex(0);
 
     new CallHistoryModel(listHistory);
     new PhoneBookModel(listPhoneBook);
-    editFilterPhoneBook->setEmptyText(tr("Search"));
 
-    // listHistory->setModel(model);
-    // listHistory->setItemDelegate(new CallHistoryItemDelegate(model)); // handled by model now
+    editFilterPhoneBook->setEmptyText(tr("Search"));
 
     time.start();
     timer.start(1000, parent);
@@ -147,9 +149,16 @@ void CallDialog::inProgress(const Jid & jid)
     d->setStatus(InCall);
 }
 
-void CallDialog::Private::clicked(const QString & buttonData)
+void CallDialog::Private::doAction(const QString & buttonData)
 {
     qDebug() << buttonData;
+    if (buttonData == "hangup") {
+        setStatus(Terminating);
+    } else if (buttonData == "accept") {
+        setStatus(Accepting);
+    } else if (buttonData == "reject") {
+        setStatus(Rejecting);
+    }
 }
 
 CallDialog * CallDialog::m_instance = NULL;
