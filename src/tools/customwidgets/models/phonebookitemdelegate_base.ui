@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>CallHistoryItemDelegateBase</class>
- <widget class="QWidget" name="CallHistoryItemDelegateBase" >
+ <class>PhoneBookItemDelegateBase</class>
+ <widget class="QWidget" name="PhoneBookItemDelegateBase" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -78,7 +78,7 @@
       </size>
      </property>
      <property name="toolTip" >
-      <string>Remove from the List</string>
+      <string>Delete contact</string>
      </property>
      <property name="styleSheet" >
       <string notr="true" >QPushButton {
@@ -104,7 +104,7 @@
       </size>
      </property>
      <property name="toolTip" >
-      <string>Add to the Phonebook</string>
+      <string>Edit contact</string>
      </property>
      <property name="styleSheet" >
       <string notr="true" >QPushButton {
@@ -117,7 +117,7 @@
      </property>
      <property name="icon" >
       <iconset resource="../customwidgets.qrc" >
-       <normaloff>:/customwidgets/data/addtophonebook.png</normaloff>:/customwidgets/data/addtophonebook.png</iconset>
+       <normaloff>:/customwidgets/data/contact_edit.png</normaloff>:/customwidgets/data/contact_edit.png</iconset>
      </property>
     </widget>
    </item>

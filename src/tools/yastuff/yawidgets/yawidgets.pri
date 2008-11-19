@@ -15,6 +15,7 @@ SOURCES += \
 	$$PWD/../../customwidgets/generic/notificationpanel.cpp \
 	$$PWD/../../customwidgets/calldialog.cpp \
 	$$PWD/../../customwidgets/models/callhistory.cpp \
+	$$PWD/../../customwidgets/models/phonebook.cpp \
 	$$PWD/../../customwidgets/generic/widgetexpander.cpp \
 	$$PWD/../../customwidgets/generic/avatarbutton.cpp \
 	$$PWD/../../customwidgets/generic/customwidgetscommon.cpp
@@ -30,6 +31,7 @@ HEADERS += \
 	$$PWD/../../customwidgets/calldialog.h \
 	$$PWD/../../customwidgets/calldialog_p.h \
 	$$PWD/../../customwidgets/models/callhistory.h \
+	$$PWD/../../customwidgets/models/phonebook.h \
 	$$PWD/../../customwidgets/generic/widgetexpander.h \
 	$$PWD/../../customwidgets/generic/avatarbutton.h \
 	$$PWD/../../customwidgets/generic/customwidgetscommon.h
@@ -38,7 +40,9 @@ INTERFACES += \
 	$$PWD/../../customwidgets/generic/dialpad_base.ui \
 	$$PWD/../../customwidgets/generic/notificationpanel_base.ui \
 	$$PWD/../../customwidgets/calldialog_base.ui \
-	$$PWD/../../customwidgets/models/callhistoryitemdelegate_base.ui
+	$$PWD/../../customwidgets/models/callhistoryitemdelegate_base.ui \
+	$$PWD/../../customwidgets/models/phonebookitemdelegate_base.ui \
+	$$PWD/../../customwidgets/models/phonebookedit_base.ui
 
 
 HEADERS += \

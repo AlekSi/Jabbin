@@ -17,20 +17,20 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef CALLHISTORY_H
-#define CALLHISTORY_H
+#ifndef PHONEBOOK_H
+#define PHONEBOOK_H
 
 #include <QAbstractListModel>
 #include <QItemDelegate>
 #include <QListView>
 #include <QLabel>
 
-class CallHistoryModel;
+class PhoneBookModel;
 
-class CallHistoryItemDelegate: public QItemDelegate {
+class PhoneBookItemDelegate: public QItemDelegate {
 public:
-    CallHistoryItemDelegate(CallHistoryModel * model);
-    ~CallHistoryItemDelegate();
+    PhoneBookItemDelegate(PhoneBookModel * model);
+    ~PhoneBookItemDelegate();
 
     void paint(QPainter * painter, const QStyleOptionViewItem & option,
             const QModelIndex & index) const;
@@ -40,11 +40,11 @@ private:
     Private * const d;
 };
 
-class CallHistoryModel: public QAbstractListModel {
+class PhoneBookModel: public QAbstractListModel {
     Q_OBJECT
 public:
-    CallHistoryModel(QListView * list = NULL);
-    ~CallHistoryModel();
+    PhoneBookModel(QListView * list = NULL);
+    ~PhoneBookModel();
 
     // Override
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
@@ -67,8 +67,8 @@ private:
     class Private;
     Private * const d;
 
-    friend class CallHistoryItemDelegate;
+    friend class PhoneBookItemDelegate;
 };
 
-#endif // SELFAVATAR_H
+#endif // PHONEBOOK_H
 

@@ -1,5 +1,9 @@
 <RCC>
   <qresource prefix="/customwidgets" >
+    <file>data/phonebook/undefined.png</file>
+    <file>data/phonebook/male.png</file>
+    <file>data/phonebook/female.png</file>
+    <file>data/contact_edit.png</file>
     <file>data/delete.png</file>
     <file>data/addtophonebook.png</file>
     <file>data/callhistory/blank.png</file>

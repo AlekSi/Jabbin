@@ -72,7 +72,7 @@ QTabWidget#callTabs > QTabBar::tab:selected {
             <enum>QTabWidget::West</enum>
            </property>
            <property name="currentIndex" >
-            <number>1</number>
+            <number>2</number>
            </property>
            <property name="iconSize" >
             <size>
@@ -227,9 +227,6 @@ QPushButton:pressed {
              <string>Call History</string>
             </attribute>
             <layout class="QVBoxLayout" name="verticalLayout_7" >
-             <property name="topMargin" >
-              <number>0</number>
-             </property>
              <property name="rightMargin" >
               <number>0</number>
              </property>
@@ -245,25 +242,40 @@ QPushButton:pressed {
              </item>
              <item>
               <widget class="QListView" name="listHistory" >
+               <property name="mouseTracking" >
+                <bool>true</bool>
+               </property>
                <property name="styleSheet" >
                 <string notr="true" >QListView {
-    show-decoration-selected: 1;
+    /*show-decoration-selected: 1;
     selection-color: black;
-    selection-background-color: rgb(232, 242, 255);
+    selection-background-color: rgb(232, 242, 255);*/
+    color: rgba(255,255,255,0);
+    selection-color: rgba(255,255,255,0);
+    background-color: rgb(255, 255, 255);
+    selection-background-color: rgb(255, 255, 255);
 }
 
+QListView::item:hover {
+    background: rgb(232, 242, 255);
+}
+/*
 QListView::item:selected {
     background: rgb(232, 242, 255);
-}</string>
+}
+*/</string>
                </property>
                <property name="frameShape" >
                 <enum>QFrame::NoFrame</enum>
                </property>
                <property name="editTriggers" >
-                <set>QAbstractItemView::AllEditTriggers</set>
+                <set>QAbstractItemView::NoEditTriggers</set>
                </property>
-               <property name="selectionBehavior" >
-                <enum>QAbstractItemView::SelectRows</enum>
+               <property name="showDropIndicator" stdset="0" >
+                <bool>false</bool>
+               </property>
+               <property name="selectionMode" >
+                <enum>QAbstractItemView::NoSelection</enum>
                </property>
                <property name="iconSize" >
                 <size>
@@ -295,9 +307,50 @@ QListView::item:selected {
               </widget>
              </item>
              <item>
-              <widget class="QTreeView" name="treePhonebook" >
+              <widget class="CustomWidgets::AdvancedLineEdit" name="lineEdit" />
+             </item>
+             <item>
+              <widget class="QListView" name="listPhoneBook" >
+               <property name="mouseTracking" >
+                <bool>true</bool>
+               </property>
+               <property name="styleSheet" >
+                <string notr="true" >QListView {
+    /*show-decoration-selected: 1;
+    selection-color: black;
+    selection-background-color: rgb(232, 242, 255);*/
+    color: rgba(255,255,255,0);
+    selection-color: rgba(255,255,255,0);
+    background-color: rgb(255, 255, 255);
+    selection-background-color: rgb(255, 255, 255);
+}
+
+QListView::item:hover {
+    background: rgb(232, 242, 255);
+}
+/*
+QListView::item:selected {
+    background: rgb(232, 242, 255);
+}
+*/</string>
+               </property>
                <property name="frameShape" >
                 <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="editTriggers" >
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
+               <property name="showDropIndicator" stdset="0" >
+                <bool>false</bool>
+               </property>
+               <property name="selectionMode" >
+                <enum>QAbstractItemView::NoSelection</enum>
+               </property>
+               <property name="iconSize" >
+                <size>
+                 <width>22</width>
+                 <height>22</height>
+                </size>
                </property>
               </widget>
              </item>

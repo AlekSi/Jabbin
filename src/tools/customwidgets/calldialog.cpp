@@ -27,6 +27,7 @@
 #include <QDebug>
 
 #include "models/callhistory.h"
+#include "models/phonebook.h"
 
 #define JIDTEXT jid.bare()
 
@@ -52,9 +53,12 @@ CallDialog::Private::Private(CallDialog * parent)
     frameIncomingCall->setPixmap(QPixmap(":/customwidgets/data/phone.png"));
     stacked->setCurrentIndex(0);
 
-    CallHistoryModel * model = new CallHistoryModel(listHistory);
+    new CallHistoryModel(listHistory);
+    new PhoneBookModel(listPhoneBook);
+    editFilterPhoneBook->setEmptyText(tr("Search"));
+
     // listHistory->setModel(model);
-    listHistory->setItemDelegate(new CallHistoryItemDelegate(model));
+    // listHistory->setItemDelegate(new CallHistoryItemDelegate(model)); // handled by model now
 
     time.start();
     timer.start(1000, parent);
@@ -189,7 +193,7 @@ void CallDialog::init(const Jid & jid, PsiAccount * account, VoiceCaller * calle
         }
 }
 
-CallDialog::CallDialog(QWidget *parent)
+CallDialog::CallDialog(QWidget * parent)
     : QFrame(parent), d(new Private(this))
 {
     m_instance = this;
