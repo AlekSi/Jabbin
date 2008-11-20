@@ -43,6 +43,15 @@ private:
 class CallHistoryModel: public QAbstractListModel {
     Q_OBJECT
 public:
+    enum Status {
+        Invalid = -1,
+        Unknown = 0,
+        Sent,
+        Received,
+        Missed,
+        Rejected
+    };
+
     CallHistoryModel(QListView * list = NULL);
     ~CallHistoryModel();
 
@@ -62,6 +71,10 @@ public:
     Qt::ItemFlags flags(const QModelIndex & index) const;
 
     bool eventFilter(QObject * obj, QEvent * event);
+
+protected:
+    void load();
+    void save();
 
 private:
     class Private;

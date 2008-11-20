@@ -18,6 +18,8 @@
  */
 
 #include "callhistory.h"
+#include "applicationinfo.h"
+
 #include <QTime>
 #include <QDebug>
 #include <QSize>
@@ -25,7 +27,10 @@
 #include <QItemDelegate>
 #include <QPainter>
 #include <QEvent>
+#include <QFile>
 #include <QHoverEvent>
+#include <QXmlStreamWriter>
+#include <QXmlStreamReader>
 #include "ui_callhistoryitemdelegate_base.h"
 
 #define ICON_WIDTH 32
@@ -34,16 +39,10 @@
 #define EDITOR_COLOR_S "235, 244, 250"
 #define EDITOR_COLOR QColor(235, 244, 250)
 
+#define CALLHISTORYFILE ApplicationInfo::homeDir() + "/callhistory.xml"
+
 class CallHistoryItem {
 public:
-    enum Status {
-        Invalid = -1,
-        Unknown = 0,
-        Sent,
-        Received,
-        Missed,
-        Rejected
-    };
 
     enum Roles {
         Id = Qt::UserRole,
@@ -51,12 +50,12 @@ public:
     };
 
     CallHistoryItem()
-        : name(QString()), id(QString()), time(QDateTime()), status(Invalid)
+        : name(QString()), id(QString()), time(QDateTime()), status(CallHistoryModel::Invalid)
     {
 
     }
 
-    CallHistoryItem(QString _name, QString _id, QDateTime _time, Status _status)
+    CallHistoryItem(QString _name, QString _id, QDateTime _time, CallHistoryModel::Status _status)
         : name(_name), id(_id), time(_time), status(_status)
     {
 
@@ -72,7 +71,7 @@ public:
     QDateTime time;
 
     // Status
-    Status status;
+    CallHistoryModel::Status status;
 
 };
 
@@ -180,28 +179,11 @@ void CallHistoryItemDelegate::paint(QPainter * painter, const QStyleOptionViewIt
 CallHistoryModel::CallHistoryModel(QListView * parent)
     : QAbstractListModel(parent), d(new Private(parent))
 {
-    d->items.append(CallHistoryItem("test1 asdoiu aoisdu aoisd uaosi duaosi du", "id1", QDateTime::currentDateTime(), CallHistoryItem::Unknown));
-    d->items.append(CallHistoryItem("test2", "id2", QDateTime::currentDateTime(), CallHistoryItem::Received));
-    d->items.append(CallHistoryItem("test3", "id3", QDateTime::currentDateTime(), CallHistoryItem::Rejected));
-    d->items.append(CallHistoryItem("test2", "id2", QDateTime::currentDateTime(), CallHistoryItem::Sent));
-    d->items.append(CallHistoryItem("test3", "id3", QDateTime::currentDateTime(), CallHistoryItem::Missed));
-    d->items.append(CallHistoryItem("test2", "id2", QDateTime::currentDateTime(), CallHistoryItem::Received));
-    d->items.append(CallHistoryItem("test3", "id3", QDateTime::currentDateTime(), CallHistoryItem::Rejected));
-    d->items.append(CallHistoryItem("test2", "id2", QDateTime::currentDateTime(), CallHistoryItem::Received));
-    d->items.append(CallHistoryItem("test3", "id3", QDateTime::currentDateTime(), CallHistoryItem::Rejected));
-    d->items.append(CallHistoryItem("test2", "id2", QDateTime::currentDateTime(), CallHistoryItem::Received));
-    d->items.append(CallHistoryItem("test3", "id3", QDateTime::currentDateTime(), CallHistoryItem::Rejected));
-    d->items.append(CallHistoryItem("test2", "id2", QDateTime::currentDateTime(), CallHistoryItem::Received));
-    d->items.append(CallHistoryItem("test3", "id3", QDateTime::currentDateTime(), CallHistoryItem::Rejected));
-    d->items.append(CallHistoryItem("test2", "id2", QDateTime::currentDateTime(), CallHistoryItem::Received));
-    d->items.append(CallHistoryItem("test3", "id3", QDateTime::currentDateTime(), CallHistoryItem::Rejected));
-    d->items.append(CallHistoryItem("test2", "id2", QDateTime::currentDateTime(), CallHistoryItem::Received));
-    d->items.append(CallHistoryItem("test3", "id3", QDateTime::currentDateTime(), CallHistoryItem::Rejected));
-    d->items.append(CallHistoryItem("test2", "id2", QDateTime::currentDateTime(), CallHistoryItem::Received));
-    d->items.append(CallHistoryItem("test3", "id3", QDateTime::currentDateTime(), CallHistoryItem::Rejected));
-    d->items.append(CallHistoryItem("test3", "id3", QDateTime::currentDateTime(), CallHistoryItem::Rejected));
-    d->items.append(CallHistoryItem("test2", "id2", QDateTime::currentDateTime(), CallHistoryItem::Received));
-    d->items.append(CallHistoryItem("test3", "id3", QDateTime::currentDateTime(), CallHistoryItem::Rejected));
+    load();
+
+    d->items.append(CallHistoryItem("test2", "id2", QDateTime::currentDateTime(), Received));
+    d->items.append(CallHistoryItem("test3", "id3", QDateTime::currentDateTime(), Rejected));
+    d->items.append(CallHistoryItem("test2", "id2", QDateTime::currentDateTime(), Sent));
 
     d->list->setModel(this);
     d->list->installEventFilter(this);
@@ -275,33 +257,33 @@ QVariant CallHistoryModel::data(const QModelIndex & index, int role) const
                 + "<span style=\"font-size: 8pt; color: grey;\">" + d->items.at(i).time.toString() + "</span>";
         case Qt::DecorationRole:
             switch (d->items.at(i).status) {
-                case CallHistoryItem::Invalid:
-                case CallHistoryItem::Unknown:
+                case Invalid:
+                case Unknown:
                     return QIcon(":/customwidgets/data/callhistory/blank.png");
-                case CallHistoryItem::Sent:
+                case Sent:
                     return QIcon(":/customwidgets/data/callhistory/sent.png");
-                case CallHistoryItem::Received:
+                case Received:
                     return QIcon(":/customwidgets/data/callhistory/received.png");
-                case CallHistoryItem::Missed:
+                case Missed:
                     return QIcon(":/customwidgets/data/callhistory/missed.png");
-                case CallHistoryItem::Rejected:
+                case Rejected:
                     return QIcon(":/customwidgets/data/callhistory/rejected.png");
             }
         case Qt::ToolTipRole:
             switch (d->items.at(i).status) {
-                case CallHistoryItem::Invalid:
-                case CallHistoryItem::Unknown:
+                case Invalid:
+                case Unknown:
                     return QString();
-                case CallHistoryItem::Sent:
+                case Sent:
                     what = tr("You have called %1 on %2");
                     break;
-                case CallHistoryItem::Received:
+                case Received:
                     what = tr("You have received a call from %1 on %2");
                     break;
-                case CallHistoryItem::Missed:
+                case Missed:
                     what = tr("You have missed a call from %1 on %2");
                     break;
-                case CallHistoryItem::Rejected:
+                case Rejected:
                     what = tr("You have rejected a call from %1 on %2");
                     break;
             }
@@ -320,3 +302,69 @@ Qt::ItemFlags CallHistoryModel::flags(const QModelIndex & index) const
 {
     return Qt::ItemIsEditable | QAbstractListModel::flags(index);
 }
+
+void CallHistoryModel::load()
+{
+    QFile file(CALLHISTORYFILE);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+
+    QXmlStreamReader reader(&file);
+
+    if (reader.atEnd()) {
+        return;
+    }
+
+    reader.readNext();
+    if (reader.isStartElement()) {
+        if (reader.name() != "phonebook" || reader.attributes().value("version") != "1.0") {
+            reader.raiseError(QObject::tr("The file is not an phonebook version 1.0 file."));
+            return;
+        }
+    }
+
+    CallHistoryItem item;
+    while (!reader.atEnd()) {
+        reader.readNext();
+        if (reader.isStartElement()) {
+            if (reader.name() == "event") {
+                item.name = reader.attributes().value("name").toString();
+                item.id = reader.attributes().value("id").toString();
+                item.time = QDateTime::fromString((reader.attributes().value("time").toString()), Qt::ISODate);
+                item.status = (Status) reader.attributes().value("status").toString().toInt();
+            }
+        } else if (reader.isEndElement()) {
+            if (reader.name() == "contact") {
+                d->items.append(item);
+            }
+        }
+    }
+}
+
+void CallHistoryModel::save()
+{
+    QFile file(CALLHISTORYFILE);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return;
+
+    QXmlStreamWriter writer(&file);
+    writer.setAutoFormatting(true);
+
+    writer.writeStartDocument();
+    writer.writeDTD("<!DOCTYPE joimcallhistory>");
+    writer.writeStartElement("callhistory");
+    writer.writeAttribute("version", "1.0");
+
+    foreach (CallHistoryItem item, d->items) {
+        writer.writeStartElement("event");
+        writer.writeAttribute("name",    item.name);
+        writer.writeAttribute("id",      item.id);
+        writer.writeAttribute("time",    item.time.toString(Qt::ISODate));
+        writer.writeAttribute("status",  QString::number(item.status));
+        writer.writeEndElement();
+    }
+
+    writer.writeEndElement();
+    writer.writeEndDocument();
+}
+

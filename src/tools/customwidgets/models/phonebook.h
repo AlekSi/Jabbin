@@ -43,6 +43,20 @@ private:
 class PhoneBookModel: public QAbstractListModel {
     Q_OBJECT
 public:
+    enum PhoneType {
+        CellPhone,
+        LandLine,
+        Office
+    };
+
+    enum Gender {
+        Unknown = 0,
+        Male,
+        Female
+    };
+
+    typedef QMap < PhoneBookModel::PhoneType, QString > PhoneList;
+
     PhoneBookModel(QListView * list = NULL);
     ~PhoneBookModel();
 
@@ -62,6 +76,27 @@ public:
     Qt::ItemFlags flags(const QModelIndex & index) const;
 
     bool eventFilter(QObject * obj, QEvent * event);
+
+    void addItem(const QString & name,
+            Gender gender,
+            const PhoneBookModel::PhoneList & phones
+            );
+
+    void setItemData(int index, const QString & name,
+            Gender gender,
+            const PhoneBookModel::PhoneList & phones
+            );
+
+    void getItemData(int index, QString & name,
+            Gender gender,
+            PhoneBookModel::PhoneList & phones
+            );
+
+    void deleteItem(int index);
+
+protected:
+    void load();
+    void save();
 
 private:
     class Private;
