@@ -32,6 +32,7 @@ HEADERS += \
 	$$PWD/../../customwidgets/calldialog_p.h \
 	$$PWD/../../customwidgets/models/callhistory.h \
 	$$PWD/../../customwidgets/models/phonebook.h \
+	$$PWD/../../customwidgets/models/phonebook_p.h \
 	$$PWD/../../customwidgets/generic/widgetexpander.h \
 	$$PWD/../../customwidgets/generic/avatarbutton.h \
 	$$PWD/../../customwidgets/generic/customwidgetscommon.h

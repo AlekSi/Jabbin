@@ -72,7 +72,7 @@ QTabWidget#callTabs > QTabBar::tab:selected {
             <enum>QTabWidget::West</enum>
            </property>
            <property name="currentIndex" >
-            <number>0</number>
+            <number>2</number>
            </property>
            <property name="iconSize" >
             <size>
@@ -92,6 +92,9 @@ QTabWidget#callTabs > QTabBar::tab:selected {
              <string>Dialpad</string>
             </attribute>
             <layout class="QVBoxLayout" name="verticalLayout_6" >
+             <property name="spacing" >
+              <number>0</number>
+             </property>
              <item>
               <widget class="QLabel" name="labelPhoneNumber" >
                <property name="text" >
@@ -107,7 +110,13 @@ QTabWidget#callTabs > QTabBar::tab:selected {
                <property name="minimumSize" >
                 <size>
                  <width>0</width>
-                 <height>30</height>
+                 <height>32</height>
+                </size>
+               </property>
+               <property name="maximumSize" >
+                <size>
+                 <width>16777215</width>
+                 <height>32</height>
                 </size>
                </property>
                <property name="toolTip" >
@@ -299,6 +308,9 @@ QListView::item:selected {
              <string>Phonebook</string>
             </attribute>
             <layout class="QVBoxLayout" name="verticalLayout_8" >
+             <property name="spacing" >
+              <number>0</number>
+             </property>
              <item>
               <widget class="QLabel" name="labelPhonebook" >
                <property name="text" >
@@ -307,7 +319,41 @@ QListView::item:selected {
               </widget>
              </item>
              <item>
-              <widget class="CustomWidgets::AdvancedLineEdit" name="editFilterPhoneBook" />
+              <layout class="QHBoxLayout" name="horizontalLayout_4" >
+               <property name="spacing" >
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="CustomWidgets::AdvancedLineEdit" name="editFilterPhoneBook" >
+                 <property name="minimumSize" >
+                  <size>
+                   <width>0</width>
+                   <height>32</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize" >
+                  <size>
+                   <width>16777215</width>
+                   <height>36</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton" >
+                 <property name="toolTip" >
+                  <string>Add contact</string>
+                 </property>
+                 <property name="text" >
+                  <string/>
+                 </property>
+                 <property name="icon" >
+                  <iconset resource="customwidgets.qrc" >
+                   <normaloff>:/customwidgets/data/addtophonebook.png</normaloff>:/customwidgets/data/addtophonebook.png</iconset>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item>
               <widget class="QListView" name="listPhoneBook" >

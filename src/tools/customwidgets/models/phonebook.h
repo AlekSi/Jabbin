@@ -88,7 +88,7 @@ public:
             );
 
     void getItemData(int index, QString & name,
-            Gender gender,
+            Gender & gender,
             PhoneBookModel::PhoneList & phones
             );
 
