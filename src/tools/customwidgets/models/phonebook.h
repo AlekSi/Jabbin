@@ -29,7 +29,7 @@ class PhoneBookModel;
 
 class PhoneBookItemDelegate: public QItemDelegate {
 public:
-    PhoneBookItemDelegate(PhoneBookModel * model);
+    PhoneBookItemDelegate(QAbstractItemModel * model);
     ~PhoneBookItemDelegate();
 
     void paint(QPainter * painter, const QStyleOptionViewItem & option,
@@ -55,9 +55,9 @@ public:
         Female
     };
 
-    typedef QMap < PhoneBookModel::PhoneType, QString > PhoneList;
+    typedef QMap < PhoneType, QString > PhoneList;
 
-    PhoneBookModel(QListView * list = NULL);
+    PhoneBookModel(QListView * list = NULL, QLineEdit * filter = NULL);
     ~PhoneBookModel();
 
     // Override
@@ -77,22 +77,13 @@ public:
 
     bool eventFilter(QObject * obj, QEvent * event);
 
-    void addItem(const QString & name,
-            Gender gender,
-            const PhoneBookModel::PhoneList & phones
-            );
+    bool removeRows(int row, int count, const QModelIndex & parent = QModelIndex());
+    bool insertRows(int row, int count, const QModelIndex & parent = QModelIndex());
+    bool setData(const QModelIndex & index, const QVariant & value, int role = Qt::EditRole);
 
-    void setItemData(int index, const QString & name,
-            Gender gender,
-            const PhoneBookModel::PhoneList & phones
-            );
-
-    void getItemData(int index, QString & name,
-            Gender & gender,
-            PhoneBookModel::PhoneList & phones
-            );
-
-    void deleteItem(int index);
+public Q_SLOTS:
+    /** opens a dialog for adding a contact */
+    void addContact(const QString & name = QString(), const QString & phone = QString());
 
 protected:
     void load();

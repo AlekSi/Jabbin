@@ -33,6 +33,7 @@
 #include <QXmlStreamWriter>
 #include <QXmlStreamReader>
 #include <QMessageBox>
+#include <QSortFilterProxyModel>
 
 #define ICON_WIDTH 32
 #define EDITOR_WIDTH 32
@@ -47,6 +48,46 @@ PhoneBookItem::PhoneBookItem(QString _name, PhoneBookModel::Gender _gender,
         PhoneBookModel::PhoneList _phones)
     : name(_name), gender(_gender), phones(_phones)
 {
+}
+
+PhoneBookItem PhoneBookItem::fromVariant(const QVariant & data)
+{
+    PhoneBookItem result;
+    result.loadFromVariant(data);
+    return result;
+}
+
+void PhoneBookItem::loadFromVariant(const QVariant & value)
+{
+    qDebug() << value;
+    QList < QVariant > data = value.toList();
+    name = data.at(0).toString();
+    gender = (PhoneBookModel::Gender)data.at(1).toInt();
+
+    QList < QVariant > phoneTypes = data.at(2).toList();
+    QList < QVariant > phoneNumbers = data.at(3).toList();
+
+    for (int i = 0; i < phoneTypes.count(); i++) {
+        phones[ (PhoneBookModel::PhoneType) phoneTypes.at(i).toInt() ]
+            = phoneNumbers.at(i).toString();
+    }
+}
+
+QVariant PhoneBookItem::toVariant() const
+{
+    QList < QVariant > data;
+    data << name;
+    data << gender;
+
+    QList < QVariant > phoneTypes;
+    foreach (PhoneBookModel::PhoneType type, phones.keys()) {
+        phoneTypes << type;
+    }
+
+    data << QVariant( phoneTypes );
+    data << QVariant( phones.values() );
+
+    return QVariant(data);
 }
 
 // PhoneBookEditorForm
@@ -64,7 +105,7 @@ PhoneBookEditorForm::~PhoneBookEditorForm()
 }
 
 // PhoneBookItemEditor
-PhoneBookItemEditor::PhoneBookItemEditor(QWidget * parent, PhoneBookModel * model)
+PhoneBookItemEditor::PhoneBookItemEditor(QWidget * parent, QAbstractItemModel * model)
     : QWidget(parent), m_model(model)
 {
     setupUi(this);
@@ -86,25 +127,24 @@ PhoneBookItemEditor::~PhoneBookItemEditor()
 
 void PhoneBookItemEditor::save()
 {
-    QString name;
-    PhoneBookModel::Gender gender;
-    PhoneBookModel::PhoneList phones;
+    PhoneBookItem item;
 
-    name = editorForm->editName->text();
+    item.name = editorForm->editName->text();
 
     if (editorForm->radioFemale->isChecked()) {
-        gender = PhoneBookModel::Female;
+        item.gender = PhoneBookModel::Female;
     } else if (editorForm->radioMale->isChecked()) {
-        gender = PhoneBookModel::Male;
+        item.gender = PhoneBookModel::Male;
     }
 
-    #define SAVE_PHONE(Type, Edit) if (Edit->text() != QString()) phones[Type] = Edit->text()
+    #define SAVE_PHONE(Type, Edit) if (Edit->text() != QString()) item.phones[Type] = Edit->text()
     SAVE_PHONE(PhoneBookModel::CellPhone, editorForm->editCellPhone);
     SAVE_PHONE(PhoneBookModel::LandLine,  editorForm->editLandLine);
     SAVE_PHONE(PhoneBookModel::Office,    editorForm->editOffice);
     #undef SAVE_PHONE
 
-    m_model->setItemData(editingIndex.row(), name, gender, phones);
+    m_model->setData(editingIndex, item.toVariant());
+    //m_model->setItemData(editingIndex.row(), name, gender, phones);
 }
 
 void PhoneBookItemEditor::call()
@@ -112,18 +152,21 @@ void PhoneBookItemEditor::call()
 
 }
 
+void PhoneBookItemEditor::add(const QString & name, const QString & phone)
+{
+    editingIndex = QModelIndex();
+    editorForm->show();
+}
+
 void PhoneBookItemEditor::edit()
 {
-    QString name;
-    PhoneBookModel::Gender gender;
-    PhoneBookModel::PhoneList phones;
-    m_model->getItemData(editingIndex.row(), name, gender, phones);
+    PhoneBookItem item = PhoneBookItem::fromVariant(m_model->data(editingIndex, Qt::EditRole));
 
-    editorForm->editName->setText(name);
+    editorForm->editName->setText(item.name);
 
     editorForm->radioMale->setChecked(false);
     editorForm->radioFemale->setChecked(false);
-    switch (gender) {
+    switch (item.gender) {
         case PhoneBookModel::Male:
             editorForm->radioMale->setChecked(true);
             break;
@@ -134,7 +177,7 @@ void PhoneBookItemEditor::edit()
             break;
     }
 
-    #define LOAD_PHONE(Type, Edit) Edit->setText( ( phones.contains(Type) )? phones[Type] : "" )
+    #define LOAD_PHONE(Type, Edit) Edit->setText( ( item.phones.contains(Type) )? item.phones[Type] : "" )
     LOAD_PHONE(PhoneBookModel::CellPhone, editorForm->editCellPhone);
     LOAD_PHONE(PhoneBookModel::LandLine,  editorForm->editLandLine);
     LOAD_PHONE(PhoneBookModel::Office,    editorForm->editOffice);
@@ -148,23 +191,23 @@ void PhoneBookItemEditor::del()
     if (QMessageBox::question(this, tr("Are you sure?"),
             tr("Are you sure you want to delete this contact?"),
             QMessageBox::Yes | QMessageBox::Cancel) == QMessageBox::Yes) {
-        m_model->deleteItem(editingIndex.row());
+        m_model->removeRow(editingIndex.row());
     }
 }
 
 // PhoneBookModel::Private
 class PhoneBookModel::Private {
 public:
-    Private(QListView * _list, PhoneBookModel * _model)
+    Private(QListView * _list)
         : list(_list)
     {
-        editor = new PhoneBookItemEditor(_list, _model);
     }
 
     QList < PhoneBookItem > items;
     QListView * list;
     PhoneBookItemDelegate * delegate;
     PhoneBookItemEditor * editor;
+    QSortFilterProxyModel * proxyModel;
 };
 
 // PhoneBookItemDelegate::Private
@@ -183,12 +226,12 @@ public:
         delete label;
     }
 
-    PhoneBookModel * model;
+    QAbstractItemModel * model;
     QLabel * label;
 };
 
 // PhoneBookItemDelegate
-PhoneBookItemDelegate::PhoneBookItemDelegate(PhoneBookModel * model)
+PhoneBookItemDelegate::PhoneBookItemDelegate(QAbstractItemModel * model)
     : d(new Private())
 {
     d->model = model;
@@ -216,7 +259,7 @@ void PhoneBookItemDelegate::paint(QPainter * painter, const QStyleOptionViewItem
 
     QLinearGradient gradient;
 
-    if (option.state & QStyle::State_MouseOver || index ==  d->model->d->editor->editingIndex) {
+    if (option.state & QStyle::State_MouseOver) { // || index ==  d->model->d->editor->editingIndex) {
         gradient = QLinearGradient(option.rect.size().width() - GRADIENT_WIDTH - EDITOR_WIDTH, 0,
                 option.rect.size().width() - EDITOR_WIDTH, 0);
         gradient.setColorAt(0, Qt::transparent);
@@ -234,24 +277,45 @@ void PhoneBookItemDelegate::paint(QPainter * painter, const QStyleOptionViewItem
 }
 
 // PhoneBookModel
-PhoneBookModel::PhoneBookModel(QListView * parent)
-    : QAbstractListModel(parent), d(new Private(parent, this))
+PhoneBookModel::PhoneBookModel(QListView * parent, QLineEdit * filter)
+    : QAbstractListModel(parent), d(new Private(parent))
 {
     load();
 
-    addItem("Ana",   Female, PhoneList());
-    addItem("Zarko", Male, PhoneList());
-    addItem("Rista", Male, PhoneList());
-    addItem("Anica", Female, PhoneList());
+    d->proxyModel = new QSortFilterProxyModel(parent);
+    d->proxyModel->setSourceModel(this);
+    d->proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+    d->proxyModel->sort(0);
 
-    d->list->setModel(this);
+    connect(filter, SIGNAL(textEdited(const QString &)),
+            d->proxyModel, SLOT(setFilterFixedString( const QString &)));
+
+    d->list->setModel(d->proxyModel);
     d->list->installEventFilter(this);
-    d->list->setItemDelegate(d->delegate = new PhoneBookItemDelegate(this));
+    d->delegate = new PhoneBookItemDelegate(d->proxyModel);
+    d->editor = new PhoneBookItemEditor(parent, d->proxyModel);
+    d->list->setItemDelegate(d->delegate);
+
+    d->list->setStyleSheet("\
+        QListView {\
+            color: rgba(155,155,155,200);\
+            selection-color: rgba(255,255,255,0);\
+            background-color: rgb(255, 255, 255);\
+            selection-background-color: rgb(255, 255, 255);\
+        }\
+        QListView::item:hover {\
+            background: rgb(232, 242, 255);\
+        }");
 }
 
 PhoneBookModel::~PhoneBookModel()
 {
     delete d;
+}
+
+void PhoneBookModel::addContact(const QString & name, const QString & phone)
+{
+    d->editor->add(name, phone);
 }
 
 bool PhoneBookModel::eventFilter(QObject * obj, QEvent * event)
@@ -298,12 +362,12 @@ QVariant PhoneBookModel::data(const QModelIndex & index, int role) const
         return QVariant();
     }
 
-    if (index.row() >= d->items.count() || index.row() < 0) {
+    int i = index.row();
+    if (i >= d->items.count() || i < 0) {
         return QVariant();
     }
 
     QString what;
-    int i = index.row();
     switch (role) {
         case Qt::WhatsThisRole:
             return QVariant();
@@ -324,10 +388,29 @@ QVariant PhoneBookModel::data(const QModelIndex & index, int role) const
             return QString();
         case Qt::SizeHintRole:
             return QSize(100, 48);
+        case Qt::EditRole:
+            return d->items.at(i).toVariant();
         default:
             return QVariant();
     }
 
+}
+
+bool PhoneBookModel::setData(const QModelIndex & index, const QVariant & value, int role)
+{
+    if (role != Qt::EditRole) {
+        return false;
+    }
+
+    PhoneBookItem item = PhoneBookItem::fromVariant(value);
+    if (index.isValid() && index.row() >= 0 && index.row() < d->items.count()) {
+        d->items[index.row()] = item;
+    } else {
+        d->items.append(item);
+    }
+
+    save();
+    return true;
 }
 
 Qt::ItemFlags PhoneBookModel::flags(const QModelIndex & index) const
@@ -409,7 +492,33 @@ void PhoneBookModel::save()
 
     writer.writeEndElement();
     writer.writeEndDocument();
+
+    d->proxyModel->sort(0);
 }
+
+bool PhoneBookModel::removeRows(int row, int count, const QModelIndex & parent)
+{
+    beginRemoveRows(parent, row, row + count - 1);
+    while (count--) {
+        d->items.removeAt(row);
+    }
+    endRemoveRows();
+    save();
+    return true;
+}
+
+bool PhoneBookModel::insertRows(int row, int count, const QModelIndex & parent)
+{
+    beginInsertRows(parent, row, row + count - 1);
+    while (count--) {
+        d->items.insert(row, PhoneBookItem());
+    }
+    endInsertRows();
+    save();
+    return true;
+}
+
+/*
 
 void PhoneBookModel::addItem(const QString & name,
         Gender gender,
@@ -428,7 +537,6 @@ void PhoneBookModel::addItem(const QString & name,
     d->items.insert(i, PhoneBookItem(name, gender, phones));
     endInsertRows();
 }
-
 void PhoneBookModel::setItemData(int i, const QString & name,
         Gender gender,
         const PhoneBookModel::PhoneList & phones
@@ -443,6 +551,7 @@ void PhoneBookModel::getItemData(int index, QString & name,
         PhoneBookModel::PhoneList & phones
         )
 {
+
     name = d->items.at(index).name;
     gender = d->items.at(index).gender;
     phones = d->items.at(index).phones;
@@ -454,4 +563,4 @@ void PhoneBookModel::deleteItem(int index)
     d->items.removeAt(index);
     endRemoveRows();
 }
-
+*/

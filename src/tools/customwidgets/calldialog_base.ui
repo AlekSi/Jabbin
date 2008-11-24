@@ -95,6 +95,9 @@ QTabWidget#callTabs > QTabBar::tab:selected {
              <property name="spacing" >
               <number>0</number>
              </property>
+             <property name="rightMargin" >
+              <number>0</number>
+             </property>
              <item>
               <widget class="QLabel" name="labelPhoneNumber" >
                <property name="text" >
@@ -311,6 +314,9 @@ QListView::item:selected {
              <property name="spacing" >
               <number>0</number>
              </property>
+             <property name="rightMargin" >
+              <number>0</number>
+             </property>
              <item>
               <widget class="QLabel" name="labelPhonebook" >
                <property name="text" >
@@ -334,7 +340,7 @@ QListView::item:selected {
                  <property name="maximumSize" >
                   <size>
                    <width>16777215</width>
-                   <height>36</height>
+                   <height>32</height>
                   </size>
                  </property>
                 </widget>
@@ -343,6 +349,11 @@ QListView::item:selected {
                 <widget class="QPushButton" name="pushButton" >
                  <property name="toolTip" >
                   <string>Add contact</string>
+                 </property>
+                 <property name="styleSheet" >
+                  <string notr="true" >QPushButton {
+    border: none;
+}</string>
                  </property>
                  <property name="text" >
                   <string/>
@@ -361,24 +372,7 @@ QListView::item:selected {
                 <bool>true</bool>
                </property>
                <property name="styleSheet" >
-                <string notr="true" >QListView {
-    /*show-decoration-selected: 1;
-    selection-color: black;
-    selection-background-color: rgb(232, 242, 255);*/
-    color: rgba(255,255,255,0);
-    selection-color: rgba(255,255,255,0);
-    background-color: rgb(255, 255, 255);
-    selection-background-color: rgb(255, 255, 255);
-}
-
-QListView::item:hover {
-    background: rgb(232, 242, 255);
-}
-/*
-QListView::item:selected {
-    background: rgb(232, 242, 255);
-}
-*/</string>
+                <string notr="true" />
                </property>
                <property name="frameShape" >
                 <enum>QFrame::NoFrame</enum>

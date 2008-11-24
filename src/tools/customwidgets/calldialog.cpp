@@ -58,7 +58,7 @@ CallDialog::Private::Private(CallDialog * parent)
     stacked->setCurrentIndex(0);
 
     new CallHistoryModel(listHistory);
-    new PhoneBookModel(listPhoneBook);
+    new PhoneBookModel(listPhoneBook, editFilterPhoneBook);
 
     editFilterPhoneBook->setEmptyText(tr("Search"));
 

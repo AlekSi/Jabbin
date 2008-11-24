@@ -31,13 +31,20 @@ class PhoneBookEditorForm;
 class PhoneBookItem {
 public:
     enum Roles {
-        PrettyDisplay = Qt::UserRole
+        PrettyDisplay = Qt::UserRole,
+        Name = Qt::UserRole + 1,
+        Gender = Qt::UserRole + 2,
+        PhoneList = Qt::UserRole + 3
     };
 
     PhoneBookItem(QString _name = QString(),
             PhoneBookModel::Gender _gender = PhoneBookModel::Unknown,
             PhoneBookModel::PhoneList _phones = PhoneBookModel::PhoneList()
             );
+
+    static PhoneBookItem fromVariant(const QVariant & data);
+    void loadFromVariant(const QVariant & data);
+    QVariant toVariant() const;
 
     // Name of the contact
     QString name;
@@ -52,7 +59,7 @@ public:
 class PhoneBookItemEditor: public QWidget, Ui::PhoneBookItemDelegateBase {
     Q_OBJECT
 public:
-    PhoneBookItemEditor(QWidget * parent, PhoneBookModel * model);
+    PhoneBookItemEditor(QWidget * parent, QAbstractItemModel * model);
 
     ~PhoneBookItemEditor();
 
@@ -60,14 +67,15 @@ public:
 
     PhoneBookEditorForm * editorForm;
 
-private Q_SLOTS:
+public Q_SLOTS:
     void call();
     void edit();
+    void add(const QString & name = QString(), const QString & phone = QString());
     void del();
     void save();
 
 private:
-    PhoneBookModel * m_model;
+    QAbstractItemModel * m_model;
 
     friend class PhoneBookItemDelegate;
 };
