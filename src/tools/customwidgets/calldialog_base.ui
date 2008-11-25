@@ -346,7 +346,7 @@ QListView::item:selected {
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton" >
+                <widget class="QPushButton" name="buttonAddContact" >
                  <property name="toolTip" >
                   <string>Add contact</string>
                  </property>

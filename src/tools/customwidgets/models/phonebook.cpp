@@ -406,7 +406,10 @@ bool PhoneBookModel::setData(const QModelIndex & index, const QVariant & value, 
     if (index.isValid() && index.row() >= 0 && index.row() < d->items.count()) {
         d->items[index.row()] = item;
     } else {
+        int row = d->items.count();
+        beginInsertRows(QModelIndex(), row, row);
         d->items.append(item);
+        endInsertRows();
     }
 
     save();

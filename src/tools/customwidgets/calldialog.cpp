@@ -55,10 +55,13 @@ CallDialog::Private::Private(CallDialog * parent)
     frameIncomingCall->setPixmap(QPixmap(":/customwidgets/data/phone.png"));
     connect(frameIncomingCall, SIGNAL(buttonClicked(const QString & )),
             this, SLOT(doAction(const QString & )));
+
     stacked->setCurrentIndex(0);
 
     new CallHistoryModel(listHistory);
-    new PhoneBookModel(listPhoneBook, editFilterPhoneBook);
+    PhoneBookModel * pbm = new PhoneBookModel(listPhoneBook, editFilterPhoneBook);
+    connect(buttonAddContact, SIGNAL(clicked()),
+            pbm, SLOT(addContact()));
 
     editFilterPhoneBook->setEmptyText(tr("Search"));
 
