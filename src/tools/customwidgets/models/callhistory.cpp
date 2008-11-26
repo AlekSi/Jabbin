@@ -92,7 +92,8 @@ void CallHistoryItemEditor::del()
 
 void CallHistoryItemEditor::toPhoneBook()
 {
-
+    QString id = m_model->data(editingIndex, CallHistoryItem::Id).toString();
+    qDebug() << "ID is " << id;
 }
 
 // CallHistoryModel::Private
@@ -238,7 +239,6 @@ bool CallHistoryModel::eventFilter(QObject * obj, QEvent * event)
         }
     } else if (obj == d->list && event->type() == QEvent::HoverLeave) {
         CallHistoryItemEditor::editor->setVisible(false);
-        // CallHistoryItemEditor::editor->editingIndex = QModelIndex();
     }
     return QObject::eventFilter(obj, event);
 }
