@@ -24,6 +24,7 @@
 #include <QItemDelegate>
 #include <QListView>
 #include <QLabel>
+#include <QDateTime>
 
 class CallHistoryModel;
 
@@ -55,6 +56,9 @@ public:
     CallHistoryModel(QListView * list = NULL);
     ~CallHistoryModel();
 
+    void addEntry(const QString & name, const QString & id, Status status, QDateTime time = QDateTime());
+    void updateLastEntryStatus(Status status);
+
     // Override
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
 
@@ -70,6 +74,8 @@ public:
     // Override
     Qt::ItemFlags flags(const QModelIndex & index) const;
 
+    bool removeRows(int row, int count, const QModelIndex & parent);
+
     bool eventFilter(QObject * obj, QEvent * event);
 
 protected:
@@ -83,5 +89,5 @@ private:
     friend class CallHistoryItemDelegate;
 };
 
-#endif // SELFAVATAR_H
+#endif // CALLHISTORY_H
 

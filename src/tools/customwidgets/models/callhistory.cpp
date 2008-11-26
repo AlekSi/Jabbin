@@ -18,9 +18,9 @@
  */
 
 #include "callhistory.h"
+#include "callhistory_p.h"
 #include "applicationinfo.h"
 
-#include <QTime>
 #include <QDebug>
 #include <QSize>
 #include <QIcon>
@@ -31,7 +31,7 @@
 #include <QHoverEvent>
 #include <QXmlStreamWriter>
 #include <QXmlStreamReader>
-#include "ui_callhistoryitemdelegate_base.h"
+#include <QMessageBox>
 
 #define ICON_WIDTH 32
 #define EDITOR_WIDTH 32
@@ -41,70 +41,67 @@
 
 #define CALLHISTORYFILE ApplicationInfo::homeDir() + "/callhistory.xml"
 
-class CallHistoryItem {
-public:
+// CallHistoryItem
+CallHistoryItem::CallHistoryItem()
+    : name(QString()), id(QString()), time(QDateTime()), status(CallHistoryModel::Invalid)
+{
 
-    enum Roles {
-        Id = Qt::UserRole,
-        PrettyDisplay = Qt::UserRole + 1
-    };
+}
 
-    CallHistoryItem()
-        : name(QString()), id(QString()), time(QDateTime()), status(CallHistoryModel::Invalid)
-    {
+CallHistoryItem::CallHistoryItem(QString _name, QString _id, QDateTime _time, CallHistoryModel::Status _status)
+    : name(_name), id(_id), time(_time), status(_status)
+{
 
-    }
+}
 
-    CallHistoryItem(QString _name, QString _id, QDateTime _time, CallHistoryModel::Status _status)
-        : name(_name), id(_id), time(_time), status(_status)
-    {
+// CallHistoryItemEditor
+CallHistoryItemEditor::CallHistoryItemEditor(QWidget * parent, QAbstractItemModel * model)
+    : QWidget(parent), m_model(model)
+{
+    editor = this;
+    setupUi(this);
+    setVisible(false);
+    setStyleSheet(QString() + "QWidget#CallHistoryItemDelegateBase { background: rgb(" + EDITOR_COLOR_S + "); }");
 
-    }
+    connect(buttonCall,        SIGNAL(clicked()), this, SLOT(call()));
+    connect(buttonDelete,      SIGNAL(clicked()), this, SLOT(del()));
+    connect(buttonToPhoneBook, SIGNAL(clicked()), this, SLOT(toPhoneBook()));
+}
 
-    // Name of the caller
-    QString name;
-
-    // Jabber ID or phone number of the caller
-    QString id;
-
-    // Timestamp
-    QDateTime time;
-
-    // Status
-    CallHistoryModel::Status status;
-
-};
-
-class CallHistoryItemEditor: public QWidget, Ui::CallHistoryItemDelegateBase {
-public:
-    CallHistoryItemEditor(QWidget * parent)
-        : QWidget(parent)
-    {
-        editor = this;
-        setupUi(this);
-        setVisible(false);
-        setStyleSheet(QString() + "QWidget#CallHistoryItemDelegateBase { background: rgb(" + EDITOR_COLOR_S + "); }");
-    }
-
-    ~CallHistoryItemEditor()
-    {
-        editor = NULL;
-    }
-
-    static CallHistoryItemEditor * editor;
-    QModelIndex editingIndex;
-
-    friend class CallHistoryItemDelegate;
-};
+CallHistoryItemEditor::~CallHistoryItemEditor()
+{
+    editor = NULL;
+}
 
 CallHistoryItemEditor * CallHistoryItemEditor::editor = NULL;
 
+void CallHistoryItemEditor::call()
+{
+
+}
+
+void CallHistoryItemEditor::del()
+{
+    if (QMessageBox::question(this, tr("Are you sure?"),
+            tr("Are you sure you want to delete this contact?"),
+            QMessageBox::Yes | QMessageBox::Cancel) == QMessageBox::Yes) {
+        qDebug() << "Index is " << editingIndex;
+        m_model->removeRow(editingIndex.row());
+    }
+}
+
+void CallHistoryItemEditor::toPhoneBook()
+{
+
+}
+
+// CallHistoryModel::Private
 class CallHistoryModel::Private {
 public:
-    Private(QListView * m_list)
+    Private(QListView * m_list, QAbstractItemModel * m_model)
         : list(m_list)
     {
-        new CallHistoryItemEditor(list);
+        new CallHistoryItemEditor(list, m_model);
     }
 
     QList < CallHistoryItem > items;
@@ -177,13 +174,9 @@ void CallHistoryItemDelegate::paint(QPainter * painter, const QStyleOptionViewIt
 }
 
 CallHistoryModel::CallHistoryModel(QListView * parent)
-    : QAbstractListModel(parent), d(new Private(parent))
+    : QAbstractListModel(parent), d(new Private(parent, this))
 {
     load();
-
-    d->items.append(CallHistoryItem("test2", "id2", QDateTime::currentDateTime(), Received));
-    d->items.append(CallHistoryItem("test3", "id3", QDateTime::currentDateTime(), Rejected));
-    d->items.append(CallHistoryItem("test2", "id2", QDateTime::currentDateTime(), Sent));
 
     d->list->setModel(this);
     d->list->installEventFilter(this);
@@ -193,6 +186,42 @@ CallHistoryModel::CallHistoryModel(QListView * parent)
 CallHistoryModel::~CallHistoryModel()
 {
     delete d;
+}
+
+void CallHistoryModel::addEntry(const QString & name, const QString & id,
+        Status status, QDateTime time)
+{
+    if (time.isNull()) {
+        time = QDateTime::currentDateTime();
+    }
+
+    int row = 0;
+    beginInsertRows(QModelIndex(), row, row);
+    d->items.prepend(CallHistoryItem(name, id, time, status));
+    endInsertRows();
+    save();
+}
+
+bool CallHistoryModel::removeRows(int row, int count, const QModelIndex & parent)
+{
+    beginRemoveRows(parent, row, row + count - 1);
+    while (count--) {
+        d->items.removeAt(row);
+    }
+    endRemoveRows();
+    save();
+    return true;
+}
+
+void CallHistoryModel::updateLastEntryStatus(Status status) {
+    if (d->items.count() == 0) {
+        return;
+    }
+    d->items.first().status = status;
+
+    QModelIndex i = index(0);
+    dataChanged(i, i);
+    save();
 }
 
 bool CallHistoryModel::eventFilter(QObject * obj, QEvent * event)
@@ -209,7 +238,7 @@ bool CallHistoryModel::eventFilter(QObject * obj, QEvent * event)
         }
     } else if (obj == d->list && event->type() == QEvent::HoverLeave) {
         CallHistoryItemEditor::editor->setVisible(false);
-        CallHistoryItemEditor::editor->editingIndex = QModelIndex();
+        // CallHistoryItemEditor::editor->editingIndex = QModelIndex();
     }
     return QObject::eventFilter(obj, event);
 }
@@ -315,10 +344,13 @@ void CallHistoryModel::load()
         return;
     }
 
+    qDebug() << "CallHistoryModel :: Loading";
+
     reader.readNext();
     if (reader.isStartElement()) {
-        if (reader.name() != "phonebook" || reader.attributes().value("version") != "1.0") {
-            reader.raiseError(QObject::tr("The file is not an phonebook version 1.0 file."));
+        qDebug() << "CallHistoryModel" << reader.name().toString();
+        if (reader.name() != "callhistory" || reader.attributes().value("version") != "1.0") {
+            reader.raiseError(QObject::tr("The file is not an callhistory version 1.0 file."));
             return;
         }
     }
@@ -327,14 +359,12 @@ void CallHistoryModel::load()
     while (!reader.atEnd()) {
         reader.readNext();
         if (reader.isStartElement()) {
+            qDebug() << "CallHistoryModel" << reader.name().toString();
             if (reader.name() == "event") {
                 item.name = reader.attributes().value("name").toString();
                 item.id = reader.attributes().value("id").toString();
                 item.time = QDateTime::fromString((reader.attributes().value("time").toString()), Qt::ISODate);
                 item.status = (Status) reader.attributes().value("status").toString().toInt();
-            }
-        } else if (reader.isEndElement()) {
-            if (reader.name() == "contact") {
                 d->items.append(item);
             }
         }

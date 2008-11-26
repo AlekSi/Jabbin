@@ -144,7 +144,6 @@ void PhoneBookItemEditor::save()
     #undef SAVE_PHONE
 
     m_model->setData(editingIndex, item.toVariant());
-    //m_model->setItemData(editingIndex.row(), name, gender, phones);
 }
 
 void PhoneBookItemEditor::call()
@@ -155,6 +154,13 @@ void PhoneBookItemEditor::call()
 void PhoneBookItemEditor::add(const QString & name, const QString & phone)
 {
     editingIndex = QModelIndex();
+    editorForm->editName->setText(name);
+    editorForm->editCellPhone->setText(phone);
+    editorForm->editLandLine->setText(QString());
+    editorForm->editOffice->setText(QString());
+    editorForm->radioMale->setChecked(false);
+    editorForm->radioFemale->setChecked(false);
+
     editorForm->show();
 }
 

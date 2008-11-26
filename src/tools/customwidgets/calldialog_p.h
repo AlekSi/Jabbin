@@ -29,6 +29,8 @@
 #include "im.h"
 #include "psiaccount.h"
 #include "voicecaller.h"
+#include "models/callhistory.h"
+#include "models/phonebook.h"
 
 class CallDialog::Private : public QObject, public Ui::CallDialogBase {
     Q_OBJECT
@@ -44,6 +46,9 @@ public:
     PsiAccount * account;
     VoiceCaller * caller;
     Jid jid;
+
+    PhoneBookModel * phonebook;
+    CallHistoryModel * callhistory;
 
 public Q_SLOTS:
     void doAction(const QString & buttonData);

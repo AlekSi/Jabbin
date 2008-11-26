@@ -32,7 +32,7 @@
     <number>0</number>
    </property>
    <item row="0" column="0" colspan="2" >
-    <widget class="QPushButton" name="pushButton" >
+    <widget class="QPushButton" name="buttonCall" >
      <property name="minimumSize" >
       <size>
        <width>32</width>
@@ -70,7 +70,7 @@
     </widget>
    </item>
    <item row="1" column="1" >
-    <widget class="QPushButton" name="pushButton_3" >
+    <widget class="QPushButton" name="buttonDelete" >
      <property name="maximumSize" >
       <size>
        <width>16</width>
@@ -96,7 +96,7 @@
     </widget>
    </item>
    <item row="1" column="0" >
-    <widget class="QPushButton" name="pushButton_2" >
+    <widget class="QPushButton" name="buttonToPhoneBook" >
      <property name="maximumSize" >
       <size>
        <width>16</width>

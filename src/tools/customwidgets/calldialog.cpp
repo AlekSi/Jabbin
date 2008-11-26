@@ -26,9 +26,6 @@
 #include <QRegExp>
 #include <QDebug>
 
-#include "models/callhistory.h"
-#include "models/phonebook.h"
-
 #define JIDTEXT jid.bare()
 
 using XMPP::Jid;
@@ -58,10 +55,11 @@ CallDialog::Private::Private(CallDialog * parent)
 
     stacked->setCurrentIndex(0);
 
-    new CallHistoryModel(listHistory);
-    PhoneBookModel * pbm = new PhoneBookModel(listPhoneBook, editFilterPhoneBook);
+    callhistory = new CallHistoryModel(listHistory);
+
+    phonebook = new PhoneBookModel(listPhoneBook, editFilterPhoneBook);
     connect(buttonAddContact, SIGNAL(clicked()),
-            pbm, SLOT(addContact()));
+            phonebook, SLOT(addContact()));
 
     editFilterPhoneBook->setEmptyText(tr("Search"));
 
@@ -82,6 +80,7 @@ void CallDialog::Private::setStatus(Status value)
             frameInCall->setTitle(tr("Calling ..."));
             frameInCall->setMessage(JIDTEXT);
             caller->call(jid);
+            callhistory->addEntry(JIDTEXT, jid.full(), CallHistoryModel::Sent);
             break;
         case InCall:
             frameInCall->setTitle(QString());
@@ -97,16 +96,19 @@ void CallDialog::Private::setStatus(Status value)
         case Incoming:
             frameIncomingCall->setTitle(tr("Incoming call"));
             frameIncomingCall->setMessage(JIDTEXT);
+            callhistory->addEntry(JIDTEXT, jid.full(), CallHistoryModel::Missed);
             break;
         case Accepting:
             frameIncomingCall->setTitle(tr("Starting call..."));
             frameIncomingCall->setMessage(JIDTEXT);
             caller->accept(jid);
+            callhistory->updateLastEntryStatus(CallHistoryModel::Received);
             break;
         case Rejecting:
             frameIncomingCall->setTitle(tr("Rejecting call..."));
             frameIncomingCall->setMessage(JIDTEXT);
             caller->reject(jid);
+            callhistory->updateLastEntryStatus(CallHistoryModel::Rejected);
             break;
     }
 
