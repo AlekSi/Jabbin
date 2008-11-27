@@ -99,6 +99,9 @@ public slots:
 	void createPreferences();
 	void toggleVisible();
 
+	void showCallDialog();
+
+
 private slots:
 	void accountCountChanged();
 	void accountActivityChanged();

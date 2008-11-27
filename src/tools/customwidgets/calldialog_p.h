@@ -46,12 +46,15 @@ public:
     PsiAccount * account;
     VoiceCaller * caller;
     Jid jid;
+    QString phone;
 
     PhoneBookModel * phonebook;
     CallHistoryModel * callhistory;
+    CallDialog * q;
 
 public Q_SLOTS:
     void doAction(const QString & buttonData);
+    void call(const QString & who);
 
 };
 

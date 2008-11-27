@@ -21,17 +21,19 @@
 #include "calldialog.h"
 #include "calldialog_p.h"
 #include "generic/customwidgetscommon.h"
+#include "jinglevoicecaller.h"
 
 #include <QRegExpValidator>
 #include <QRegExp>
 #include <QDebug>
 
-#define JIDTEXT jid.bare()
+#define JIDTEXT ((phone == QString())? phone : (jid.bare()))
 
 using XMPP::Jid;
 
 CallDialog::Private::Private(CallDialog * parent)
-    : status(Normal), account(NULL), caller(NULL)
+    : status(Normal), account(NULL), caller(NULL),
+      phonebook(NULL), callhistory(NULL), q(parent)
 {
     setupUi(parent);
     frameVolumes->hide();
@@ -56,10 +58,14 @@ CallDialog::Private::Private(CallDialog * parent)
     stacked->setCurrentIndex(0);
 
     callhistory = new CallHistoryModel(listHistory);
+    connect(callhistory, SIGNAL(callRequested(const QString &)),
+            this, SLOT(call(const QString &)), Qt::QueuedConnection);
 
     phonebook = new PhoneBookModel(listPhoneBook, editFilterPhoneBook);
     connect(buttonAddContact, SIGNAL(clicked()),
-            phonebook, SLOT(addContact()));
+            phonebook, SLOT(addContact()), Qt::QueuedConnection);
+    connect(phonebook, SIGNAL(callRequested(const QString &)),
+            this, SLOT(call(const QString &)), Qt::QueuedConnection);
 
     editFilterPhoneBook->setEmptyText(tr("Search"));
 
@@ -79,7 +85,11 @@ void CallDialog::Private::setStatus(Status value)
         case Calling:
             frameInCall->setTitle(tr("Calling ..."));
             frameInCall->setMessage(JIDTEXT);
-            caller->call(jid);
+            if (phone == QString()) {
+                caller->call(jid);
+            } else {
+                ((JingleVoiceCaller *) caller)->sendDTMF(jid, phone);
+            }
             callhistory->addEntry(JIDTEXT, jid.full(), CallHistoryModel::Sent);
             break;
         case InCall:
@@ -128,6 +138,8 @@ void CallDialog::Private::setStatus(Status value)
             break;
     }
 
+    emit q->requestsAttention();
+
 }
 
 void CallDialog::accepted(const Jid & jid)
@@ -166,7 +178,22 @@ void CallDialog::Private::doAction(const QString & buttonData)
     }
 }
 
+void CallDialog::Private::call(const QString & who)
+{
+    qDebug() << "we want to call:" << who;
+    if (who.startsWith("phone://")) {
+        phone = who;
+        phone.remove(0, 8);
+    } else {
+        phone = QString();
+        jid = XMPP::Jid(who);
+    }
+    qDebug() << phone;
+    setStatus(Calling);
+}
+
 CallDialog * CallDialog::m_instance = NULL;
+PsiContactList * CallDialog::contactList = NULL;
 
 CallDialog * CallDialog::instance()
 {

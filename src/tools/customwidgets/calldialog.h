@@ -24,6 +24,7 @@
 #include "im.h"
 #include "psiaccount.h"
 #include "voicecaller.h"
+#include "psicontactlist.h"
 
 /**
  * This class is implementing a call dialog which
@@ -82,6 +83,13 @@ public:
      */
     Status status() const;
 
+Q_SIGNALS:
+    /**
+     * This signal is emitted when the call dialog wants the
+     * parent to show it
+     */
+    void requestsAttention();
+
 public Q_SLOTS:
     /**
      * Calls the currently entered number
@@ -134,6 +142,9 @@ public Q_SLOTS:
 
 protected:
     void timerEvent(QTimerEvent * event);
+
+public:
+    static PsiContactList * contactList;
 
 private:
     class Private;

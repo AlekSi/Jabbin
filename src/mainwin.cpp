@@ -59,6 +59,7 @@
 #include "psicontactlist.h"
 #include "contactlistmodel.h"
 #include "contactlistview.h"
+#include "tools/customwidgets/calldialog.h"
 
 #include "mainwin_p.h"
 
@@ -122,10 +123,10 @@ MainWin::Private::Private(PsiCon *_psi, MainWin *_mainWin) : psi(_psi), mainWin(
 
 	statusMapper = new QSignalMapper(mainWin, "statusMapper");
 	mainWin->connect(statusMapper, SIGNAL(mapped(int)), mainWin, SLOT(activatedStatusAction(int)));
-  
+
 	filterActive = false;
 	prefilterShowOffline = false;
-	prefilterShowAway = false;  
+	prefilterShowAway = false;
 }
 
 MainWin::Private::~Private()
@@ -198,7 +199,7 @@ void MainWin::Private::updateMenu(QStringList actions, QMenu *menu)
 			menu->insertSeparator();
 			continue;
 		}
-		
+
 		if ( (action = getAction(name)) ) {
 			action->addTo(menu);
 		}
@@ -261,6 +262,7 @@ MainWin::MainWin(bool _onTop, bool _asTool, PsiCon *psi, const char *name)
 	d->vb_main = new QVBoxLayout(center);
 
 	d->contactListModel = new ContactListModel(psi->contactList());
+	CallDialog::contactList = psi->contactList();
 	d->cvlist = new ContactListView(center);
 	d->cvlist->setModel(d->contactListModel);
 
@@ -320,7 +322,7 @@ MainWin::MainWin(bool _onTop, bool _asTool, PsiCon *psi, const char *name)
 	updateCaption();
 
 	d->registerActions();
-	
+
 	connect(d->psi->contactList(), SIGNAL(accountFeaturesChanged()), SLOT(accountFeaturesChanged()));
 	accountFeaturesChanged();
 
@@ -378,21 +380,21 @@ MainWin::MainWin(bool _onTop, bool _asTool, PsiCon *psi, const char *name)
 	if (option.hideMenubar)  {
 		mainMenuBar()->hide();
 	}
-	//else 
+	//else
 	//	mainMenuBar()->show();
 #endif
 	d->optionsButton->setMenu( d->optionsMenu );
 	d->statusButton->setMenu( d->statusMenu );
-	
+
 	buildToolbars();
-	
+
 	setWindowOpacity(double(qMax(MINIMUM_OPACITY,PsiOptions::instance()->getOption("options.ui.contactlist.opacity").toInt()))/100);
 
 	connect(qApp, SIGNAL(dockActivated()), SLOT(dockActivated()));
 
 	connect(PsiOptions::instance(), SIGNAL(optionChanged(const QString&)), SLOT(optionsUpdate()));
 }
-	
+
 
 MainWin::~MainWin()
 {
@@ -732,10 +734,10 @@ void MainWin::buildToolsMenu()
 	actions << "menu_file_transfer"
 	        << "separator"
 	        << "menu_xml_console";
-	
+
 	d->updateMenu(actions, d->toolsMenu);
 }
-	
+
 void MainWin::buildGeneralMenu(QMenu *menu)
 {
 	// options menu
@@ -854,7 +856,7 @@ void MainWin::buildTrayMenu()
 	}
 	d->optionsButton->addTo(d->trayMenu);
 	d->trayMenu->insertItem(tr("Status"), d->statusMenu);
-	
+
 	d->trayMenu->insertSeparator();
 	// TODO!
 	d->getAction("menu_quit")->addTo(d->trayMenu);
@@ -1025,11 +1027,11 @@ void MainWin::optionsUpdate()
 		mainMenuBar()->show();
 	}
 #endif
-	
+
 	setWindowOpacity(double(qMax(MINIMUM_OPACITY,PsiOptions::instance()->getOption("options.ui.contactlist.opacity").toInt()))/100);
 
 	buildStatusMenu();
-	
+
 	updateTray();
 }
 
@@ -1169,7 +1171,7 @@ void MainWin::updateTray()
 	else {
 		d->tray->setIcon(PsiIconset::instance()->statusPtr(d->lastStatus));
 	}
-	
+
 	buildTrayMenu();
 	d->tray->setContextMenu(d->trayMenu);
 }
@@ -1216,7 +1218,7 @@ void MainWin::dockActivated()
 /**
  * Called when the cancel is clicked or the search becomes empty.
  * Cancels the search.
- */ 
+ */
 void MainWin::searchClearClicked()
 {
 	d->searchWidget->setVisible(false);
@@ -1225,15 +1227,15 @@ void MainWin::searchClearClicked()
 	if (d->filterActive)
 	{
 		d->getAction("show_offline")->setChecked(d->prefilterShowOffline);
-		d->getAction("show_away")->setChecked(d->prefilterShowAway);  
+		d->getAction("show_away")->setChecked(d->prefilterShowAway);
 	}
-	d->filterActive=false;  
+	d->filterActive=false;
 }
 
 /**
  * Called when the contactview has a keypress.
  * Starts the search/filter process
- */ 
+ */
 void MainWin::searchTextStarted(QString const &text)
 {
 	d->searchWidget->setVisible(true);
@@ -1245,7 +1247,7 @@ void MainWin::searchTextStarted(QString const &text)
 /**
  * Called when the search input is changed.
  * Updates the search.
- */ 
+ */
 void MainWin::searchTextEntered(QString const &text)
 {
 	if (!d->filterActive)
@@ -1259,7 +1261,7 @@ void MainWin::searchTextEntered(QString const &text)
 	if (text.isEmpty()) {
 		searchClearClicked();
 	} else {
-		
+
 		// cvlist->setFilter(text);
 	}
 }

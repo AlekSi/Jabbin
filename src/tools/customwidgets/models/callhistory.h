@@ -78,6 +78,17 @@ public:
 
     bool eventFilter(QObject * obj, QEvent * event);
 
+public Q_SLOTS:
+    void call(const QString & who);
+
+Q_SIGNALS:
+    /**
+     * Call is requested.
+     * @param who a jabber id or phone number (if phone number,
+     * it is in format phone://phone-number
+     */
+    void callRequested(const QString & who);
+
 protected:
     void load();
     void save();

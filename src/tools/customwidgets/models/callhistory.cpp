@@ -20,6 +20,8 @@
 #include "callhistory.h"
 #include "callhistory_p.h"
 #include "applicationinfo.h"
+#include "calldialog.h"
+#include "psicontact.h"
 
 #include <QDebug>
 #include <QSize>
@@ -66,6 +68,7 @@ CallHistoryItemEditor::CallHistoryItemEditor(QWidget * parent, QAbstractItemMode
     connect(buttonCall,        SIGNAL(clicked()), this, SLOT(call()));
     connect(buttonDelete,      SIGNAL(clicked()), this, SLOT(del()));
     connect(buttonToPhoneBook, SIGNAL(clicked()), this, SLOT(toPhoneBook()));
+    buttonToPhoneBook->hide();
 }
 
 CallHistoryItemEditor::~CallHistoryItemEditor()
@@ -77,7 +80,8 @@ CallHistoryItemEditor * CallHistoryItemEditor::editor = NULL;
 
 void CallHistoryItemEditor::call()
 {
-
+    QString id = m_model->data(editingIndex, CallHistoryItem::Id).toString();
+    ((CallHistoryModel *)m_model)->call(id);
 }
 
 void CallHistoryItemEditor::del()
@@ -85,7 +89,6 @@ void CallHistoryItemEditor::del()
     if (QMessageBox::question(this, tr("Are you sure?"),
             tr("Are you sure you want to delete this contact?"),
             QMessageBox::Yes | QMessageBox::Cancel) == QMessageBox::Yes) {
-        qDebug() << "Index is " << editingIndex;
         m_model->removeRow(editingIndex.row());
     }
 }
@@ -93,7 +96,15 @@ void CallHistoryItemEditor::del()
 void CallHistoryItemEditor::toPhoneBook()
 {
     QString id = m_model->data(editingIndex, CallHistoryItem::Id).toString();
-    qDebug() << "ID is " << id;
+    qDebug() << "CallHistoryItemEditor::toPhoneBook() : ID is " << id;
+    qDebug() << "CallHistoryItemEditor::toPhoneBook()"
+        << (void *) CallDialog::contactList;
+    qDebug() << "CallHistoryItemEditor::toPhoneBook()"
+        << CallDialog::contactList->contacts();
+    foreach (PsiContact * contact, CallDialog::contactList->contacts()) {
+        qDebug() << "CallHistoryItemEditor::toPhoneBook() : " << contact->name();
+    }
+
 }
 
 // CallHistoryModel::Private
@@ -187,6 +198,11 @@ CallHistoryModel::CallHistoryModel(QListView * parent)
 CallHistoryModel::~CallHistoryModel()
 {
     delete d;
+}
+
+void CallHistoryModel::call(const QString & who)
+{
+    emit callRequested(who);
 }
 
 void CallHistoryModel::addEntry(const QString & name, const QString & id,

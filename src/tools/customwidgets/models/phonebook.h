@@ -84,6 +84,15 @@ public:
 public Q_SLOTS:
     /** opens a dialog for adding a contact */
     void addContact(const QString & name = QString(), const QString & phone = QString());
+    void call(const QString & who);
+
+Q_SIGNALS:
+    /**
+     * Call is requested.
+     * @param who a jabber id or phone number (if phone number,
+     * it is in format phone://phone-number
+     */
+    void callRequested(const QString & who);
 
 protected:
     void load();

@@ -68,7 +68,6 @@ QVariant OptionsTree::getOption(const QString& name) const
  */
 void OptionsTree::setOption(const QString& name, const QVariant& value)
 {
-	qDebug() << "Setting the option " << name << " and the value is " << value;
 	const QVariant &prev = tree_.getValue(name);
 	if ( prev == value ) {
 		return;

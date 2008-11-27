@@ -34,6 +34,8 @@
 #include <QXmlStreamReader>
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
+#include <QCursor>
+#include <QMenu>
 
 #define ICON_WIDTH 32
 #define EDITOR_WIDTH 32
@@ -148,7 +150,32 @@ void PhoneBookItemEditor::save()
 
 void PhoneBookItemEditor::call()
 {
+    PhoneBookItem item = PhoneBookItem::fromVariant(m_model->data(editingIndex, Qt::EditRole));
 
+    editorForm->editName->setText(item.name);
+
+    QString who = "phone://";
+    if (item.phones.count() > 1) {
+        QMenu * menu = new QMenu();
+        foreach (QString phone, item.phones) {
+            menu->addAction(phone);
+        }
+
+        QAction * action = menu->exec(QCursor::pos());
+        if (!action) {
+            // selection was canceled
+            return;
+        }
+        who += action->text();
+        delete menu;
+    } else {
+        // we have only one item
+        foreach (QString phone, item.phones) {
+            who += phone;
+        }
+    }
+
+    ((PhoneBookModel *)m_model)->call(who);
 }
 
 void PhoneBookItemEditor::add(const QString & name, const QString & phone)
@@ -322,6 +349,12 @@ PhoneBookModel::~PhoneBookModel()
 void PhoneBookModel::addContact(const QString & name, const QString & phone)
 {
     d->editor->add(name, phone);
+}
+
+void PhoneBookModel::call(const QString & who)
+{
+    qDebug() << "PhoneBookModel::call(" << who << ")";
+    emit callRequested(who);
 }
 
 bool PhoneBookModel::eventFilter(QObject * obj, QEvent * event)

@@ -308,7 +308,7 @@ QTabWidget#mainTabWidget > QTabBar::tab:disabled {
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="taDial" >
+     <widget class="QWidget" name="tabDial" >
       <property name="autoFillBackground" >
        <bool>false</bool>
       </property>
@@ -333,7 +333,7 @@ QTabWidget#mainTabWidget > QTabBar::tab:disabled {
         <number>4</number>
        </property>
        <item>
-        <widget class="CallDialog" name="frame_2" >
+        <widget class="CallDialog" name="callDialog" >
          <property name="frameShape" >
           <enum>QFrame::NoFrame</enum>
          </property>

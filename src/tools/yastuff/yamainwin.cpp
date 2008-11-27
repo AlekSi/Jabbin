@@ -516,6 +516,10 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 
 	setOpacityOptionPath("options.ui.contactlist.opacity");
 	optionsUpdate();
+
+	CallDialog::contactList = psi->contactList();
+	connect(ui_.callDialog, SIGNAL(requestsAttention()),
+		this, SLOT(showCallDialog()));
 }
 
 YaMainWin::~YaMainWin()
@@ -931,6 +935,15 @@ void YaMainWin::setTrayToolTip(const XMPP::Status &, bool)
 void YaMainWin::toggleVisible()
 {
 	setWindowVisible(!isVisible());
+}
+
+void YaMainWin::showCallDialog()
+{
+	//ui_.mainTabWidget->setCurrentWidget(ui_.callDialog);
+	ui_.mainTabWidget->setCurrentWidget(ui_.tabDial);
+	if (!isVisible()) {
+		setWindowVisible(true);
+	}
 }
 
 void YaMainWin::accountContactsChanged()
