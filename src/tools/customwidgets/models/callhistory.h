@@ -90,6 +90,8 @@ Q_SIGNALS:
      */
     void callRequested(const QString & who);
 
+    void modelEmpty(bool empty);
+
 protected:
     void load();
     void save();

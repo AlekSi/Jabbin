@@ -216,6 +216,7 @@ void CallHistoryModel::addEntry(const QString & name, const QString & id,
     beginInsertRows(QModelIndex(), row, row);
     d->items.prepend(CallHistoryItem(name, id, time, status));
     endInsertRows();
+    emit modelEmpty(d->items.size() == 0);
     save();
 }
 
@@ -227,11 +228,16 @@ bool CallHistoryModel::removeRows(int row, int count, const QModelIndex & parent
     }
     endRemoveRows();
     save();
+    emit modelEmpty(d->items.size() == 0);
     return true;
 }
 
 void CallHistoryModel::clear()
 {
+    if (d->items.count() == 0) {
+        QMessageBox::information(d->list, tr("Information"), tr("Call history is already empty"));
+        return;
+    }
     if (QMessageBox::question(d->list, tr("Are you sure?"),
             tr("Are you sure you want to clear the call history?"),
             QMessageBox::Yes | QMessageBox::Cancel) == QMessageBox::Yes) {
@@ -271,11 +277,7 @@ bool CallHistoryModel::eventFilter(QObject * obj, QEvent * event)
 int CallHistoryModel::rowCount(const QModelIndex & parent) const
 {
     Q_UNUSED(parent);
-    if (d->items.count()) {
-        return d->items.count();
-    } else {
-        return 1;
-    }
+    return d->items.count();
 }
 
 int CallHistoryModel::columnCount(const QModelIndex &parent) const
@@ -398,6 +400,7 @@ void CallHistoryModel::load()
             }
         }
     }
+    emit modelEmpty(d->items.size() == 0);
 }
 
 void CallHistoryModel::save()

@@ -66,6 +66,9 @@ CallDialog::Private::Private(CallDialog * parent)
             this, SLOT(call(const QString &)), Qt::QueuedConnection);
     connect(buttonClearCallHistory, SIGNAL(clicked()),
             callhistory, SLOT(clear()));
+    buttonClearCallHistory->setVisible(callhistory->rowCount() != 0);
+    connect(callhistory, SIGNAL(modelEmpty(bool)),
+            buttonClearCallHistory, SLOT(setHidden(bool)));
 
     phonebook = new PhoneBookModel(listPhoneBook, editFilterPhoneBook);
     connect(buttonAddContact, SIGNAL(clicked()),
