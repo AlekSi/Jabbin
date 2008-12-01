@@ -230,6 +230,15 @@ bool CallHistoryModel::removeRows(int row, int count, const QModelIndex & parent
     return true;
 }
 
+void CallHistoryModel::clear()
+{
+    if (QMessageBox::question(d->list, tr("Are you sure?"),
+            tr("Are you sure you want to clear the call history?"),
+            QMessageBox::Yes | QMessageBox::Cancel) == QMessageBox::Yes) {
+        removeRows(0, d->items.count(), QModelIndex());
+    }
+}
+
 void CallHistoryModel::updateLastEntryStatus(Status status) {
     if (d->items.count() == 0) {
         return;
@@ -262,7 +271,11 @@ bool CallHistoryModel::eventFilter(QObject * obj, QEvent * event)
 int CallHistoryModel::rowCount(const QModelIndex & parent) const
 {
     Q_UNUSED(parent);
-    return d->items.count();
+    if (d->items.count()) {
+        return d->items.count();
+    } else {
+        return 1;
+    }
 }
 
 int CallHistoryModel::columnCount(const QModelIndex &parent) const

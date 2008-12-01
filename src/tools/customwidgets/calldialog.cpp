@@ -64,12 +64,15 @@ CallDialog::Private::Private(CallDialog * parent)
     callhistory = new CallHistoryModel(listHistory);
     connect(callhistory, SIGNAL(callRequested(const QString &)),
             this, SLOT(call(const QString &)), Qt::QueuedConnection);
+    connect(buttonClearCallHistory, SIGNAL(clicked()),
+            callhistory, SLOT(clear()));
 
     phonebook = new PhoneBookModel(listPhoneBook, editFilterPhoneBook);
     connect(buttonAddContact, SIGNAL(clicked()),
             phonebook, SLOT(addContact()), Qt::QueuedConnection);
     connect(phonebook, SIGNAL(callRequested(const QString &)),
             this, SLOT(call(const QString &)), Qt::QueuedConnection);
+
 
     editFilterPhoneBook->setEmptyText(tr("Search"));
 

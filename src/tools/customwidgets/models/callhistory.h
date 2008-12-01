@@ -80,6 +80,7 @@ public:
 
 public Q_SLOTS:
     void call(const QString & who);
+    void clear();
 
 Q_SIGNALS:
     /**
