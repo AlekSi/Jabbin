@@ -27,7 +27,11 @@
 #include <QRegExp>
 #include <QDebug>
 
-#define JIDTEXT ((phone == QString())? phone : (jid.bare()))
+int call_dlg_mic_level = 100;
+int call_dlg_dsp_level = 100;
+
+// #define JIDTEXT ((phone == QString())? phone : (jid.bare()))
+#define JIDTEXT jid.bare()
 
 using XMPP::Jid;
 
@@ -68,6 +72,14 @@ CallDialog::Private::Private(CallDialog * parent)
             this, SLOT(call(const QString &)), Qt::QueuedConnection);
 
     editFilterPhoneBook->setEmptyText(tr("Search"));
+
+    sliderSpeakerVolume->setValue(call_dlg_dsp_level);
+    sliderMicrophoneVolume->setValue(call_dlg_mic_level);
+
+    connect(sliderSpeakerVolume, SIGNAL(valueChanged(int)),
+            parent, SLOT(changeSpeakerVolume(int)));
+    connect(sliderMicrophoneVolume, SIGNAL(valueChanged(int)),
+            parent, SLOT(changeMicrophoneVolume(int)));
 
     time.start();
     timer.start(1000, parent);
@@ -228,7 +240,7 @@ void CallDialog::init(const Jid & jid, PsiAccount * account, VoiceCaller * calle
                 this,   SLOT(terminated(const Jid & )),
                 Qt::QueuedConnection);
         qDebug() << "CallDialog::connecting " <<
-        connect(caller, SIGNAL(inProgress(const Jid & )),
+        connect(caller, SIGNAL(in_progress(const Jid & )),
                 this,   SLOT(inProgress(const Jid & )),
                 Qt::QueuedConnection);
         }
@@ -252,12 +264,12 @@ void CallDialog::dialpadButtonClicked(char symbol) {
 
 void CallDialog::changeSpeakerVolume(int val)
 {
-    // TODO:
+    call_dlg_dsp_level = val;
 }
 
 void CallDialog::changeMicrophoneVolume(int val)
 {
-    // TODO:
+    call_dlg_mic_level = val;
 }
 
 void CallDialog::rejectIncoming()

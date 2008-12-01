@@ -1,3 +1,8 @@
+//
+// ivan: This file is no longer used
+//
+#error This file should not be used: calldlg.h
+
 /*
  * calldlg.h - dialog for handling calls
  * Copyright (C) 2005 Oleksandr Yakovlyev <me@yshurik.kiev.ua>

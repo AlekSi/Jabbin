@@ -212,7 +212,7 @@ HEADERS += \
 	$$PWD/psioptionseditor.h \
 	$$PWD/psioptions.h \
 	$$PWD/voicecaller.h \
-	$$PWD/voicecalldlg.h \
+#	$$PWD/voicecalldlg.h \
 	$$PWD/resourcemenu.h \
 	$$PWD/groupmenu.h \
 	$$PWD/statusmenu.h \
@@ -324,7 +324,7 @@ SOURCES += \
 	$$PWD/psioptions.cpp \
 	$$PWD/psioptionseditor.cpp \
 	$$PWD/voicecaller.cpp \
-	$$PWD/voicecalldlg.cpp \
+#	$$PWD/voicecalldlg.cpp \
 	$$PWD/resourcemenu.cpp \
 	$$PWD/groupmenu.cpp \
 	$$PWD/statusmenu.cpp \

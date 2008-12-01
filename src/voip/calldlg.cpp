@@ -1,3 +1,7 @@
+//
+// ivan: This file is no longer used
+//
+
 /*
  * calldlg.cpp - dialog for handling calls
  * Copyright (C) 2005 Oleksandr Yakovlyev <me@yshurik.kiev.ua>
@@ -138,23 +142,23 @@ CallDlg::CallDlg(const Jid &jid, PsiAccount *pa, VoiceCaller * voiceCaller)
 
     d->l_from = new QLabel(this);
     d->l_from->setText(d->jid.user());
-    
+
     //const VCard * vcard = VCardFactory::vcard(jid);
 
 	//if (vcard && !vcard->nickName().isEmpty()) {
     //    d->l_from->setText(vcard->nickName());
     //}
-    
+
     d->l_time = new QLabel(tr("Duration:"), this);
     d->l_status = new QLabel(tr("Status:"), this);
-    
+
     QFont f = d->l_from->font();
-    
+
     if ( f.pixelSize() >0 )
         f.setPixelSize( f.pixelSize()+2 );
     else if ( f.pointSize() >0 )
         f.setPointSize( f.pointSize()+2 );
-    
+
     d->l_status->setFont( f );
     f.setItalic(true);
     d->l_time->setFont( f );
@@ -171,7 +175,7 @@ CallDlg::CallDlg(const Jid &jid, PsiAccount *pa, VoiceCaller * voiceCaller)
 		/*if (vcard) {
 			if ( !vcard->photo().isEmpty() ) {
 			    QImage img(vcard->photo());
-			
+
 				int w = img.width();
 				int h = img.height();
 
@@ -180,7 +184,7 @@ CallDlg::CallDlg(const Jid &jid, PsiAccount *pa, VoiceCaller * voiceCaller)
 				    s_img = img.smoothScale(64, (64*h)/w);
 				else
 				    s_img = img.smoothScale((64*w)/h, 64);
-            
+
 				QPixmap p_img(64,64);
 				p_img.fill(Qt::color0);
 				QPainter p( &p_img );
@@ -197,7 +201,7 @@ CallDlg::CallDlg(const Jid &jid, PsiAccount *pa, VoiceCaller * voiceCaller)
 		hb3->addWidget(d->l_status, 1,1);
 		hb3->addWidget(d->l_time, 2,1);
 	}
-    
+
     d->sl_dsp = new QSlider(Qt::Horizontal, this);
     d->sl_mic = new QSlider(Qt::Horizontal, this);
 
@@ -249,11 +253,11 @@ CallDlg::CallDlg(const Jid &jid, PsiAccount *pa, VoiceCaller * voiceCaller)
 		d->l_from->hide();
 
         d->l_number = new QLabel(this);
-        d->l_number->setText ("Enter a phone number"); 
+        d->l_number->setText ("Enter a phone number");
 		hb3->addWidget(d->l_number, 6,1);
-  
+
         d->l_format = new QLabel(this);
-        d->l_format->setText ("Example: 00 + country code + area code + number"); 
+        d->l_format->setText ("Example: 00 + country code + area code + number");
 		d->l_format->setFont( QFont( "helvetica", 7 ) );
         d->l_format->setPaletteForegroundColor(QColor("#555555"));
 		hb3->addWidget(d->l_format, 8,1);
@@ -415,10 +419,10 @@ void CallDlg::closeEvent(QCloseEvent *e)
 //    d->voiceCaller->terminate(d->jid);
 //    finalize();
 //    close();
-      if ( d->status == InProgress || 
-             d->status == Calling || 
-             d->status == Accepting || 
-             d->status == Accepted || d->status == Incoming ) {	
+      if ( d->status == InProgress ||
+             d->status == Calling ||
+             d->status == Accepting ||
+             d->status == Accepted || d->status == Incoming ) {
 		     e->ignore();
       }
       else {
@@ -550,7 +554,7 @@ void CallDlg::countDuration()
 
 bool CallDlg::eventFilter( QObject *o, QEvent *e )
 {
-	if ( e->type() == QEvent::Timer) 
+	if ( e->type() == QEvent::Timer)
 	{
 		QTimerEvent *timer = (QTimerEvent *)e;
 		if (d->secTimer)
@@ -576,7 +580,7 @@ bool CallDlg::eventFilter( QObject *o, QEvent *e )
 
 		}
 		return FALSE; //perform standard event processing
-	} 
+	}
 	else {
 		// standard event processing
 		return FALSE;
@@ -695,7 +699,7 @@ void CallDlg::setStatus(CallStatus s)
 		{
 			qDebug(QString("call duration timer started.Id %1").arg(timer_id));
 		}*/
-		//install our workaround for situations where d->secTimer simple doesn't work(problem with moc's understanding of 
+		//install our workaround for situations where d->secTimer simple doesn't work(problem with moc's understanding of
 		//template classes???)
 		d->timeSpent.start();
 		d->timeSinceLastFire.start();

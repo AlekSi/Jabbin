@@ -459,7 +459,7 @@ private:
 	void openNextEvent(const UserListItem &, ActivationType activationType);
 	void updateReadNext(const Jid &);
 	ChatDlg *ensureChatDlg(const Jid &);
-	CallDlg *ensureCallDlg(const Jid &);
+	// CallDlg *ensureCallDlg(const Jid &);
 	void lastStepLogin();
 	void processIncomingMessage(const Message &);
 	void processEncryptedMessage(const Message &);

@@ -26,7 +26,7 @@ win32 {
 
 HEADERS += \
     $$VOIP_CPP/callslog.h \
-    $$VOIP_CPP/calldlg.h \
+#    $$VOIP_CPP/calldlg.h \
     $$VOIP_CPP/dtmfsender.h \
     $$VOIP_CPP/voicecodec.h \
     $$VOIP_CPP/codecs/pcmucodec.h \
@@ -42,7 +42,7 @@ HEADERS += \
 
 SOURCES += \
     $$VOIP_CPP/callslog.cpp \
-    $$VOIP_CPP/calldlg.cpp \
+#    $$VOIP_CPP/calldlg.cpp \
     $$VOIP_CPP/dtmfsender.cpp \
     $$VOIP_CPP/voicecodec.cpp \
     $$VOIP_CPP/codecs/pcmucodec.cpp \

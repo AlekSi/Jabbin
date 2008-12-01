@@ -96,8 +96,8 @@
 #include "accountmodifydlg.h"
 #include "passphrasedlg.h"
 #include "voicecaller.h"
-#include "voicecalldlg.h"
-#include "calldlg.h"
+// ivan: disabling old CallDlg: #include "voicecalldlg.h"
+// ivan: disabling old CallDlg: #include "calldlg.h"
 #ifdef HAVE_JINGLE
 #include "jinglevoicecaller.h"
 #endif
@@ -2277,10 +2277,15 @@ void PsiAccount::incomingVoiceCall(const Jid& j)
 //	VoiceCallDlg* vc = new VoiceCallDlg(j,voiceCaller());
 //	vc->show();
 //	vc->incoming();
+
+/* ivan: disabling old CallDlg:
     CallDlg *c = ensureCallDlg(j);
     processCalls(j);
     bringToFront(c);
     c->incoming();
+    */
+
+    CallDialog::instance()->init(j, this, voiceCaller());
     CallDialog::instance()->incoming();
 }
 
@@ -3600,7 +3605,9 @@ ChatDlg *PsiAccount::ensureChatDlg(const Jid &j)
 	return c;
 }
 
-CallDlg *PsiAccount::ensureCallDlg(const Jid &j)
+/*
+ * ivan: disabling old CallDlg
+ * CallDlg *PsiAccount::ensureCallDlg(const Jid &j)
 {
 	CallDlg *c = findDialog<CallDlg*>(j);
 
@@ -3613,10 +3620,10 @@ CallDlg *PsiAccount::ensureCallDlg(const Jid &j)
 	else {
 		// on X11, do a special reparent to open on the right desktop
 #ifdef Q_WS_X11
-		/* KIS added an exception for tabs here. We do *not* want chats flying
+		/ KIS added an exception for tabs here. We do *not* want chats flying
 		 * randomlyi, it pulls them out of tabsets. So instead, we move the
 		 * tabset instead. It's just as filthy, unfortunately, but it's the
-		 * only way */
+		 * only way /
 		//TODO: This doesn't work as expected atm, it doesn't seem to reparent the tabset
 		QWidget *window = c;
 		if(window && window->isHidden()) {
@@ -3633,6 +3640,7 @@ CallDlg *PsiAccount::ensureCallDlg(const Jid &j)
 	}
 	return c;
 }
+*/
 
 void PsiAccount::changeStatus(int x)
 {
@@ -4003,9 +4011,11 @@ void PsiAccount::actionPhoneCall()
 
     Jid j = Jid(userAccount().dtmf_resource);
 
-    CallDlg *c = ensureCallDlg( j );
+    /*
+     * ivan: disabling old CallDlg
+     * CallDlg *c = ensureCallDlg( j );
 	processCalls( j );
-	bringToFront(c);
+	bringToFront(c);*/
     //c->phoneCall();
 }
 
@@ -5143,11 +5153,12 @@ void PsiAccount::processChats(const Jid &j)
 void PsiAccount::processCalls(const Jid &j)
 {
 	printf("processing calls for [%s]\n", j.full().latin1());
-	CallDlg *c = findDialog<CallDlg*>(j);
+	/* ivan: disabling old CallDlg:
+         CallDlg *c = findDialog<CallDlg*>(j);
+         */
 
-//	CallDlg *c = (CallDlg *)dialogFind("CallDlg", j);
-	if(!c)
-		return;
+	/*if(!c)
+		return;*/
 
 }
 
@@ -5176,11 +5187,11 @@ void PsiAccount::openChat(const Jid& j, ActivationType activationType)
 
 void PsiAccount::openCall(const Jid &j)
 {
-	CallDlg *c = ensureCallDlg(j);
+	/*CallDlg *c = ensureCallDlg(j);
 	processCalls(j);
 	bringToFront(c);
     c->call();
-    CallDialog::instance()->call();
+    CallDialog::instance()->call();*/
 }
 
 void PsiAccount::chatMessagesRead(const Jid &j)
@@ -5383,8 +5394,10 @@ QStringList PsiAccount::hiddenCalls(const Jid &j) const
 {
 	QStringList list;
 
+        /*
 	foreach(CallDlg* call, findDialogs<CallDlg*>(j, false))
 		list += call->jid().resource();
+                */
 
 	return list;
 }
