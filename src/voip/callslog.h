@@ -1,3 +1,8 @@
+//
+// ivan: This file is no longer used
+//
+#error This file should not be used: calldlg.h
+
 /* vim:tabstop=4:shiftwidth=4:expandtab:cinoptions=(s,U1,m1
  * Copyright (C) 2005 Dmitry Poplavsky <dima@thekompany.com>
  *
@@ -43,7 +48,7 @@ public:
     bool isAccepted;
     int duration; // in seconds
 
-    bool isValid; 
+    bool isValid;
 };
 
 /*!
@@ -68,7 +73,7 @@ public slots:
 private:
 	class Private;
 	Private *d;
-}; 
+};
 
 
 class CallsLogDialog : public CallsLogDialogBase {
@@ -83,7 +88,7 @@ public slots:
 
 protected:
     void updateItems();
-    
+
 };
 
 #endif // CALLSLOG_H

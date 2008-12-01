@@ -49,7 +49,7 @@
 #include "psiaccount.h"
 #include "dtmfsender.h"
 
-#include "callslog.h"
+// #include "callslog.h"
 
 // Should change in the future
 #define JINGLE_NS "http://www.google.com/session"

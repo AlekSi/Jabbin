@@ -1,3 +1,8 @@
+//
+// ivan: This file is no longer used
+//
+#error This file should not be used: callslogdialogbase.cpp
+
 #include "callslogdialogbase.h"
 
 #include <qvariant.h>

@@ -25,7 +25,7 @@ win32 {
 }
 
 HEADERS += \
-    $$VOIP_CPP/callslog.h \
+#    $$VOIP_CPP/callslog.h \
 #    $$VOIP_CPP/calldlg.h \
     $$VOIP_CPP/dtmfsender.h \
     $$VOIP_CPP/voicecodec.h \
@@ -38,10 +38,10 @@ HEADERS += \
     $$VOIP_CPP/ringbuffer.h \
     $$VOIP_CPP/mediastream.h \
     $$VOIP_CPP/joimmediaengine.h \
-    $$VOIP_CPP/callslogdialogbase.h
+#    $$VOIP_CPP/callslogdialogbase.h
 
 SOURCES += \
-    $$VOIP_CPP/callslog.cpp \
+#    $$VOIP_CPP/callslog.cpp \
 #    $$VOIP_CPP/calldlg.cpp \
     $$VOIP_CPP/dtmfsender.cpp \
     $$VOIP_CPP/voicecodec.cpp \
@@ -54,7 +54,7 @@ SOURCES += \
     $$VOIP_CPP/ringbuffer.cpp \
     $$VOIP_CPP/mediastream.cpp \
     $$VOIP_CPP/joimmediaengine.cpp \
-    $$VOIP_CPP/callslogdialogbase.cpp
+#    $$VOIP_CPP/callslogdialogbase.cpp
 
 #portaudio
 
@@ -73,4 +73,4 @@ SOURCES += \
 unix: SOURCES += $$VOIP_CPP/portaudio/pa_unix.c $$VOIP_CPP/portaudio/pa_unix_oss.c
 win32:SOURCES += $$VOIP_CPP/portaudio/pa_win_wmme.c
 
-INTERFACES += $$VOIP_CPP/callslogdialogbase.ui
+#INTERFACES += $$VOIP_CPP/callslogdialogbase.ui

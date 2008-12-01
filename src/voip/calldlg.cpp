@@ -10,7 +10,6 @@
 
 #include "common.h"
 #include "calldlg.h"
-#include "common.h"
 #include "psiaccount.h"
 #include "voicecaller.h"
 #include "profiles.h"
