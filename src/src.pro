@@ -6,7 +6,7 @@ EXPATPATH = c:\expat-2.0.1
 # Configuration
 TEMPLATE = app
 TARGET   = joim
-CONFIG  += qt thread x11 qt3support
+CONFIG  += qt thread x11 qt3support console
 
 windows: include(../conf_windows.pri)
 
@@ -173,16 +173,16 @@ unix:!mac {
 	QMAKE_POST_LINK = rm -f ../joim ; ln -s src/joim ../joim
 }
 
-#win32 {
+win32 {
 #	# generate program debug detabase
 #	win32-msvc|win32-msvc.net|win32-msvc2005 {
 #		QMAKE_CFLAGS += /Zi
 #		QMAKE_LFLAGS += /DEBUG
 #	}
 #
-#	# buggy MSVC workaround
-#	#win32-msvc|win32-msvc.net|win32-msvc2005: QMAKE_LFLAGS += /FORCE:MULTIPLE /NODEFAULTLIB:msvcrt.lib /NODEFAULTLIB:msvcrtd.lib
-#}
+	# buggy MSVC workaround
+	win32-msvc|win32-msvc.net|win32-msvc2005: QMAKE_LFLAGS += /FORCE:MULTIPLE /NODEFAULTLIB:msvcrtd.lib
+}
 
 mac {
 	# Universal binaries

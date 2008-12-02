@@ -3,11 +3,11 @@ SOURCES += $$PWD/qca-ossl/qca-ossl.cpp
 windows {
 	LIBS += -lgdi32 -lwsock32
 
-	debug {
-		LIBS += -llibeay32MDd -lssleay32MDd
+	release {
+		LIBS += -llibeay32 -lssleay32
 	}
 
-	!debug {
-		LIBS += -llibeay32MD -lssleay32MD
+	!release {
+		LIBS += -llibeay32d -lssleay32d
 	}
 }

@@ -6390,7 +6390,7 @@ static QStringList all_hash_types()
 	list += "sha512";
 #endif
 #ifdef OBJ_whirlpool
-	list += "whirlpool";
+//	list += "whirlpool";
 #endif
 	return list;
 }
@@ -6601,8 +6601,8 @@ public:
 			return new opensslHashContext( EVP_sha512(), this, type);
 #endif
 #ifdef OBJ_whirlpool
-		else if ( type == "whirlpool" )
-			return new opensslHashContext( EVP_whirlpool(), this, type);
+//		else if ( type == "whirlpool" )
+//			return new opensslHashContext( EVP_whirlpool(), this, type);
 #endif
 		else if ( type == "pbkdf1(sha1)" )
 			return new opensslPbkdf1Context( EVP_sha1(), this, type );
