@@ -181,7 +181,7 @@ win32 {
 #	}
 #
 	# buggy MSVC workaround
-	win32-msvc|win32-msvc.net|win32-msvc2005: QMAKE_LFLAGS += /FORCE:MULTIPLE /NODEFAULTLIB:msvcrtd.lib
+	win32-msvc|win32-msvc.net|win32-msvc2005: QMAKE_LFLAGS += /NODEFAULTLIB:libcmt.lib
 }
 
 mac {
