@@ -85,15 +85,16 @@ extern "C" {
  *
  *	\section intro_sec Indroduction
  *		Let's write an introduction to go here
- *	
+ *
  *	\section Installation
  *		For installation details, please see the INSTALL file
  *
  *	\section Contact Details
  *		And here we might put our contact details
  */
-  
 
+
+// #include "optionsdialog.h"
 
 using namespace XMPP;
 
@@ -132,7 +133,7 @@ PsiMain::PsiMain(QObject *par)
 		//printf("guessing locale: [%s]\n", lastLang.latin1());
 	}
 #else
-	//lastLang = "ru"; 
+	//lastLang = "ru";
 	QString(QTextCodec::locale()).left(2);
 #endif
 
@@ -165,7 +166,7 @@ PsiMain::PsiMain(QObject *par)
 #endif
 		// Create & open the default profile
 		if (!profileExists(newProfile) && !profileNew(newProfile)) {
-			QMessageBox::critical(0, tr("Error"), 
+			QMessageBox::critical(0, tr("Error"),
 				tr("There was an error creating the %1 profile.").arg(newProfile));
 			QTimer::singleShot(0, this, SLOT(bail()));
 		}
@@ -348,6 +349,11 @@ int main(int argc, char *argv[])
 	QApplication::addLibraryPath(ApplicationInfo::resourcesDir());
 	QApplication::addLibraryPath(ApplicationInfo::homeDir());
 	QApplication::setQuitOnLastWindowClosed(false);
+        /*
+	OptionsDialog * od = new OptionsDialog();
+	od->show();
+	return app.exec();
+        */
 
 #ifdef Q_WS_MAC
 	QDir dir(QApplication::applicationDirPath());

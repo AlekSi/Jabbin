@@ -1,0 +1,1057 @@
+<ui version="4.0" >
+ <class>OptionsDialogBase</class>
+ <widget class="QWidget" name="OptionsDialogBase" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>693</width>
+    <height>530</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Preferences</string>
+  </property>
+  <property name="styleSheet" >
+   <string notr="true" >QPushButton {
+   color: white;
+   border-image: url(:/images/pushbutton/green/pushbutton.png) 12px 11px 12px 10px;
+   border-width: 0px 11px 0px 10px;
+   min-height: 1.5em;
+}
+
+QPushButton:disabled {
+   color: white;
+}
+
+QPushButton:hover {
+   border-image: url(:/images/pushbutton/green/pushbutton_hover.png) 12px 11px 12px 10px;
+}
+
+QPushButton:focus {
+   border-image: url(:/images/pushbutton/green/pushbutton_focus.png) 12px 11px 12px 10px;
+}
+
+QPushButton:pressed {
+   border-image: url(:/images/pushbutton/green/pushbutton_pressed.png) 12px 11px 12px 10px;
+}
+
+AdvancedTabBar::tab {
+   height: 0px;
+   color: rgba(255, 255, 255, 0);
+   border: none;
+   background: none;
+}
+
+QListWidget#AdvancedTabBarList {
+    border: none;
+	background-image: url(:/customwidgets/data/window_background_crop.png);
+    background-repeat: repeat-x;
+    background-color: #d5e6f3;
+    background-attachment: fixed;
+    selection-background-color: white;
+    selection-color: black;
+}
+
+QListWidget#AdvancedTabBarList::item:selected {
+    background-color: white;
+    color: black;
+	background-image: url(:/customwidgets/data/options_list_item.png);
+    background-repeat: repeat-y;
+}
+
+QTabWidget::pane {
+    border: 2px solid gray;
+    border-width: 6px;
+    border-image: url(:/customwidgets/generic/data/panel.png) 6 6 6 6 stretch stretch;
+}
+
+OptionsDialog {
+	background-image: url(:/customwidgets/data/window_background.png);
+    background-repeat: repeat-x;
+    background-color: #d5e6f3;
+    border: 4px solid 99b9d2;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" >
+   <property name="spacing" >
+    <number>0</number>
+   </property>
+   <item>
+    <spacer name="verticalSpacer_9" >
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType" >
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0" >
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="AdvancedTabWidget" name="tabs" >
+     <property name="tabPosition" >
+      <enum>QTabWidget::West</enum>
+     </property>
+     <property name="currentIndex" >
+      <number>6</number>
+     </property>
+     <property name="iconSize" >
+      <size>
+       <width>32</width>
+       <height>32</height>
+      </size>
+     </property>
+     <property name="elideMode" >
+      <enum>Qt::ElideNone</enum>
+     </property>
+     <property name="usesScrollButtons" >
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="tabGeneralSettings" >
+      <attribute name="title" >
+       <string>General Settings</string>
+      </attribute>
+      <attribute name="icon" >
+       <iconset resource="customwidgets.qrc" >
+        <normaloff>:/customwidgets/data/options/general.png</normaloff>:/customwidgets/data/options/general.png</iconset>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3" >
+       <item>
+        <widget class="QLabel" name="label" >
+         <property name="text" >
+          <string>&lt;b>General Settings:&lt;/b> set up the basics of how Joim works</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupContactDoubleClick" >
+         <property name="title" >
+          <string>When I double-click on a contact:</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2" >
+          <item>
+           <widget class="QRadioButton" name="radioContactDoubleClickCall" >
+            <property name="text" >
+             <string>Start Call (if the contact can be called)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioContactDoubleClickChat" >
+            <property name="text" >
+             <string>Start Chat</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupStatus" >
+         <property name="title" >
+          <string>Status</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout" >
+          <item row="0" column="0" >
+           <widget class="QLabel" name="labelStatusAway" >
+            <property name="text" >
+             <string>Show me as 'Away' when I'm inactive for</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QSpinBox" name="editStatusAway" >
+            <property name="minimumSize" >
+             <size>
+              <width>100</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="suffix" >
+             <string> minutes</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QLabel" name="labelStatusDND" >
+            <property name="text" >
+             <string>Show me as 'Do not disturb' when I'm inactive for</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QSpinBox" name="editStatusDND" >
+            <property name="suffix" >
+             <string> minutes</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" >
+           <widget class="QLabel" name="labelStatusOffline" >
+            <property name="text" >
+             <string>Show me as 'Offline' when I'm inactive for</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" >
+           <widget class="QSpinBox" name="editStatusOffline" >
+            <property name="suffix" >
+             <string> minutes</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2" >
+           <spacer name="horizontalSpacer" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupMisc" >
+         <property name="title" >
+          <string>Miscellaneous</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2" >
+          <item row="0" column="0" colspan="2" >
+           <widget class="QCheckBox" name="checkAutostart" >
+            <property name="text" >
+             <string>Start Joim when I turn on my computer</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QLabel" name="labelLanguage" >
+            <property name="text" >
+             <string>Language</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QComboBox" name="comboLanguage" >
+            <property name="editable" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>87</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabAppeareance" >
+      <attribute name="title" >
+       <string>Appearance</string>
+      </attribute>
+      <attribute name="icon" >
+       <iconset resource="customwidgets.qrc" >
+        <normaloff>:/customwidgets/data/options/appearance.png</normaloff>:/customwidgets/data/options/appearance.png</iconset>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_5" >
+       <item>
+        <widget class="QLabel" name="label_13" >
+         <property name="text" >
+          <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-weight:600;">Appeareance:&lt;/span> set up the appeareance and behavior of Joim&lt;/p>&lt;/body>&lt;/html></string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupContactList" >
+         <property name="title" >
+          <string>Contact List</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_7" >
+          <item row="0" column="0" colspan="2" >
+           <widget class="QCheckBox" name="checkUseOfficeBackground" >
+            <property name="minimumSize" >
+             <size>
+              <width>350</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string>Use "office" window background</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2" >
+           <widget class="QCheckBox" name="checkShowContactListGroups" >
+            <property name="text" >
+             <string>Show groups in contact list</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" >
+           <widget class="QCheckBox" name="checkEnableContactListAvatars" >
+            <property name="minimumSize" >
+             <size>
+              <width>100</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize" >
+             <size>
+              <width>100</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string>Avatars:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" >
+           <widget class="QComboBox" name="comboContactListAvatars" >
+            <property name="minimumSize" >
+             <size>
+              <width>200</width>
+              <height>0</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2" >
+           <spacer name="horizontalSpacer_6" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupChatWindow" >
+         <property name="title" >
+          <string>Chat Window</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_8" >
+          <item row="0" column="0" colspan="4" >
+           <widget class="QCheckBox" name="checkCtrlEnterSendsChatMessages" >
+            <property name="minimumSize" >
+             <size>
+              <width>350</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string>Ctrl+Enter shortcut sends chat messages</string>
+            </property>
+           </widget>
+          </item>
+          <item rowspan="6" row="0" column="4" >
+           <spacer name="horizontalSpacer_7" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>280</width>
+              <height>148</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QLabel" name="labelChatBackground" >
+            <property name="minimumSize" >
+             <size>
+              <width>100</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize" >
+             <size>
+              <width>100</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text" >
+             <string>Background:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" colspan="3" >
+           <widget class="QComboBox" name="comboChatBackground" />
+          </item>
+          <item row="2" column="0" colspan="4" >
+           <widget class="QCheckBox" name="checkEnableEmoticons" >
+            <property name="text" >
+             <string>Enable emoticons</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" colspan="2" >
+           <widget class="QCheckBox" name="checkLogMessageHistory" >
+            <property name="text" >
+             <string>Log message history</string>
+            </property>
+            <property name="tristate" >
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2" colspan="2" >
+           <widget class="YaLinkButton" name="buttonClearMessageHistory" >
+            <property name="text" >
+             <string>Clear Message History</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0" colspan="4" >
+           <widget class="QLabel" name="labelFont" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Preferred" hsizetype="Expanding" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>Use the following font in chat window:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0" colspan="3" >
+           <widget class="QFontComboBox" name="comboFont" />
+          </item>
+          <item row="5" column="3" >
+           <widget class="QSpinBox" name="editFontSize" />
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_8" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>108</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabAudio" >
+      <attribute name="title" >
+       <string>Audio Settings</string>
+      </attribute>
+      <attribute name="icon" >
+       <iconset resource="customwidgets.qrc" >
+        <normaloff>:/customwidgets/data/options/audio.png</normaloff>:/customwidgets/data/options/audio.png</iconset>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_20" >
+       <item row="0" column="0" colspan="2" >
+        <widget class="QLabel" name="label_12" >
+         <property name="text" >
+          <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-weight:600;">Audio Settings:&lt;/span> set up sound on your computer&lt;/p>&lt;/body>&lt;/html></string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <layout class="QGridLayout" name="gridLayout_19" >
+         <item rowspan="2" row="0" column="0" colspan="2" >
+          <widget class="QLabel" name="icoMicrophone" >
+           <property name="minimumSize" >
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+           <property name="pixmap" >
+            <pixmap resource="customwidgets.qrc" >:/customwidgets/generic/data/microphone.png</pixmap>
+           </property>
+           <property name="alignment" >
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2" >
+          <widget class="QLabel" name="labelMicrophone" >
+           <property name="text" >
+            <string>Microphone</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3" colspan="2" >
+          <widget class="QComboBox" name="comboMicrophoneDevice" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+             <horstretch>1</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2" >
+          <widget class="QLabel" name="labelMicrophoneVolume" >
+           <property name="text" >
+            <string>Volume</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3" colspan="2" >
+          <widget class="QSlider" name="sliderMicrophoneVolume" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+             <horstretch>1</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="5" >
+          <widget class="Line" name="line" >
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item rowspan="3" row="3" column="0" colspan="2" >
+          <widget class="QLabel" name="iconSpeaker" >
+           <property name="minimumSize" >
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="maximumSize" >
+            <size>
+             <width>64</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string/>
+           </property>
+           <property name="pixmap" >
+            <pixmap resource="customwidgets.qrc" >:/customwidgets/generic/data/speaker.png</pixmap>
+           </property>
+           <property name="alignment" >
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2" >
+          <widget class="QLabel" name="labelSpeaker" >
+           <property name="text" >
+            <string>Speakers</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="3" colspan="2" >
+          <widget class="QComboBox" name="comboSpeakerDevice" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+             <horstretch>1</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
+         </item>
+         <item rowspan="2" row="4" column="3" colspan="2" >
+          <widget class="QSlider" name="sliderSpeakerVolume" >
+           <property name="sizePolicy" >
+            <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+             <horstretch>1</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+         <item rowspan="2" row="4" column="2" >
+          <widget class="QLabel" name="labelSpeakerVolume" >
+           <property name="text" >
+            <string>Volume</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0" colspan="4" >
+          <spacer name="horizontalSpacer_4" >
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>200</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="7" column="4" >
+          <widget class="QPushButton" name="buttonTestCall" >
+           <property name="minimumSize" >
+            <size>
+             <width>150</width>
+             <height>29</height>
+            </size>
+           </property>
+           <property name="text" >
+            <string>Make a test call</string>
+           </property>
+           <property name="icon" >
+            <iconset resource="customwidgets.qrc" >
+             <normaloff>:/customwidgets/data/phone.png</normaloff>:/customwidgets/data/phone.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0" colspan="5" >
+          <widget class="Line" name="line_2" >
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="1" >
+        <spacer name="horizontalSpacer_5" >
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>181</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="0" >
+        <spacer name="verticalSpacer_7" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>267</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabNotifications" >
+      <attribute name="title" >
+       <string>Alerts and Messages</string>
+      </attribute>
+      <attribute name="icon" >
+       <iconset resource="customwidgets.qrc" >
+        <normaloff>:/customwidgets/data/options/notifications.png</normaloff>:/customwidgets/data/options/notifications.png</iconset>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_9" >
+       <item>
+        <widget class="QLabel" name="label_11" >
+         <property name="text" >
+          <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-weight:600;">Alerts and Messages:&lt;/span> set up how Joim tells you about what's going on&lt;/p>&lt;/body>&lt;/html></string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupCallAlert" >
+         <property name="title" >
+          <string>When someone calls me...</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6" >
+          <item>
+           <widget class="QRadioButton" name="radioJoimCallAlert" >
+            <property name="text" >
+             <string>Show Joim call alert</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="radioSystemAlert" >
+            <property name="text" >
+             <string>Show system notification</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkPopupOnContactRequest" >
+         <property name="text" >
+          <string>Popup a window when somebody adds me to their contacts list</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupNotifications" >
+         <property name="title" >
+          <string>Show a notification when someone...</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4" >
+          <item>
+           <widget class="QCheckBox" name="checkNotificationContactOnline" >
+            <property name="text" >
+             <string>comes online</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkNotificationChatRequest" >
+            <property name="text" >
+             <string>wants to chat</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkNotificationReceivingFile" >
+            <property name="text" >
+             <string>sends me a file</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkNotificationVoicemail" >
+            <property name="text" >
+             <string>leaves me a voicemail</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_4" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>177</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabSounds" >
+      <attribute name="title" >
+       <string>Sounds</string>
+      </attribute>
+      <attribute name="icon" >
+       <iconset resource="customwidgets.qrc" >
+        <normaloff>:/customwidgets/data/options/sounds.png</normaloff>:/customwidgets/data/options/sounds.png</iconset>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_6" >
+       <item row="0" column="0" colspan="2" >
+        <widget class="QLabel" name="label_3" >
+         <property name="text" >
+          <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-weight:600;">Sounds:&lt;/span> set for which events you want a sound notification&lt;/p>&lt;/body>&lt;/html></string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <layout class="QGridLayout" name="gridLayout_5" >
+         <item row="0" column="0" >
+          <widget class="QLabel" name="labelSoundEvents" >
+           <property name="text" >
+            <string>Select event:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1" colspan="2" >
+          <widget class="QLabel" name="labelSound" >
+           <property name="text" >
+            <string>Choose which sound to play</string>
+           </property>
+          </widget>
+         </item>
+         <item rowspan="3" row="1" column="0" >
+          <widget class="QListWidget" name="listSoundEvents" >
+           <property name="minimumSize" >
+            <size>
+             <width>300</width>
+             <height>0</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" colspan="2" >
+          <widget class="QComboBox" name="comboSound" />
+         </item>
+         <item row="2" column="1" colspan="2" >
+          <spacer name="verticalSpacer_5" >
+           <property name="orientation" >
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="3" column="1" >
+          <widget class="QPushButton" name="buttonMuteSounds" >
+           <property name="text" >
+            <string>Mute all sounds</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2" >
+          <widget class="QPushButton" name="buttonResetSounds" >
+           <property name="text" >
+            <string>Reset to defaults</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="1" >
+        <spacer name="horizontalSpacer_3" >
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>72</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="0" >
+        <spacer name="verticalSpacer_6" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>221</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabBlocked" >
+      <attribute name="title" >
+       <string>Blocked Users</string>
+      </attribute>
+      <attribute name="icon" >
+       <iconset resource="customwidgets.qrc" >
+        <normaloff>:/customwidgets/data/options/blocked-users.png</normaloff>:/customwidgets/data/options/blocked-users.png</iconset>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_4" >
+       <item row="0" column="0" colspan="2" >
+        <widget class="QLabel" name="label_2" >
+         <property name="text" >
+          <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+&lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
+p, li { white-space: pre-wrap; }
+&lt;/style>&lt;/head>&lt;body style=" font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;">
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">&lt;span style=" font-weight:600;">Blocked Users:&lt;/span> keep individuals from contacting you&lt;/p>&lt;/body>&lt;/html></string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <layout class="QGridLayout" name="gridLayout_3" >
+         <item row="0" column="0" >
+          <widget class="QLabel" name="labelBlockedPersons" >
+           <property name="text" >
+            <string>Currently blocked:</string>
+           </property>
+          </widget>
+         </item>
+         <item rowspan="2" row="1" column="0" >
+          <widget class="QListView" name="listBlockedPersons" >
+           <property name="minimumSize" >
+            <size>
+             <width>300</width>
+             <height>0</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1" >
+          <widget class="QPushButton" name="buttonUnblockPerson" >
+           <property name="text" >
+            <string>Unblock this person</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1" >
+          <spacer name="verticalSpacer_2" >
+           <property name="orientation" >
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="3" column="0" >
+          <widget class="QLabel" name="labelBlockPerson" >
+           <property name="text" >
+            <string>You can prevent a person from contacting you by selecting their name from the list below, or by entering their Joim or Jabber ID.</string>
+           </property>
+           <property name="wordWrap" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0" >
+          <widget class="QComboBox" name="editBlockPerson" >
+           <property name="editable" >
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1" >
+          <widget class="QPushButton" name="buttonBlockPerson" >
+           <property name="text" >
+            <string>Block this person</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="1" >
+        <spacer name="horizontalSpacer_2" >
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>177</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="0" >
+        <spacer name="verticalSpacer_3" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>143</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabAccounts" >
+      <attribute name="title" >
+       <string>Accounts</string>
+      </attribute>
+      <attribute name="icon" >
+       <iconset resource="customwidgets.qrc" >
+        <normaloff>:/customwidgets/data/options/accounts.png</normaloff>:/customwidgets/data/options/accounts.png</iconset>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons" >
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AdvancedTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>tools/customwidgets/generic/advancedtabwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>YaLinkButton</class>
+   <extends>QPushButton</extends>
+   <header>yalinkbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="customwidgets.qrc" />
+ </resources>
+ <connections/>
+</ui>

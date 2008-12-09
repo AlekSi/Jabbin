@@ -1,5 +1,15 @@
 <RCC>
   <qresource prefix="/customwidgets" >
+    <file>data/options/accounts.png</file>
+    <file>data/window_background_crop.png</file>
+    <file>data/window_background.png</file>
+    <file>generic/data/panel.png</file>
+    <file>data/options/general.png</file>
+    <file>data/options/sounds.png</file>
+    <file>data/options/notifications.png</file>
+    <file>data/options/blocked-users.png</file>
+    <file>data/options/audio.png</file>
+    <file>data/options/appearance.png</file>
     <file>data/phonebook/undefined.png</file>
     <file>data/phonebook/male.png</file>
     <file>data/phonebook/female.png</file>

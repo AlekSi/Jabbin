@@ -48,7 +48,8 @@ class YaTrayIcon;
 class StatusMenu;
 class YaSettingsButton;
 class YaInformer;
-class YaPreferences;
+// class YaPreferences; // replaced with OptionsDialog
+class OptionsDialog;
 class YaDayUse;
 
 namespace XMPP {
@@ -181,7 +182,10 @@ private:
 	// QTimer* updateFriendsFrameVisibilityTimer_;
 	YaWindowBackground background_;
 	Ui::MainWindow ui_;
-	QPointer<YaPreferences> preferences_;
+
+
+	// QPointer<YaPreferences> preferences_; // replaced with OptionsDialog
+        QPointer < OptionsDialog > preferences_;
 };
 
 #endif

@@ -80,6 +80,7 @@
 #include "yadayuse.h"
 
 #include "mainwin_p.h"
+#include "optionsdialog.h"
 
 static const QString lastLoggedInStatusTypeOptionPath = "options.ya.last-logged-in-status-type";
 // static const QString tinyContactsOptionPath = "options.ya.main-window.contact-list.tiny-contacts";
@@ -1064,7 +1065,7 @@ void YaMainWin::createPreferences()
 	if (preferences_)
 		return;
 
-	preferences_ = new YaPreferences();
+	preferences_ = new OptionsDialog(); // new YaPreferences();
 	preferences_->setController(psi_);
 }
 
@@ -1077,8 +1078,8 @@ void YaMainWin::toggleAccounts()
 void YaMainWin::togglePreferences()
 {
 	createPreferences();
-	preferences_->moveToCenterOfScreen();
-	preferences_->activate();
+	// preferences_->moveToCenterOfScreen();
+	// preferences_->activate();
 	preferences_->openPreferences();
 	bringToFront(preferences_);
 }
