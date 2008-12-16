@@ -26,7 +26,11 @@
 #include <QPoint>
 #include <QToolButton>
 
-#define DEFAULT_BORDER_SIZE 4
+#include <QBitmap>
+#include <QPixmap>
+#include <QPainter>
+
+#define DEFAULT_BORDER_SIZE 2
 #define HEADER_SIZE 20
 
 // StyledWindow::Private
@@ -108,6 +112,7 @@ public:
         addTitlebarItem(Title, QIcon());
         titlebarItems[Title]->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred));
         titlebarItems[Title]->setText(q->windowTitle());
+        titlebarItems[Title]->setObjectName("TitlebarTitle");
 
         titlebarItems[Title]->setStyleSheet(
             "QToolButton {         \
@@ -129,6 +134,7 @@ public:
         button->setToolTip(tooltip);
         button->setStyleSheet("QToolButton { border: none; }");
         button->installEventFilter(q);
+        button->setObjectName("Titlebar");
 
         titlebarItems[coordinate] = button;
 
@@ -245,6 +251,17 @@ void StyledWindow::resizeEvent(QResizeEvent * event)
 
     if (d->borderLayout) {
         d->borderLayout->setGeometry(QRect(QPoint(), event->size()));
+
+        QRegion region;
+        QRect rect(QPoint(), size());
+
+        region += rect.adjusted(d->borderSize * 2, 0, - d->borderSize * 2, 0);
+        region += rect.adjusted(0, d->borderSize * 2, 0, 0);// - d->borderSize * 2);
+        QRect corner(rect.topLeft(), QSize(d->borderSize * 4, d->borderSize * 4));
+        region += QRegion(corner, QRegion::Ellipse);
+        corner.moveTopRight(rect.topRight());
+        region += QRegion(corner, QRegion::Ellipse);
+        setMask(region);
     }
 }
 

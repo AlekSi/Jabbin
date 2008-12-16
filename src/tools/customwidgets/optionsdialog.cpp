@@ -33,8 +33,8 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
     : q(parent), controller(NULL)
 {
     setupUi(parent);
-    // tabs->setViewType(AdvancedTabBar::ListView);
-    // tabs->setTabBarThickness(200);
+    tabs->setViewType(AdvancedTabBar::ListView);
+    tabs->setTabBarThickness(200);
 
     connect(buttonBox, SIGNAL(clicked(QAbstractButton *)),
                 this, SLOT(buttonClicked(QAbstractButton *)));
