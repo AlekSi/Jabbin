@@ -26,15 +26,48 @@
 #include "psicontactlist.h"
 #include "common.h"
 
+#include <phonon/objectdescription.h>
+#include <phonon/backendcapabilities.h>
+
 OptionsDialog::Private::Private(OptionsDialog * parent)
     : q(parent), controller(NULL)
 {
     setupUi(parent);
-    tabs->setViewType(AdvancedTabBar::ListView);
-    tabs->setTabBarThickness(200);
+    // tabs->setViewType(AdvancedTabBar::ListView);
+    // tabs->setTabBarThickness(200);
 
     connect(buttonBox, SIGNAL(clicked(QAbstractButton *)),
                 this, SLOT(buttonClicked(QAbstractButton *)));
+
+    // Avatars combo
+    comboContactListAvatars->addItem(tr("Auto-sized"), 1);
+    comboContactListAvatars->addItem(tr("Big"), 2);
+    comboContactListAvatars->addItem(tr("Small"), 3);
+
+    // Chat bg combo
+    QMap<QString, QString> m;
+    m["carbon.png"] = tr("Carbon");
+    m["orange.png"] = tr("Orange");
+    m["pinky.png"] = tr("Pinky");
+    m["seawater.png"] = tr("Sea water");
+    m["silver.png"] = tr("Silver");
+    m["sky.png"] = tr("Sky");
+    m["office.png"] = tr("Office");
+
+    comboChatBackground->addItem(tr("Office"), "office.png");
+
+    foreach(QString b, YaWindowBackground::funnyBackgrounds()) {
+        Q_ASSERT(m.contains(b));
+        comboChatBackground->addItem(m[b], b);
+    }
+
+    comboChatBackground->addItem(tr("Random"), "random");
+
+    // audio devices
+    foreach (Phonon::AudioOutputDevice dev, Phonon::BackendCapabilities::availableAudioOutputDevices()) {
+        comboSpeakerDevice->addItem(dev.description() + " (" + dev.name() + ")");
+    }
+
 }
 
 void OptionsDialog::Private::buttonClicked(QAbstractButton * object)
@@ -50,8 +83,9 @@ void OptionsDialog::Private::buttonClicked(QAbstractButton * object)
 }
 
 OptionsDialog::OptionsDialog(QWidget * parent)
-    : YaWindow(parent), d(new Private(this))
+    : StyledWindow(parent), d(new Private(this))
 {
+    setUseCustomDecorations(true);
 }
 
 OptionsDialog::~OptionsDialog()
@@ -74,7 +108,7 @@ void OptionsDialog::ok()
 void OptionsDialog::load()
 {
 #define getOption(A, B) PsiOptions::instance()->getOption(A).to##B ()
-    // General page
+    // General Settings page
     bool value = getOption("options.general.contact.doubleclick.call", Bool);
     d->radioContactDoubleClickCall->setChecked(value);
     d->radioContactDoubleClickChat->setChecked(!value);
@@ -83,16 +117,45 @@ void OptionsDialog::load()
     d->editStatusDND->setValue(getOption("options.general.status.auto.dnd", Int));
     d->editStatusOffline->setValue(getOption("options.general.status.auto.offline", Int));
 
-    d->checkAutostart->setChecked(getOption("options.general.autostart", Bool));
+#if defined(Q_WS_WIN)
+    // TODO: needs testing
+    QSettings autoStartSettings(QSettings::NativeFormat, QSettings::UserScope, "Microsoft", "Windows");
+    d->checkAutostart->setChecked(autoStartSettings.contains(autoStartRegistryKey));
+#elif defined(Q_WS_X11)
+    QString home = QDir::homePath();
+    // gnome (and possibly others)
+    bool autorunGnome = QFile::exists(home + "/.config/autostart/joim.desktop");
+    // kde
+    bool autorunKDE = QFile::exists(home + "/.kde/Autostart/joim.desktop") ||
+                      QFile::exists(home + "/.kde4/Autostart/joim.desktop");
+    d->checkAutostart->setChecked(autorunKDE && autorunGnome);
+    if (autorunGnome != autorunKDE) {
+        d->checkAutostart->setCheckState(Qt::PartiallyChecked);
+    }
+#else
+    ui_.startAutomatically->hide();
+#endif
+
+    d->checkNotificationContactOnline->setChecked(getOption("options.notifications.contact-online", Bool));
+
     d->comboLanguage->setCurrentText(getOption("options.general.language", String));
 
     // Appearance page
     d->checkUseOfficeBackground->setChecked(getOption("options.ya.office-background", Bool));
     d->checkShowContactListGroups->setChecked(getOption("options.ya.main-window.contact-list.show-groups", Bool));
-    int avatarStyle = getOption("options.ya.main-window.contact-list.avatar-style", Int);
-    d->checkEnableContactListAvatars->setChecked(avatarStyle != 0);
 
-    d->checkCtrlEnterSendsChatMessages->setChecked(ShortcutManager::instance()->shortcuts("chat.send").contains(QKeySequence(Qt::CTRL + Qt::Key_Return)));
+    int avatarStyle = getOption("options.ya.main-window.contact-list.avatar-style", Int);
+    d->checkEnableContactListAvatars->setChecked(avatarStyle);
+    d->comboContactListAvatars->setEnabled(avatarStyle);
+    if (avatarStyle != 0) {
+        d->comboContactListAvatars->setCurrentIndex(
+            d->comboContactListAvatars->findData(avatarStyle));
+    }
+
+    d->checkCtrlEnterSendsChatMessages->setChecked(
+            ShortcutManager::instance()->shortcuts("chat.send").contains(
+                QKeySequence(Qt::CTRL + Qt::Key_Return)));
+
     d->comboChatBackground->setCurrentIndex(
             d->comboChatBackground->findData(getOption("options.ya.chat-background", String)
             ));
@@ -108,8 +171,25 @@ void OptionsDialog::load()
     }
     d->checkLogMessageHistory->setChecked(logEnabled);
 
-    // TODO: Font settings...
+    QFont font;
+    font.fromString(option.font[2]);
+    d->comboFont->setCurrentFont(font);
+    d->editFontSize->setValue(font.pointSize());
 
+    // Audio settings page
+    // Nothing at the moment, we don't use Phonon for talk
+    // (we can not yet, no input support)
+
+    // Alerts and Messages page
+    value = getOption("options.notifications.joim-popup", Bool);
+    d->radioJoimCallAlert->setChecked(value);
+    d->radioSystemCallAlert->setChecked(!value);
+
+    d->checkPopupOnContactRequest->setChecked(getOption("options.notifications.friend-request", Bool));
+    d->checkNotificationContactOnline->setChecked(getOption("options.notifications.contact-online", Bool));
+    d->checkNotificationChatRequest->setChecked(getOption("options.notifications.chat-request", Bool));
+    d->checkNotificationReceivingFile->setChecked(getOption("options.notifications.receiving-file", Bool));
+    d->checkNotificationVoicemail->setChecked(getOption("options.notifications.voicemail", Bool));
 
 
 #undef getOption

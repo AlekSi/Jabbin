@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>693</width>
-    <height>530</height>
+    <width>669</width>
+    <height>524</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -67,10 +67,16 @@ QTabWidget::pane {
 }
 
 OptionsDialog {
-	background-image: url(:/customwidgets/data/window_background.png);
+    border: none;
+	background-image: url(:/customwidgets/data/window_background_crop.png);
     background-repeat: repeat-x;
     background-color: #d5e6f3;
-    border: 4px solid 99b9d2;
+    background-attachment: fixed;
+    background-position: top left;
+}
+
+QWidget#Border {
+    background:  #99b9d2;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" >
@@ -78,28 +84,12 @@ OptionsDialog {
     <number>0</number>
    </property>
    <item>
-    <spacer name="verticalSpacer_9" >
-     <property name="orientation" >
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType" >
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0" >
-      <size>
-       <width>20</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item>
     <widget class="AdvancedTabWidget" name="tabs" >
      <property name="tabPosition" >
       <enum>QTabWidget::West</enum>
      </property>
      <property name="currentIndex" >
-      <number>6</number>
+      <number>0</number>
      </property>
      <property name="iconSize" >
       <size>
@@ -377,7 +367,7 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
-          <item rowspan="6" row="0" column="4" >
+          <item rowspan="6" row="0" column="5" >
            <spacer name="horizontalSpacer_7" >
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
@@ -429,13 +419,6 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
-          <item row="3" column="2" colspan="2" >
-           <widget class="YaLinkButton" name="buttonClearMessageHistory" >
-            <property name="text" >
-             <string>Clear Message History</string>
-            </property>
-           </widget>
-          </item>
           <item row="4" column="0" colspan="4" >
            <widget class="QLabel" name="labelFont" >
             <property name="sizePolicy" >
@@ -454,6 +437,13 @@ p, li { white-space: pre-wrap; }
           </item>
           <item row="5" column="3" >
            <widget class="QSpinBox" name="editFontSize" />
+          </item>
+          <item row="3" column="2" colspan="2" >
+           <widget class="QPushButton" name="buttonClearLog" >
+            <property name="text" >
+             <string>Clear Message History</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -727,7 +717,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="radioSystemAlert" >
+           <widget class="QRadioButton" name="radioSystemCallAlert" >
             <property name="text" >
              <string>Show system notification</string>
             </property>
@@ -1044,14 +1034,26 @@ p, li { white-space: pre-wrap; }
    <header>tools/customwidgets/generic/advancedtabwidget.h</header>
    <container>1</container>
   </customwidget>
-  <customwidget>
-   <class>YaLinkButton</class>
-   <extends>QPushButton</extends>
-   <header>yalinkbutton.h</header>
-  </customwidget>
  </customwidgets>
  <resources>
   <include location="customwidgets.qrc" />
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>checkEnableContactListAvatars</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>comboContactListAvatars</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>108</x>
+     <y>158</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>186</x>
+     <y>158</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

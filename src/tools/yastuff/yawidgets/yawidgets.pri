@@ -10,6 +10,7 @@ SOURCES += \
 	$$PWD/newselfavatar/yaselfmoodaction.cpp \
 	$$PWD/../../customwidgets/selfmood.cpp \
 	$$PWD/../../customwidgets/selfavatar.cpp \
+	$$PWD/../../customwidgets/generic/styledwindow.cpp \
 	$$PWD/../../customwidgets/generic/advancedlineedit.cpp \
 	$$PWD/../../customwidgets/generic/advancedtabwidget.cpp \
 	$$PWD/../../customwidgets/generic/advancedtabbar.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
 	$$PWD/newselfavatar/yaselfmoodaction.h \
 	$$PWD/../../customwidgets/selfmood.h \
 	$$PWD/../../customwidgets/selfavatar.h \
+	$$PWD/../../customwidgets/generic/styledwindow.h \
 	$$PWD/../../customwidgets/generic/advancedlineedit.h \
 	$$PWD/../../customwidgets/generic/advancedtabwidget.h \
 	$$PWD/../../customwidgets/generic/advancedtabbar.h \

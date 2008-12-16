@@ -28,9 +28,6 @@ public:
     OptionsDialog * q;
     PsiCon * controller;
 
-    void openPreferences();
-    void openAccounts();
-
 public Q_SLOTS:
     void buttonClicked(QAbstractButton * button);
 

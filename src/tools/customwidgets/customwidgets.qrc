@@ -1,5 +1,13 @@
 <RCC>
   <qresource prefix="/customwidgets" >
+    <file>generic/data/window_button_minimize.png</file>
+    <file>generic/data/window_button_minimize_hover.png</file>
+    <file>generic/data/window_button_maximize.png</file>
+    <file>generic/data/window_button_maximize_hover.png</file>
+    <file>generic/data/window_button_config.png</file>
+    <file>generic/data/window_button_config_hover.png</file>
+    <file>generic/data/window_button_close.png</file>
+    <file>generic/data/window_button_close_hover.png</file>
     <file>data/options/accounts.png</file>
     <file>data/window_background_crop.png</file>
     <file>data/window_background.png</file>

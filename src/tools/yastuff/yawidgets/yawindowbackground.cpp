@@ -222,3 +222,4 @@ QStringList YaWindowBackground::funnyBackgrounds()
 
 	return result;
 }
+

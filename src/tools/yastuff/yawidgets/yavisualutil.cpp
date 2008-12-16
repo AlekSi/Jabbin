@@ -192,7 +192,7 @@ QColor Ya::VisualUtil::tabHighlightColor()
 
 QColor Ya::VisualUtil::highlightColor()
 {
-	return PsiOptions::instance()->getOption("options.ya.office-background").toBool() ? 
+	return PsiOptions::instance()->getOption("options.ya.office-background").toBool() ?
 		QColor(0XF3, 0XF8, 0XFF) : QColor(0XFE, 0XF5, 0XCF);
 }
 
@@ -203,19 +203,19 @@ QColor Ya::VisualUtil::highlightBackgroundColor()
 
 QColor Ya::VisualUtil::hoverHighlightColor()
 {
-	return PsiOptions::instance()->getOption("options.ya.office-background").toBool() ? 
+	return PsiOptions::instance()->getOption("options.ya.office-background").toBool() ?
 		blueBackgroundColor() : yellowBackgroundColor();
 }
 
 QColor Ya::VisualUtil::downlightColor()
 {
-	return PsiOptions::instance()->getOption("options.ya.office-background").toBool() ? 
+	return PsiOptions::instance()->getOption("options.ya.office-background").toBool() ?
 		blueBackgroundColor() : yellowBackgroundColor();
 }
 
 QColor Ya::VisualUtil::deleteConfirmationBackgroundColor()
 {
-	return PsiOptions::instance()->getOption("options.ya.office-background").toBool() ? 
+	return PsiOptions::instance()->getOption("options.ya.office-background").toBool() ?
 		QColor(0x44, 0x66, 0xDD) : QColor(0xDD, 0x66, 0x44);
 }
 

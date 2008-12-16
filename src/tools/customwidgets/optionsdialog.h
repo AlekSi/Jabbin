@@ -21,10 +21,10 @@
 #define C_OPTIONSDIALOG_H
 
 #include <QDialog>
-#include "yawindow.h"
+#include "generic/styledwindow.h"
 #include "psicon.h"
 
-class OptionsDialog : public YaWindow {
+class OptionsDialog : public StyledWindow {
     Q_OBJECT
 
 public:
