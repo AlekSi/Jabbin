@@ -125,9 +125,9 @@ public:
         borderLayout->addLayout(titlebarLayout, 1, 1);
     }
 
-    void addTitlebarItem(qreal coordinate, const QIcon & icon, const QString & tooltip = QString())
+    QToolButton * addTitlebarItem(qreal coordinate, const QIcon & icon, const QString & tooltip = QString())
     {
-        if (titlebarItems.contains(coordinate)) return;
+        if (titlebarItems.contains(coordinate)) return NULL;
 
         QToolButton * button = new QToolButton(q);
         button->setIcon(icon);
@@ -145,12 +145,13 @@ public:
             iterator.next();
             if (coordinate < iterator.key()) {
                 titlebarLayout->insertWidget(i - 1, button);
-                return;
+                return button;
             }
             ++i;
         }
 
         titlebarLayout->addWidget(button);
+        return button;
     }
 
     void changeBorder(int delta, int hdr = 0)
@@ -280,7 +281,7 @@ bool StyledWindow::isTitlebarItemVisible(TitlebarItem item) const
     return isTitlebarItemVisible((qreal)item);
 }
 
-void StyledWindow::addTitlebarItem(qreal coordinate, const QIcon & icon, const QString & tooltip)
+QToolButton * StyledWindow::addTitlebarItem(qreal coordinate, const QIcon & icon, const QString & tooltip)
 {
     d->addTitlebarItem(coordinate, icon, tooltip);
 }

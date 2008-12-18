@@ -95,7 +95,7 @@ public:
      * @param icon icon for the item
      * @param tooltip tooltip for the item
      */
-    void addTitlebarItem(qreal coordinate, const QIcon & icon,
+    QToolButton * addTitlebarItem(qreal coordinate, const QIcon & icon,
             const QString & tooltip = QString());
 
     /**

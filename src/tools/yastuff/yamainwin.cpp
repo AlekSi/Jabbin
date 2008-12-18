@@ -408,6 +408,7 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 	settingsButton_ = new YaSettingsButton(this);
 	// settingsButton_->setWidgetForTopButton(extra()); // ivan: temp
 	// settingsButton_->setMenu(settingsMenu_); // ivan: temp
+	// getConfigButton()->setMenu(settingsMenu_);
 	settingsButton_->setGeometry(QRect(0, 0, 0, 0));
 #endif
 
