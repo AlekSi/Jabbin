@@ -509,7 +509,7 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 	connect(psi_->yaOnline(), SIGNAL(showYapsiPreferences()), SLOT(togglePreferences()));
 #endif
 
-	background_ = YaWindowBackground(YaWindowBackground::Roster);
+	// ivan // background_ = YaWindowBackground(YaWindowBackground::Roster);
 	setMinimizeEnabled(false);
 	setMaximizeEnabled(false);
 
@@ -723,6 +723,7 @@ bool YaMainWin::eventFilter(QObject* obj, QEvent* e)
 	if (filtering)
 		return false;
 
+#if 0 // ivan: commented out the paint code
 	if (e->type() == QEvent::Paint && (obj == ui_.logoPage || obj == ui_.selfWidgetsPage)) {
 		QWidget* w = static_cast<QWidget*>(obj);
 		QPainter p(w);
@@ -731,7 +732,7 @@ bool YaMainWin::eventFilter(QObject* obj, QEvent* e)
 		paintOnlineLogo(&p);
 		return true;
 	}
-#if 0
+if 0
 	else if (e->type() == QEvent::MouseMove ||
 	         e->type() == QEvent::MouseButtonRelease ||
 	         e->type() == QEvent::MouseButtonPress)
@@ -1003,12 +1004,14 @@ void YaMainWin::paintOnlineLogo(QPainter* p)
 	p->drawText(QRect(13 + 16 + 2, 4, width(), 23), Qt::AlignLeft | Qt::AlignVCenter, tr("Joim"));
 }
 
+/* ivan
 void YaMainWin::paintEvent(QPaintEvent*)
 {
 	QPainter p(this);
 	background_.paint(&p, rect(), isActiveWindow());
 	paintOnlineLogo(&p);
 }
+*/
 
 void YaMainWin::filterContacts()
 {

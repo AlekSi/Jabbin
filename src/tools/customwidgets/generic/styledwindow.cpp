@@ -287,6 +287,7 @@ void StyledWindow::addTitlebarItem(qreal coordinate, const QIcon & icon, const Q
 
 void StyledWindow::showTitlebarItem(qreal coordinate, bool show)
 {
+    qDebug() << "showTitlebarItem" << coordinate << show << d->titlebarItems;
     if (!d->titlebarItems.contains(coordinate)) return;
     d->titlebarItems[coordinate]->setVisible(show);
 }

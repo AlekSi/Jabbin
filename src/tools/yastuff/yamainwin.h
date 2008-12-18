@@ -150,7 +150,7 @@ protected:
 	// reimplemented
 	void closeEvent(QCloseEvent*);
 	bool eventFilter(QObject*, QEvent*);
-	void paintEvent(QPaintEvent*);
+// ivan //	void paintEvent(QPaintEvent*);
 	void repaintBackground();
 	bool expandWidthWhenMaximized() const;
 	void contextMenuEvent(QContextMenuEvent*);
