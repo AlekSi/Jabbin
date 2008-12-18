@@ -207,8 +207,8 @@ public:
 };
 
 // AdvancedTabWidget
-StyledWindow::StyledWindow(QWidget *parent)
-    : QWidget(parent), d(new Private(this))
+StyledWindow::StyledWindow(QWidget *parent, Qt::WindowFlags f)
+    : QWidget(parent, f), d(new Private(this))
 {
 }
 

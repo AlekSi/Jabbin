@@ -26,7 +26,8 @@
 #include <QString>
 #include <QStringList>
 
-#include "yawindow.h"
+// #include "yawindow.h"
+#include "advancedwindow.h"
 
 #include "advwidget.h"
 #include "ui_yamainwindow.h"
@@ -56,7 +57,7 @@ namespace XMPP {
 	class Status;
 }
 
-class YaMainWin : public YaWindow
+class YaMainWin : public AdvancedWindow //YaWindow
 {
 	Q_OBJECT
 private:

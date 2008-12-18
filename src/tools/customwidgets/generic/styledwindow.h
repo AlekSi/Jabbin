@@ -47,7 +47,7 @@ public:
     /**
      * Creates a new StyledWindow
      */
-    StyledWindow(QWidget *parent = 0);
+    StyledWindow(QWidget *parent = 0, Qt::WindowFlags f = 0);
 
     /**
      * Destroys this StyledWindow

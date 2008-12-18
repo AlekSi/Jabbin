@@ -16,6 +16,7 @@ SOURCES += \
 	$$PWD/../../customwidgets/generic/advancedtabbar.cpp \
 	$$PWD/../../customwidgets/generic/dialpad.cpp \
 	$$PWD/../../customwidgets/generic/notificationpanel.cpp \
+	$$PWD/../../customwidgets/advancedwindow.cpp \
 	$$PWD/../../customwidgets/calldialog.cpp \
 	$$PWD/../../customwidgets/optionsdialog.cpp \
 	$$PWD/../../customwidgets/models/callhistory.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
 	$$PWD/../../customwidgets/generic/advancedtabbar.h \
 	$$PWD/../../customwidgets/generic/dialpad.h \
 	$$PWD/../../customwidgets/generic/notificationpanel.h \
+	$$PWD/../../customwidgets/advancedwindow.h \
 	$$PWD/../../customwidgets/optionsdialog.h \
 	$$PWD/../../customwidgets/optionsdialog_p.h \
 	$$PWD/../../customwidgets/calldialog.h \

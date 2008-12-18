@@ -259,7 +259,7 @@ private:
 #endif
 
 YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
-	: YaWindow(0, (_onTop ? Qt::WStyle_StaysOnTop : Qt::Widget) | (_asTool ? Qt::WStyle_Tool : Qt::Widget))
+	: AdvancedWindow(0, (_onTop ? Qt::WStyle_StaysOnTop : Qt::Widget) | (_asTool ? Qt::WStyle_Tool : Qt::Widget))
 	, psi_(psi)
 	, yaDayUse_(0)
 	, informersModel_(0)
@@ -406,13 +406,13 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 
 #ifndef Q_WS_MAC
 	settingsButton_ = new YaSettingsButton(this);
-	settingsButton_->setWidgetForTopButton(extra());
-	settingsButton_->setMenu(settingsMenu_);
+	// settingsButton_->setWidgetForTopButton(extra()); // ivan: temp
+	// settingsButton_->setMenu(settingsMenu_); // ivan: temp
 	settingsButton_->setGeometry(QRect(0, 0, 0, 0));
 #endif
 
 #ifdef YAPSI_ACTIVEX_SERVER
-	YaSidebarButton* sidebarButton = new YaSidebarButton(extra());
+	// YaSidebarButton* sidebarButton = new YaSidebarButton(extra()); // ivan: temp
 	connect(sidebarButton, SIGNAL(clicked()), psi_->yaOnline(), SLOT(showSidebar()));
 #endif
 
@@ -640,7 +640,7 @@ void YaMainWin::accountCountChanged()
 
 	ui_.selfName->setContactList(psi_->contactList());
 	ui_.selfUserpic->setContactList(psi_->contactList());
-	ui_.selfName->setWindowExtra(windowExtra());
+	// ui_.selfName->setWindowExtra(windowExtra()); // ivan: temp
 
 	// ui_.selfName->setVisible(!psi_->contactList()->enabledAccounts().isEmpty());
 	// ui_.selfMood->setVisible(!psi_->contactList()->enabledAccounts().isEmpty());
@@ -713,7 +713,8 @@ void YaMainWin::closeEvent(QCloseEvent* e)
 	if (!tray_.isNull() && !tray_->isVisible())
 		quitApplication();
 #endif
-	YaWindow::closeEvent(e);
+	// YaWindow::closeEvent(e);
+	AdvancedWindow::closeEvent(e);
 }
 
 bool YaMainWin::eventFilter(QObject* obj, QEvent* e)
@@ -802,7 +803,8 @@ bool YaMainWin::eventFilter(QObject* obj, QEvent* e)
 	}
 #endif
 
-	return YaWindow::eventFilter(obj, e);
+	// return YaWindow::eventFilter(obj, e);
+	return AdvancedWindow::eventFilter(obj, e);
 }
 
 void YaMainWin::about()
@@ -1055,9 +1057,11 @@ void YaMainWin::activateToShowError(YaInformer* informer)
 
 void YaMainWin::repaintBackground()
 {
+/*
 	YaWindow::repaintBackground();
 	ui_.logoPage->repaint();
 	ui_.selfWidgetsPage->repaint();
+	*/
 }
 
 void YaMainWin::createPreferences()
@@ -1106,7 +1110,8 @@ void YaMainWin::optionChanged(const QString& option)
 		}
 	}
 
-	YaWindow::optionChanged(option);
+	// YaWindow::optionChanged(option);
+	AdvancedWindow::optionChanged(option);
 }
 
 #include "yamainwin.moc"
