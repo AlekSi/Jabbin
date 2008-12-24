@@ -408,7 +408,11 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 	settingsButton_ = new YaSettingsButton(this);
 	// settingsButton_->setWidgetForTopButton(extra()); // ivan: temp
 	// settingsButton_->setMenu(settingsMenu_); // ivan: temp
+	getConfigButton()->setPopupMode(QToolButton::InstantPopup);
 	// getConfigButton()->setMenu(settingsMenu_);
+        connect(
+                getConfigButton(), SIGNAL(clicked()),
+                this, SLOT(showSettingsMenu()));
 	settingsButton_->setGeometry(QRect(0, 0, 0, 0));
 #endif
 
@@ -1116,6 +1120,11 @@ void YaMainWin::optionChanged(const QString& option)
 
 	// YaWindow::optionChanged(option);
 	AdvancedWindow::optionChanged(option);
+}
+
+void YaMainWin::showSettingsMenu()
+{
+    settingsMenu_->popup(QCursor::pos());
 }
 
 #include "yamainwin.moc"

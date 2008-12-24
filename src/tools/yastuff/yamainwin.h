@@ -103,6 +103,8 @@ public slots:
 
 	void showCallDialog();
 
+	void showSettingsMenu();
+
 
 private slots:
 	void accountCountChanged();

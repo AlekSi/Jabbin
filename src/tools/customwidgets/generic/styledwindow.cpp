@@ -250,7 +250,9 @@ void StyledWindow::resizeEvent(QResizeEvent * event)
 {
     QWidget::resizeEvent(event);
 
-    if (d->borderLayout) {
+    if (d->customDecorations) {
+        d->ensureBorderWidgets();
+
         d->borderLayout->setGeometry(QRect(QPoint(), event->size()));
 
         QRegion region;
@@ -283,12 +285,11 @@ bool StyledWindow::isTitlebarItemVisible(TitlebarItem item) const
 
 QToolButton * StyledWindow::addTitlebarItem(qreal coordinate, const QIcon & icon, const QString & tooltip)
 {
-    d->addTitlebarItem(coordinate, icon, tooltip);
+    return d->addTitlebarItem(coordinate, icon, tooltip);
 }
 
 void StyledWindow::showTitlebarItem(qreal coordinate, bool show)
 {
-    qDebug() << "showTitlebarItem" << coordinate << show << d->titlebarItems;
     if (!d->titlebarItems.contains(coordinate)) return;
     d->titlebarItems[coordinate]->setVisible(show);
 }
@@ -360,7 +361,6 @@ bool StyledWindow::eventFilter(QObject * object, QEvent * event)
         } else if ((coordinate = d->titlebarItems.key((QToolButton *)object, Title)) != Title) {
             // Matching all other titlebar elements (except Title)
             if (event->type() == QEvent::MouseButtonRelease) {
-                qDebug() << "click!";
                 if (coordinate == Minimize) {
                     setWindowState(windowState() | Qt::WindowMinimized);
                 } else if (coordinate == Maximize) {
