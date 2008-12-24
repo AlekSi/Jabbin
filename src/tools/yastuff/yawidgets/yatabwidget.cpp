@@ -144,9 +144,9 @@ private:
 YaTabWidget::YaTabWidget(QWidget* parent)
 	: QTabWidget(parent)
 {
-	YaTabWidgetStyle* style = new YaTabWidgetStyle(qApp->style());
-	style->setParent(this);
-	setStyle(style);
+//	YaTabWidgetStyle* style = new YaTabWidgetStyle(qApp->style());
+//	style->setParent(this);
+//	setStyle(style);
 
 	YaTabBar* tabBar = new YaTabBar(this);
 	connect(tabBar, SIGNAL(closeButtonClicked()), SIGNAL(closeButtonClicked()));
@@ -171,23 +171,25 @@ YaTabWidget::~YaTabWidget()
 {
 }
 
-void YaTabWidget::paintEvent(QPaintEvent*)
+void YaTabWidget::paintEvent(QPaintEvent * e)
 {
-	QPainter p(this);
+    QTabWidget::paintEvent(e);
 
-	TabbableWidget* dlg = dynamic_cast<TabbableWidget*>(currentWidget());
-	if (dlg) {
-		dlg->background().paint(&p, rect(), isActiveWindow());
-	}
-
-	if (tabBar()->isVisible()) {
-		QRect r = tabRect();
-		int y = tabBar()->geometry().top();
-		p.fillRect(QRect(QPoint(r.left(), y), r.bottomRight()), static_cast<YaTabBar*>(tabBar())->tabBackgroundColor());
-
-		p.setPen(Ya::VisualUtil::rosterTabBorderColor());
-		p.drawLine(tabBar()->geometry().topLeft(), QPoint(r.right(), y));
-	}
+// ivan //	QPainter p(this);
+// ivan //
+// ivan //	TabbableWidget* dlg = dynamic_cast<TabbableWidget*>(currentWidget());
+// ivan //	if (dlg) {
+// ivan //		dlg->background().paint(&p, rect(), isActiveWindow());
+// ivan //	}
+// ivan //
+// ivan //	if (tabBar()->isVisible()) {
+// ivan //		QRect r = tabRect();
+// ivan //		int y = tabBar()->geometry().top();
+// ivan //		p.fillRect(QRect(QPoint(r.left(), y), r.bottomRight()), static_cast<YaTabBar*>(tabBar())->tabBackgroundColor());
+// ivan //
+// ivan //		p.setPen(Ya::VisualUtil::rosterTabBorderColor());
+// ivan //		p.drawLine(tabBar()->geometry().topLeft(), QPoint(r.right(), y));
+// ivan //	}
 }
 
 QSize YaTabWidget::tabSizeHint() const

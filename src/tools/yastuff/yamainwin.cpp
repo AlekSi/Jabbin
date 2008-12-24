@@ -1065,11 +1065,9 @@ void YaMainWin::activateToShowError(YaInformer* informer)
 
 void YaMainWin::repaintBackground()
 {
-/*
-	YaWindow::repaintBackground();
-	ui_.logoPage->repaint();
-	ui_.selfWidgetsPage->repaint();
-	*/
+	// ivan: // YaWindow::repaintBackground();
+	// ivan: // ui_.logoPage->repaint();
+	// ivan: // ui_.selfWidgetsPage->repaint();
 }
 
 void YaMainWin::createPreferences()

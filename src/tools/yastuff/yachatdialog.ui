@@ -12,6 +12,16 @@
   <property name="windowTitle" >
    <string>Form</string>
   </property>
+  <property name="styleSheet" >
+   <string notr="true" >YaChatDlg, #chatTopFrame {
+	background-image: url(:/customwidgets/data/window_background_crop.png);
+    background-repeat: repeat-x;
+    background-color: #d5e6f3;
+    background-attachment: fixed;
+
+    border: 2px solid #d5e6f3;
+}</string>
+  </property>
   <layout class="QVBoxLayout" >
    <property name="spacing" >
     <number>0</number>

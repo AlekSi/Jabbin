@@ -31,7 +31,7 @@
 
 #include "advwidget.h"
 #include "ui_yamainwindow.h"
-#include "yawindowbackground.h"
+// #include "yawindowbackground.h"
 
 class QMenuBar;
 class QAction;
@@ -183,7 +183,7 @@ private:
 	StatusMenu* statusMenu_;
 	YaSettingsButton* settingsButton_;
 	// QTimer* updateFriendsFrameVisibilityTimer_;
-	YaWindowBackground background_;
+	// YaWindowBackground background_;
 	Ui::MainWindow ui_;
 
 
