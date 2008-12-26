@@ -110,7 +110,7 @@ QToolButton#TitlebarTitle {
          <enum>QTabWidget::West</enum>
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>5</number>
         </property>
         <property name="iconSize" >
          <size>
@@ -485,6 +485,9 @@ p, li { white-space: pre-wrap; }
          </layout>
         </widget>
         <widget class="QWidget" name="tabAudio" >
+         <property name="enabled" >
+          <bool>false</bool>
+         </property>
          <attribute name="title" >
           <string>Audio Settings</string>
          </attribute>

@@ -28,11 +28,25 @@
 
 #include <phonon/objectdescription.h>
 #include <phonon/backendcapabilities.h>
+#include <unistd.h>
+
+static const QString autoStartRegistryKey = "CurrentVersion/Run/joimchat.exe";
 
 OptionsDialog::Private::Private(OptionsDialog * parent)
     : q(parent), controller(NULL)
 {
     setupUi(parent);
+
+    // Hiding unimplemented options
+    tabs->removeTab(tabs->indexOf(tabAudio));
+    tabs->removeTab(tabs->indexOf(tabSounds));
+    labelLanguage->setVisible(false);
+    comboLanguage->setVisible(false);
+    checkUseOfficeBackground->setVisible(false);
+    comboChatBackground->setVisible(false);
+    labelChatBackground->setVisible(false);
+
+    // Init
     tabs->setViewType(AdvancedTabBar::ListView);
     tabs->setTabBarThickness(200);
 
@@ -124,10 +138,10 @@ void OptionsDialog::load()
 #elif defined(Q_WS_X11)
     QString home = QDir::homePath();
     // gnome (and possibly others)
-    bool autorunGnome = QFile::exists(home + "/.config/autostart/joim.desktop");
+    bool autorunGnome = QFile::exists(home + "/.config/autostart/joim");
     // kde
-    bool autorunKDE = QFile::exists(home + "/.kde/Autostart/joim.desktop") ||
-                      QFile::exists(home + "/.kde4/Autostart/joim.desktop");
+    bool autorunKDE = QFile::exists(home + "/.kde/Autostart/joim") ||
+                      QFile::exists(home + "/.kde4/Autostart/joim");
     d->checkAutostart->setChecked(autorunKDE && autorunGnome);
     if (autorunGnome != autorunKDE) {
         d->checkAutostart->setCheckState(Qt::PartiallyChecked);
@@ -135,8 +149,6 @@ void OptionsDialog::load()
 #else
     ui_.startAutomatically->hide();
 #endif
-
-    d->checkNotificationContactOnline->setChecked(getOption("options.notifications.contact-online", Bool));
 
     d->comboLanguage->setCurrentText(getOption("options.general.language", String));
 
@@ -186,6 +198,7 @@ void OptionsDialog::load()
     d->radioSystemCallAlert->setChecked(!value);
 
     d->checkPopupOnContactRequest->setChecked(getOption("options.notifications.friend-request", Bool));
+
     d->checkNotificationContactOnline->setChecked(getOption("options.notifications.contact-online", Bool));
     d->checkNotificationChatRequest->setChecked(getOption("options.notifications.chat-request", Bool));
     d->checkNotificationReceivingFile->setChecked(getOption("options.notifications.receiving-file", Bool));
@@ -205,7 +218,24 @@ void OptionsDialog::save()
     setOption("options.general.status.auto.dnd", d->editStatusDND->value());
     setOption("options.general.status.auto.offline", d->editStatusOffline->value());
 
-    setOption("options.general.autostart", d->checkAutostart->isChecked());
+    bool autostart = d->checkAutostart->isChecked();
+#if defined(Q_WS_WIN)
+    // TODO: needs testing
+    if (autostart) {
+        autoStartSettings.remove(autoStartRegistryKey);
+    } else {
+        autoStartSettings.setValue(autoStartRegistryKey,
+            QCoreApplication::applicationFilePath());
+    }
+#elif defined(Q_WS_X11)
+    QString home = QDir::homePath();
+    symlink(QCoreApplication::applicationFilePath(), home + "/.config/autostart/joim");
+    symlink(QCoreApplication::applicationFilePath(), home + "/.kde/Autostart/joim");
+    symlink(QCoreApplication::applicationFilePath(), home + "/.kde4/Autostart/joim");
+#else
+    // nothing
+#endif
+
     setOption("options.general.language", d->comboLanguage->currentText());
 
     // Appearance page
@@ -225,7 +255,21 @@ void OptionsDialog::save()
         setOption("options.shortcuts.chat.send", vl);
     }
 
-    // TODO: Font settings...
+    QFont font = d->comboFont->currentFont();
+    font.setPointSize(d->editFontSize->value());
+    option.font[2] = d->comboFont->currentFont().toString();
+
+    // Alerts and Messages page
+    setOption("options.notifications.joim-popup", d->radioJoimCallAlert->isChecked());
+
+    setOption("options.notifications.friend-request", d->checkPopupOnContactRequest->isChecked());
+    setOption("options.notifications.contact-online", d->checkNotificationContactOnline->isChecked());
+    setOption("options.notifications.chat-request", d->checkNotificationChatRequest->isChecked());
+    setOption("options.notifications.receiving-file", d->checkNotificationReceivingFile->isChecked());
+    setOption("options.notifications.voicemail", d->checkNotificationVoicemail->isChecked());
+
+
+    //
     if (d->controller)
         d->controller->slotApplyOptions(option);
 #undef setOption
@@ -235,6 +279,8 @@ void OptionsDialog::showEvent(QShowEvent * event)
 {
     Q_UNUSED(event);
     load();
+
+    d->tabs->setCurrentIndex(0);
 }
 
 void OptionsDialog::openPreferences()
