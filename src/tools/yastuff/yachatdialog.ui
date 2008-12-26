@@ -19,7 +19,7 @@
     background-color: #d5e6f3;
     background-attachment: fixed;
 
-    border: 2px solid #d5e6f3;
+    border: 0px solid #99b9d2;
 }</string>
   </property>
   <layout class="QVBoxLayout" >
