@@ -28,7 +28,10 @@
 
 #include <phonon/objectdescription.h>
 #include <phonon/backendcapabilities.h>
+
+#ifdef Q_WS_X11
 #include <unistd.h>
+#endif
 
 static const QString autoStartRegistryKey = "CurrentVersion/Run/joimchat.exe";
 
@@ -229,9 +232,15 @@ void OptionsDialog::save()
     }
 #elif defined(Q_WS_X11)
     QString home = QDir::homePath();
-    symlink(QCoreApplication::applicationFilePath(), home + "/.config/autostart/joim");
-    symlink(QCoreApplication::applicationFilePath(), home + "/.kde/Autostart/joim");
-    symlink(QCoreApplication::applicationFilePath(), home + "/.kde4/Autostart/joim");
+    if (autostart) {
+        symlink(QCoreApplication::applicationFilePath(), home + "/.config/autostart/joim");
+        symlink(QCoreApplication::applicationFilePath(), home + "/.kde/Autostart/joim");
+        symlink(QCoreApplication::applicationFilePath(), home + "/.kde4/Autostart/joim");
+    } else {
+        unlink(home + "/.config/autostart/joim");
+        unlink(home + "/.kde/Autostart/joim");
+        unlink(home + "/.kde4/Autostart/joim");
+    }
 #else
     // nothing
 #endif
