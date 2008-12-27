@@ -224,6 +224,7 @@ void OptionsDialog::save()
     bool autostart = d->checkAutostart->isChecked();
 #if defined(Q_WS_WIN)
     // TODO: needs testing
+    QSettings autoStartSettings(QSettings::NativeFormat, QSettings::UserScope, "Microsoft", "Windows");
     if (autostart) {
         autoStartSettings.remove(autoStartRegistryKey);
     } else {
