@@ -48,6 +48,8 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
     checkUseOfficeBackground->setVisible(false);
     comboChatBackground->setVisible(false);
     labelChatBackground->setVisible(false);
+    labelStatusAway->setVisible(false);
+    editStatusAway->setVisible(false);
 
     // Init
     tabs->setViewType(AdvancedTabBar::ListView);
@@ -133,6 +135,7 @@ void OptionsDialog::load()
     d->editStatusAway->setValue(getOption("options.general.status.auto.away", Int));
     d->editStatusDND->setValue(getOption("options.general.status.auto.dnd", Int));
     d->editStatusOffline->setValue(getOption("options.general.status.auto.offline", Int));
+    d->checkRestoreActiveStatus->setChecked(getOption("options.general.status.auto.restore", Bool));
 
 #if defined(Q_WS_WIN)
     // TODO: needs testing
@@ -220,6 +223,7 @@ void OptionsDialog::save()
     setOption("options.general.status.auto.away", d->editStatusAway->value());
     setOption("options.general.status.auto.dnd", d->editStatusDND->value());
     setOption("options.general.status.auto.offline", d->editStatusOffline->value());
+    setOption("options.general.status.auto.restore", d->checkRestoreActiveStatus->isChecked());
 
     bool autostart = d->checkAutostart->isChecked();
 #if defined(Q_WS_WIN)

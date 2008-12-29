@@ -110,7 +110,7 @@ QToolButton#TitlebarTitle {
          <enum>QTabWidget::West</enum>
         </property>
         <property name="currentIndex" >
-         <number>5</number>
+         <number>0</number>
         </property>
         <property name="iconSize" >
          <size>
@@ -229,6 +229,13 @@ QToolButton#TitlebarTitle {
                 </size>
                </property>
               </spacer>
+             </item>
+             <item row="3" column="0" colspan="2" >
+              <widget class="QCheckBox" name="checkRestoreActiveStatus" >
+               <property name="text" >
+                <string>Restore previous status when I become active again</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>

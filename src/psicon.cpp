@@ -521,12 +521,12 @@ bool PsiCon::init()
 		// 	acc.pass = "foobar";
 		// 	acc.resource = QString::number(i);
 		// 	acc.priority = 0;
-		// 
+		//
 		// 	acc.opt_ignoreSSLWarnings = true;
 		// 	acc.opt_host = true;
 		// 	acc.host = "om.beeonline.ru";
 		// 	acc.port = 5222;
-		// 
+		//
 		// 	d->pro.acc << acc;
 		// }
 
@@ -560,7 +560,7 @@ bool PsiCon::init()
 	//just set a dummy option to trigger saving
 	options->setOption("trigger-save",false);
 	options->setOption("trigger-save",true);
-	
+
 	connect(options, SIGNAL(optionChanged(const QString&)), SLOT(optionsUpdate()));
 
 #ifdef YAPSI
@@ -597,7 +597,7 @@ bool PsiCon::init()
 		d->actionList = new PsiActionList( this );
 
 	PsiConObject* psiConObject = new PsiConObject(this);
-		
+
 	Anim::setMainThread(QThread::currentThread());
 
 	d->iconSelect = new IconSelectPopup(0);
@@ -605,9 +605,9 @@ bool PsiCon::init()
 
 	// setup the main window
 #ifdef YAPSI
-	d->mainwin = new YaMainWin(option.alwaysOnTop, (option.useDock && option.dockToolMW), this, "joimpsimain"); 
+	d->mainwin = new YaMainWin(option.alwaysOnTop, (option.useDock && option.dockToolMW), this, "joimpsimain");
 #else
-	d->mainwin = new MainWin(option.alwaysOnTop, (option.useDock && option.dockToolMW), this, "psimain"); 
+	d->mainwin = new MainWin(option.alwaysOnTop, (option.useDock && option.dockToolMW), this, "psimain");
 #endif
 	d->mainwin->setUseDock(option.useDock);
 
@@ -960,7 +960,7 @@ void PsiCon::doNewBlankMessage()
 	w->show();
 }
 
-// FIXME: smells fishy. Refactor! Probably create a common class for all dialogs and 
+// FIXME: smells fishy. Refactor! Probably create a common class for all dialogs and
 // call optionsUpdate() automatically.
 EventDlg *PsiCon::createEventDlg(const QString &to, PsiAccount *pa)
 {
@@ -1652,7 +1652,7 @@ IconSelectPopup *PsiCon::iconSelectPopup() const
 	return d->iconSelect;
 }
 
-bool PsiCon::filterEvent(const PsiAccount* acc, const PsiEvent* e) const 
+bool PsiCon::filterEvent(const PsiAccount* acc, const PsiEvent* e) const
 {
 #ifdef YAPSI
 #if 0

@@ -25,6 +25,7 @@
 #include <QList>
 #include <QString>
 #include <QStringList>
+#include <QBasicTimer>
 
 // #include "yawindow.h"
 #include "advancedwindow.h"
@@ -156,6 +157,7 @@ protected:
 	void repaintBackground();
 	bool expandWidthWhenMaximized() const;
 	void contextMenuEvent(QContextMenuEvent*);
+        void timerEvent(QTimerEvent * event);
 
 private:
 	PsiAccount* yaAccount() const;
@@ -186,6 +188,14 @@ private:
 	// YaWindowBackground background_;
 	Ui::MainWindow ui_;
 
+	QBasicTimer autoStatusTimer_;
+	QTime lastAction_;
+	QPoint lastActionMousePos_;
+//        int autoAway_;
+        int autoDND_;
+        int autoOffline_;
+        int autoLevel_;
+        XMPP::Status::Type oldStatus_;
 
 	// QPointer<YaPreferences> preferences_; // replaced with OptionsDialog
         QPointer < OptionsDialog > preferences_;
