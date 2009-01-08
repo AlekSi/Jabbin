@@ -63,6 +63,16 @@ QListWidget#AdvancedTabBarList {
     selection-color: black;
 }
 
+QListWidget#AdvancedTabBarList {
+    padding-left: 16px;
+}
+
+QListWidget#AdvancedTabBarList::item {
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 8px;
+}
+
 QListWidget#AdvancedTabBarList::item:selected {
     background-color: white;
     color: black;
