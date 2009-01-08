@@ -106,11 +106,8 @@ QToolButton#TitlebarTitle {
       </property>
       <item>
        <widget class="AdvancedTabWidget" name="tabs" >
-        <property name="tabPosition" >
-         <enum>QTabWidget::West</enum>
-        </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>3</number>
         </property>
         <property name="iconSize" >
          <size>
@@ -722,8 +719,8 @@ p, li { white-space: pre-wrap; }
           <iconset resource="customwidgets.qrc" >
            <normaloff>:/customwidgets/data/options/notifications.png</normaloff>:/customwidgets/data/options/notifications.png</iconset>
          </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout_9" >
-          <item>
+         <layout class="QGridLayout" name="gridLayout_10" >
+          <item row="0" column="0" colspan="3" >
            <widget class="QLabel" name="label_11" >
             <property name="text" >
              <string>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
@@ -734,82 +731,165 @@ p, li { white-space: pre-wrap; }
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QGroupBox" name="groupCallAlert" >
-            <property name="title" >
-             <string>When someone calls me...</string>
+          <item row="1" column="0" >
+           <widget class="QTableWidget" name="tableNotifications" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+              <horstretch>1</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_6" >
-             <item>
-              <widget class="QRadioButton" name="radioJoimCallAlert" >
+            <property name="editTriggers" >
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="alternatingRowColors" >
+             <bool>true</bool>
+            </property>
+            <property name="selectionMode" >
+             <enum>QAbstractItemView::SingleSelection</enum>
+            </property>
+            <property name="selectionBehavior" >
+             <enum>QAbstractItemView::SelectRows</enum>
+            </property>
+            <property name="showGrid" >
+             <bool>false</bool>
+            </property>
+            <property name="cornerButtonEnabled" >
+             <bool>false</bool>
+            </property>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <column>
+             <property name="text" >
+              <string>Event</string>
+             </property>
+            </column>
+            <column>
+             <property name="text" >
+              <string/>
+             </property>
+             <property name="icon" >
+              <iconset resource="customwidgets.qrc" >
+               <normaloff>:/customwidgets/data/options/notifications.png</normaloff>:/customwidgets/data/options/notifications.png</iconset>
+             </property>
+            </column>
+            <column>
+             <property name="text" >
+              <string/>
+             </property>
+             <property name="icon" >
+              <iconset resource="customwidgets.qrc" >
+               <normaloff>:/customwidgets/data/options/sounds.png</normaloff>:/customwidgets/data/options/sounds.png</iconset>
+             </property>
+            </column>
+            <item row="0" column="0" >
+             <property name="text" >
+              <string>Incoming call</string>
+             </property>
+            </item>
+            <item row="1" column="0" >
+             <property name="text" >
+              <string>Contact wants to chat</string>
+             </property>
+            </item>
+            <item row="2" column="0" >
+             <property name="text" >
+              <string>Someone requests to see my status</string>
+             </property>
+            </item>
+            <item row="3" column="0" >
+             <property name="text" >
+              <string>Contact is online</string>
+             </property>
+            </item>
+            <item row="4" column="0" >
+             <property name="text" >
+              <string>Incoming file</string>
+             </property>
+            </item>
+            <item row="5" column="0" >
+             <property name="text" >
+              <string>Received voicemail</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QGroupBox" name="groupNofiticationOptions" >
+            <property name="title" >
+             <string>Options</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_9" >
+             <item row="0" column="0" colspan="2" >
+              <widget class="QCheckBox" name="checkNotificationTooltip" >
                <property name="text" >
-                <string>Show Joim call alert</string>
+                <string>Show notification tooltip</string>
                </property>
               </widget>
              </item>
-             <item>
-              <widget class="QRadioButton" name="radioSystemCallAlert" >
+             <item row="1" column="0" colspan="2" >
+              <widget class="QCheckBox" name="checkNotificationSound" >
                <property name="text" >
-                <string>Show system notification</string>
+                <string>Sound notification</string>
                </property>
               </widget>
+             </item>
+             <item row="2" column="0" >
+              <widget class="QLabel" name="labelNotificationSound" >
+               <property name="text" >
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" >
+              <widget class="QPushButton" name="buttonNotificationSoundBrowse" >
+               <property name="text" >
+                <string>Browse</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0" colspan="2" >
+              <spacer name="verticalSpacer_4" >
+               <property name="orientation" >
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>153</width>
+                 <height>109</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
           </item>
-          <item>
-           <widget class="QCheckBox" name="checkPopupOnContactRequest" >
-            <property name="text" >
-             <string>Popup a window when somebody adds me to their contacts list</string>
+          <item row="1" column="2" >
+           <spacer name="horizontalSpacer_8" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
             </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupNotifications" >
-            <property name="title" >
-             <string>Show a notification when someone...</string>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>17</width>
+              <height>247</height>
+             </size>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_4" >
-             <item>
-              <widget class="QCheckBox" name="checkNotificationContactOnline" >
-               <property name="text" >
-                <string>comes online</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="checkNotificationChatRequest" >
-               <property name="text" >
-                <string>wants to chat</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="checkNotificationReceivingFile" >
-               <property name="text" >
-                <string>sends me a file</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="checkNotificationVoicemail" >
-               <property name="text" >
-                <string>leaves me a voicemail</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
+           </spacer>
           </item>
-          <item>
-           <spacer name="verticalSpacer_4" >
+          <item row="2" column="0" >
+           <spacer name="verticalSpacer_9" >
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeHint" stdset="0" >
              <size>
-              <width>20</width>
-              <height>177</height>
+              <width>436</width>
+              <height>246</height>
              </size>
             </property>
            </spacer>
@@ -1071,6 +1151,7 @@ p, li { white-space: pre-wrap; }
  </customwidgets>
  <resources>
   <include location="customwidgets.qrc" />
+  <include location="../../../../../../../../home/ivan/.designer/backup/customwidgets.qrc" />
  </resources>
  <connections/>
 </ui>

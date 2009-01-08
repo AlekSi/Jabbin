@@ -29,6 +29,8 @@
 #include <phonon/objectdescription.h>
 #include <phonon/backendcapabilities.h>
 
+#include <QHeaderView>
+
 #ifdef Q_WS_X11
 #include <unistd.h>
 #endif
@@ -53,7 +55,7 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
 
     // Init
     tabs->setViewType(AdvancedTabBar::ListView);
-    tabs->setTabBarThickness(200);
+    tabs->setTabBarThickness(64);
 
     connect(buttonBox, SIGNAL(clicked(QAbstractButton *)),
                 this, SLOT(buttonClicked(QAbstractButton *)));
@@ -81,6 +83,13 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
     }
 
     comboChatBackground->addItem(tr("Random"), "random");
+
+    // Alerts and Messages page
+    tableNotifications->setColumnWidth(0, 250);
+    tableNotifications->setColumnWidth(1, 32);
+    tableNotifications->setColumnWidth(2, 32);
+    tableNotifications->verticalHeader()->hide();
+    groupNofiticationOptions->setEnabled(false);
 
     // audio devices
     foreach (Phonon::AudioOutputDevice dev, Phonon::BackendCapabilities::availableAudioOutputDevices()) {
@@ -199,16 +208,16 @@ void OptionsDialog::load()
     // (we can not yet, no input support)
 
     // Alerts and Messages page
-    value = getOption("options.notifications.joim-popup", Bool);
-    d->radioJoimCallAlert->setChecked(value);
-    d->radioSystemCallAlert->setChecked(!value);
+    // value = getOption("options.notifications.joim-popup", Bool);
+    // d->radioJoimCallAlert->setChecked(value);
+    // d->radioSystemCallAlert->setChecked(!value);
 
-    d->checkPopupOnContactRequest->setChecked(getOption("options.notifications.friend-request", Bool));
+    // d->checkPopupOnContactRequest->setChecked(getOption("options.notifications.friend-request", Bool));
 
-    d->checkNotificationContactOnline->setChecked(getOption("options.notifications.contact-online", Bool));
-    d->checkNotificationChatRequest->setChecked(getOption("options.notifications.chat-request", Bool));
-    d->checkNotificationReceivingFile->setChecked(getOption("options.notifications.receiving-file", Bool));
-    d->checkNotificationVoicemail->setChecked(getOption("options.notifications.voicemail", Bool));
+    // d->checkNotificationContactOnline->setChecked(getOption("options.notifications.contact-online", Bool));
+    // d->checkNotificationChatRequest->setChecked(getOption("options.notifications.chat-request", Bool));
+    // d->checkNotificationReceivingFile->setChecked(getOption("options.notifications.receiving-file", Bool));
+    // d->checkNotificationVoicemail->setChecked(getOption("options.notifications.voicemail", Bool));
 
 
 #undef getOption
@@ -274,13 +283,13 @@ void OptionsDialog::save()
     option.font[2] = d->comboFont->currentFont().toString();
 
     // Alerts and Messages page
-    setOption("options.notifications.joim-popup", d->radioJoimCallAlert->isChecked());
+    // setOption("options.notifications.joim-popup", d->radioJoimCallAlert->isChecked());
 
-    setOption("options.notifications.friend-request", d->checkPopupOnContactRequest->isChecked());
-    setOption("options.notifications.contact-online", d->checkNotificationContactOnline->isChecked());
-    setOption("options.notifications.chat-request", d->checkNotificationChatRequest->isChecked());
-    setOption("options.notifications.receiving-file", d->checkNotificationReceivingFile->isChecked());
-    setOption("options.notifications.voicemail", d->checkNotificationVoicemail->isChecked());
+    // setOption("options.notifications.friend-request", d->checkPopupOnContactRequest->isChecked());
+    // setOption("options.notifications.contact-online", d->checkNotificationContactOnline->isChecked());
+    // setOption("options.notifications.chat-request", d->checkNotificationChatRequest->isChecked());
+    // setOption("options.notifications.receiving-file", d->checkNotificationReceivingFile->isChecked());
+    // setOption("options.notifications.voicemail", d->checkNotificationVoicemail->isChecked());
 
 
     //
