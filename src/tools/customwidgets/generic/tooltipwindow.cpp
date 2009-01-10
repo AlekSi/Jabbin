@@ -27,6 +27,8 @@
 #include <QPushButton>
 #include <QBasicTimer>
 
+namespace CustomWidgets {
+
 // TooltipWindow::Private
 class TooltipWindow::Private: public Ui::TooltipWindowBase {
 public:
@@ -172,3 +174,4 @@ void TooltipWindow::enterEvent(QEvent * event)
     QWidget::enterEvent(event);
 }
 
+} // namespace CustomWidgets

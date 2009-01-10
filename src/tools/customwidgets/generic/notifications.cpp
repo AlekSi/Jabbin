@@ -28,6 +28,8 @@
 #define FRAMECOUNT 20
 #define TIMEINTERVAL 300
 
+namespace CustomWidgets {
+
 Notifications * Notifications::Private::instance = NULL;
 
 // Notifications::Private
@@ -178,3 +180,5 @@ Notifications::~Notifications()
 {
     delete d;
 }
+
+} // namespace CustomWidgets

@@ -21,6 +21,8 @@
 #include "advancedtabbar.h"
 #include <QDebug>
 
+namespace CustomWidgets {
+
 // AdvancedTabWidget::Private
 class AdvancedTabWidget::Private {
 public:
@@ -65,3 +67,4 @@ void AdvancedTabWidget::setTabBarThickness(int value)
     d->tabBar->setThickness(value);
 }
 
+} // namespace CustomWidgets

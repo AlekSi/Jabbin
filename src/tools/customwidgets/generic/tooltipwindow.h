@@ -22,6 +22,8 @@
 
 #include <QWidget>
 
+namespace CustomWidgets {
+
 /**
  * This class is implementing a notification tooltip
  */
@@ -66,6 +68,8 @@ private:
     class Private;
     Private * const d;
 };
+
+} // namespace CustomWidgets
 
 #endif // TOOLTIPWINDOW_H_
 

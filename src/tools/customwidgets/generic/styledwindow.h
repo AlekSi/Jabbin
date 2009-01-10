@@ -25,6 +25,8 @@
 class QResizeEvent;
 class QToolButton;
 
+namespace CustomWidgets {
+
 /**
  * This class is implementing a window with custom style and
  * decorations
@@ -135,6 +137,8 @@ private:
     class Private;
     Private * const d;
 };
+
+} // namespace CustomWidgets
 
 #endif // STYLEDWINDOW_H_
 

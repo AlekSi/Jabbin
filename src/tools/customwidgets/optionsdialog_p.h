@@ -19,6 +19,7 @@
 
 #include "optionsdialog.h"
 #include "ui_optionsdialog_base.h"
+#include <QIcon>
 
 class OptionsDialog::Private : public QObject, public Ui::OptionsDialogBase {
     Q_OBJECT
@@ -31,5 +32,9 @@ public:
 public Q_SLOTS:
     void buttonClicked(QAbstractButton * button);
 
+public:
+    QIcon iconNotification;
+    QIcon iconSound;
+    QIcon iconJoim;
 };
 

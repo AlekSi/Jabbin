@@ -23,6 +23,8 @@
 #include <QObject>
 #include <QPixmap>
 
+namespace CustomWidgets {
+
 /**
  * Notifications system
  */
@@ -74,6 +76,8 @@ private:
     class Private;
     Private * const d;
 };
+
+} // namespace CustomWidgets
 
 #endif // NOTIFICATIONS_H_
 

@@ -24,6 +24,8 @@
 #include <QPaintEvent>
 #include <QListWidget>
 
+namespace CustomWidgets {
+
 // AdvancedTabBar::Private
 class AdvancedTabBar::Private {
 public:
@@ -164,3 +166,5 @@ void AdvancedTabBar::setThickness(int value)
     d->thickness = value;
     update();
 }
+
+} // namespace CustomWidgets

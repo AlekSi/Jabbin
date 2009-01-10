@@ -22,6 +22,8 @@
 
 #include <QTabBar>
 
+namespace CustomWidgets {
+
 /**
  * The class that provides the tabs for AdvancedTabWidget.
  */
@@ -85,5 +87,7 @@ private:
     class Private;
     Private * const d;
 };
+
+} // namespace CustomWidgets
 
 #endif // ADVANCED_TABBAR_H_

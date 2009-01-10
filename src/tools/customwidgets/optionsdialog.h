@@ -24,7 +24,7 @@
 #include "generic/styledwindow.h"
 #include "psicon.h"
 
-class OptionsDialog : public StyledWindow {
+class OptionsDialog : public CustomWidgets::StyledWindow {
     Q_OBJECT
 
 public:

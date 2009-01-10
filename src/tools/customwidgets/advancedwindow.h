@@ -23,7 +23,7 @@
 
 #include <QTabWidget>
 
-class AdvancedWindow: public StyledWindow {
+class AdvancedWindow: public CustomWidgets::StyledWindow {
     Q_OBJECT
 
 public:

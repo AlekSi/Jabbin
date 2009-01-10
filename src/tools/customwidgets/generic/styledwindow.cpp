@@ -33,6 +33,8 @@
 #define DEFAULT_BORDER_SIZE 2
 #define HEADER_SIZE 20
 
+namespace CustomWidgets {
+
 // StyledWindow::Private
 class StyledWindow::Private {
 public:
@@ -373,3 +375,5 @@ bool StyledWindow::eventFilter(QObject * object, QEvent * event)
     }
     return QWidget::eventFilter(object, event);
 }
+
+} // namespace CustomWidgets

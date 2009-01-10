@@ -27,6 +27,8 @@
 #include <QMap>
 #include <QTimeLine>
 
+namespace CustomWidgets {
+
 class Notifications::Private: public QObject {
     Q_OBJECT
 
@@ -48,6 +50,8 @@ public Q_SLOTS:
     void actionChosen(const QString & id);
     void timelineFrameChanged(int frame);
 };
+
+} // namespace CustomWidgets
 
 #endif // NOTIFICATIONS_P_H_
 

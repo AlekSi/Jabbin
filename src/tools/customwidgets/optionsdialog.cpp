@@ -38,7 +38,10 @@
 static const QString autoStartRegistryKey = "CurrentVersion/Run/joimchat.exe";
 
 OptionsDialog::Private::Private(OptionsDialog * parent)
-    : q(parent), controller(NULL)
+    : q(parent), controller(NULL),
+      iconNotification(":/customwidgets/data/options/notifications.png"),
+      iconSound(":/customwidgets/data/options/sounds.png"),
+      iconJoim(":/customwidgets/data/options/general.png")
 {
     setupUi(parent);
 
@@ -54,7 +57,7 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
     editStatusAway->setVisible(false);
 
     // Init
-    tabs->setViewType(AdvancedTabBar::ListView);
+    tabs->setViewType(CustomWidgets::AdvancedTabBar::ListView);
     tabs->setTabBarThickness(64);
 
     connect(buttonBox, SIGNAL(clicked(QAbstractButton *)),
@@ -67,13 +70,13 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
 
     // Chat bg combo
     QMap<QString, QString> m;
-    m["carbon.png"] = tr("Carbon");
-    m["orange.png"] = tr("Orange");
-    m["pinky.png"] = tr("Pinky");
+    m["carbon.png"]   = tr("Carbon");
+    m["orange.png"]   = tr("Orange");
+    m["pinky.png"]    = tr("Pinky");
     m["seawater.png"] = tr("Sea water");
-    m["silver.png"] = tr("Silver");
-    m["sky.png"] = tr("Sky");
-    m["office.png"] = tr("Office");
+    m["silver.png"]   = tr("Silver");
+    m["sky.png"]      = tr("Sky");
+    m["office.png"]   = tr("Office");
 
     comboChatBackground->addItem(tr("Office"), "office.png");
 
@@ -88,8 +91,31 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
     tableNotifications->setColumnWidth(0, 250);
     tableNotifications->setColumnWidth(1, 32);
     tableNotifications->setColumnWidth(2, 32);
+    tableNotifications->setColumnWidth(3, 32);
     tableNotifications->verticalHeader()->hide();
+    tableNotifications->horizontalHeader()->hide();
     groupNofiticationOptions->setEnabled(false);
+
+    for (int row = 0; row < tableNotifications->rowCount(); row++) {
+        for (int col = 1; col < tableNotifications->columnCount(); col++) {
+            QTableWidgetItem * item = new QTableWidgetItem();
+            switch (col) {
+                case 1:
+                    item->setIcon(iconNotification);
+                    break;
+                case 2:
+                    item->setIcon(iconSound);
+                    break;
+                case 3:
+                    item->setIcon(iconJoim);
+                    break;
+            }
+            tableNotifications->setItem(row, col, item);
+        }
+    }
+
+
+
 
     // audio devices
     foreach (Phonon::AudioOutputDevice dev, Phonon::BackendCapabilities::availableAudioOutputDevices()) {

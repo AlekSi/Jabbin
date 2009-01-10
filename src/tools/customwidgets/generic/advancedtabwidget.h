@@ -23,6 +23,8 @@
 #include <QTabWidget>
 #include "advancedtabbar.h"
 
+namespace CustomWidgets {
+
 /**
  * This class is implementing a tab widget with some special
  * view modes
@@ -65,6 +67,8 @@ private:
     class Private;
     Private * const d;
 };
+
+} // namespace CustomWidgets
 
 #endif // ADVANCED_TABWIDGET_H_
 
