@@ -25,6 +25,7 @@
 #include "psiaccount.h"
 #include "psicontactlist.h"
 #include "common.h"
+#include "generic/notifications.h"
 #include "joimnotifications.h"
 
 #include <phonon/objectdescription.h>
@@ -97,7 +98,7 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
     tableNotifications->setColumnWidth(3, 32);
     tableNotifications->verticalHeader()->hide();
     tableNotifications->horizontalHeader()->hide();
-    groupNofiticationOptions->setEnabled(false);
+    groupNofiticationOptions->setVisible(false);
 
     for (int row = 0; row < tableNotifications->rowCount(); row++) {
         for (int col = 1; col < tableNotifications->columnCount(); col++) {
@@ -128,6 +129,8 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
             this, SLOT(tableNotificationsCurrentCellChanged(int,int,int,int)));
     connect(buttonNotificationSoundBrowse, SIGNAL(clicked()),
             this, SLOT(buttonNotificationSoundBrowseClicked()));
+    connect(buttonSampleTooltip, SIGNAL(clicked()),
+            this, SLOT(buttonSampleTooltipClicked()));
     connect(checkNotificationTooltip, SIGNAL(clicked()),
             this, SLOT(tableNotificationsUpdate()));
     connect(checkNotificationSound, SIGNAL(clicked()),
@@ -180,7 +183,7 @@ void OptionsDialog::Private::tableNotificationsCurrentCellChanged(int currentRow
     labelNotificationSound->setVisible(!svalue.isEmpty());
     buttonNotificationSoundBrowse->setVisible(!svalue.isEmpty());
 
-    groupNofiticationOptions->setEnabled(true);
+    groupNofiticationOptions->setVisible(true);
 }
 
 void OptionsDialog::Private::tableNotificationsUpdate()
@@ -217,6 +220,24 @@ void OptionsDialog::Private::buttonNotificationSoundBrowseClicked()
     qDebug() << "Chosen file " << file;
     labelNotificationSound->setText(file);
     tableNotificationsUpdate();
+}
+
+void OptionsDialog::Private::buttonSampleTooltipClicked()
+{
+    QMap < QString, QString > actions;
+
+    CustomWidgets::Notifications * notifications = CustomWidgets::Notifications::instance();
+    notifications->showNotification("Simple Notification",
+            "This is a simple notification tooltip with a specified timeout",
+            iconJoim.pixmap(64, 64), actions, 2);
+
+    actions["chat"] = "Close";
+    notifications->showNotification("Notification with action",
+            "This is a simple notification tooltip with a longer timeout, and an action button",
+            iconJoim.pixmap(64, 64), actions, 4);
+    notifications->showNotification("Permanent notification",
+            "This is a notification tooltip without a timer, so you need to click 'Close'",
+            iconJoim.pixmap(64, 64), actions);
 }
 
 OptionsDialog::OptionsDialog(QWidget * parent)

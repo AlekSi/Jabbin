@@ -35,6 +35,7 @@ public Q_SLOTS:
             int currentColumn, int previousRow, int previousColumn);
     void tableNotificationsUpdate();
     void buttonNotificationSoundBrowseClicked();
+    void buttonSampleTooltipClicked();
 
 public:
     QIcon iconNotification;

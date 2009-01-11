@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/customwidgets" >
+    <file>generic/data/tooltip_background.png</file>
     <file>generic/data/window_button_minimize.png</file>
     <file>generic/data/window_button_minimize_hover.png</file>
     <file>generic/data/window_button_maximize.png</file>

@@ -125,13 +125,33 @@ int Notifications::showNotification(const QString & title, const QString & text,
     tooltip->setActions(actions);
     tooltip->setTimeout(timeout);
 
-    tooltip->setStyleSheet("\
-            #TooltipBase { border: none; } \
-            #Frame { background-color: white;\
-            border-width: 4px; \
-            border-image: url(:/tooltip/data/tooltip_background.png) 4 4 4 4 stretch stretch; } \
-            QPushButtoin { border: none; } \
-            ");
+    tooltip->setStyleSheet(" \
+            #TooltipBase { \
+                border: none; \
+            } \
+            #Frame { \
+                background-color: white; \
+                border-width: 4px; \
+                border-image: url(:/customwidgets/generic/data/tooltip_background.png) 4 4 4 4 stretch stretch; \
+            } \
+            QPushButton { \
+               color: white; \
+               border-image: url(:/images/pushbutton/green/pushbutton.png) 12px 11px 12px 10px; \
+               border-width: 0px 11px 0px 10px; \
+               min-height: 1.5em; \
+            } \
+            QPushButton:disabled { \
+               color: white; \
+            } \
+            QPushButton:hover { \
+               border-image: url(:/images/pushbutton/green/pushbutton_hover.png) 12px 11px 12px 10px; \
+            } \
+            QPushButton:focus { \
+               border-image: url(:/images/pushbutton/green/pushbutton_focus.png) 12px 11px 12px 10px; \
+            } \
+            QPushButton:pressed { \
+               border-image: url(:/images/pushbutton/green/pushbutton_pressed.png) 12px 11px 12px 10px; \
+            }");
 
     connect(tooltip, SIGNAL(actionChosen(const QString &)),
             d, SLOT(actionChosen(const QString &)));

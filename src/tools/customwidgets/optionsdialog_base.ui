@@ -869,21 +869,41 @@ p, li { white-space: pre-wrap; }
              <string>Options</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_9" >
-             <item row="0" column="0" colspan="2" >
+             <item row="0" column="0" >
               <widget class="QCheckBox" name="checkNotificationTooltip" >
+               <property name="sizePolicy" >
+                <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
+                 <horstretch>1</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text" >
                 <string>Show notification tooltip</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="0" colspan="2" >
+             <item row="0" column="1" colspan="2" >
+              <widget class="QPushButton" name="buttonSampleTooltip" >
+               <property name="text" >
+                <string>Show me a sample tooltip</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" colspan="3" >
+              <widget class="QCheckBox" name="checkPopupJoim" >
+               <property name="text" >
+                <string>Show Joim window</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0" colspan="3" >
               <widget class="QCheckBox" name="checkNotificationSound" >
                <property name="text" >
                 <string>Sound notification</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="0" >
+             <item row="3" column="0" colspan="2" >
               <widget class="QLabel" name="labelNotificationSound" >
                <property name="sizePolicy" >
                 <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
@@ -896,7 +916,14 @@ p, li { white-space: pre-wrap; }
                </property>
               </widget>
              </item>
-             <item row="5" column="0" colspan="2" >
+             <item row="3" column="2" >
+              <widget class="QPushButton" name="buttonNotificationSoundBrowse" >
+               <property name="text" >
+                <string>Browse</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0" colspan="3" >
               <spacer name="verticalSpacer_4" >
                <property name="orientation" >
                 <enum>Qt::Vertical</enum>
@@ -909,26 +936,7 @@ p, li { white-space: pre-wrap; }
                </property>
               </spacer>
              </item>
-             <item row="1" column="0" colspan="2" >
-              <widget class="QCheckBox" name="checkPopupJoim" >
-               <property name="text" >
-                <string>Show Joim window</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1" >
-              <widget class="QPushButton" name="buttonNotificationSoundBrowse" >
-               <property name="text" >
-                <string>Browse</string>
-               </property>
-              </widget>
-             </item>
             </layout>
-            <zorder>checkNotificationTooltip</zorder>
-            <zorder>checkNotificationSound</zorder>
-            <zorder>labelNotificationSound</zorder>
-            <zorder>checkPopupJoim</zorder>
-            <zorder>buttonNotificationSoundBrowse</zorder>
            </widget>
           </item>
          </layout>
@@ -1188,7 +1196,6 @@ p, li { white-space: pre-wrap; }
  </customwidgets>
  <resources>
   <include location="customwidgets.qrc" />
-  <include location="../../../../../../../../home/ivan/.designer/backup/customwidgets.qrc" />
  </resources>
  <connections>
   <connection>
