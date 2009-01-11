@@ -521,7 +521,7 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 #endif
 
 	// ivan // background_ = YaWindowBackground(YaWindowBackground::Roster);
-	setMinimizeEnabled(false);
+	// setMinimizeEnabled(false);
 	setMaximizeEnabled(false);
 
 	optionChanged(alwaysOnTopOptionPath);
