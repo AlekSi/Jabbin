@@ -25,11 +25,13 @@
 #include "psiaccount.h"
 #include "psicontactlist.h"
 #include "common.h"
+#include "joimnotifications.h"
 
 #include <phonon/objectdescription.h>
 #include <phonon/backendcapabilities.h>
 
 #include <QHeaderView>
+#include <QFileDialog>
 
 #ifdef Q_WS_X11
 #include <unistd.h>
@@ -41,7 +43,8 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
     : q(parent), controller(NULL),
       iconNotification(":/customwidgets/data/options/notifications.png"),
       iconSound(":/customwidgets/data/options/sounds.png"),
-      iconJoim(":/customwidgets/data/options/general.png")
+      iconJoim(":/customwidgets/data/options/general.png"),
+      tableNotificationsCurrentRow(-1)
 {
     setupUi(parent);
 
@@ -99,23 +102,38 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
     for (int row = 0; row < tableNotifications->rowCount(); row++) {
         for (int col = 1; col < tableNotifications->columnCount(); col++) {
             QTableWidgetItem * item = new QTableWidgetItem();
-            switch (col) {
-                case 1:
-                    item->setIcon(iconNotification);
-                    break;
-                case 2:
-                    item->setIcon(iconSound);
-                    break;
-                case 3:
-                    item->setIcon(iconJoim);
-                    break;
-            }
+             // switch (col) {
+             //     case 1:
+             //         item->setIcon(iconNotification);
+             //         break;
+             //     case 2:
+             //         item->setIcon(iconSound);
+             //         break;
+             //     case 3:
+             //         item->setIcon(iconJoim);
+             //         break;
+             // }
             tableNotifications->setItem(row, col, item);
         }
     }
 
+    tableNotifications->item(0, 0)->setData(Qt::UserRole, N_INCOMING_CALL);
+    tableNotifications->item(1, 0)->setData(Qt::UserRole, N_CHAT_REQUEST);
+    tableNotifications->item(2, 0)->setData(Qt::UserRole, N_STATUS_REQUEST);
+    tableNotifications->item(3, 0)->setData(Qt::UserRole, N_CONTACT_ONLINE);
+    tableNotifications->item(4, 0)->setData(Qt::UserRole, N_INCOMING_FILE);
+    tableNotifications->item(5, 0)->setData(Qt::UserRole, N_INCOMING_VOICEMAIL);
 
-
+    connect(tableNotifications, SIGNAL(currentCellChanged(int,int,int,int)),
+            this, SLOT(tableNotificationsCurrentCellChanged(int,int,int,int)));
+    connect(buttonNotificationSoundBrowse, SIGNAL(clicked()),
+            this, SLOT(buttonNotificationSoundBrowseClicked()));
+    connect(checkNotificationTooltip, SIGNAL(clicked()),
+            this, SLOT(tableNotificationsUpdate()));
+    connect(checkNotificationSound, SIGNAL(clicked()),
+            this, SLOT(tableNotificationsUpdate()));
+    connect(checkPopupJoim, SIGNAL(clicked()),
+            this, SLOT(tableNotificationsUpdate()));
 
     // audio devices
     foreach (Phonon::AudioOutputDevice dev, Phonon::BackendCapabilities::availableAudioOutputDevices()) {
@@ -134,6 +152,71 @@ void OptionsDialog::Private::buttonClicked(QAbstractButton * object)
         q->hide();
     }
 
+}
+
+void OptionsDialog::Private::tableNotificationsCurrentCellChanged(int currentRow,
+            int currentColumn, int previousRow, int previousColumn)
+{
+    if (currentRow == previousRow) {
+        return;
+    }
+
+    tableNotificationsCurrentRow = currentRow;
+
+    if (tableNotificationsCurrentRow == -1) {
+        return;
+    }
+
+    qDebug() << tableNotifications->item(currentRow, 0)->data(Qt::UserRole);
+
+    checkNotificationTooltip->setChecked(
+            tableNotifications->item(currentRow, 1)->data(Qt::UserRole).toBool());
+    checkPopupJoim->setChecked(
+            tableNotifications->item(currentRow, 3)->data(Qt::UserRole).toBool());
+
+    QString svalue = tableNotifications->item(currentRow, 2)->data(Qt::UserRole).toString();
+    checkNotificationSound->setChecked(!svalue.isEmpty());
+    labelNotificationSound->setText(svalue);
+    labelNotificationSound->setVisible(!svalue.isEmpty());
+    buttonNotificationSoundBrowse->setVisible(!svalue.isEmpty());
+
+    groupNofiticationOptions->setEnabled(true);
+}
+
+void OptionsDialog::Private::tableNotificationsUpdate()
+{
+    if (tableNotificationsCurrentRow == -1) {
+        return;
+    }
+
+    tableNotifications->item(tableNotificationsCurrentRow, 1)
+        ->setData(Qt::UserRole, checkNotificationTooltip->isChecked());
+    tableNotifications->item(tableNotificationsCurrentRow, 1)->setIcon(
+            checkNotificationTooltip->isChecked() ? iconNotification : QIcon());
+    tableNotifications->item(tableNotificationsCurrentRow, 3)
+        ->setData(Qt::UserRole, checkPopupJoim->isChecked());
+    tableNotifications->item(tableNotificationsCurrentRow, 3)->setIcon(
+            checkPopupJoim->isChecked() ? iconJoim : QIcon());
+
+    QString svalue = QString();
+    if (checkNotificationSound->isChecked()) {
+        svalue = labelNotificationSound->text();
+    }
+    qDebug() << svalue << "###########";
+    tableNotifications->item(tableNotificationsCurrentRow, 2)
+        ->setData(Qt::UserRole, svalue);
+    tableNotifications->item(tableNotificationsCurrentRow, 2)->setIcon(
+            (!svalue.isEmpty()) ? iconSound : QIcon());
+
+}
+
+void OptionsDialog::Private::buttonNotificationSoundBrowseClicked()
+{
+    QString file = QFileDialog::getOpenFileName(
+            q, tr("Choose a sound file"));
+    qDebug() << "Chosen file " << file;
+    labelNotificationSound->setText(file);
+    tableNotificationsUpdate();
 }
 
 OptionsDialog::OptionsDialog(QWidget * parent)
@@ -234,17 +317,28 @@ void OptionsDialog::load()
     // (we can not yet, no input support)
 
     // Alerts and Messages page
-    // value = getOption("options.notifications.joim-popup", Bool);
-    // d->radioJoimCallAlert->setChecked(value);
-    // d->radioSystemCallAlert->setChecked(!value);
+    for (int row = 0; row < d->tableNotifications->rowCount(); row++) {
+        QString id = d->tableNotifications->item(row, 0)->data(Qt::UserRole).toString();
 
-    // d->checkPopupOnContactRequest->setChecked(getOption("options.notifications.friend-request", Bool));
+        bool value;
+        QString svalue;
 
-    // d->checkNotificationContactOnline->setChecked(getOption("options.notifications.contact-online", Bool));
-    // d->checkNotificationChatRequest->setChecked(getOption("options.notifications.chat-request", Bool));
-    // d->checkNotificationReceivingFile->setChecked(getOption("options.notifications.receiving-file", Bool));
-    // d->checkNotificationVoicemail->setChecked(getOption("options.notifications.voicemail", Bool));
+        // tooltip
+        value = getOption(id + ".tooltip", Bool);
+        d->tableNotifications->item(row, 1)->setData(Qt::UserRole, value);
+        d->tableNotifications->item(row, 1)->setIcon(value ? d->iconNotification : QIcon());
 
+        // sound
+        svalue = getOption(id + ".sound", String);
+        d->tableNotifications->item(row, 2)->setData(Qt::UserRole, svalue);
+        d->tableNotifications->item(row, 2)->setIcon(svalue.isEmpty() ? QIcon() : d->iconSound);
+
+        // popup joim
+        value = getOption(id + ".popupjoim", Bool);
+        d->tableNotifications->item(row, 3)->setData(Qt::UserRole, value);
+        d->tableNotifications->item(row, 3)->setIcon(value ? d->iconJoim : QIcon());
+
+    }
 
 #undef getOption
 }
@@ -309,14 +403,25 @@ void OptionsDialog::save()
     option.font[2] = d->comboFont->currentFont().toString();
 
     // Alerts and Messages page
-    // setOption("options.notifications.joim-popup", d->radioJoimCallAlert->isChecked());
+    for (int row = 0; row < d->tableNotifications->rowCount(); row++) {
+        QString id = d->tableNotifications->item(row, 0)->data(Qt::UserRole).toString();
 
-    // setOption("options.notifications.friend-request", d->checkPopupOnContactRequest->isChecked());
-    // setOption("options.notifications.contact-online", d->checkNotificationContactOnline->isChecked());
-    // setOption("options.notifications.chat-request", d->checkNotificationChatRequest->isChecked());
-    // setOption("options.notifications.receiving-file", d->checkNotificationReceivingFile->isChecked());
-    // setOption("options.notifications.voicemail", d->checkNotificationVoicemail->isChecked());
+        bool value;
+        QString svalue;
 
+        // tooltip
+        value = d->tableNotifications->item(row, 1)->data(Qt::UserRole).toBool();
+        setOption(id + ".tooltip", value);
+
+        // sound
+        svalue = d->tableNotifications->item(row, 2)->data(Qt::UserRole).toString();
+        setOption(id + ".sound", svalue);
+
+        // popup joim
+        value = d->tableNotifications->item(row, 3)->data(Qt::UserRole).toBool();
+        setOption(id + ".popupjoim", value);
+
+    }
 
     //
     if (d->controller)

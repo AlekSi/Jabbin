@@ -31,10 +31,16 @@ public:
 
 public Q_SLOTS:
     void buttonClicked(QAbstractButton * button);
+    void tableNotificationsCurrentCellChanged(int currentRow,
+            int currentColumn, int previousRow, int previousColumn);
+    void tableNotificationsUpdate();
+    void buttonNotificationSoundBrowseClicked();
 
 public:
     QIcon iconNotification;
     QIcon iconSound;
     QIcon iconJoim;
+    int   tableNotificationsCurrentRow;
+
 };
 
