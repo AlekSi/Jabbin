@@ -46,7 +46,49 @@ QToolButton#TitlebarTitle {
     background-repeat: repeat-x;
     background-color: #d5e6f3;
     background-attachment: fixed;
-}</string>
+}
+
+QTabWidget#mainTabWidget::pane {
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    margin-top: -26px;
+    padding-top: 30px;
+    background-image: url(:/customwidgets/data/barbutton_normal.png);
+}
+
+QTabWidget#mainTabWidget::tab-bar {
+    margin: 0px;
+    padding: 0px;
+    height: 30px;
+    background-color: black;
+    left: 8px;
+ }
+
+QTabWidget#mainTabWidget > QTabBar::tab {
+    margin: 0px;
+    padding: 0px;
+    padding-left: 2px;
+    padding-right: 2px;
+    border: 0px;
+    border-image: url(:/customwidgets/data/barbutton_normal.png) 1px;
+    font-size: 10px;
+    height: 28px;
+}
+
+QTabWidget#mainTabWidget > QTabBar::tab:hover {
+    border-image: url(:/customwidgets/data/barbutton_hover.png) 1px;
+}
+
+QTabWidget#mainTabWidget > QTabBar::tab:selected {
+    border-image: url(:/customwidgets/data/barbutton_active.png) 1px;
+}
+
+QTabWidget#mainTabWidget > QTabBar::tab:disabled {
+    color: rgba(0, 0, 0, 0);
+    border-image: none;
+}
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3" >
    <property name="spacing" >
@@ -252,47 +294,7 @@ QToolButton#TitlebarTitle {
       <item>
        <widget class="QTabWidget" name="mainTabWidget" >
         <property name="styleSheet" >
-         <string notr="true" >QTabWidget#mainTabWidget::pane {
-    border: none;
-    margin: 0px;
-    padding: 0px;
-    margin-top: -26px;
-    padding-top: 30px;
-    background-image: url(:/customwidgets/data/barbutton_normal.png);
-}
-
-QTabWidget#mainTabWidget::tab-bar {
-    margin: 0px;
-    padding: 0px;
-    height: 30px;
-    background-color: black;
-    left: 8px;
- }
-
-QTabWidget#mainTabWidget > QTabBar::tab {
-    margin: 0px;
-    padding: 0px;
-    padding-left: 2px;
-    padding-right: 2px;
-    border: 0px;
-    border-image: url(:/customwidgets/data/barbutton_normal.png) 1px;
-    font-size: 10px;
-    height: 28px;
-}
-
-QTabWidget#mainTabWidget > QTabBar::tab:hover {
-    border-image: url(:/customwidgets/data/barbutton_hover.png) 1px;
-}
-
-QTabWidget#mainTabWidget > QTabBar::tab:selected {
-    border-image: url(:/customwidgets/data/barbutton_active.png) 1px;
-}
-
-QTabWidget#mainTabWidget > QTabBar::tab:disabled {
-    color: rgba(0, 0, 0, 0);
-    border-image: none;
-}
-</string>
+         <string notr="true" />
         </property>
         <property name="currentIndex" >
          <number>0</number>
