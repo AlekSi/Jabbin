@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>647</width>
+    <width>589</width>
     <height>632</height>
    </rect>
   </property>
@@ -117,7 +117,7 @@ QToolButton#TitlebarTitle {
       <item>
        <widget class="CustomWidgets::AdvancedTabWidget" name="tabs" >
         <property name="currentIndex" >
-         <number>3</number>
+         <number>6</number>
         </property>
         <property name="iconSize" >
          <size>
@@ -1168,6 +1168,218 @@ p, li { white-space: pre-wrap; }
           <iconset resource="customwidgets.qrc" >
            <normaloff>:/customwidgets/data/options/accounts.png</normaloff>:/customwidgets/data/options/accounts.png</iconset>
          </attribute>
+         <layout class="QGridLayout" name="gridLayout_14" >
+          <item row="0" column="0" >
+           <widget class="QGroupBox" name="groupPhoneServices" >
+            <property name="minimumSize" >
+             <size>
+              <width>400</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="title" >
+             <string>Phone services</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_11" >
+             <item row="0" column="0" >
+              <widget class="QLabel" name="label_4" >
+               <property name="text" >
+                <string>Call server JID (Server)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" >
+              <widget class="QLineEdit" name="editPhoneServicesServer" >
+               <property name="text" >
+                <string>jabberout.com </string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" >
+              <widget class="QLabel" name="label_5" >
+               <property name="text" >
+                <string>Call server resource (Name)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" >
+              <widget class="QLineEdit" name="editPhoneServicesName" >
+               <property name="text" >
+                <string>phone</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2" >
+              <spacer name="horizontalSpacer_10" >
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QGroupBox" name="groupServiceDiscovery" >
+            <property name="title" >
+             <string>Service Discovery</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_12" >
+             <item row="0" column="0" colspan="2" >
+              <widget class="QLabel" name="labelServiceDiscovery" >
+               <property name="text" >
+                <string>Service providers</string>
+               </property>
+              </widget>
+             </item>
+             <item rowspan="3" row="1" column="0" >
+              <widget class="QListWidget" name="listServiceDiscovery" >
+               <property name="minimumSize" >
+                <size>
+                 <width>300</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" >
+              <widget class="QToolButton" name="buttonServiceDiscoveryAdd" >
+               <property name="text" >
+                <string>...</string>
+               </property>
+               <property name="icon" >
+                <iconset resource="customwidgets.qrc" >
+                 <normaloff>:/customwidgets/generic/data/icon-add.png</normaloff>:/customwidgets/generic/data/icon-add.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" >
+              <widget class="QToolButton" name="buttonServiceDiscoveryRemove" >
+               <property name="text" >
+                <string>...</string>
+               </property>
+               <property name="icon" >
+                <iconset resource="customwidgets.qrc" >
+                 <normaloff>:/customwidgets/generic/data/icon-delete.png</normaloff>:/customwidgets/generic/data/icon-delete.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1" >
+              <spacer name="verticalSpacer_10" >
+               <property name="orientation" >
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>26</width>
+                 <height>78</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="1" column="2" >
+              <spacer name="horizontalSpacer_11" >
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="2" column="0" >
+           <widget class="QGroupBox" name="groupAccounts" >
+            <property name="title" >
+             <string>Jabber accounts</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_13" >
+             <item rowspan="3" row="0" column="0" >
+              <widget class="QListWidget" name="listAccounts" >
+               <property name="minimumSize" >
+                <size>
+                 <width>300</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" >
+              <widget class="QToolButton" name="buttonAccountsAdd" >
+               <property name="text" >
+                <string>...</string>
+               </property>
+               <property name="icon" >
+                <iconset resource="customwidgets.qrc" >
+                 <normaloff>:/customwidgets/generic/data/icon-add.png</normaloff>:/customwidgets/generic/data/icon-add.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" >
+              <widget class="QToolButton" name="buttonAccountsRemove" >
+               <property name="text" >
+                <string>...</string>
+               </property>
+               <property name="icon" >
+                <iconset resource="customwidgets.qrc" >
+                 <normaloff>:/customwidgets/generic/data/icon-delete.png</normaloff>:/customwidgets/generic/data/icon-delete.png</iconset>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" >
+              <spacer name="verticalSpacer_10" >
+               <property name="orientation" >
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>20</width>
+                 <height>46</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="1" column="2" >
+              <spacer name="horizontalSpacer_9" >
+               <property name="orientation" >
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0" >
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="3" column="0" >
+           <spacer name="verticalSpacer_11" >
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </widget>
        </widget>
       </item>
@@ -1182,6 +1394,8 @@ p, li { white-space: pre-wrap; }
        </widget>
       </item>
      </layout>
+     <zorder>buttonBox</zorder>
+     <zorder>tabs</zorder>
     </widget>
    </item>
   </layout>
