@@ -139,7 +139,7 @@ QGroupBox {
       <item>
        <widget class="CustomWidgets::AdvancedTabWidget" name="tabs" >
         <property name="currentIndex" >
-         <number>6</number>
+         <number>0</number>
         </property>
         <property name="iconSize" >
          <size>
@@ -195,7 +195,7 @@ QGroupBox {
           <item>
            <widget class="QGroupBox" name="groupStatus" >
             <property name="title" >
-             <string>Status</string>
+             <string>Status:</string>
             </property>
             <layout class="QGridLayout" name="gridLayout" >
              <item row="0" column="0" >
@@ -284,7 +284,7 @@ QGroupBox {
           <item>
            <widget class="QGroupBox" name="groupMisc" >
             <property name="title" >
-             <string>Miscellaneous</string>
+             <string>Miscellaneous:</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_2" >
              <item row="0" column="0" colspan="2" >
@@ -900,7 +900,7 @@ p, li { white-space: pre-wrap; }
           <item row="2" column="0" >
            <widget class="QGroupBox" name="groupNofiticationOptions" >
             <property name="title" >
-             <string>Options</string>
+             <string>Options:</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_9" >
              <item row="0" column="0" >
@@ -1212,7 +1212,7 @@ p, li { white-space: pre-wrap; }
              </size>
             </property>
             <property name="title" >
-             <string>Phone services</string>
+             <string>Phone services:</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_11" >
              <item row="0" column="0" >
@@ -1262,7 +1262,7 @@ p, li { white-space: pre-wrap; }
           <item row="2" column="0" >
            <widget class="QGroupBox" name="groupServiceDiscovery" >
             <property name="title" >
-             <string>Service Discovery</string>
+             <string>Service Discovery:</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_12" >
              <item row="0" column="0" colspan="2" >
@@ -1336,7 +1336,7 @@ p, li { white-space: pre-wrap; }
           <item row="3" column="0" >
            <widget class="QGroupBox" name="groupAccounts" >
             <property name="title" >
-             <string>Jabber accounts</string>
+             <string>Jabber accounts:</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_13" >
              <item rowspan="3" row="0" column="0" >
