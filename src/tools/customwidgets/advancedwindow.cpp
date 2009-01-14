@@ -40,7 +40,12 @@ public:
         q->setUseCustomDecorations(true);
         buttonConfig = q->addTitlebarItem(StyledWindow::Title + 0.5,
                 QIcon(":/customwidgets/generic/data/window_button_config.png"), tr("Preferences"));
+    }
 
+    void saveGeometry()
+    {
+        qDebug() << "saving geometry" << q->geometry();
+        PsiOptions::instance()->setOption(geometryOptionPath, q->geometry());
     }
 
     AdvancedWindow * q;
@@ -64,9 +69,22 @@ void AdvancedWindow::setGeometryOptionPath(const QString & optionPath)
     d->geometryOptionPath = optionPath;
 
     QRect savedGeometry = PsiOptions::instance()->getOption(d->geometryOptionPath).toRect();
+    qDebug() << "loading geometry" << savedGeometry;
     if (savedGeometry.isValid()) {
         setGeometry(savedGeometry);
     }
+}
+
+void AdvancedWindow::resizeEvent(QResizeEvent * event)
+{
+    d->saveGeometry();
+    CustomWidgets::StyledWindow::resizeEvent(event);
+}
+
+void AdvancedWindow::moveEvent(QMoveEvent * event)
+{
+    d->saveGeometry();
+    CustomWidgets::StyledWindow::moveEvent(event);
 }
 
 void AdvancedWindow::setOpacityOptionPath(const QString & optionPath)

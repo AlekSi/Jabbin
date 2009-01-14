@@ -46,6 +46,10 @@ public:
 
     QToolButton * getConfigButton() const;
 
+protected:
+    void moveEvent(QMoveEvent * event);
+    void resizeEvent(QResizeEvent * event);
+
 public Q_SLOTS:
     void optionChanged(const QString & option);
 
