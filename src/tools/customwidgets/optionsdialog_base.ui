@@ -115,13 +115,17 @@ QGroupBox {
 }
 
  QGroupBox::title {
-     subcontrol-origin: margin;
-     padding: 0 3px;
-     margin-left: 10px;
-     font-weight: bold;
-     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                       stop: 0 #FFOECE, stop: 1 #FFFFFF);
- }</string>
+    subcontrol-origin: margin;
+    padding: 0 3px;
+    margin-left: 10px;
+    font-weight: bold;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #FFOECE, stop: 1 #FFFFFF);
+}
+
+QToolButton {
+    border: none;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_7" >
    <property name="margin" >
@@ -139,7 +143,7 @@ QGroupBox {
       <item>
        <widget class="CustomWidgets::AdvancedTabWidget" name="tabs" >
         <property name="currentIndex" >
-         <number>0</number>
+         <number>6</number>
         </property>
         <property name="iconSize" >
          <size>
@@ -349,7 +353,7 @@ p, li { white-space: pre-wrap; }
           <item>
            <widget class="QGroupBox" name="groupContactList" >
             <property name="title" >
-             <string>Contact List</string>
+             <string>Contact List:</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_7" >
              <item row="0" column="0" colspan="2" >
@@ -420,7 +424,7 @@ p, li { white-space: pre-wrap; }
           <item>
            <widget class="QGroupBox" name="groupChatWindow" >
             <property name="title" >
-             <string>Chat Window</string>
+             <string>Chat Window:</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_8" >
              <item row="0" column="0" colspan="4" >
@@ -1243,7 +1247,7 @@ p, li { white-space: pre-wrap; }
                </property>
               </widget>
              </item>
-             <item row="0" column="2" >
+             <item rowspan="2" row="0" column="2" >
               <spacer name="horizontalSpacer_10" >
                <property name="orientation" >
                 <enum>Qt::Horizontal</enum>
@@ -1284,8 +1288,8 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="1" column="1" >
               <widget class="QToolButton" name="buttonServiceDiscoveryAdd" >
-               <property name="text" >
-                <string>...</string>
+               <property name="toolTip" >
+                <string>Add a new service provider</string>
                </property>
                <property name="icon" >
                 <iconset resource="customwidgets.qrc" >
@@ -1295,8 +1299,8 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="2" column="1" >
               <widget class="QToolButton" name="buttonServiceDiscoveryRemove" >
-               <property name="text" >
-                <string>...</string>
+               <property name="toolTip" >
+                <string>Remove selected service provider</string>
                </property>
                <property name="icon" >
                 <iconset resource="customwidgets.qrc" >
@@ -1312,12 +1316,12 @@ p, li { white-space: pre-wrap; }
                <property name="sizeHint" stdset="0" >
                 <size>
                  <width>26</width>
-                 <height>88</height>
+                 <height>106</height>
                 </size>
                </property>
               </spacer>
              </item>
-             <item row="1" column="2" >
+             <item rowspan="4" row="0" column="2" >
               <spacer name="horizontalSpacer_11" >
                <property name="orientation" >
                 <enum>Qt::Horizontal</enum>
@@ -1351,8 +1355,8 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="0" column="1" >
               <widget class="QToolButton" name="buttonAccountsAdd" >
-               <property name="text" >
-                <string>...</string>
+               <property name="toolTip" >
+                <string>Add a new Jabber account</string>
                </property>
                <property name="icon" >
                 <iconset resource="customwidgets.qrc" >
@@ -1362,8 +1366,8 @@ p, li { white-space: pre-wrap; }
              </item>
              <item row="1" column="1" >
               <widget class="QToolButton" name="buttonAccountsRemove" >
-               <property name="text" >
-                <string>...</string>
+               <property name="toolTip" >
+                <string>Remove selected Jabber account</string>
                </property>
                <property name="icon" >
                 <iconset resource="customwidgets.qrc" >
@@ -1384,7 +1388,7 @@ p, li { white-space: pre-wrap; }
                </property>
               </spacer>
              </item>
-             <item row="1" column="2" >
+             <item rowspan="3" row="0" column="2" >
               <spacer name="horizontalSpacer_9" >
                <property name="orientation" >
                 <enum>Qt::Horizontal</enum>
