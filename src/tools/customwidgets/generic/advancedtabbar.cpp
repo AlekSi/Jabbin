@@ -34,6 +34,8 @@ public:
     {
         list = new QListWidget(parent);
         list->setObjectName("AdvancedTabBarList");
+        list->setDragEnabled(false);
+        list->setDragDropMode(QAbstractItemView::NoDragDrop);
         list->hide();
         connect(list, SIGNAL(currentRowChanged(int)),
                 parent, SLOT(setCurrentIndex(int)));
@@ -103,6 +105,8 @@ void AdvancedTabBar::resizeEvent(QResizeEvent * event)
             d->list->setViewMode(QListView::ListMode);
             break;
     }
+    d->list->setDragEnabled(false);
+    d->list->setDragDropMode(QAbstractItemView::NoDragDrop);
     d->list->resize(size());
 }
 

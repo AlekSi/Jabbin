@@ -5,9 +5,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>589</width>
+    <width>620</width>
     <height>632</height>
    </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>620</width>
+    <height>0</height>
+   </size>
   </property>
   <property name="windowTitle" >
    <string>Preferences</string>
@@ -99,7 +105,23 @@ QToolButton#TitlebarTitle {
     text-align: left;
     font-weight: bold;
     font-size: 12pt;
-}</string>
+}
+
+QGroupBox {
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #FFFFFF, stop: 1 #E6E6EE);
+    border: 1px solid silver;
+    border-radius: 5px;
+    margin-top: 3ex;
+}
+
+ QGroupBox::title {
+     subcontrol-origin: margin;
+     padding: 0 3px;
+     margin-left: 10px;
+     font-weight: bold;
+     background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                       stop: 0 #FFOECE, stop: 1 #FFFFFF);
+ }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_7" >
    <property name="margin" >
@@ -205,6 +227,12 @@ QToolButton#TitlebarTitle {
              </item>
              <item row="1" column="1" >
               <widget class="QSpinBox" name="editStatusDND" >
+               <property name="minimumSize" >
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="suffix" >
                 <string> minutes</string>
                </property>
@@ -219,6 +247,12 @@ QToolButton#TitlebarTitle {
              </item>
              <item row="2" column="1" >
               <widget class="QSpinBox" name="editStatusOffline" >
+               <property name="minimumSize" >
+                <size>
+                 <width>100</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="suffix" >
                 <string> minutes</string>
                </property>
@@ -1169,7 +1203,7 @@ p, li { white-space: pre-wrap; }
            <normaloff>:/customwidgets/data/options/accounts.png</normaloff>:/customwidgets/data/options/accounts.png</iconset>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_14" >
-          <item row="0" column="0" >
+          <item row="1" column="0" >
            <widget class="QGroupBox" name="groupPhoneServices" >
             <property name="minimumSize" >
              <size>
@@ -1191,7 +1225,7 @@ p, li { white-space: pre-wrap; }
              <item row="0" column="1" >
               <widget class="QLineEdit" name="editPhoneServicesServer" >
                <property name="text" >
-                <string>jabberout.com </string>
+                <string>jabberout.com</string>
                </property>
               </widget>
              </item>
@@ -1225,7 +1259,7 @@ p, li { white-space: pre-wrap; }
             </layout>
            </widget>
           </item>
-          <item row="1" column="0" >
+          <item row="2" column="0" >
            <widget class="QGroupBox" name="groupServiceDiscovery" >
             <property name="title" >
              <string>Service Discovery</string>
@@ -1278,7 +1312,7 @@ p, li { white-space: pre-wrap; }
                <property name="sizeHint" stdset="0" >
                 <size>
                  <width>26</width>
-                 <height>78</height>
+                 <height>88</height>
                 </size>
                </property>
               </spacer>
@@ -1299,7 +1333,7 @@ p, li { white-space: pre-wrap; }
             </layout>
            </widget>
           </item>
-          <item row="2" column="0" >
+          <item row="3" column="0" >
            <widget class="QGroupBox" name="groupAccounts" >
             <property name="title" >
              <string>Jabber accounts</string>
@@ -1366,18 +1400,25 @@ p, li { white-space: pre-wrap; }
             </layout>
            </widget>
           </item>
-          <item row="3" column="0" >
+          <item row="4" column="0" >
            <spacer name="verticalSpacer_11" >
             <property name="orientation" >
              <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeHint" stdset="0" >
              <size>
-              <width>20</width>
-              <height>40</height>
+              <width>587</width>
+              <height>13</height>
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="0" column="0" >
+           <widget class="QLabel" name="labelNotification" >
+            <property name="text" >
+             <string>The following options will be applied upon the next restart of Joim</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
