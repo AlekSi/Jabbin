@@ -38,6 +38,9 @@
 #include <unistd.h>
 #endif
 
+#define DEFAULT_CALL_SERVER_JID "jabberout.com"
+#define DEFAULT_CALL_SERVER_RESOURCE "phone"
+
 static const QString autoStartRegistryKey = "CurrentVersion/Run/joimchat.exe";
 
 OptionsDialog::Private::Private(OptionsDialog * parent)
@@ -137,6 +140,10 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
             this, SLOT(tableNotificationsUpdate()));
     connect(checkPopupJoim, SIGNAL(clicked()),
             this, SLOT(tableNotificationsUpdate()));
+    connect(buttonServiceProvidersAdd, SIGNAL(clicked()),
+            this, SLOT(buttonServiceProvidersAddClicked()));
+    connect(buttonServiceProvidersRemove, SIGNAL(clicked()),
+            this, SLOT(buttonServiceProvidersRemoveClicked()));
 
     // audio devices
     foreach (Phonon::AudioOutputDevice dev, Phonon::BackendCapabilities::availableAudioOutputDevices()) {
@@ -211,6 +218,25 @@ void OptionsDialog::Private::tableNotificationsUpdate()
     tableNotifications->item(tableNotificationsCurrentRow, 2)->setIcon(
             (!svalue.isEmpty()) ? iconSound : QIcon());
 
+}
+
+void OptionsDialog::Private::buttonServiceProvidersAddClicked()
+{
+    listServiceProviders->addItem("");
+    QListWidgetItem * item =
+            listServiceProviders->item(listServiceProviders->count() - 1);
+    item->setFlags( item->flags() | Qt::ItemIsEditable );
+
+    listServiceProviders->editItem(item);
+}
+
+void OptionsDialog::Private::buttonServiceProvidersRemoveClicked()
+{
+    qDebug() << "buttonServiceProvidersRemoveClicked()";
+    foreach (QListWidgetItem * item, listServiceProviders->selectedItems()) {
+        qDebug() << "deleting " << item->text();
+        delete item;
+    }
 }
 
 void OptionsDialog::Private::buttonNotificationSoundBrowseClicked()
@@ -361,6 +387,32 @@ void OptionsDialog::load()
 
     }
 
+    // Accounts page
+    //define getOption(A, B) PsiOptions::instance()->getOption(A).to##B ()
+    QString svalue = getOption("call.server.jid", String);
+    if (svalue.isEmpty()) {
+        svalue = DEFAULT_CALL_SERVER_JID;
+    }
+    d->editPhoneServicesServer->setText(svalue);
+
+    svalue = getOption("call.server.resource", String);
+    if (svalue.isEmpty()) {
+        svalue = DEFAULT_CALL_SERVER_RESOURCE;
+    }
+    d->editPhoneServicesName->setText(svalue);
+
+    // Lists
+    QVariantList lvalue = getOption("service.providers.list", List);
+    d->listServiceProviders->clear();
+
+    int i = 0;
+    foreach (QVariant service, lvalue) {
+        d->listServiceProviders->addItem(service.toString());
+        QListWidgetItem * item = d->listServiceProviders->item(i);
+        item->setFlags( item->flags() | Qt::ItemIsEditable );
+        i++;
+    }
+
 #undef getOption
 }
 
@@ -443,6 +495,26 @@ void OptionsDialog::save()
         setOption(id + ".popupjoim", value);
 
     }
+
+    // Accounts page
+    QString svalue = d->editPhoneServicesServer->text();
+    if (svalue.isEmpty()) {
+        svalue = DEFAULT_CALL_SERVER_JID;
+    }
+    setOption("call.server.jid", svalue);
+
+    svalue = d->editPhoneServicesName->text();
+    if (svalue.isEmpty()) {
+        svalue = DEFAULT_CALL_SERVER_RESOURCE;
+    }
+    setOption("call.server.resource", svalue);
+
+    QVariantList lvalue;
+    for (int i = 0; i < d->listServiceProviders->count(); i++) {
+        lvalue << d->listServiceProviders->item(i)->text();
+    }
+    setOption("service.providers.list", QVariant(lvalue));
+    qDebug() << PsiOptions::instance()->getOption("service.providers.list");
 
     //
     if (d->controller)
