@@ -297,7 +297,7 @@ QTabWidget#mainTabWidget > QTabBar::tab:disabled {
          <string notr="true" />
         </property>
         <property name="currentIndex" >
-         <number>0</number>
+         <number>2</number>
         </property>
         <property name="usesScrollButtons" >
          <bool>true</bool>
@@ -371,7 +371,7 @@ QTabWidget#mainTabWidget > QTabBar::tab:disabled {
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="tabServices" >
+        <widget class="ServicesPanel" name="tabServices" >
          <property name="styleSheet" >
           <string notr="true" >QWidget {
     background-color: white;
@@ -464,6 +464,12 @@ QTabWidget#mainTabWidget > QTabBar::tab:disabled {
    <class>CallDialog</class>
    <extends>QFrame</extends>
    <header>calldialog.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ServicesPanel</class>
+   <extends>QWidget</extends>
+   <header>tools/services/servicespanel.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

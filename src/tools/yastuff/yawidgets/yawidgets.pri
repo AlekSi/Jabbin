@@ -8,6 +8,8 @@ DEPENDPATH += $$PWD/../../customwidgets
 SOURCES += \
 	$$PWD/newselfavatar/yaselfmood.cpp \
 	$$PWD/newselfavatar/yaselfmoodaction.cpp \
+	$$PWD/../../services/servicesmodel.cpp \
+	$$PWD/../../services/servicespanel.cpp \
 	$$PWD/../../customwidgets/selfmood.cpp \
 	$$PWD/../../customwidgets/selfavatar.cpp \
 	$$PWD/../../customwidgets/generic/styledwindow.cpp \
@@ -31,6 +33,9 @@ SOURCES += \
 HEADERS += \
 	$$PWD/newselfavatar/yaselfmood.h \
 	$$PWD/newselfavatar/yaselfmoodaction.h \
+	$$PWD/../../services/servicesmodel.h \
+	$$PWD/../../services/servicespanel.h \
+	$$PWD/../../services/servicespanel_p.h \
 	$$PWD/../../customwidgets/selfmood.h \
 	$$PWD/../../customwidgets/selfavatar.h \
 	$$PWD/../../customwidgets/generic/styledwindow.h \
@@ -59,6 +64,7 @@ HEADERS += \
 INTERFACES += \
 	$$PWD/../../customwidgets/generic/dialpad_base.ui \
 	$$PWD/../../customwidgets/generic/notificationpanel_base.ui \
+	$$PWD/../../services/servicespanel_base.ui \
 	$$PWD/../../customwidgets/calldialog_base.ui \
 	$$PWD/../../customwidgets/optionsdialog_base.ui \
 	$$PWD/../../customwidgets/generic/tooltipwindow_base.ui \

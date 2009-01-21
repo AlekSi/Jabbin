@@ -113,6 +113,7 @@ SOURCES += \
 
 RESOURCES += \
 	$$PWD/../customwidgets/customwidgets.qrc \
+	$$PWD/../services/services.qrc \
 	$$PWD/yastuff.qrc \
 	$$PWD/yaiconsets.qrc
 

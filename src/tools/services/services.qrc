@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="services" >
+    <file>data/service.png</file>
+  </qresource>
+</RCC>
