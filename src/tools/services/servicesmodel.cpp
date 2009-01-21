@@ -163,20 +163,17 @@ ServicesModel::ServicesModel(QObject * parent)
     : QAbstractItemModel(parent),
       d(new Private())
 {
-    qDebug() << "ServicesModel::ServicesModel(...)";
     d->root->addService("jabber.org");
     d->root->addService("jabber.com");
 }
 
 ServicesModel::~ServicesModel()
 {
-    qDebug() << "ServicesModel::~ServicesModel()";
     delete d;
 }
 
 QModelIndex ServicesModel::index(int row, int column, const QModelIndex & parent) const
 {
-    qDebug() << "ServicesModel::index " << row << column << parent;
     if (!hasIndex(row, column, parent))
         return QModelIndex();
 
@@ -197,7 +194,6 @@ QModelIndex ServicesModel::index(int row, int column, const QModelIndex & parent
 
 QModelIndex ServicesModel::parent(const QModelIndex & index) const
 {
-    qDebug() << "ServicesModel::parent " << index;
     if (!index.isValid())
         return QModelIndex();
 
@@ -213,7 +209,6 @@ QModelIndex ServicesModel::parent(const QModelIndex & index) const
 
 int ServicesModel::rowCount(const QModelIndex & parent) const
 {
-    qDebug() << "ServicesModel::rowCount " << parent;
     if (parent.column() > 0)
         return 0;
 
@@ -224,58 +219,44 @@ int ServicesModel::rowCount(const QModelIndex & parent) const
         parentItem = static_cast < ServicesModelItem * >
             (parent.internalPointer());
 
-    qDebug() << parentItem->title() << parentItem->childCount();
     return parentItem->childCount();
 }
 
 int ServicesModel::columnCount(const QModelIndex & parent) const
 {
-    qDebug() << "ServicesModel::columnCount " << parent;
     return 1;
 }
 
 QVariant ServicesModel::data(const QModelIndex & index, int role) const
 {
-    qDebug() << "ServicesModel::data " << index << role;
     ServicesModelItem * item;
 
      if (!index.isValid()) {
-         qDebug() << "           index is not valid, using root element";
          item = d->root;
      } else {
-         qDebug() << "           index is valid, using root element";
          item = static_cast < ServicesModelItem * >
              (index.internalPointer());
      }
 
      if (!item) {
-         qDebug() << "           item is null, exiting";
          return QVariant();
      }
 
     switch (role) {
         case Qt::DisplayRole:
-            qDebug() << "           returning title";
             return item->title();
         case Qt::DecorationRole:
-            qDebug() << "           returning icon";
             return item->icon();
         case Qt::SizeHintRole:
-            qDebug() << "           returning size for " << (void *) item;
-            qDebug() << "           type is " << item->type();
             switch (item->type()) {
                 case ServicesModelItem::Generic:
-                    qDebug() << "           returning 24";
                     return QSize(24, 24);
                 case ServicesServerItem::Server:
-                    qDebug() << "           returning 32";
                     return QSize(32, 32);
                 default:
-                    qDebug() << "           returning 16";
                     return QSize(16, 16);
             }
         default:
-            qDebug() << "           unknown role";
             return QVariant();
     }
 
@@ -292,7 +273,6 @@ bool ServicesModel::setData(const QModelIndex & index, const QVariant & value,
 QVariant ServicesModel::headerData(int section, Qt::Orientation orientation,
         int role) const
 {
-    qDebug() << "ServicesModel::headerData " << role;
     switch (role) {
         case Qt::DisplayRole:
             return QString("Header");
@@ -306,13 +286,11 @@ QVariant ServicesModel::headerData(int section, Qt::Orientation orientation,
 
 bool ServicesModel::hasChildren(const QModelIndex & index) const
 {
-    qDebug() << "ServicesModel::hasChildren " << index;
     return (rowCount(index) != 0);
 }
 
 Qt::ItemFlags ServicesModel::flags(const QModelIndex & index) const
 {
-    qDebug() << "ServicesModel::flags " << index;
     if (!index.isValid())
          return 0;
 
