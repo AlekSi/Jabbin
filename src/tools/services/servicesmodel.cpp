@@ -20,6 +20,13 @@
 #include "servicesmodel.h"
 #include "servicesmodel_p.h"
 #include <QDebug>
+#include <QApplication>
+#include <QTimer>
+
+#include "xmpp_tasks.h"
+#include "xmpp_discoitem.h"
+#include "protocol/discoinfoquerier.h"
+#define INVALIDATE_PERIOD 60000
 
 // ServicesModelItem
 ServicesModelItem::ServicesModelItem(ServicesModelItem * parent, QString data)
@@ -77,21 +84,37 @@ QIcon ServicesModelItem::icon()
     return m_icon;
 }
 
+void ServicesModelItem::invalidate()
+{
+    m_itemLoaded = false;
+    load();
+}
+
 void ServicesModelItem::load()
 {
     if (m_itemLoaded) return;
-    // TODO:
-
-    m_itemLoaded = true;
+    _load();
 }
 
 void ServicesModelItem::initChildren()
 {
     if (m_childrenLoaded) return;
     load();
-    // TODO:
-
+    _initChildren();
     m_childrenLoaded = true;
+}
+
+void ServicesModelItem::_load()
+{
+    // TODO:
+    m_title = QObject::tr("Loading");
+    m_icon = QIcon(":/services/data/loading.png");
+    notifyUpdated();
+}
+
+void ServicesModelItem::_initChildren()
+{
+    // TODO:
 }
 
 int ServicesModelItem::row()
@@ -105,10 +128,50 @@ int ServicesModelItem::indexOf(ServicesModelItem * child)
     return m_children.indexOf(child);
 }
 
+ServicesModel * ServicesModelItem::model() const
+{
+    return parent()->model();
+}
+
+void ServicesModelItem::notifyUpdated()
+{
+    m_itemLoaded = true;
+    model()->d->itemUpdated(this);
+}
+
 // ServicesServerItem
 ServicesServerItem::ServicesServerItem(ServicesModelItem * parent, QString server)
-    : ServicesModelItem(parent, server)
+    : ServicesModelItem(parent, server),
+      m_waitingForInfo(false)
 {
+    m_discoItem.setJid(server.stripWhiteSpace());
+    m_discoItem.setNode(QString());
+
+}
+
+void ServicesServerItem::discoInfoFinished()
+{
+    JT_DiscoInfo * jt = (JT_DiscoInfo *)sender();
+    qDebug() << "discoInfoFinished()" <<
+            jt->item().jid().full();
+
+    if (jt->success()) {
+        if (jt->item().name().isEmpty()) {
+            m_title = jt->item().jid().full();
+        } else {
+            m_title = jt->item().name();
+        }
+        // qDebug() << "features: " << jt->item().features().id() << XMPP::Features::feature(jt->item().features().id());
+        m_icon = QIcon(":/services/data/service.png");
+    } else {
+        // Handle the error
+        m_title = tr("Error connecting to %1").arg(m_data);
+        m_icon = QIcon(":/services/data/error.png");
+        QTimer::singleShot(INVALIDATE_PERIOD, this, SLOT(invalidate()));
+    }
+
+    m_waitingForInfo = false;
+    notifyUpdated();
 }
 
 int ServicesServerItem::type() const
@@ -116,25 +179,38 @@ int ServicesServerItem::type() const
     return Server;
 }
 
-void ServicesServerItem::load()
+void ServicesServerItem::_load()
 {
-    m_title = m_data;
-    m_icon = QIcon(":/services/data/service.png");
+    m_icon = QIcon(":/services/data/loading.png");
+    m_title = tr("Connecting to %1").arg(m_data);
+
+    JT_DiscoInfo * jt = new JT_DiscoInfo(model()->psiAccount()->client()->rootTask());
+    connect(jt, SIGNAL(finished()), SLOT(discoInfoFinished()));
+
+    if (m_waitingForInfo) {
+        return;
+    }
+
+    qDebug() << m_waitingForInfo << "Calling jt->get(); " << m_discoItem.jid().full();
+
+    jt->get(m_discoItem);
+
+    // this would be a lot prettier if jt->go() returned bool
+    // - false if connection error
+    m_waitingForInfo = (jt->client() && &jt->client()->stream());
+    qDebug() << "Success connect:" << m_waitingForInfo;
+    jt->go(true);
 }
 
-void ServicesServerItem::initChildren()
+void ServicesServerItem::_initChildren()
 {
-    if (m_childrenLoaded) return;
-    load();
-
     m_children << new ServicesModelItem(this, "www");
     m_children << new ServicesModelItem(this, "www2");
-    m_childrenLoaded = true;
 }
 
 // ServicesRootItem
-ServicesRootItem::ServicesRootItem()
-    : ServicesModelItem(NULL, QString())
+ServicesRootItem::ServicesRootItem(ServicesModel * model)
+    : ServicesModelItem(NULL, QString()), m_model(model)
 {
 }
 
@@ -148,9 +224,14 @@ void ServicesRootItem::addService(const QString service)
     m_children << new ServicesServerItem(this, service);
 }
 
+ServicesModel * ServicesRootItem::model() const
+{
+    return m_model;
+}
+
 // ServicesModel::Private
-ServicesModel::Private::Private()
-    : root(new ServicesRootItem())
+ServicesModel::Private::Private(ServicesModel * parent)
+    : q(parent)
 {
 }
 
@@ -158,13 +239,37 @@ ServicesModel::Private::~Private()
 {
 }
 
-// ServicesModel
-ServicesModel::ServicesModel(QObject * parent)
-    : QAbstractItemModel(parent),
-      d(new Private())
+void ServicesModel::Private::itemUpdated(ServicesModelItem * item)
 {
+    QModelIndex index = indexOf(item);
+    q->dataChanged(index, index);
+}
+
+QModelIndex ServicesModel::Private::indexOf(ServicesModelItem * item)
+{
+    if (item == root) {
+        return QModelIndex();
+    }
+
+    ServicesModelItem * parentItem = item->parent();
+    return q->index(parentItem->row(), 0, indexOf(parentItem));
+}
+
+// ServicesModel
+ServicesModel::ServicesModel(PsiAccount * psiAccount, QObject * parent)
+    : QAbstractItemModel(parent),
+      d(new Private(this))
+{
+    d->psiAccount = psiAccount;
+    d->root = new ServicesRootItem(this);
     d->root->addService("jabber.org");
     d->root->addService("jabber.com");
+    d->root->addService("localhost");
+}
+
+PsiAccount * ServicesModel::psiAccount() const
+{
+    return d->psiAccount;
 }
 
 ServicesModel::~ServicesModel()

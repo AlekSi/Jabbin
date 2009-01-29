@@ -88,6 +88,39 @@ QTabWidget#mainTabWidget > QTabBar::tab:disabled {
     color: rgba(0, 0, 0, 0);
     border-image: none;
 }
+
+YaPushButton, .QWidget > QPushButton {
+   color: black;
+   border-image: url(:/customicons/BottonWhite.png) 2px;
+   /*   border-width: 0px 11px 0px 10px;*/
+   /*min-width: 4em;
+   min-height: 1.5em;*/
+}
+
+YaPushButton, .QWidget > QPushButton:disabled {
+   color: white;
+}
+
+YaPushButton, .QWidget > QPushButton:focus {
+   /*border-image: url(:/images/pushbutton/green/pushbutton_focus.png) 12px 11px 12px 10px;*/
+   border-image: url(:/customicons/BottonRedFocus.png) 2px;
+}
+
+YaPushButton, .QWidget > QPushButton:hover {
+   /*border-image: url(:/images/pushbutton/green/pushbutton_hover.png) 12px 11px 12px 10px;*/
+   border-image: url(:/customicons/BottonRed.png) 2px;
+}
+
+YaPushButton, .QWidget > QPushButton:pressed {
+   /*border-image: url(:/images/pushbutton/green/pushbutton_pressed.png) 12px 11px 12px 10px;*/
+   border-image: url(:/customicons/BottonRedPressed.png) 2px;
+}
+
+.QLineEdit {
+  border: 2px solid gray;
+  border-width: 6px;
+  border-image: url(:/customwidgets/generic/data/advancedlineedit_background.png) 6 6 6 6 stretch stretch;
+}
 </string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3" >
@@ -297,7 +330,7 @@ QTabWidget#mainTabWidget > QTabBar::tab:disabled {
          <string notr="true" />
         </property>
         <property name="currentIndex" >
-         <number>2</number>
+         <number>0</number>
         </property>
         <property name="usesScrollButtons" >
          <bool>true</bool>
@@ -348,9 +381,9 @@ QTabWidget#mainTabWidget > QTabBar::tab:disabled {
           <string>&amp;Dial</string>
          </attribute>
          <attribute name="icon" >
-          <iconset resource="yaiconsets.qrc" >
-           <normaloff>:/iconsets/roster/roster-tabs/call.png</normaloff>
-           <disabledoff>:/customwidgets/generic/data/blank.png</disabledoff>:/iconsets/roster/roster-tabs/call.png</iconset>
+          <iconset resource="../../../iconsets/custom/customicons.qrc" >
+           <normaloff>:/customicons/CalPad-Icon16x16.png</normaloff>
+           <disabledoff>:/customwidgets/generic/data/blank.png</disabledoff>:/customicons/CalPad-Icon16x16.png</iconset>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_5" >
           <property name="spacing" >
@@ -475,6 +508,7 @@ QTabWidget#mainTabWidget > QTabBar::tab:disabled {
  </customwidgets>
  <resources>
   <include location="yaiconsets.qrc" />
+  <include location="../../../iconsets/custom/customicons.qrc" />
   <include location="../customwidgets/customwidgets.qrc" />
  </resources>
  <connections/>

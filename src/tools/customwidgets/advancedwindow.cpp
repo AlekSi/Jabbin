@@ -44,7 +44,6 @@ public:
 
     void saveGeometry()
     {
-        qDebug() << "saving geometry" << q->geometry();
         PsiOptions::instance()->setOption(geometryOptionPath, q->geometry());
     }
 
@@ -69,7 +68,6 @@ void AdvancedWindow::setGeometryOptionPath(const QString & optionPath)
     d->geometryOptionPath = optionPath;
 
     QRect savedGeometry = PsiOptions::instance()->getOption(d->geometryOptionPath).toRect();
-    qDebug() << "loading geometry" << savedGeometry;
     if (savedGeometry.isValid()) {
         setGeometry(savedGeometry);
     }

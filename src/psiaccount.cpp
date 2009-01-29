@@ -172,6 +172,8 @@ typedef int socklen_t;
 #endif*/
 #include "psilogger.h"
 
+#include "tools/services/servicespanel.h"
+
 using namespace XMPP;
 
 // #define INITIAL_PRESENCE_AFTER_VCARD
@@ -1067,6 +1069,8 @@ PsiAccount::PsiAccount(const UserAccount &acc, PsiContactList *parent, CapsRegis
 	QTimer::singleShot(0, d, SLOT(loadQueue()));
 
 	d->contactList->link(this);
+
+	ServicesPanel::instance()->init(this);
 }
 
 PsiAccount::~PsiAccount()

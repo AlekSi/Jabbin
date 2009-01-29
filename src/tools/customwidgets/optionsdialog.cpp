@@ -65,7 +65,7 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
 
     // Init
     tabs->setViewType(CustomWidgets::AdvancedTabBar::ListView);
-    tabs->setTabBarThickness(64);
+    tabs->setTabBarThickness(240);
 
     connect(buttonBox, SIGNAL(clicked(QAbstractButton *)),
                 this, SLOT(buttonClicked(QAbstractButton *)));

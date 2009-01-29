@@ -51,7 +51,7 @@ public:
      * Since we have only one instance of ServicesPanel, this method
      * sets the needed parameters for it.
      */
-    void init(const XMPP::Jid & jid, PsiAccount * account);
+    void init(/*const XMPP::Jid & jid,*/ PsiAccount * account);
 
     /**
      * @returns Jabber ID

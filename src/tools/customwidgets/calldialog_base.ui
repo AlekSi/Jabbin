@@ -78,7 +78,7 @@ QTabWidget#callTabs > QTabBar::tab:selected {
             <enum>QTabWidget::West</enum>
            </property>
            <property name="currentIndex" >
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="iconSize" >
             <size>
@@ -91,8 +91,8 @@ QTabWidget#callTabs > QTabBar::tab:selected {
              <string/>
             </attribute>
             <attribute name="icon" >
-             <iconset resource="customwidgets.qrc" >
-              <normaloff>:/customwidgets/data/calldialog_dial.png</normaloff>:/customwidgets/data/calldialog_dial.png</iconset>
+             <iconset resource="../../../iconsets/custom/customicons.qrc" >
+              <normaloff>:/customicons/CalPad-Icon32x32.png</normaloff>:/customicons/CalPad-Icon32x32.png</iconset>
             </attribute>
             <attribute name="toolTip" >
              <string>Dialpad</string>
@@ -162,35 +162,9 @@ QTabWidget#callTabs > QTabBar::tab:selected {
                 <widget class="QPushButton" name="buttonCall" >
                  <property name="minimumSize" >
                   <size>
-                   <width>93</width>
-                   <height>29</height>
+                   <width>97</width>
+                   <height>31</height>
                   </size>
-                 </property>
-                 <property name="styleSheet" >
-                  <string notr="true" >QPushButton {
-   color: white;
-   border-image: url(:/images/pushbutton/green/pushbutton.png) 12px 11px 12px 10px;
-   border-width: 0px 11px 0px 10px;
-   min-width: 4em;
-   min-height: 1.5em;
-}
-
-QPushButton:disabled {
-   color: white;
-}
-
-QPushButton:hover {
-   border-image: url(:/images/pushbutton/green/pushbutton_hover.png) 12px 11px 12px 10px;
-}
-
-QPushButton:focus {
-   border-image: url(:/images/pushbutton/green/pushbutton_focus.png) 12px 11px 12px 10px;
-}
-
-QPushButton:pressed {
-   border-image: url(:/images/pushbutton/green/pushbutton_pressed.png) 12px 11px 12px 10px;
-}
-</string>
                  </property>
                  <property name="text" >
                   <string>Call</string>
@@ -615,6 +589,7 @@ QListView::item:selected {
  </tabstops>
  <resources>
   <include location="customwidgets.qrc" />
+  <include location="../../../iconsets/custom/customicons.qrc" />
  </resources>
  <connections>
   <connection>

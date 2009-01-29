@@ -34,6 +34,7 @@ HEADERS += \
 	$$PWD/newselfavatar/yaselfmood.h \
 	$$PWD/newselfavatar/yaselfmoodaction.h \
 	$$PWD/../../services/servicesmodel.h \
+	$$PWD/../../services/servicesmodel_p.h \
 	$$PWD/../../services/servicespanel.h \
 	$$PWD/../../services/servicespanel_p.h \
 	$$PWD/../../customwidgets/selfmood.h \

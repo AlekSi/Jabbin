@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>620</width>
+    <width>850</width>
     <height>632</height>
    </rect>
   </property>
@@ -27,29 +27,6 @@
     background-attachment: fixed;
     selection-background-color: white;
     selection-color: black;
-}
-
-QPushButton {
-   color: white;
-   border-image: url(:/images/pushbutton/green/pushbutton.png) 12px 11px 12px 10px;
-   border-width: 0px 11px 0px 10px;
-   min-height: 1.5em;
-}
-
-QPushButton:disabled {
-   color: white;
-}
-
-QPushButton:hover {
-   border-image: url(:/images/pushbutton/green/pushbutton_hover.png) 12px 11px 12px 10px;
-}
-
-QPushButton:focus {
-   border-image: url(:/images/pushbutton/green/pushbutton_focus.png) 12px 11px 12px 10px;
-}
-
-QPushButton:pressed {
-   border-image: url(:/images/pushbutton/green/pushbutton_pressed.png) 12px 11px 12px 10px;
 }
 
 AdvancedTabBar::tab {
@@ -114,7 +91,7 @@ QGroupBox {
     margin-top: 3ex;
 }
 
- QGroupBox::title {
+QGroupBox::title {
     subcontrol-origin: margin;
     padding: 0 3px;
     margin-left: 10px;
@@ -125,7 +102,34 @@ QGroupBox {
 
 QToolButton {
     border: none;
-}</string>
+}
+
+QPushButton {
+   color: black;
+   border-image: url(:/customicons/BottonWhite.png) 2px;
+   border: 2px;
+   min-height: 1.5em;
+   padding: 0px 8px;
+}
+
+QPushButton:disabled {
+   color: white;
+}
+
+QPushButton:focus {
+   /*border-image: url(:/images/pushbutton/green/pushbutton_focus.png) 12px 11px 12px 10px;*/
+   border-image: url(:/customicons/BottonRedFocus.png) 2px;
+}
+
+QPushButton:hover {
+   /*border-image: url(:/images/pushbutton/green/pushbutton_hover.png) 12px 11px 12px 10px;*/
+   border-image: url(:/customicons/BottonRed.png) 2px;
+}
+
+QPushButton:pressed {
+   border-image: url(:/customicons/BottonRedPressed.png) 2px;
+}
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_7" >
    <property name="margin" >
@@ -142,6 +146,9 @@ QToolButton {
       </property>
       <item>
        <widget class="CustomWidgets::AdvancedTabWidget" name="tabs" >
+        <property name="tabPosition" >
+         <enum>QTabWidget::West</enum>
+        </property>
         <property name="currentIndex" >
          <number>6</number>
         </property>
@@ -710,7 +717,7 @@ p, li { white-space: pre-wrap; }
               <property name="minimumSize" >
                <size>
                 <width>150</width>
-                <height>31</height>
+                <height>29</height>
                </size>
               </property>
               <property name="text" >

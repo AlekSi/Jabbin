@@ -20,9 +20,15 @@
 #ifndef SERVICESMODEL_PH_
 #define SERVICESMODEL_PH_
 
+#include <QObject>
 #include <QList>
+#include <QIcon>
+#include "servicesmodel.h"
 
-class ServicesModelItem {
+#include "xmpp_discoitem.h"
+
+class ServicesModelItem: public QObject {
+    Q_OBJECT
 public:
     ServicesModelItem(ServicesModelItem * parent, QString data);
     virtual ~ServicesModelItem();
@@ -31,22 +37,30 @@ public:
     ServicesModelItem * child(int index);
     ServicesModelItem * parent() const;
 
-    void activate();
+    virtual void activate();
 
     QString title();
     QIcon icon();
 
     virtual int row();
     virtual int indexOf(ServicesModelItem * child);
+    virtual ServicesModel * model() const;
 
     enum ItemType {
         Generic = 1
     };
     virtual int type() const;
 
+public Q_SLOTS:
+    void invalidate();
+
 protected:
-    virtual void load();
-    virtual void initChildren();
+    void load();
+    void initChildren();
+    void notifyUpdated();
+
+    virtual void _load();
+    virtual void _initChildren();
 
     QString m_title;
     QString m_data;
@@ -59,6 +73,7 @@ protected:
 };
 
 class ServicesServerItem: public ServicesModelItem {
+    Q_OBJECT
 public:
     ServicesServerItem(ServicesModelItem * parent, QString server);
 
@@ -68,24 +83,42 @@ public:
     virtual int type() const;
 
 protected:
-    virtual void load();
-    virtual void initChildren();
+    virtual void _load();
+    virtual void _initChildren();
+
+protected Q_SLOTS:
+    void discoInfoFinished();
+
+private:
+    XMPP::DiscoItem m_discoItem;
+    bool m_waitingForInfo;
+
 };
 
 class ServicesRootItem: public ServicesModelItem {
 public:
-    ServicesRootItem();
+    ServicesRootItem(ServicesModel * model);
     int row();
 
     void addService(const QString service);
+    ServicesModel * model() const;
+
+private:
+    ServicesModel * m_model;
 };
 
 class ServicesModel::Private {
 public:
-    Private();
+    Private(ServicesModel * parent);
     ~Private();
 
     ServicesRootItem * root;
+    PsiAccount * psiAccount;
+
+    void itemUpdated(ServicesModelItem * item);
+    QModelIndex indexOf(ServicesModelItem * item);
+
+    ServicesModel * q;
 };
 
 #endif // SERVICESMODEL_PH_

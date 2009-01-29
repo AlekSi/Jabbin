@@ -115,7 +115,8 @@ RESOURCES += \
 	$$PWD/../customwidgets/customwidgets.qrc \
 	$$PWD/../services/services.qrc \
 	$$PWD/yastuff.qrc \
-	$$PWD/yaiconsets.qrc
+	$$PWD/yaiconsets.qrc \
+	$$PWD/../../../iconsets/custom/customicons.qrc
 
 INTERFACES += \
 	$$PWD/yaloginpage.ui \

@@ -23,6 +23,9 @@
 #include <QtCore/qabstractitemmodel.h>
 #include <QtCore/qdir.h>
 #include <QtGui/qfileiconprovider.h>
+#include "psiaccount.h"
+
+class ServicesModelItem;
 
 class ServicesModel: public QAbstractItemModel
 {
@@ -33,7 +36,7 @@ public:
         AddressRole = Qt::UserRole + 1
     };
 
-    ServicesModel(QObject * parent = 0);
+    ServicesModel(PsiAccount * psiAccount, QObject * parent = 0);
     ~ServicesModel();
 
     QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const;
@@ -58,12 +61,16 @@ public:
                       int row, int column, const QModelIndex &parent);
     Qt::DropActions supportedDropActions() const;
 
+    PsiAccount * psiAccount() const;
+
 public Q_SLOTS:
     void refresh(const QModelIndex &parent = QModelIndex());
 
 private:
     class Private;
     Private * const d;
+
+    friend class ServicesModelItem;
 };
 
 #endif // SERVICESMODEL_H_

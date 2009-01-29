@@ -46,6 +46,8 @@ void YaPushButton::init()
 
 void YaPushButton::updateButtonStyle()
 {
+/** ivan: we are handling the styles globally now
+
 #ifndef YAPSI_NO_STYLESHEETS
 	QString style = buttonStyle_ == ButtonStyle_Destructive ? "red" : "green";
 
@@ -74,6 +76,7 @@ void YaPushButton::updateButtonStyle()
 	).arg(style);
 	setStyleSheet(styleSheet);
 #endif
+*/
 }
 
 void YaPushButton::setButtonStyle(YaPushButton::ButtonStyle buttonStyle)

@@ -29,8 +29,6 @@ ServicesPanel::Private::Private(ServicesPanel * parent)
     : account(NULL), q(parent)
 {
     setupUi(parent);
-    ServicesModel * model = new ServicesModel();
-    treeServices->setModel(model);
 }
 
 ServicesPanel * ServicesPanel::m_instance = NULL;
@@ -40,10 +38,12 @@ ServicesPanel * ServicesPanel::instance()
     return m_instance;
 }
 
-void ServicesPanel::init(const Jid & jid, PsiAccount * account)
+void ServicesPanel::init(/*const Jid & jid,*/ PsiAccount * account)
 {
-    d->jid = jid;
+    // d->jid = jid;
     d->account = account;
+    ServicesModel * model = new ServicesModel(account);
+    d->treeServices->setModel(model);
 }
 
 ServicesPanel::ServicesPanel(QWidget * parent)
