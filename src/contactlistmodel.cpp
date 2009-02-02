@@ -363,6 +363,9 @@ QVariant ContactListModel::contactData(const PsiContact* contact, int role)
 	else if (role == StatusTypeRole) {
 		return QVariant(contact->status().type());
 	}
+	else if (role == CallableRole) {
+		return QVariant(contact->isCallable());
+	}
 #ifdef YAPSI
 	else if (role == NotifyValueRole) {
 		return QVariant(contact->status().notifyValue());
@@ -403,7 +406,7 @@ bool ContactListModel::setData(const QModelIndex& index, const QVariant& data, i
 		return false;
 	ContactListGroup*     group   = 0;
 	PsiContact*           contact = 0;
-	
+
 	if (role == ActivateRole) {
 		PsiContact* contact = dynamic_cast<PsiContact*>(item->item());
 		if (!contact)

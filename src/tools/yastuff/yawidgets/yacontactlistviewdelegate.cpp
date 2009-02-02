@@ -49,6 +49,7 @@ YaContactListViewDelegate::YaContactListViewDelegate(YaContactListView* parent)
 #endif
 {
 	setDrawStatusIcon(true);
+	phoneIcon = QIcon(":/iconsets/chatwindow/call.png");
 }
 
 const YaContactListView* YaContactListViewDelegate::contactList() const
@@ -170,7 +171,7 @@ int YaContactListViewDelegate::nameFontSize(const QRect& nameRect) const
 
 int YaContactListViewDelegate::statusTypeFontSize(const QRect& statusTypeRect) const
 {
-	return statusTypeRect.height();
+	return 9;
 }
 
 int YaContactListViewDelegate::statusMessageFontSize(const QRect& statusRect) const
@@ -196,6 +197,8 @@ void YaContactListViewDelegate::doAvatar(QPainter* painter, const QStyleOptionVi
 			avatar = qvariant_cast<QIcon>(avatarData);
 		}
 	}
+
+
 
         /*QRect r = option.rect;
         r.adjust(horizontalMargin_, verticalMargin_,
@@ -282,7 +285,7 @@ void YaContactListViewDelegate::drawStatusTypeText(QPainter* painter, const QSty
 	QString statusTypeText = tr(" - %1").arg(Ya::statusName(statusType(index)));
 	QRect statusTypeRect(*rect);
 	QStyleOptionViewItemV2 st_o = option;
-	st_o.font.setPixelSize(9);
+	st_o.font.setPixelSize(statusTypeFontSize(option.rect));
 	st_o.fontMetrics = QFontMetrics(st_o.font);
 	QPalette palette = blackText();
 	palette.setColor(QPalette::Text, Ya::VisualUtil::statusColor(statusType(index), hovered()));
@@ -344,6 +347,15 @@ void YaContactListViewDelegate::realDrawContact(QPainter* painter, const QStyleO
 {
 	drawEditorBackground(painter, option, index);
 	doAvatar(painter, option, index);
+
+        // do we draw the phone icon?
+        if (index.data(ContactListModel::CallableRole).toBool()) {
+                QRect phoneIconRect = QRect(0, 0, 16, 16);
+                phoneIconRect.moveTopRight(
+                        avatarRect(option.rect).topLeft()
+                        - QPoint(horizontalMargin_, 0));
+                phoneIcon.paint(painter, phoneIconRect);
+        }
 
 	bool selected = option.state & QStyle::State_Selected;
 

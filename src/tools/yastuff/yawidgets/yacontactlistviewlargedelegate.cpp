@@ -95,6 +95,11 @@ int YaContactListViewLargeDelegate::nameFontSize(const QRect& nameRect) const
     return 14;
 }
 
+int YaContactListViewLargeDelegate::statusTypeFontSize(const QRect& statusTypeRect) const
+{
+    return 10;
+}
+
 int YaContactListViewLargeDelegate::avatarSize() const
 {
 	return 46;

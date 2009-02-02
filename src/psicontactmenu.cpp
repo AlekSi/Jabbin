@@ -243,7 +243,7 @@ public:
 		// 		pm.setItemEnabled(10, false);
 		// 	pm.insertSeparator();
 		// }
-		// 
+		//
 		// if ( (self  && i->isAlerting()) ||
 		//      (!self && e->alerting) ) {
 		// 	d->cv->qa_recv->addTo(&pm);
@@ -351,13 +351,13 @@ private slots:
 		openHistory_->setEnabled(profile->haveHistory());
 		delete profile;
 
-//		FIXME! Check if the user has voice capabilities		
+//		FIXME! Check if the user has voice capabilities
 //		bool hasVoice = false;
-// 		const UserResourceList &rl = d->u_.userResourceList();
-// 		for (UserResourceList::ConstIterator it = rl.begin(); it != rl.end() && !hasVoice; ++it) {
+//		const UserResourceList &rl = d->u_.userResourceList();
+//		for (UserResourceList::ConstIterator it = rl.begin(); it != rl.end() && !hasVoice; ++it) {
 //	 			hasVoice = psiAccount()->capsManager()->features(u->jid().withResource((*it).name())).canVoice();
 //		}
-//		openCall_->setEnabled(hasVoice);
+		openCall_->setEnabled(contact_->isCallable());
 
 		rename_->setEnabled(contact_->isEditable());
 		yaProfile_->setEnabled(contact_->isYaJid());

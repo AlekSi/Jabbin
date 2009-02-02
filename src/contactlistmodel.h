@@ -59,18 +59,19 @@ public:
 		PictureRole     = Qt::UserRole + 3,
 		StatusTextRole  = Qt::UserRole + 4,
 		StatusTypeRole  = Qt::UserRole + 5,
+                CallableRole    = Qt::UserRole + 6,
 
 		// groups
-		ExpandedRole    = Qt::UserRole + 6,
-		TotalItemsRole  = Qt::UserRole + 7,
-		FullGroupNameRole = Qt::UserRole + 8,
+		ExpandedRole    = Qt::UserRole + 7,
+		TotalItemsRole  = Qt::UserRole + 8,
+		FullGroupNameRole = Qt::UserRole + 9,
 
 #ifdef YAPSI
-		NotifyValueRole = Qt::UserRole + 9,
-		GenderRole      = Qt::UserRole + 10,
-		LastRole        = Qt::UserRole + 10
+		NotifyValueRole = Qt::UserRole + 10,
+		GenderRole      = Qt::UserRole + 11,
+		LastRole        = Qt::UserRole + 11
 #else
-		LastRole        = Qt::UserRole + 8
+		LastRole        = Qt::UserRole + 9
 #endif
 	};
 

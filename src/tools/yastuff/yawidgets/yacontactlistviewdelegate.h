@@ -114,6 +114,7 @@ private:
 	int margin_;
 	int avatarSize_;
 	bool preserveJidHosts_;
+	QIcon phoneIcon;
 };
 
 #endif

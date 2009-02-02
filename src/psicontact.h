@@ -55,6 +55,7 @@ public:
 	virtual bool authorizesToSeeStatus() const;
 	virtual bool isOnline() const;
 	virtual bool isHidden() const;
+	virtual bool isCallable() const;
 
 	void activate();
 
@@ -152,7 +153,7 @@ signals:
 #endif
 
 	/**
-	 * This signal is emitted when PsiContact has entered its final 
+	 * This signal is emitted when PsiContact has entered its final
 	 * destruction stage.
 	 */
 	void destroyed(PsiContact*);

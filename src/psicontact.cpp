@@ -932,6 +932,13 @@ bool PsiContact::isOnline() const
 	;
 }
 
+bool PsiContact::isCallable() const
+{
+    // TODO! Implement this
+    // the following is only for the testing purposes
+	return ((long) this) % 3;
+}
+
 bool PsiContact::isHidden() const
 {
 	return false;
