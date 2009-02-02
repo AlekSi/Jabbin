@@ -49,6 +49,7 @@
 #include "vcardfactory.h"
 #include "psicon.h"
 #include "psicontactlist.h"
+#include "capsmanager.h"
 
 static const int statusTimerInterval = 5000;
 
@@ -935,8 +936,20 @@ bool PsiContact::isOnline() const
 bool PsiContact::isCallable() const
 {
     // TODO! Implement this
-    // the following is only for the testing purposes
-	return ((long) this) % 3;
+
+    const UserResourceList & list = d->u_.userResourceList();
+    foreach (UserResource res, list) {
+        qDebug() << "$$$$$$$$$$$" << res.name() << res.clientOS() << res.versionString();
+        if (account()->capsManager()->features(
+                    d->u_.jid().withResource(res.name())).canVoice()) return true;
+
+    }
+    //for (UserResourceList::ConstIterator i = list.begin();
+    //        i != list.end() && !result; ++i) {
+    //}
+//	 			hasVoice = psiAccount()->capsManager()->features(u->jid().withResource((*it).name())).canVoice();
+//		}
+    return false;
 }
 
 bool PsiContact::isHidden() const
