@@ -34,6 +34,7 @@
 #include "yarostertooltip.h"
 #include "yaemptytextlineedit.h"
 
+#define NAME_STATUS_RATIO 0.5
 #define YAPSI_PALE_ROSTER_JIDS
 #define YAPSI_STRIP_JID_HOST
 
@@ -47,7 +48,7 @@ YaContactListViewDelegate::YaContactListViewDelegate(YaContactListView* parent)
 	, preserveJidHosts_(false)
 #endif
 {
-	setDrawStatusIcon(false);
+	setDrawStatusIcon(true);
 }
 
 const YaContactListView* YaContactListViewDelegate::contactList() const
@@ -101,14 +102,17 @@ QString YaContactListViewDelegate::nameText(const QStyleOptionViewItem& o, const
 
 void YaContactListViewDelegate::drawName(QPainter* painter, const QStyleOptionViewItem& o, const QRect& rect, const QString& name, const QModelIndex& index) const
 {
+    QStyleOptionViewItem option(o);
+    option.font.setPixelSize(nameFontSize(option.rect));
 #ifdef YAPSI_PALE_ROSTER_JIDS
 	if (name == index.data(ContactListModel::JidRole).toString() && !preserveJidHosts_) {
 		XMPP::Jid jid(name);
-		drawText(painter, o, rect, jid.node(), index);
+
+		drawText(painter, option, rect, jid.node(), index);
 
 #ifndef YAPSI_STRIP_JID_HOST
 		if (opt().hovered || o.state & QStyle::State_Selected) {
-			QStyleOptionViewItem o2(o);
+			QStyleOptionViewItem o2(option);
 			o2.rect = rect;
 			o2.rect.setLeft(o2.rect.left() + o2.fontMetrics.width(jid.node()));
 			o2.palette.setColor(QPalette::HighlightedText, Qt::gray);
@@ -119,11 +123,12 @@ void YaContactListViewDelegate::drawName(QPainter* painter, const QStyleOptionVi
 		return;
 	}
 #endif
-	drawText(painter, o, rect, name, index);
+	drawText(painter, option, rect, name, index);
 }
 
 void YaContactListViewDelegate::drawContact(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
+        //we call everything related to painting from here
 	drawBackground(painter, option, index);
 	realDrawContact(painter, option, index);
 }
@@ -160,7 +165,7 @@ void YaContactListViewDelegate::setMargin(int margin)
 
 int YaContactListViewDelegate::nameFontSize(const QRect& nameRect) const
 {
-	return nameRect.height();
+	return 11;
 }
 
 int YaContactListViewDelegate::statusTypeFontSize(const QRect& statusTypeRect) const
@@ -177,8 +182,8 @@ QRect YaContactListViewDelegate::avatarRect(const QRect& visualRect) const
 {
 	int avatarSize = this->avatarSize() - (verticalMargin() * 2) - 1;
 	QRect result(QPoint(0, 0), QPoint(avatarSize, avatarSize));
-	result.moveTo(visualRect.topLeft());
-	result.translate(horizontalMargin(), verticalMargin());
+	result.moveTopRight(visualRect.topRight());
+	result.translate( - horizontalMargin(), verticalMargin());
 	return result;
 }
 
@@ -191,6 +196,11 @@ void YaContactListViewDelegate::doAvatar(QPainter* painter, const QStyleOptionVi
 			avatar = qvariant_cast<QIcon>(avatarData);
 		}
 	}
+
+        /*QRect r = option.rect;
+        r.adjust(horizontalMargin_, verticalMargin_,
+                -horizontalMargin_, -verticalMargin_);
+        avatar->*/
 
 	Ya::VisualUtil::drawAvatar(painter,
 	                           avatarRect(option.rect),
@@ -238,10 +248,13 @@ QStyleOptionViewItemV2 YaContactListViewDelegate::statusTextStyle(Ya::VisualUtil
 
 QRect YaContactListViewDelegate::textRect(const QRect& visualRect) const
 {
-	QRect result(avatarRect(visualRect).right() + horizontalMargin() + 1, visualRect.top() + verticalMargin(), 0, 0);
-	result.setWidth(visualRect.right()   - result.left() - horizontalMargin());
-	result.setHeight(visualRect.bottom() - result.top()  - verticalMargin() + 2);
-	return result;
+        int avatarWidth = avatarRect(visualRect).width();
+        QRect result(
+                visualRect.left()   + horizontalMargin_,
+                visualRect.top()    + verticalMargin_,
+                visualRect.width()  - avatarWidth   - 2 * horizontalMargin_,
+                visualRect.height() - verticalMargin_ * 2);
+        return result;
 }
 
 QString YaContactListViewDelegate::statusText(const QModelIndex& index) const
@@ -310,11 +323,13 @@ QRect YaContactListViewDelegate::nameRect(const QStyleOptionViewItem& option, co
 	QRect textRect = this->textRect(option.rect);
 
 	QRect nameRect(textRect);
-	nameRect.setHeight(textRect.height() / 2);
+	nameRect.setHeight(textRect.height() * NAME_STATUS_RATIO);
 
+        /* ivan: aligning to top
 	if (statusText(index).isEmpty()) {
 		nameRect.moveTop(textRect.top() + (textRect.height() - nameRect.height()) / 2);
 	}
+        */
 
 	if (drawStatusIcon(statusType(index))) {
 		QPixmap statusPixmap = Ya::VisualUtil::rosterStatusPixmap(statusType(index));
@@ -350,17 +365,14 @@ void YaContactListViewDelegate::realDrawContact(QPainter* painter, const QStyleO
 
 	if (drawStatusTypeText(index))
 		drawStatusTypeText(painter, n_o, &nameRect, index);
-	drawName(painter, n_o, nameRect, nameText(option, index), index);
 
-	// painter->drawRect(nameRect);
-	// painter->drawRect(statusTypeRect);
+        n_o.displayAlignment = Qt::AlignBottom | Qt::AlignLeft;
+	drawName(painter, n_o, nameRect, nameText(option, index), index);
 
 	// begin - status message
 	QRect statusRect(nameRect);
-	statusRect.moveTo(statusRect.left(), textRect.bottom() - statusRect.height());
-	statusRect.setRight(textRect.right());
-	statusRect.adjust(0, (int)(((float)statusRect.height()) * 0.2), 0, 0);
-	// painter->drawRect(statusRect);
+        statusRect.moveTop(nameRect.bottom());
+        statusRect.setHeight(textRect.height() - nameRect.height());
 
 	if (!statusText(index).isEmpty()) {
 		QStyleOptionViewItemV2 sm_o = statusTextStyle(Ya::VisualUtil::RosterStyleNormal, hovered());
@@ -403,6 +415,8 @@ QRect YaContactListViewDelegate::groupNameRect(const QStyleOptionViewItem& optio
 
 	if (groupNameRect.right() > option.rect.right() - groupButtonMargin)
 		groupNameRect.setRight(option.rect.right() - groupButtonMargin);
+
+        // groupNameRect.setHeight(qMax(14, groupNameRect.height()));
 	return groupNameRect;
 }
 

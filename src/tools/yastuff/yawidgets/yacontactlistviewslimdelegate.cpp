@@ -30,6 +30,7 @@ YaContactListViewSlimDelegate::YaContactListViewSlimDelegate(YaContactListView* 
 	setAvatarSize(22);
 }
 
+/*
 void YaContactListViewSlimDelegate::realDrawContact(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
 	drawEditorBackground(painter, option, index);
@@ -81,3 +82,4 @@ QRect YaContactListViewSlimDelegate::nameRect(const QStyleOptionViewItem& option
 	nameRect.setRight(option.rect.right() - horizontalMargin());
 	return nameRect;
 }
+*/

@@ -28,7 +28,8 @@ YaContactListViewLargeDelegate::YaContactListViewLargeDelegate(YaContactListView
 	: YaContactListViewDelegate(parent)
 {}
 
-void YaContactListViewLargeDelegate::realDrawContact(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
+/* ivan:
+ void YaContactListViewLargeDelegate::realDrawContact(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
 	drawEditorBackground(painter, option, index);
 	doAvatar(painter, option, index);
@@ -87,6 +88,11 @@ void YaContactListViewLargeDelegate::realDrawContact(QPainter* painter, const QS
 		sm_o.palette.setColor(QPalette::Highlight, option.palette.color(QPalette::Highlight));
 		drawStatus(painter, sm_o, statusRect, statusText(index), index);
 	}
+}*/
+
+int YaContactListViewLargeDelegate::nameFontSize(const QRect& nameRect) const
+{
+    return 14;
 }
 
 int YaContactListViewLargeDelegate::avatarSize() const

@@ -31,10 +31,10 @@ public:
 
 protected:
 	// reimplemented
-	virtual void realDrawContact(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
-	virtual QRect nameRect(const QStyleOptionViewItem& option, const QModelIndex& index) const;
+	//virtual void realDrawContact(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+	//virtual QRect nameRect(const QStyleOptionViewItem& option, const QModelIndex& index) const;
 
-	QRect typeRect(const QStyleOptionViewItem& option, const QModelIndex& index) const;
+	//QRect typeRect(const QStyleOptionViewItem& option, const QModelIndex& index) const;
 };
 
 #endif

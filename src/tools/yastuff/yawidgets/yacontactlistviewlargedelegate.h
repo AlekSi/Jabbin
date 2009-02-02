@@ -31,7 +31,8 @@ public:
 
 protected:
 	// reimplemented
-	virtual void realDrawContact(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+	//ivan: virtual void realDrawContact(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+	virtual int nameFontSize(const QRect& nameRect) const;
 	virtual int avatarSize() const;
 	virtual QRect rosterToolTipArea(const QRect& rect) const;
 };

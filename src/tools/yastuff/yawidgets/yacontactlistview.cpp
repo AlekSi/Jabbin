@@ -101,7 +101,7 @@ YaContactListView::YaContactListView(QWidget* parent)
 	connect(this, SIGNAL(entered(const QModelIndex&)), SLOT(updateCursorMouseHover(const QModelIndex&)));
 	connect(this, SIGNAL(clicked(const QModelIndex&)), SLOT(itemClicked(const QModelIndex&)));
 	connect(this, SIGNAL(viewportEntered()), SLOT(updateCursorMouseHover()));
-	
+
 	setSelectionMode(ExtendedSelection);
 	viewport()->installEventFilter(this);
 
