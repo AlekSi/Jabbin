@@ -187,6 +187,44 @@ QString Ya::statusFullName(XMPP::Status::Type status)
 	return result;
 }
 
+QString Ya::statusFullText(XMPP::Status::Type status)
+{
+	QString result;
+	switch (status) {
+	case XMPP::Status::Offline:
+		result = QCoreApplication::instance()->translate("Ya", "Offline");
+		break;
+	case XMPP::Status::XA:
+		if (PsiOptions::instance()->getOption("options.ui.menu.status.xa").toBool()) {
+			result = QCoreApplication::instance()->translate("Ya", "Long gone");
+			break;
+		}
+	case XMPP::Status::Away:
+		result = QCoreApplication::instance()->translate("Ya", "Away");
+		break;
+	case XMPP::Status::DND:
+		result = QCoreApplication::instance()->translate("Ya", "Don't disturb");
+		break;
+	case XMPP::Status::FFC:
+		if (PsiOptions::instance()->getOption("options.ui.menu.status.chat").toBool()) {
+			result = QCoreApplication::instance()->translate("Ya", "Free for chat");
+			break;
+		}
+	case XMPP::Status::Online:
+		result = QCoreApplication::instance()->translate("Ya", "Available");
+		break;
+	case XMPP::Status::Invisible:
+		result = QCoreApplication::instance()->translate("Ya", "Invisible");
+		break;
+	case XMPP::Status::NotAuthorizedToSeeStatus:
+		result = QCoreApplication::instance()->translate("Ya", "Not authoruzed");
+		break;
+	default:
+		Q_ASSERT(false);
+	}
+
+	return result;
+}
 QString Ya::statusName(XMPP::Status::Type status)
 {
 	QString result = Ya::statusFullName(status).toLower();
@@ -251,7 +289,7 @@ QString Ya::normalizeStanza(QString txt)
 	return txt;
 }
 
-QString Ya::buildBuzzMessage(QString txt) 
+QString Ya::buildBuzzMessage(QString txt)
 {
 	if (txt.isEmpty()) {
 		txt = DEFAULT_BUZZ_MESSAGE;

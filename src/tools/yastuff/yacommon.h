@@ -75,6 +75,7 @@ namespace Ya {
 	bool isFriendsGroup(const QString& groupName);
 	bool isInFriends(const UserListItem*);
 	QString statusFullName(XMPP::Status::Type status);
+	QString statusFullText(XMPP::Status::Type status);
 	QString statusName(XMPP::Status::Type status);
 	QString statusDescription(XMPP::Status::Type status);
 	QColor statusColor(XMPP::Status::Type status);
