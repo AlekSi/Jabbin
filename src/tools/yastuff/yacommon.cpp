@@ -217,7 +217,7 @@ QString Ya::statusFullText(XMPP::Status::Type status)
 		result = QCoreApplication::instance()->translate("Ya", "Invisible");
 		break;
 	case XMPP::Status::NotAuthorizedToSeeStatus:
-		result = QCoreApplication::instance()->translate("Ya", "Not authoruzed");
+		result = QCoreApplication::instance()->translate("Ya", "Not authorized");
 		break;
 	default:
 		Q_ASSERT(false);

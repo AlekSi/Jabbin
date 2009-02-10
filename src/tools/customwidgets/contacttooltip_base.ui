@@ -1,0 +1,156 @@
+<ui version="4.0" >
+ <class>ContactTooltipBase</class>
+ <widget class="QWidget" name="ContactTooltipBase" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>272</width>
+    <height>267</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <property name="styleSheet" >
+   <string notr="true" >#ContactTooltipBase {
+    border: none;
+	background-image: url(:/customwidgets/data/window_background_crop.png);
+    background-repeat: repeat-x;
+    background-color: #d5e6f3;
+    background-attachment: fixed;
+    selection-background-color: white;
+    selection-color: black;
+}
+
+QToolButton {
+    border: none;
+}
+
+QPushButton {
+   color: black;
+   border-image: url(:/customicons/BottonWhite.png) 2px;
+   border: 2px;
+   padding: 0px 8px;
+   text-align: left;
+}
+
+QPushButton:disabled {
+   color: white;
+}
+
+QPushButton:focus {
+   border-image: url(:/customicons/BottonRedFocus.png) 2px;
+}
+
+QPushButton:hover {
+   border-image: url(:/customicons/BottonRed.png) 2px;
+}
+
+QPushButton:pressed {
+   border-image: url(:/customicons/BottonRedPressed.png) 2px;
+}
+
+QLabel#labelName {
+  font-weight: bold;
+}</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout" >
+   <item row="0" column="0" >
+    <widget class="QLabel" name="labelName" >
+     <property name="styleSheet" >
+      <string notr="true" />
+     </property>
+     <property name="text" >
+      <string>Name Surname</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" >
+    <widget class="QLabel" name="labelJID" >
+     <property name="text" >
+      <string>&lt;a href="jabberid@server.org">&lt;span style=" text-decoration: underline; color:#0000ff;">jabberid@server.org&lt;/span>&lt;/a></string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" >
+    <layout class="QHBoxLayout" name="horizontalLayout" >
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout" >
+       <item>
+        <widget class="QToolButton" name="buttonAvatar" >
+         <property name="minimumSize" >
+          <size>
+           <width>128</width>
+           <height>128</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string/>
+         </property>
+         <property name="iconSize" >
+          <size>
+           <width>128</width>
+           <height>128</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="labelStatus" >
+         <property name="text" >
+          <string>status</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="labelDescription" >
+         <property name="text" >
+          <string>Gender, age, locality not specified</string>
+         </property>
+         <property name="wordWrap" >
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="buttons" >
+       <property name="minimumSize" >
+        <size>
+         <width>128</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="orientation" >
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="standardButtons" >
+        <set>QDialogButtonBox::NoButton</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../yastuff/yastuff.qrc" />
+  <include location="customwidgets.qrc" />
+ </resources>
+ <connections/>
+</ui>

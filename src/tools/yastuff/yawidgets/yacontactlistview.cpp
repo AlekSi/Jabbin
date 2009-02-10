@@ -53,6 +53,7 @@
 #include "yacontactlistviewslimdelegate.h"
 #include "yacontactlistviewlargedelegate.h"
 #include "yacontactlistmodelselection.h"
+#include "contacttooltip.h"
 
 static const int SCROLL_SINGLE_STEP = 32;
 static const QString optionPathTemplate = QString::fromUtf8("options.ya.roster.%1");
@@ -277,47 +278,70 @@ void YaContactListView::updateCursorMouseHover(const QModelIndex& index)
 
 void YaContactListView::showToolTip(const QModelIndex& index, const QPoint& globalPos) const
 {
-	Q_UNUSED(globalPos);
-	// if (ContactListModel::indexType(index) != ContactListModel::ContactType) {
-	// 	ContactListView::showToolTip(index, globalPos);
-	// 	return;
-	// }
+    Q_UNUSED(globalPos);
 
-	ContactListItemProxy* item = itemProxy(index);
+    ContactListItemProxy* item = itemProxy(index);
 
-	if (item && !extendedSelectionAllowed() && ContactListModel::indexType(index) == ContactListModel::ContactType)
-	{
-		QRect rect = dynamic_cast<YaContactListViewDelegate*>(itemDelegate())->rosterToolTipArea(visualRect(index));
-		QRect itemRect = QRect(viewport()->mapToGlobal(rect.topLeft()),
-		                       viewport()->mapToGlobal(rect.bottomRight()));
-		YaRosterToolTip::instance()->showText(itemRect,
-		                                      dynamic_cast<PsiContact*>(item->item()),
-		                                      this,
-		                                      model()->mimeData(QModelIndexList() << index));
-	}
-	else if (ContactListModel::indexType(index) == ContactListModel::GroupType) {
-		item = 0;
-	}
-#ifdef YAPSI_FANCY_DELETE_CONFIRMATIONS
-	else if (item) {
-		QMimeData* selection = this->selection();
-		YaContactListModelSelection selectionHelper(selection);
-		YaContactListModel* model = dynamic_cast<YaContactListModel*>(realModel());
-		if (model && selection && selectionHelper.isMultiSelection()) {
-			QRect rect = QRect(viewport()->mapToGlobal(viewport()->rect().topLeft()),
-			                   viewport()->mapToGlobal(viewport()->rect().bottomRight()));
-			YaMultiContactConfirmationToolTip::instance()->show(rect, model, selection, this);
-		}
-		else if (selection) {
-			item = 0;
-			delete selection;
-		}
-	}
-#endif
+    if (item && !extendedSelectionAllowed()
+            && ContactListModel::indexType(index) == ContactListModel::ContactType) {
+        QRect rect = dynamic_cast < YaContactListViewDelegate * >
+                (itemDelegate())->rosterToolTipArea(visualRect(index));
+        QRect itemRect = QRect(viewport()->mapToGlobal(rect.topLeft()),
+                viewport()->mapToGlobal(rect.bottomRight()));
+        ContactTooltip::instance()->showContact(
+                dynamic_cast < PsiContact * > (item->item()),
+                itemRect
+                );
+    } else if (ContactListModel::indexType(index) == ContactListModel::GroupType) {
+        item = 0;
+    }
 
-	if (!item) {
-		YaRosterToolTip::instance()->hide();
-	}
+    if (!item) {
+        YaRosterToolTip::instance()->hide();
+    }
+
+
+// 	Q_UNUSED(globalPos);
+// 	// if (ContactListModel::indexType(index) != ContactListModel::ContactType) {
+// 	// 	ContactListView::showToolTip(index, globalPos);
+// 	// 	return;
+// 	// }
+//
+// 	ContactListItemProxy* item = itemProxy(index);
+//
+// 	if (item && !extendedSelectionAllowed() && ContactListModel::indexType(index) == ContactListModel::ContactType)
+// 	{
+// 		QRect rect = dynamic_cast<YaContactListViewDelegate*>(itemDelegate())->rosterToolTipArea(visualRect(index));
+// 		QRect itemRect = QRect(viewport()->mapToGlobal(rect.topLeft()),
+// 		                       viewport()->mapToGlobal(rect.bottomRight()));
+// 		YaRosterToolTip::instance()->showText(itemRect,
+// 		                                      dynamic_cast<PsiContact*>(item->item()),
+// 		                                      this,
+// 		                                      model()->mimeData(QModelIndexList() << index));
+// 	}
+// 	else if (ContactListModel::indexType(index) == ContactListModel::GroupType) {
+// 		item = 0;
+// 	}
+// #ifdef YAPSI_FANCY_DELETE_CONFIRMATIONS
+// 	else if (item) {
+// 		QMimeData* selection = this->selection();
+// 		YaContactListModelSelection selectionHelper(selection);
+// 		YaContactListModel* model = dynamic_cast<YaContactListModel*>(realModel());
+// 		if (model && selection && selectionHelper.isMultiSelection()) {
+// 			QRect rect = QRect(viewport()->mapToGlobal(viewport()->rect().topLeft()),
+// 			                   viewport()->mapToGlobal(viewport()->rect().bottomRight()));
+// 			YaMultiContactConfirmationToolTip::instance()->show(rect, model, selection, this);
+// 		}
+// 		else if (selection) {
+// 			item = 0;
+// 			delete selection;
+// 		}
+// 	}
+// #endif
+//
+// 	if (!item) {
+// 		YaRosterToolTip::instance()->hide();
+// 	}
 }
 
 void YaContactListView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)

@@ -81,6 +81,7 @@
 
 #include "mainwin_p.h"
 #include "optionsdialog.h"
+#include "contacttooltip.h"
 
 #define AUTO_STATUS_TIMER_INTERVAL 5000
 
@@ -536,6 +537,7 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 	CallDialog::contactList = psi->contactList();
 	connect(ui_.callDialog, SIGNAL(requestsAttention()),
 		this, SLOT(showCallDialog()));
+
 }
 
 YaMainWin::~YaMainWin()

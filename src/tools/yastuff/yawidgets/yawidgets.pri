@@ -20,6 +20,7 @@ SOURCES += \
 	$$PWD/../../customwidgets/generic/notificationpanel.cpp \
 	$$PWD/../../customwidgets/advancedwindow.cpp \
 	$$PWD/../../customwidgets/calldialog.cpp \
+	$$PWD/../../customwidgets/contacttooltip.cpp \
 	$$PWD/../../customwidgets/optionsdialog.cpp \
 	$$PWD/../../customwidgets/joimnotifications.cpp \
 	$$PWD/../../customwidgets/models/callhistory.cpp \
@@ -50,6 +51,8 @@ HEADERS += \
 	$$PWD/../../customwidgets/optionsdialog_p.h \
 	$$PWD/../../customwidgets/calldialog.h \
 	$$PWD/../../customwidgets/calldialog_p.h \
+	$$PWD/../../customwidgets/contacttooltip.h \
+	$$PWD/../../customwidgets/contacttooltip_p.h \
 	$$PWD/../../customwidgets/joimnotifications.h \
 	$$PWD/../../customwidgets/models/callhistory.h \
 	$$PWD/../../customwidgets/models/callhistory_p.h \
@@ -67,6 +70,7 @@ INTERFACES += \
 	$$PWD/../../customwidgets/generic/notificationpanel_base.ui \
 	$$PWD/../../services/servicespanel_base.ui \
 	$$PWD/../../customwidgets/calldialog_base.ui \
+	$$PWD/../../customwidgets/contacttooltip_base.ui \
 	$$PWD/../../customwidgets/optionsdialog_base.ui \
 	$$PWD/../../customwidgets/generic/tooltipwindow_base.ui \
 	$$PWD/../../customwidgets/models/callhistoryitemdelegate_base.ui \
