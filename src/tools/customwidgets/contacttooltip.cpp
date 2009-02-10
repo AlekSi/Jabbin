@@ -20,6 +20,9 @@
 #include "contacttooltip.h"
 #include "contacttooltip_p.h"
 
+#include <QDesktopWidget>
+#include <QApplication>
+
 #include "yacommon.h"
 
 // #define JIDTEXT ((phone == QString())? phone : (jid.bare()))
@@ -137,17 +140,30 @@ void ContactTooltip::showContact(PsiContact * contact, const QRect & parent)
 
 
     // Moving the window
-    QPoint tl = parent.topLeft();
-    tl -= QPoint(width(), 0);
+    QRect g = geometry();
+    g.moveTopLeft(parent.topLeft() - QPoint(g.width(), 0));
+    g.moveTop(g.top() - (g.height() - parent.height()) / 2);
 
+    QRect screen = QApplication::desktop()->geometry();
+    if (g.left() < screen.left()) {
+        g.moveLeft(parent.right());
+    }
+
+    if (g.top() < screen.top()) {
+        g.moveTop(screen.top());
+    }
+
+    if (g.bottom() > screen.bottom()) {
+        g.moveBottom(screen.bottom());
+    }
 
     if (isVisible()) {
         d->timeline.stop();
         d->moveFrom = geometry().topLeft();
-        d->moveTo = tl;
+        d->moveTo = g.topLeft();
         d->timeline.start();
     } else {
-        move(tl);
+        move(g.topLeft());
         show();
     }
     d->timer.start(SLEEPINTERVAL, this);
