@@ -136,6 +136,9 @@ void ContactTooltip::showContact(PsiContact * contact, const QRect & parent)
     }
     d->labelDescription->setText(QString());
 
+    d->buttonChat->setVisible(true);
+    d->buttonHistory->setVisible(true);
+    d->buttonCall->setVisible(true);
     d->buttonCall->setVisible(contact->isCallable());
 
 
@@ -167,6 +170,14 @@ void ContactTooltip::showContact(PsiContact * contact, const QRect & parent)
         show();
     }
     d->timer.start(SLEEPINTERVAL, this);
+}
+
+void ContactTooltip::showSelf(PsiContact * contact, const QRect & parent)
+{
+    showContact(contact, parent);
+    d->buttonChat->setVisible(false);
+    d->buttonHistory->setVisible(false);
+    d->buttonCall->setVisible(false);
 }
 
 void ContactTooltip::timerEvent(QTimerEvent * event)

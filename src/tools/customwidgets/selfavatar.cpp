@@ -30,7 +30,8 @@
 #include "vcardfactory.h"
 #include "xmpp_vcard.h"
 #include "applicationinfo.h"
-#include "yarostertooltip.h"
+// #include "yarostertooltip.h"
+#include "contacttooltip.h"
 
 #define MENU_AVATAR_ICON_SIZE QSize(32, 32)
 #define MENU_AVATAR_COLUMN_COUNT 5
@@ -247,7 +248,7 @@ void SelfAvatar::accountActivityChanged()
     setEnabled(d->isConnected());
 }
 
-void SelfAvatar::enterEvent(QEvent *)
+void SelfAvatar::enterEvent(QEvent * event)
 {
     /* copyright by Michail Pishchagin */
 
@@ -258,6 +259,10 @@ void SelfAvatar::enterEvent(QEvent *)
 
     globalRect.setRight(windowRect.right());
 
-    YaRosterToolTip::instance()->showText(globalRect,
-            d->contact, this, 0);
+    //YaRosterToolTip::instance()->showText(globalRect,
+    //        d->contact, this, 0);
+
+    ContactTooltip::instance()->showSelf(d->contact, globalRect);
+
+    CustomWidgets::AvatarButton::enterEvent(event);
 }

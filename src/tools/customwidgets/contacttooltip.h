@@ -43,6 +43,11 @@ public:
      */
     void showContact(PsiContact * contact = NULL, const QRect & parent = QRect());
 
+    /**
+     * This shows the ContactTooltip with the specified contact
+     */
+    void showSelf(PsiContact * contact = NULL, const QRect & parent = QRect());
+
 protected:
     void timerEvent(QTimerEvent * event);
     void leaveEvent(QEvent * event);
