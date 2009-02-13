@@ -87,8 +87,9 @@ QTabWidget#mainTabWidget &gt; QTabBar::tab:selected {
 
 QTabWidget#mainTabWidget &gt; QTabBar::tab:disabled {
     etch-disabled-text: 0;
-    color: rgba(0, 0, 0, 10%);
+    color: rgba(0, 0, 0, 0);
     border-image: none;
+    top: -20px;
 }
 
 YaPushButton, .QWidget &gt; QPushButton {
