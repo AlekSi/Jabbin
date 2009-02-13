@@ -411,6 +411,7 @@ void DiscoListItem::updateItems(bool parentAutoItems)
 		autoItems = false;
 
 	if ( d->protocol == DiscoData::Auto || d->protocol == DiscoData::Disco ) {
+		qDebug() << "DDLG: JT_DiscoItems" << di.jid().full() << di.node();
 		JT_DiscoItems *jt = new JT_DiscoItems(d->pa->client()->rootTask());
 		connect(jt, SIGNAL(finished()), SLOT(discoItemsFinished()));
 		jt->get(di.jid(), di.node());
@@ -425,9 +426,13 @@ void DiscoListItem::updateItems(bool parentAutoItems)
 
 void DiscoListItem::discoItemsFinished()
 {
+	qDebug() << "DDLG: JT_DiscoItems Finished";
 	JT_DiscoItems *jt = (JT_DiscoItems *)sender();
 
 	if ( jt->success() ) {
+		foreach (DiscoItem item, jt->items()) {
+			qDebug() << item.jid().full();
+		}
 		updateItemsFinished(jt->items());
 	}
 	else if ( d->protocol == DiscoData::Auto ) {
@@ -460,6 +465,7 @@ void DiscoListItem::doBrowse(bool parentAutoItems)
 	if ( !autoItemsEnabled() )
 		autoItems = false;
 
+	qDebug() << "DDLG: JT_Browse" << di.jid().full();
 	JT_Browse *jt = new JT_Browse(d->pa->client()->rootTask());
 	connect(jt, SIGNAL(finished()), SLOT(browseFinished()));
 	jt->get(di.jid());
@@ -469,6 +475,7 @@ void DiscoListItem::doBrowse(bool parentAutoItems)
 
 void DiscoListItem::browseFinished()
 {
+	qDebug() << "DDLG: JT_Browse finished";
 	JT_Browse *jt = (JT_Browse *)sender();
 
 	if ( jt->success() ) {
@@ -522,6 +529,7 @@ void DiscoListItem::doAgents(bool parentAutoItems)
 	if ( !autoItemsEnabled() )
 		autoItems = false;
 
+	qDebug() << "DDLG: JT_GetServices" << di.jid().full();
 	JT_GetServices *jt = new JT_GetServices(d->pa->client()->rootTask());
 	connect(jt, SIGNAL(finished()), SLOT(agentsFinished()));
 	jt->get(di.jid());
@@ -531,6 +539,7 @@ void DiscoListItem::doAgents(bool parentAutoItems)
 
 void DiscoListItem::agentsFinished()
 {
+	qDebug() << "DDLG: JT_GetServices finished";
 	JT_GetServices *jt = (JT_GetServices *)sender();
 
 	if ( jt->success() ) {
@@ -554,6 +563,7 @@ void DiscoListItem::agentsFinished()
 		for ( ; it != from.end(); ++it) {
 			DiscoItem item;
 			item.fromAgentItem( *it );
+			qDebug() << "DDLG: JT_GetServices" << item.jid().full();
 
 			to.append( item );
 		}

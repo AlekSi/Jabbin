@@ -30,7 +30,7 @@
 class ServicesModelItem: public QObject {
     Q_OBJECT
 public:
-    ServicesModelItem(ServicesModelItem * parent, QString data);
+    ServicesModelItem(ServicesModelItem * parent, DiscoItem item);
     virtual ~ServicesModelItem();
 
     int childCount();
@@ -59,17 +59,23 @@ protected:
     void initChildren();
     void notifyUpdated();
 
+    void clearChildren();
+    void addChildren(const QList < ServicesModelItem * > & children);
+    void addChild(ServicesModelItem * child);
+
     virtual void _load();
     virtual void _initChildren();
 
     QString m_title;
-    QString m_data;
     QIcon m_icon;
 
     bool m_itemLoaded;
     bool m_childrenLoaded;
-    QList < ServicesModelItem * > m_children;
     ServicesModelItem * m_parent;
+    XMPP::DiscoItem m_discoItem;
+
+private:
+    QList < ServicesModelItem * > m_children;
 };
 
 class ServicesServerItem: public ServicesModelItem {
@@ -87,10 +93,10 @@ protected:
     virtual void _initChildren();
 
 protected Q_SLOTS:
+    void discoItemsFinished();
     void discoInfoFinished();
 
 private:
-    XMPP::DiscoItem m_discoItem;
     bool m_waitingForInfo;
 
 };
@@ -116,7 +122,15 @@ public:
     PsiAccount * psiAccount;
 
     void itemUpdated(ServicesModelItem * item);
+
+    void childrenToBeAdded(ServicesModelItem * item, int from, int count);
+    void childrenAdded();
+
+    void childrenToBeCleared(ServicesModelItem * item, int count);
+    void childrenCleared();
+
     QModelIndex indexOf(ServicesModelItem * item);
+
 
     ServicesModel * q;
 };
