@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>ServicesPanelBase</class>
- <widget class="QWidget" name="ServicesPanelBase" >
-  <property name="geometry" >
+ <widget class="QWidget" name="ServicesPanelBase">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,31 +10,28 @@
     <height>528</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" >
-   <property name="margin" >
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
     <number>0</number>
    </property>
    <item>
-    <widget class="QTreeView" name="treeServices" >
-     <property name="frameShape" >
+    <widget class="QTreeView" name="treeServices">
+     <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
-     <property name="indentation" >
-      <number>0</number>
-     </property>
-     <property name="rootIsDecorated" >
-      <bool>false</bool>
-     </property>
-     <property name="sortingEnabled" >
-      <bool>false</bool>
-     </property>
-     <property name="animated" >
+     <property name="rootIsDecorated">
       <bool>true</bool>
      </property>
-     <property name="headerHidden" >
+     <property name="sortingEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="animated">
+      <bool>true</bool>
+     </property>
+     <property name="headerHidden">
       <bool>true</bool>
      </property>
     </widget>
@@ -41,7 +39,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="services.qrc" />
+  <include location="services.qrc"/>
  </resources>
  <connections/>
 </ui>

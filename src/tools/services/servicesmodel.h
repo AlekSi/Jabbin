@@ -25,7 +25,7 @@
 #include <QtGui/qfileiconprovider.h>
 #include "psiaccount.h"
 
-class ServicesModelItem;
+class ServiceItem;
 
 class ServicesModel: public QAbstractItemModel
 {
@@ -70,7 +70,7 @@ private:
     class Private;
     Private * const d;
 
-    friend class ServicesModelItem;
+    friend class ServiceItem;
 };
 
 #endif // SERVICESMODEL_H_

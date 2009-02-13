@@ -27,15 +27,19 @@
 
 #include "xmpp_discoitem.h"
 
-class ServicesModelItem: public QObject {
+/**
+ * Generic implementation to be subclassed to implement the actual
+ * service discovery
+ */
+class ServiceItem: public QObject {
     Q_OBJECT
 public:
-    ServicesModelItem(ServicesModelItem * parent, DiscoItem item);
-    virtual ~ServicesModelItem();
+    ServiceItem(ServiceItem * parent, DiscoItem item);
+    virtual ~ServiceItem();
 
     int childCount();
-    ServicesModelItem * child(int index);
-    ServicesModelItem * parent() const;
+    ServiceItem * child(int index);
+    ServiceItem * parent() const;
 
     virtual void activate();
 
@@ -43,7 +47,7 @@ public:
     QIcon icon();
 
     virtual int row();
-    virtual int indexOf(ServicesModelItem * child);
+    virtual int indexOf(ServiceItem * child);
     virtual ServicesModel * model() const;
 
     enum ItemType {
@@ -60,8 +64,8 @@ protected:
     void notifyUpdated();
 
     void clearChildren();
-    void addChildren(const QList < ServicesModelItem * > & children);
-    void addChild(ServicesModelItem * child);
+    void addChildren(const QList < ServiceItem * > & children);
+    void addChild(ServiceItem * child);
 
     virtual void _load();
     virtual void _initChildren();
@@ -71,26 +75,43 @@ protected:
 
     bool m_itemLoaded;
     bool m_childrenLoaded;
-    ServicesModelItem * m_parent;
+    ServiceItem * m_parent;
     XMPP::DiscoItem m_discoItem;
+    int m_type;
+
+public:
+    static QIcon m_genericIcon;
+    static QIcon m_loadingIcon;
+    static QIcon m_errorIcon;
+    static QIcon m_serviceIcon;
+    static QIcon m_serverIcon;
+    static QIcon m_roomIcon;
+    static QIcon m_userIcon;
 
 private:
-    QList < ServicesModelItem * > m_children;
+    QList < ServiceItem * > m_children;
 };
 
-class ServicesServerItem: public ServicesModelItem {
+/**
+ * Base discovery class for XMPP services
+ */
+class XmppServiceItem: public ServiceItem {
     Q_OBJECT
 public:
-    ServicesServerItem(ServicesModelItem * parent, QString server);
+    XmppServiceItem(ServiceItem * parent, QString server);
+    XmppServiceItem(ServiceItem * parent, DiscoItem item);
 
     enum ItemType {
-        Server = Generic + 1
+        Service = Generic + 1,
+        Server  = Generic + 2,
+        Room    = Generic + 3,
+        User    = Generic + 4
     };
-    virtual int type() const;
 
 protected:
     virtual void _load();
     virtual void _initChildren();
+    virtual QIcon _defaultIcon();
 
 protected Q_SLOTS:
     void discoItemsFinished();
@@ -98,10 +119,9 @@ protected Q_SLOTS:
 
 private:
     bool m_waitingForInfo;
-
 };
 
-class ServicesRootItem: public ServicesModelItem {
+class ServicesRootItem: public ServiceItem {
 public:
     ServicesRootItem(ServicesModel * model);
     int row();
@@ -121,15 +141,15 @@ public:
     ServicesRootItem * root;
     PsiAccount * psiAccount;
 
-    void itemUpdated(ServicesModelItem * item);
+    void itemUpdated(ServiceItem * item);
 
-    void childrenToBeAdded(ServicesModelItem * item, int from, int count);
+    void childrenToBeAdded(ServiceItem * item, int from, int count);
     void childrenAdded();
 
-    void childrenToBeCleared(ServicesModelItem * item, int count);
+    void childrenToBeCleared(ServiceItem * item, int count);
     void childrenCleared();
 
-    QModelIndex indexOf(ServicesModelItem * item);
+    QModelIndex indexOf(ServiceItem * item);
 
 
     ServicesModel * q;

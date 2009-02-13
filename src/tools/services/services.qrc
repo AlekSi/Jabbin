@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="services" >
+    <file>data/generic.png</file>
+    <file>data/list.png</file>
+    <file>data/user.png</file>
     <file>data/error.png</file>
     <file>data/star.png</file>
     <file>data/loading.png</file>
