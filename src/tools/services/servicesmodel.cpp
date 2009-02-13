@@ -23,7 +23,7 @@
 #include <QApplication>
 #include <QTimer>
 
-#include "discodlg.h"
+// #include "discodlg.h"
 
 #include "psioptions.h"
 #include "xmpp_tasks.h"
