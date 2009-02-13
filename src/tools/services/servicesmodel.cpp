@@ -25,6 +25,7 @@
 
 #include "discodlg.h"
 
+#include "psioptions.h"
 #include "xmpp_tasks.h"
 #include "xmpp_discoitem.h"
 #include "protocol/discoinfoquerier.h"
@@ -386,9 +387,13 @@ ServicesModel::ServicesModel(PsiAccount * psiAccount, QObject * parent)
 {
     d->psiAccount = psiAccount;
     d->root = new ServicesRootItem(this);
-    d->root->addService("jabber.org");
-    d->root->addService("jabber.com");
-    d->root->addService("localhost");
+
+    QVariantList lvalue = PsiOptions::instance()
+        ->getOption("service.providers.list").toList();
+
+    foreach (QVariant service, lvalue) {
+        d->root->addService(service.toString());
+    }
 
     // DiscoDlg * dlg = new DiscoDlg(psiAccount, psiAccount->jid(), QString());
     // dlg->show();
