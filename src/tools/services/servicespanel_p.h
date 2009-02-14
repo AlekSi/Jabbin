@@ -20,12 +20,15 @@
 #include "servicespanel.h"
 #include "ui_servicespanel_base.h"
 
+class ServicesModel;
+
 class ServicesPanel::Private : public QObject, public Ui::ServicesPanelBase {
     Q_OBJECT
 public:
     Private(ServicesPanel * parent);
 
     PsiAccount * account;
+    ServicesModel * model;
     Jid jid;
 
     ServicesPanel * q;

@@ -23,7 +23,7 @@
 #include <QApplication>
 #include <QTimer>
 
-// #include "discodlg.h"
+#include "discodlg.h"
 
 #include "psioptions.h"
 #include "xmpp_tasks.h"
@@ -47,7 +47,7 @@ ServiceItem::ServiceItem(ServiceItem * parent, DiscoItem data)
       m_itemLoaded(false), m_childrenLoaded(false), m_discoItem(data),
       m_type(Generic)
 {
-
+    qDebug() << "ServiceItem::ServiceItem";
 }
 
 ServiceItem::~ServiceItem()
@@ -180,6 +180,7 @@ XmppServiceItem::XmppServiceItem(ServiceItem * parent, QString server)
     : ServiceItem(parent, DiscoItem()),
       m_waitingForInfo(false)
 {
+    qDebug() << "XmppServiceItem::XmppServiceItem";
     m_discoItem.setJid(server.stripWhiteSpace());
     m_discoItem.setNode(QString());
     m_type = XmppServiceItem::Service;
@@ -197,6 +198,7 @@ XmppServiceItem::XmppServiceItem(ServiceItem * parent, DiscoItem item)
 void XmppServiceItem::discoInfoFinished()
 {
     JT_DiscoInfo * jt = (JT_DiscoInfo *)sender();
+    qDebug() << "discoInfoFinished" << jt->success();
 
     if (jt->success() && jt->item().jid().full() != QString()) {
         const DiscoItem * item = & jt->item();
@@ -226,6 +228,7 @@ void XmppServiceItem::discoInfoFinished()
 void XmppServiceItem::discoItemsFinished()
 {
     JT_DiscoItems *jt = (JT_DiscoItems *)sender();
+    qDebug() << "discoItemsFinished" << jt->success();
 
     clearChildren();
     if ( jt->success() ) {
@@ -395,8 +398,8 @@ ServicesModel::ServicesModel(PsiAccount * psiAccount, QObject * parent)
         d->root->addService(service.toString());
     }
 
-    // DiscoDlg * dlg = new DiscoDlg(psiAccount, psiAccount->jid(), QString());
-    // dlg->show();
+    DiscoDlg * dlg = new DiscoDlg(psiAccount, psiAccount->jid(), QString());
+    dlg->show();
 }
 
 PsiAccount * ServicesModel::psiAccount() const
@@ -487,7 +490,6 @@ QVariant ServicesModel::data(const QModelIndex & index, int role) const
                     data(index, Qt::SizeHintRole).toSize()
                     - QSize(4, 4));
         case Qt::SizeHintRole:
-            qDebug() << "XmppServiceItem::m_type = " << item->type();
             switch (item->type()) {
                 case ServiceItem::Generic:
                     return QSize(28, 28);

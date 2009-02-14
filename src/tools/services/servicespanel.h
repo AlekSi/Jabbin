@@ -63,6 +63,9 @@ public:
      */
     void setJid(const XMPP::Jid & jid);
 
+protected:
+    void showEvent(QShowEvent * event);
+
 private:
     class Private;
     Private * const d;

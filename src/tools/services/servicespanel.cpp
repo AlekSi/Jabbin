@@ -26,7 +26,7 @@
 using XMPP::Jid;
 
 ServicesPanel::Private::Private(ServicesPanel * parent)
-    : account(NULL), q(parent)
+    : account(NULL), model(NULL), q(parent)
 {
     setupUi(parent);
 }
@@ -42,8 +42,13 @@ void ServicesPanel::init(/*const Jid & jid,*/ PsiAccount * account)
 {
     // d->jid = jid;
     d->account = account;
-    ServicesModel * model = new ServicesModel(account);
-    d->treeServices->setModel(model);
+    //ServicesModel * model = new ServicesModel(account);
+    //virtual void showEvent ( QShowEvent * event )d->treeServices->setModel(model);
+}
+
+void ServicesPanel::showEvent(QShowEvent *) {
+    d->model = new ServicesModel(d->account);
+    d->treeServices->setModel(d->model);
 }
 
 ServicesPanel::ServicesPanel(QWidget * parent)
