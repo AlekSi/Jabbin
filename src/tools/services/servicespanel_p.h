@@ -19,6 +19,7 @@
 
 #include "servicespanel.h"
 #include "ui_servicespanel_base.h"
+#include <QModelIndex>
 
 class ServicesModel;
 
@@ -32,5 +33,15 @@ public:
     Jid jid;
 
     ServicesPanel * q;
+    QModelIndex clickedItem;
+    Qt::MouseButton clickedWithButton;
+
+public Q_SLOTS:
+    void itemClicked(const QModelIndex & index);
+    bool eventFilter(QObject * object, QEvent * event);
+
+    void joinService();
+    void addToContacts();
+    void reloadItem();
 };
 

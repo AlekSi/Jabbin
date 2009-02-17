@@ -8,5 +8,18 @@
     <file>data/loading.png</file>
     <file>data/users.png</file>
     <file>data/service.png</file>
+
+    <file>data/services/aim.png</file>
+    <file>data/services/facebook.png</file>
+    <file>data/services/gadu-gadu.png</file>
+    <file>data/services/gtalk.png</file>
+    <file>data/services/icq.png</file>
+    <file>data/services/jabber.png</file>
+    <file>data/services/msn.png</file>
+    <file>data/services/myspace.png</file>
+    <file>data/services/qq.png</file>
+    <file>data/services/xmpp.png</file>
+    <file>data/services/yahoo.png</file>
+    <file>data/services/sms.png</file>
   </qresource>
 </RCC>

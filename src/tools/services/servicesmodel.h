@@ -33,7 +33,17 @@ class ServicesModel: public QAbstractItemModel
 
 public:
     enum Roles {
-        AddressRole = Qt::UserRole + 1
+        AddressRole = Qt::UserRole + 1,
+        ServiceTypeRole
+    };
+
+    enum ItemTypes {
+        NoType = 0,
+        Generic,
+        Service,
+        Server,
+        Room,
+        User
     };
 
     ServicesModel(PsiAccount * psiAccount, QObject * parent = 0);
@@ -47,6 +57,7 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
+    XMPP::Jid jid(const QModelIndex & index) const;
 
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 

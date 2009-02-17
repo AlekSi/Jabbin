@@ -45,14 +45,12 @@ public:
 
     QString title();
     QIcon icon();
+    XMPP::Jid jid();
 
     virtual int row();
     virtual int indexOf(ServiceItem * child);
     virtual ServicesModel * model() const;
 
-    enum ItemType {
-        Generic = 1
-    };
     virtual int type() const;
 
 public Q_SLOTS:
@@ -88,6 +86,19 @@ public:
     static QIcon m_roomIcon;
     static QIcon m_userIcon;
 
+    static QIcon m_xmppIcon;
+    static QIcon m_msnIcon;
+    static QIcon m_myspaceIcon;
+    static QIcon m_qqIcon;
+    static QIcon m_aimIcon;
+    static QIcon m_gtalkIcon;
+    static QIcon m_jabberIcon;
+    static QIcon m_facebookIcon;
+    static QIcon m_gadugaduIcon;
+    static QIcon m_yahooIcon;
+    static QIcon m_icqIcon;
+    static QIcon m_smsIcon;
+
 private:
     QList < ServiceItem * > m_children;
 };
@@ -100,13 +111,6 @@ class XmppServiceItem: public ServiceItem {
 public:
     XmppServiceItem(ServiceItem * parent, QString server);
     XmppServiceItem(ServiceItem * parent, DiscoItem item);
-
-    enum ItemType {
-        Service = Generic + 1,
-        Server  = Generic + 2,
-        Room    = Generic + 3,
-        User    = Generic + 4
-    };
 
 protected:
     virtual void _load();

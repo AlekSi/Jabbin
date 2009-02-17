@@ -42,10 +42,23 @@ QIcon ServiceItem::m_serverIcon;   // = QIcon(":/services/data/list.png");
 QIcon ServiceItem::m_roomIcon;     // = QIcon(":/services/data/users.png");
 QIcon ServiceItem::m_userIcon;     // = QIcon(":/services/data/user.png");
 
+QIcon ServiceItem::m_xmppIcon;     // = QIcon(":/services/data/services/xmpp.png");
+QIcon ServiceItem::m_msnIcon;      // = QIcon(":/services/data/services/msn.png");
+QIcon ServiceItem::m_myspaceIcon;  // = QIcon(":/services/data/services/myspace.png");
+QIcon ServiceItem::m_qqIcon;       // = QIcon(":/services/data/services/qq.png");
+QIcon ServiceItem::m_aimIcon;      // = QIcon(":/services/data/services/aim.png");
+QIcon ServiceItem::m_gtalkIcon;    // = QIcon(":/services/data/services/gtalk.png");
+QIcon ServiceItem::m_jabberIcon;   // = QIcon(":/services/data/services/jabber.png");
+QIcon ServiceItem::m_facebookIcon; // = QIcon(":/services/data/services/facebook.png");
+QIcon ServiceItem::m_gadugaduIcon; // = QIcon(":/services/data/services/gadu-gadu.png");
+QIcon ServiceItem::m_yahooIcon;    // = QIcon(":/services/data/services/yahoo.png");
+QIcon ServiceItem::m_icqIcon;      // = QIcon(":/services/data/services/icq.png");
+QIcon ServiceItem::m_smsIcon;      // = QIcon(":/services/data/services/sms.png");
+
 ServiceItem::ServiceItem(ServiceItem * parent, DiscoItem data)
     : m_parent(parent), m_icon(), m_title(),
       m_itemLoaded(false), m_childrenLoaded(false), m_discoItem(data),
-      m_type(Generic)
+      m_type(ServicesModel::Generic)
 {
     qDebug() << "ServiceItem::ServiceItem";
 }
@@ -120,6 +133,12 @@ QIcon ServiceItem::icon()
     return m_icon;
 }
 
+XMPP::Jid ServiceItem::jid()
+{
+    load();
+    return m_discoItem.jid();
+}
+
 void ServiceItem::invalidate()
 {
     m_itemLoaded = false;
@@ -183,7 +202,7 @@ XmppServiceItem::XmppServiceItem(ServiceItem * parent, QString server)
     qDebug() << "XmppServiceItem::XmppServiceItem";
     m_discoItem.setJid(server.stripWhiteSpace());
     m_discoItem.setNode(QString());
-    m_type = XmppServiceItem::Service;
+    m_type = ServicesModel::Service;
 }
 
 XmppServiceItem::XmppServiceItem(ServiceItem * parent, DiscoItem item)
@@ -247,14 +266,59 @@ void XmppServiceItem::discoItemsFinished()
 
 QIcon XmppServiceItem::_defaultIcon()
 {
+    if (!m_discoItem.identities().isEmpty()) {
+        DiscoItem::Identity id = m_discoItem.identities().first();
+
+        if (id.type == ("aim"))
+            return ServiceItem::m_aimIcon;
+        else if (id.type == ("gadu-gadu"))
+            return ServiceItem::m_gadugaduIcon;
+        //else if (id.type == ("http-ws"))
+        //    return ServiceItem::m_http-wsIcon;
+        else if (id.type == ("icq"))
+            return ServiceItem::m_icqIcon;
+        else if (id.type == ("lcs"))
+            return ServiceItem::m_msnIcon;
+        else if (id.type == ("msn"))
+            return ServiceItem::m_msnIcon;
+        else if (id.type == ("ocs"))
+            return ServiceItem::m_msnIcon;
+        else if (id.type == ("qq"))
+            return ServiceItem::m_qqIcon;
+        //else if (id.type == ("sametime"))
+        //    return ServiceItem::m_sametimeIcon;
+        //else if (id.type == ("simple"))
+        //    return ServiceItem::m_simpleIcon;
+        else if (id.type == ("sms"))
+            return ServiceItem::m_smsIcon;
+        //else if (id.type == ("smtp"))
+        //    return ServiceItem::m_smtpIcon;
+        //else if (id.type == ("tlen"))
+        //    return ServiceItem::m_tlenIcon;
+        //else if (id.type == ("xfire"))
+        //    return ServiceItem::m_xfireIcon;
+        else if (id.type == ("xmpp"))
+            return ServiceItem::m_jabberIcon;
+        else if (id.type == ("yahoo"))
+            return ServiceItem::m_yahooIcon;
+
+        if (!id.category.isEmpty()) {
+             qDebug() << "_defaultIcon type is" << id.type;
+        } else {
+            qDebug() << "_defaultIcon: category is empty, but id is " << id.type;
+        }
+    } else {
+        qDebug() << "_defaultIcon: identities are empty";
+    }
+
     switch (m_type) {
-        case Service:
+        case ServicesModel::Service:
             return m_serviceIcon;
-        case Server:
+        case ServicesModel::Server:
             return m_serverIcon;
-        case Room:
+        case ServicesModel::Room:
             return m_roomIcon;
-        case User:
+        case ServicesModel::User:
             return m_userIcon;
         default:
             return m_genericIcon;
@@ -332,13 +396,26 @@ ServicesModel::Private::Private(ServicesModel * parent)
     // Initializing icons here since they can not be
     // initialized before QApplication instance is
     // created
-    ServiceItem::m_genericIcon = QIcon(":/services/data/generic.png");
-    ServiceItem::m_loadingIcon = QIcon(":/services/data/loading.png");
-    ServiceItem::m_errorIcon = QIcon(":/services/data/error.png");
-    ServiceItem::m_serviceIcon = QIcon(":/services/data/service.png");
-    ServiceItem::m_serverIcon = QIcon(":/services/data/list.png");
-    ServiceItem::m_roomIcon = QIcon(":/services/data/users.png");
-    ServiceItem::m_userIcon = QIcon(":/services/data/user.png");
+    ServiceItem::m_genericIcon  = QIcon(":/services/data/generic.png");
+    ServiceItem::m_loadingIcon  = QIcon(":/services/data/loading.png");
+    ServiceItem::m_errorIcon    = QIcon(":/services/data/error.png");
+    ServiceItem::m_serviceIcon  = QIcon(":/services/data/service.png");
+    ServiceItem::m_serverIcon   = QIcon(":/services/data/list.png");
+    ServiceItem::m_roomIcon     = QIcon(":/services/data/users.png");
+    ServiceItem::m_userIcon     = QIcon(":/services/data/user.png");
+
+    ServiceItem::m_xmppIcon     = QIcon(":/services/data/services/xmpp.png");
+    ServiceItem::m_msnIcon      = QIcon(":/services/data/services/msn.png");
+    ServiceItem::m_myspaceIcon  = QIcon(":/services/data/services/myspace.png");
+    ServiceItem::m_qqIcon       = QIcon(":/services/data/services/qq.png");
+    ServiceItem::m_aimIcon      = QIcon(":/services/data/services/aim.png");
+    ServiceItem::m_gtalkIcon    = QIcon(":/services/data/services/gtalk.png");
+    ServiceItem::m_jabberIcon   = QIcon(":/services/data/services/jabber.png");
+    ServiceItem::m_facebookIcon = QIcon(":/services/data/services/facebook.png");
+    ServiceItem::m_gadugaduIcon = QIcon(":/services/data/services/gadu-gadu.png");
+    ServiceItem::m_yahooIcon    = QIcon(":/services/data/services/yahoo.png");
+    ServiceItem::m_icqIcon      = QIcon(":/services/data/services/icq.png");
+    ServiceItem::m_smsIcon      = QIcon(":/services/data/services/sms.png");
 }
 
 ServicesModel::Private::~Private()
@@ -398,8 +475,8 @@ ServicesModel::ServicesModel(PsiAccount * psiAccount, QObject * parent)
         d->root->addService(service.toString());
     }
 
-    DiscoDlg * dlg = new DiscoDlg(psiAccount, psiAccount->jid(), QString());
-    dlg->show();
+    //DiscoDlg * dlg = new DiscoDlg(psiAccount, psiAccount->jid(), QString());
+    // dlg->show();
 }
 
 PsiAccount * ServicesModel::psiAccount() const
@@ -491,24 +568,46 @@ QVariant ServicesModel::data(const QModelIndex & index, int role) const
                     - QSize(4, 4));
         case Qt::SizeHintRole:
             switch (item->type()) {
-                case ServiceItem::Generic:
+                case Generic:
                     return QSize(28, 28);
-                case XmppServiceItem::Service:
+                case Service:
                     return QSize(36, 36);
-                case XmppServiceItem::Server:
+                case Server:
                     return QSize(36, 36);
-                case XmppServiceItem::Room:
+                case Room:
                     return QSize(24, 24);
-                case XmppServiceItem::User:
+                case User:
                     return QSize(24, 24);
                 default:
                     return QSize(16, 16);
             }
+        case ServiceTypeRole:
+            return item->type();
+        case AddressRole:
+            return item->jid().bare();
         default:
             return QVariant();
     }
 
     return QVariant();
+}
+
+XMPP::Jid ServicesModel::jid(const QModelIndex & index) const
+{
+    ServiceItem * item;
+
+     if (!index.isValid()) {
+         item = d->root;
+     } else {
+         item = static_cast < ServiceItem * >
+             (index.internalPointer());
+     }
+
+     if (!item) {
+         return XMPP::Jid();
+     }
+
+     return item->jid();
 }
 
 bool ServicesModel::setData(const QModelIndex & index, const QVariant & value,

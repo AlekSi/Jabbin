@@ -22,6 +22,9 @@
 #include "servicesmodel.h"
 
 #include <QDebug>
+#include <QMenu>
+#include <QCursor>
+#include <QMouseEvent>
 
 using XMPP::Jid;
 
@@ -29,7 +32,68 @@ ServicesPanel::Private::Private(ServicesPanel * parent)
     : account(NULL), model(NULL), q(parent)
 {
     setupUi(parent);
+    connect(treeServices, SIGNAL(clicked(const QModelIndex &)),
+            this, SLOT(itemClicked(const QModelIndex &)));
 }
+
+void ServicesPanel::Private::itemClicked(const QModelIndex & index)
+{
+    qDebug() << "item was clicked" << index.data();
+    qDebug() << "         type is" << index.data(ServicesModel::ServiceTypeRole);
+    qDebug() << "      address is" << index.data(ServicesModel::AddressRole);
+
+    if (clickedWithButton == Qt::RightButton) {
+        QMenu menu;
+
+        clickedItem = index;
+
+        switch (index.data(ServicesModel::ServiceTypeRole).toInt()) {
+            case ServicesModel::Room:
+            case ServicesModel::User:
+                menu.addAction(tr("Join service"),
+                        this, SLOT(joinService()));
+                menu.addAction(tr("Bookmark to contact list"),
+                        this, SLOT(addToContacts()));
+            default:
+                menu.addAction(tr("Reload"),
+                        this, SLOT(reloadItem()));
+        }
+
+        menu.exec(QCursor::pos());
+    }
+}
+
+bool ServicesPanel::Private::eventFilter(QObject * object, QEvent * event)
+{
+    if (object == treeServices->viewport() &&
+            event->type() == QEvent::MouseButtonRelease) {
+        qDebug() << "Released mouse";
+        QMouseEvent * mouseEvent = static_cast < QMouseEvent * >(event);
+        if (mouseEvent) {
+            clickedWithButton = mouseEvent->button();
+        }
+    }
+    return false;
+}
+
+void ServicesPanel::Private::joinService()
+{
+    qDebug() << "join service" <<
+        model->data(clickedItem, ServicesModel::AddressRole);
+}
+
+void ServicesPanel::Private::addToContacts()
+{
+    qDebug() << "add to contacts" <<
+        model->data(clickedItem, ServicesModel::AddressRole);
+}
+
+void ServicesPanel::Private::reloadItem()
+{
+    qDebug() << "reload item" <<
+        model->data(clickedItem, ServicesModel::AddressRole);
+}
+
 
 ServicesPanel * ServicesPanel::m_instance = NULL;
 
@@ -47,8 +111,11 @@ void ServicesPanel::init(/*const Jid & jid,*/ PsiAccount * account)
 }
 
 void ServicesPanel::showEvent(QShowEvent *) {
-    d->model = new ServicesModel(d->account);
-    d->treeServices->setModel(d->model);
+    if (!d->model) {
+        d->model = new ServicesModel(d->account);
+        d->treeServices->setModel(d->model);
+    }
+    d->treeServices->viewport()->installEventFilter(d);
 }
 
 ServicesPanel::ServicesPanel(QWidget * parent)
