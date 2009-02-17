@@ -52,6 +52,7 @@ public:
     virtual ServicesModel * model() const;
 
     virtual int type() const;
+    virtual void reload();
 
 public Q_SLOTS:
     void invalidate();
@@ -111,6 +112,7 @@ class XmppServiceItem: public ServiceItem {
 public:
     XmppServiceItem(ServiceItem * parent, QString server);
     XmppServiceItem(ServiceItem * parent, DiscoItem item);
+    virtual void reload();
 
 protected:
     virtual void _load();

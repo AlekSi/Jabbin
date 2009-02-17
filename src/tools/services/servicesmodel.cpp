@@ -95,6 +95,11 @@ int ServiceItem::type() const
     return m_type;
 }
 
+void ServiceItem::reload()
+{
+
+}
+
 int ServiceItem::childCount()
 {
     initChildren();
@@ -212,6 +217,14 @@ XmppServiceItem::XmppServiceItem(ServiceItem * parent, DiscoItem item)
     if (parent) {
         m_type = parent->type() + 1;
     }
+}
+
+void XmppServiceItem::reload()
+{
+    clearChildren();
+    m_itemLoaded = false;
+    m_childrenLoaded = false;
+    load();
 }
 
 void XmppServiceItem::discoInfoFinished()
@@ -674,6 +687,14 @@ Qt::DropActions ServicesModel::supportedDropActions() const
 
 void ServicesModel::refresh(const QModelIndex & parent)
 {
-    //
+    ServiceItem * parentItem;
+
+     if (!parent.isValid())
+         parentItem = d->root;
+     else
+         parentItem = static_cast < ServiceItem * >
+             (parent.internalPointer());
+
+     parentItem->reload();
 }
 

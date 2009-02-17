@@ -92,6 +92,7 @@ void ServicesPanel::Private::reloadItem()
 {
     qDebug() << "reload item" <<
         model->data(clickedItem, ServicesModel::AddressRole);
+    model->refresh(clickedItem);
 }
 
 
