@@ -65,15 +65,25 @@ ServiceItem::ServiceItem(ServiceItem * parent, DiscoItem data)
 
 ServiceItem::~ServiceItem()
 {
+    foreach (XMPP::Task * task, m_tasks) {
+        task->safeDelete();
+    }
+    m_tasks.clear();
+
     qDeleteAll(m_children);
 }
 
 void ServiceItem::clearChildren()
 {
+    qDebug() << "clearChildren 1";
     model()->d->childrenToBeCleared(this, m_children.size());
+    qDebug() << "clearChildren 2";
     qDeleteAll(m_children);
+    qDebug() << "clearChildren 3";
     m_children.clear();
+    qDebug() << "clearChildren 4";
     model()->d->childrenCleared();
+    qDebug() << "clearChildren 5";
 }
 
 void ServiceItem::addChild(ServiceItem * child)
@@ -97,6 +107,10 @@ int ServiceItem::type() const
 
 void ServiceItem::reload()
 {
+    clearChildren();
+    m_itemLoaded = false;
+    m_childrenLoaded = false;
+    load();
 
 }
 
@@ -219,14 +233,6 @@ XmppServiceItem::XmppServiceItem(ServiceItem * parent, DiscoItem item)
     }
 }
 
-void XmppServiceItem::reload()
-{
-    clearChildren();
-    m_itemLoaded = false;
-    m_childrenLoaded = false;
-    load();
-}
-
 void XmppServiceItem::discoInfoFinished()
 {
     JT_DiscoInfo * jt = (JT_DiscoInfo *)sender();
@@ -255,6 +261,9 @@ void XmppServiceItem::discoInfoFinished()
 
     m_waitingForInfo = false;
     notifyUpdated();
+
+    m_tasks.remove(jt);
+    jt->safeDelete();
 }
 
 void XmppServiceItem::discoItemsFinished()
@@ -275,6 +284,9 @@ void XmppServiceItem::discoItemsFinished()
         m_icon = _defaultIcon();
         notifyUpdated();
     }
+
+    m_tasks.remove(jt);
+    jt->safeDelete();
 }
 
 QIcon XmppServiceItem::_defaultIcon()
@@ -314,14 +326,6 @@ QIcon XmppServiceItem::_defaultIcon()
             return ServiceItem::m_jabberIcon;
         else if (id.type == ("yahoo"))
             return ServiceItem::m_yahooIcon;
-
-        if (!id.category.isEmpty()) {
-             qDebug() << "_defaultIcon type is" << id.type;
-        } else {
-            qDebug() << "_defaultIcon: category is empty, but id is " << id.type;
-        }
-    } else {
-        qDebug() << "_defaultIcon: identities are empty";
     }
 
     switch (m_type) {
@@ -349,6 +353,8 @@ void XmppServiceItem::_load()
     m_title = tr("Connecting to %1").arg(m_discoItem.jid().bare());
 
     JT_DiscoInfo * jt = new JT_DiscoInfo(model()->psiAccount()->client()->rootTask());
+    m_tasks << jt;
+
     connect(jt, SIGNAL(finished()), SLOT(discoInfoFinished()));
 
     jt->get(m_discoItem);
@@ -356,7 +362,7 @@ void XmppServiceItem::_load()
     // this would be a lot prettier if jt->go() returned bool
     // - false if connection error
     m_waitingForInfo = (jt->client() && &jt->client()->stream());
-    jt->go(true);
+    jt->go();
 }
 
 void XmppServiceItem::_initChildren()
@@ -369,6 +375,7 @@ void XmppServiceItem::_initChildren()
     // m_title = tr("Connecting to %1").arg(m_discoItem.jid().bare());
 
     JT_DiscoItems * jt = new JT_DiscoItems(model()->psiAccount()->client()->rootTask());
+    m_tasks << jt;
     connect(jt, SIGNAL(finished()), SLOT(discoItemsFinished()));
 
     jt->get(m_discoItem.jid(), m_discoItem.node());
@@ -376,7 +383,7 @@ void XmppServiceItem::_initChildren()
     // this would be a lot prettier if jt->go() returned bool
     // - false if connection error
     m_waitingForInfo = (jt->client() && &jt->client()->stream());
-    jt->go(true);
+    jt->go();
 
 }
 

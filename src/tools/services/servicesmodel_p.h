@@ -26,6 +26,7 @@
 #include "servicesmodel.h"
 
 #include "xmpp_discoitem.h"
+#include "xmpp_task.h"
 
 /**
  * Generic implementation to be subclassed to implement the actual
@@ -76,6 +77,7 @@ protected:
     bool m_childrenLoaded;
     ServiceItem * m_parent;
     XMPP::DiscoItem m_discoItem;
+    QList < XMPP::Task * > m_tasks;
     int m_type;
 
 public:
@@ -112,7 +114,6 @@ class XmppServiceItem: public ServiceItem {
 public:
     XmppServiceItem(ServiceItem * parent, QString server);
     XmppServiceItem(ServiceItem * parent, DiscoItem item);
-    virtual void reload();
 
 protected:
     virtual void _load();
