@@ -48,12 +48,13 @@ void ServicesPanel::Private::itemClicked(const QModelIndex & index)
         clickedItem = index;
 
         switch (index.data(ServicesModel::ServiceTypeRole).toInt()) {
+            case ServicesModel::Server:
             case ServicesModel::Room:
             case ServicesModel::User:
-                menu.addAction(tr("Join service"),
+                menu.addAction(tr("Register service"),
                         this, SLOT(joinService()));
-                menu.addAction(tr("Bookmark to contact list"),
-                        this, SLOT(addToContacts()));
+                // menu.addAction(tr("Bookmark to contact list"),
+                //         this, SLOT(addToContacts()));
             default:
                 menu.addAction(tr("Reload"),
                         this, SLOT(reloadItem()));

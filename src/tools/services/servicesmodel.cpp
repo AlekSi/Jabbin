@@ -56,7 +56,7 @@ QIcon ServiceItem::m_icqIcon;      // = QIcon(":/services/data/services/icq.png"
 QIcon ServiceItem::m_smsIcon;      // = QIcon(":/services/data/services/sms.png");
 
 ServiceItem::ServiceItem(ServiceItem * parent, DiscoItem data)
-    : m_parent(parent), m_icon(), m_title(),
+    : QObject(parent), m_parent(parent), m_icon(), m_title(),
       m_itemLoaded(false), m_childrenLoaded(false), m_discoItem(data),
       m_type(ServicesModel::Generic)
 {
@@ -85,7 +85,7 @@ void ServiceItem::removeChild(ServiceItem * child)
 {
     model()->d->childrenToBeRemoved(this, m_children.indexOf(child), 1);
     m_children.removeAll(child);
-    child->deleteLater();
+    //child->deleteLater();
     model()->d->childrenRemoved();
 }
 
