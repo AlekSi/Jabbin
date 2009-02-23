@@ -530,11 +530,11 @@
    <extends>QLabel</extends>
    <header>yacontactlabel.h</header>
   </customwidget>
- </customwidgets>
- <customwidgets>
-   <class>FadingMultilineLabel</class>
-   <extends>QLabel</extends>
-   <header>fadingmultilinelabel.h</header>
+  <customwidget>
+    <class>FadingMultilineLabel</class>
+    <extends>QLabel</extends>
+    <header>fadingmultilinelabel.h</header>
+  </customwidget>
  </customwidgets>
  <resources>
   <include location="yastuff.qrc" />

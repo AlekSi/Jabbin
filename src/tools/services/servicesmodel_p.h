@@ -102,6 +102,7 @@ public:
     static QIcon m_gadugaduIcon;
     static QIcon m_yahooIcon;
     static QIcon m_icqIcon;
+    static QIcon m_ircIcon;
     static QIcon m_smsIcon;
 
 private:

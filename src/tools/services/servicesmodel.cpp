@@ -53,6 +53,7 @@ QIcon ServiceItem::m_facebookIcon; // = QIcon(":/services/data/services/facebook
 QIcon ServiceItem::m_gadugaduIcon; // = QIcon(":/services/data/services/gadu-gadu.png");
 QIcon ServiceItem::m_yahooIcon;    // = QIcon(":/services/data/services/yahoo.png");
 QIcon ServiceItem::m_icqIcon;      // = QIcon(":/services/data/services/icq.png");
+QIcon ServiceItem::m_ircIcon;      // = QIcon(":/services/data/services/irc.png");
 QIcon ServiceItem::m_smsIcon;      // = QIcon(":/services/data/services/sms.png");
 
 ServiceItem::ServiceItem(ServiceItem * parent, DiscoItem data)
@@ -267,9 +268,12 @@ void XmppServiceItem::discoInfoFinished()
             }
 
             m_waitingForInfo = false;
-            _initChildren();
 
-            addChild(new ServiceItem(this, DiscoItem()));
+            if (m_discoItem.identities().first().category == "server") {
+                _initChildren();
+                addChild(new ServiceItem(this, DiscoItem()));
+            }
+
             m_icon = _defaultIcon();
         } else {
             qDebug() << m_discoItem.identities().first().type;
@@ -322,6 +326,8 @@ QIcon XmppServiceItem::_defaultIcon()
 
         if (id.type == ("aim"))
             return ServiceItem::m_aimIcon;
+        else if (id.type == ("irc"))
+            return ServiceItem::m_ircIcon;
         else if (id.type == ("gadu-gadu"))
             return ServiceItem::m_gadugaduIcon;
         //else if (id.type == ("http-ws"))
@@ -462,6 +468,7 @@ ServicesModel::Private::Private(ServicesModel * parent)
     ServiceItem::m_gadugaduIcon = QIcon(":/services/data/services/gadu-gadu.png");
     ServiceItem::m_yahooIcon    = QIcon(":/services/data/services/yahoo.png");
     ServiceItem::m_icqIcon      = QIcon(":/services/data/services/icq.png");
+    ServiceItem::m_ircIcon      = QIcon(":/services/data/services/irc.png");
     ServiceItem::m_smsIcon      = QIcon(":/services/data/services/sms.png");
 }
 
