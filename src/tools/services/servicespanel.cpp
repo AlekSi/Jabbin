@@ -86,6 +86,12 @@ void ServicesPanel::Private::addToContacts()
 {
     qDebug() << "add to contacts" <<
         model->data(clickedItem, ServicesModel::AddressRole);
+    // account->openAddUserDlg();
+    // QStringList groups;
+    // groups << tr("Services");
+    // account->dj_add(model->jid(clickedItem),
+    //        model->data(clickedItem).toString(), groups, true);
+    // account->featureActivated(Features::FID_Add, model->jid(clickedItem), QString());
 }
 
 void ServicesPanel::Private::reloadItem()

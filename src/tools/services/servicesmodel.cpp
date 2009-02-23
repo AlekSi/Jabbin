@@ -75,15 +75,18 @@ ServiceItem::~ServiceItem()
 
 void ServiceItem::clearChildren()
 {
-    qDebug() << "clearChildren 1";
     model()->d->childrenToBeCleared(this, m_children.size());
-    qDebug() << "clearChildren 2";
     qDeleteAll(m_children);
-    qDebug() << "clearChildren 3";
     m_children.clear();
-    qDebug() << "clearChildren 4";
     model()->d->childrenCleared();
-    qDebug() << "clearChildren 5";
+}
+
+void ServiceItem::removeChild(ServiceItem * child)
+{
+    model()->d->childrenToBeRemoved(this, m_children.indexOf(child), 1);
+    m_children.removeAll(child);
+    child->deleteLater();
+    model()->d->childrenRemoved();
 }
 
 void ServiceItem::addChild(ServiceItem * child)
@@ -202,6 +205,13 @@ int ServiceItem::indexOf(ServiceItem * child)
     return m_children.indexOf(child);
 }
 
+void ServiceItem::removeMe()
+{
+    if (m_parent) {
+        m_parent->removeChild(this);
+    }
+}
+
 ServicesModel * ServiceItem::model() const
 {
     return parent()->model();
@@ -239,19 +249,33 @@ void XmppServiceItem::discoInfoFinished()
     qDebug() << "discoInfoFinished" << jt->success();
 
     if (jt->success() && jt->item().jid().full() != QString()) {
-        const DiscoItem * item = & jt->item();
+        m_discoItem = jt->item();
 
-        if (item->name().isEmpty()) {
-            m_title = item->jid().full();
-        } else {
-            m_title = item->name();
+        foreach (DiscoItem::Identity id, m_discoItem.identities()) {
+            qDebug() << id.type << id.name << id.category;
         }
 
-        m_waitingForInfo = false;
-        _initChildren();
+        if (!m_discoItem.identities().isEmpty()
+                && ( m_discoItem.identities().first().category == "gateway"
+                || m_discoItem.identities().first().category == "server")
+                ) {
 
-        addChild(new ServiceItem(this, DiscoItem()));
-        m_icon = _defaultIcon();
+            if (m_discoItem.name().isEmpty()) {
+                m_title = m_discoItem.jid().full();
+            } else {
+                m_title = m_discoItem.name();
+            }
+
+            m_waitingForInfo = false;
+            _initChildren();
+
+            addChild(new ServiceItem(this, DiscoItem()));
+            m_icon = _defaultIcon();
+        } else {
+            qDebug() << m_discoItem.identities().first().type;
+            m_title = "delete me";
+            removeMe();
+        }
     } else {
         // Handle the error
         m_title = tr("Error connecting to %1").arg(m_discoItem.jid().bare());
@@ -293,6 +317,8 @@ QIcon XmppServiceItem::_defaultIcon()
 {
     if (!m_discoItem.identities().isEmpty()) {
         DiscoItem::Identity id = m_discoItem.identities().first();
+        qDebug() << "XmppServiceItem::_defaultIcon" << id.type
+            << id.category << id.name;
 
         if (id.type == ("aim"))
             return ServiceItem::m_aimIcon;
@@ -327,6 +353,8 @@ QIcon XmppServiceItem::_defaultIcon()
         else if (id.type == ("yahoo"))
             return ServiceItem::m_yahooIcon;
     }
+
+    qDebug() << "XmppServiceItem::_defaultIcon - identities are empty";
 
     switch (m_type) {
         case ServicesModel::Service:
@@ -372,7 +400,6 @@ void XmppServiceItem::_initChildren()
     }
 
     m_icon = m_loadingIcon;
-    // m_title = tr("Connecting to %1").arg(m_discoItem.jid().bare());
 
     JT_DiscoItems * jt = new JT_DiscoItems(model()->psiAccount()->client()->rootTask());
     m_tasks << jt;
@@ -459,6 +486,17 @@ void ServicesModel::Private::childrenAdded()
     q->endInsertRows();
 }
 
+void ServicesModel::Private::childrenToBeRemoved(ServiceItem * item, int from, int count)
+{
+    QModelIndex index = indexOf(item);
+    q->beginRemoveRows(index, from, from + count - 1);
+}
+
+void ServicesModel::Private::childrenRemoved()
+{
+    q->endInsertRows();
+}
+
 void ServicesModel::Private::childrenToBeCleared(ServiceItem * item, int count)
 {
     QModelIndex index = indexOf(item);
@@ -495,8 +533,8 @@ ServicesModel::ServicesModel(PsiAccount * psiAccount, QObject * parent)
         d->root->addService(service.toString());
     }
 
-    //DiscoDlg * dlg = new DiscoDlg(psiAccount, psiAccount->jid(), QString());
-    // dlg->show();
+    DiscoDlg * dlg = new DiscoDlg(psiAccount, psiAccount->jid(), QString());
+    dlg->show();
 }
 
 PsiAccount * ServicesModel::psiAccount() const

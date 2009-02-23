@@ -121,7 +121,7 @@ void ContactTooltip::showContact(PsiContact * contact, const QRect & parent)
     d->labelName->setText(contact->name());
     if (contact->name() != contact->jid().bare()) {
         d->labelJID->setText(
-                "<a href='mailto:'" +
+                "<a href='mailto:" +
                 contact->jid().bare() + "'>" +
                 contact->jid().bare() + "</a>"
                 );

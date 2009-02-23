@@ -43,6 +43,7 @@ public:
     ServiceItem * parent() const;
 
     virtual void activate();
+    void removeMe();
 
     QString title();
     QIcon icon();
@@ -66,6 +67,7 @@ protected:
     void clearChildren();
     void addChildren(const QList < ServiceItem * > & children);
     void addChild(ServiceItem * child);
+    void removeChild(ServiceItem * child);
 
     virtual void _load();
     virtual void _initChildren();
@@ -152,6 +154,9 @@ public:
 
     void childrenToBeAdded(ServiceItem * item, int from, int count);
     void childrenAdded();
+
+    void childrenToBeRemoved(ServiceItem * item, int from, int count);
+    void childrenRemoved();
 
     void childrenToBeCleared(ServiceItem * item, int count);
     void childrenCleared();
