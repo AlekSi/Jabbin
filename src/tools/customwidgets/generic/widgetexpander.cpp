@@ -63,7 +63,6 @@ void WidgetExpander::setMinimumWidthRatio(qreal ratio)
 
 void WidgetExpander::setChildWidget(QWidget * child)
 {
-    qDebug() << "setChildWidget";
     if (!child || d->child == child) {
         return;
     }
@@ -117,7 +116,6 @@ void WidgetExpander::resizeEvent(QResizeEvent *)
     d->fullwidth = width();
 
     if (d->child) {
-        qDebug() << d->minwidth, height();
         d->child->resize(d->minwidth, height());
     }
 }

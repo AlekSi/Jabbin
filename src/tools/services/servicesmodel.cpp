@@ -61,7 +61,6 @@ ServiceItem::ServiceItem(ServiceItem * parent, DiscoItem data)
       m_itemLoaded(false), m_childrenLoaded(false), m_discoItem(data),
       m_type(ServicesModel::Generic)
 {
-    qDebug() << "ServiceItem::ServiceItem";
 }
 
 ServiceItem::~ServiceItem()
@@ -229,7 +228,6 @@ XmppServiceItem::XmppServiceItem(ServiceItem * parent, QString server)
     : ServiceItem(parent, DiscoItem()),
       m_waitingForInfo(false)
 {
-    qDebug() << "XmppServiceItem::XmppServiceItem";
     m_discoItem.setJid(server.stripWhiteSpace());
     m_discoItem.setNode(QString());
     m_type = ServicesModel::Service;
@@ -247,14 +245,9 @@ XmppServiceItem::XmppServiceItem(ServiceItem * parent, DiscoItem item)
 void XmppServiceItem::discoInfoFinished()
 {
     JT_DiscoInfo * jt = (JT_DiscoInfo *)sender();
-    qDebug() << "discoInfoFinished" << jt->success();
 
     if (jt->success() && jt->item().jid().full() != QString()) {
         m_discoItem = jt->item();
-
-        foreach (DiscoItem::Identity id, m_discoItem.identities()) {
-            qDebug() << id.type << id.name << id.category;
-        }
 
         if (!m_discoItem.identities().isEmpty()
                 && ( m_discoItem.identities().first().category == "gateway"
@@ -276,7 +269,6 @@ void XmppServiceItem::discoInfoFinished()
 
             m_icon = _defaultIcon();
         } else {
-            qDebug() << m_discoItem.identities().first().type;
             m_title = "delete me";
             removeMe();
         }
@@ -297,7 +289,6 @@ void XmppServiceItem::discoInfoFinished()
 void XmppServiceItem::discoItemsFinished()
 {
     JT_DiscoItems *jt = (JT_DiscoItems *)sender();
-    qDebug() << "discoItemsFinished" << jt->success();
 
     clearChildren();
     if ( jt->success() ) {
@@ -321,8 +312,6 @@ QIcon XmppServiceItem::_defaultIcon()
 {
     if (!m_discoItem.identities().isEmpty()) {
         DiscoItem::Identity id = m_discoItem.identities().first();
-        qDebug() << "XmppServiceItem::_defaultIcon" << id.type
-            << id.category << id.name;
 
         if (id.type == ("aim"))
             return ServiceItem::m_aimIcon;
@@ -359,8 +348,6 @@ QIcon XmppServiceItem::_defaultIcon()
         else if (id.type == ("yahoo"))
             return ServiceItem::m_yahooIcon;
     }
-
-    qDebug() << "XmppServiceItem::_defaultIcon - identities are empty";
 
     switch (m_type) {
         case ServicesModel::Service:

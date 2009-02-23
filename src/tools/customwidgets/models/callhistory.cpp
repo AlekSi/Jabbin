@@ -375,8 +375,6 @@ void CallHistoryModel::load()
         return;
     }
 
-    qDebug() << "CallHistoryModel :: Loading";
-
     reader.readNext();
     if (reader.isStartElement()) {
         qDebug() << "CallHistoryModel" << reader.name().toString();

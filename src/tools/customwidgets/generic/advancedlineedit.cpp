@@ -48,8 +48,6 @@ public:
 
     void invalidateButtons()
     {
-        qDebug() << "invalidating";
-
         int frameWidth = q->style()->pixelMetric(QStyle::PM_DefaultFrameWidth);
         int beginWidth =
             (
@@ -61,8 +59,6 @@ public:
                 flags[EndButton] == ShowAlways ||
                 ( flags[EndButton] != Hide && q->hasFocus() )
             ) ? (endButton->sizeHint().width()) : (0);
-
-        qDebug() << "invalidating";
 
         beginButton->setVisible(beginWidth != 0);
         endButton->setVisible(endWidth != 0);
