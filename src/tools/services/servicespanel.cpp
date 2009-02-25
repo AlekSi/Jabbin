@@ -53,8 +53,6 @@ void ServicesPanel::Private::itemClicked(const QModelIndex & index)
             case ServicesModel::User:
                 menu.addAction(tr("Register service"),
                         this, SLOT(joinService()));
-                // menu.addAction(tr("Bookmark to contact list"),
-                //         this, SLOT(addToContacts()));
             default:
                 menu.addAction(tr("Reload"),
                         this, SLOT(reloadItem()));
@@ -81,18 +79,9 @@ void ServicesPanel::Private::joinService()
 {
     qDebug() << "join service" <<
         model->data(clickedItem, ServicesModel::AddressRole);
-}
-
-void ServicesPanel::Private::addToContacts()
-{
-    qDebug() << "add to contacts" <<
-        model->data(clickedItem, ServicesModel::AddressRole);
-    // account->openAddUserDlg();
-    // QStringList groups;
-    // groups << tr("Services");
-    // account->dj_add(model->jid(clickedItem),
-    //        model->data(clickedItem).toString(), groups, true);
-    // account->featureActivated(Features::FID_Add, model->jid(clickedItem), QString());
+    account->featureActivated(Features::feature(Features::FID_Register),
+            model->jid(clickedItem),
+            QString());
 }
 
 void ServicesPanel::Private::reloadItem()
@@ -110,12 +99,9 @@ ServicesPanel * ServicesPanel::instance()
     return m_instance;
 }
 
-void ServicesPanel::init(/*const Jid & jid,*/ PsiAccount * account)
+void ServicesPanel::init(PsiAccount * account)
 {
-    // d->jid = jid;
     d->account = account;
-    //ServicesModel * model = new ServicesModel(account);
-    //virtual void showEvent ( QShowEvent * event )d->treeServices->setModel(model);
 }
 
 void ServicesPanel::showEvent(QShowEvent *) {

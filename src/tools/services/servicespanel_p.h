@@ -41,7 +41,6 @@ public Q_SLOTS:
     bool eventFilter(QObject * object, QEvent * event);
 
     void joinService();
-    void addToContacts();
     void reloadItem();
 };
 
