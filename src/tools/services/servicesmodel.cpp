@@ -23,7 +23,7 @@
 #include <QApplication>
 #include <QTimer>
 
-#include "discodlg.h"
+// #include "discodlg.h"
 
 #include "psioptions.h"
 #include "xmpp_tasks.h"
@@ -527,8 +527,8 @@ ServicesModel::ServicesModel(PsiAccount * psiAccount, QObject * parent)
         d->root->addService(service.toString());
     }
 
-    DiscoDlg * dlg = new DiscoDlg(psiAccount, psiAccount->jid(), QString());
-    dlg->show();
+    // DiscoDlg * dlg = new DiscoDlg(psiAccount, psiAccount->jid(), QString());
+    // dlg->show();
 }
 
 PsiAccount * ServicesModel::psiAccount() const
