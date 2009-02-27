@@ -107,6 +107,7 @@ void ContactTooltip::showContact(PsiContact * contact, const QRect & parent)
             button->disconnect(d->oldContact);
         }
     }
+    d->oldContact = contact;
 
     connect(d->buttonChat, SIGNAL(clicked()),
             contact, SLOT(openChat()));

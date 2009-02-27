@@ -751,9 +751,11 @@ void PsiContact::userInfo()
 void PsiContact::history()
 {
 #ifdef YAPSI
+	qDebug() << "History requested... YAPSI";
 	if (account())
 		Ya::showHistory(account(), jid());
 #else
+	qDebug() << "History requested... PSI";
 	if (account())
 		account()->actionHistory(jid());
 #endif
