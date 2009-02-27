@@ -623,7 +623,7 @@ QVariant ServicesModel::data(const QModelIndex & index, int role) const
                 case Generic:
                     return QSize(28, 28);
                 case Service:
-                    return QSize(36, 36);
+                    return QSize(24, 24);
                 case Server:
                     return QSize(36, 36);
                 case Room:

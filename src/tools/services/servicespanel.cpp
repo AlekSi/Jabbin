@@ -110,6 +110,10 @@ void ServicesPanel::showEvent(QShowEvent *) {
         d->treeServices->setModel(d->model);
     }
     d->treeServices->viewport()->installEventFilter(d);
+
+    for (int i = 0; i < d->model->rowCount(); i++) {
+        d->treeServices->expand(d->model->index(i, 0));
+    }
 }
 
 ServicesPanel::ServicesPanel(QWidget * parent)

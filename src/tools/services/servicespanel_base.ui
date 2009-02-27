@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>380</width>
+    <width>379</width>
     <height>528</height>
    </rect>
   </property>
@@ -23,12 +23,15 @@
       <enum>QFrame::NoFrame</enum>
      </property>
      <property name="rootIsDecorated">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="sortingEnabled">
       <bool>false</bool>
      </property>
      <property name="animated">
+      <bool>true</bool>
+     </property>
+     <property name="wordWrap">
       <bool>true</bool>
      </property>
      <property name="headerHidden">
