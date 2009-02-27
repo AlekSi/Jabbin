@@ -37,7 +37,7 @@ using XMPP::Jid;
 ContactTooltip * ContactTooltip::m_instance = NULL;
 
 ContactTooltip::Private::Private(ContactTooltip * parent)
-    : q(parent), oldContact(NULL)
+    : q(parent), oldContact(NULL), flipped(false)
 {
     setupUi(parent);
 
@@ -143,6 +143,8 @@ void ContactTooltip::showContact(PsiContact * contact, const QRect & parent)
 
 
     // Moving the window
+    bool flip = false;
+
     QRect g = geometry();
     g.moveTopLeft(parent.topLeft() - QPoint(g.width(), 0));
     g.moveTop(g.top() - (g.height() - parent.height()) / 2);
@@ -150,6 +152,22 @@ void ContactTooltip::showContact(PsiContact * contact, const QRect & parent)
     QRect screen = QApplication::desktop()->geometry();
     if (g.left() < screen.left()) {
         g.moveLeft(parent.right());
+        if (!d->flipped) {
+            flip = true;
+            d->flipped = true;
+        }
+    } else {
+        if (d->flipped) {
+            flip = true;
+            d->flipped = false;
+        }
+    }
+
+    if (flip) {
+        d->horizontalLayout->removeWidget(d->buttons);
+        d->horizontalLayout->insertWidget(
+                d->flipped ? 0 : 1,
+                d->buttons);
     }
 
     if (g.top() < screen.top()) {

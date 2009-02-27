@@ -45,6 +45,7 @@ public:
     QPushButton * buttonChat;
     QPushButton * buttonProfile;
     QPushButton * buttonHistory;
+    bool flipped;
 
     PsiContact * oldContact;
 
