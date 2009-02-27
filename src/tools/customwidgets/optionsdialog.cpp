@@ -212,7 +212,6 @@ void OptionsDialog::Private::tableNotificationsUpdate()
     if (checkNotificationSound->isChecked()) {
         svalue = labelNotificationSound->text();
     }
-    qDebug() << svalue << "###########";
     tableNotifications->item(tableNotificationsCurrentRow, 2)
         ->setData(Qt::UserRole, svalue);
     tableNotifications->item(tableNotificationsCurrentRow, 2)->setIcon(

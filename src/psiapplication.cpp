@@ -143,12 +143,12 @@ void setTrayOwnerWindow(Display *dsp)
 class PsiMacStyle : public QMacStyle
 {
 public:
-	PsiMacStyle() 
+	PsiMacStyle()
 	{
 		extern void qt_mac_set_menubar_icons(bool b); // qmenu_mac.cpp
 		qt_mac_set_menubar_icons(false);
 	}
-	
+
 	void drawControl(ControlElement ce, const QStyleOption *opt, QPainter *p, const QWidget *w) const
 	{
 		if (disableIconsForMenu(w) && ce == QStyle::CE_MenuItem) {
@@ -163,7 +163,7 @@ public:
 
 		QMacStyle::drawControl(ce, opt, p, w);
 	}
-	
+
 	QSize sizeFromContents(ContentsType ct, const QStyleOption *opt, const QSize &csz, const QWidget *widget) const
 	{
 		if (disableIconsForMenu(widget) && ct == QStyle::CT_MenuItem) {
@@ -177,7 +177,7 @@ public:
 
 		return QMacStyle::sizeFromContents(ct, opt, csz, widget);
 	}
-		
+
 private:
 	/**
 	 * This function provides means to override the icon-disabling
@@ -198,6 +198,7 @@ private:
 PsiApplication::PsiApplication(int &argc, char **argv, bool GUIenabled)
 : QApplication(argc, argv, GUIenabled)
 {
+	setApplicationName("Joim");
 	init(GUIenabled);
 	connect(this, SIGNAL(aboutToQuit()), SLOT(appAboutToQuit()));
 
@@ -239,7 +240,7 @@ void PsiApplication::init(bool GUIenabled)
 	setStyle(new PsiMacStyle());
 #endif
 #endif
-	
+
 #ifdef Q_WS_X11
 	if ( GUIenabled ) {
 		const int max = 20;
@@ -362,7 +363,7 @@ bool PsiApplication::x11EventFilter( XEvent *_event )
 				newTrayOwner();
 			}
 			break;
-			
+
 		case DestroyNotify:
 			if (_event->xdestroywindow.event == tray_owner)
 			{

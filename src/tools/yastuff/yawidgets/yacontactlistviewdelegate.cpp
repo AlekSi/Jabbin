@@ -296,7 +296,6 @@ bool YaContactListViewDelegate::drawStatusTypeText(const QModelIndex& index) con
 void YaContactListViewDelegate::drawStatusTypeText(QPainter* painter, const QStyleOptionViewItem& option, QRect* rect, const QModelIndex& index) const
 {
 	QString statusTypeText = Ya::statusFullText(statusType(index));
-	qDebug() <<  statusTypeText;
 	QRect statusTypeRect(*rect);
 	QStyleOptionViewItemV2 st_o = option;
 	st_o.font.setPixelSize(statusTypeFontSize(option.rect));

@@ -94,7 +94,6 @@ YaChatContactStatusExtra::YaChatContactStatusExtra(QWidget *parent)
 		border-image: url(/home/ivan/Projects/Joim/build/src/tools/customwidgets/generic/data/chatcontactstatus_background.png) 8 15 10 8 stretch stretch;\
 	}";
 
-	qDebug() << style;
 	setStyleSheet(style);
 
 }
