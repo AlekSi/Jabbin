@@ -320,7 +320,9 @@ public:
 		, doPopups_(true)
 		, pongServer_(0)
 		, pingServerTimer_(0)
+		, lastNumberOfSecondsIdle_(0)
 	{
+		oldStatus_.setType(Status::Offline);
 		pingServerTimer_ = new QTimer(this);
 		pingServerTimer_->setSingleShot(true);
 		pingServerTimer_->setInterval(5000);
@@ -729,13 +731,28 @@ public:
 		AutoAway_None = 0,
 		AutoAway_Away,
 		AutoAway_XA,
+		AutoAway_DND,
 		AutoAway_Offline
 	};
+
+	void resetAutoAway()
+	{
+		if (oldStatus_.type() == Status::Offline) {
+		    return;
+		}
+		account->setStatusDirect(oldStatus_);
+		oldStatus_.setType(Status::Offline);
+	}
 
 	void setAutoAway(AutoAway autoAway)
 	{
 		if (!account->isAvailable())
 			return;
+
+		if (oldStatus_.type() == Status::Offline) {
+			oldStatus_ = account->status();
+		}
+
 		Status status = autoAwayStatus(autoAway);
 #ifdef YAPSI
 		status.setStatus(loginStatus.status());
@@ -762,10 +779,12 @@ private:
 
 	XMPP::Status autoAwayStatus(AutoAway autoAway)
 	{
-		if (!lastManualStatus_.isAway()) {
+		// if (!lastManualStatus_.isAway()) {
 			switch (autoAway) {
 			case AutoAway_Away:
 				return Status(XMPP::Status::Away, option.asMessage, acc.priority);
+			case AutoAway_DND:
+				return Status(XMPP::Status::DND, option.asMessage, acc.priority);
 			case AutoAway_XA:
 				return Status(XMPP::Status::XA, option.asMessage, acc.priority);
 			case AutoAway_Offline:
@@ -773,7 +792,7 @@ private:
 			default:
 				;
 			}
-		}
+		//}
 		return lastManualStatus_;
 	}
 
@@ -824,6 +843,8 @@ public:
 	PongServer* pongServer_;
 	QTimer* pingServerTimer_;
 	QDateTime lastPongTime_;
+	int lastNumberOfSecondsIdle_;
+	Status oldStatus_;
 };
 
 PsiAccount::PsiAccount(const UserAccount &acc, PsiContactList *parent, CapsRegistry* capsRegistry, TabManager *tabManager)
@@ -3019,16 +3040,35 @@ void PsiAccount::publishTune(const Tune& tune)
 
 void PsiAccount::secondsIdle(int seconds)
 {
-	int minutes = seconds / 60;
+#define getOption(A, B) PsiOptions::instance()->getOption(A).to##B ()
+	int minutes = seconds / 10;
+	int required;
 
-	if(option.use_asOffline && option.asOffline > 0 && minutes >= option.asOffline)
+	if (seconds < d->lastNumberOfSecondsIdle_) {
+		if (getOption("options.general.status.auto.restore", Bool)) {
+			d->resetAutoAway();
+		}
+		return;
+	}
+	d->lastNumberOfSecondsIdle_ = seconds;
+
+	if ((required = getOption("options.general.status.auto.offline", Int)) > 0 && minutes >= required) {
 		d->setAutoAway(Private::AutoAway_Offline);
-	else if(option.use_asXa && option.asXa > 0 && minutes >= option.asXa)
-		d->setAutoAway(Private::AutoAway_XA);
-	else if(option.use_asAway && option.asAway > 0 && minutes >= option.asAway)
+	} else if ((required = getOption("options.general.status.auto.dnd", Int)) > 0 && minutes >= required) {
+		d->setAutoAway(Private::AutoAway_DND);
+	} else if ((required = getOption("options.general.status.auto.away", Int)) > 0 && minutes >= required) {
 		d->setAutoAway(Private::AutoAway_Away);
-	else
-		d->setAutoAway(Private::AutoAway_None);
+	}
+
+// 	if(option.use_asOffline && option.asOffline > 0 && minutes >= option.asOffline)
+// 		d->setAutoAway(Private::AutoAway_Offline);
+// 	else if(option.use_asXa && option.asXa > 0 && minutes >= option.asXa)
+// 		d->setAutoAway(Private::AutoAway_XA);
+// 	else if(option.use_asAway && option.asAway > 0 && minutes >= option.asAway)
+// 		d->setAutoAway(Private::AutoAway_Away);
+// 	else
+// 		d->setAutoAway(Private::AutoAway_None);
+#undef getOption
 }
 
 void PsiAccount::playSound(int onevent)

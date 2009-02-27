@@ -62,6 +62,8 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
     labelChatBackground->setVisible(false);
     labelStatusAway->setVisible(false);
     editStatusAway->setVisible(false);
+    groupServiceDiscovery->setVisible(false);
+    groupAccounts->setVisible(false);
 
     // Init
     tabs->setViewType(CustomWidgets::AdvancedTabBar::ListView);

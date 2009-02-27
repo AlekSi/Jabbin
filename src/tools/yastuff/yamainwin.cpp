@@ -1139,50 +1139,50 @@ void YaMainWin::optionChanged(const QString& option)
 	AdvancedWindow::optionChanged(option);
 }
 
-void YaMainWin::timerEvent(QTimerEvent * event)
-{
-	if (event->timerId() == autoStatusTimer_.timerId()) {
-		if (lastActionMousePos_ != QCursor::pos()) {
-			// mouse has moved
-			lastAction_ = QTime::currentTime();
-			lastActionMousePos_ = QCursor::pos();
-			if (autoLevel_ && PsiOptions::instance()->getOption("options.general.status.auto.restore").toBool()) {
-				statusSelected(oldStatus_);
-				oldStatus_ = XMPP::Status::Offline;
-			}
-			autoLevel_ = 0;
-		} else if (psi_->currentStatusType() != XMPP::Status::Offline) {
-			// mouse has not moved
-			int passed = lastAction_.msecsTo(QTime::currentTime());
-			// if (autoAway_ < passed && autoLevel_ == 0) {
-			// 	qDebug() << "We want to go away";
-			// 	if (autoAway_)
-			// 		statusSelected(XMPP::Status::Away);
-			// 	autoLevel_++;
-			// } else
-			if (autoDND_ < passed && autoLevel_ == 0) {
-				qDebug() << "We want to be DND";
-				if (autoDND_) {
-					if (oldStatus_ == XMPP::Status::Offline) {
-					    oldStatus_ = psi_->currentStatusType();
-					}
-					statusSelected(XMPP::Status::DND);
-				}
-				autoLevel_++;
-			} else if (autoOffline_ < passed && autoLevel_ == 1) {
-				qDebug() << "We want to go offline";
-				if (autoOffline_) {
-					if (oldStatus_ == XMPP::Status::Offline) {
-					    oldStatus_ = psi_->currentStatusType();
-					}
-					statusSelected(XMPP::Status::Offline);
-				}
-				autoLevel_++;
-			}
-		}
-		autoStatusTimer_.start(AUTO_STATUS_TIMER_INTERVAL, this);
-	}
-}
+// void YaMainWin::timerEvent(QTimerEvent * event)
+// {
+// 	if (event->timerId() == autoStatusTimer_.timerId()) {
+// 		if (lastActionMousePos_ != QCursor::pos()) {
+// 			// mouse has moved
+// 			lastAction_ = QTime::currentTime();
+// 			lastActionMousePos_ = QCursor::pos();
+// 			if (autoLevel_ && PsiOptions::instance()->getOption("options.general.status.auto.restore").toBool()) {
+// 				statusSelected(oldStatus_);
+// 				oldStatus_ = XMPP::Status::Offline;
+// 			}
+// 			autoLevel_ = 0;
+// 		} else if (psi_->currentStatusType() != XMPP::Status::Offline) {
+// 			// mouse has not moved
+// 			int passed = lastAction_.msecsTo(QTime::currentTime());
+// 			// if (autoAway_ < passed && autoLevel_ == 0) {
+// 			// 	qDebug() << "We want to go away";
+// 			// 	if (autoAway_)
+// 			// 		statusSelected(XMPP::Status::Away);
+// 			// 	autoLevel_++;
+// 			// } else
+// 			if (autoDND_ < passed && autoLevel_ == 0) {
+// 				qDebug() << "We want to be DND";
+// 				if (autoDND_) {
+// 					if (oldStatus_ == XMPP::Status::Offline) {
+// 					    oldStatus_ = psi_->currentStatusType();
+// 					}
+// 					statusSelected(XMPP::Status::DND);
+// 				}
+// 				autoLevel_++;
+// 			} else if (autoOffline_ < passed && autoLevel_ == 1) {
+// 				qDebug() << "We want to go offline";
+// 				if (autoOffline_) {
+// 					if (oldStatus_ == XMPP::Status::Offline) {
+// 					    oldStatus_ = psi_->currentStatusType();
+// 					}
+// 					statusSelected(XMPP::Status::Offline);
+// 				}
+// 				autoLevel_++;
+// 			}
+// 		}
+// 		autoStatusTimer_.start(AUTO_STATUS_TIMER_INTERVAL, this);
+// 	}
+// }
 
 void YaMainWin::showSettingsMenu()
 {

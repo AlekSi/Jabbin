@@ -157,7 +157,7 @@ protected:
 	void repaintBackground();
 	bool expandWidthWhenMaximized() const;
 	void contextMenuEvent(QContextMenuEvent*);
-        void timerEvent(QTimerEvent * event);
+        // void timerEvent(QTimerEvent * event);
 
 private:
 	PsiAccount* yaAccount() const;

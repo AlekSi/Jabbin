@@ -42,7 +42,7 @@ void ServicesPanel::Private::itemClicked(const QModelIndex & index)
     qDebug() << "         type is" << index.data(ServicesModel::ServiceTypeRole);
     qDebug() << "      address is" << index.data(ServicesModel::AddressRole);
 
-    if (clickedWithButton == Qt::RightButton) {
+    // if (clickedWithButton == Qt::RightButton) {
         QMenu menu;
 
         clickedItem = index;
@@ -59,7 +59,7 @@ void ServicesPanel::Private::itemClicked(const QModelIndex & index)
         }
 
         menu.exec(QCursor::pos());
-    }
+    // }
 }
 
 bool ServicesPanel::Private::eventFilter(QObject * object, QEvent * event)
