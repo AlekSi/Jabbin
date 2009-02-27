@@ -935,20 +935,12 @@ bool PsiContact::isOnline() const
 
 bool PsiContact::isCallable() const
 {
-    // TODO! Implement this
-
     const UserResourceList & list = d->u_.userResourceList();
     foreach (UserResource res, list) {
-        qDebug() << "$$$$$$$$$$$" << res.name() << res.clientOS() << res.versionString();
         if (account()->capsManager()->features(
                     d->u_.jid().withResource(res.name())).canVoice()) return true;
 
     }
-    //for (UserResourceList::ConstIterator i = list.begin();
-    //        i != list.end() && !result; ++i) {
-    //}
-//	 			hasVoice = psiAccount()->capsManager()->features(u->jid().withResource((*it).name())).canVoice();
-//		}
     return false;
 }
 

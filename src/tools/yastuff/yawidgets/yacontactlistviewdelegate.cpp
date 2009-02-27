@@ -320,7 +320,6 @@ void YaContactListViewDelegate::drawStatusTypeText(QPainter* painter, const QSty
 		}
 		*/
 		if (painter) {
-			qDebug() << "painting " << statusTypeText;
 			drawText(painter, st_o, statusTypeRect, statusTypeText, index);
 		}
 	}

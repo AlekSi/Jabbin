@@ -239,6 +239,7 @@ void YaChatDlg::initUi()
 	// ui_.contactToolTipArea->installEventFilter(this);
 
 	connect(ui_.contactToolTipArea, SIGNAL(clicked()), SLOT(showContactProfile()));
+	connect(ui_.buttonCall, SIGNAL(clicked()), SLOT(callContact()));
 
 	// TODO: connect this button to start a call
 	// ui_.contactToolTipArea->setText(tr("Info"));
@@ -422,6 +423,7 @@ void YaChatDlg::contactUpdated(UserListItem* u, int status, const QString& statu
 	lastStatus_ = XMPP::Status(statusType, statusString);
 
 	updateModelNotices();
+	ui_.buttonCall->setVisible(contact->isCallable());
 	// ui_.addToFriendsButton->setEnabled(!Ya::isInFriends(u));
 }
 
@@ -654,6 +656,14 @@ void YaChatDlg::setLooks()
 	ChatDlg::setLooks();
 
 	ui_.separator->updateChatEditHeight();
+}
+
+void YaChatDlg::callContact()
+{
+	PsiContact* contact = account()->findContact(jid().bare());
+	if (contact && contact->isCallable()) {
+		contact->openCall();
+	}
 }
 
 void YaChatDlg::addContact()
