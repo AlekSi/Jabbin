@@ -354,7 +354,7 @@ QRect YaContactListViewDelegate::nameRect(const QStyleOptionViewItem& option, co
 		nameRect.translate(statusPixmap.width() + 3, 0);
 	}
 
-	nameRect.setRight(option.rect.right() - horizontalMargin() - 1);
+	nameRect.setRight(option.rect.right() - horizontalMargin() - 1 - avatarSize());
 	return nameRect;
 }
 

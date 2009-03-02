@@ -83,7 +83,7 @@ bool ServicesPanel::Private::eventFilter(QObject * object, QEvent * event)
             clickedWithButton = mouseEvent->button();
         }
     }
-    return false;
+    return QObject::eventFilter(object, event);
 }
 
 void ServicesPanel::Private::joinService()
@@ -125,6 +125,8 @@ void ServicesPanel::showEvent(QShowEvent *) {
     for (int i = 0; i < d->model->rowCount(); i++) {
         d->treeServices->expand(d->model->index(i, 0));
     }
+
+    d->treeServices->setFocus();
 }
 
 ServicesPanel::ServicesPanel(QWidget * parent)
