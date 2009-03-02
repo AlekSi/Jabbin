@@ -42,10 +42,21 @@ void ServicesPanel::Private::itemClicked(const QModelIndex & index)
     qDebug() << "         type is" << index.data(ServicesModel::ServiceTypeRole);
     qDebug() << "      address is" << index.data(ServicesModel::AddressRole);
 
-    // if (clickedWithButton == Qt::RightButton) {
+    clickedItem = index;
+
+    if (clickedWithButton == Qt::LeftButton) {
+        switch (index.data(ServicesModel::ServiceTypeRole).toInt()) {
+            case ServicesModel::Server:
+            case ServicesModel::Room:
+            case ServicesModel::User:
+                joinService();
+                break;
+            default:
+                break;
+        }
+    } else if (clickedWithButton == Qt::RightButton) {
         QMenu menu;
 
-        clickedItem = index;
 
         switch (index.data(ServicesModel::ServiceTypeRole).toInt()) {
             case ServicesModel::Server:
@@ -59,7 +70,7 @@ void ServicesPanel::Private::itemClicked(const QModelIndex & index)
         }
 
         menu.exec(QCursor::pos());
-    // }
+    }
 }
 
 bool ServicesPanel::Private::eventFilter(QObject * object, QEvent * event)
