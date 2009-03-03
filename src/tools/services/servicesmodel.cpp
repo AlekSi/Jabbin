@@ -298,6 +298,11 @@ void XmppServiceItem::discoItemsFinished()
             children << new XmppServiceItem(this, item);
         }
 
+        // Enable the following for scrollbar testing
+        // for (int i = 0; i < 30; i++) {
+        //     children << new ServiceItem(this, DiscoItem());
+        // }
+
         addChildren(children);
 
         m_icon = _defaultIcon();

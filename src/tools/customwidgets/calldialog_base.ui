@@ -1,8 +1,9 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <author>Ivan Čukić</author>
  <class>CallDialogBase</class>
- <widget class="QFrame" name="CallDialogBase" >
-  <property name="geometry" >
+ <widget class="QFrame" name="CallDialogBase">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -10,132 +11,104 @@
     <height>721</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" >
-   <property name="spacing" >
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin" >
+   <property name="margin">
     <number>0</number>
    </property>
    <item>
-    <widget class="QStackedWidget" name="stacked" >
-     <property name="currentIndex" >
+    <widget class="QStackedWidget" name="stacked">
+     <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="pageDialpad" >
-      <layout class="QVBoxLayout" name="verticalLayout_2" >
-       <property name="spacing" >
+     <widget class="QWidget" name="pageDialpad">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
         <number>0</number>
        </property>
-       <property name="margin" >
+       <property name="margin">
         <number>0</number>
        </property>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout" >
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QTabWidget" name="callTabs" >
-           <property name="minimumSize" >
+          <widget class="QTabWidget" name="callTabs">
+           <property name="minimumSize">
             <size>
              <width>0</width>
              <height>300</height>
             </size>
            </property>
-           <property name="styleSheet" >
-            <string notr="true" >QTabWidget#callTabs::pane {
-    border: none;
-    margin: 0px;
-    padding: 0px;
-    border-left: 1px solid #e0e0e0;
-    left: 2px;
-}
-
-QTabWidget#callTabs > QTabBar::tab {
-    border: 14px;
-    padding-top: 0px;
-    border-image: url(:/customwidgets/data/verticalbarbutton_normal.png) 14px;
-    font-size: 12px;
-    color: rgba(0, 0, 0, 125);
-    margin-right: -32px;
-    width: 64px;
-}
-
-QTabWidget#callTabs > QTabBar::tab:hover {
-    margin-right: -32px;
-    border-image: url(:/customwidgets/data/verticalbarbutton_hover.png) 14px;
-    color: rgba(0, 0, 0, 200);
-}
-
-QTabWidget#callTabs > QTabBar::tab:selected {
-    margin-right: -32px;
-    border-image: url(:/customwidgets/data/verticalbarbutton_active.png) 14px;
-    color: rgb(0, 0, 0);
-}</string>
+           <property name="styleSheet">
+            <string notr="true"/>
            </property>
-           <property name="tabPosition" >
+           <property name="tabPosition">
             <enum>QTabWidget::West</enum>
            </property>
-           <property name="currentIndex" >
-            <number>0</number>
+           <property name="currentIndex">
+            <number>2</number>
            </property>
-           <property name="iconSize" >
+           <property name="iconSize">
             <size>
              <width>32</width>
              <height>32</height>
             </size>
            </property>
-           <widget class="QWidget" name="tabDialpad" >
-            <attribute name="title" >
-             <string/>
-            </attribute>
-            <attribute name="icon" >
-             <iconset resource="../../../iconsets/custom/customicons.qrc" >
+           <widget class="QWidget" name="tabDialpad">
+            <attribute name="icon">
+             <iconset resource="../../../iconsets/custom/customicons.qrc">
               <normaloff>:/customicons/CalPad-Icon32x32.png</normaloff>:/customicons/CalPad-Icon32x32.png</iconset>
             </attribute>
-            <attribute name="toolTip" >
+            <attribute name="title">
+             <string/>
+            </attribute>
+            <attribute name="toolTip">
              <string>Dialpad</string>
             </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_6" >
-             <property name="spacing" >
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <property name="spacing">
               <number>0</number>
              </property>
-             <property name="rightMargin" >
+             <property name="rightMargin">
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="labelPhoneNumber" >
-               <property name="text" >
+              <widget class="QLabel" name="labelPhoneNumber">
+               <property name="text">
                 <string>Enter a phone number</string>
                </property>
-               <property name="buddy" >
+               <property name="buddy">
                 <cstring>editPhoneNumber</cstring>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="CustomWidgets::AdvancedLineEdit" name="editPhoneNumber" >
-               <property name="minimumSize" >
+              <widget class="CustomWidgets::AdvancedLineEdit" name="editPhoneNumber">
+               <property name="minimumSize">
                 <size>
                  <width>0</width>
                  <height>32</height>
                 </size>
                </property>
-               <property name="maximumSize" >
+               <property name="maximumSize">
                 <size>
                  <width>16777215</width>
                  <height>32</height>
                 </size>
                </property>
-               <property name="toolTip" >
+               <property name="toolTip">
                 <string>Example: 00 + country code + area code + number</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="CustomWidgets::Dialpad" name="dialpad" >
-               <property name="minimumSize" >
+              <widget class="CustomWidgets::Dialpad" name="dialpad">
+               <property name="minimumSize">
                 <size>
                  <width>150</width>
                  <height>200</height>
@@ -144,13 +117,13 @@ QTabWidget#callTabs > QTabBar::tab:selected {
               </widget>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_2" >
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
                <item>
-                <spacer name="horizontalSpacer" >
-                 <property name="orientation" >
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="sizeHint" stdset="0" >
+                 <property name="sizeHint" stdset="0">
                   <size>
                    <width>40</width>
                    <height>20</height>
@@ -159,30 +132,30 @@ QTabWidget#callTabs > QTabBar::tab:selected {
                 </spacer>
                </item>
                <item>
-                <widget class="QPushButton" name="buttonCall" >
-                 <property name="minimumSize" >
+                <widget class="QPushButton" name="buttonCall">
+                 <property name="minimumSize">
                   <size>
                    <width>97</width>
                    <height>31</height>
                   </size>
                  </property>
-                 <property name="text" >
+                 <property name="text">
                   <string>Call</string>
                  </property>
-                 <property name="default" >
+                 <property name="default">
                   <bool>true</bool>
                  </property>
-                 <property name="flat" >
+                 <property name="flat">
                   <bool>true</bool>
                  </property>
                 </widget>
                </item>
                <item>
-                <spacer name="horizontalSpacer_2" >
-                 <property name="orientation" >
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="sizeHint" stdset="0" >
+                 <property name="sizeHint" stdset="0">
                   <size>
                    <width>40</width>
                    <height>20</height>
@@ -193,11 +166,11 @@ QTabWidget#callTabs > QTabBar::tab:selected {
               </layout>
              </item>
              <item>
-              <spacer name="verticalSpacer" >
-               <property name="orientation" >
+              <spacer name="verticalSpacer">
+               <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
-               <property name="sizeHint" stdset="0" >
+               <property name="sizeHint" stdset="0">
                 <size>
                  <width>20</width>
                  <height>40</height>
@@ -207,48 +180,48 @@ QTabWidget#callTabs > QTabBar::tab:selected {
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="tabHistory" >
-            <attribute name="title" >
-             <string/>
-            </attribute>
-            <attribute name="icon" >
-             <iconset resource="customwidgets.qrc" >
+           <widget class="QWidget" name="tabHistory">
+            <attribute name="icon">
+             <iconset resource="customwidgets.qrc">
               <normaloff>:/customwidgets/data/calldialog_history.png</normaloff>:/customwidgets/data/calldialog_history.png</iconset>
             </attribute>
-            <attribute name="toolTip" >
+            <attribute name="title">
+             <string/>
+            </attribute>
+            <attribute name="toolTip">
              <string>Call History</string>
             </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_7" >
-             <property name="rightMargin" >
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <property name="rightMargin">
               <number>0</number>
              </property>
-             <property name="bottomMargin" >
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
-              <layout class="QGridLayout" name="gridLayout" >
-               <property name="spacing" >
+              <layout class="QGridLayout" name="gridLayout">
+               <property name="spacing">
                 <number>0</number>
                </property>
-               <item rowspan="2" row="0" column="0" >
-                <widget class="QLabel" name="labelHistory" >
-                 <property name="text" >
+               <item row="0" column="0" rowspan="2">
+                <widget class="QLabel" name="labelHistory">
+                 <property name="text">
                   <string>Call History</string>
                  </property>
                 </widget>
                </item>
-               <item rowspan="2" row="0" column="1" >
-                <widget class="QToolButton" name="buttonClearCallHistory" >
-                 <property name="toolTip" >
+               <item row="0" column="1" rowspan="2">
+                <widget class="QToolButton" name="buttonClearCallHistory">
+                 <property name="toolTip">
                   <string>Clear call history</string>
                  </property>
-                 <property name="styleSheet" >
-                  <string notr="true" >QToolButton {
+                 <property name="styleSheet">
+                  <string notr="true">QToolButton {
     border: none;
 }</string>
                  </property>
-                 <property name="icon" >
-                  <iconset resource="customwidgets.qrc" >
+                 <property name="icon">
+                  <iconset resource="customwidgets.qrc">
                    <normaloff>:/customwidgets/data/delete.png</normaloff>:/customwidgets/data/delete.png</iconset>
                  </property>
                 </widget>
@@ -256,12 +229,12 @@ QTabWidget#callTabs > QTabBar::tab:selected {
               </layout>
              </item>
              <item>
-              <widget class="QListView" name="listHistory" >
-               <property name="mouseTracking" >
+              <widget class="QListView" name="listHistory">
+               <property name="mouseTracking">
                 <bool>true</bool>
                </property>
-               <property name="styleSheet" >
-                <string notr="true" >QListView {
+               <property name="styleSheet">
+                <string notr="true">QListView {
     /*show-decoration-selected: 1;
     selection-color: black;
     selection-background-color: rgb(232, 242, 255);*/
@@ -280,19 +253,19 @@ QListView::item:selected {
 }
 */</string>
                </property>
-               <property name="frameShape" >
+               <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
-               <property name="editTriggers" >
+               <property name="editTriggers">
                 <set>QAbstractItemView::NoEditTriggers</set>
                </property>
-               <property name="showDropIndicator" stdset="0" >
+               <property name="showDropIndicator" stdset="0">
                 <bool>false</bool>
                </property>
-               <property name="selectionMode" >
+               <property name="selectionMode">
                 <enum>QAbstractItemView::NoSelection</enum>
                </property>
-               <property name="iconSize" >
+               <property name="iconSize">
                 <size>
                  <width>22</width>
                  <height>22</height>
@@ -302,45 +275,45 @@ QListView::item:selected {
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="tabContacts" >
-            <attribute name="title" >
-             <string/>
-            </attribute>
-            <attribute name="icon" >
-             <iconset resource="customwidgets.qrc" >
+           <widget class="QWidget" name="tabContacts">
+            <attribute name="icon">
+             <iconset resource="customwidgets.qrc">
               <normaloff>:/customwidgets/data/calldialog_addressbook.png</normaloff>:/customwidgets/data/calldialog_addressbook.png</iconset>
             </attribute>
-            <attribute name="toolTip" >
+            <attribute name="title">
+             <string/>
+            </attribute>
+            <attribute name="toolTip">
              <string>Phonebook</string>
             </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_8" >
-             <property name="spacing" >
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <property name="spacing">
               <number>0</number>
              </property>
-             <property name="rightMargin" >
+             <property name="rightMargin">
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="labelPhonebook" >
-               <property name="text" >
+              <widget class="QLabel" name="labelPhonebook">
+               <property name="text">
                 <string>Phonebook</string>
                </property>
               </widget>
              </item>
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_4" >
-               <property name="spacing" >
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <property name="spacing">
                 <number>0</number>
                </property>
                <item>
-                <widget class="CustomWidgets::AdvancedLineEdit" name="editFilterPhoneBook" >
-                 <property name="minimumSize" >
+                <widget class="CustomWidgets::AdvancedLineEdit" name="editFilterPhoneBook">
+                 <property name="minimumSize">
                   <size>
                    <width>0</width>
                    <height>32</height>
                   </size>
                  </property>
-                 <property name="maximumSize" >
+                 <property name="maximumSize">
                   <size>
                    <width>16777215</width>
                    <height>32</height>
@@ -349,20 +322,20 @@ QListView::item:selected {
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="buttonAddContact" >
-                 <property name="toolTip" >
+                <widget class="QPushButton" name="buttonAddContact">
+                 <property name="toolTip">
                   <string>Add contact</string>
                  </property>
-                 <property name="styleSheet" >
-                  <string notr="true" >QPushButton {
+                 <property name="styleSheet">
+                  <string notr="true">QPushButton {
     border: none;
 }</string>
                  </property>
-                 <property name="text" >
+                 <property name="text">
                   <string/>
                  </property>
-                 <property name="icon" >
-                  <iconset resource="customwidgets.qrc" >
+                 <property name="icon">
+                  <iconset resource="customwidgets.qrc">
                    <normaloff>:/customwidgets/data/addtophonebook.png</normaloff>:/customwidgets/data/addtophonebook.png</iconset>
                  </property>
                 </widget>
@@ -370,26 +343,26 @@ QListView::item:selected {
               </layout>
              </item>
              <item>
-              <widget class="QListView" name="listPhoneBook" >
-               <property name="mouseTracking" >
+              <widget class="QListView" name="listPhoneBook">
+               <property name="mouseTracking">
                 <bool>true</bool>
                </property>
-               <property name="styleSheet" >
-                <string notr="true" />
+               <property name="styleSheet">
+                <string notr="true"/>
                </property>
-               <property name="frameShape" >
+               <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
                </property>
-               <property name="editTriggers" >
+               <property name="editTriggers">
                 <set>QAbstractItemView::NoEditTriggers</set>
                </property>
-               <property name="showDropIndicator" stdset="0" >
+               <property name="showDropIndicator" stdset="0">
                 <bool>false</bool>
                </property>
-               <property name="selectionMode" >
+               <property name="selectionMode">
                 <enum>QAbstractItemView::NoSelection</enum>
                </property>
-               <property name="iconSize" >
+               <property name="iconSize">
                 <size>
                  <width>22</width>
                  <height>22</height>
@@ -405,11 +378,11 @@ QListView::item:selected {
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="pageInCall" >
-      <layout class="QVBoxLayout" name="verticalLayout_4" >
+     <widget class="QWidget" name="pageInCall">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
-        <widget class="CustomWidgets::NotificationPanel" name="frameInCall" >
-         <property name="minimumSize" >
+        <widget class="CustomWidgets::NotificationPanel" name="frameInCall">
+         <property name="minimumSize">
           <size>
            <width>100</width>
            <height>100</height>
@@ -418,14 +391,14 @@ QListView::item:selected {
         </widget>
        </item>
        <item>
-        <spacer name="verticalSpacer_2" >
-         <property name="orientation" >
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeType" >
+         <property name="sizeType">
           <enum>QSizePolicy::MinimumExpanding</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
@@ -435,20 +408,20 @@ QListView::item:selected {
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="pageIncomingCall" >
-      <layout class="QVBoxLayout" name="verticalLayout_5" >
+     <widget class="QWidget" name="pageIncomingCall">
+      <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
-        <widget class="CustomWidgets::NotificationPanel" name="frameIncomingCall" />
+        <widget class="CustomWidgets::NotificationPanel" name="frameIncomingCall"/>
        </item>
        <item>
-        <spacer name="verticalSpacer_3" >
-         <property name="orientation" >
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeType" >
+         <property name="sizeType">
           <enum>QSizePolicy::MinimumExpanding</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>285</height>
@@ -461,18 +434,18 @@ QListView::item:selected {
     </widget>
    </item>
    <item>
-    <widget class="QFrame" name="frame" >
-     <layout class="QVBoxLayout" name="verticalLayout_3" >
-      <property name="spacing" >
+    <widget class="QFrame" name="frame">
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <property name="spacing">
        <number>0</number>
       </property>
-      <property name="margin" >
+      <property name="margin">
        <number>0</number>
       </property>
       <item>
-       <widget class="QCheckBox" name="checkVolumesShown" >
-        <property name="styleSheet" >
-         <string notr="true" > QCheckBox {
+       <widget class="QCheckBox" name="checkVolumesShown">
+        <property name="styleSheet">
+         <string notr="true"> QCheckBox {
      padding-left: 4px;
      spacing: 5px;
  }
@@ -499,56 +472,56 @@ QListView::item:selected {
  }
 </string>
         </property>
-        <property name="text" >
+        <property name="text">
          <string>Audio volumes</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QFrame" name="frameVolumes" >
-        <property name="frameShape" >
+       <widget class="QFrame" name="frameVolumes">
+        <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
-        <property name="frameShadow" >
+        <property name="frameShadow">
          <enum>QFrame::Sunken</enum>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_3" >
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QLabel" name="labelSpeakerVolume" >
-           <property name="toolTip" >
+          <widget class="QLabel" name="labelSpeakerVolume">
+           <property name="toolTip">
             <string>Speaker volume</string>
            </property>
-           <property name="pixmap" >
-            <pixmap resource="customwidgets.qrc" >:/customwidgets/generic/data/speaker.png</pixmap>
+           <property name="pixmap">
+            <pixmap resource="customwidgets.qrc">:/customwidgets/generic/data/speaker.png</pixmap>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="sliderSpeakerVolume" >
-           <property name="toolTip" >
+          <widget class="QSlider" name="sliderSpeakerVolume">
+           <property name="toolTip">
             <string>Speaker volume</string>
            </property>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="labelMicrophoneVolume" >
-           <property name="toolTip" >
+          <widget class="QLabel" name="labelMicrophoneVolume">
+           <property name="toolTip">
             <string>Microphone volume</string>
            </property>
-           <property name="pixmap" >
-            <pixmap resource="customwidgets.qrc" >:/customwidgets/generic/data/microphone.png</pixmap>
+           <property name="pixmap">
+            <pixmap resource="customwidgets.qrc">:/customwidgets/generic/data/microphone.png</pixmap>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QSlider" name="sliderMicrophoneVolume" >
-           <property name="toolTip" >
+          <widget class="QSlider" name="sliderMicrophoneVolume">
+           <property name="toolTip">
             <string>Microphone volume</string>
            </property>
-           <property name="orientation" >
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
           </widget>
@@ -588,8 +561,8 @@ QListView::item:selected {
   <tabstop>buttonCall</tabstop>
  </tabstops>
  <resources>
-  <include location="customwidgets.qrc" />
-  <include location="../../../iconsets/custom/customicons.qrc" />
+  <include location="customwidgets.qrc"/>
+  <include location="../../../iconsets/custom/customicons.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -598,11 +571,11 @@ QListView::item:selected {
    <receiver>frameVolumes</receiver>
    <slot>setVisible(bool)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>27</x>
      <y>659</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>27</x>
      <y>674</y>
     </hint>

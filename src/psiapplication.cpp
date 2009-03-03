@@ -233,7 +233,7 @@ void PsiApplication::init(bool GUIenabled)
 	Q_UNUSED(GUIenabled);
 #ifdef YAPSI
 	YaStyle* yaStyle = new YaStyle(style());
-	// setStyle(yaStyle);
+	setStyle(yaStyle);
 	// setPalette(Ya::Utils::instance().palette());
 #else
 #ifdef Q_WS_MAC

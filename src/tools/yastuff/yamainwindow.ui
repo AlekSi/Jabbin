@@ -54,8 +54,10 @@ QTabWidget#mainTabWidget::pane {
     margin: 0px;
     padding: 0px;
     margin-top: -26px;
-    padding-top: 30px;
+    padding-top: 28px;
     background-image: url(:/customwidgets/data/barbutton_normal.png);
+    background-repeat: repeat-x;
+    background-color: white;
 }
 
 QTabWidget#mainTabWidget::tab-bar {
@@ -121,7 +123,43 @@ YaPushButton, .QWidget &gt; QPushButton:pressed {
 
 QLabel#labelCredit {
   color: rgba(0, 0, 0, 128);
-}</string>
+}
+
+QTabWidget#callTabs::pane {
+    border: none;
+    margin: 0px;
+    padding: 0px;
+    border-left: 1px solid #e0e0e0;
+    left: 2px;
+}
+
+QTabWidget#callTabs &gt; QTabBar::tab {
+    border: 14px;
+    padding-top: 0px;
+    border-image: url(:/customwidgets/data/verticalbarbutton_normal.png) 14px;
+    font-size: 12px;
+    color: rgba(0, 0, 0, 125);
+    margin-right: -32px;
+    width: 64px;
+}
+
+QTabWidget#callTabs &gt; QTabBar::tab:hover {
+    margin-right: -32px;
+    border-image: url(:/customwidgets/data/verticalbarbutton_hover.png) 14px;
+    color: rgba(0, 0, 0, 200);
+}
+
+QTabWidget#callTabs &gt; QTabBar::tab:selected {
+    margin-right: -32px;
+    border-image: url(:/customwidgets/data/verticalbarbutton_active.png) 14px;
+    color: rgb(0, 0, 0);
+}
+
+roster, callDialog, servicesPanel {
+   background-image: none;
+   background-color: white;
+}
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <property name="spacing">
@@ -326,11 +364,8 @@ QLabel#labelCredit {
       </item>
       <item>
        <widget class="QTabWidget" name="mainTabWidget">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <property name="usesScrollButtons">
          <bool>true</bool>
@@ -404,7 +439,7 @@ QLabel#labelCredit {
           </item>
          </layout>
         </widget>
-        <widget class="ServicesPanel" name="tabServices">
+        <widget class="QWidget" name="tabServices">
          <property name="styleSheet">
           <string notr="true">QWidget {
     background-color: white;
@@ -418,6 +453,16 @@ QLabel#labelCredit {
          <attribute name="title">
           <string>&amp;Services</string>
          </attribute>
+         <widget class="ServicesPanel" name="servicesPanel" native="true">
+          <property name="geometry">
+           <rect>
+            <x>39</x>
+            <y>20</y>
+            <width>251</width>
+            <height>441</height>
+           </rect>
+          </property>
+         </widget>
         </widget>
         <widget class="QWidget" name="tabSocial">
          <property name="styleSheet">
@@ -441,7 +486,7 @@ QLabel#labelCredit {
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>20</height>
+          <height>200</height>
          </size>
         </property>
         <property name="frameShape">

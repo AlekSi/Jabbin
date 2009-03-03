@@ -187,6 +187,7 @@ private:
 	// QTimer* updateFriendsFrameVisibilityTimer_;
 	// YaWindowBackground background_;
 	Ui::MainWindow ui_;
+	Ui::MainWindow ui_2;
 
 	QBasicTimer autoStatusTimer_;
 	QTime lastAction_;

@@ -290,7 +290,35 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 	// we want fancy roster tooltips to be visible even if mainwin is not focused
 	setAttribute(Qt::WA_AlwaysShowToolTips, true);
 
+        // Ui::MainWindow * ui_2 = new Ui::MainWindow();
+        // QWidget * test = new QWidget();
+        // ui_2->setupUi(test);
+        // test->show();
+
 	ui_.setupUi(this);
+
+        // Removing tabs:
+        ui_.callDialog->setParent(NULL);
+        ui_.roster->setParent(NULL);
+        ui_.servicesPanel->setParent(NULL);
+	while (ui_.mainTabWidget->count()) {
+		ui_.mainTabWidget->removeTab(0);
+	}
+
+        QIcon iconContacts;
+        iconContacts.addPixmap(QPixmap(QString::fromUtf8(":/iconsets/roster/roster-tabs/contacts.png")), QIcon::Normal, QIcon::Off);
+        iconContacts.addPixmap(QPixmap(QString::fromUtf8(":/customwidgets/generic/data/blank.png")), QIcon::Disabled, QIcon::Off);
+        ui_.mainTabWidget->addTab(ui_.roster, iconContacts, tr("&Contacts"));
+
+        QIcon iconDial;
+        iconDial.addPixmap(QPixmap(QString::fromUtf8(":/customicons/CalPad-Icon16x16.png")), QIcon::Normal, QIcon::Off);
+        iconDial.addPixmap(QPixmap(QString::fromUtf8(":/customwidgets/generic/data/blank.png")), QIcon::Disabled, QIcon::Off);
+        ui_.mainTabWidget->addTab(ui_.callDialog, iconDial, tr("&Dial"));
+
+        QIcon iconServices;
+        iconServices.addPixmap(QPixmap(QString::fromUtf8(":/iconsets/roster/roster-tabs/services.png")), QIcon::Normal, QIcon::Off);
+        iconServices.addPixmap(QPixmap(QString::fromUtf8(":/customwidgets/generic/data/blank.png")), QIcon::Disabled, QIcon::Off);
+        ui_.mainTabWidget->addTab(ui_.servicesPanel, iconServices, QString("&Services"));
 
 	ui_.topStack->init();
 	ui_.topStack->setAnimationStyle(AnimatedStackedWidget::Animation_Push_Horizontal);
@@ -537,7 +565,6 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 	CallDialog::contactList = psi->contactList();
 	connect(ui_.callDialog, SIGNAL(requestsAttention()),
 		this, SLOT(showCallDialog()));
-
 }
 
 YaMainWin::~YaMainWin()

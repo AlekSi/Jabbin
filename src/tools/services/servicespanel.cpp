@@ -115,7 +115,7 @@ void ServicesPanel::init(PsiAccount * account)
     d->account = account;
 }
 
-void ServicesPanel::showEvent(QShowEvent *) {
+void ServicesPanel::showEvent(QShowEvent * event) {
     if (!d->model) {
         d->model = new ServicesModel(d->account);
         d->treeServices->setModel(d->model);
@@ -127,6 +127,7 @@ void ServicesPanel::showEvent(QShowEvent *) {
     }
 
     d->treeServices->setFocus();
+    QWidget::showEvent(event);
 }
 
 ServicesPanel::ServicesPanel(QWidget * parent)
