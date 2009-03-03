@@ -96,23 +96,28 @@ QTabWidget#mainTabWidget &gt; QTabBar::tab:disabled {
 
 YaPushButton, .QWidget &gt; QPushButton {
    color: black;
-   border-image: url(:/customicons/BottonWhite.png) 2px;
+   border: 0px;
+   border-image: url(:/customwidgets/generic/data/button.png) 2px;
 }
 
-YaPushButton, .QWidget &gt; QPushButton:disabled {
-   color: white;
+YaPushButton:disabled, .QWidget &gt; QPushButton:disabled {
+   color: rgba(0, 0, 0, 128);
 }
 
-YaPushButton, .QWidget &gt; QPushButton:focus {
-   border-image: url(:/customicons/BottonRedFocus.png) 2px;
+YaPushButton:focus, .QWidget &gt; QPushButton:focus {
+   border-image: url(:/customwidgets/generic/data/button_focus.png) 2px;
 }
 
-YaPushButton, .QWidget &gt; QPushButton:hover {
-   border-image: url(:/customicons/BottonRed.png) 2px;
+YaPushButton:hover, .QWidget &gt; QPushButton:hover {
+   border-image: url(:/customwidgets/generic/data/button_hover.png) 2px;
 }
 
-YaPushButton, .QWidget &gt; QPushButton:pressed {
-   border-image: url(:/customicons/BottonRedPressed.png) 2px;
+YaPushButton:hover:focus, .QWidget &gt; QPushButton:hover:focus {
+   border-image: url(:/customwidgets/generic/data/button_hover_focus.png) 2px;
+}
+
+YaPushButton:pressed, .QWidget &gt; QPushButton:pressed {
+   border-image: url(:/customwidgets/generic/data/button_pressed.png) 2px;
 }
 
 .QLineEdit {

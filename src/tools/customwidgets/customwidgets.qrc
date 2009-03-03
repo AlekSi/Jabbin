@@ -1,5 +1,10 @@
 <RCC>
   <qresource prefix="/customwidgets" >
+    <file>generic/data/button.png</file>
+    <file>generic/data/button_focus.png</file>
+    <file>generic/data/button_hover_focus.png</file>
+    <file>generic/data/button_hover.png</file>
+    <file>generic/data/button_pressed.png</file>
     <file>generic/data/icon-delete.png</file>
     <file>generic/data/icon-add.png</file>
     <file>generic/data/tooltip_background.png</file>
