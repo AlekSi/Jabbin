@@ -3041,7 +3041,7 @@ void PsiAccount::publishTune(const Tune& tune)
 void PsiAccount::secondsIdle(int seconds)
 {
 #define getOption(A, B) PsiOptions::instance()->getOption(A).to##B ()
-	int minutes = seconds / 10;
+	int minutes = seconds / 60;
 	int required;
 
 	if (seconds < d->lastNumberOfSecondsIdle_) {
