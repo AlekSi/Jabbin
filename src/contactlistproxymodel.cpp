@@ -88,9 +88,8 @@ bool ContactListProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex& s
 				return group->haveOnlineContacts();
 			}
 		}
-		else {
-			return true;
-		}
+
+		return true;
 	default:
 		Q_ASSERT(false);
 	}
