@@ -109,6 +109,8 @@ private:
     QList < ServiceItem * > m_children;
 };
 
+class PsiContact;
+
 /**
  * Base discovery class for XMPP services
  */
@@ -117,6 +119,7 @@ class XmppServiceItem: public ServiceItem {
 public:
     XmppServiceItem(ServiceItem * parent, QString server);
     XmppServiceItem(ServiceItem * parent, DiscoItem item);
+    PsiContact * contact;
 
 protected:
     virtual void _load();
@@ -126,6 +129,7 @@ protected:
 protected Q_SLOTS:
     void discoItemsFinished();
     void discoInfoFinished();
+    void contactUpdated();
 
 private:
     bool m_waitingForInfo;

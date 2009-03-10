@@ -25,6 +25,7 @@
 #include <QMenu>
 #include <QCursor>
 #include <QMouseEvent>
+#include <QStyledItemDelegate>
 
 using XMPP::Jid;
 
@@ -62,15 +63,39 @@ void ServicesPanel::Private::itemClicked(const QModelIndex & index)
             case ServicesModel::Server:
             case ServicesModel::Room:
             case ServicesModel::User:
-                menu.addAction(tr("Register service"),
-                        this, SLOT(joinService()));
+                if (int status = index.data(ServicesModel::ServiceStatusRole).toInt()) {
+                    if (status == ServicesModel::Online) {
+                        menu.addAction(tr("Log out"),
+                                this, SLOT(serviceLogout()));
+                    } else {
+                        menu.addAction(tr("Log in"),
+                                this, SLOT(serviceLogin()));
+                    }
+                } else {
+                    menu.addAction(tr("Register service"),
+                            this, SLOT(joinService()));
+                }
+                break;
             default:
                 menu.addAction(tr("Reload"),
                         this, SLOT(reloadItem()));
+                break;
         }
 
         menu.exec(QCursor::pos());
     }
+}
+
+void ServicesPanel::Private::serviceLogout()
+{
+    Status s = makeStatus(STATUS_OFFLINE, "");
+    account->actionAgentSetStatus(model->jid(clickedItem), s);
+}
+
+void ServicesPanel::Private::serviceLogin()
+{
+    Status s = makeStatus(STATUS_ONLINE, "");
+    account->actionAgentSetStatus(model->jid(clickedItem), s);
 }
 
 bool ServicesPanel::Private::eventFilter(QObject * object, QEvent * event)

@@ -40,6 +40,9 @@ public Q_SLOTS:
     void itemClicked(const QModelIndex & index);
     bool eventFilter(QObject * object, QEvent * event);
 
+    void serviceLogout();
+    void serviceLogin();
+
     void joinService();
     void reloadItem();
 };

@@ -34,6 +34,7 @@
 #include "contactlistmodel.h"
 #include "shortcutmanager.h"
 #include "yaprofile.h"
+#include "userlist.h"
 #include "psicon.h"
 #ifdef YAPSI
 #include "yatoastercentral.h"
@@ -95,6 +96,14 @@ public:
 		, contact_(_contact)
 		, menu_(menu)
 	{
+
+		if (contact_->userListItem().isTransport()) {
+			QAction * test = new QAction(tr("Go online"), this);
+			menu->addAction(test);
+			test = new QAction(tr("Go offline"), this);
+			menu->addAction(test);
+			return;
+		}
 		connect(PsiOptions::instance(), SIGNAL(optionChanged(const QString&)), SLOT(optionChanged(const QString&)));
 		connect(menu, SIGNAL(aboutToShow()), SLOT(updateActions()));
 
@@ -105,6 +114,7 @@ public:
 		connect(rename_, SIGNAL(activated()), this, SLOT(rename()));
 
 #ifdef YAPSI
+
 		openChat_ = new QAction(tr("&Chat"), this);
 		connect(openChat_, SIGNAL(activated()), contact_, SLOT(openChat()));
 

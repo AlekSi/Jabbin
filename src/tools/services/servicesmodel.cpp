@@ -226,7 +226,7 @@ void ServiceItem::notifyUpdated()
 // XmppServiceItem
 XmppServiceItem::XmppServiceItem(ServiceItem * parent, QString server)
     : ServiceItem(parent, DiscoItem()),
-      m_waitingForInfo(false)
+      m_waitingForInfo(false), contact(NULL)
 {
     m_discoItem.setJid(server.stripWhiteSpace());
     m_discoItem.setNode(QString());
@@ -235,11 +235,17 @@ XmppServiceItem::XmppServiceItem(ServiceItem * parent, QString server)
 
 XmppServiceItem::XmppServiceItem(ServiceItem * parent, DiscoItem item)
     : ServiceItem(parent, item),
-      m_waitingForInfo(false)
+      m_waitingForInfo(false), contact(NULL)
 {
     if (parent) {
         m_type = parent->type() + 1;
     }
+}
+
+void XmppServiceItem::contactUpdated()
+{
+    m_title = contact->name() + " (" + contact->status().typeString() + ")";
+    notifyUpdated();
 }
 
 void XmppServiceItem::discoInfoFinished()
@@ -258,6 +264,13 @@ void XmppServiceItem::discoInfoFinished()
                 m_title = m_discoItem.jid().full();
             } else {
                 m_title = m_discoItem.name();
+            }
+
+            contact = model()->psiAccount()->findContact(
+                jt->item().jid());
+            if (contact) {
+                connect(contact, SIGNAL(updated()), this, SLOT(contactUpdated()));
+                m_title += " (" + contact->status().typeString() + ")";
             }
 
             m_waitingForInfo = false;
@@ -640,6 +653,17 @@ QVariant ServicesModel::data(const QModelIndex & index, int role) const
             }
         case ServiceTypeRole:
             return item->type();
+        case ServiceStatusRole:
+        {
+            XmppServiceItem * xmppitem = dynamic_cast < XmppServiceItem * > (item);
+            if (!xmppitem || !xmppitem->contact)
+                return ServicesModel::Unregistered;
+            if (xmppitem->contact->status().type() == Status::Offline)
+                return ServicesModel::Offline;
+            else
+                return ServicesModel::Online;
+        }
+            return 0; //item->...();
         case AddressRole:
             return item->jid().bare();
         default:

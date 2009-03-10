@@ -24,6 +24,7 @@
 #include <QtCore/qdir.h>
 #include <QtGui/qfileiconprovider.h>
 #include "psiaccount.h"
+#include "psicontact.h"
 
 class ServiceItem;
 
@@ -34,7 +35,8 @@ class ServicesModel: public QAbstractItemModel
 public:
     enum Roles {
         AddressRole = Qt::UserRole + 1,
-        ServiceTypeRole
+        ServiceTypeRole,
+        ServiceStatusRole
     };
 
     enum ItemTypes {
@@ -44,6 +46,12 @@ public:
         Server,
         Room,
         User
+    };
+
+    enum ServiceStatus {
+        Unregistered = 0,
+        Offline,
+        Online
     };
 
     ServicesModel(PsiAccount * psiAccount, QObject * parent = 0);

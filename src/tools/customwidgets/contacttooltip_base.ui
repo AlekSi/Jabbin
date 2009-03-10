@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>ContactTooltipBase</class>
- <widget class="QWidget" name="ContactTooltipBase" >
-  <property name="geometry" >
+ <widget class="QWidget" name="ContactTooltipBase">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,11 +10,11 @@
     <height>267</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Form</string>
   </property>
-  <property name="styleSheet" >
-   <string notr="true" >#ContactTooltipBase {
+  <property name="styleSheet">
+   <string notr="true">#ContactTooltipBase {
     border: none;
 	background-image: url(:/customwidgets/data/window_background_crop.png);
     background-repeat: repeat-x;
@@ -27,68 +28,72 @@ QToolButton {
     border: none;
 }
 
+QLabel#labelName {
+  font-weight: bold;
+}
+
 QPushButton {
-   color: black;
-   border-image: url(:/customicons/BottonWhite.png) 2px;
-   border: 2px;
+   min-height: 1.5em;
    padding: 0px 8px;
-   text-align: left;
+   color: black;
+   border: 0px;
+   border-image: url(:/customwidgets/generic/data/button.png) 2px;
 }
 
 QPushButton:disabled {
-   color: white;
+   color: rgba(0, 0, 0, 128);
 }
 
 QPushButton:focus {
-   border-image: url(:/customicons/BottonRedFocus.png) 2px;
+   border-image: url(:/customwidgets/generic/data/button_focus.png) 2px;
 }
 
 QPushButton:hover {
-   border-image: url(:/customicons/BottonRed.png) 2px;
+   border-image: url(:/customwidgets/generic/data/button_hover.png) 2px;
+}
+
+QPushButton:hover:focus {
+   border-image: url(:/customwidgets/generic/data/button_hover_focus.png) 2px;
 }
 
 QPushButton:pressed {
-   border-image: url(:/customicons/BottonRedPressed.png) 2px;
-}
-
-QLabel#labelName {
-  font-weight: bold;
+   border-image: url(:/customwidgets/generic/data/button_pressed.png) 2px;
 }</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout" >
-   <item row="0" column="0" >
-    <widget class="QLabel" name="labelName" >
-     <property name="styleSheet" >
-      <string notr="true" />
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="labelName">
+     <property name="styleSheet">
+      <string notr="true"/>
      </property>
-     <property name="text" >
+     <property name="text">
       <string>Name Surname</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0" >
-    <widget class="QLabel" name="labelJID" >
-     <property name="text" >
-      <string>&lt;a href="jabberid@server.org">&lt;span style=" text-decoration: underline; color:#0000ff;">jabberid@server.org&lt;/span>&lt;/a></string>
+   <item row="1" column="0">
+    <widget class="QLabel" name="labelJID">
+     <property name="text">
+      <string>&lt;a href=&quot;jabberid@server.org&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;jabberid@server.org&lt;/span&gt;&lt;/a&gt;</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="0" >
-    <layout class="QHBoxLayout" name="horizontalLayout" >
+   <item row="2" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout" >
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QToolButton" name="buttonAvatar" >
-         <property name="minimumSize" >
+        <widget class="QToolButton" name="buttonAvatar">
+         <property name="minimumSize">
           <size>
            <width>128</width>
            <height>128</height>
           </size>
          </property>
-         <property name="text" >
+         <property name="text">
           <string/>
          </property>
-         <property name="iconSize" >
+         <property name="iconSize">
           <size>
            <width>128</width>
            <height>128</height>
@@ -97,28 +102,28 @@ QLabel#labelName {
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="labelStatus" >
-         <property name="text" >
+        <widget class="QLabel" name="labelStatus">
+         <property name="text">
           <string>status</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="labelDescription" >
-         <property name="text" >
+        <widget class="QLabel" name="labelDescription">
+         <property name="text">
           <string>Gender, age, locality not specified</string>
          </property>
-         <property name="wordWrap" >
+         <property name="wordWrap">
           <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <spacer name="verticalSpacer" >
-         <property name="orientation" >
+        <spacer name="verticalSpacer">
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
@@ -129,17 +134,17 @@ QLabel#labelName {
       </layout>
      </item>
      <item>
-      <widget class="QDialogButtonBox" name="buttons" >
-       <property name="minimumSize" >
+      <widget class="QDialogButtonBox" name="buttons">
+       <property name="minimumSize">
         <size>
          <width>128</width>
          <height>0</height>
         </size>
        </property>
-       <property name="orientation" >
+       <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
-       <property name="standardButtons" >
+       <property name="standardButtons">
         <set>QDialogButtonBox::NoButton</set>
        </property>
       </widget>
@@ -149,8 +154,8 @@ QLabel#labelName {
   </layout>
  </widget>
  <resources>
-  <include location="../yastuff/yastuff.qrc" />
-  <include location="customwidgets.qrc" />
+  <include location="../yastuff/yastuff.qrc"/>
+  <include location="customwidgets.qrc"/>
  </resources>
  <connections/>
 </ui>
