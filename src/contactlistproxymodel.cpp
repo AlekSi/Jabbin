@@ -53,6 +53,7 @@ bool ContactListProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex& s
 
 	ContactListItemProxy* itemProxy = static_cast<ContactListItemProxy*>(index.internalPointer());
 	ContactListItem* item = itemProxy ? itemProxy->item() : 0;
+
 	if (!item) {
 		Q_ASSERT(false);
 		return false;
@@ -73,14 +74,19 @@ bool ContactListProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex& s
 		if (!showOffline()) {
 			return psiContact->isOnline();
 		}
-		else {
-			return true;
-		}
+
+		return true;
 	}
 	case ContactListModel::GroupType:
-		if (!showOffline()) {
+		{
 			ContactListGroup* group = dynamic_cast<ContactListGroup*>(item);
-			return group->haveOnlineContacts();
+			if (group->name() == tr("Transports")) {
+				return false;
+			}
+
+			if (!showOffline()) {
+				return group->haveOnlineContacts();
+			}
 		}
 		else {
 			return true;
