@@ -122,7 +122,7 @@ void ServicesPanel::Private::joinService()
             model->jid(clickedItem),
             QString());
 
-    model->reloadItem(clickedItem);
+    // model->reloadItem(clickedItem);
 }
 
 void ServicesPanel::Private::reloadItem()

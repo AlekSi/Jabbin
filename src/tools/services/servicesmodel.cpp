@@ -246,8 +246,12 @@ XmppServiceItem::XmppServiceItem(ServiceItem * parent, DiscoItem item)
 
 void XmppServiceItem::contactUpdated()
 {
-    m_title = contact->name() + " (" + contact->status().typeString() + ")";
-    notifyUpdated();
+    if (contact) {
+        m_title = contact->name() + " (" + contact->status().typeString() + ")";
+        notifyUpdated();
+    } else {
+        reload();
+    }
 }
 
 void XmppServiceItem::discoInfoFinished()
@@ -272,7 +276,6 @@ void XmppServiceItem::discoInfoFinished()
                 connect(contact, SIGNAL(updated()), this, SLOT(contactUpdated()));
                 m_title += " (" + contact->status().typeString() + ")";
             } else {
-                connect(contact, SIGNAL(updated()), this, SLOT(contactUpdated()));
                 if (m_type != ServicesModel::Service) {
                     m_title += " (" + tr("not registered") + ")";
                 }
@@ -486,6 +489,38 @@ ServicesModel::Private::~Private()
 {
 }
 
+ServiceItem * ServicesModel::Private::findItem(const Jid & jid)
+{
+    QList < ServiceItem * > stack;
+    stack << root;
+
+    ServiceItem * item;
+    while (stack.size()) {
+        item = stack.takeFirst();
+        if (item->jid() == jid) {
+            return item;
+        }
+
+        for (int i = 0; i < item->childCount(); i++) {
+            stack << item->child(i);
+        }
+    }
+
+    return NULL;
+}
+
+void ServicesModel::Private::contactUpdated(const Jid & jid)
+{
+    if (jid.full().contains("@"))
+        return;
+
+    XmppServiceItem * item = dynamic_cast < XmppServiceItem * >
+        (findItem(jid));
+    if (item) {
+        item->contactUpdated();
+    }
+}
+
 void ServicesModel::Private::itemUpdated(ServiceItem * item)
 {
     QModelIndex index = indexOf(item);
@@ -556,6 +591,8 @@ ServicesModel::ServicesModel(PsiAccount * psiAccount, QObject * parent)
       d(new Private(this))
 {
     d->psiAccount = psiAccount;
+    connect(d->psiAccount, SIGNAL(updateContact(Jid)),
+        d, SLOT(contactUpdated(Jid)));
     d->root = new ServicesRootItem(this);
 
     QVariantList lvalue = PsiOptions::instance()

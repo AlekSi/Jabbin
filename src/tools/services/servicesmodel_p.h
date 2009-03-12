@@ -129,6 +129,8 @@ protected:
 protected Q_SLOTS:
     void discoItemsFinished();
     void discoInfoFinished();
+
+public Q_SLOTS:
     void contactUpdated();
 
 private:
@@ -147,7 +149,8 @@ private:
     ServicesModel * m_model;
 };
 
-class ServicesModel::Private {
+class ServicesModel::Private: public QObject {
+    Q_OBJECT
 public:
     Private(ServicesModel * parent);
     ~Private();
@@ -164,6 +167,8 @@ public:
 
     void itemUpdated(ServiceItem * item);
 
+    ServiceItem * findItem(const Jid & jid);
+
     void childrenToBeAdded(ServiceItem * item, int from, int count);
     void childrenAdded();
 
@@ -175,7 +180,10 @@ public:
 
     QModelIndex indexOf(ServiceItem * item);
 
+public Q_SLOTS:
+    void contactUpdated(const Jid & jid);
 
+private:
     ServicesModel * q;
 };
 
