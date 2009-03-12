@@ -690,9 +690,16 @@ QVariant ServicesModel::data(const QModelIndex & index, int role) const
         case Qt::DisplayRole:
             return item->title();
         case Qt::DecorationRole:
+        {
+            XmppServiceItem * xmppitem = dynamic_cast < XmppServiceItem * > (item);
+            if (!xmppitem || !xmppitem->contact && xmppitem->type() != Service)
+                return item->icon().pixmap(
+                        data(index, Qt::SizeHintRole).toSize()
+                        - QSize(4, 4), QIcon::Disabled);
             return item->icon().pixmap(
                     data(index, Qt::SizeHintRole).toSize()
-                    - QSize(4, 4));
+                    - QSize(4, 4), QIcon::Normal);
+        }
         case Qt::SizeHintRole:
             switch (item->type()) {
                 case Generic:
