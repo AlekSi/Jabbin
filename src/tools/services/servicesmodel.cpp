@@ -259,11 +259,9 @@ void XmppServiceItem::discoInfoFinished()
                 && ( m_discoItem.identities().first().category == "gateway"
                 || m_discoItem.identities().first().category == "server")
                 ) {
-
-            if (m_discoItem.name().isEmpty()) {
+            m_title = m_discoItem.name();
+            if (m_title.isEmpty() || m_title == "Openfire Server") {
                 m_title = m_discoItem.jid().full();
-            } else {
-                m_title = m_discoItem.name();
             }
 
             contact = model()->psiAccount()->findContact(

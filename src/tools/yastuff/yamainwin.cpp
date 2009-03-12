@@ -318,7 +318,7 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
         QIcon iconServices;
         iconServices.addPixmap(QPixmap(QString::fromUtf8(":/iconsets/roster/roster-tabs/services.png")), QIcon::Normal, QIcon::Off);
         iconServices.addPixmap(QPixmap(QString::fromUtf8(":/customwidgets/generic/data/blank.png")), QIcon::Disabled, QIcon::Off);
-        ui_.mainTabWidget->addTab(ui_.servicesPanel, iconServices, QString("&Services"));
+        ui_.mainTabWidget->addTab(ui_.servicesPanel, iconServices, QString("&Accounts"));
 
 	ui_.topStack->init();
 	ui_.topStack->setAnimationStyle(AnimatedStackedWidget::Animation_Push_Horizontal);
