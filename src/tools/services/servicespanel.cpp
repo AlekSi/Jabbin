@@ -50,7 +50,9 @@ void ServicesPanel::Private::itemClicked(const QModelIndex & index)
             case ServicesModel::Server:
             case ServicesModel::Room:
             case ServicesModel::User:
-                joinService();
+                if (!index.data(ServicesModel::ServiceStatusRole).toInt()) {
+                    joinService();
+                }
                 break;
             default:
                 break;
