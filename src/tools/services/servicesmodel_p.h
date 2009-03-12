@@ -152,6 +152,13 @@ public:
     Private(ServicesModel * parent);
     ~Private();
 
+    enum ModelStatus {
+        Normal = 0,
+        Deleting,
+        Inserting
+    };
+    ModelStatus modelStatus;
+
     ServicesRootItem * root;
     PsiAccount * psiAccount;
 

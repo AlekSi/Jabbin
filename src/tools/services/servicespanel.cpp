@@ -73,11 +73,12 @@ void ServicesPanel::Private::itemClicked(const QModelIndex & index)
                         menu.addAction(tr("Log in"),
                                 this, SLOT(serviceLogin()));
                     }
+                    menu.addAction(tr("Change account"),
+                            this, SLOT(joinService()));
                 } else {
                     menu.addAction(tr("Register service"),
                             this, SLOT(joinService()));
                 }
-                break;
             default:
                 menu.addAction(tr("Reload"),
                         this, SLOT(reloadItem()));
@@ -120,6 +121,8 @@ void ServicesPanel::Private::joinService()
     account->featureActivated(Features::feature(Features::FID_Register),
             model->jid(clickedItem),
             QString());
+
+    model->reloadItem(clickedItem);
 }
 
 void ServicesPanel::Private::reloadItem()

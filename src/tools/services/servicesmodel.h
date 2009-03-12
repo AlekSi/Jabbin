@@ -82,6 +82,8 @@ public:
 
     PsiAccount * psiAccount() const;
 
+    void reloadItem(const QModelIndex & index);
+
 public Q_SLOTS:
     void refresh(const QModelIndex &parent = QModelIndex());
 

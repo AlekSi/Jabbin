@@ -75,6 +75,8 @@ ServiceItem::~ServiceItem()
 
 void ServiceItem::clearChildren()
 {
+    if (m_children.size() == 0)
+        return;
     model()->d->childrenToBeCleared(this, m_children.size());
     qDeleteAll(m_children);
     m_children.clear();
@@ -269,6 +271,11 @@ void XmppServiceItem::discoInfoFinished()
             if (contact) {
                 connect(contact, SIGNAL(updated()), this, SLOT(contactUpdated()));
                 m_title += " (" + contact->status().typeString() + ")";
+            } else {
+                connect(contact, SIGNAL(updated()), this, SLOT(contactUpdated()));
+                if (m_type != ServicesModel::Service) {
+                    m_title += " (" + tr("not registered") + ")";
+                }
             }
 
             m_waitingForInfo = false;
@@ -447,7 +454,7 @@ ServicesModel * ServicesRootItem::model() const
 
 // ServicesModel::Private
 ServicesModel::Private::Private(ServicesModel * parent)
-    : q(parent)
+    : q(parent), modelStatus(Normal)
 {
     // Initializing icons here since they can not be
     // initialized before QApplication instance is
@@ -487,35 +494,50 @@ void ServicesModel::Private::itemUpdated(ServiceItem * item)
 
 void ServicesModel::Private::childrenToBeAdded(ServiceItem * item, int from, int count)
 {
+    if (count < 1) return;
+    modelStatus = Inserting;
     QModelIndex index = indexOf(item);
     q->beginInsertRows(index, from, from + count - 1);
 }
 
 void ServicesModel::Private::childrenAdded()
 {
-    q->endInsertRows();
+    if (modelStatus == Inserting) {
+        q->endInsertRows();
+    }
+    modelStatus == Normal;
 }
 
 void ServicesModel::Private::childrenToBeRemoved(ServiceItem * item, int from, int count)
 {
+    if (count < 1) return;
+    modelStatus = Deleting;
     QModelIndex index = indexOf(item);
     q->beginRemoveRows(index, from, from + count - 1);
 }
 
 void ServicesModel::Private::childrenRemoved()
 {
-    q->endInsertRows();
+    if (modelStatus == Deleting) {
+        q->endRemoveRows();
+    }
+    modelStatus == Normal;
 }
 
 void ServicesModel::Private::childrenToBeCleared(ServiceItem * item, int count)
 {
+    if (count < 1) return;
+    modelStatus = Deleting;
     QModelIndex index = indexOf(item);
     q->beginRemoveRows(index, 0, count - 1);
 }
 
 void ServicesModel::Private::childrenCleared()
 {
-    q->endRemoveRows();
+    if (modelStatus == Deleting) {
+        q->endRemoveRows();
+    }
+    modelStatus == Normal;
 }
 
 QModelIndex ServicesModel::Private::indexOf(ServiceItem * item)
@@ -649,6 +671,13 @@ QVariant ServicesModel::data(const QModelIndex & index, int role) const
                 default:
                     return QSize(16, 16);
             }
+        case Qt::ForegroundRole:
+        {
+            XmppServiceItem * xmppitem = dynamic_cast < XmppServiceItem * > (item);
+            if (!xmppitem || !xmppitem->contact && xmppitem->type() != Service)
+                return QColor(0, 0, 0, 100);
+            return QVariant();
+        }
         case ServiceTypeRole:
             return item->type();
         case ServiceStatusRole:
@@ -675,18 +704,34 @@ XMPP::Jid ServicesModel::jid(const QModelIndex & index) const
 {
     ServiceItem * item;
 
-     if (!index.isValid()) {
-         item = d->root;
-     } else {
-         item = static_cast < ServiceItem * >
-             (index.internalPointer());
-     }
+    if (!index.isValid()) {
+        item = d->root;
+    } else {
+        item = static_cast < ServiceItem * >
+            (index.internalPointer());
+    }
 
-     if (!item) {
-         return XMPP::Jid();
-     }
+    if (!item) {
+        return XMPP::Jid();
+    }
 
-     return item->jid();
+    return item->jid();
+}
+
+void ServicesModel::reloadItem(const QModelIndex & index)
+{
+    ServiceItem * item;
+
+    if (!index.isValid()) {
+        item = d->root;
+    } else {
+        item = static_cast < ServiceItem * >
+            (index.internalPointer());
+    }
+
+    if (item) {
+        item->reload();
+    }
 }
 
 bool ServicesModel::setData(const QModelIndex & index, const QVariant & value,
