@@ -44,6 +44,7 @@ public Q_SLOTS:
     void serviceLogin();
 
     void joinService();
+    void leaveService();
     void reloadItem();
 };
 

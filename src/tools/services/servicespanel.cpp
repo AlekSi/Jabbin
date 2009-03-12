@@ -75,11 +75,14 @@ void ServicesPanel::Private::itemClicked(const QModelIndex & index)
                     }
                     menu.addAction(tr("Change account"),
                             this, SLOT(joinService()));
+                    menu.addAction(tr("Unregister service"),
+                            this, SLOT(leaveService()));
                 } else {
                     menu.addAction(tr("Register service"),
                             this, SLOT(joinService()));
                 }
             default:
+                menu.addSeparator();
                 menu.addAction(tr("Reload"),
                         this, SLOT(reloadItem()));
                 break;
@@ -123,6 +126,14 @@ void ServicesPanel::Private::joinService()
             QString());
 
     // model->reloadItem(clickedItem);
+}
+
+void ServicesPanel::Private::leaveService()
+{
+    qDebug() << "leave service" <<
+        model->data(clickedItem, ServicesModel::AddressRole);
+    account->actionRemove(model->jid(clickedItem));
+    model->refresh(clickedItem);
 }
 
 void ServicesPanel::Private::reloadItem()
