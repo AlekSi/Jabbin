@@ -19,6 +19,21 @@
 
 #include "joimnotifications.h"
 #include "generic/notifications.h"
+#include "psioptions.h"
+#include "phononsoundplayer.h"
+#include <QMap>
+
+class NotificationItem {
+public:
+    NotificationItem()
+        : tooltipId(0), player(NULL)
+    {
+
+    }
+
+    int tooltipId;
+    SoundPlayer * player;
+};
 
 class JoimNotifications::Private
 {
@@ -27,6 +42,8 @@ public:
     {
 
     }
+
+    QMap  < int, NotificationItem > notifications;
 
     static JoimNotifications * instance;
 };
@@ -37,6 +54,9 @@ JoimNotifications *
 JoimNotifications::JoimNotifications()
     : d(new Private())
 {
+    connect(
+         CustomWidgets::Notifications::instance(), SIGNAL(notificationFinished(int, const QString &)),
+         this, SIGNAL(notificationFinished(int, const QString &)));
 
 }
 
@@ -51,3 +71,74 @@ JoimNotifications * JoimNotifications::instance()
     }
     return Private::instance;
 }
+
+int JoimNotifications::createNotification(
+        const QString & type, const QString & data,
+        Qt::ConnectionType ctype)
+{
+    int id = 0;
+
+#define getOption(A, B) PsiOptions::instance()->getOption(A).to##B ()
+    if (getOption(type + ".tooltip", Bool)) {
+        QString message;
+        QMap < QString, QString > actions;
+        int timeout = 5;
+        if (type == N_INCOMING_CALL) {
+            message = tr("Incoming call from %1").arg(data);
+            actions["accept"] = tr("Accept");
+            actions["reject"] = tr("Reject");
+            timeout = 0;
+        } else if (type == N_CHAT_REQUEST) {
+            message = tr("%1 wants to chat with you").arg(data);
+        } else if (type == N_STATUS_REQUEST) {
+            message = tr("%1 wants to see your status").arg(data);
+        } else if (type == N_CONTACT_ONLINE) {
+            message = tr("%1 is now online").arg(data);
+        } else if (type == N_INCOMING_CALL) {
+            message = tr("%1 sent you a file").arg(data);
+        } else if (type == N_INCOMING_VOICEMAIL) {
+            message = tr("Incoming voicemail from %1").arg(data);
+        }
+
+        id = CustomWidgets::Notifications::instance()->showNotification(
+            tr("Notification from Joim"), message,
+            QPixmap(), actions,
+            timeout);
+        d->notifications[id].tooltipId = id;
+    }
+
+    QString value = getOption(type + ".sound", String);
+    if (!value.isEmpty()) {
+        if (!id) {
+            while (d->notifications.contains(--id))
+                ;
+        }
+
+        d->notifications[id].player = new SoundPlayer(NULL);
+        d->notifications[id].player->playContinuosSound(value,
+            (type == N_INCOMING_CALL) ? 60000 : 10);
+    }
+
+    if (getOption(type + ".popupjoim", Bool)) {
+
+    }
+
+#undef getOption
+
+    return id;
+}
+
+void JoimNotifications::endNotification(int id)
+{
+    if (d->notifications.contains(id)) {
+        if (d->notifications[id].tooltipId > 0) {
+            CustomWidgets::Notifications::instance()->deleteNotification(
+                  d->notifications[id].tooltipId);
+        }
+        if (d->notifications[id].player) {
+            d->notifications[id].player->stop();
+            d->notifications[id].player->deleteLater();
+        }
+    }
+}
+

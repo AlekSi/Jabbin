@@ -44,10 +44,14 @@ Notifications::Private::Private()
 
 void Notifications::Private::actionChosen(const QString & id)
 {
+    qDebug() << "connect: Notifications::Private::actionChosen" << id;
+
     TooltipWindow * tooltip = static_cast < TooltipWindow * > (sender());
     int key = tooltips.key(tooltip, -1);
     if (key == -1) return;
-    chosenActions[key] = id;
+
+    qDebug() << "connect: Notifications::Private::actionChosen emitting" << key << id;
+    emit instance->notificationFinished(key, id);
 
     hideNotification(tooltip);
 }
@@ -100,7 +104,6 @@ void Notifications::Private::deleteNotification(int id)
     hideNotification(tooltip);
     delete tooltip;
     tooltips.remove(id);
-    chosenActions.remove(id);
 }
 
 
@@ -114,8 +117,10 @@ Notifications * Notifications::instance()
     return Private::instance;
 }
 
-int Notifications::showNotification(const QString & title, const QString & text,
-            const QPixmap & icon, const QMap < QString, QString > & actions,
+int Notifications::showNotification(const QString & title,
+            const QString & text,
+            const QPixmap & icon,
+            const QMap < QString, QString > & actions,
             int timeout)
 {
     TooltipWindow * tooltip = new TooltipWindow();
@@ -125,38 +130,10 @@ int Notifications::showNotification(const QString & title, const QString & text,
     tooltip->setActions(actions);
     tooltip->setTimeout(timeout);
 
-    tooltip->setStyleSheet(" \
-            #TooltipBase { \
-                border: none; \
-            } \
-            #Frame { \
-                background-color: white; \
-                border-width: 4px; \
-                border-image: url(:/customwidgets/generic/data/tooltip_background.png) 4 4 4 4 stretch stretch; \
-            } \
-            QPushButton { \
-               color: white; \
-               border-image: url(:/images/pushbutton/green/pushbutton.png) 12px 11px 12px 10px; \
-               border-width: 0px 11px 0px 10px; \
-               min-height: 1.5em; \
-            } \
-            QPushButton:disabled { \
-               color: white; \
-            } \
-            QPushButton:hover { \
-               border-image: url(:/images/pushbutton/green/pushbutton_hover.png) 12px 11px 12px 10px; \
-            } \
-            QPushButton:focus { \
-               border-image: url(:/images/pushbutton/green/pushbutton_focus.png) 12px 11px 12px 10px; \
-            } \
-            QPushButton:pressed { \
-               border-image: url(:/images/pushbutton/green/pushbutton_pressed.png) 12px 11px 12px 10px; \
-            }");
-
     connect(tooltip, SIGNAL(actionChosen(const QString &)),
             d, SLOT(actionChosen(const QString &)));
 
-    int newid = 0;
+    int newid = 1;
     // finding the first available id
     while (d->tooltips.contains(newid)) {
         ++newid;
@@ -178,11 +155,6 @@ int Notifications::showNotification(const QString & title, const QString & text,
     d->tooltips[newid] = tooltip;
     d->visibleTooltipsList << tooltip;
     return newid;
-}
-
-QString Notifications::chosenAction(int id) const
-{
-    return d->chosenActions.value(id, QString());
 }
 
 void Notifications::deleteNotification(int id)

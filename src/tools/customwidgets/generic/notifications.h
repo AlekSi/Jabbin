@@ -41,22 +41,18 @@ public:
 
     /**
      * Creates and shows a new notification
-     * @returns id number of the notification
+     * @returns id number of the notification, success if not 0
      * @param title notification title
      * @param text notification text
      * @param icon notification icon
      * @param actions list of actions
      * @param timeout timeout in seconds
      */
-    int showNotification(const QString & title, const QString & text,
-            const QPixmap & icon, const QMap < QString, QString > & actions,
+    int showNotification(const QString & title,
+            const QString & text,
+            const QPixmap & icon,
+            const QMap < QString, QString > & actions,
             int timeout = 0);
-
-    /**
-     * @returns the chosen action for the specified notification
-     * @param id notification id
-     */
-    QString chosenAction(int id) const;
 
     /**
      * Deletes the specified notification
@@ -64,11 +60,7 @@ public:
     void deleteNotification(int id);
 
 Q_SIGNALS:
-    /**
-     * Emitted when the notification is closed either by choosing an
-     * action or because of the timeout
-     */
-    void notificationExpired(int id);
+    void notificationFinished(int id, const QString & action);
 
 private:
     Notifications();

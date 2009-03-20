@@ -21,6 +21,7 @@
 #include "calldialog.h"
 #include "calldialog_p.h"
 #include "generic/customwidgetscommon.h"
+#include "joimnotifications.h"
 #include "jinglevoicecaller.h"
 
 #include <QRegExpValidator>
@@ -37,7 +38,8 @@ using XMPP::Jid;
 
 CallDialog::Private::Private(CallDialog * parent)
     : status(Normal), account(NULL), caller(NULL),
-      phonebook(NULL), callhistory(NULL), q(parent)
+      phonebook(NULL), callhistory(NULL), q(parent),
+      notificationId(-1)
 {
     setupUi(parent);
     frameVolumes->hide();
@@ -46,6 +48,8 @@ CallDialog::Private::Private(CallDialog * parent)
 
     connect(dialpad, SIGNAL(buttonClicked(char)),
             parent, SLOT(dialpadButtonClicked(char)));
+    connect(JoimNotifications::instance(), SIGNAL(notificationFinished(int, const QString &)),
+            this, SLOT(notificationFinished(int, const QString &)));
     stacked->setCurrentWidget(pageDialpad);
 
     frameInCall->addButton("Hangup", QIcon("help"), QString("hangup"));
@@ -96,6 +100,10 @@ void CallDialog::Private::setStatus(Status value)
     qDebug() << "CallDialog :: Status changed to: " << value;
     status = value;
 
+    if (notificationId && status != Incoming) {
+        JoimNotifications::instance()->endNotification(notificationId);
+    }
+
     switch (status) {
         case Normal:
             timer.stop();
@@ -125,6 +133,9 @@ void CallDialog::Private::setStatus(Status value)
             frameIncomingCall->setTitle(tr("Incoming call"));
             frameIncomingCall->setMessage(JIDTEXT);
             callhistory->addEntry(JIDTEXT, jid.full(), CallHistoryModel::Missed);
+            notificationId = JoimNotifications::instance()->createNotification(
+                N_INCOMING_CALL, JIDTEXT);
+
             break;
         case Accepting:
             frameIncomingCall->setTitle(tr("Starting call..."));
@@ -158,6 +169,19 @@ void CallDialog::Private::setStatus(Status value)
 
     emit q->requestsAttention();
 
+}
+
+void CallDialog::Private::notificationFinished(int id, const QString & action)
+{
+    qDebug() << "connect: CallDialog::Private::notificationFinished" << id << action;
+    if (id != notificationId) {
+        return;
+    }
+
+    JoimNotifications::instance()->endNotification(notificationId);
+    notificationId = 0;
+
+    doAction(action);
 }
 
 void CallDialog::accepted(const Jid & jid)
@@ -220,8 +244,6 @@ CallDialog * CallDialog::instance()
 
 void CallDialog::init(const Jid & jid, PsiAccount * account, VoiceCaller * caller)
 {
-    qDebug() << "CallDialog::Init " << jid.full() <<
-        (void *) caller;
     d->jid = jid;
     d->account = account;
 
@@ -233,19 +255,15 @@ void CallDialog::init(const Jid & jid, PsiAccount * account, VoiceCaller * calle
 
         d->caller = caller;
 
-        qDebug() << "CallDialog::connecting " <<
         connect(caller, SIGNAL(accepted(Jid)),
                 this,   SLOT(accepted(Jid)),
                 Qt::QueuedConnection);
-        qDebug() << "CallDialog::connecting " <<
         connect(caller, SIGNAL(rejected(const Jid & )),
                 this,   SLOT(rejected(const Jid & )),
                 Qt::QueuedConnection);
-        qDebug() << "CallDialog::connecting " <<
         connect(caller, SIGNAL(terminated(const Jid & )),
                 this,   SLOT(terminated(const Jid & )),
                 Qt::QueuedConnection);
-        qDebug() << "CallDialog::connecting " <<
         connect(caller, SIGNAL(in_progress(const Jid & )),
                 this,   SLOT(inProgress(const Jid & )),
                 Qt::QueuedConnection);

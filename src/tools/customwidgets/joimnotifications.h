@@ -23,7 +23,7 @@
 #include <QObject>
 #include <QPixmap>
 
-#define N_INCOMING_CALL      "notification.incomming_call"
+#define N_INCOMING_CALL      "notification.incoming_call"
 #define N_CHAT_REQUEST       "notification.chat_request"
 #define N_STATUS_REQUEST     "notification.status_request"
 #define N_CONTACT_ONLINE     "notification.contact_online"
@@ -43,6 +43,27 @@ public:
      * @returns instance of Notifications
      */
     static JoimNotifications * instance();
+
+    /**
+     * Creates a notification of the specified type.
+     * @param type type
+     * @param data extra data needed for the notification
+     * @param ctype    @see QObject::connect()
+     * @returns id of the notification, 0 iff not sucess
+     */
+    int createNotification(
+        const QString & type,
+        const QString & data,
+        Qt::ConnectionType ctype = Qt::AutoConnection);
+
+    /**
+     * Closes the specified notification
+     * @param id id
+     */
+    void endNotification(int id);
+
+Q_SIGNALS:
+    void notificationFinished(int id, const QString & action);
 
 private:
     JoimNotifications();

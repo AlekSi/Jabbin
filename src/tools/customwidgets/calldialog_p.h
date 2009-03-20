@@ -52,9 +52,12 @@ public:
     CallHistoryModel * callhistory;
     CallDialog * q;
 
+    int notificationId;
+
 public Q_SLOTS:
     void doAction(const QString & buttonData);
     void call(const QString & who);
+    void notificationFinished(int id, const QString & action);
 
 };
 

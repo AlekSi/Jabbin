@@ -45,6 +45,5 @@ public:
     QIcon iconSound;
     QIcon iconJoim;
     int   tableNotificationsCurrentRow;
-
 };
 

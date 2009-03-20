@@ -987,8 +987,8 @@ void YaMainWin::toggleVisible()
 
 void YaMainWin::showCallDialog()
 {
-	//ui_.mainTabWidget->setCurrentWidget(ui_.callDialog);
-	ui_.mainTabWidget->setCurrentWidget(ui_.tabDial);
+	ui_.mainTabWidget->setCurrentWidget(ui_.callDialog);
+	//ui_.mainTabWidget->setCurrentWidget(ui_.tabDial);
 	if (!isVisible()) {
 		setWindowVisible(true);
 	}

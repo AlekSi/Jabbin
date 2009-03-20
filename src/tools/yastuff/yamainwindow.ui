@@ -22,31 +22,37 @@
   </property>
   <property name="styleSheet">
    <string notr="true">#MainWindow {
-    background:  #99b9d2;
+    background: rgb(232, 246, 255);
+/* 204 hue */
 }
 
-QWidget#Border, QToolButton#Titlebar, #OptionsDialogBase {
-    background:  #99b9d2;
+QWidget#Border {
+    background:  #81a8c6;
+}
+
+QToolButton#Titlebar, #OptionsDialogBase {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(154, 198, 228, 255), stop:0.47619 rgba(158, 200, 229, 255), stop:0.507937 rgba(175, 208, 230, 255), stop:1 rgba(214, 223, 230, 255));
+    height: 20px;
+    border: 5px solid #81a8c6;
 }
 
 QToolButton#Titlebar:hover {
-    background:  #A9C9E2;
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(154, 198, 228, 255), stop:0.47619 rgba(169, 214, 245, 255), stop:0.507937 rgba(187, 222, 245, 255), stop:1 rgba(227, 236, 244, 255));
+    height: 20px;
 }
 
 QToolButton#TitlebarTitle {
-    background:  #99b9d2;
-    color: white;
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(154, 198, 228, 255), stop:0.47619 rgba(158, 200, 229, 255), stop:0.507937 rgba(175, 208, 230, 255), stop:1 rgba(214, 223, 230, 255));
+    color: rgba(0, 0, 0, 160);
     text-align: left;
     font-weight: bold;
     font-size: 12pt;
+    height: 20px;
 }
 
 #logoPage, #selfWidgetsPage {
     border: none;
-	background-image: url(:/customwidgets/data/window_background_crop.png);
-    background-repeat: repeat-x;
-    background-color: #d5e6f3;
-    background-attachment: fixed;
+    background: rgb(232, 246, 255);
 }
 
 QTabWidget#mainTabWidget::pane {
@@ -91,7 +97,7 @@ QTabWidget#mainTabWidget &gt; QTabBar::tab:disabled {
     etch-disabled-text: 0;
     color: rgba(0, 0, 0, 0);
     border-image: none;
-    top: -20px;
+    top: -30px;
 }
 
 YaPushButton, .QWidget &gt; QPushButton {

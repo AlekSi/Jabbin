@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>TooltipWindowBase</class>
- <widget class="QWidget" name="TooltipWindowBase" >
-  <property name="geometry" >
+ <widget class="QWidget" name="TooltipWindowBase">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,87 +10,126 @@
     <height>122</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <property name="windowIcon" >
+  <property name="windowIcon">
    <iconset>
     <normaloff>../../../../../../../../home/ivan/vim_gloss_512.png</normaloff>../../../../../../../../home/ivan/vim_gloss_512.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" >
-   <property name="margin" >
+  <property name="styleSheet">
+   <string>#TooltipBase {
+  border: none;
+}
+
+#Frame {
+  background-color: white;
+  border-width: 4px;
+  border-image: url(:/customwidgets/generic/data/tooltip_background.png) 4 4 4 4 stretch stretch;
+}
+ 
+QPushButton {
+   min-height: 1.5em;
+   padding: 0px 8px;
+   color: black;
+   border: 0px;
+   border-image: url(:/customwidgets/generic/data/button.png) 2px;
+}
+
+QPushButton:disabled {
+   color: rgba(0, 0, 0, 128);
+}
+
+QPushButton:focus {
+   border-image: url(:/customwidgets/generic/data/button_focus.png) 2px;
+}
+
+QPushButton:hover {
+   border-image: url(:/customwidgets/generic/data/button_hover.png) 2px;
+}
+
+QPushButton:hover:focus {
+   border-image: url(:/customwidgets/generic/data/button_hover_focus.png) 2px;
+}
+
+QPushButton:pressed {
+   border-image: url(:/customwidgets/generic/data/button_pressed.png) 2px;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
     <number>0</number>
    </property>
    <item>
-    <widget class="QFrame" name="Frame" >
-     <property name="frameShape" >
+    <widget class="QFrame" name="Frame">
+     <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
-     <property name="frameShadow" >
+     <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2" >
-      <property name="spacing" >
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="spacing">
        <number>0</number>
       </property>
       <item>
-       <layout class="QGridLayout" name="gridLayout" >
-        <property name="horizontalSpacing" >
+       <layout class="QGridLayout" name="gridLayout">
+        <property name="horizontalSpacing">
          <number>8</number>
         </property>
-        <item rowspan="2" row="0" column="0" >
-         <widget class="QLabel" name="icon" >
-          <property name="minimumSize" >
+        <item row="0" column="0" rowspan="2">
+         <widget class="QLabel" name="icon">
+          <property name="minimumSize">
            <size>
             <width>64</width>
             <height>64</height>
            </size>
           </property>
-          <property name="maximumSize" >
+          <property name="maximumSize">
            <size>
             <width>64</width>
             <height>64</height>
            </size>
           </property>
-          <property name="baseSize" >
+          <property name="baseSize">
            <size>
             <width>64</width>
             <height>64</height>
            </size>
           </property>
-          <property name="text" >
+          <property name="text">
            <string/>
           </property>
          </widget>
         </item>
-        <item row="0" column="1" >
-         <widget class="QLabel" name="labelTitle" >
-          <property name="font" >
+        <item row="0" column="1">
+         <widget class="QLabel" name="labelTitle">
+          <property name="font">
            <font>
             <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
-          <property name="text" >
+          <property name="text">
            <string>Title</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="1" >
-         <widget class="QLabel" name="labelText" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+        <item row="1" column="1">
+         <widget class="QLabel" name="labelText">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>1</verstretch>
            </sizepolicy>
           </property>
-          <property name="text" >
+          <property name="text">
            <string>Text asd aspdo iapsod pso pdso sopidh aop aois daoisd oasd</string>
           </property>
-          <property name="alignment" >
+          <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
           </property>
-          <property name="wordWrap" >
+          <property name="wordWrap">
            <bool>true</bool>
           </property>
          </widget>
@@ -97,22 +137,22 @@
        </layout>
       </item>
       <item>
-       <layout class="QGridLayout" name="gridLayout_2" >
-        <property name="horizontalSpacing" >
+       <layout class="QGridLayout" name="gridLayout_2">
+        <property name="horizontalSpacing">
          <number>8</number>
         </property>
-        <property name="verticalSpacing" >
+        <property name="verticalSpacing">
          <number>0</number>
         </property>
-        <item row="0" column="0" >
-         <spacer name="verticalSpacer" >
-          <property name="orientation" >
+        <item row="0" column="0">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
-          <property name="sizeType" >
+          <property name="sizeType">
            <enum>QSizePolicy::Fixed</enum>
           </property>
-          <property name="sizeHint" stdset="0" >
+          <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
             <height>17</height>
@@ -120,37 +160,37 @@
           </property>
          </spacer>
         </item>
-        <item rowspan="2" row="0" column="1" >
-         <widget class="QDialogButtonBox" name="buttons" >
-          <property name="orientation" >
+        <item row="0" column="1" rowspan="2">
+         <widget class="QDialogButtonBox" name="buttons">
+          <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
-          <property name="standardButtons" >
+          <property name="standardButtons">
            <set>QDialogButtonBox::NoButton</set>
           </property>
          </widget>
         </item>
-        <item row="1" column="0" >
-         <widget class="QProgressBar" name="timebar" >
-          <property name="sizePolicy" >
-           <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
+        <item row="1" column="0">
+         <widget class="QProgressBar" name="timebar">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
             <horstretch>1</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
-          <property name="maximumSize" >
+          <property name="maximumSize">
            <size>
             <width>16777215</width>
             <height>8</height>
            </size>
           </property>
-          <property name="value" >
+          <property name="value">
            <number>24</number>
           </property>
-          <property name="textVisible" >
+          <property name="textVisible">
            <bool>false</bool>
           </property>
-          <property name="invertedAppearance" >
+          <property name="invertedAppearance">
            <bool>true</bool>
           </property>
          </widget>
@@ -163,7 +203,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="styledwindow.qrc" />
+  <include location="styledwindow.qrc"/>
  </resources>
  <connections/>
 </ui>

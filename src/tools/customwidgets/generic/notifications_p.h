@@ -38,7 +38,6 @@ public:
 
     QMap < int, TooltipWindow * > tooltips;
     QList < TooltipWindow * > visibleTooltipsList;
-    QMap < int, QString > chosenActions;
 
     QMap < TooltipWindow *, QPair < int, int > > positions;
     QTimeLine timeline;
