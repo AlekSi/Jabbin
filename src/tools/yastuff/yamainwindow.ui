@@ -43,7 +43,7 @@ QToolButton#Titlebar:hover {
 
 QToolButton#TitlebarTitle {
 	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(154, 198, 228, 255), stop:0.47619 rgba(158, 200, 229, 255), stop:0.507937 rgba(175, 208, 230, 255), stop:1 rgba(214, 223, 230, 255));
-    color: rgba(0, 0, 0, 160);
+    color: #234578;
     text-align: left;
     font-weight: bold;
     font-size: 12pt;
@@ -56,20 +56,20 @@ QToolButton#TitlebarTitle {
 }
 
 QTabWidget#mainTabWidget::pane {
-    border: none;
+    border-bottom: 1px solid #81a8c6;
     margin: 0px;
     padding: 0px;
     margin-top: -26px;
     padding-top: 28px;
-    background-image: url(:/customwidgets/data/barbutton_normal.png);
-    background-repeat: repeat-x;
-    background-color: white;
+    /*background-image: url(:/customwidgets/data/barbutton_normal.png);*/
+    /*background-repeat: repeat-x;*/
+    background: rgb(232, 246, 255);
 }
 
 QTabWidget#mainTabWidget::tab-bar {
     margin: 0px;
     padding: 0px;
-    height: 30px;
+    height: 21px;
     background-color: black;
     left: 8px;
  }
@@ -79,18 +79,22 @@ QTabWidget#mainTabWidget &gt; QTabBar::tab {
     padding: 0px;
     padding-left: 2px;
     padding-right: 2px;
-    border: 0px;
-    border-image: url(:/customwidgets/data/barbutton_normal.png) 1px;
-    font-size: 10px;
-    height: 28px;
+    border-bottom: 1px solid #81a8c6;
+   /* border-image: url(:/customwidgets/data/barbutton_normal.png) 1px;*/
+    font-size: 11px;
+    height: 21px;
 }
 
 QTabWidget#mainTabWidget &gt; QTabBar::tab:hover {
-    border-image: url(:/customwidgets/data/barbutton_hover.png) 1px;
+   /* border-image: url(:/customwidgets/data/barbutton_hover.png) 1px;*/
+      background-color: #c9deff;
 }
 
 QTabWidget#mainTabWidget &gt; QTabBar::tab:selected {
-    border-image: url(:/customwidgets/data/barbutton_active.png) 1px;
+    /*border-image: url(:/customwidgets/data/barbutton_active.png) 1px;*/
+    background-color: white;
+    border: 1px solid #81a8c6;
+    border-bottom: none;
 }
 
 QTabWidget#mainTabWidget &gt; QTabBar::tab:disabled {
