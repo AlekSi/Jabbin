@@ -5232,9 +5232,9 @@ void PsiAccount::openChat(const Jid& j, ActivationType activationType)
 void PsiAccount::openCall(const Jid &j)
 {
     qDebug() << "Call?";
-	// CallDlg *c = ensureCallDlg(j);
-	processCalls(j);
-	// bringToFront(c);
+    // CallDlg *c = ensureCallDlg(j);
+    // processCalls(j);
+    // bringToFront(c);
     //c->call();
     CallDialog::instance()->init(j, this, voiceCaller());
     CallDialog::instance()->call();

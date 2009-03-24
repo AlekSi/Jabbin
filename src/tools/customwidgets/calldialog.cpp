@@ -91,8 +91,8 @@ CallDialog::Private::Private(CallDialog * parent)
     connect(sliderMicrophoneVolume, SIGNAL(valueChanged(int)),
             parent, SLOT(changeMicrophoneVolume(int)));
 
-    time.start();
-    timer.start(1000, parent);
+    // time.start();
+    // timer.start(1000, parent);
 }
 
 void CallDialog::Private::setStatus(Status value)
@@ -104,37 +104,36 @@ void CallDialog::Private::setStatus(Status value)
         JoimNotifications::instance()->endNotification(notificationId);
     }
 
+    timer.stop();
     switch (status) {
         case Normal:
-            timer.stop();
             break;
         case Calling:
-            qDebug() << ":: 1";
+            qDebug() << "CallDialog::setStatus: calling";
             frameInCall->setTitle(tr("Calling ..."));
-            qDebug() << ":: 2";
             frameInCall->setMessage(JIDTEXT);
             if (phone == QString()) {
-                qDebug() << ":: 3a" << caller << JIDTEXT;
                 caller->call(jid);
             } else {
-                qDebug() << ":: 3b";
                 ((JingleVoiceCaller *) caller)->sendDTMF(jid, phone);
             }
-            qDebug() << ":: 4";
             callhistory->addEntry(JIDTEXT, jid.full(), CallHistoryModel::Sent);
             break;
         case InCall:
+            qDebug() << "CallDialog::setStatus: in call";
             frameInCall->setTitle(QString());
             frameInCall->setMessage(JIDTEXT);
             time.start();
-            timer.start(1000, this);
+            timer.start(1000, q);
             break;
         case Terminating:
+            qDebug() << "CallDialog::setStatus: terminating";
             frameInCall->setTitle(tr("Ending call ..."));
             frameInCall->setMessage(JIDTEXT);
             caller->terminate(jid);
             break;
         case Incoming:
+            qDebug() << "CallDialog::setStatus: incoming";
             frameIncomingCall->setTitle(tr("Incoming call"));
             frameIncomingCall->setMessage(JIDTEXT);
             callhistory->addEntry(JIDTEXT, jid.full(), CallHistoryModel::Missed);
@@ -143,12 +142,14 @@ void CallDialog::Private::setStatus(Status value)
 
             break;
         case Accepting:
+            qDebug() << "CallDialog::setStatus: accepting";
             frameIncomingCall->setTitle(tr("Starting call..."));
             frameIncomingCall->setMessage(JIDTEXT);
             caller->accept(jid);
             callhistory->updateLastEntryStatus(CallHistoryModel::Received);
             break;
         case Rejecting:
+            qDebug() << "CallDialog::setStatus: rejecting";
             frameIncomingCall->setTitle(tr("Rejecting call..."));
             frameIncomingCall->setMessage(JIDTEXT);
             caller->reject(jid);
@@ -332,7 +333,7 @@ void CallDialog::incoming()
 
 void CallDialog::timerEvent(QTimerEvent * event)
 {
-    d->timer.start(1000, this);
+    d->timer.stop();
 
     int elapsed = d->time.elapsed();
     short int ss, mm, hh;
@@ -351,5 +352,6 @@ void CallDialog::timerEvent(QTimerEvent * event)
     }
 
     d->frameInCall->setTitle(tr("Call duration: <b>%1</b>").arg(fmtTime));
+    d->timer.start(1000, this);
 }
 
