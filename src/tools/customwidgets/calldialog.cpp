@@ -109,13 +109,18 @@ void CallDialog::Private::setStatus(Status value)
             timer.stop();
             break;
         case Calling:
+            qDebug() << ":: 1";
             frameInCall->setTitle(tr("Calling ..."));
+            qDebug() << ":: 2";
             frameInCall->setMessage(JIDTEXT);
             if (phone == QString()) {
+                qDebug() << ":: 3a" << caller << JIDTEXT;
                 caller->call(jid);
             } else {
+                qDebug() << ":: 3b";
                 ((JingleVoiceCaller *) caller)->sendDTMF(jid, phone);
             }
+            qDebug() << ":: 4";
             callhistory->addEntry(JIDTEXT, jid.full(), CallHistoryModel::Sent);
             break;
         case InCall:

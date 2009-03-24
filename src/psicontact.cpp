@@ -610,6 +610,7 @@ void PsiContact::sendMessageTo(QString resource)
 
 void PsiContact::openCall()
 {
+	qDebug() << "PsiContact::openCall() : " << account();
 	if (account())
 		account()->actionMakeCall(jid());
 }
