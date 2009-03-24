@@ -49,6 +49,7 @@
 #include "yapushbutton.h"
 #include "psioptions.h"
 #include "psiiconset.h"
+#include "contacttooltip.h"
 
 static const QString emoticonsEnabledOptionPath = "options.ya.emoticons-enabled";
 static const QString enableTypographyOptionPath = "options.ya.typography.enable";
@@ -566,8 +567,10 @@ void YaChatDlg::showContactProfile()
 	if (contact) {
 		QRect rect = ui_.contactToolTipArea->geometry();
 		QRect itemRect = QRect(ui_.chatTopFrame->mapToGlobal(rect.topLeft()),
-		                       ui_.chatTopFrame->mapToGlobal(rect.bottomRight()));
-		YaChatToolTip::instance()->showText(itemRect, contact, ui_.contactToolTipArea, 0);
+			ui_.chatTopFrame->mapToGlobal(rect.bottomRight()));
+		ContactTooltip::instance()->showContact(contact, itemRect);
+	//	YaChatToolTip::instance()->showText(itemRect, contact, ui_.contactToolTipArea, 0);
+
 	}
 }
 
