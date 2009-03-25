@@ -7,7 +7,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>311</width>
+    <width>325</width>
     <height>639</height>
    </rect>
   </property>
@@ -56,17 +56,17 @@ QToolButton#TitlebarTitle {
 }
 
 QTabWidget#mainTabWidget::pane {
-    border-bottom: 1px solid #81a8c6;
+    border-top: 1px solid #81a8c6;
     margin: 0px;
     padding: 0px;
-    margin-top: -26px;
-    padding-top: 28px;
+    margin-top: 1px;
     /*background-image: url(:/customwidgets/data/barbutton_normal.png);*/
     /*background-repeat: repeat-x;*/
     background: rgb(232, 246, 255);
 }
 
 QTabWidget#mainTabWidget::tab-bar {
+    /*border-bottom: 1px solid #81a8c6;*/
     margin: 0px;
     padding: 0px;
     height: 21px;
@@ -82,7 +82,7 @@ QTabWidget#mainTabWidget &gt; QTabBar::tab {
     border-bottom: 1px solid #81a8c6;
    /* border-image: url(:/customwidgets/data/barbutton_normal.png) 1px;*/
     font-size: 11px;
-    height: 21px;
+    height: 20px;
 }
 
 QTabWidget#mainTabWidget &gt; QTabBar::tab:hover {
