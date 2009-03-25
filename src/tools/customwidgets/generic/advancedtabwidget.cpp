@@ -49,7 +49,7 @@ AdvancedTabWidget::~AdvancedTabWidget()
 void AdvancedTabWidget::resizeEvent(QResizeEvent * event)
 {
     QTabWidget::resizeEvent(event);
-    tabBar()->resize(size());
+    // tabBar()->resize(size());
 }
 
 void AdvancedTabWidget::setViewType(AdvancedTabBar::ViewType viewType)

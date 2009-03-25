@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Preferences</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="customwidgets.qrc">
+    <normaloff>:/customwidgets/data/options/general.png</normaloff>:/customwidgets/data/options/general.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">#Frame {
     border: none;
@@ -48,13 +52,13 @@ QListWidget#AdvancedTabBarList {
 }
 
 QListWidget#AdvancedTabBarList {
+    padding-top: 24px;
     padding-left: 16px;
 }
 
 QListWidget#AdvancedTabBarList::item {
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-top: 8px;
+    padding: 8px;
+    padding-left: 0px;
 }
 
 QListWidget#AdvancedTabBarList::item:selected {
