@@ -30,7 +30,7 @@
 #include <QPixmap>
 #include <QPainter>
 
-#define DEFAULT_BORDER_SIZE 2
+#define DEFAULT_BORDER_SIZE 1
 #define HEADER_SIZE 20
 
 namespace CustomWidgets {

@@ -27,7 +27,7 @@
 }
 
 QWidget#Border {
-    background:  #81a8c6;
+    background: gray;
 }
 
 QToolButton#Titlebar, #OptionsDialogBase {
