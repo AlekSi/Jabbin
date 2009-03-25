@@ -17,8 +17,8 @@
  *
  */
  
-#ifndef JOIM_MEDIAENGINE_H_
-#define JOIM_MEDIAENGINE_H_
+#ifndef JABBIN_MEDIAENGINE_H_
+#define JABBIN_MEDIAENGINE_H_
 
 #include "talk/session/phone/mediaengine.h"
 #include "talk/session/phone/codec.h"
@@ -83,5 +83,5 @@ class JabbinMediaEngine : public MediaEngine {
 
 }  // namespace cricket
 
-#endif //JOIM_MEDIAENGINE_H_
+#endif //JABBIN_MEDIAENGINE_H_
 

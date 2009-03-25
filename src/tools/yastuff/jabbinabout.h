@@ -1,5 +1,5 @@
 /*
- * joimabout.h - about dialog
+ * jabbinabout.h - about dialog
  * Copyright (C) 2008  Yandex LLC (Michail Pishchagin)
  *
  * This program is free software; you can redistribute it and/or
@@ -24,7 +24,7 @@
 #include "yawindow.h"
 #include "yawindowbackground.h"
 
-#include "ui_joimabout.h"
+#include "ui_jabbinabout.h"
 
 class YaAbout : private YaWindow
 {

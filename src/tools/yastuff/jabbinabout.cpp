@@ -1,5 +1,5 @@
 /*
- * joimabout.cpp - about dialog
+ * jabbinabout.cpp - about dialog
  * Copyright (C) 2008  Yandex LLC (Michail Pishchagin)
  *
  * This program is free software; you can redistribute it and/or
@@ -18,9 +18,9 @@
  *
  */
 
-#include "joimabout.h"
+#include "jabbinabout.h"
 
-#include "joimpsi_revision.h" // auto-generated file, see src.pro for details
+#include "jabbinpsi_revision.h" // auto-generated file, see src.pro for details
 
 #include <QPainter>
 
@@ -60,7 +60,7 @@ YaAbout::YaAbout()
 #endif
 	ui_.appName->setText(ui_.appName->text().arg(osName));
 
-	QString str = tr("%1 (Build %2)").arg(JOIMPSI_VERSION).arg(JOIMPSI_REVISION);
+	QString str = tr("%1 (Build %2)").arg(JABBINPSI_VERSION).arg(JABBINPSI_REVISION);
 	ui_.buildLabel->setText(str);
 
 	background_ = YaWindowBackground(YaWindowBackground::Roster);

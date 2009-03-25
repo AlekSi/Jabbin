@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef JOIMNOTIFICATIONS_H_
-#define JOIMNOTIFICATIONS_H_
+#ifndef JABBINNOTIFICATIONS_H_
+#define JABBINNOTIFICATIONS_H_
 
 #include <QObject>
 #include <QPixmap>
@@ -31,18 +31,18 @@
 #define N_INCOMING_VOICEMAIL "notification.incomming_voicemail"
 
 /**
- * Joim Notifications system
+ * Jabbin Notifications system
  */
-class JoimNotifications: public QObject {
+class JabbinNotifications: public QObject {
     Q_OBJECT
 
 public:
-    ~JoimNotifications();
+    ~JabbinNotifications();
 
     /**
      * @returns instance of Notifications
      */
-    static JoimNotifications * instance();
+    static JabbinNotifications * instance();
 
     /**
      * Creates a notification of the specified type.
@@ -66,11 +66,11 @@ Q_SIGNALS:
     void notificationFinished(int id, const QString & action);
 
 private:
-    JoimNotifications();
+    JabbinNotifications();
 
     class Private;
     Private * const d;
 };
 
-#endif // JOIMNOTIFICATIONS_H_
+#endif // JABBINNOTIFICATIONS_H_
 

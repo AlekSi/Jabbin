@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "joimnotifications.h"
+#include "jabbinnotifications.h"
 #include "generic/notifications.h"
 #include "psioptions.h"
 #include "phononsoundplayer.h"
@@ -35,7 +35,7 @@ public:
     SoundPlayer * player;
 };
 
-class JoimNotifications::Private
+class JabbinNotifications::Private
 {
 public:
     Private()
@@ -45,13 +45,13 @@ public:
 
     QMap  < int, NotificationItem > notifications;
 
-    static JoimNotifications * instance;
+    static JabbinNotifications * instance;
 };
 
-JoimNotifications *
- JoimNotifications::Private::instance = NULL;
+JabbinNotifications *
+ JabbinNotifications::Private::instance = NULL;
 
-JoimNotifications::JoimNotifications()
+JabbinNotifications::JabbinNotifications()
     : d(new Private())
 {
     connect(
@@ -60,19 +60,19 @@ JoimNotifications::JoimNotifications()
 
 }
 
-JoimNotifications::~JoimNotifications()
+JabbinNotifications::~JabbinNotifications()
 {
 }
 
-JoimNotifications * JoimNotifications::instance()
+JabbinNotifications * JabbinNotifications::instance()
 {
     if (!Private::instance) {
-        Private::instance = new JoimNotifications();
+        Private::instance = new JabbinNotifications();
     }
     return Private::instance;
 }
 
-int JoimNotifications::createNotification(
+int JabbinNotifications::createNotification(
         const QString & type, const QString & data,
         Qt::ConnectionType ctype)
 {
@@ -101,7 +101,7 @@ int JoimNotifications::createNotification(
         }
 
         id = CustomWidgets::Notifications::instance()->showNotification(
-            tr("Notification from Joim"), message,
+            tr("Notification from Jabbin"), message,
             QPixmap(), actions,
             timeout);
         d->notifications[id].tooltipId = id;
@@ -119,7 +119,7 @@ int JoimNotifications::createNotification(
             (type == N_INCOMING_CALL) ? 60000 : 10);
     }
 
-    if (getOption(type + ".popupjoim", Bool)) {
+    if (getOption(type + ".popupjabbin", Bool)) {
 
     }
 
@@ -128,7 +128,7 @@ int JoimNotifications::createNotification(
     return id;
 }
 
-void JoimNotifications::endNotification(int id)
+void JabbinNotifications::endNotification(int id)
 {
     if (d->notifications.contains(id)) {
         if (d->notifications[id].tooltipId > 0) {

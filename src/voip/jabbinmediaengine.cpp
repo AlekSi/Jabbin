@@ -17,7 +17,7 @@
  *
  */
 
-#include "joimmediaengine.h"
+#include "jabbinmediaengine.h"
 
 #include <sys/types.h>
 #ifndef WIN32

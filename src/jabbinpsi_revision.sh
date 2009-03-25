@@ -1,17 +1,17 @@
 #!/bin/sh
 
-# ivan: this updates joimpsi_revision file which leads to disabling
+# ivan: this updates jabbinpsi_revision file which leads to disabling
 # voip functions. So, I'm disabling this
 exit 0
 
-revision_file="tools/yastuff/joimpsi_revision.h"
+revision_file="tools/yastuff/jabbinpsi_revision.h"
 
 update_revision_file() {
 cat > $revision_file <<EOF
-static QString JOIMPSI_VERSION="`cat ../joimpsi_version`";
-static const int JOIMPSI_REVISION=$1;
+static QString JABBINPSI_VERSION="`cat ../jabbinpsi_version`";
+static const int JABBINPSI_REVISION=$1;
 EOF
-	# echo "static const int JOIMPSI_REVISION=$1;" > $revision_file
+	# echo "static const int JABBINPSI_REVISION=$1;" > $revision_file
 	echo "'$revision_file' successfully updated."
 }
 
