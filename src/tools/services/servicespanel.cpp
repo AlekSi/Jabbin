@@ -52,12 +52,16 @@ void ServicesPanel::Private::itemClicked(const QModelIndex & index)
             case ServicesModel::User:
                 if (!index.data(ServicesModel::ServiceStatusRole).toInt()) {
                     joinService();
+                } else {
+                    clickedWithButton = Qt::RightButton;
                 }
                 break;
             default:
                 break;
         }
-    } else if (clickedWithButton == Qt::RightButton) {
+    }
+
+    if (clickedWithButton == Qt::RightButton) {
         QMenu menu;
 
 
