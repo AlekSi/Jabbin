@@ -30,7 +30,7 @@
 
 #include "yapushbutton.h"
 #include "applicationinfo.h"
-#include "joimpsi_revision.h"
+#include "jabbinpsi_revision.h"
 #include "aboutdlg.h"
 
 bool YaLicense::ensureLicenseAccepted()
@@ -124,7 +124,7 @@ void YaLicense::setLicenseAccepted(bool accepted)
 		if (file.open(QIODevice::WriteOnly)) {
 			QTextStream text(&file);
 			text.setCodec("UTF-8");
-			text << QString("%1.%2").arg(JOIMPSI_VERSION).arg(JOIMPSI_REVISION);
+			text << QString("%1.%2").arg(JABBINPSI_VERSION).arg(JABBINPSI_REVISION);
 		}
 	}
 }

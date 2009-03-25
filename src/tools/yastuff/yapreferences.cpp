@@ -45,7 +45,7 @@
 #include "yawindowbackground.h"
 #include "chatdlg.h"
 
-static const QString autoStartRegistryKey = "CurrentVersion/Run/joimchat.exe";
+static const QString autoStartRegistryKey = "CurrentVersion/Run/jabbinchat.exe";
 
 YaPreferences::YaPreferences()
 	: YaWindow(0)

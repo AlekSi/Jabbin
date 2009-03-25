@@ -61,7 +61,7 @@
 #include "tabdlg.h"
 #include "statusmenu.h"
 #include "userlist.h"
-#include "joimabout.h"
+#include "jabbinabout.h"
 #include "yalastmailinformer.h"
 #include "yaeventnotifier.h"
 #include "shortcutmanager.h"
@@ -197,7 +197,7 @@ public:
 
 		setAttribute(Qt::WA_Hover, true);
 
-		setText(tr("Joim"));
+		setText(tr("Jabbin"));
 	}
 };
 #endif
@@ -355,7 +355,7 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 	// menuBar()->hide();
 	// setStatusBar(0);
 
-	setWindowTitle(tr("Joim"));
+	setWindowTitle(tr("Jabbin"));
 #ifndef Q_WS_MAC
 	qApp->setWindowIcon(Ya::VisualUtil::defaultWindowIcon());
 // #ifdef Q_WS_X11
@@ -386,7 +386,7 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 	optionsAction_->setMenuRole(QAction::PreferencesRole);
 	connect(optionsAction_, SIGNAL(triggered()), SLOT(togglePreferences()));
 
-	aboutAction_ = new QAction(tr("About Joim..."), this);
+	aboutAction_ = new QAction(tr("About Jabbin..."), this);
 	aboutAction_->setMenuRole(QAction::AboutRole);
 	connect(aboutAction_, SIGNAL(triggered()), SLOT(about()));
 	ShortcutManager::connect("appwide.show-about-dialog", this, SLOT(about()));
@@ -395,7 +395,7 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 	quitAction_->setMenuRole(QAction::QuitRole);
 	connect(quitAction_, SIGNAL(triggered()), SLOT(quitApplication()));
 
-	showYapsiAction_ = new QAction(tr("Show Joim"), this);
+	showYapsiAction_ = new QAction(tr("Show Jabbin"), this);
 	YaBoldMenu::ensureActionBoldText(showYapsiAction_);
 	connect(showYapsiAction_, SIGNAL(triggered()), SLOT(trayClicked()));
 
@@ -1045,7 +1045,7 @@ void YaMainWin::paintOnlineLogo(QPainter* p)
 	f.setPixelSize(14);
 	f.setBold(true);
 	p->setFont(f);
-	p->drawText(QRect(13 + 16 + 2, 4, width(), 23), Qt::AlignLeft | Qt::AlignVCenter, tr("Joim"));
+	p->drawText(QRect(13 + 16 + 2, 4, width(), 23), Qt::AlignLeft | Qt::AlignVCenter, tr("Jabbin"));
 }
 
 /* ivan

@@ -66,7 +66,7 @@ QVariant AccountInformerModel::data(const QModelIndex& index, int role) const
 	case Qt::DisplayRole:
 		if (item) {
 			if (editMode(index) == EditDisabled)
-				return QVariant(tr("%1 (Joim)").arg(item->data(Qt::DisplayRole).toString()));
+				return QVariant(tr("%1 (Jabbin)").arg(item->data(Qt::DisplayRole).toString()));
 			else if (editMode(index) == EditPassword)
 				return item->data(Qt::DisplayRole);
 			else

@@ -411,7 +411,7 @@ void CallHistoryModel::save()
     writer.setAutoFormatting(true);
 
     writer.writeStartDocument();
-    writer.writeDTD("<!DOCTYPE joimcallhistory>");
+    writer.writeDTD("<!DOCTYPE jabbincallhistory>");
     writer.writeStartElement("callhistory");
     writer.writeAttribute("version", "1.0");
 

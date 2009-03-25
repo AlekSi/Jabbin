@@ -72,7 +72,7 @@ YaTrayIcon::YaTrayIcon()
 #endif
 
 #ifndef Q_WS_MAC
-	setToolTip(tr("Joim"));
+	setToolTip(tr("Jabbin"));
 #endif
 }
 

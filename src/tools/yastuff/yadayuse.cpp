@@ -55,7 +55,7 @@ extern "C" {
 #include "psilogger.h"
 #include "systeminfo.h"
 
-#include "joimpsi_revision.h"
+#include "jabbinpsi_revision.h"
 
 QString YaDayUse::basePingUrl()
 {
@@ -69,7 +69,7 @@ QString YaDayUse::appId()
 
 QString YaDayUse::ver()
 {
-	return QString("%1.%2").arg(JOIMPSI_VERSION).arg(JOIMPSI_REVISION);
+	return QString("%1.%2").arg(JABBINPSI_VERSION).arg(JABBINPSI_REVISION);
 }
 
 QString YaDayUse::osId()
@@ -184,16 +184,16 @@ QString YaDayUse::uiPath() const
 	if (SHGetSpecialFolderPathW(0, str, CSIDL_APPDATA, true))
 		base = QString::fromWCharArray(str);
 
-	QDir uihome(base + "/Joim");
+	QDir uihome(base + "/Jabbin");
 	if(!uihome.exists()) {
 		QDir home(base);
-		home.mkdir("Joim");
+		home.mkdir("Jabbin");
 	}
 #else
-	QDir uihome(QDir::homeDirPath() + "/.joim");
+	QDir uihome(QDir::homeDirPath() + "/.jabbin");
 	if(!uihome.exists()) {
 		QDir home = QDir::home();
-		home.mkdir(".joim");
+		home.mkdir(".jabbin");
 		chmod(QFile::encodeName(uihome.path()), 0700);
 	}
 #endif

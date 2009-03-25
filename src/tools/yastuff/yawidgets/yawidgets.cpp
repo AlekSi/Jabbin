@@ -71,7 +71,7 @@ QString YaWidgetPlugin::name() const
 
 QString YaWidgetPlugin::group() const
 {
-	return "JoimPsi";
+	return "JabbinPsi";
 }
 
 QString YaWidgetPlugin::toolTip() const

@@ -2,11 +2,11 @@
 # This is the spec version, *not* the application version
 Version=1.0
 Type=Application
-Name=Joim
+Name=Jabbin
 GenericName=Jabber Client
 Comment=Communicate over the Jabber network
-Icon=joim
-Exec=joim
+Icon=jabbin
+Exec=jabbin
 Terminal=false
 Categories=Network;InstantMessaging;Qt;
 

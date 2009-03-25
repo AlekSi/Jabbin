@@ -21,7 +21,7 @@
 #include "calldialog.h"
 #include "calldialog_p.h"
 #include "generic/customwidgetscommon.h"
-#include "joimnotifications.h"
+#include "jabbinnotifications.h"
 #include "jinglevoicecaller.h"
 
 #include <QRegExpValidator>
@@ -48,7 +48,7 @@ CallDialog::Private::Private(CallDialog * parent)
 
     connect(dialpad, SIGNAL(buttonClicked(char)),
             parent, SLOT(dialpadButtonClicked(char)));
-    connect(JoimNotifications::instance(), SIGNAL(notificationFinished(int, const QString &)),
+    connect(JabbinNotifications::instance(), SIGNAL(notificationFinished(int, const QString &)),
             this, SLOT(notificationFinished(int, const QString &)));
     stacked->setCurrentWidget(pageDialpad);
 
@@ -101,7 +101,7 @@ void CallDialog::Private::setStatus(Status value)
     status = value;
 
     if (notificationId && status != Incoming) {
-        JoimNotifications::instance()->endNotification(notificationId);
+        JabbinNotifications::instance()->endNotification(notificationId);
     }
 
     timer.stop();
@@ -137,7 +137,7 @@ void CallDialog::Private::setStatus(Status value)
             frameIncomingCall->setTitle(tr("Incoming call"));
             frameIncomingCall->setMessage(JIDTEXT);
             callhistory->addEntry(JIDTEXT, jid.full(), CallHistoryModel::Missed);
-            notificationId = JoimNotifications::instance()->createNotification(
+            notificationId = JabbinNotifications::instance()->createNotification(
                 N_INCOMING_CALL, JIDTEXT);
 
             break;
@@ -184,7 +184,7 @@ void CallDialog::Private::notificationFinished(int id, const QString & action)
         return;
     }
 
-    JoimNotifications::instance()->endNotification(notificationId);
+    JabbinNotifications::instance()->endNotification(notificationId);
     notificationId = 0;
 
     doAction(action);

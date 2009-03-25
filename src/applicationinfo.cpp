@@ -26,17 +26,17 @@
 #include "config.h"
 #endif
 
-#include "joimpsi_revision.h"
+#include "jabbinpsi_revision.h"
 
 // Constants. These should be moved to a more 'dynamically changeable'
 // place (like an external file loaded through the resources system)
 // Should also be overridable through an optional file.
 
-#define PROG_NAME QString::fromUtf8("Joim")
-#define PROG_VERSION JOIMPSI_VERSION;
+#define PROG_NAME QString::fromUtf8("Jabbin")
+#define PROG_VERSION JABBINPSI_VERSION;
 #define PROG_CAPS_NODE "http://www.jabberout.com/caps";
-#define PROG_CAPS_VERSION JOIMPSI_VERSION;
-#define PROG_IPC_NAME "com.jabberout.joim"
+#define PROG_CAPS_VERSION JABBINPSI_VERSION;
+#define PROG_IPC_NAME "com.jabberout.jabbin"
 #define PROG_OPTIONS_NS "http://www.jabberout.com/options";
 #define PROG_STORAGE_NS "http://www.jabberout.com/storage";
 
@@ -105,10 +105,10 @@ QString ApplicationInfo::homeDir()
 		return p;
 
 #if defined(Q_WS_X11) || defined(Q_WS_MAC)
-	QDir proghome(QDir::homeDirPath() + "/.joimchat");
+	QDir proghome(QDir::homeDirPath() + "/.jabbinchat");
 	if(!proghome.exists()) {
 		QDir home = QDir::home();
-		home.mkdir(".joimchat");
+		home.mkdir(".jabbinchat");
 		chmod(QFile::encodeName(proghome.path()), 0700);
 	}
 	return proghome.path();
@@ -118,10 +118,10 @@ QString ApplicationInfo::homeDir()
 	if (SHGetSpecialFolderPathW(0, str, CSIDL_APPDATA, true))
 		base = QString::fromWCharArray(str);
 
-	QDir proghome(base + "/JoimChatData");
+	QDir proghome(base + "/JabbinChatData");
 	if(!proghome.exists()) {
 		QDir home(base);
-		home.mkdir("JoimChatData");
+		home.mkdir("JabbinChatData");
 	}
 
 	return proghome.path();

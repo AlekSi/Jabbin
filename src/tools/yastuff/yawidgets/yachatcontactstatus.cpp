@@ -91,7 +91,7 @@ YaChatContactStatusExtra::YaChatContactStatusExtra(QWidget *parent)
 		padding-left: 10px;\
 		border: 2px solid gray;\
 		border-width: 10px;\
-		border-image: url(/home/ivan/Projects/Joim/build/src/tools/customwidgets/generic/data/chatcontactstatus_background.png) 8 15 10 8 stretch stretch;\
+		border-image: url(/home/ivan/Projects/Jabbin/build/src/tools/customwidgets/generic/data/chatcontactstatus_background.png) 8 15 10 8 stretch stretch;\
 	}";
 
 	setStyleSheet(style);

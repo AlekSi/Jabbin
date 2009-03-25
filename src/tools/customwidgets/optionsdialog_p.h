@@ -43,7 +43,7 @@ public Q_SLOTS:
 public:
     QIcon iconNotification;
     QIcon iconSound;
-    QIcon iconJoim;
+    QIcon iconJabbin;
     int   tableNotificationsCurrentRow;
 };
 

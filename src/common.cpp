@@ -430,7 +430,7 @@ void closeDialogs(QWidget *w)
 
 void x11wmClass(Display *dsp, WId wid, QString resName)
 {
-	char app_name[] = "joimchat";
+	char app_name[] = "jabbinchat";
 
 	//Display *dsp = x11Display();                 // get the display
 	//WId win = winId();                           // get the window

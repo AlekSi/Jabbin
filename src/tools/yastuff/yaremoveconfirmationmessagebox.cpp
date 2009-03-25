@@ -121,7 +121,7 @@ YaRemoveConfirmationMessageBox::YaRemoveConfirmationMessageBox(const QString& ti
 {
 	setStyle(YaStyle::defaultStyle());
 
-	setWindowTitle(tr("Joim"));
+	setWindowTitle(tr("Jabbin"));
 	setText(title);
 	setInformativeText(informativeText);
 

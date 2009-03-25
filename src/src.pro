@@ -5,7 +5,7 @@ EXPATPATH = c:\expat-2.0.1
 
 # Configuration
 TEMPLATE = app
-TARGET   = joim
+TARGET   = jabbin
 CONFIG  += qt thread x11 qt3support console
 
 windows: include(../conf_windows.pri)
@@ -14,8 +14,8 @@ yapsi_activex_server {
 	CONFIG  += qaxserver qaxcontainer
 	contains(CONFIG, static): DEFINES += QT_NODLL
 
-	# DEF_FILE = ../win32/joimpsiserver.def
-	RC_FILE  = ../win32/joimpsiserver.rc
+	# DEF_FILE = ../win32/jabbinpsiserver.def
+	RC_FILE  = ../win32/jabbinpsiserver.rc
 }
 
 !yapsi_activex_server {
@@ -57,17 +57,17 @@ exists(../conf.pri) {
 
 	# icons and desktop files
 	dt.path=$$PREFIX/share/applications/
-	dt.extra    = cp -f ../psi.desktop $(INSTALL_ROOT)$$dt.path/joim.desktop
+	dt.extra    = cp -f ../psi.desktop $(INSTALL_ROOT)$$dt.path/jabbin.desktop
 	icon1.path=$$PREFIX/share/icons/hicolor/16x16/apps
-	icon1.extra = cp -f ../iconsets/system/default/logo_16.png $(INSTALL_ROOT)$$icon1.path/joim.png
+	icon1.extra = cp -f ../iconsets/system/default/logo_16.png $(INSTALL_ROOT)$$icon1.path/jabbin.png
 	icon2.path=$$PREFIX/share/icons/hicolor/32x32/apps
-	icon2.extra = cp -f ../iconsets/system/default/logo_32.png $(INSTALL_ROOT)$$icon2.path/joim.png
+	icon2.extra = cp -f ../iconsets/system/default/logo_32.png $(INSTALL_ROOT)$$icon2.path/jabbin.png
 	icon3.path=$$PREFIX/share/icons/hicolor/48x48/apps
-	icon3.extra = cp -f ../iconsets/system/default/logo_48.png $(INSTALL_ROOT)$$icon3.path/joim.png
+	icon3.extra = cp -f ../iconsets/system/default/logo_48.png $(INSTALL_ROOT)$$icon3.path/jabbin.png
 	icon4.path=$$PREFIX/share/icons/hicolor/64x64/apps
-	icon4.extra = cp -f ../iconsets/system/default/logo_64.png $(INSTALL_ROOT)$$icon4.path/joim.png
+	icon4.extra = cp -f ../iconsets/system/default/logo_64.png $(INSTALL_ROOT)$$icon4.path/jabbin.png
 	icon5.path=$$PREFIX/share/icons/hicolor/128x128/apps
-	icon5.extra = cp -f ../iconsets/system/default/logo_128.png $(INSTALL_ROOT)$$icon5.path/joim.png
+	icon5.extra = cp -f ../iconsets/system/default/logo_128.png $(INSTALL_ROOT)$$icon5.path/jabbin.png
 	INSTALLS += dt icon1 icon2 icon3 icon4 icon5
 }
 
@@ -129,10 +129,10 @@ RESOURCES += ../psi.qrc ../iconsets.qrc
 
 !win32 {
 	# Revision number
-	system(./joimpsi_revision.sh)
+	system(./jabbinpsi_revision.sh)
 
 	# Qt translations
-	system(./joimpsi_qt_translations.sh)
+	system(./jabbinpsi_qt_translations.sh)
 }
 
 BREAKPAD_PATH = $$PWD/../../vendor/google-breakpad/src
@@ -170,7 +170,7 @@ win32-msvc.net:debug {
 
 # Platform specifics
 unix:!mac {
-	QMAKE_POST_LINK = rm -f ../joim ; ln -s src/joim ../joim
+	QMAKE_POST_LINK = rm -f ../jabbin ; ln -s src/jabbin ../jabbin
 }
 
 win32 {

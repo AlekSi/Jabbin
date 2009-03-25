@@ -182,7 +182,7 @@ QPushButton:pressed {
           <item>
            <widget class="QLabel" name="label">
             <property name="text">
-             <string>&lt;b&gt;General Settings:&lt;/b&gt; set up the basics of how Joim works</string>
+             <string>&lt;b&gt;General Settings:&lt;/b&gt; set up the basics of how Jabbin works</string>
             </property>
            </widget>
           </item>
@@ -307,7 +307,7 @@ QPushButton:pressed {
              <item row="0" column="0" colspan="2">
               <widget class="QCheckBox" name="checkAutostart">
                <property name="text">
-                <string>Start Joim when I turn on my computer</string>
+                <string>Start Jabbin when I turn on my computer</string>
                </property>
               </widget>
              </item>
@@ -359,7 +359,7 @@ QPushButton:pressed {
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Appeareance:&lt;/span&gt; set up the appeareance and behavior of Joim&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Appeareance:&lt;/span&gt; set up the appeareance and behavior of Jabbin&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -788,7 +788,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Sans Serif'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Alerts and Messages:&lt;/span&gt; set up how Joim tells you about what's going on&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Alerts and Messages:&lt;/span&gt; set up how Jabbin tells you about what's going on&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -941,9 +941,9 @@ p, li { white-space: pre-wrap; }
               </widget>
              </item>
              <item row="1" column="0" colspan="3">
-              <widget class="QCheckBox" name="checkPopupJoim">
+              <widget class="QCheckBox" name="checkPopupJabbin">
                <property name="text">
-                <string>Show Joim window</string>
+                <string>Show Jabbin window</string>
                </property>
               </widget>
              </item>
@@ -1160,7 +1160,7 @@ p, li { white-space: pre-wrap; }
             <item row="3" column="0">
              <widget class="QLabel" name="labelBlockPerson">
               <property name="text">
-               <string>You can prevent a person from contacting you by selecting their name from the list below, or by entering their Joim or Jabber ID.</string>
+               <string>You can prevent a person from contacting you by selecting their name from the list below, or by entering their Jabbin or Jabber ID.</string>
               </property>
               <property name="wordWrap">
                <bool>true</bool>
@@ -1438,7 +1438,7 @@ p, li { white-space: pre-wrap; }
           <item row="0" column="0">
            <widget class="QLabel" name="labelNotification">
             <property name="text">
-             <string>The following options will be applied upon the next restart of Joim</string>
+             <string>The following options will be applied upon the next restart of Jabbin</string>
             </property>
            </widget>
           </item>

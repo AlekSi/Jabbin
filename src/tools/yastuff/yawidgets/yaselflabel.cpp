@@ -44,7 +44,7 @@ QString YaSelfLabel::text() const
 	PsiAccount* a;
 	if (!contactList_ || !(a = contactList_->defaultAccount())) {
 		if (contactList_ && contactList_->enabledAccounts().isEmpty())
-			return tr("Joim");
+			return tr("Jabbin");
 		return Ya::ellipsis();
 	}
 

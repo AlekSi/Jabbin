@@ -38,7 +38,7 @@ PsiLogger::PsiLogger():QObject(QCoreApplication::instance()), file_(0), stream_(
 	bool enableLogging = false;
 #ifdef Q_WS_WIN
 	{
-		QSettings sUser(QSettings::UserScope, "Jabberout", "Joim");
+		QSettings sUser(QSettings::UserScope, "Jabberout", "Jabbin");
 		QString log = sUser.value("log").toString();
 		if (!log.isEmpty())
 			enableLogging = true;
@@ -55,7 +55,7 @@ PsiLogger::PsiLogger():QObject(QCoreApplication::instance()), file_(0), stream_(
 	if (!enableLogging)
 		return;
 
-	QString fileName = ApplicationInfo::homeDir() + "/joimchat-log.txt";
+	QString fileName = ApplicationInfo::homeDir() + "/jabbinchat-log.txt";
 	QFile::remove(fileName);
 	file_ = new QFile(fileName);
 	if (!file_->open(QIODevice::WriteOnly)) {

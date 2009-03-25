@@ -42,7 +42,7 @@ void log(QString message)
 #include "psicon.h"
 #include "main.h"
 #include "yaonline.h"
-#include "joimpsi_revision.h" // auto-generated file, see src.pro for details
+#include "jabbinpsi_revision.h" // auto-generated file, see src.pro for details
 #include "psilogger.h"
 
 YaPsiServer* YaPsiServer::instance_ = 0;
@@ -220,12 +220,12 @@ void YaPsiServer::hideAllWindows()
 
 QString YaPsiServer::getBuildNumber()
 {
-	return QString::number(JOIMPSI_REVISION);
+	return QString::number(JABBINPSI_REVISION);
 }
 
 QString YaPsiServer::getUninstallPath()
 {
-	QSettings sUser(QSettings::UserScope, "Jabberout", "Joim");
+	QSettings sUser(QSettings::UserScope, "Jabberout", "Jabbin");
 	QDir programDir(sUser.value("ProgramDir").toString());
 	QStringList filters;
 	filters << "unins*.exe";

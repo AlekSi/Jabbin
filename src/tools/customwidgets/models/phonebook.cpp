@@ -512,7 +512,7 @@ void PhoneBookModel::save()
     writer.setAutoFormatting(true);
 
     writer.writeStartDocument();
-    writer.writeDTD("<!DOCTYPE joimphonebook>");
+    writer.writeDTD("<!DOCTYPE jabbinphonebook>");
     writer.writeStartElement("phonebook");
     writer.writeAttribute("version", "1.0");
 

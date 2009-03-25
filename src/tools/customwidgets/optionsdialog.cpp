@@ -26,7 +26,7 @@
 #include "psicontactlist.h"
 #include "common.h"
 #include "generic/notifications.h"
-#include "joimnotifications.h"
+#include "jabbinnotifications.h"
 
 #include <phonon/objectdescription.h>
 #include <phonon/backendcapabilities.h>
@@ -41,13 +41,13 @@
 #define DEFAULT_CALL_SERVER_JID "jabberout.com"
 #define DEFAULT_CALL_SERVER_RESOURCE "phone"
 
-static const QString autoStartRegistryKey = "CurrentVersion/Run/joimchat.exe";
+static const QString autoStartRegistryKey = "CurrentVersion/Run/jabbinchat.exe";
 
 OptionsDialog::Private::Private(OptionsDialog * parent)
     : q(parent), controller(NULL),
       iconNotification(":/customwidgets/data/options/notifications.png"),
       iconSound(":/customwidgets/data/options/sounds.png"),
-      iconJoim(":/customwidgets/data/options/general.png"),
+      iconJabbin(":/customwidgets/data/options/general.png"),
       tableNotificationsCurrentRow(-1)
 {
     setupUi(parent);
@@ -116,7 +116,7 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
              //         item->setIcon(iconSound);
              //         break;
              //     case 3:
-             //         item->setIcon(iconJoim);
+             //         item->setIcon(iconJabbin);
              //         break;
              // }
             tableNotifications->setItem(row, col, item);
@@ -140,7 +140,7 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
             this, SLOT(tableNotificationsUpdate()));
     connect(checkNotificationSound, SIGNAL(clicked()),
             this, SLOT(tableNotificationsUpdate()));
-    connect(checkPopupJoim, SIGNAL(clicked()),
+    connect(checkPopupJabbin, SIGNAL(clicked()),
             this, SLOT(tableNotificationsUpdate()));
     connect(buttonServiceProvidersAdd, SIGNAL(clicked()),
             this, SLOT(buttonServiceProvidersAddClicked()));
@@ -183,7 +183,7 @@ void OptionsDialog::Private::tableNotificationsCurrentCellChanged(int currentRow
 
     checkNotificationTooltip->setChecked(
             tableNotifications->item(currentRow, 1)->data(Qt::UserRole).toBool());
-    checkPopupJoim->setChecked(
+    checkPopupJabbin->setChecked(
             tableNotifications->item(currentRow, 3)->data(Qt::UserRole).toBool());
 
     QString svalue = tableNotifications->item(currentRow, 2)->data(Qt::UserRole).toString();
@@ -206,9 +206,9 @@ void OptionsDialog::Private::tableNotificationsUpdate()
     tableNotifications->item(tableNotificationsCurrentRow, 1)->setIcon(
             checkNotificationTooltip->isChecked() ? iconNotification : QIcon());
     tableNotifications->item(tableNotificationsCurrentRow, 3)
-        ->setData(Qt::UserRole, checkPopupJoim->isChecked());
+        ->setData(Qt::UserRole, checkPopupJabbin->isChecked());
     tableNotifications->item(tableNotificationsCurrentRow, 3)->setIcon(
-            checkPopupJoim->isChecked() ? iconJoim : QIcon());
+            checkPopupJabbin->isChecked() ? iconJabbin : QIcon());
 
     QString svalue = QString();
     if (checkNotificationSound->isChecked()) {
@@ -256,15 +256,15 @@ void OptionsDialog::Private::buttonSampleTooltipClicked()
     CustomWidgets::Notifications * notifications = CustomWidgets::Notifications::instance();
     notifications->showNotification("Simple Notification",
             "This is a simple notification tooltip with a specified timeout",
-            iconJoim.pixmap(64, 64), actions, 2);
+            iconJabbin.pixmap(64, 64), actions, 2);
 
     actions["chat"] = "Close";
     notifications->showNotification("Notification with action",
             "This is a simple notification tooltip with a longer timeout, and an action button",
-            iconJoim.pixmap(64, 64), actions, 4);
+            iconJabbin.pixmap(64, 64), actions, 4);
     notifications->showNotification("Permanent notification",
             "This is a notification tooltip without a timer, so you need to click 'Close'",
-            iconJoim.pixmap(64, 64), actions);
+            iconJabbin.pixmap(64, 64), actions);
 }
 
 OptionsDialog::OptionsDialog(QWidget * parent)
@@ -310,10 +310,10 @@ void OptionsDialog::load()
 #elif defined(Q_WS_X11)
     QString home = QDir::homePath();
     // gnome (and possibly others)
-    bool autorunGnome = QFile::exists(home + "/.config/autostart/joim");
+    bool autorunGnome = QFile::exists(home + "/.config/autostart/jabbin");
     // kde
-    bool autorunKDE = QFile::exists(home + "/.kde/Autostart/joim") ||
-                      QFile::exists(home + "/.kde4/Autostart/joim");
+    bool autorunKDE = QFile::exists(home + "/.kde/Autostart/jabbin") ||
+                      QFile::exists(home + "/.kde4/Autostart/jabbin");
     d->checkAutostart->setChecked(autorunKDE && autorunGnome);
     if (autorunGnome != autorunKDE) {
         d->checkAutostart->setCheckState(Qt::PartiallyChecked);
@@ -381,10 +381,10 @@ void OptionsDialog::load()
         d->tableNotifications->item(row, 2)->setData(Qt::UserRole, svalue);
         d->tableNotifications->item(row, 2)->setIcon(svalue.isEmpty() ? QIcon() : d->iconSound);
 
-        // popup joim
-        value = getOption(id + ".popupjoim", Bool);
+        // popup jabbin
+        value = getOption(id + ".popupjabbin", Bool);
         d->tableNotifications->item(row, 3)->setData(Qt::UserRole, value);
-        d->tableNotifications->item(row, 3)->setIcon(value ? d->iconJoim : QIcon());
+        d->tableNotifications->item(row, 3)->setIcon(value ? d->iconJabbin : QIcon());
 
     }
 
@@ -441,13 +441,13 @@ void OptionsDialog::save()
 #elif defined(Q_WS_X11)
     QString home = QDir::homePath();
     if (autostart) {
-        symlink(QCoreApplication::applicationFilePath(), home + "/.config/autostart/joim");
-        symlink(QCoreApplication::applicationFilePath(), home + "/.kde/Autostart/joim");
-        symlink(QCoreApplication::applicationFilePath(), home + "/.kde4/Autostart/joim");
+        symlink(QCoreApplication::applicationFilePath(), home + "/.config/autostart/jabbin");
+        symlink(QCoreApplication::applicationFilePath(), home + "/.kde/Autostart/jabbin");
+        symlink(QCoreApplication::applicationFilePath(), home + "/.kde4/Autostart/jabbin");
     } else {
-        unlink(home + "/.config/autostart/joim");
-        unlink(home + "/.kde/Autostart/joim");
-        unlink(home + "/.kde4/Autostart/joim");
+        unlink(home + "/.config/autostart/jabbin");
+        unlink(home + "/.kde/Autostart/jabbin");
+        unlink(home + "/.kde4/Autostart/jabbin");
     }
 #else
     // nothing
@@ -491,9 +491,9 @@ void OptionsDialog::save()
         svalue = d->tableNotifications->item(row, 2)->data(Qt::UserRole).toString();
         setOption(id + ".sound", svalue);
 
-        // popup joim
+        // popup jabbin
         value = d->tableNotifications->item(row, 3)->data(Qt::UserRole).toBool();
-        setOption(id + ".popupjoim", value);
+        setOption(id + ".popupjabbin", value);
 
     }
 

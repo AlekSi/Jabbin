@@ -70,7 +70,7 @@ HEADERS += \
 	$$PWD/yastyle.h \
 	$$PWD/yatoster.h \
 	$$PWD/yapopupnotification.h \
-	$$PWD/joimabout.h \
+	$$PWD/jabbinabout.h \
 	$$PWD/yapreferences.h \
 	$$PWD/yaprivacymanager.h \
 	$$PWD/yaipc.h \
@@ -102,7 +102,7 @@ SOURCES += \
 	$$PWD/yastyle.cpp \
 	$$PWD/yatoster.cpp \
 	$$PWD/yapopupnotification.cpp \
-	$$PWD/joimabout.cpp \
+	$$PWD/jabbinabout.cpp \
 	$$PWD/yapreferences.cpp \
 	$$PWD/yaprivacymanager.cpp \
 	$$PWD/yaipc.cpp \
@@ -123,7 +123,7 @@ INTERFACES += \
 	$$PWD/yamainwindow.ui \
 	$$PWD/yachatdialog.ui \
 	$$PWD/yarostertiplabel.ui \
-	$$PWD/joimabout.ui \
+	$$PWD/jabbinabout.ui \
 	$$PWD/yapreferences.ui \
 	$$PWD/yalicense.ui
 

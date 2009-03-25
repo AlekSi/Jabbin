@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>yachat</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Joim 1.0</string>
+	<string>Jabbin 1.0</string>
 	<key>CFBundleIconFile</key>
 	<string>application.icns</string>
 	<key>CFBundleIdentifier</key>
@@ -25,7 +25,7 @@
 	<key>CSResourcesFileMapped</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string>http://download.jabberout.com/joim/version.xml</string>
+	<string>http://download.jabberout.com/jabbin/version.xml</string>
 	<key>SUShowReleaseNotes</key>
 	<true/>
 </dict>

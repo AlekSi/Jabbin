@@ -40,7 +40,7 @@
 #include "visibletext.h"
 #include "yacontactlistviewdelegate.h"
 #include "yavisualutil.h"
-#include "joimpsi_revision.h"
+#include "jabbinpsi_revision.h"
 #include "common.h"
 #include "iconset.h"
 
@@ -492,7 +492,7 @@ const void Ya::showHistory(const PsiAccount* me, const XMPP::Jid& interlocutor)
 		out << "<head>" << endl;
 		out << "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />" << endl;
 		out << "<title>" << QCoreApplication::instance()->translate("Ya", "%1: Chat History").arg(TextUtil::escape(interlocutor.bare())) << "</title>" << endl;
-		out << "<meta name=\"Generator\" content=\"YaChat :: " << JOIMPSI_VERSION << "." << JOIMPSI_REVISION << "\" />" << endl;
+		out << "<meta name=\"Generator\" content=\"YaChat :: " << JABBINPSI_VERSION << "." << JABBINPSI_REVISION << "\" />" << endl;
 		out << "<meta name=\"Keywords\" content=\"" << TextUtil::escape(me->name()) << "," << TextUtil::escape(interlocutor.full()) << "\" />" << endl;
 		out << "<meta name=\"Description\" content=\"" << TextUtil::escape(me->name()) << "," << TextUtil::escape(interlocutor.full()) << "\" />" << endl;
 

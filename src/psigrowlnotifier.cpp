@@ -93,7 +93,7 @@ PsiGrowlNotifier::PsiGrowlNotifier() : QObject(QCoreApplication::instance())
 	// Register with Growl
 	QString appName = "Psi";
 #ifdef YAPSI
-	appName = QObject::tr("Joim");
+	appName = QObject::tr("Jabbin");
 #endif
 	gn_ = new GrowlNotifier(nots, defaults, appName);
 }

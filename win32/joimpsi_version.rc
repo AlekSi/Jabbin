@@ -14,7 +14,7 @@ BEGIN
         BEGIN
             VALUE "FileVersion", "1, 0, 0, 1000"
             VALUE "ProductVersion", "1, 0, 0, 1000"
-            VALUE "ProductName", "Joim\0"
+            VALUE "ProductName", "Jabbin\0"
             VALUE "CompanyName", "Jabberout\0"
         END
     END

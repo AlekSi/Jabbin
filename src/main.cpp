@@ -20,7 +20,7 @@
 
 #ifdef HAVE_BREAKPAD
 #include "breakpad.h"
-#include "joimpsi_revision.h" // auto-generated file, see src.pro for details
+#include "jabbinpsi_revision.h" // auto-generated file, see src.pro for details
 #endif
 
 #ifdef HAVE_SPARKLE
@@ -107,7 +107,7 @@ PsiMain::PsiMain(QObject *par)
 #ifndef YAPSI
 	QSettings sUser(QSettings::UserScope, "psi-im.org", "Psi");
 #else
-	QSettings sUser(QSettings::UserScope, "jabberout.com", "Joim");
+	QSettings sUser(QSettings::UserScope, "jabberout.com", "Jabbin");
 #endif
 	lastProfile = sUser.value("last_profile").toString();
 	lastLang = sUser.value("last_lang").toString();
@@ -327,7 +327,7 @@ static void startOnline()
 	QString onlineExe = programDir.absoluteFilePath("online.exe");
 	if (QFile::exists(onlineExe)) {
 		QStringList arguments;
-		arguments << "-program:joimchat.exe";
+		arguments << "-program:jabbinchat.exe";
 		if (YaOnline::onlineIsRunning()) {
 			QProcess::execute(onlineExe, arguments);
 		}
@@ -403,8 +403,8 @@ int main(int argc, char *argv[])
 #ifdef HAVE_BREAKPAD
 	{
 		QMap<QString, QString> p;
-		p["name"]         = "joim";
-		p["version"]      = QString("%1.%2").arg(JOIMPSI_VERSION).arg(JOIMPSI_REVISION);
+		p["name"]         = "jabbin";
+		p["version"]      = QString("%1.%2").arg(JABBINPSI_VERSION).arg(JABBINPSI_REVISION);
 		p["report-url"]   = "http://localhost/cgi-bin/cgi-collector/collector.py";
 		p["report-email"] = "report@e.mail";
 		Breakpad::install(ApplicationInfo::crashReporterDir(), p);

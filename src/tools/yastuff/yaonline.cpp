@@ -172,7 +172,7 @@ static YaOnlineEventData yaOnlineIdToEventData(PsiCon* controller, const QString
 
 	QStringList data = id.split(":");
 	Q_ASSERT(data.size() == 2);
-	Q_ASSERT(data[0] == "joimchat");
+	Q_ASSERT(data[0] == "jabbinchat");
 	QDomDocument doc;
 	if (!doc.setContent(QCA::Base64().decodeString(data[1])))
 		return result;
@@ -519,7 +519,7 @@ void YaOnline::notify(int id, PsiEvent* event)
 	}
 
 	XMPP::Message m;
-	m.setFrom("lastmail.jabberout.com/joim");
+	m.setFrom("lastmail.jabberout.com/jabbin");
 	YaLastMail lastMail;
 
 	lastMail.subject   = event->description();

@@ -157,7 +157,7 @@ public slots:
 #ifdef YAPSI
 	void updateStyleSheet()
 	{
-		loadStyleSheet("JoimPsi");
+		loadStyleSheet("JabbinPsi");
 	}
 #endif
 
@@ -605,7 +605,7 @@ bool PsiCon::init()
 
 	// setup the main window
 #ifdef YAPSI
-	d->mainwin = new YaMainWin(option.alwaysOnTop, (option.useDock && option.dockToolMW), this, "joimpsimain");
+	d->mainwin = new YaMainWin(option.alwaysOnTop, (option.useDock && option.dockToolMW), this, "jabbinpsimain");
 #else
 	d->mainwin = new MainWin(option.alwaysOnTop, (option.useDock && option.dockToolMW), this, "psimain");
 #endif

@@ -2,26 +2,26 @@
  * libjingle
  * Copyright 2004--2005, Google Inc.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *  1. Redistributions of source code must retain the above copyright notice, 
+ *  1. Redistributions of source code must retain the above copyright notice,
  *     this list of conditions and the following disclaimer.
  *  2. Redistributions in binary form must reproduce the above copyright notice,
  *     this list of conditions and the following disclaimer in the documentation
  *     and/or other materials provided with the distribution.
- *  3. The name of the author may not be used to endorse or promote products 
+ *  3. The name of the author may not be used to endorse or promote products
  *     derived from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
- * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
  * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
- * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
  * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
  * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR 
- * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+ * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
@@ -36,7 +36,7 @@
 #else
 //#include "talk/session/phone/linphonemediaengine.h"
 
-#include "joimmediaengine.h"
+#include "jabbinmediaengine.h"
 
 #endif
 #include "channelmanager.h"
@@ -136,7 +136,7 @@ void ChannelManager::DestroyVoiceChannel_w(VoiceChannel *voice_channel) {
   assert(it != channels_.end());
   if (it == channels_.end())
     return;
- 
+
   channels_.erase(it);
   MediaChannel *channel = voice_channel->channel();
   delete voice_channel;
@@ -173,7 +173,7 @@ void ChannelManager::SetAudioOptions_w(AudioOptions options) {
       (*it)->PauseMedia_w();
     }
 
-    if (media_engine_->SetSoundDevices(options.wave_in_device, 
+    if (media_engine_->SetSoundDevices(options.wave_in_device,
         options.wave_out_device) == -1) {
       // TODO: We need to log these failures.
     }
@@ -195,7 +195,7 @@ void ChannelManager::OnMessage(talk_base::Message *message) {
   case MSG_CREATEVOICECHANNEL:
     {
       std::cerr << "ChannelManager::OnMessage create voice channel" << std::endl;
-      talk_base::TypedMessageData<CreateParams *> *data 
+      talk_base::TypedMessageData<CreateParams *> *data
         = static_cast<talk_base::TypedMessageData<CreateParams *> *>(
           message->pdata);
       data->data()->channel = CreateVoiceChannel_w(data->data()->session);
@@ -204,7 +204,7 @@ void ChannelManager::OnMessage(talk_base::Message *message) {
 
   case MSG_DESTROYVOICECHANNEL:
     {
-      talk_base::TypedMessageData<VoiceChannel *> *data 
+      talk_base::TypedMessageData<VoiceChannel *> *data
         = static_cast<talk_base::TypedMessageData<VoiceChannel *> *>(
           message->pdata);
       DestroyVoiceChannel_w(data->data());
@@ -212,7 +212,7 @@ void ChannelManager::OnMessage(talk_base::Message *message) {
     break;
   case MSG_SETAUDIOOPTIONS:
     {
-      talk_base::TypedMessageData<AudioOptions> *data 
+      talk_base::TypedMessageData<AudioOptions> *data
         = static_cast<talk_base::TypedMessageData<AudioOptions> *>(
           message->pdata);
       SetAudioOptions_w(data->data());

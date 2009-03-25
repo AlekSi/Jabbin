@@ -147,7 +147,7 @@ bool PsiContactList::haveConnectingAccounts() const
 
 /**
  * At the moment, it returns first enabled account.
- * Note: In Joim it tries to return first enabled jabberout account, then
+ * Note: In Jabbin it tries to return first enabled jabberout account, then
  * reverts to the usual behavior.
  */
 PsiAccount *PsiContactList::defaultAccount() const

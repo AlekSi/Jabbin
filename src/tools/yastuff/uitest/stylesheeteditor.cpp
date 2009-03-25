@@ -37,7 +37,7 @@ StyleSheetEditor::StyleSheetEditor(QWidget *parent)
 
 	ui.styleCombo->addItems(QStyleFactory::keys());
 	ui.styleCombo->setCurrentIndex(ui.styleCombo->findText(defaultStyle));
-	loadStyleSheet("Joimpsi");
+	loadStyleSheet("Jabbinpsi");
 }
 
 void StyleSheetEditor::on_styleCombo_activated(const QString &styleName)

@@ -22,7 +22,7 @@ SOURCES += \
 	$$PWD/../../customwidgets/calldialog.cpp \
 	$$PWD/../../customwidgets/contacttooltip.cpp \
 	$$PWD/../../customwidgets/optionsdialog.cpp \
-	$$PWD/../../customwidgets/joimnotifications.cpp \
+	$$PWD/../../customwidgets/jabbinnotifications.cpp \
 	$$PWD/../../customwidgets/models/callhistory.cpp \
 	$$PWD/../../customwidgets/models/phonebook.cpp \
 	$$PWD/../../customwidgets/generic/widgetexpander.cpp \
@@ -53,7 +53,7 @@ HEADERS += \
 	$$PWD/../../customwidgets/calldialog_p.h \
 	$$PWD/../../customwidgets/contacttooltip.h \
 	$$PWD/../../customwidgets/contacttooltip_p.h \
-	$$PWD/../../customwidgets/joimnotifications.h \
+	$$PWD/../../customwidgets/jabbinnotifications.h \
 	$$PWD/../../customwidgets/models/callhistory.h \
 	$$PWD/../../customwidgets/models/callhistory_p.h \
 	$$PWD/../../customwidgets/models/phonebook.h \

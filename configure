@@ -598,7 +598,7 @@ public:
 		if(!lib.isEmpty())
 			conf->addLib(QString("-L") + s);
 		conf->addLib("-lssl -lcrypto");
-		
+
 		conf->addDefine("HAVE_OPENSSL");
 
 		return true;
@@ -714,7 +714,7 @@ public:
 		if (!QFile::exists("third-party/qca/qca") || !conf->getenv("QC_DISABLE_bundled_qca").isEmpty() || !QFile::exists("third-party/qca/qca-ossl")) {
 			return true;
 		}
-			
+
 		bundled = false;
 
 #if defined(Q_OS_WIN) || defined(Q_OS_MAC)
@@ -728,7 +728,7 @@ public:
 		{
 			if(QFile::exists(path))
 			{
-				QString certPathString = 
+				QString certPathString =
 					"QCA_SYSTEMSTORE_PATH=\\\\\\\\\\\\\"" + path + "\\\\\\\\\\\\\"";
 				conf->addDefine(certPathString);
 				return true;
@@ -762,10 +762,10 @@ public:
 			if(QFile::exists(conf->getenv("PREFIX") + "/certs/rootcerts.pem"))
 				path = "\$\$PREFIX/certs/rootcerts.pem";
 			else
-				path = "\$\$DATADIR/joimchat/certs/rootcerts.pem";
+				path = "\$\$DATADIR/jabbinchat/certs/rootcerts.pem";
 
 			QString extra =
-			"qcasharedfiles.path = \$\$DATADIR/joimchat\n"
+			"qcasharedfiles.path = \$\$DATADIR/jabbinchat\n"
 			"qcasharedfiles.files = third-party/qca/qca/certs\n"
 			"INSTALLS += qcasharedfiles\n";
 			conf->addExtra(extra);
@@ -773,7 +773,7 @@ public:
 		}
 
 		// Qt<4.2 workaround
-		QString certPathString = 
+		QString certPathString =
 			"QCA_SYSTEMSTORE_PATH=\\\\\\\\\\\\\"" + path + "\\\\\\\\\\\\\"";
 		conf->addDefine(certPathString);
 
@@ -843,7 +843,7 @@ public:
 			return false;
 		if(ret != 0)
 			return false;
-		
+
 		conf->addExtra("CONFIG += dbus");
 		return true;
 	}
@@ -886,7 +886,7 @@ public:
             return false;
         return true;
     }
-	
+
 	// TODO: This should go into ConfObj
 	void addFrameworkPath(const QString& str)
 	{
@@ -901,7 +901,7 @@ public:
 		if(!checkFramework(growl_path, "Growl"))
 			return false;
 
-		if(!growl_path.isEmpty()) 
+		if(!growl_path.isEmpty())
 			addFrameworkPath(growl_path);
 		conf->addLib("-framework Growl");
 		conf->addDefine("HAVE_GROWL");
@@ -952,7 +952,7 @@ public:
 		else {
 			conf->addLib("-lXss");
 		}
-		
+
 		conf->addDefine("HAVE_XSS");
 		return true;
 	}
@@ -997,7 +997,7 @@ public:
 		int ret;
 		if (!conf->doCompileAndLink(str, QStringList(), QString(), QString(), &ret) || ret != 0)
 			return false;
-			
+
 		conf->addDefine("HAVE_DNOTIFY");
 		return true;
 	}
@@ -1028,7 +1028,7 @@ public:
 			"}\n";
 		if (!conf->doCompileAndLink(str, QStringList(), QString(), QString(), NULL))
 			return false;
-			
+
 		conf->addDefine("HAVE_GETHOSTBYNAME_R");
 		return true;
 	}
@@ -1209,16 +1209,16 @@ public:
 	QString checkString() const { return QString(); }
 	bool exec()
 	{
-		conf->addExtra(QString("PSI_DATADIR=%1/joimchat").arg(conf->getenv("DATADIR")));
+		conf->addExtra(QString("PSI_DATADIR=%1/jabbinchat").arg(conf->getenv("DATADIR")));
 
 		QFile file("src/config.h");
 		if ( file.open(QIODevice::WriteOnly | QIODevice::Text) ) {
 			QTextStream stream( &file );
-			stream << "#define PSI_DATADIR \"" << conf->getenv("DATADIR") << "/joimchat\"" << endl;
+			stream << "#define PSI_DATADIR \"" << conf->getenv("DATADIR") << "/jabbinchat\"" << endl;
 		}
-		
+
 		conf->addDefine("HAVE_CONFIG");
-		
+
 		return true;
 	}
 };

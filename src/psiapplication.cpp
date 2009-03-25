@@ -198,7 +198,7 @@ private:
 PsiApplication::PsiApplication(int &argc, char **argv, bool GUIenabled)
 : QApplication(argc, argv, GUIenabled)
 {
-	setApplicationName("Joim");
+	setApplicationName("Jabbin");
 	init(GUIenabled);
 	connect(this, SIGNAL(aboutToQuit()), SLOT(appAboutToQuit()));
 
