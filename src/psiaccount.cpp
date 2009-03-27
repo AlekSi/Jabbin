@@ -2854,7 +2854,6 @@ void PsiAccount::setStatus(const Status &_s,  bool withPriority)
 
 			login();
 			setStatusDirect(s, withPriority);
-			emit moodChanged();
 		}
 		// change status
 		else {
