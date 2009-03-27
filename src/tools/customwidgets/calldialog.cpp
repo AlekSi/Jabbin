@@ -273,7 +273,7 @@ void CallDialog::init(const Jid & jid, PsiAccount * account, VoiceCaller * calle
         connect(caller, SIGNAL(in_progress(const Jid & )),
                 this,   SLOT(inProgress(const Jid & )),
                 Qt::QueuedConnection);
-        }
+    }
 }
 
 CallDialog::CallDialog(QWidget * parent)
