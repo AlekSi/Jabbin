@@ -277,7 +277,7 @@ PsiAccount* YaLoginPage::getAccount() const
 
 void YaLoginPage::registerAccount()
 {
-	DesktopUtil::openYaUrl("http://www.jabberout.com/register");
+	DesktopUtil::openYaUrl("http://www.jabbin.com/register");
 }
 
 void YaLoginPage::paintEvent(QPaintEvent*)
