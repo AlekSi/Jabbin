@@ -138,6 +138,7 @@ public:
 	Status::Type currentStatusType() const;
 #ifdef YAPSI
 	Status::Type lastLoggedInStatusType() const;
+	QString lastLoggedInStatusText() const;
 #endif
 	QString currentStatusMessage() const;
 

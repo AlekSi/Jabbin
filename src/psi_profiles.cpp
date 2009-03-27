@@ -452,6 +452,7 @@ void UserProfile::reset()
 
 	// global
 	mwgeom.setRect(64, 64, 150, 360);
+	qDebug() << "UserProfile::reset() this:" << (void*) this;
 	lastStatusString = "";
 	useSound = TRUE;
 	proxyList.clear();
@@ -853,6 +854,9 @@ static Options::ToolbarPrefs loadToolbarData( const QDomElement &e )
 
 bool UserProfile::toFile(const QString &fname)
 {
+	qDebug() << "UserProfile::toFile() this:" << (void*) this << " fname:" << fname;
+
+	qWarning();
 	QDomDocument doc;
 
 	QDomElement base = doc.createElement("psiconf");
@@ -863,6 +867,7 @@ bool UserProfile::toFile(const QString &fname)
 	base.appendChild(textTag(doc, "geom", mwgeom));
 	base.appendChild(stringListToXml(doc, "recentGCList", recentGCList));
 	base.appendChild(stringListToXml(doc, "recentBrowseList", recentBrowseList));
+	qDebug() << "UserProfile::toFile() this:" << (void*) this << " lastStatusString:" << lastStatusString;
 	base.appendChild(textTag(doc, "lastStatusString", lastStatusString));
 	base.appendChild(textTag(doc, "useSound", useSound));
 
@@ -1346,6 +1351,7 @@ bool UserProfile::toFile(const QString &fname)
 
 bool UserProfile::fromFile(const QString &fname)
 {
+	qDebug() << "UserProfile::fromFile() this:" << (void*) this << " fname:" << fname;
 	QString confver;
 	QDomDocument doc;
 	QString progver;
@@ -1367,6 +1373,7 @@ bool UserProfile::fromFile(const QString &fname)
 	xmlToStringList(base, "recentGCList", &recentGCList);
 	xmlToStringList(base, "recentBrowseList", &recentBrowseList);
 	readEntry(base, "lastStatusString", &lastStatusString);
+	qDebug() << "UserProfile::fromFile() this:" << (void*) this << " lastStatusString:" << lastStatusString;
 	readBoolEntry(base, "useSound", &useSound);
 
 	bool found;

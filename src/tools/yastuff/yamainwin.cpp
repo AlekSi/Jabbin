@@ -526,6 +526,7 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 	updateSelfWidgetsVisibility();
 
 	ui_.selfMood->setStatusType(XMPP::Status::Offline);
+	ui_.selfMood->setStatusText(psi_->lastLoggedInStatusText());
 	connect(ui_.selfMood, SIGNAL(statusChanged(XMPP::Status::Type)), SLOT(statusSelected(XMPP::Status::Type)));
 	connect(ui_.selfMood, SIGNAL(statusChanged(const QString&)), SLOT(statusSelected()));
 
@@ -928,6 +929,8 @@ void YaMainWin::statusSelected(XMPP::Status::Type statusType)
 		psi_->yaOnline()->setDND(statusType == XMPP::Status::DND);
 	}
 #endif
+
+
 }
 
 void YaMainWin::dndEnabledActionTriggered()

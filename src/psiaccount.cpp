@@ -1449,7 +1449,8 @@ void PsiAccount::autoLogin()
 #ifndef YAPSI
 			setStatus(Status(Status::Online, "", d->acc.priority));
 #else
-			setStatus(Status(d->psi->lastLoggedInStatusType(), d->psi->currentStatusMessage(), d->acc.priority));
+			qDebug() << "PsiAccount::autoLogin()" << d->psi->lastLoggedInStatusText();
+			setStatus(Status(d->psi->lastLoggedInStatusType(), d->psi->lastLoggedInStatusText(), d->acc.priority));
 #endif
 		}
 	}
@@ -2852,6 +2853,8 @@ void PsiAccount::setStatus(const Status &_s,  bool withPriority)
 #endif
 
 			login();
+			setStatusDirect(s, withPriority);
+			emit moodChanged();
 		}
 		// change status
 		else {

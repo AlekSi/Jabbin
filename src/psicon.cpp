@@ -251,7 +251,8 @@ public:
 #endif
 		pro.recentGCList = recentGCList;
 		pro.recentBrowseList = recentBrowseList;
-		pro.lastStatusString = lastStatusString;
+		qDebug() << "PsiCon::Private::saveProfile() this:" << (void*) this << " lastStatusString:" << lastStatusString;
+		// pro.lastStatusString = lastStatusString;
 		pro.useSound = useSound;
 		pro.prefs = option;
 		if ( proxy )
@@ -426,6 +427,7 @@ PsiCon::PsiCon()
 	yaOnline_ = YaOnlineHelper::instance();
 #endif
 
+	qDebug() << "PsiCon::PsiCon() this:" << (void*) this << " lastStatusString reset";
 	d->lastStatusString = "";
 	useSound = true;
 	d->mainwin = 0;
@@ -579,6 +581,7 @@ bool PsiCon::init()
 
 	d->recentGCList = d->pro.recentGCList;
 	d->recentBrowseList = d->pro.recentBrowseList;
+	qDebug() << "PsiCon::init() this:" << (void*) this << " lastStatusString:" << d->pro.lastStatusString;
 	d->lastStatusString = d->pro.lastStatusString;
 	useSound = d->pro.useSound;
 
@@ -1142,22 +1145,29 @@ XMPP::Status::Type PsiCon::lastLoggedInStatusType() const
 {
 	return d->mainwin->lastLoggedInStatusType();
 }
+QString PsiCon::lastLoggedInStatusText() const
+{
+	return d->lastStatusString;
+}
 #endif
 
 QString PsiCon::currentStatusMessage() const
 {
 #ifdef YAPSI
-	if (!d->mainwin)
-		return QString();
-	return d->mainwin->statusMessage();
+	QString message = "";
+	if (d->mainwin) {
+		message = d->mainwin->statusMessage();
+	}
+	return message;
 #else
-	return d->lastStatusString;
+     return d->lastStatusString;
 #endif
 }
 
 void PsiCon::setStatusFromDialog(const XMPP::Status &s, bool withPriority)
 {
 	d->lastStatusString = s.status();
+	d->pro.lastStatusString = s.status();
 	setGlobalStatus(s, withPriority);
 }
 
