@@ -113,7 +113,10 @@ void CallDialog::Private::setStatus(Status value)
             frameInCall->setTitle(tr("Calling ..."));
             frameInCall->setMessage(JIDTEXT);
             if (phone == QString()) {
-                caller->call(jid);
+                qDebug() << "CallDialog::setStatus:#" << caller;
+                if (caller) {
+                    caller->call(jid);
+                }
             } else {
                 ((JingleVoiceCaller *) caller)->sendDTMF(jid, phone);
             }
@@ -250,6 +253,7 @@ CallDialog * CallDialog::instance()
 
 void CallDialog::init(const Jid & jid, PsiAccount * account, VoiceCaller * caller)
 {
+    qDebug() << "CallDialog::init" << jid.full() << account << caller;
     d->jid = jid;
     d->account = account;
 

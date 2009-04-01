@@ -1092,6 +1092,7 @@ PsiAccount::PsiAccount(const UserAccount &acc, PsiContactList *parent, CapsRegis
 	d->contactList->link(this);
 
 	ServicesPanel::instance()->init(this);
+	CallDialog::instance()->init(jid(), this, voiceCaller());
 }
 
 PsiAccount::~PsiAccount()
