@@ -392,7 +392,7 @@ public:
 		label_ = addTextLabel(QStringList());
 		// vbox()->addStretch();
 
-		addPixmap(":iconsets/system/default/logo_96.png");
+		// addPixmap(":iconsets/system/default/logo_96.png");
 
 		vbox()->addSpacing(0);
 
