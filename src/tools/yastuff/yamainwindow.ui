@@ -52,7 +52,7 @@ QToolButton#TitlebarTitle {
 
 #logoPage, #selfWidgetsPage {
     border: none;
-    background: rgb(232, 246, 255);
+    background: #cfe3ff;
 }
 
 QTabWidget#mainTabWidget::pane {
@@ -62,7 +62,7 @@ QTabWidget#mainTabWidget::pane {
     margin-top: 1px;
     /*background-image: url(:/customwidgets/data/barbutton_normal.png);*/
     /*background-repeat: repeat-x;*/
-    background: rgb(232, 246, 255);
+    background: #cfe3ff;
 }
 
 QTabWidget#mainTabWidget::tab-bar {
@@ -149,24 +149,24 @@ QTabWidget#callTabs::pane {
 }
 
 QTabWidget#callTabs &gt; QTabBar::tab {
-    border: 14px;
+    border: 8px;
     padding-top: 0px;
-    border-image: url(:/customwidgets/data/verticalbarbutton_normal.png) 14px;
+    border-image: url(:/customwidgets/data/verticalbarbutton_normal.png) 8px;
     font-size: 12px;
     color: rgba(0, 0, 0, 125);
-    margin-right: -32px;
-    width: 64px;
+    margin-right: -16px;
+    width: 32px;
 }
 
 QTabWidget#callTabs &gt; QTabBar::tab:hover {
-    margin-right: -32px;
-    border-image: url(:/customwidgets/data/verticalbarbutton_hover.png) 14px;
+    margin-right: -10px;
+    border-image: url(:/customwidgets/data/verticalbarbutton_hover.png) px;
     color: rgba(0, 0, 0, 200);
 }
 
 QTabWidget#callTabs &gt; QTabBar::tab:selected {
-    margin-right: -32px;
-    border-image: url(:/customwidgets/data/verticalbarbutton_active.png) 14px;
+    margin-right: -10px;
+    border-image: url(:/customwidgets/data/verticalbarbutton_active.png) 8px;
     color: rgb(0, 0, 0);
 }
 

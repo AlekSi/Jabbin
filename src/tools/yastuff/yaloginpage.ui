@@ -14,6 +14,13 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" >
    <item>
+    <widget class="YaLinkButton" name="registerButton" >
+     <property name="text" >
+      <string>Register</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QLabel" name="errorLabel" >
      <property name="minimumSize" >
       <size>
@@ -186,13 +193,6 @@
       </spacer>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="YaLinkButton" name="registerButton" >
-     <property name="text" >
-      <string>Register</string>
-     </property>
-    </widget>
    </item>
    <item>
     <spacer>
