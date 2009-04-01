@@ -41,6 +41,7 @@ public:
     QPoint moveFrom;
 
     QList < QPushButton * > buttonList;
+    QPushButton * buttonInfo;
     QPushButton * buttonCall;
     QPushButton * buttonChat;
     QPushButton * buttonProfile;

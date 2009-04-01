@@ -49,6 +49,7 @@ ContactTooltip::Private::Private(ContactTooltip * parent)
     buttonList << (buttonChat = new QPushButton(QIcon(":/images/chat_windowicon.png"), tr("Chat")));
     buttonList << (buttonCall = new QPushButton(QIcon(":/customicons/CalPad-Icon16x16"), tr("Call")));
     buttonList << (buttonProfile = new QPushButton(QIcon(":/images/user-actions/button_glyph_profile.png"), tr("Profile")));
+    buttonList << (buttonInfo = new QPushButton(QIcon(":/iconsets/chatwindow/profile.png"), tr("Info")));
     buttonList << (buttonHistory = new QPushButton(QIcon(":/images/user-actions/button_glyph_history.png"), tr("History")));
 
     foreach (QPushButton * button, buttonList) {
@@ -115,6 +116,8 @@ void ContactTooltip::showContact(PsiContact * contact, const QRect & parent)
             contact, SLOT(openCall()));
     connect(d->buttonProfile, SIGNAL(clicked()),
             contact, SLOT(yaProfile()));
+    connect(d->buttonInfo, SIGNAL(clicked()),
+            contact, SLOT(userInfo()));
     connect(d->buttonHistory, SIGNAL(clicked()),
             contact, SLOT(history()));
 
@@ -142,6 +145,11 @@ void ContactTooltip::showContact(PsiContact * contact, const QRect & parent)
     d->buttonCall->setVisible(true);
     d->buttonCall->setVisible(contact->isCallable());
 
+    d->buttonProfile->setVisible(
+        contact->jid().bare().endsWith("@jabbin.com")
+        ||
+        contact->jid().bare().endsWith("@jabberout.com")
+    );
 
     // Moving the window
     bool flip = false;

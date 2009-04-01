@@ -45,7 +45,7 @@
 
 
 using namespace XMPP;
-		
+
 class InfoDlg::Private
 {
 public:
@@ -146,7 +146,7 @@ InfoDlg::~InfoDlg()
 }
 
 /**
- * Redefined so the window does not close when changes are not saved. 
+ * Redefined so the window does not close when changes are not saved.
  */
 void InfoDlg::closeEvent ( QCloseEvent * e ) {
 
@@ -224,7 +224,7 @@ void InfoDlg::setData(const VCard &i)
 	ui_.le_fullname->setText( i.fullName() );
 	ui_.le_nickname->setText( i.nickName() );
 #ifdef YAPSI
-	d->gender->button( (int)i.gender() )->setChecked(true);
+	//d->gender->button( (int)i.gender() )->setChecked(true);
 #endif
 	ui_.le_bday->setText( i.bdayStr() );
 
@@ -260,7 +260,7 @@ void InfoDlg::setData(const VCard &i)
 	ui_.le_title->setText( i.title() );
 	ui_.le_role->setText( i.role() );
 	ui_.te_desc->setText( i.desc() );
-	
+
 	if ( !i.photo().isEmpty() ) {
 		//printf("There is a picture...\n");
 		d->photo = i.photo();
@@ -472,7 +472,7 @@ VCard InfoDlg::makeVCard()
 		list << p;
 		v.setPhoneList( list );
 	}
-	
+
 	if ( !d->photo.isEmpty() ) {
 		//printf("Adding a pixmap to the vCard...\n");
 		v.setPhoto( d->photo );
@@ -538,13 +538,13 @@ void InfoDlg::selectPhoto()
 			}
 			option.lastPath = fi.dirPath();
 			//printf(QDir::convertSeparators(fi.filePath()));
-			
+
 			// put the image in the preview box
 			setPreviewPhoto(str);
 		}
 		break;
 	}
-	
+
 }
 
 /**
@@ -556,7 +556,7 @@ void InfoDlg::setPreviewPhoto(const QString& path)
 	QFile photo_file(path);
 	if (!photo_file.open(QIODevice::ReadOnly))
 		return;
-	
+
 	QByteArray photo_data = photo_file.readAll();
 	QImage photo_image(photo_data);
 	if(!photo_image.isNull()) {
@@ -574,7 +574,7 @@ void InfoDlg::clearPhoto()
 	// this will cause the pixmap disappear
 	ui_.label_photo->setText(tr("Picture not\navailable"));
 	d->photo = QByteArray();
-	
+
 	// the picture changed, so notify there are some changes done
 	d->te_edited = true;
 }
