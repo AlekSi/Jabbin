@@ -73,6 +73,7 @@
 #include "textutil.h"
 #include "fakegroupcontact.h"
 #include "yacommon.h"
+#include "tools/services/servicespopupbutton.h"
 
 static const QString tabIndexOptionPath = "options.ya.main-window.tab-index";
 static const QString showContactListGroupsOptionPath = "options.ya.main-window.contact-list.show-groups";
@@ -352,7 +353,7 @@ public:
 	{
 		vbox()->addStretch();
 
-		addPixmap(":iconsets/system/default/logo_96.png");
+		// addPixmap(":iconsets/system/default/logo_96.png");
 
 		vbox()->addSpacing(0);
 
@@ -394,7 +395,7 @@ public:
 
 		// addPixmap(":iconsets/system/default/logo_96.png");
 
-		vbox()->addSpacing(0);
+		vbox()->addSpacing(10);
 
 		addTextLabel(QStringList()
 			<< QString::fromUtf8("Please insert the nick (jabber id) of the friend you want to add in the above box. For example: user@jabberout.com")
@@ -723,6 +724,7 @@ public:
 		, addButton_(0)
 		, filterButton_(0)
 		, addContactLineEdit_(0)
+		, addContactLineEditAccount_(0)
 		, filterEdit_(0)
 	{}
 
@@ -770,6 +772,8 @@ public:
 			addContactLineEdit_->setOkButtonVisible(false);
 			addContactLineEdit_->setCancelButtonVisible(false);
 
+			addContactLineEditAccount_ = new ServicesPopupButton(addContactLineEdit_);
+
 			filterEdit_ = new YaExpandingOverlayLineEdit(this);
 			filterEdit_->setController(filterButton_);
 			filterEdit_->setOkButtonVisible(false);
@@ -797,11 +801,13 @@ public:
 			}
 
 			addContactLineEdit_->addToGrounding(rightFrame_);
+
 			filterEdit_->addToGrounding(rightFrame_);
 		}
 	}
 
 	YaExpandingOverlayLineEdit* addContactLineEdit() const { return addContactLineEdit_; }
+	ServicesPopupButton* addContactLineEditAccount() const { return addContactLineEditAccount_; }
 	YaExpandingOverlayLineEdit* filterEdit() const { return filterEdit_; }
 	QToolButton* addButton() const { return addButton_; }
 	QToolButton* filterButton() const { return filterButton_; }
@@ -852,6 +858,7 @@ private:
 	QToolButton* addButton_;
 	QToolButton* filterButton_;
 	YaExpandingOverlayLineEdit* addContactLineEdit_;
+	ServicesPopupButton* addContactLineEditAccount_;
 	YaExpandingOverlayLineEdit* filterEdit_;
 };
 
@@ -959,6 +966,7 @@ void YaRosterContactsTab::init()
 		addContactListView_ = new YaAddContactPage(0);
 		addContactListView_->init();
 		contactsPageButton()->addContactLineEdit()->installEventFilter(this);
+		contactsPageButton()->addContactLineEditAccount()->installEventFilter(this);
 		connect(contactsPageButton()->addContactLineEdit(), SIGNAL(enteredText(const QString&)), SLOT(addContactTextEntered(const QString&)));
 		connect(contactsPageButton()->addContactLineEdit(), SIGNAL(cancelled()), SLOT(addContactCancelled()));
 
@@ -1118,6 +1126,15 @@ void YaRosterContactsTab::setAddContactModeEnabled(bool _enabled)
 void YaRosterContactsTab::addContactTextEntered(const QString& text)
 {
 	QString c = text.trimmed();
+	QString transport = contactsPageButton()->addContactLineEditAccount()->transport();
+	qDebug() << "Transport is " << transport;
+	if (!transport.isEmpty()) {
+		c = c.replace("@", "%");
+		c.append("@" + transport);
+		qDebug() << "jid is " << c;
+	}
+
+
 	if (c.isEmpty()) {
 		setAddContactModeEnabled(false);
 		return;
@@ -1339,6 +1356,25 @@ bool YaRosterContactsTab::eventFilter(QObject* obj, QEvent* e)
 	if (e->type() == QEvent::DeferredDelete || e->type() == QEvent::Destroy) {
 		return false;
 	}
+
+	if (
+		e->type() == QEvent::Resize &&
+		(obj == contactsPageButton()->addContactLineEdit() ||
+		obj == contactsPageButton()->addContactLineEditAccount())
+	) {
+		qDebug() << "positioning the service chooser for add contact";
+		int width = contactsPageButton()->addContactLineEditAccount()->width();
+		contactsPageButton()->addContactLineEditAccount()->move(
+			contactsPageButton()->addContactLineEdit()->width() - width, 0);
+	}
+	// if (obj == contactsPageButton()->addContactLineEdit() && e->type() == QEvent::Resize) {
+	// 	contactsPageButton()->addContactLineEditAccount()->move(
+	// 		contactsPageButton()->addContactLineEdit()->width()
+	// 		- contactsPageButton()->addContactLineEditAccount()->width(),
+	// 		0
+	// 		);
+	// 	return false;
+	// }
 
 #ifndef CONTACTLIST_UNSELECT_ON_CLICK_OUTSIDE
 	// needs testing

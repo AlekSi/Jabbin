@@ -83,6 +83,7 @@ protected:
     int m_type;
 
 public:
+    static void initIcons();
     static QIcon m_genericIcon;
     static QIcon m_loadingIcon;
     static QIcon m_errorIcon;

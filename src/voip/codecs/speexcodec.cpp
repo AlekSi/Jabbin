@@ -22,6 +22,7 @@
 
 #include <string.h>
 #include <math.h>
+#include <QDebug>
 
 
 #define FRAME_SIZE 160
@@ -57,15 +58,17 @@ public:
 
 SpeexEncoder::SpeexEncoder()
 {
+    qDebug() << "SpeexEncoder::SpeexEncoder";
+
     d = new Private;
     //d->framesPerPacket = 1;
     d->state = 0;
-    speex_bits_init(&(d->bits)); 
+    speex_bits_init(&(d->bits));
     d->inputBuffer = new RingBuffer(1024);
     d->outputBuffer = new RingBuffer(1024);
-    
-    speex_bits_init(&(d->bits)); 
-    d->state = speex_encoder_init(&speex_nb_mode); 
+
+    speex_bits_init(&(d->bits));
+    d->state = speex_encoder_init(&speex_nb_mode);
 
     int quality=8;
     speex_encoder_ctl(d->state, SPEEX_SET_QUALITY, &quality);
@@ -73,21 +76,21 @@ SpeexEncoder::SpeexEncoder()
     speex_encoder_ctl(d->state, SPEEX_SET_COMPLEXITY, &complexity);
     int vad=1;
     speex_encoder_ctl(d->state, SPEEX_SET_VAD, &vad);
-    
+
 }
 
 SpeexDecoder::SpeexDecoder()
 {
     d = new Private;
     d->state = 0;
-    speex_bits_init(&(d->bits)); 
+    speex_bits_init(&(d->bits));
     //d->inputBuffer = new RingBuffer(1024);
     d->outputBuffer = new RingBuffer(1024);
 
 
-    speex_bits_init(&(d->bits)); 
-    d->state = speex_decoder_init(&speex_nb_mode); 
-    
+    speex_bits_init(&(d->bits));
+    d->state = speex_decoder_init(&speex_nb_mode);
+
     int enh = 1;//enable a perceptual post-filter
     speex_decoder_ctl(d->state, SPEEX_SET_ENH, &enh);
 }
@@ -107,7 +110,7 @@ SpeexDecoder::~SpeexDecoder()
 {
     speex_decoder_destroy(d->state);
     speex_bits_destroy(&(d->bits));
-    
+
     //delete d->inputBuffer;
     delete d->outputBuffer;
     delete d;
@@ -127,15 +130,15 @@ int SpeexEncoder::encode( const short *data, int size, char **res, int *samplesP
     while ( d->inputBuffer->size() >= FRAME_SIZE*2 )
     {
         char output_frame[FRAME_SIZE*2];
-        short* input_frame = (short*)d->inputBuffer->data(); 
-        
+        short* input_frame = (short*)d->inputBuffer->data();
+
         /*Flush all the bits in the struct so we can encode a new frame*/
         speex_bits_reset(&(d->bits));
-        
+
         speex_encode_int(d->state, input_frame, &(d->bits));
-        
+
         d->inputBuffer->fetch( FRAME_SIZE*2 );
-        
+
         char bytes = speex_bits_write(&(d->bits), output_frame, FRAME_SIZE*2);
         d->outputBuffer->put(output_frame, bytes);
 
@@ -158,7 +161,7 @@ int SpeexEncoder::encode( const short *data, int size, char **res, int *samplesP
 int SpeexDecoder::decode( const char *data, int size, short **res )
 {
     qDebug("speex decode %d bytes", size);
-   
+
     short output_frame[FRAME_SIZE];
 
     speex_bits_read_from(&(d->bits), (char*)data, size );
@@ -171,7 +174,7 @@ int SpeexDecoder::decode( const char *data, int size, short **res )
         speex_bits_advance( &(d->bits), remainingBits % 8 );
 
         //qDebug( "remaining bits: %d", speex_bits_remaining(&(d->bits)) );
-        
+
         if(ret == -1)
         {
             //debug("End of stream");
@@ -190,7 +193,7 @@ int SpeexDecoder::decode( const char *data, int size, short **res )
 
     int resSize = d->outputBuffer->size();
 
-    if (  resSize > 0 ) {  
+    if (  resSize > 0 ) {
         *res = new short[resSize/2];
         memcpy(*res, d->outputBuffer->data(), (resSize/2)*2 );
         d->outputBuffer->clear();

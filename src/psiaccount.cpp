@@ -173,6 +173,7 @@ typedef int socklen_t;
 #include "psilogger.h"
 
 #include "tools/services/servicespanel.h"
+#include "tools/services/servicespopupbutton.h"
 
 using namespace XMPP;
 
@@ -1092,6 +1093,7 @@ PsiAccount::PsiAccount(const UserAccount &acc, PsiContactList *parent, CapsRegis
 	d->contactList->link(this);
 
 	ServicesPanel::instance()->init(this);
+	ServicesPopupButton::setAccount(this);
 	CallDialog::instance()->init(jid(), this, voiceCaller());
 }
 

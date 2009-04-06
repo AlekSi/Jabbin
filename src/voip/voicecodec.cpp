@@ -2,6 +2,7 @@
 
 #include <Q3ValueList>
 #include <Q3IntDict>
+#include <QDebug>
 
 #include "codecs/pcmucodec.h"
 #include "codecs/speexcodec.h"
@@ -10,7 +11,7 @@ VoiceEncoder::VoiceEncoder(){}
 VoiceEncoder::~VoiceEncoder(){}
 VoiceDecoder::VoiceDecoder(){}
 VoiceDecoder::~VoiceDecoder(){}
-    
+
 
 
 CodecsManager * codecsManagerInstance = 0;
@@ -27,6 +28,7 @@ CodecsManager::CodecsManager()
     d = new Private();
     codecsManagerInstance = this;
 
+    qDebug() << "CodecsManager::CodecsManager() installing codecs";
     installCodecFactory( new PCMUCodecFactory() );
     installCodecFactory( new SpeexCodecFactory() );
 }

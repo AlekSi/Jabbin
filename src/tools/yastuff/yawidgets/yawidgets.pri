@@ -10,6 +10,7 @@ SOURCES += \
 	$$PWD/newselfavatar/yaselfmoodaction.cpp \
 	$$PWD/../../services/servicesmodel.cpp \
 	$$PWD/../../services/servicespanel.cpp \
+	$$PWD/../../services/servicespopupbutton.cpp \
 	$$PWD/../../customwidgets/selfmood.cpp \
 	$$PWD/../../customwidgets/selfavatar.cpp \
 	$$PWD/../../customwidgets/generic/styledwindow.cpp \
@@ -38,6 +39,8 @@ HEADERS += \
 	$$PWD/../../services/servicesmodel_p.h \
 	$$PWD/../../services/servicespanel.h \
 	$$PWD/../../services/servicespanel_p.h \
+	$$PWD/../../services/servicespopupbutton.h \
+	$$PWD/../../services/servicespopupbutton_p.h \
 	$$PWD/../../customwidgets/selfmood.h \
 	$$PWD/../../customwidgets/selfavatar.h \
 	$$PWD/../../customwidgets/generic/styledwindow.h \

@@ -84,6 +84,8 @@ public:
 
     void reloadItem(const QModelIndex & index);
 
+    static QIcon iconForTransportType(const QString & type);
+
 public Q_SLOTS:
     void refresh(const QModelIndex &parent = QModelIndex());
 

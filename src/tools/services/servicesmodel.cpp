@@ -339,40 +339,9 @@ QIcon XmppServiceItem::_defaultIcon()
     if (!m_discoItem.identities().isEmpty()) {
         DiscoItem::Identity id = m_discoItem.identities().first();
 
-        if (id.type == ("aim"))
-            return ServiceItem::m_aimIcon;
-        else if (id.type == ("irc"))
-            return ServiceItem::m_ircIcon;
-        else if (id.type == ("gadu-gadu"))
-            return ServiceItem::m_gadugaduIcon;
-        //else if (id.type == ("http-ws"))
-        //    return ServiceItem::m_http-wsIcon;
-        else if (id.type == ("icq"))
-            return ServiceItem::m_icqIcon;
-        else if (id.type == ("lcs"))
-            return ServiceItem::m_msnIcon;
-        else if (id.type == ("msn"))
-            return ServiceItem::m_msnIcon;
-        else if (id.type == ("ocs"))
-            return ServiceItem::m_msnIcon;
-        else if (id.type == ("qq"))
-            return ServiceItem::m_qqIcon;
-        //else if (id.type == ("sametime"))
-        //    return ServiceItem::m_sametimeIcon;
-        //else if (id.type == ("simple"))
-        //    return ServiceItem::m_simpleIcon;
-        else if (id.type == ("sms"))
-            return ServiceItem::m_smsIcon;
-        //else if (id.type == ("smtp"))
-        //    return ServiceItem::m_smtpIcon;
-        //else if (id.type == ("tlen"))
-        //    return ServiceItem::m_tlenIcon;
-        //else if (id.type == ("xfire"))
-        //    return ServiceItem::m_xfireIcon;
-        else if (id.type == ("xmpp"))
-            return ServiceItem::m_jabberIcon;
-        else if (id.type == ("yahoo"))
-            return ServiceItem::m_yahooIcon;
+        QIcon icon = ServicesModel::iconForTransportType(id.type);
+        if (!icon.isNull())
+            return icon;
     }
 
     switch (m_type) {
@@ -462,6 +431,17 @@ ServicesModel::Private::Private(ServicesModel * parent)
     // Initializing icons here since they can not be
     // initialized before QApplication instance is
     // created
+}
+
+ServicesModel::Private::~Private()
+{
+}
+
+void ServiceItem::initIcons()
+{
+    if (!ServiceItem::m_genericIcon.isNull())
+        return;
+
     ServiceItem::m_genericIcon  = QIcon(":/services/data/generic.png");
     ServiceItem::m_loadingIcon  = QIcon(":/services/data/loading.png");
     ServiceItem::m_errorIcon    = QIcon(":/services/data/error.png");
@@ -483,10 +463,6 @@ ServicesModel::Private::Private(ServicesModel * parent)
     ServiceItem::m_icqIcon      = QIcon(":/services/data/services/icq.png");
     ServiceItem::m_ircIcon      = QIcon(":/services/data/services/irc.png");
     ServiceItem::m_smsIcon      = QIcon(":/services/data/services/sms.png");
-}
-
-ServicesModel::Private::~Private()
-{
 }
 
 ServiceItem * ServicesModel::Private::findItem(const Jid & jid)
@@ -853,3 +829,30 @@ void ServicesModel::refresh(const QModelIndex & parent)
      parentItem->reload();
 }
 
+QIcon ServicesModel::iconForTransportType(const QString & type)
+{
+    ServiceItem::initIcons();
+    if (type == "aim")
+        return ServiceItem::m_aimIcon;
+    else if (type == "irc")
+        return ServiceItem::m_ircIcon;
+    else if (type == "gadu-gadu")
+        return ServiceItem::m_gadugaduIcon;
+    else if (type == "icq")
+        return ServiceItem::m_icqIcon;
+    else if (type == "lcs")
+        return ServiceItem::m_msnIcon;
+    else if (type == "msn")
+        return ServiceItem::m_msnIcon;
+    else if (type == "ocs")
+        return ServiceItem::m_msnIcon;
+    else if (type == "qq")
+        return ServiceItem::m_qqIcon;
+    else if (type == "sms")
+        return ServiceItem::m_smsIcon;
+    else if (type == "xmpp")
+        return ServiceItem::m_jabberIcon;
+    else if (type == "yahoo")
+        return ServiceItem::m_yahooIcon;
+    return QIcon();
+}
