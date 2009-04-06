@@ -745,8 +745,12 @@ void PsiContact::clearCustomPicture()
 
 void PsiContact::userInfo()
 {
-	if (account())
+	qDebug() << "PsiContact::userInfo() 1";
+	if (account()) {
+		qDebug() << "PsiContact::userInfo() 2";
 		account()->actionInfo(jid());
+	}
+	qDebug() << "PsiContact::userInfo() 3";
 }
 
 void PsiContact::history()
