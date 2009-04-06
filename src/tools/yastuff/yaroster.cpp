@@ -1129,7 +1129,7 @@ void YaRosterContactsTab::addContactTextEntered(const QString& text)
 	QString transport = contactsPageButton()->addContactLineEditAccount()->transport();
 	qDebug() << "Transport is " << transport;
 	if (!transport.isEmpty()) {
-		c = c.replace("@", "%");
+		c = c.replace("@", "\\40");
 		c.append("@" + transport);
 		qDebug() << "jid is " << c;
 	}

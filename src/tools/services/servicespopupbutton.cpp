@@ -67,9 +67,9 @@ void ServicesPopupButton::Private::menuAboutToBeShown()
             QString jid = contact->jid().bare();
             if (jid.contains("@") || !jid.endsWith(accountServer))
                 continue;
-            jid = jid.left(jid.indexOf("."));
+            QString type = jid.left(jid.indexOf("."));
             actions[menu->addAction(
-                ServicesModel::iconForTransportType(jid),
+                ServicesModel::iconForTransportType(type),
                 contact->name())] = jid;
         }
     }
