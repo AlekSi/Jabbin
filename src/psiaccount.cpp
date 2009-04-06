@@ -4120,6 +4120,7 @@ void PsiAccount::actionAgentSetStatus(const Jid &j, Status &s)
 
 void PsiAccount::actionInfo(const Jid &_j, bool showStatusInfo)
 {
+	qDebug() << "PsiAccount::actionInfo() 1";
 	bool useCache = true;
 	Jid j;
 	if(findGCContact(_j)) {
@@ -4130,6 +4131,7 @@ void PsiAccount::actionInfo(const Jid &_j, bool showStatusInfo)
 		j = _j.userHost();
 	}
 
+	qDebug() << "PsiAccount::actionInfo() 2";
 	InfoDlg *w = findDialog<InfoDlg*>(j);
 	if(w) {
 		w->updateStatus();
@@ -4151,6 +4153,7 @@ void PsiAccount::actionInfo(const Jid &_j, bool showStatusInfo)
 		if(!vcard && loggedIn())
 			w->doRefresh();
 	}
+	qDebug() << "PsiAccount::actionInfo() 3";
 }
 
 void PsiAccount::actionAuth(const Jid &j)
