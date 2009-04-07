@@ -63,7 +63,7 @@ public:
 	QByteArray photo;
 	QList<QString> infoRequested;
 #ifdef YAPSI
-	QButtonGroup* gender;
+	// QButtonGroup* gender;
 #endif
 };
 
@@ -324,8 +324,8 @@ void InfoDlg::fieldsEnable(bool x)
 	ui_.le_fullname->setEnabled(x);
 	ui_.le_nickname->setEnabled(x);
 #ifdef YAPSI
-	foreach(QAbstractButton* button, d->gender->buttons())
-		button->setEnabled(x);
+	// foreach(QAbstractButton* button, d->gender->buttons())
+	// 	button->setEnabled(x);
 #endif
 	ui_.le_bday->setEnabled(x);
 	ui_.le_email->setEnabled(x);
@@ -408,8 +408,8 @@ void InfoDlg::setReadOnly(bool x)
 	ui_.le_fullname->setReadOnly(x);
 	ui_.le_nickname->setReadOnly(x);
 #ifdef YAPSI
-	foreach(QAbstractButton* button, d->gender->buttons())
-		button->setEnabled(!x);
+//	foreach(QAbstractButton* button, d->gender->buttons())
+//		button->setEnabled(!x);
 #endif
 	ui_.le_bday->setReadOnly(x);
 	ui_.le_email->setReadOnly(x);
@@ -476,7 +476,7 @@ VCard InfoDlg::makeVCard()
 	v.setFullName( ui_.le_fullname->text() );
 	v.setNickName( ui_.le_nickname->text() );
 #ifdef YAPSI
-	v.setGender( static_cast<XMPP::VCard::Gender>(d->gender->checkedId()) );
+	//v.setGender( static_cast<XMPP::VCard::Gender>(d->gender->checkedId()) );
 #endif
 	v.setBdayStr( ui_.le_bday->text() );
 
