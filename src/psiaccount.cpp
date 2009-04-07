@@ -4120,7 +4120,6 @@ void PsiAccount::actionAgentSetStatus(const Jid &j, Status &s)
 
 void PsiAccount::actionInfo(const Jid &_j, bool showStatusInfo)
 {
-	qDebug() << "PsiAccount::actionInfo() 1";
 	bool useCache = true;
 	Jid j;
 	if(findGCContact(_j)) {
@@ -4131,41 +4130,35 @@ void PsiAccount::actionInfo(const Jid &_j, bool showStatusInfo)
 		j = _j.userHost();
 	}
 
-	qDebug() << "PsiAccount::actionInfo() 2";
 	InfoDlg *w = findDialog<InfoDlg*>(j);
 	if(w) {
-	qDebug() << "PsiAccount::actionInfo() 2a1";
 		w->updateStatus();
-	qDebug() << "PsiAccount::actionInfo() 2a2";
 		w->setStatusVisibility(showStatusInfo);
-	qDebug() << "PsiAccount::actionInfo() 2a3";
 		bringToFront(w);
-	qDebug() << "PsiAccount::actionInfo() 2a4";
 	}
 	else {
-	qDebug() << "PsiAccount::actionInfo() 2b1";
-		const VCard *vcard = VCardFactory::instance()->vcard(j);
-	qDebug() << "PsiAccount::actionInfo() 2b2";
+		const VCard * vcard = VCardFactory::instance()->vcard(j);
 
 		VCard tmp;
-	qDebug() << "PsiAccount::actionInfo() 2b3";
-		if ( vcard )
-			tmp = *vcard;
+		if ( vcard ) {
+			tmp = * vcard;
+			qDebug() << "PsiAccount::actionInfo() vcard is valid";
+		}
 	qDebug() << "PsiAccount::actionInfo() 2b4";
+	qDebug() << "PsiAccount::actionInfo() j=" << j.bare();
+	qDebug() << "PsiAccount::actionInfo() d->jid=" << d->jid.bare();
+	qDebug() << "PsiAccount::actionInfo() tmp=" << tmp.fullName();
+	qDebug() << "PsiAccount::actionInfo() useCache=" << useCache;
+
 		w = new InfoDlg(j.compare(d->jid) ? InfoDlg::Self : InfoDlg::Contact, j, tmp, this, 0, useCache);
-	qDebug() << "PsiAccount::actionInfo() 2b5";
 
 		w->setStatusVisibility(showStatusInfo);
-	qDebug() << "PsiAccount::actionInfo() 2b6";
 		w->show();
-	qDebug() << "PsiAccount::actionInfo() 2b7";
 
 		// automatically retrieve info if it doesn't exist
 		if(!vcard && loggedIn())
 			w->doRefresh();
-	qDebug() << "PsiAccount::actionInfo() 2b8";
 	}
-	qDebug() << "PsiAccount::actionInfo() 3";
 }
 
 void PsiAccount::actionAuth(const Jid &j)

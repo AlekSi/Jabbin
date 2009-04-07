@@ -70,23 +70,39 @@ public:
 InfoDlg::InfoDlg(int type, const Jid &j, const VCard &vcard, PsiAccount *pa, QWidget *parent, bool cacheVCard)
 	: QDialog(parent)
 {
+qDebug() << "InfoDlg::InfoDlg 1";
 	setAttribute(Qt::WA_DeleteOnClose);
+qDebug() << "InfoDlg::InfoDlg 2";
   	if ( option.brushedMetal )
 		setAttribute(Qt::WA_MacMetalStyle);
+qDebug() << "InfoDlg::InfoDlg 3";
 	ui_.setupUi(this);
+qDebug() << "InfoDlg::InfoDlg 4";
 	d = new Private;
+qDebug() << "InfoDlg::InfoDlg 5";
 	setModal(false);
+qDebug() << "InfoDlg::InfoDlg 6";
 	d->type = type;
+qDebug() << "InfoDlg::InfoDlg 7";
 	d->jid = j;
+qDebug() << "InfoDlg::InfoDlg 8";
 	d->vcard = vcard;
+qDebug() << "InfoDlg::InfoDlg 9";
 	d->pa = pa;
+qDebug() << "InfoDlg::InfoDlg 10";
 	d->te_edited = false;
+qDebug() << "InfoDlg::InfoDlg 11";
 	d->jt = 0;
+qDebug() << "InfoDlg::InfoDlg 12";
 	d->pa->dialogRegister(this, j);
+qDebug() << "InfoDlg::InfoDlg 13";
 	d->cacheVCard = cacheVCard;
+qDebug() << "InfoDlg::InfoDlg 14";
 	d->busy = ui_.busy;
+qDebug() << "InfoDlg::InfoDlg 15";
 
 	ui_.te_desc->setTextFormat(Qt::PlainText);
+qDebug() << "InfoDlg::InfoDlg 16";
 
 	setWindowTitle(d->jid.full());
 #ifndef Q_WS_MAC
@@ -101,6 +117,7 @@ InfoDlg::InfoDlg(int type, const Jid &j, const VCard &vcard, PsiAccount *pa, QWi
 // 	d->gender->setExclusive(true);
 // #endif
 
+qDebug() << "InfoDlg::InfoDlg 17";
 	connect(ui_.pb_refresh, SIGNAL(clicked()), this, SLOT(doRefresh()));
 	connect(ui_.pb_refresh, SIGNAL(clicked()), this, SLOT(updateStatus()));
 	connect(ui_.te_desc, SIGNAL(textChanged()), this, SLOT(textChanged()));
@@ -108,10 +125,12 @@ InfoDlg::InfoDlg(int type, const Jid &j, const VCard &vcard, PsiAccount *pa, QWi
 	connect(ui_.pb_clear, SIGNAL(clicked()), this, SLOT(clearPhoto()));
 	connect(ui_.pb_close, SIGNAL(clicked()), this, SLOT(close()));
 
+qDebug() << "InfoDlg::InfoDlg 18";
 	if(d->type == Self) {
 		connect(ui_.pb_submit, SIGNAL(clicked()), this, SLOT(doSubmit()));
 	}
 	else {
+qDebug() << "InfoDlg::InfoDlg 19";
 		// Hide buttons
 		ui_.pb_submit->hide();
 		ui_.pb_open->hide();
@@ -120,23 +139,34 @@ InfoDlg::InfoDlg(int type, const Jid &j, const VCard &vcard, PsiAccount *pa, QWi
 	}
 
 	// Add a status tab
+qDebug() << "InfoDlg::InfoDlg 20";
 	connect(d->pa->client(), SIGNAL(resourceAvailable(const Jid &, const Resource &)), SLOT(contactAvailable(const Jid &, const Resource &)));
 	connect(d->pa->client(), SIGNAL(resourceUnavailable(const Jid &, const Resource &)), SLOT(contactUnavailable(const Jid &, const Resource &)));
 	connect(d->pa,SIGNAL(updateContact(const Jid&)),SLOT(contactUpdated(const Jid&)));
+qDebug() << "InfoDlg::InfoDlg 21";
 	ui_.te_status->setReadOnly(true);
+qDebug() << "InfoDlg::InfoDlg 22";
 	ui_.te_status->setTextFormat(Qt::RichText);
+qDebug() << "InfoDlg::InfoDlg 23";
 	PsiRichText::install(ui_.te_status->document());
+qDebug() << "InfoDlg::InfoDlg 24";
 	updateStatus();
+qDebug() << "InfoDlg::InfoDlg 25";
 	foreach(UserListItem* u, d->pa->findRelevant(j)) {
+qDebug() << "InfoDlg::InfoDlg 26a";
 		foreach(UserResource r, u->userResourceList()) {
+qDebug() << "InfoDlg::InfoDlg 26a1";
 			requestClientVersion(d->jid.withResource(r.name()));
 		}
 		if (u->userResourceList().isEmpty() && u->lastAvailable().isNull()) {
+qDebug() << "InfoDlg::InfoDlg 26a2";
 			requestLastActivity();
 		}
 	}
 
+qDebug() << "InfoDlg::InfoDlg 27";
 	setData(d->vcard);
+qDebug() << "InfoDlg::InfoDlg 28";
 }
 
 InfoDlg::~InfoDlg()
