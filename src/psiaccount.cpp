@@ -4134,24 +4134,36 @@ void PsiAccount::actionInfo(const Jid &_j, bool showStatusInfo)
 	qDebug() << "PsiAccount::actionInfo() 2";
 	InfoDlg *w = findDialog<InfoDlg*>(j);
 	if(w) {
+	qDebug() << "PsiAccount::actionInfo() 2a1";
 		w->updateStatus();
+	qDebug() << "PsiAccount::actionInfo() 2a2";
 		w->setStatusVisibility(showStatusInfo);
+	qDebug() << "PsiAccount::actionInfo() 2a3";
 		bringToFront(w);
+	qDebug() << "PsiAccount::actionInfo() 2a4";
 	}
 	else {
+	qDebug() << "PsiAccount::actionInfo() 2b1";
 		const VCard *vcard = VCardFactory::instance()->vcard(j);
+	qDebug() << "PsiAccount::actionInfo() 2b2";
 
 		VCard tmp;
+	qDebug() << "PsiAccount::actionInfo() 2b3";
 		if ( vcard )
 			tmp = *vcard;
+	qDebug() << "PsiAccount::actionInfo() 2b4";
 		w = new InfoDlg(j.compare(d->jid) ? InfoDlg::Self : InfoDlg::Contact, j, tmp, this, 0, useCache);
+	qDebug() << "PsiAccount::actionInfo() 2b5";
 
 		w->setStatusVisibility(showStatusInfo);
+	qDebug() << "PsiAccount::actionInfo() 2b6";
 		w->show();
+	qDebug() << "PsiAccount::actionInfo() 2b7";
 
 		// automatically retrieve info if it doesn't exist
 		if(!vcard && loggedIn())
 			w->doRefresh();
+	qDebug() << "PsiAccount::actionInfo() 2b8";
 	}
 	qDebug() << "PsiAccount::actionInfo() 3";
 }
