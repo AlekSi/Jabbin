@@ -26,7 +26,9 @@
 
 YaContactListViewLargeDelegate::YaContactListViewLargeDelegate(YaContactListView* parent)
 	: YaContactListViewDelegate(parent)
-{}
+{
+    setVerticalMargin(3);
+}
 
 /* ivan:
  void YaContactListViewLargeDelegate::realDrawContact(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const

@@ -11,6 +11,7 @@ SOURCES += \
 	$$PWD/../../services/servicesmodel.cpp \
 	$$PWD/../../services/servicespanel.cpp \
 	$$PWD/../../services/servicespopupbutton.cpp \
+	$$PWD/../../customwidgets/emoticonspopupbutton.cpp \
 	$$PWD/../../customwidgets/selfmood.cpp \
 	$$PWD/../../customwidgets/selfavatar.cpp \
 	$$PWD/../../customwidgets/generic/styledwindow.cpp \
@@ -41,6 +42,8 @@ HEADERS += \
 	$$PWD/../../services/servicespanel_p.h \
 	$$PWD/../../services/servicespopupbutton.h \
 	$$PWD/../../services/servicespopupbutton_p.h \
+	$$PWD/../../customwidgets/emoticonspopupbutton.h \
+	$$PWD/../../customwidgets/emoticonspopupbutton_p.h \
 	$$PWD/../../customwidgets/selfmood.h \
 	$$PWD/../../customwidgets/selfavatar.h \
 	$$PWD/../../customwidgets/generic/styledwindow.h \

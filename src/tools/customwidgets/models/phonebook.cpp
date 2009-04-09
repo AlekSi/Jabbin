@@ -37,8 +37,8 @@
 #include <QCursor>
 #include <QMenu>
 
-#define ICON_WIDTH 32
-#define EDITOR_WIDTH 32
+#define ICON_WIDTH 22
+#define EDITOR_WIDTH 64
 #define GRADIENT_WIDTH 20
 #define EDITOR_COLOR_S "235, 244, 250"
 #define EDITOR_COLOR QColor(235, 244, 250)
@@ -250,7 +250,7 @@ public:
     {
         label = new QLabel();
         label->setName("PhoneBookItemDelegateLabel");
-        label->setStyleSheet("QLabel { background-color: white; }");
+        label->setStyleSheet("QLabel#PhoneBookItemDelegateLabel { background-color: white; font-size: 10px; }");
         label->setAutoFillBackground(true);
     }
 
@@ -413,7 +413,7 @@ QVariant PhoneBookModel::data(const QModelIndex & index, int role) const
         case Qt::DisplayRole:
             return d->items.at(i).name;
         case PhoneBookItem::PrettyDisplay:
-            return "<span style=\"font-size: 12pt; font-weight:bold;\">" + d->items.at(i).name + "</span>\n";
+            return "<span style=\"font-size: 12px; font-weight:bold;\">" + d->items.at(i).name + "</span>\n";
         case Qt::DecorationRole:
             switch (d->items.at(i).gender) {
                 case Unknown:
@@ -426,7 +426,7 @@ QVariant PhoneBookModel::data(const QModelIndex & index, int role) const
         case Qt::ToolTipRole:
             return QString();
         case Qt::SizeHintRole:
-            return QSize(100, 48);
+            return QSize(100, 22);
         case Qt::EditRole:
             return d->items.at(i).toVariant();
         default:

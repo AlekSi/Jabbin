@@ -168,7 +168,7 @@ protected slots:
 		"	border-image: url(:/images/pushbutton/silver_profile/pushbutton_pressed.png) 12px 0px 12px 10px;"
 		"}"
 		);
-		setStyleSheet(styleSheet);
+		// setStyleSheet(styleSheet);
 #endif
 	}
 
@@ -247,31 +247,32 @@ void YaChatDlg::initUi()
 	// ui_.buttonCall->setText(tr("Call"));
 	#ifndef YAPSI_NO_STYLESHEETS
 		QString styleSheet = QString(
-		"QPushButton {"
+		"QPushButton, QToolButton {"
 		"	font-size: 12px;"
 		"	color: black;"
 		"	border-image: url(:/images/pushbutton/silver_profile/pushbutton.png) 12px 0px 12px 10px;"
 		"	border-width: 0px 7px 0px 15px;"
 		"}"
 		""
-		"QPushButton:disabled {"
+		"QPushButton:disabled, QToolButton:disabled {"
 		"	color: black;"
 		"}"
 		""
-		"QPushButton:focus {"
+		"QPushButton:focus, QToolButton:focus {"
 		"	border-image: url(:/images/pushbutton/silver_profile/pushbutton_focus.png) 12px 0px 12px 10px;"
 		"}"
 		""
-		"QPushButton:hover {"
+		"QPushButton:hover, QToolButton:hover {"
 		"	border-image: url(:/images/pushbutton/silver_profile/pushbutton_hover.png) 12px 0px 12px 10px;"
 		"}"
 		""
-		"QPushButton:pressed {"
+		"QPushButton:pressed, QToolButton:pressed {"
 		"	border-image: url(:/images/pushbutton/silver_profile/pushbutton_pressed.png) 12px 0px 12px 10px;"
 		"}"
 		);
-		ui_.buttonCall->setStyleSheet(styleSheet);
-		ui_.contactToolTipArea->setStyleSheet(styleSheet);
+		// ui_.buttonCall->setStyleSheet(styleSheet);
+		// ui_.contactToolTipArea->setStyleSheet(styleSheet);
+		// ui_.buttonEmoticons->setStyleSheet(styleSheet);
 	#endif
 
 	// connect(ui_.sendButton, SIGNAL(clicked()), SLOT(doSend()));
@@ -296,13 +297,14 @@ void YaChatDlg::initUi()
 
 	ui_.contactName->setMinimumSize(100, 30);
 
-	connect(ui_.separator, SIGNAL(textSelected(QString)), SLOT(addEmoticon(QString)));
-	connect(ui_.separator, SIGNAL(addContact()), SLOT(addContact()));
-	connect(ui_.separator, SIGNAL(authContact()), SLOT(authContact()));
+	// connect(ui_.separator, SIGNAL(textSelected(QString)), SLOT(addEmoticon(QString)));
+	// connect(ui_.separator, SIGNAL(addContact()), SLOT(addContact()));
+	// connect(ui_.separator, SIGNAL(authContact()), SLOT(authContact()));
 
 	{
 		if (PsiIconset::instance()->yaEmoticonSelectorIconset()) {
-			ui_.separator->setIconset(*PsiIconset::instance()->yaEmoticonSelectorIconset());
+			// ui_.separator->setIconset(*PsiIconset::instance()->yaEmoticonSelectorIconset());
+			ui_.buttonEmoticons->setIconset(*PsiIconset::instance()->yaEmoticonSelectorIconset());
 		}
 	}
 
@@ -444,8 +446,8 @@ void YaChatDlg::updateModelNotices()
 	model_->setAccountIsOfflineNoticeVisible(!account()->isAvailable());
 	model_->setAccountIsDisabledNoticeVisible(!account()->enabled());
 
-	ui_.separator->setShowAddButton(contact && contact->isBlocked() && account()->isAvailable());
-	ui_.separator->setShowAuthButton(!ui_.separator->showAddButton() && contact && !contact->authorizesToSeeStatus() && showAuthButton_ && account()->isAvailable());
+	// ui_.separator->setShowAddButton(contact && contact->isBlocked() && account()->isAvailable());
+	// ui_.separator->setShowAuthButton(!ui_.separator->showAddButton() && contact && !contact->authorizesToSeeStatus() && showAuthButton_ && account()->isAvailable());
 }
 
 void YaChatDlg::updateAvatar()
@@ -649,7 +651,7 @@ void YaChatDlg::chatEditCreated()
 {
 	ChatDlg::chatEditCreated();
 
-	ui_.separator->setChatWidgets(chatEdit(), chatView());
+	// ui_.separator->setChatWidgets(chatEdit(), chatView());
 	chatEdit()->setTypographyAction(YaChatDlgShared::instance()->typographyAction());
 	chatEdit()->setEmoticonsAction(YaChatDlgShared::instance()->emoticonsAction());
 }
@@ -658,7 +660,7 @@ void YaChatDlg::setLooks()
 {
 	ChatDlg::setLooks();
 
-	ui_.separator->updateChatEditHeight();
+	// ui_.separator->updateChatEditHeight();
 }
 
 void YaChatDlg::callContact()

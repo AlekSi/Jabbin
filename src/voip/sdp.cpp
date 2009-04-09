@@ -20,6 +20,7 @@
 #include "sdp.h"
 #include <qstringlist.h>
 #include <qregexp.h>
+#include <QDebug>
 
 
 SDP::SDP()
@@ -56,7 +57,8 @@ QString SDP::toString()
 
     if ( aFields.length() )
         res += QString("\n")+aFields;
-    
+
+    qDebug() << "SDP::toString:" << res;
     return res;
 }
 
@@ -66,10 +68,12 @@ void SDP::parse(QString data)
     formats.clear();
     rtmaps.clear();
     fmtps.clear();
-    
+
+    qDebug() << "SDP::parse:" << data;
     QStringList items = QStringList::split('\n',data);
     for ( QStringList::Iterator it = items.begin(); it != items.end(); ++it ) {
         QString item = (*it).stripWhiteSpace();
+        qDebug() << "SDP::parse" << item;
         if ( item.startsWith("o=") ) {
             owner = item.mid(2);
         } else

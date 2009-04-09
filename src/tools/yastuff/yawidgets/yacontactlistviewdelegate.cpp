@@ -42,7 +42,7 @@
 YaContactListViewDelegate::YaContactListViewDelegate(YaContactListView* parent)
 	: ContactListViewDelegate(parent)
 	, horizontalMargin_(5)
-	, verticalMargin_(3)
+	, verticalMargin_(1)
 	, margin_(3)
 	, avatarSize_(31)
 #ifdef YAPSI_PALE_ROSTER_JIDS
@@ -175,7 +175,7 @@ void YaContactListViewDelegate::setMargin(int margin)
 
 int YaContactListViewDelegate::nameFontSize(const QRect& nameRect) const
 {
-	return 11;
+	return 12;
 }
 
 int YaContactListViewDelegate::statusTypeFontSize(const QRect& statusTypeRect) const
