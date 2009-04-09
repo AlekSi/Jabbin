@@ -97,12 +97,7 @@ void CallHistoryItemEditor::toPhoneBook()
 {
     QString id = m_model->data(editingIndex, CallHistoryItem::Id).toString();
     qDebug() << "CallHistoryItemEditor::toPhoneBook() : ID is " << id;
-    qDebug() << "CallHistoryItemEditor::toPhoneBook()"
-        << (void *) CallDialog::contactList;
-    qDebug() << "CallHistoryItemEditor::toPhoneBook()"
-        << CallDialog::contactList->contacts();
     foreach (PsiContact * contact, CallDialog::contactList->contacts()) {
-        qDebug() << "CallHistoryItemEditor::toPhoneBook() : " << contact->name();
     }
 
 }
@@ -377,7 +372,6 @@ void CallHistoryModel::load()
 
     reader.readNext();
     if (reader.isStartElement()) {
-        qDebug() << "CallHistoryModel" << reader.name().toString();
         if (reader.name() != "callhistory" || reader.attributes().value("version") != "1.0") {
             reader.raiseError(QObject::tr("The file is not an callhistory version 1.0 file."));
             return;
@@ -388,7 +382,6 @@ void CallHistoryModel::load()
     while (!reader.atEnd()) {
         reader.readNext();
         if (reader.isStartElement()) {
-            qDebug() << "CallHistoryModel" << reader.name().toString();
             if (reader.name() == "event") {
                 item.name = reader.attributes().value("name").toString();
                 item.id = reader.attributes().value("id").toString();

@@ -14,6 +14,40 @@
 	-->
 <psi version="defaults" >
 	<options comment="Client options">
+		<notification>
+			<chat_request>
+				<popupjabbin type="bool" >false</popupjabbin>
+				<sound type="QString" ></sound>
+				<tooltip type="bool" >false</tooltip>
+			</chat_request>
+			<contact_online>
+				<popupjabbin type="bool" >false</popupjabbin>
+				<sound type="QString" ></sound>
+				<tooltip type="bool" >false</tooltip>
+			</contact_online>
+			<incoming_call>
+				<popupjabbin type="bool" >false</popupjabbin>
+				<sound type="QString" >${"resourcesDir"}/sound/ringing.mp3</sound>
+				<tooltip type="bool" >true</tooltip>
+			</incoming_call>
+			<incomming_file>
+				<popupjabbin type="bool" >false</popupjabbin>
+				<sound type="QString" ></sound>
+				<tooltip type="bool" >false</tooltip>
+			</incomming_file>
+			<incomming_voicemail>
+				<popupjabbin type="bool" >false</popupjabbin>
+				<sound type="QString" ></sound>
+				<tooltip type="bool" >false</tooltip>
+			</incomming_voicemail>
+			<status_request>
+				<popupjabbin type="bool" >false</popupjabbin>
+				<sound type="QString" ></sound>
+				<tooltip type="bool" >false</tooltip>
+			</status_request>
+		</notification>
+
+
 		<account comment="Default account options">
 			<domain comment="Always use the same domain to register with. Leave this empty to allow the user to choose his server." type="QString"></domain>
 		</account>

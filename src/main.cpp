@@ -118,6 +118,12 @@ PsiMain::PsiMain(QObject *par)
 	lastLang = s.value("last_lang", lastLang).toString();
 	autoOpen = s.value("auto_open", autoOpen).toBool();
 
+	qDebug() << "homeDir" << ApplicationInfo::homeDir();
+	qDebug() << "resourcesDir" << ApplicationInfo::resourcesDir();
+	qDebug() << "profilesDir" << ApplicationInfo::profilesDir();
+	qDebug() << "historyDir" << ApplicationInfo::historyDir();
+	qDebug() << "documentsDir" << ApplicationInfo::documentsDir();
+
 #ifdef YAPSI
 #ifdef YAPSI_ACTIVEX_SERVER
 	lastProfile = YaOnlineHelper::instance()->activeProfile();

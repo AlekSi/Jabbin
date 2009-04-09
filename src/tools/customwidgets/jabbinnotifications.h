@@ -23,12 +23,12 @@
 #include <QObject>
 #include <QPixmap>
 
-#define N_INCOMING_CALL      "notification.incoming_call"
-#define N_CHAT_REQUEST       "notification.chat_request"
-#define N_STATUS_REQUEST     "notification.status_request"
-#define N_CONTACT_ONLINE     "notification.contact_online"
-#define N_INCOMING_FILE      "notification.incomming_file"
-#define N_INCOMING_VOICEMAIL "notification.incomming_voicemail"
+#define N_INCOMING_CALL      "options.notification.incoming_call"
+#define N_CHAT_REQUEST       "options.notification.chat_request"
+#define N_STATUS_REQUEST     "options.notification.status_request"
+#define N_CONTACT_ONLINE     "options.notification.contact_online"
+#define N_INCOMING_FILE      "options.notification.incomming_file"
+#define N_INCOMING_VOICEMAIL "options.notification.incomming_voicemail"
 
 /**
  * Jabbin Notifications system

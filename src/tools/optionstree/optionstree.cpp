@@ -24,6 +24,7 @@
 
 #include "optionstree.h"
 #include "atomicxmlfile.h"
+#include "applicationinfo.h"
 
 /**
  * Default constructor
@@ -53,6 +54,21 @@ QVariant OptionsTree::getOption(const QString& name) const
 	if (value==VariantTree::missingValue) {
 		value=QVariant(QVariant::Invalid);
 	}
+
+	if (value.type() == QVariant::String)
+	{
+		QString string = value.toString();
+		value = string.replace(
+			"${\"resourcesDir\"}",
+			ApplicationInfo::resourcesDir()
+		);
+	}
+
+	if (name.startsWith("options.notification")) {
+		qDebug() << "OptionsTree::getOption:" << name;
+		qDebug() << "#############" << value;
+	}
+
 	return value;
 }
 
