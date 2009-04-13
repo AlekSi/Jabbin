@@ -40,6 +40,7 @@
 
 #define DEFAULT_CALL_SERVER_JID "jabberout.com"
 #define DEFAULT_CALL_SERVER_RESOURCE "phone"
+#define NO_OF_OPTIONS 7
 
 static const QString autoStartRegistryKey = "CurrentVersion/Run/jabbinchat.exe";
 
@@ -129,6 +130,7 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
     tableNotifications->item(3, 0)->setData(Qt::UserRole, N_CONTACT_ONLINE);
     tableNotifications->item(4, 0)->setData(Qt::UserRole, N_INCOMING_FILE);
     tableNotifications->item(5, 0)->setData(Qt::UserRole, N_INCOMING_VOICEMAIL);
+    tableNotifications->item(6, 0)->setData(Qt::UserRole, N_UPDATE_AVAILABLE);
 
     connect(tableNotifications, SIGNAL(currentCellChanged(int,int,int,int)),
             this, SLOT(tableNotificationsCurrentCellChanged(int,int,int,int)));

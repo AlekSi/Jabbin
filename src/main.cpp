@@ -81,6 +81,8 @@ extern "C" {
 #	include <qt_windows.h> // for RegDeleteKey
 #endif
 
+#include "tools/update/updater.h"
+
 /** \mainpage Psi API Documentation
  *
  *	\section intro_sec Indroduction
@@ -360,6 +362,8 @@ int main(int argc, char *argv[])
 	od->show();
 	return app.exec();
         */
+
+        Updater::instance();
 
 #ifdef Q_WS_MAC
 	QDir dir(QApplication::applicationDirPath());

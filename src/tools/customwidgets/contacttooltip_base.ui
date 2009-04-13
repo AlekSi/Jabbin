@@ -35,30 +35,36 @@ QLabel#labelName {
 QPushButton {
    min-height: 1.5em;
    padding: 0px 8px;
-   color: black;
-   border: 0px;
-   border-image: url(:/customwidgets/generic/data/button.png) 2px;
+   color: navy;
+   border: none;
+   background: none;
+   text-decoration: none;
+   text-align: left;
+   /*border: 0px;
+   border-image: url(:/customwidgets/generic/data/button.png) 2px;*/
 }
 
 QPushButton:disabled {
    color: rgba(0, 0, 0, 128);
 }
 
-QPushButton:focus {
+/*QPushButton:focus {
    border-image: url(:/customwidgets/generic/data/button_focus.png) 2px;
-}
+}*/
 
 QPushButton:hover {
-   border-image: url(:/customwidgets/generic/data/button_hover.png) 2px;
+   /*border-image: url(:/customwidgets/generic/data/button_hover.png) 2px;*/
+   text-decoration: underline;
+   color: rgb(100, 100, 255);
 }
 
-QPushButton:hover:focus {
+/*QPushButton:hover:focus {
    border-image: url(:/customwidgets/generic/data/button_hover_focus.png) 2px;
 }
 
 QPushButton:pressed {
    border-image: url(:/customwidgets/generic/data/button_pressed.png) 2px;
-}</string>
+}*/</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">

@@ -8,6 +8,7 @@ DEPENDPATH += $$PWD/../../customwidgets
 SOURCES += \
 	$$PWD/newselfavatar/yaselfmood.cpp \
 	$$PWD/newselfavatar/yaselfmoodaction.cpp \
+	$$PWD/../../update/updater.cpp \
 	$$PWD/../../services/servicesmodel.cpp \
 	$$PWD/../../services/servicespanel.cpp \
 	$$PWD/../../services/servicespopupbutton.cpp \
@@ -36,6 +37,8 @@ SOURCES += \
 HEADERS += \
 	$$PWD/newselfavatar/yaselfmood.h \
 	$$PWD/newselfavatar/yaselfmoodaction.h \
+	$$PWD/../../update/updater.h \
+	$$PWD/../../update/updater_p.h \
 	$$PWD/../../services/servicesmodel.h \
 	$$PWD/../../services/servicesmodel_p.h \
 	$$PWD/../../services/servicespanel.h \

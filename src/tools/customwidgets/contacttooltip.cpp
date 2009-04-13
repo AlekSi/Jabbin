@@ -56,6 +56,7 @@ ContactTooltip::Private::Private(ContactTooltip * parent)
         buttons->addButton(button, QDialogButtonBox::AcceptRole);
         connect(button, SIGNAL(clicked()),
             parent, SLOT(hide()));
+        button->setCursor(Qt::PointingHandCursor);
     }
 }
 

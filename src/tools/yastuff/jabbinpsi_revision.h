@@ -1,2 +1,3 @@
 static QString JABBINPSI_VERSION="1";
 static const int JABBINPSI_REVISION=1;
+static QString JABBINPSI_FULL_VERSION="0.80.10";

@@ -17,12 +17,17 @@
 		<notification>
 			<chat_request>
 				<popupjabbin type="bool" >false</popupjabbin>
-				<sound type="QString" ></sound>
+				<sound type="QString" >${"resourcesDir"}/sound/chat2.wav</sound>
 				<tooltip type="bool" >false</tooltip>
 			</chat_request>
-			<contact_online>
+			<update_available>
 				<popupjabbin type="bool" >false</popupjabbin>
 				<sound type="QString" ></sound>
+				<tooltip type="bool" >true</tooltip>
+			</update_available>
+			<contact_online>
+				<popupjabbin type="bool" >false</popupjabbin>
+				<sound type="QString" >${"resourcesDir"}/sound/online.wav</sound>
 				<tooltip type="bool" >false</tooltip>
 			</contact_online>
 			<incoming_call>
@@ -37,7 +42,7 @@
 			</incomming_file>
 			<incomming_voicemail>
 				<popupjabbin type="bool" >false</popupjabbin>
-				<sound type="QString" ></sound>
+				<sound type="QString" >${"resourcesDir"}/sound/ft_incoming.wav</sound>
 				<tooltip type="bool" >false</tooltip>
 			</incomming_voicemail>
 			<status_request>

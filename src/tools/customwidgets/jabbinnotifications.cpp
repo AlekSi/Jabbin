@@ -88,6 +88,11 @@ int JabbinNotifications::createNotification(
             actions["accept"] = tr("Accept");
             actions["reject"] = tr("Reject");
             timeout = 0;
+        } else if (type == N_UPDATE_AVAILABLE) {
+            message = tr("There is a new version of Jabbin available - %1").arg(data);
+            actions["download"] = tr("Download");
+            actions["ignore"] = tr("Ignore");
+            timeout = 0;
         } else if (type == N_CHAT_REQUEST) {
             message = tr("%1 wants to chat with you").arg(data);
         } else if (type == N_STATUS_REQUEST) {
