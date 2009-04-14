@@ -298,13 +298,14 @@ void YaChatDlg::initUi()
 	ui_.contactName->setMinimumSize(100, 30);
 
 	// connect(ui_.separator, SIGNAL(textSelected(QString)), SLOT(addEmoticon(QString)));
+	connect(ui_.buttonEmoticons, SIGNAL(textSelected(QString)), SLOT(addEmoticon(QString)));
 	// connect(ui_.separator, SIGNAL(addContact()), SLOT(addContact()));
 	// connect(ui_.separator, SIGNAL(authContact()), SLOT(authContact()));
 
 	{
 		if (PsiIconset::instance()->yaEmoticonSelectorIconset()) {
 			// ui_.separator->setIconset(*PsiIconset::instance()->yaEmoticonSelectorIconset());
-			ui_.buttonEmoticons->setIconset(*PsiIconset::instance()->yaEmoticonSelectorIconset());
+			ui_.buttonEmoticons->setIconset(* PsiIconset::instance()->yaEmoticonSelectorIconset());
 		}
 	}
 

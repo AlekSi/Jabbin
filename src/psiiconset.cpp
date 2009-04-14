@@ -29,6 +29,7 @@
 #include <Q3Dict>
 #include <Q3PtrList>
 #include <QCoreApplication>
+#include <QDebug>
 
 using namespace XMPP;
 
@@ -59,8 +60,8 @@ public:
 		QStringList dirs;
 		dirs << ":";
 		dirs << ".";
-		dirs << ApplicationInfo::homeDir();
-		dirs << ApplicationInfo::resourcesDir();
+		dirs << ApplicationInfo::homeDir() + "/";
+		dirs << ApplicationInfo::resourcesDir() + "/";
 
 		QStringList::Iterator it = dirs.begin();
 		for ( ; it != dirs.end(); ++it) {
@@ -115,7 +116,7 @@ public:
 					to->setIcon( icon->name(), *icon );
 			}
 		}
-		
+
 		to->setInformation(*from);
 	}
 
@@ -656,7 +657,7 @@ void PsiIconset::removeAnimation(Iconset *is)
 
 PsiIconset* PsiIconset::instance()
 {
-	if (!instance_) 
+	if (!instance_)
 		instance_ = new PsiIconset();
 	return instance_;
 }

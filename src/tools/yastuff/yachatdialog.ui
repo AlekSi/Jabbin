@@ -32,31 +32,19 @@ QFrame#bottomFrame {
 }
 
 QPushButton, QToolButton {
-   color: black;
-   border: 0px;
-   border-image: url(:/customwidgets/generic/data/button.png) 2px;
+    color: black;
+    border: none;
+    background: none;
 }
 
 QPushButton:disabled, QToolButton:disabled {
    color: rgba(0, 0, 0, 128);
+   padding: 8px;
 }
 
-QPushButton:focus, QToolButton:focus {
-   border-image: url(:/customwidgets/generic/data/button_focus.png) 2px;
-}
-
-QPushButton:hover, QToolButton:hover {
-   border-image: url(:/customwidgets/generic/data/button_hover.png) 2px;
-}
-
-QPushButton:hover:focus, QToolButton:hover:focus {
-   border-image: url(:/customwidgets/generic/data/button_hover_focus.png) 2px;
-}
-
-QPushButton:pressed, QToolButton:pressed {
-   border-image: url(:/customwidgets/generic/data/button_pressed.png) 2px;
-}
-</string>
+#sendButton {
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(26, 53, 71, 255), stop:0.47619 rgba(67, 85, 98, 255), stop:0.483871 rgba(85, 121, 145, 255), stop:1 rgba(54, 86, 110, 255));
+}</string>
   </property>
   <layout class="QVBoxLayout">
    <property name="spacing">
@@ -383,16 +371,49 @@ QPushButton:pressed, QToolButton:pressed {
            <property name="minimumSize">
             <size>
              <width>0</width>
-             <height>4</height>
+             <height>24</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
              <width>16777215</width>
-             <height>4</height>
+             <height>24</height>
             </size>
            </property>
-           <zorder>bottomFrame</zorder>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <property name="margin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="EmoticonsPopupButton" name="buttonEmoticons">
+              <property name="minimumSize">
+               <size>
+                <width>22</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>22</width>
+                <height>22</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>387</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </widget>
          </item>
          <item>
@@ -432,22 +453,6 @@ QPushButton:pressed, QToolButton:pressed {
                <number>0</number>
               </property>
               <item>
-               <widget class="EmoticonsPopupButton" name="buttonEmoticons">
-                <property name="minimumSize">
-                 <size>
-                  <width>32</width>
-                  <height>32</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>32</width>
-                  <height>32</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item>
                <widget class="YaChatSendButton" name="sendButton">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
@@ -476,9 +481,6 @@ QPushButton:pressed, QToolButton:pressed {
          </item>
         </layout>
         <zorder>separator</zorder>
-        <zorder>mle</zorder>
-        <zorder>toolButton</zorder>
-        <zorder>sendButton</zorder>
         <zorder></zorder>
        </widget>
       </widget>
@@ -488,7 +490,6 @@ QPushButton:pressed, QToolButton:pressed {
   </layout>
   <zorder>chatTopFrame</zorder>
   <zorder></zorder>
-  <zorder>chatView</zorder>
  </widget>
  <customwidgets>
   <customwidget>

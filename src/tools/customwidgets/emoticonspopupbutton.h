@@ -49,6 +49,8 @@ Q_SIGNALS:
     void textSelected(QString text);
 
 private:
+    friend class EmoticonsPopupMenu;
+
     class Private;
     Private * const d;
 };

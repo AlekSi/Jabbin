@@ -21,12 +21,64 @@
 #include "emoticonspopupbutton_p.h"
 
 #include <QDebug>
+#include <QStyle>
+#include <QEvent>
+#include <cmath>
+
+EmoticonsPopupMenu::EmoticonsPopupMenu(EmoticonsPopupButton * parent)
+    : QMenu(parent), q(parent)
+{
+    grid = new QGridLayout(this);
+    grid->setMargin(style()->pixelMetric(QStyle::PM_MenuPanelWidth, 0, this));
+    grid->setSpacing(4);
+}
+
+EmoticonsPopupMenu::~EmoticonsPopupMenu()
+{
+}
+
+void EmoticonsPopupMenu::updateMenu(Iconset * iconset)
+{
+    int count = iconset->count();
+    int width = sqrt(count) + 1;
+
+    int index = 0;
+    QListIterator < PsiIcon * > i = iconset->iterator();
+    while (i.hasNext()) {
+        PsiIcon * icon = i.next();
+        // addAction(icon->icon(), icon->name());
+        QToolButton * button = new QToolButton(this);
+        button->setIcon(icon->icon());
+        button->installEventFilter(this);
+        buttons[button] = icon->name();
+        buttons[button] = icon->defaultText();
+
+        grid->addWidget(button,
+            index / width, index % width);
+        connect(button, SIGNAL(clicked()),
+                this, SLOT(close()));
+        index++;
+    }
+}
+
+bool EmoticonsPopupMenu::eventFilter(QObject * object, QEvent * event)
+{
+    if (event->type() == QEvent::MouseButtonRelease) {
+        QToolButton * button = static_cast < QToolButton * > (object);
+        if (buttons.contains(button)) {
+            q->textSelected(buttons[button]);
+            // q->textSelected(":)");
+            // q->setAvatar(button->icon());
+        }
+    }
+    return QMenu::eventFilter(object, event);
+}
 
 // EmoticonsPopupButton::Private
 EmoticonsPopupButton::Private::Private(EmoticonsPopupButton * parent)
     : QObject(), menu(NULL), q(parent)
 {
-    menu = new QMenu();
+    menu = new EmoticonsPopupMenu(q);
     connect(menu, SIGNAL(aboutToShow()),
             this, SLOT(menuAboutToBeShown()));
     connect(menu, SIGNAL(triggered(QAction *)),
@@ -35,29 +87,16 @@ EmoticonsPopupButton::Private::Private(EmoticonsPopupButton * parent)
     parent->setPopupMode(QToolButton::InstantPopup);
 };
 
-void EmoticonsPopupButton::Private::actionChosen(QAction * action)
-{
-    if (action) {
-        // selected = actions[action];
-    }
-}
-
 void EmoticonsPopupButton::Private::menuAboutToBeShown()
 {
-    menu->clear();
-    actions.clear();
+    menu->updateMenu(& iconset);
 
-    QListIterator < PsiIcon * > i = iconset.iterator();
-    while (i.hasNext()) {
-        PsiIcon * icon = i.next();
-        menu->addAction(icon->icon(), icon->name());
-    }
 }
 
 EmoticonsPopupButton::EmoticonsPopupButton(QWidget * parent)
     : QToolButton(parent), d(new Private(this))
 {
-    setIcon(QIcon(":/services/data/services/jabber.png"));
+    // setIcon(QIcon(":/services/data/services/jabber.png"));
 }
 
 EmoticonsPopupButton::~EmoticonsPopupButton()
@@ -68,5 +107,12 @@ EmoticonsPopupButton::~EmoticonsPopupButton()
 void EmoticonsPopupButton::setIconset(const Iconset & iconset)
 {
     d->iconset = iconset;
+
+    QListIterator < PsiIcon * > i = iconset.iterator();
+    while (i.hasNext()) {
+        PsiIcon * icon = i.next();
+        setIcon(icon->icon());
+        return;
+    }
 }
 

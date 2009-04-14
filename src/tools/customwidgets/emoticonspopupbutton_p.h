@@ -21,6 +21,21 @@
 #include <QAction>
 #include <QHash>
 #include <QMenu>
+#include <QGridLayout>
+
+class EmoticonsPopupMenu: public QMenu {
+public:
+    EmoticonsPopupMenu(EmoticonsPopupButton * parent);
+    ~EmoticonsPopupMenu();
+
+    void updateMenu(Iconset * iconset);
+    bool eventFilter(QObject * object, QEvent * event);
+
+private:
+    QHash < QToolButton *, QString > buttons;
+    EmoticonsPopupButton * q;
+    QGridLayout * grid;
+};
 
 // EmoticonsPopupButton::Private
 class EmoticonsPopupButton::Private: public QObject {
@@ -31,11 +46,9 @@ public:
 
 public Q_SLOTS:
     void menuAboutToBeShown();
-    void actionChosen(QAction * action);
 
 public:
-    QHash < QAction *, QString > actions;
-    QMenu * menu;
+    EmoticonsPopupMenu * menu;
     Iconset iconset;
 
     EmoticonsPopupButton * const q;

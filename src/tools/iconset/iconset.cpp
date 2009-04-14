@@ -32,6 +32,7 @@
 #include <QThread>
 #include <QCoreApplication>
 #include <QTextCodec>
+#include <QDebug>
 
 #include "anim.h"
 
@@ -264,20 +265,20 @@ public:
 		anim = from.anim ? new Anim ( *from.anim ) : 0;
 		icon = 0;
 	}
-	
+
 	void unloadAnim()
 	{
 		if ( anim )
 			delete anim;
 		anim = 0;
 	}
-	
+
 	void connectInstance(PsiIcon *icon)
 	{
 		connect(this, SIGNAL(pixmapChanged()), icon, SIGNAL(pixmapChanged()));
 		connect(this, SIGNAL(iconModified()),  icon, SIGNAL(iconModified()));
 	}
-	
+
 	void disconnectInstance(PsiIcon *icon)
 	{
 		disconnect(this, SIGNAL(pixmapChanged()), icon, SIGNAL(pixmapChanged()));
@@ -794,7 +795,7 @@ void PsiIcon::stop()
 void PsiIcon::stripFirstAnimFrame()
 {
 	detach();
-	
+
 	if ( d->anim )
 		d->anim->stripFirstFrame();
 }
@@ -1032,7 +1033,7 @@ public:
 		// all PsiIcon names in Iconset must be unique
 		if ( dict.contains(n) )
 			remove(n);
-			
+
 		dict[n] = icon;
 		list.append(icon);
 	}
@@ -1043,7 +1044,7 @@ public:
 		while ( !list.isEmpty() )
 			delete list.takeFirst();
 	}
-	
+
 	void remove(QString name)
 	{
 		if ( dict.contains(name) ) {
@@ -1358,7 +1359,7 @@ public:
 
 		return success;
 	}
-	
+
 	void setInformation(const Private &from) {
 		name = from.name;
 		version = from.version;
@@ -1529,7 +1530,7 @@ void Iconset::setIcon(const QString &name, const PsiIcon &icon)
 	detach();
 
 	PsiIcon *newIcon = new PsiIcon(icon);
-	
+
 	d->remove(name);
 	d->append( name, newIcon );
 }
