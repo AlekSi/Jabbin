@@ -296,7 +296,7 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
         // test->show();
 
 	ui_.setupUi(this);
-
+	ui_.labelCredit->setPatternText(tr("Credit: $%1"));
 
         // Removing tabs:
         ui_.callDialog->setParent(NULL);
@@ -682,6 +682,11 @@ void YaMainWin::accountCountChanged()
 
 		disconnect(account, SIGNAL(moodChanged()), this, SLOT(moodChanged()));
 		connect(account,    SIGNAL(moodChanged()), this, SLOT(moodChanged()));
+
+
+		ui_.labelCredit->setUrl(QUrl(
+			"http://www.telecom64.eu/intranet/billing/callback/checkCredit.php?callerId=" + account->jid().bare()));
+		ui_.labelCredit->reload();
 	}
 
 	ui_.selfName->setContactList(psi_->contactList());

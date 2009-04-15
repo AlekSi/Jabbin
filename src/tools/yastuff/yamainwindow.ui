@@ -210,7 +210,7 @@ roster, callDialog, servicesPanel {
          <string notr="true"/>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="selfWidgetsPage">
          <property name="sizePolicy">
@@ -326,7 +326,7 @@ roster, callDialog, servicesPanel {
               </widget>
              </item>
              <item row="1" column="2">
-              <widget class="QLabel" name="labelCredit">
+              <widget class="CustomWidgets::HttpLabel" name="labelCredit">
                <property name="maximumSize">
                 <size>
                  <width>16777215</width>
@@ -339,7 +339,7 @@ roster, callDialog, servicesPanel {
                 </font>
                </property>
                <property name="text">
-                <string>Credit: $0</string>
+                <string>Loading...</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
@@ -557,6 +557,11 @@ roster, callDialog, servicesPanel {
    <extends>QWidget</extends>
    <header>tools/services/servicespanel.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CustomWidgets::HttpLabel</class>
+   <extends>QLabel</extends>
+   <header>tools/customwidgets/generic/httplabel.h</header>
   </customwidget>
  </customwidgets>
  <resources>

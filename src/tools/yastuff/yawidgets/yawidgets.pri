@@ -16,6 +16,7 @@ SOURCES += \
 	$$PWD/../../customwidgets/selfmood.cpp \
 	$$PWD/../../customwidgets/selfavatar.cpp \
 	$$PWD/../../customwidgets/generic/styledwindow.cpp \
+	$$PWD/../../customwidgets/generic/httplabel.cpp \
 	$$PWD/../../customwidgets/generic/advancedlineedit.cpp \
 	$$PWD/../../customwidgets/generic/advancedtabwidget.cpp \
 	$$PWD/../../customwidgets/generic/advancedtabbar.cpp \
@@ -50,6 +51,7 @@ HEADERS += \
 	$$PWD/../../customwidgets/selfmood.h \
 	$$PWD/../../customwidgets/selfavatar.h \
 	$$PWD/../../customwidgets/generic/styledwindow.h \
+	$$PWD/../../customwidgets/generic/httplabel.h \
 	$$PWD/../../customwidgets/generic/advancedlineedit.h \
 	$$PWD/../../customwidgets/generic/advancedtabwidget.h \
 	$$PWD/../../customwidgets/generic/advancedtabbar.h \
