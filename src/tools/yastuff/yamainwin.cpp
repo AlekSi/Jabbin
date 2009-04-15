@@ -330,9 +330,9 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 
 	YaLogo* yaLogo = new YaLogo(ui_.logoPage);
 	// replaceWidget(ui_.logoFrame, yaLogo);
-	ui_.logoFrame = yaLogo;
+	//ui_.logoFrame = yaLogo;
 
-	ui_.applicationName->setText(QString());
+	//ui_.applicationName->setText(QString());
 
 	ui_.mainTabWidget->setCurrentIndex(0);
 	for (int tab = 0; tab < ui_.mainTabWidget->count(); tab++) {

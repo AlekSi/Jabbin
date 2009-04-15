@@ -142,10 +142,13 @@ void YaLoginPage::setShouldBeVisible(bool shouldBeVisible)
 				enableControls = false;
 		}
 
-		if (enableControls)
+		if (enableControls) {
 			ui_.buttonStack->setCurrentWidget(ui_.signInPage);
-		else
+			ui_.statusStack->setCurrentWidget(ui_.signInPage2);
+                } else {
 			ui_.buttonStack->setCurrentWidget(ui_.signingInPage);
+			ui_.statusStack->setCurrentWidget(ui_.signingInPage2);
+                }
 
 		ui_.login->setEnabled(enableControls);
 		ui_.password->setEnabled(enableControls);

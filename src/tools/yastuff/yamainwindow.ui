@@ -210,7 +210,7 @@ roster, callDialog, servicesPanel {
          <string notr="true"/>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="selfWidgetsPage">
          <property name="sizePolicy">
@@ -352,24 +352,17 @@ roster, callDialog, servicesPanel {
          </layout>
         </widget>
         <widget class="QWidget" name="logoPage">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QWidget" name="logoFrame" native="true">
-            <property name="maximumSize">
-             <size>
-              <width>50</width>
-              <height>50</height>
-             </size>
+           <widget class="QLabel" name="labelApplicationTitle">
+            <property name="autoFillBackground">
+             <bool>false</bool>
             </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="applicationName">
             <property name="text">
-             <string>Ya.Online</string>
+             <string/>
+            </property>
+            <property name="pixmap">
+             <pixmap resource="../../../iconsets.qrc">:/iconsets/images/jabbintitle.png</pixmap>
             </property>
            </widget>
           </item>
@@ -568,6 +561,8 @@ roster, callDialog, servicesPanel {
  </customwidgets>
  <resources>
   <include location="yaiconsets.qrc"/>
+  <include location="../../../psi.qrc"/>
+  <include location="../../../iconsets.qrc"/>
   <include location="../../../iconsets/custom/customicons.qrc"/>
   <include location="../customwidgets/customwidgets.qrc"/>
  </resources>
