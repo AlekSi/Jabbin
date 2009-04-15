@@ -1,25 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0">
+<ui version="4.0" >
  <class>ContactTooltipBase</class>
- <widget class="QWidget" name="ContactTooltipBase">
-  <property name="geometry">
+ <widget class="QWidget" name="ContactTooltipBase" >
+  <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>272</width>
+    <width>284</width>
     <height>267</height>
    </rect>
   </property>
-  <property name="windowTitle">
+  <property name="windowTitle" >
    <string>Form</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">#ContactTooltipBase {
-    border: none;
-	background-image: url(:/customwidgets/data/window_background_crop.png);
-    background-repeat: repeat-x;
-    background-color: #d5e6f3;
-    background-attachment: fixed;
+  <property name="styleSheet" >
+   <string notr="true" >#ContactTooltipBase {
+    border: 1px solid #81a8c6;
+	/*background-image: url(:/customwidgets/data/window_background_crop.png);
+    background-repeat: repeat-x;*/
+    background-color: #cfe3ff;
+    /*background-attachment: fixed;*/
     selection-background-color: white;
     selection-color: black;
 }
@@ -30,12 +29,17 @@ QToolButton {
 
 QLabel#labelName {
   font-weight: bold;
+  margin-top: 3px;
+  font-size: 15px;
+  height: 20px;
+  border-bottom: 1px solid #234578;
+  color: #234578;
 }
 
 QPushButton {
-   min-height: 1.5em;
+   min-height: 1em;
    padding: 0px 8px;
-   color: navy;
+   color: #234578;
    border: none;
    background: none;
    text-decoration: none;
@@ -65,8 +69,7 @@ QPushButton:hover {
 QPushButton:pressed {
    border-image: url(:/customwidgets/generic/data/button_pressed.png) 2px;
 }*/</string>
-  </property>
-  <layout class="QGridLayout" name="gridLayout">
+  </property><layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
     <widget class="QLabel" name="labelName">
      <property name="maximumSize">
@@ -110,8 +113,8 @@ QPushButton:pressed {
         <widget class="QToolButton" name="buttonAvatar">
          <property name="minimumSize">
           <size>
-           <width>128</width>
-           <height>128</height>
+           <width>90</width>
+           <height>90</height>
           </size>
          </property>
          <property name="maximumSize">
