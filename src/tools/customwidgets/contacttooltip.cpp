@@ -47,8 +47,8 @@ ContactTooltip::Private::Private(ContactTooltip * parent)
             this, SLOT(timelineFrameChanged(int)));
 
     buttonList << (buttonChat = new QPushButton(QIcon(":/images/chat_windowicon.png"), tr("Chat")));
-    buttonList << (buttonCall = new QPushButton(QIcon(":/customicons/CalPad-Icon16x16"), tr("Call")));
-    buttonList << (buttonProfile = new QPushButton(QIcon(":/images/user-actions/button_glyph_profile.png"), tr("Profile")));
+    buttonList << (buttonCall = new QPushButton(QIcon(":/iconsets/chatwindow/call.png"), tr("Call")));
+    buttonList << (buttonProfile = new QPushButton(QIcon(":/images/user-actions/button_glyph_profile.png"), tr("Lifestream")));
     buttonList << (buttonInfo = new QPushButton(QIcon(":/iconsets/chatwindow/profile.png"), tr("Info")));
     buttonList << (buttonHistory = new QPushButton(QIcon(":/images/user-actions/button_glyph_history.png"), tr("History")));
 

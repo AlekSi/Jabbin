@@ -459,7 +459,7 @@ roster, callDialog, servicesPanel {
            <disabledoff>:/customwidgets/generic/data/blank.png</disabledoff>:/iconsets/roster/roster-tabs/services.png</iconset>
          </attribute>
          <attribute name="title">
-          <string>&amp;Accounts</string>
+          <string>&amp;Networks</string>
          </attribute>
          <widget class="ServicesPanel" name="servicesPanel" native="true">
           <property name="geometry">
