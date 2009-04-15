@@ -40,7 +40,7 @@ EmoticonsPopupMenu::~EmoticonsPopupMenu()
 void EmoticonsPopupMenu::updateMenu(Iconset * iconset)
 {
     int count = iconset->count();
-    int width = sqrt(count) + 1;
+    int width = sqrt(static_cast<double>(count)) + 1;
 
     int index = 0;
     QListIterator < PsiIcon * > i = iconset->iterator();
@@ -67,8 +67,6 @@ bool EmoticonsPopupMenu::eventFilter(QObject * object, QEvent * event)
         QToolButton * button = static_cast < QToolButton * > (object);
         if (buttons.contains(button)) {
             q->textSelected(buttons[button]);
-            // q->textSelected(":)");
-            // q->setAvatar(button->icon());
         }
     }
     return QMenu::eventFilter(object, event);
