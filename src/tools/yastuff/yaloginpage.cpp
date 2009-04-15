@@ -21,6 +21,7 @@
 #include "yaloginpage.h"
 
 #include <QPainter>
+#include <QMovie>
 
 #include "psicontactlist.h"
 #include "psiaccount.h"
@@ -47,6 +48,10 @@ YaLoginPage::YaLoginPage()
 	connect(ui_.login, SIGNAL(textChanged(const QString&)), SLOT(textChanged()));
 	connect(ui_.password, SIGNAL(textChanged(const QString&)), SLOT(textChanged()));
 	textChanged();
+
+	QMovie * movie = new QMovie(":/images/busy/animation.gif");
+	ui_.labelBusy->setMovie(movie);
+	movie->start();
 
 	YaPushButton::initAllButtons(this);
 }
@@ -153,7 +158,8 @@ void YaLoginPage::setShouldBeVisible(bool shouldBeVisible)
 		ui_.login->setEnabled(enableControls);
 		ui_.password->setEnabled(enableControls);
 		ui_.signIn->setEnabled(signInEnabled());
-		ui_.busy->setActive(!enableControls);
+		// ui_.busy->setActive(!enableControls);
+		ui_.labelBusy->movie()->setPaused(enableControls);
 
 		if (login().isEmpty()) {
 			ui_.login->setFocus();

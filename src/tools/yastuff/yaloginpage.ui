@@ -23,7 +23,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="signInPage2">
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -101,7 +101,14 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="YaBusyWidget" name="busy" native="true"/>
+        <widget class="QLabel" name="labelBusy">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -242,12 +249,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>YaBusyWidget</class>
-   <extends>QWidget</extends>
-   <header>yabusywidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>YaPushButton</class>
    <extends>QPushButton</extends>
    <header>yapushbutton.h</header>
@@ -258,6 +259,8 @@
    <header>yalinkbutton.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="yastuff.qrc"/>
+ </resources>
  <connections/>
 </ui>

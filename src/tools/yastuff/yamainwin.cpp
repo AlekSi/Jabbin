@@ -297,6 +297,7 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 
 	ui_.setupUi(this);
 
+
         // Removing tabs:
         ui_.callDialog->setParent(NULL);
         ui_.roster->setParent(NULL);
