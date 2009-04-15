@@ -28,7 +28,7 @@
 // #define JIDTEXT ((phone == QString())? phone : (jid.bare()))
 #define JIDTEXT jid.bare()
 #define SLEEPINTERVAL 2000
-#define CORNERDIAMETER 4
+#define CORNERDIAMETER 24
 #define FRAMECOUNT 20
 #define TIMEINTERVAL 300
 
