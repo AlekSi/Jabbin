@@ -28,7 +28,7 @@
 // #define JIDTEXT ((phone == QString())? phone : (jid.bare()))
 #define JIDTEXT jid.bare()
 #define SLEEPINTERVAL 2000
-#define CORNERDIAMETER 24
+#define CORNERDIAMETER 16
 #define FRAMECOUNT 20
 #define TIMEINTERVAL 300
 
@@ -69,11 +69,13 @@ void ContactTooltip::Private::timelineFrameChanged(int frame)
 {
     qreal factor = frame / (qreal) FRAMECOUNT;
 
-    QRect g = q->geometry();
-    g.moveTopLeft(
-            moveTo -
+    // QRect g = q->geometry();
+    // g.moveTopLeft(
+    //         moveTo -
+    //         (1 - factor) * (moveTo - moveFrom));
+    // q->setGeometry(g);
+    q->move(moveTo -
             (1 - factor) * (moveTo - moveFrom));
-    q->setGeometry(g);
 }
 
 ContactTooltip * ContactTooltip::instance()
@@ -123,15 +125,15 @@ void ContactTooltip::showContact(PsiContact * contact, const QRect & parent)
             contact, SLOT(history()));
 
     // Setting the data
-    d->labelName->setText(contact->name());
+    d->labelJID->setText(
+            "<a href='mailto:" +
+            contact->jid().bare() + "'>" +
+            contact->jid().bare() + "</a>"
+            );
     if (contact->name() != contact->jid().bare()) {
-        d->labelJID->setText(
-                "<a href='mailto:" +
-                contact->jid().bare() + "'>" +
-                contact->jid().bare() + "</a>"
-                );
+        d->labelName->setText(contact->name());
     } else {
-        d->labelJID->setText(QString());
+        d->labelName->setText(contact->jid().user());
     }
     d->labelStatus->setText(Ya::statusFullText(contact->status().type()));
     if (!contact->picture().isNull()) {
@@ -238,17 +240,17 @@ void ContactTooltip::resizeEvent(QResizeEvent * event)
     QRegion region;
     QRect rect(QPoint(), size());
 
-    region += rect.adjusted(CORNERDIAMETER, 0, - CORNERDIAMETER, 0);
-    region += rect.adjusted(0, CORNERDIAMETER, 0, - CORNERDIAMETER);
+    region += rect.adjusted(CORNERDIAMETER, 0, 0, - CORNERDIAMETER);
+    region += rect.adjusted(0, CORNERDIAMETER, - CORNERDIAMETER, 0);
 
     QRect corner(rect.topLeft(), QSize(2 * CORNERDIAMETER, 2 * CORNERDIAMETER));
     region += QRegion(corner, QRegion::Ellipse);
-    corner.moveTopRight(rect.topRight());
-    region += QRegion(corner, QRegion::Ellipse);
+    // corner.moveTopRight(rect.topRight());
+    // region += QRegion(corner, QRegion::Ellipse);
     corner.moveBottomRight(rect.bottomRight());
     region += QRegion(corner, QRegion::Ellipse);
-    corner.moveBottomLeft(rect.bottomLeft());
-    region += QRegion(corner, QRegion::Ellipse);
+    // corner.moveBottomLeft(rect.bottomLeft());
+    // region += QRegion(corner, QRegion::Ellipse);
     setMask(region);
 }
 

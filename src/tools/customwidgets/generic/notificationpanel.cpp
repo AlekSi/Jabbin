@@ -32,14 +32,11 @@ public:
     Private(NotificationPanel * parent)
     {
         setupUi(parent);
-        buttonStyle =
-            Common::readFile(":/customwidgets/generic/data/notificationpanel_button_style.css");
 
         connect(& signalMapper, SIGNAL(mapped(const QString & )),
                 parent, SIGNAL(buttonClicked(const QString & )));
     }
 
-    QString buttonStyle;
     QSignalMapper signalMapper;
 };
 
@@ -60,7 +57,6 @@ void NotificationPanel::addButton(const QString & text, const QIcon & icon, cons
 
     connect(button, SIGNAL(clicked()), & (d->signalMapper), SLOT(map()));
     d->signalMapper.setMapping(button, data);
-    button->setStyleSheet(d->buttonStyle);
 }
 
 QString NotificationPanel::title() const

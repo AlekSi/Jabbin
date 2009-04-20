@@ -51,7 +51,7 @@
             <enum>QTabWidget::West</enum>
            </property>
            <property name="currentIndex">
-            <number>2</number>
+            <number>0</number>
            </property>
            <property name="iconSize">
             <size>
@@ -141,6 +141,10 @@
                  </property>
                  <property name="text">
                   <string>Call</string>
+                 </property>
+                 <property name="icon">
+                  <iconset resource="customwidgets.qrc">
+                   <normaloff>:/customwidgets/data/phone.png</normaloff>:/customwidgets/data/phone.png</iconset>
                  </property>
                  <property name="default">
                   <bool>true</bool>

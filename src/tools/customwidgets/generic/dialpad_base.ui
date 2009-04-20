@@ -1,319 +1,320 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>DialpadBase</class>
- <widget class="QFrame" name="DialpadBase" >
-  <property name="geometry" >
+ <widget class="QFrame" name="DialpadBase">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>160</width>
-    <height>210</height>
+    <height>130</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Frame</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout" >
+  <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <layout class="QGridLayout" name="gridLayout" >
-     <property name="spacing" >
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="spacing">
       <number>0</number>
      </property>
-     <item row="0" column="0" >
-      <widget class="QPushButton" name="btnDial1" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+     <item row="0" column="0">
+      <widget class="QPushButton" name="btnDial1">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="maximumSize" >
+       <property name="maximumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>1</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1" >
-      <widget class="QPushButton" name="btnDial2" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+     <item row="0" column="1">
+      <widget class="QPushButton" name="btnDial2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="maximumSize" >
+       <property name="maximumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>2</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="2" >
-      <widget class="QPushButton" name="btnDial3" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+     <item row="0" column="2">
+      <widget class="QPushButton" name="btnDial3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="maximumSize" >
+       <property name="maximumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>3</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0" >
-      <widget class="QPushButton" name="btnDial4" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+     <item row="1" column="0">
+      <widget class="QPushButton" name="btnDial4">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="maximumSize" >
+       <property name="maximumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>4</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1" >
-      <widget class="QPushButton" name="btnDial5" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+     <item row="1" column="1">
+      <widget class="QPushButton" name="btnDial5">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="maximumSize" >
+       <property name="maximumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>5</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="2" >
-      <widget class="QPushButton" name="btnDial6" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+     <item row="1" column="2">
+      <widget class="QPushButton" name="btnDial6">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="maximumSize" >
+       <property name="maximumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>6</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0" >
-      <widget class="QPushButton" name="btnDial7" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+     <item row="2" column="0">
+      <widget class="QPushButton" name="btnDial7">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="maximumSize" >
+       <property name="maximumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>7</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1" >
-      <widget class="QPushButton" name="btnDial8" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+     <item row="2" column="1">
+      <widget class="QPushButton" name="btnDial8">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="maximumSize" >
+       <property name="maximumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>8</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="2" >
-      <widget class="QPushButton" name="btnDial9" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+     <item row="2" column="2">
+      <widget class="QPushButton" name="btnDial9">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="maximumSize" >
+       <property name="maximumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>9</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="0" >
-      <widget class="QPushButton" name="btnDialAsterisk" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+     <item row="3" column="0">
+      <widget class="QPushButton" name="btnDialAsterisk">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="maximumSize" >
+       <property name="maximumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>*</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="1" >
-      <widget class="QPushButton" name="btnDial0" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+     <item row="3" column="1">
+      <widget class="QPushButton" name="btnDial0">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="maximumSize" >
+       <property name="maximumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>0</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="2" >
-      <widget class="QPushButton" name="btnDialPound" >
-       <property name="sizePolicy" >
-        <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+     <item row="3" column="2">
+      <widget class="QPushButton" name="btnDialPound">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="minimumSize" >
+       <property name="minimumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="maximumSize" >
+       <property name="maximumSize">
         <size>
          <width>50</width>
-         <height>50</height>
+         <height>30</height>
         </size>
        </property>
-       <property name="text" >
+       <property name="text">
         <string>#</string>
        </property>
       </widget>

@@ -104,29 +104,29 @@ QTabWidget#mainTabWidget &gt; QTabBar::tab:disabled {
     top: -30px;
 }
 
-YaPushButton, .QWidget &gt; QPushButton {
+YaPushButton, .QWidget &gt; QPushButton, QDialogButtonBox QPushButton {
    color: black;
    border: 0px;
    border-image: url(:/customwidgets/generic/data/button.png) 2px;
 }
 
-YaPushButton:disabled, .QWidget &gt; QPushButton:disabled {
+YaPushButton:disabled, .QWidget &gt; QPushButton:disabled, QDialogButtonBox QPushButton:disabled {
    color: rgba(0, 0, 0, 128);
 }
 
-YaPushButton:focus, .QWidget &gt; QPushButton:focus {
+YaPushButton:focus, .QWidget &gt; QPushButton:focus, QDialogButtonBox QPushButton:focus {
    border-image: url(:/customwidgets/generic/data/button_focus.png) 2px;
 }
 
-YaPushButton:hover, .QWidget &gt; QPushButton:hover {
+YaPushButton:hover, .QWidget &gt; QPushButton:hover, QDialogButtonBox QPushButton:hover {
    border-image: url(:/customwidgets/generic/data/button_hover.png) 2px;
 }
 
-YaPushButton:hover:focus, .QWidget &gt; QPushButton:hover:focus {
+YaPushButton:hover:focus, .QWidget &gt; QPushButton:hover:focus, QDialogButtonBox QPushButton:hover:focus {
    border-image: url(:/customwidgets/generic/data/button_hover_focus.png) 2px;
 }
 
-YaPushButton:pressed, .QWidget &gt; QPushButton:pressed {
+YaPushButton:pressed, .QWidget &gt; QPushButton:pressed, QDialogButtonBox QPushButton:pressed {
    border-image: url(:/customwidgets/generic/data/button_pressed.png) 2px;
 }
 
@@ -173,8 +173,7 @@ QTabWidget#callTabs &gt; QTabBar::tab:selected {
 roster, callDialog, servicesPanel {
    background-image: none;
    background-color: white;
-}
-</string>
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
    <property name="spacing">
