@@ -104,6 +104,10 @@ QTabWidget#mainTabWidget &gt; QTabBar::tab:disabled {
     top: -30px;
 }
 
+QDialogButtonBox QPushButton {
+    min-height: 1.5em;
+}
+
 YaPushButton, .QWidget &gt; QPushButton, QDialogButtonBox QPushButton {
    color: black;
    border: 0px;
@@ -458,7 +462,7 @@ roster, callDialog, servicesPanel {
            <disabledoff>:/customwidgets/generic/data/blank.png</disabledoff>:/iconsets/roster/roster-tabs/services.png</iconset>
          </attribute>
          <attribute name="title">
-          <string>&amp;Networks</string>
+          <string>&amp;Accounts</string>
          </attribute>
          <widget class="ServicesPanel" name="servicesPanel" native="true">
           <property name="geometry">

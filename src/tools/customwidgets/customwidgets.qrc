@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/customwidgets" >
+    <file>data/hangup.png</file>
     <file>generic/data/button.png</file>
     <file>generic/data/button_focus.png</file>
     <file>generic/data/button_hover_focus.png</file>

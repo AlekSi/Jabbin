@@ -50,7 +50,7 @@ YaContactListViewDelegate::YaContactListViewDelegate(YaContactListView* parent)
 #endif
 {
 	setDrawStatusIcon(true);
-	phoneIcon = QIcon(":/iconsets/chatwindow/call.png");
+	phoneIcon = QIcon(":/iconsets/roster/callable.png");
 }
 
 const YaContactListView* YaContactListViewDelegate::contactList() const

@@ -52,7 +52,7 @@ CallDialog::Private::Private(CallDialog * parent)
             this, SLOT(notificationFinished(int, const QString &)));
     stacked->setCurrentWidget(pageDialpad);
 
-    frameInCall->addButton("Hangup", QIcon("help"), QString("hangup"));
+    frameInCall->addButton("Hangup", QIcon(":/customwidgets/data/hangup.png"), QString("hangup"));
     frameInCall->setPixmap(QPixmap(":/customwidgets/data/phone.png"));
     connect(frameInCall, SIGNAL(buttonClicked(const QString & )),
             this, SLOT(doAction(const QString & )));

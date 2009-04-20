@@ -1,5 +1,6 @@
 <RCC>
   <qresource>
+    <file>iconsets/roster/callable.png</file>
     <file>iconsets/chatwindow/profile.png</file>
     <file>iconsets/chatwindow/call.png</file>
     <file>iconsets/roster/roster-tabs/social.png</file>
