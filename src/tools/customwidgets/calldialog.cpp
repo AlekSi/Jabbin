@@ -46,6 +46,11 @@ CallDialog::Private::Private(CallDialog * parent)
     editPhoneNumber->setEmptyText(tr("Enter phone number"));
     editPhoneNumber->setValidator(new QRegExpValidator(QRegExp("[+]?[0-9*#]*"), parent));
 
+    connect(labelRefill, SIGNAL(linkActivated(const QString &)),
+            this, SLOT(openUrl(const QString &)));
+    connect(labelRates, SIGNAL(linkActivated(const QString &)),
+            this, SLOT(openUrl(const QString &)));
+
     connect(dialpad, SIGNAL(buttonClicked(char)),
             parent, SLOT(dialpadButtonClicked(char)));
     connect(JabbinNotifications::instance(), SIGNAL(notificationFinished(int, const QString &)),
@@ -241,6 +246,11 @@ void CallDialog::Private::call(const QString & who)
     }
     qDebug() << phone;
     setStatus(Calling);
+}
+
+void CallDialog::Private::openUrl(const QString & url)
+{
+    QDesktopServices::openUrl(QUrl(url));
 }
 
 CallDialog * CallDialog::m_instance = NULL;

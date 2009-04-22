@@ -26,6 +26,8 @@
 #include <QRegExp>
 #include <QBasicTimer>
 #include <QTime>
+#include <QUrl>
+#include <QDesktopServices>
 #include "im.h"
 #include "psiaccount.h"
 #include "voicecaller.h"
@@ -58,6 +60,7 @@ public Q_SLOTS:
     void doAction(const QString & buttonData);
     void call(const QString & who);
     void notificationFinished(int id, const QString & action);
+    void openUrl(const QString & url);
 
 };
 
