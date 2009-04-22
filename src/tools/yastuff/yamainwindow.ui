@@ -22,7 +22,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">#MainWindow {
-    background: rgb(232, 246, 255);
+    background:  #cfe3ff;
 /* 204 hue */
 }
 
@@ -144,7 +144,8 @@ QLabel#labelCredit {
   color: rgba(0, 0, 0, 128);
 }
 
-QTabWidget#callTabs::pane {
+QTabWidget#call
+::pane {
     border: none;
     margin: 0px;
     padding: 0px;
@@ -153,7 +154,7 @@ QTabWidget#callTabs::pane {
 }
 
 QTabWidget#callTabs &gt; QTabBar::tab {
-    border: 8px;
+    border:8px;
     padding-top: 0px;
     border-image: url(:/customwidgets/data/verticalbarbutton_normal.png) 8px;
     font-size: 12px;
@@ -164,7 +165,7 @@ QTabWidget#callTabs &gt; QTabBar::tab {
 
 QTabWidget#callTabs &gt; QTabBar::tab:hover {
     margin-right: -10px;
-    border-image: url(:/customwidgets/data/verticalbarbutton_hover.png) px;
+    border-image: url(:/customwidgets/data/verticalbarbutton_hover.png) 8px;
     color: rgba(0, 0, 0, 200);
 }
 
