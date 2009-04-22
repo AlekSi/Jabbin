@@ -75,6 +75,7 @@ public:
 
 public Q_SLOTS:
     void reload();
+    void openLink(const QString & link);
 
 protected Q_SLOTS:
     void networkReplyFinished(QNetworkReply * reply);

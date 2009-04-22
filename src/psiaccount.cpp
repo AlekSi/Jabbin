@@ -1987,6 +1987,10 @@ void PsiAccount::getErrorInfo(int err, AdvancedConnector *conn, Stream *stream, 
 
 void PsiAccount::cs_error(int err)
 {
+	qDebug() << "PsiAccount::cs_error:" << err
+		<< isActive() << loggedIn()
+	;
+
 	QString str;
 	bool reconn;
 
@@ -2058,9 +2062,9 @@ void PsiAccount::cs_error(int err)
 	// Auto-Reconnect?
 	if(d->acc.opt_reconn && reconn) {
 		int delay = 5000; // reconnect in 5 seconds
-#ifdef YAPSI
-		delay = 60000;
-#endif
+// #ifdef YAPSI
+// 		delay = 60000;
+// #endif
 		doReconnect = true;
 		stateChanged();
 		QTimer::singleShot(delay, this, SLOT(reconnect()));
@@ -3315,11 +3319,15 @@ void PsiAccount::actionJoin(const Jid &j, const QString& password)
 	w->show();
 }
 
+int wasonline = 0;
+
 void PsiAccount::stateChanged()
 {
-	if(loggedIn())
+	if (loggedIn()) {
+		wasonline++;
 		d->setState(makeSTATUS(status()));
-	else {
+	} else {
+		// if (wasonline > 0) qFatal("we are offline... why?");
 		if(isActive()) {
 			d->setState(-1);
 		}

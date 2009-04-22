@@ -130,6 +130,9 @@ void SoundPlayer::replay()
 
 void SoundPlayer::stop()
 {
+    qDebug() << "SoundPlayer::stop():" << d;
+    qDebug() << "SoundPlayer::stop():" << d->music;
+
     if (!d->music) {
         return;
     }

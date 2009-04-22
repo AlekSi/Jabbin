@@ -241,6 +241,7 @@ void YaChatDlg::initUi()
 
 	connect(ui_.contactToolTipArea, SIGNAL(clicked()), SLOT(showContactProfile()));
 	connect(ui_.buttonCall, SIGNAL(clicked()), SLOT(callContact()));
+	connect(ui_.buttonHistory, SIGNAL(clicked()), SLOT(showContactHistory()));
 
 	// TODO: connect this button to start a call
 	// ui_.contactToolTipArea->setText(tr("Info"));
@@ -563,17 +564,23 @@ void YaChatDlg::sendBuzz()
 	aSend(m);
 }
 
+void YaChatDlg::showContactHistory()
+{
+	PsiContact* contact = account()->findContact(jid().bare());
+	// FIXME: won't work after contact was deleted
+	if (contact) {
+		contact->history();
+	}
+}
+
 void YaChatDlg::showContactProfile()
 {
 	PsiContact* contact = account()->findContact(jid().bare());
 	// FIXME: won't work after contact was deleted
 	if (contact) {
 		QRect rect = ui_.contactToolTipArea->geometry();
-		QRect itemRect = QRect(ui_.chatTopFrame->mapToGlobal(rect.topLeft()),
-			ui_.chatTopFrame->mapToGlobal(rect.bottomRight()));
-		ContactTooltip::instance()->showContact(contact, itemRect);
-	//	YaChatToolTip::instance()->showText(itemRect, contact, ui_.contactToolTipArea, 0);
-
+		rect.moveTopLeft(ui_.contactToolTipArea->mapToGlobal(QPoint()));
+		ContactTooltip::instance()->showContact(contact, rect);
 	}
 }
 

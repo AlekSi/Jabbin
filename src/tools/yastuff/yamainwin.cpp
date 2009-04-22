@@ -296,7 +296,11 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
         // test->show();
 
 	ui_.setupUi(this);
-	ui_.labelCredit->setPatternText(tr("Credit: $%1"));
+	ui_.labelCredit->setPatternText(
+            QString() + "<a href=\"http://www.jabbin.com/recharge\"><font color=\"gray\">" +
+            tr("Credit: $%1")
+            + "</font></a>"
+            );
 
         // Removing tabs:
         ui_.callDialog->setParent(NULL);

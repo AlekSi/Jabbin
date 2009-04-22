@@ -21,6 +21,8 @@
 #include <QDebug>
 #include <QNetworkAccessManager>
 #include <QBasicTimer>
+#include <QDesktopServices>
+#include <QUrl>
 
 namespace CustomWidgets {
 
@@ -46,12 +48,19 @@ HttpLabel::HttpLabel(QWidget *parent)
     d->manager = new QNetworkAccessManager(this);
     connect(d->manager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(networkReplyFinished(QNetworkReply*)));
+    connect(this, SIGNAL(linkActivated(const QString &)),
+            this, SLOT(openLink(const QString &)));
 }
 
 HttpLabel::~HttpLabel()
 {
     delete d->manager;
     delete d;
+}
+
+void HttpLabel::openLink(const QString & link)
+{
+    QDesktopServices::openUrl(QUrl(link));
 }
 
 void HttpLabel::networkReplyFinished(QNetworkReply * reply)

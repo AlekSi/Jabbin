@@ -60,6 +60,7 @@ private slots:
 	void addContact();
 	void authContact();
 	void showContactProfile();
+	void showContactHistory();
 	void callContact();
 
 protected:

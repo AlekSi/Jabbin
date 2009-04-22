@@ -6,7 +6,7 @@ EXPATPATH = c:\expat-2.0.1
 # Configuration
 TEMPLATE = app
 TARGET   = jabbin
-CONFIG  += qt thread x11 qt3support console
+CONFIG  += qt thread x11 qt3support console debug
 
 windows: include(../conf_windows.pri)
 
