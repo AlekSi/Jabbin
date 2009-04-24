@@ -571,12 +571,16 @@ ServicesModel::ServicesModel(PsiAccount * psiAccount, QObject * parent)
         d, SLOT(contactUpdated(Jid)));
     d->root = new ServicesRootItem(this);
 
-    QVariantList lvalue = PsiOptions::instance()
-        ->getOption("service.providers.list").toList();
+    // QVariantList lvalue = PsiOptions::instance()
+    //     ->getOption("service.providers.list").toList();
 
-    foreach (QVariant service, lvalue) {
-        d->root->addService(service.toString());
-    }
+    // foreach (QVariant service, lvalue) {
+    //     d->root->addService(service.toString());
+    // }
+
+    qDebug() << "Setting service domain to" <<
+        psiAccount->jid().domain();
+    d->root->addService(psiAccount->jid().host());
 
     // DiscoDlg * dlg = new DiscoDlg(psiAccount, psiAccount->jid(), QString());
     // dlg->show();
