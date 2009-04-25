@@ -31,6 +31,11 @@ public:
 
     }
 
+    ~NotificationItem()
+    {
+        delete player;
+    }
+
     int tooltipId;
     SoundPlayer * player;
 };

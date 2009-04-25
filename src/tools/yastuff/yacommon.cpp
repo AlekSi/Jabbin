@@ -181,7 +181,8 @@ QString Ya::statusFullName(XMPP::Status::Type status)
 		result = QCoreApplication::instance()->translate("Ya", "Invisible");
 		break;
 	default:
-		Q_ASSERT(false);
+		result = QString();
+		// Q_ASSERT(false);
 	}
 
 	return result;
@@ -220,7 +221,8 @@ QString Ya::statusFullText(XMPP::Status::Type status)
 		result = QCoreApplication::instance()->translate("Ya", "Not authorized");
 		break;
 	default:
-		Q_ASSERT(false);
+		result = QString();
+		// Q_ASSERT(false);
 	}
 
 	return result;

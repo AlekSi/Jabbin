@@ -42,7 +42,7 @@
 #define DEFAULT_CALL_SERVER_RESOURCE "phone"
 #define NO_OF_OPTIONS 7
 
-static const QString autoStartRegistryKey = "CurrentVersion/Run/jabbinchat.exe";
+static const QString autoStartRegistryKey = "/CurrentVersion/Run/jabbinchat.exe";
 
 OptionsDialog::Private::Private(OptionsDialog * parent)
     : q(parent), controller(NULL),
@@ -440,6 +440,7 @@ void OptionsDialog::save()
         autoStartSettings.setValue(autoStartRegistryKey,
             QCoreApplication::applicationFilePath());
     }
+    autoStartSettings.sync();
 #elif defined(Q_WS_X11)
     QString home = QDir::homePath();
     if (autostart) {

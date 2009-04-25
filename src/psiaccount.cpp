@@ -2060,8 +2060,11 @@ void PsiAccount::cs_error(int err)
 #endif
 
 	// Auto-Reconnect?
-	if(d->acc.opt_reconn && reconn) {
+	if((d->acc.opt_reconn && reconn) || (err == -1)) {
 		int delay = 5000; // reconnect in 5 seconds
+		if (err == -1) {
+			delay = 0;
+		}
 // #ifdef YAPSI
 // 		delay = 60000;
 // #endif
@@ -3319,19 +3322,30 @@ void PsiAccount::actionJoin(const Jid &j, const QString& password)
 	w->show();
 }
 
+//#define _KILL_ON_OFFLINE_
+#ifdef _KILL_ON_OFFLINE_
 int wasonline = 0;
+#endif
 
 void PsiAccount::stateChanged()
 {
 	if (loggedIn()) {
+		#ifdef _KILL_ON_OFFLINE_
 		wasonline++;
+		#endif
 		d->setState(makeSTATUS(status()));
 	} else {
-		// if (wasonline > 0) qFatal("we are offline... why?");
 		if(isActive()) {
-			d->setState(-1);
-		}
-		else {
+			#ifdef _KILL_ON_OFFLINE_
+			if (wasonline > 0)
+				qFatal("we are offline... why? isActive is true");
+			#endif
+			// d->setState(-1);
+		} else {
+			#ifdef _KILL_ON_OFFLINE_
+			if (wasonline > 0)
+				qFatal("we are offline... why? isActive is false");
+			#endif
 			d->setState(STATUS_OFFLINE);
 		}
 	}
