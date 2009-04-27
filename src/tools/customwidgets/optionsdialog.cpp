@@ -42,7 +42,7 @@
 #define DEFAULT_CALL_SERVER_RESOURCE "phone"
 #define NO_OF_OPTIONS 7
 
-static const QString autoStartRegistryKey = "/CurrentVersion/Run/jabbinchat.exe";
+static const QString autoStartRegistryKey = "/CurrentVersion/Run/jabbin.exe";
 
 OptionsDialog::Private::Private(OptionsDialog * parent)
     : q(parent), controller(NULL),
@@ -433,7 +433,12 @@ void OptionsDialog::save()
     bool autostart = d->checkAutostart->isChecked();
 #if defined(Q_WS_WIN)
     // TODO: needs testing
-    QSettings autoStartSettings(QSettings::NativeFormat, QSettings::UserScope, "Microsoft", "Windows");
+    qDebug() << "OptionsDialog::save()"
+             << autoStartRegistryKey
+             << QCoreApplication::applicationFilePath()
+             << autostart;
+    QSettings autoStartSettings(QSettings::NativeFormat, QSettings::SystemScope, "Microsoft", "Windows");
+    // QSettings::SystemScope vs QSettings::UserScope
     if (autostart) {
         autoStartSettings.remove(autoStartRegistryKey);
     } else {
