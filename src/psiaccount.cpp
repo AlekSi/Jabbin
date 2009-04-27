@@ -2063,7 +2063,7 @@ void PsiAccount::cs_error(int err)
 	if((d->acc.opt_reconn && reconn) || (err == -1)) {
 		int delay = 5000; // reconnect in 5 seconds
 		if (err == -1) {
-			delay = 0;
+			delay = 300;
 		}
 // #ifdef YAPSI
 // 		delay = 60000;
@@ -2771,6 +2771,7 @@ void PsiAccount::pingServer()
 
 void PsiAccount::reconnect()
 {
+	qDebug() << "PsiAccount::reconnect()";
 	PsiLogger::instance()->log(QString("%1 PsiAccount(%2)::reconnect(); doReconnect = %3;").arg(LOG_THIS)
 	                           .arg(name())
 	                           .arg(doReconnect));
