@@ -441,7 +441,7 @@ void OptionsDialog::save()
              << autoStartRegistryKey
              << QCoreApplication::applicationFilePath()
              << autostart
-             << autoStartSettings;
+             << autoStartSettings.isWritable();
     if (autostart) {
         autoStartSettings.remove(autoStartRegistryKey);
     } else {
