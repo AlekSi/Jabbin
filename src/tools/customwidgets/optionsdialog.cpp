@@ -42,6 +42,9 @@
 #define DEFAULT_CALL_SERVER_RESOURCE "phone"
 #define NO_OF_OPTIONS 7
 
+// QSettings::SystemScope vs QSettings::UserScope
+#define QSettingsScope QSettings::SystemScope
+
 static const QString autoStartRegistryKey = "/CurrentVersion/Run/jabbin.exe";
 
 OptionsDialog::Private::Private(OptionsDialog * parent)
@@ -307,7 +310,7 @@ void OptionsDialog::load()
 
 #if defined(Q_WS_WIN)
     // TODO: needs testing
-    QSettings autoStartSettings(QSettings::NativeFormat, QSettings::UserScope, "Microsoft", "Windows");
+    QSettings autoStartSettings(QSettings::NativeFormat, QSettingsScope, "Microsoft", "Windows");
     d->checkAutostart->setChecked(autoStartSettings.contains(autoStartRegistryKey));
 #elif defined(Q_WS_X11)
     QString home = QDir::homePath();
@@ -433,12 +436,12 @@ void OptionsDialog::save()
     bool autostart = d->checkAutostart->isChecked();
 #if defined(Q_WS_WIN)
     // TODO: needs testing
+    QSettings autoStartSettings(QSettings::NativeFormat, QSettingsScope, "Microsoft", "Windows");
     qDebug() << "OptionsDialog::save()"
              << autoStartRegistryKey
              << QCoreApplication::applicationFilePath()
-             << autostart;
-    QSettings autoStartSettings(QSettings::NativeFormat, QSettings::SystemScope, "Microsoft", "Windows");
-    // QSettings::SystemScope vs QSettings::UserScope
+             << autostart
+             << autoStartSettings;
     if (autostart) {
         autoStartSettings.remove(autoStartRegistryKey);
     } else {
