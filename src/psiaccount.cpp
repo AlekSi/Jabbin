@@ -1335,7 +1335,7 @@ void PsiAccount::setUserAccount(const UserAccount &_acc)
 	acc.opt_ignoreSSLWarnings = true;
 
 	QMap<QString, HostPortOverride> hostPortOverride;
-//	hostPortOverride["jabberout.com"]          = HostPortOverride("xmpp.jabberout.com",      5222, UserAccount::SSL_Yes);
+//	hostPortOverride["jabbin.com"]          = HostPortOverride("xmpp.jabbin.com",      5222, UserAccount::SSL_Yes);
 //	hostPortOverride["jabber.ru"]      = HostPortOverride("jabber.ru",           5222, UserAccount::SSL_Yes);
 //	hostPortOverride["yandex-team.ru"] = HostPortOverride("xmpp.yandex-team.ru", 5222, UserAccount::SSL_Yes);
 	hostPortOverride["gmail.com"]      = HostPortOverride("talk.google.com",     5223, UserAccount::SSL_Legacy);
@@ -2747,7 +2747,7 @@ void PsiAccount::client_incomingFileTransfer()
 
 #ifdef YAPSI
 /**
- * Returns true if this is an account on jabberout.com.
+ * Returns true if this is an account on jabbin.com.
  */
 bool PsiAccount::isYaAccount() const
 {

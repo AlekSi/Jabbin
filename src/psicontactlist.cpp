@@ -147,7 +147,7 @@ bool PsiContactList::haveConnectingAccounts() const
 
 /**
  * At the moment, it returns first enabled account.
- * Note: In Jabbin it tries to return first enabled jabberout account, then
+ * Note: In Jabbin it tries to return first enabled jabbin account, then
  * reverts to the usual behavior.
  */
 PsiAccount *PsiContactList::defaultAccount() const
@@ -181,7 +181,7 @@ PsiAccount* PsiContactList::createAccount(const QString& name, const Jid& j, con
 	acc.name = name;
 
 	acc.jid = j.full();
-	if(!pass.isEmpty()) { 
+	if(!pass.isEmpty()) {
 		acc.opt_pass = true;
 		acc.pass = pass;
 	}

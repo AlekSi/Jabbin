@@ -109,7 +109,7 @@ bool Ya::isYaInformer(PsiEvent* event)
 
 bool Ya::isYaJid(const XMPP::Jid& jid)
 {
-	return jid.host() == "jabberout.com";
+	return jid.host() == "jabbin.com";
 }
 
 static const QChar& friendsChar()
@@ -556,14 +556,14 @@ QString Ya::messageNotifierText(const QString& messageText)
 QString Ya::yaRuAliasing(const QString& jid)
 {
 	QString tmp = jid;
-	tmp.replace(QRegExp("@(joim|jabbin|jabberout)\\.(com|net)$"), "@jabberout.com");
+	tmp.replace(QRegExp("@(joim|jabbin)\\.(com|net)$"), "@jabbin.com");
 	return tmp;
 }
 
 QString Ya::stripYaRuHostname(const QString& jid)
 {
 	QString tmp = jid;
-	tmp.replace(QRegExp("@(joim|jabbin|jabberout)\\.(com|net)$"), "");
+	tmp.replace(QRegExp("@(joim|jabbin)\\.(com|net)$"), "");
 	return tmp;
 }
 

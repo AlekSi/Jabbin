@@ -34,11 +34,11 @@
 
 #define PROG_NAME QString::fromUtf8("Jabbin")
 #define PROG_VERSION JABBINPSI_VERSION;
-#define PROG_CAPS_NODE "http://www.jabberout.com/caps";
+#define PROG_CAPS_NODE "http://www.jabbin.com/caps";
 #define PROG_CAPS_VERSION JABBINPSI_VERSION;
-#define PROG_IPC_NAME "com.jabberout.jabbin"
-#define PROG_OPTIONS_NS "http://www.jabberout.com/options";
-#define PROG_STORAGE_NS "http://www.jabberout.com/storage";
+#define PROG_IPC_NAME "com.jabbin.jabbin"
+#define PROG_OPTIONS_NS "http://www.jabbin.com/options";
+#define PROG_STORAGE_NS "http://www.jabbin.com/storage";
 
 #if defined(Q_WS_X11) && !defined(PSI_DATADIR)
 #define PSI_DATADIR "/usr/local/share/psi"
@@ -79,7 +79,7 @@ QString ApplicationInfo::optionsNS()
 QString ApplicationInfo::storageNS()
 {
 	return PROG_STORAGE_NS;
-}	
+}
 
 QString ApplicationInfo::resourcesDir()
 {

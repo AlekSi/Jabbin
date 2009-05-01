@@ -1314,8 +1314,8 @@ void PsiCon::checkAccountsEmpty()
 #ifndef YAPSI
 		promptUserToCreateAccount();
 #else
-		// PsiAccount* account = createAccount("jabberout.com", "", "",
-		//                                     true, "jabberout.com", 5222,
+		// PsiAccount* account = createAccount("jabbin.com", "", "",
+		//                                     true, "jabbin.com", 5222,
 		//                                     false, UserAccount::SSL_Yes, 0, false);
 		// Q_ASSERT(account);
 		break;

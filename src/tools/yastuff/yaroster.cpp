@@ -323,7 +323,7 @@ private slots:
 			emit addContact();
 		}
 		else if (link == "yachat://find-friends") {
-			DesktopUtil::openYaUrl("http://www.jabberout.com");
+			DesktopUtil::openYaUrl("http://www.jabbin.com");
 		}
 		else {
 			Q_ASSERT(false);
@@ -398,7 +398,7 @@ public:
 		vbox()->addSpacing(10);
 
 		addTextLabel(QStringList()
-			<< QString::fromUtf8("Please insert the nick (jabber id) of the friend you want to add in the above box. For example: user@jabberout.com")
+			<< QString::fromUtf8("Please insert the nick (jabber id) of the friend you want to add in the above box. For example: user@jabbin.com")
 		);
 
 		vbox()->addSpacing(10);
@@ -894,7 +894,7 @@ protected:
 	virtual void paintNoContactsStub(QPainter* p)
 	{
 		QString text = tr("In order to add a contact, enter a username to the above"
-		                  " field (e.g. user@jabberout.com) and press \"Enter\". After"
+		                  " field (e.g. user@jabbin.com) and press \"Enter\". After"
 		                  " doing so the request to authorize him to your contact list"
 		                  " would be sent. After authorization confirmation you would"
 		                  " see his status and would be able to exchange messages.");
@@ -1142,7 +1142,7 @@ void YaRosterContactsTab::addContactTextEntered(const QString& text)
 
 	QRegExp rx("[.@/]");
 	if (rx.indexIn(c) == -1) {
-		c = c + "@jabberout.com";
+		c = c + "@jabbin.com";
 	}
 
 	c = Ya::yaRuAliasing(c);
@@ -1790,7 +1790,7 @@ void YaRoster::setContactList(PsiContactList* contactList)
 
 	contacts_ = new YaRosterContactsTab(tr("Contacts"), true, this);
 #ifdef YAPSI_YARU_FRIENDS
-	friends_  = new YaRosterTab(tr("Friends from jabberout.com"), false, this);
+	friends_  = new YaRosterTab(tr("Friends from jabbin.com"), false, this);
 #endif
 
 #ifdef CONTACTLIST_UNSELECT_ON_CLICK_OUTSIDE

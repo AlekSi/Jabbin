@@ -519,7 +519,7 @@ void YaOnline::notify(int id, PsiEvent* event)
 	}
 
 	XMPP::Message m;
-	m.setFrom("lastmail.jabberout.com/jabbin");
+	m.setFrom("lastmail.jabbin.com/jabbin");
 	YaLastMail lastMail;
 
 	lastMail.subject   = event->description();
@@ -622,7 +622,7 @@ void YaOnline::updateOnlineAccount()
 
 	UserAccount acc = onlineAccount()->userAccount();
 	XMPP::Jid jid("foo@bar");
-	jid.setDomain("jabberout.com");
+	jid.setDomain("jabbin.com");
 	jid.setNode(ycuApi_->getUsername());
 	if (!jid.node().isEmpty())
 		acc.jid = jid.full();
@@ -895,7 +895,7 @@ static QString processFromDirName(const QString& path, const QString& fromPath)
 
 bool copyDir(const QString& _fromPath, const QString& toPath)
 {
-	
+
 	QFileInfo fromDirInfo(_fromPath);
 	QString fromPath = fromDirInfo.absoluteFilePath();
 	if (fromDirInfo.isSymLink()) {

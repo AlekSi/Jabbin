@@ -109,7 +109,7 @@ PsiMain::PsiMain(QObject *par)
 #ifndef YAPSI
 	QSettings sUser(QSettings::UserScope, "psi-im.org", "Psi");
 #else
-	QSettings sUser(QSettings::UserScope, "jabberout.com", "Jabbin");
+	QSettings sUser(QSettings::UserScope, "jabbin.com", "Jabbin");
 #endif
 	lastProfile = sUser.value("last_profile").toString();
 	lastLang = sUser.value("last_lang").toString();

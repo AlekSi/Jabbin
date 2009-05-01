@@ -150,8 +150,6 @@ void ContactTooltip::showContact(PsiContact * contact, const QRect & parent)
 
     d->buttonProfile->setVisible(
         contact->jid().bare().endsWith("@jabbin.com")
-        ||
-        contact->jid().bare().endsWith("@jabberout.com")
     );
 
     // Moving the window
