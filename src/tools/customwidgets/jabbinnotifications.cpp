@@ -77,8 +77,47 @@ JabbinNotifications * JabbinNotifications::instance()
     return Private::instance;
 }
 
+int JabbinNotifications::createNotification(PsiEvent * event,
+        Qt::ConnectionType ctype)
+{
+    if (!event) {
+        return -1;
+    }
+
+    QString type;
+    QStringList data;
+    data << event->jid().bare();
+    data << event->description();
+    switch (event->type()) {
+        case PsiEvent::Message:
+            type = N_CHAT_REQUEST;
+            break;
+        case PsiEvent::Auth:
+            type = N_STATUS_REQUEST;
+            break;
+        case PsiEvent::File:
+            type = N_INCOMING_FILE;
+            break;
+    }
+
+    qDebug() << "JabbinNotifications::createNotification:"
+             << type << data;
+
+    return createNotification(
+        type, data, ctype);
+}
+
+
 int JabbinNotifications::createNotification(
         const QString & type, const QString & data,
+        Qt::ConnectionType ctype)
+{
+    return createNotification(type, QStringList(data), ctype);
+}
+
+
+int JabbinNotifications::createNotification(
+        const QString & type, const QStringList & data,
         Qt::ConnectionType ctype)
 {
     int id = 0;
@@ -89,25 +128,26 @@ int JabbinNotifications::createNotification(
         QMap < QString, QString > actions;
         int timeout = 5;
         if (type == N_INCOMING_CALL) {
-            message = tr("Incoming call from %1").arg(data);
+            message = tr("Incoming call from %1").arg(data.at(0));
             actions["accept"] = tr("Accept");
             actions["reject"] = tr("Reject");
             timeout = 0;
         } else if (type == N_UPDATE_AVAILABLE) {
-            message = tr("There is a new version of Jabbin available - %1").arg(data);
+            message = tr("There is a new version of Jabbin available - %1").arg(data.at(0));
             actions["download"] = tr("Download");
             actions["ignore"] = tr("Ignore");
             timeout = 0;
         } else if (type == N_CHAT_REQUEST) {
-            message = tr("%1 wants to chat with you").arg(data);
+            message = tr("%1 sent you a message: %2").arg(data.at(0), data.at(1));
         } else if (type == N_STATUS_REQUEST) {
-            message = tr("%1 wants to see your status").arg(data);
+            // message = tr("%1 wants to subscribe to your presence").arg(data.at(0));
+            message = data.at(1);
         } else if (type == N_CONTACT_ONLINE) {
-            message = tr("%1 is now online").arg(data);
+            message = tr("%1 is now online").arg(data.at(0));
         } else if (type == N_INCOMING_CALL) {
-            message = tr("%1 sent you a file").arg(data);
+            message = tr("%1 sent you a file").arg(data.at(0));
         } else if (type == N_INCOMING_VOICEMAIL) {
-            message = tr("Incoming voicemail from %1").arg(data);
+            message = tr("Incoming voicemail from %1").arg(data.at(0));
         }
 
         id = CustomWidgets::Notifications::instance()->showNotification(

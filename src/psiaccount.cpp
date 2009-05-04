@@ -174,6 +174,7 @@ typedef int socklen_t;
 
 #include "tools/services/servicespanel.h"
 #include "tools/services/servicespopupbutton.h"
+#include "tools/customwidgets/jabbinnotifications.h"
 
 using namespace XMPP;
 
@@ -3323,7 +3324,7 @@ void PsiAccount::actionJoin(const Jid &j, const QString& password)
 	w->show();
 }
 
-//#define _KILL_ON_OFFLINE_
+// #define _KILL_ON_OFFLINE_
 #ifdef _KILL_ON_OFFLINE_
 int wasonline = 0;
 #endif
@@ -4912,7 +4913,8 @@ void PsiAccount::handleEvent(PsiEvent* e, ActivationType activationType)
 		PsiEvent* notificationEvent = id == -1 ? backupEvent : e;
 #endif
 		if (notificationEvent) {
-			YaPopupNotification::notify(id, notificationEvent);
+			//YaPopupNotification::notify(id, notificationEvent);
+                        JabbinNotifications::instance()->createNotification(notificationEvent);
 		}
 // #ifdef YAPSI_ACTIVEX_SERVER
 // 		if (notificationEvent && !notificationEvent->shownInOnline()) {

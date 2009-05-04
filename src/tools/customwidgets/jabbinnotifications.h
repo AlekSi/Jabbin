@@ -22,6 +22,7 @@
 
 #include <QObject>
 #include <QPixmap>
+#include "psievent.h"
 
 #define N_INCOMING_CALL      "options.notification.incoming_call"
 #define N_UPDATE_AVAILABLE   "options.notification.update_available"
@@ -58,10 +59,33 @@ public:
         Qt::ConnectionType ctype = Qt::AutoConnection);
 
     /**
+     * Creates a notification of the specified type.
+     * @param type type
+     * @param data extra data needed for the notification
+     * @param ctype    @see QObject::connect()
+     * @returns id of the notification, 0 iff not sucess
+     */
+    int createNotification(
+        const QString & type,
+        const QStringList & data,
+        Qt::ConnectionType ctype = Qt::AutoConnection);
+
+    /**
+     * Creates a notification of the specified type.
+     * @param event psi event
+     * @returns id of the notification, 0 iff not sucess
+     */
+    int createNotification(
+        PsiEvent * event,
+        Qt::ConnectionType ctype = Qt::AutoConnection
+    );
+
+    /**
      * Closes the specified notification
      * @param id id
      */
     void endNotification(int id);
+
 
 Q_SIGNALS:
     void notificationFinished(int id, const QString & action);

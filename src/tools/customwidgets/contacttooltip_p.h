@@ -23,6 +23,7 @@
 #include <QBasicTimer>
 #include <QTimeLine>
 #include <QPushButton>
+#include <QPointer>
 
 #include "generic/customwidgetscommon.h"
 
@@ -48,7 +49,7 @@ public:
     QPushButton * buttonHistory;
     bool flipped;
 
-    PsiContact * oldContact;
+    QPointer < PsiContact > oldContact;
 
 public Q_SLOTS:
     void timelineFrameChanged(int frame);

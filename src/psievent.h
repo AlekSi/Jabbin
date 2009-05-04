@@ -62,7 +62,7 @@ public:
 		RosterExchange,
 		//Status
 		HttpAuth,
-        Call
+		Call
 	};
 	virtual int type() const = 0;
 
@@ -267,7 +267,7 @@ public:
 	void setRosterExchangeItems(const XMPP::RosterExchangeItems&);
 	const QString& text() const;
 	void setText(const QString& text);
-	
+
 	virtual int priority() const;
 
 	virtual QString description() const;
@@ -289,7 +289,7 @@ public:
 	void setFrom(const XMPP::Jid &);
 	const XMPP::Status& status() const;
 	void setStatus(const XMPP::Status&);
-	
+
 	virtual int priority() const;
 
 private:

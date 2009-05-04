@@ -106,7 +106,7 @@ void ContactTooltip::showContact(PsiContact * contact, const QRect & parent)
     }
 
     // Connecting the buttons
-    if (d->oldContact) {
+    if (!d->oldContact.isNull()) {
         foreach (QPushButton * button, d->buttonList) {
             button->disconnect(d->oldContact);
         }

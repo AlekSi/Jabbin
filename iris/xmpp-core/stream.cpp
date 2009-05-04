@@ -460,7 +460,7 @@ void ClientStream::setLocalAddr(const QHostAddress &addr, Q_UINT16 port)
 	d->localPort = port;
 }
 
-void ClientStream::setCompress(bool compress) 
+void ClientStream::setCompress(bool compress)
 {
 	d->doCompress = compress;
 }
@@ -610,6 +610,8 @@ void ClientStream::cr_error()
 void ClientStream::bs_connectionClosed()
 {
 	reset();
+	qDebug() << "ClientStream::bs_connectionClosed()";
+	// qFatal("ClientStream::bs_connectionClosed");
 	connectionClosed();
 }
 
@@ -671,6 +673,8 @@ void ClientStream::ss_tlsHandshaken()
 void ClientStream::ss_tlsClosed()
 {
 	reset();
+	qDebug() << "ClientStream::ss_tlsClosed()";
+	// qFatal("ClientStream");
 	connectionClosed();
 }
 
@@ -709,7 +713,7 @@ void ClientStream::sasl_nextStep(const QByteArray &stepData)
 	processNext();
 }
 
-void ClientStream::sasl_needParams(const QCA::SASL::Params& p) 
+void ClientStream::sasl_needParams(const QCA::SASL::Params& p)
 {
 #ifdef XMPP_DEBUG
 	printf("need params: %d,%d,%d,%d\n", p.user, p.authzid, p.pass, p.realm);
@@ -1018,6 +1022,8 @@ void ClientStream::processNext()
 				printf("DocumentClosed\n");
 #endif
 				reset();
+
+				qDebug() << "ClientStream::processNext()";
 				connectionClosed();
 				return;
 			}

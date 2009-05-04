@@ -24,6 +24,7 @@
 #include "shortcutmanager.h"
 
 #include <QKeyEvent>
+#include <QDebug>
 
 #ifdef Q_WS_WIN
 #include <qt_windows.h>
