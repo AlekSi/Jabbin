@@ -18,7 +18,7 @@
 			<chat_request>
 				<popupjabbin type="bool" >false</popupjabbin>
 				<sound type="QString" >${"resourcesDir"}/sound/chat2.wav</sound>
-				<tooltip type="bool" >false</tooltip>
+				<tooltip type="bool" >true</tooltip>
 			</chat_request>
 			<update_available>
 				<popupjabbin type="bool" >false</popupjabbin>
@@ -48,7 +48,7 @@
 			<status_request>
 				<popupjabbin type="bool" >false</popupjabbin>
 				<sound type="QString" ></sound>
-				<tooltip type="bool" >false</tooltip>
+				<tooltip type="bool" >true</tooltip>
 			</status_request>
 		</notification>
 
