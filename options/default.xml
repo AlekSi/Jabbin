@@ -50,6 +50,11 @@
 				<sound type="QString" ></sound>
 				<tooltip type="bool" >true</tooltip>
 			</status_request>
+			<connection_error>
+				<popupjabbin type="bool" >false</popupjabbin>
+				<sound type="QString" ></sound>
+				<tooltip type="bool" >true</tooltip>
+			</connection_error>
 		</notification>
 
 

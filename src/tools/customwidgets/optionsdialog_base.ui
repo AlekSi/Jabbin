@@ -819,8 +819,9 @@ p, li { white-space: pre-wrap; }
              <bool>false</bool>
             </property>
             <property name="rowCount">
-             <number>7</number>
+             <number>8</number>
             </property>
+            <row/>
             <row/>
             <row/>
             <row/>
@@ -893,6 +894,11 @@ p, li { white-space: pre-wrap; }
             <item row="6" column="0">
              <property name="text">
               <string>Update available</string>
+             </property>
+            </item>
+            <item row="7" column="0">
+             <property name="text">
+              <string>Connection error</string>
              </property>
             </item>
            </widget>

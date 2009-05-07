@@ -40,7 +40,7 @@
 
 #define DEFAULT_CALL_SERVER_JID "jabbin.com"
 #define DEFAULT_CALL_SERVER_RESOURCE "phone"
-#define NO_OF_OPTIONS 7
+#define NO_OF_OPTIONS 8
 
 // QSettings::SystemScope vs QSettings::UserScope
 #define QSettingsScope QSettings::SystemScope
@@ -134,6 +134,7 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
     tableNotifications->item(4, 0)->setData(Qt::UserRole, N_INCOMING_FILE);
     tableNotifications->item(5, 0)->setData(Qt::UserRole, N_INCOMING_VOICEMAIL);
     tableNotifications->item(6, 0)->setData(Qt::UserRole, N_UPDATE_AVAILABLE);
+    tableNotifications->item(7, 0)->setData(Qt::UserRole, N_CONNECTION_ERROR);
 
     connect(tableNotifications, SIGNAL(currentCellChanged(int,int,int,int)),
             this, SLOT(tableNotificationsCurrentCellChanged(int,int,int,int)));

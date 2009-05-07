@@ -139,6 +139,13 @@ int JabbinNotifications::createNotification(
             timeout = 0;
         } else if (type == N_CHAT_REQUEST) {
             message = tr("%1 sent you a message: %2").arg(data.at(0), data.at(1));
+        } else if (type == N_CONNECTION_ERROR) {
+            int delay = data.at(0).toInt();
+            if (delay < 1000) {
+                message = tr("There was a connection problem. Reconnecting immediately.");
+            } else {
+                message = tr("There was a connection problem. Reconnecting in %1 seconds.").arg(QString::number(delay / 1000));
+            }
         } else if (type == N_STATUS_REQUEST) {
             // message = tr("%1 wants to subscribe to your presence").arg(data.at(0));
             message = data.at(1);

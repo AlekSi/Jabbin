@@ -31,6 +31,7 @@
 #define N_CONTACT_ONLINE     "options.notification.contact_online"
 #define N_INCOMING_FILE      "options.notification.incomming_file"
 #define N_INCOMING_VOICEMAIL "options.notification.incomming_voicemail"
+#define N_CONNECTION_ERROR   "options.notification.connection_error"
 
 /**
  * Jabbin Notifications system
