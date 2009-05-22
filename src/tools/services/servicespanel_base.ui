@@ -22,6 +22,9 @@
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
+     <property name="indentation">
+      <number>0</number>
+     </property>
      <property name="rootIsDecorated">
       <bool>false</bool>
      </property>

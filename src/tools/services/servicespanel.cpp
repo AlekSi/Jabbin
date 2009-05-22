@@ -87,7 +87,7 @@ void ServicesPanel::Private::itemClicked(const QModelIndex & index)
                 }
             default:
                 menu.addSeparator();
-                menu.addAction(tr("Reload"),
+                menu.addAction(tr("Reload service"),
                         this, SLOT(reloadItem()));
                 break;
         }
@@ -116,6 +116,15 @@ bool ServicesPanel::Private::eventFilter(QObject * object, QEvent * event)
         QMouseEvent * mouseEvent = static_cast < QMouseEvent * >(event);
         if (mouseEvent) {
             clickedWithButton = mouseEvent->button();
+            if (clickedWithButton == Qt::RightButton &&
+                !treeServices->indexAt(mouseEvent->pos()).isValid()
+            ) {
+                qDebug() << "popup the menu now!";
+                QMenu menu;
+                menu.addAction(tr("Reload list"),
+                        this, SLOT(reloadAll()));
+                menu.exec(QCursor::pos());
+            }
         }
     }
     return QObject::eventFilter(object, event);
@@ -147,6 +156,10 @@ void ServicesPanel::Private::reloadItem()
     model->refresh(clickedItem);
 }
 
+void ServicesPanel::Private::reloadAll()
+{
+    model->refresh(QModelIndex());
+}
 
 ServicesPanel * ServicesPanel::m_instance = NULL;
 

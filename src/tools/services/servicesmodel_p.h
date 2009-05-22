@@ -144,6 +144,7 @@ public:
     int row();
 
     void addService(const QString service);
+    void reload();
     ServicesModel * model() const;
 
 private:

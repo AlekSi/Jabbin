@@ -419,6 +419,13 @@ void ServicesRootItem::addService(const QString service)
     addChild(new XmppServiceItem(this, service));
 }
 
+void ServicesRootItem::reload()
+{
+    for (int i = 0; i < childCount(); i++) {
+        child(i)->reload();
+    }
+}
+
 ServicesModel * ServicesRootItem::model() const
 {
     return m_model;
@@ -685,7 +692,7 @@ QVariant ServicesModel::data(const QModelIndex & index, int role) const
                 case Generic:
                     return QSize(28, 28);
                 case Service:
-                    return QSize(24, 24);
+                    return QSize(0, 0);
                 case Server:
                     return QSize(36, 36);
                 case Room:
