@@ -577,6 +577,7 @@ ServicesModel::ServicesModel(PsiAccount * psiAccount, QObject * parent)
     : QAbstractItemModel(parent),
       d(new Private(this))
 {
+    ServiceItem::initIcons();
     d->psiAccount = psiAccount;
     connect(d->psiAccount, SIGNAL(updateContact(Jid)),
         d, SLOT(contactUpdated(Jid)));
@@ -852,7 +853,6 @@ void ServicesModel::refresh(const QModelIndex & parent)
 
 QIcon ServicesModel::iconForTransportType(const QString & type)
 {
-    ServiceItem::initIcons();
     if (type == "aim")
         return ServiceItem::m_aimIcon;
     else if (type == "irc")
