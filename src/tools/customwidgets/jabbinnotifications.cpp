@@ -140,6 +140,7 @@ int JabbinNotifications::createNotification(
         } else if (type == N_CHAT_REQUEST) {
             message = tr("%1 sent you a message: %2").arg(data.at(0), data.at(1));
         } else if (type == N_CONNECTION_ERROR) {
+            timeout = 10;
             int delay = data.at(0).toInt();
             if (delay < 1000) {
                 message = tr("There was a connection problem. Reconnecting immediately.");
