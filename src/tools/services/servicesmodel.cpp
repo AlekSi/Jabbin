@@ -244,6 +244,10 @@ XmppServiceItem::XmppServiceItem(ServiceItem * parent, DiscoItem item)
     }
 }
 
+bool XmppServiceItem::isLoaded() const {
+    return !m_waitingForInfo;
+}
+
 void XmppServiceItem::contactUpdated()
 {
     if (contact) {
@@ -692,7 +696,13 @@ QVariant ServicesModel::data(const QModelIndex & index, int role) const
                 case Generic:
                     return QSize(28, 28);
                 case Service:
-                    return QSize(0, 0);
+                    {
+                    XmppServiceItem * xmppitem = dynamic_cast < XmppServiceItem * > (item);
+                    if (xmppitem->isLoaded())
+                         return QSize(0, 0);
+                    else
+                         return QSize(36, 36);
+                    }
                 case Server:
                     return QSize(36, 36);
                 case Room:

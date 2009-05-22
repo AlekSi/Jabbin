@@ -121,6 +121,7 @@ public:
     XmppServiceItem(ServiceItem * parent, QString server);
     XmppServiceItem(ServiceItem * parent, DiscoItem item);
     PsiContact * contact;
+    bool isLoaded() const;
 
 protected:
     virtual void _load();
