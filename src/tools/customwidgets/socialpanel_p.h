@@ -17,40 +17,34 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#ifndef COMMON_FUNCTIONS_H_
-#define COMMON_FUNCTIONS_H_
+#include "socialpanel.h"
+#include "generic/customwidgetscommon.h"
+#include <QWebView>
+#include <QStackedLayout>
+#include <QScriptValue>
 
-#include <QObject>
-#include <QString>
-
-class QNetworkReply;
-class QUrl;
-
-namespace CustomWidgets {
-
-class Common {
-public:
-    static QString readFile(const QString & fileName);
-};
-
-class HttpReader: public QObject {
+class SocialPanel::Private: public QObject {
     Q_OBJECT
 public:
-    HttpReader();
+    Private();
 
-    void read(const QUrl & url);
+    PsiAccount * account;
+    CustomWidgets::HttpReader httpreader;
 
-Q_SIGNALS:
-    void finished(const QString data);
+    QWebView * web;
+    QStackedLayout * layout;
 
-protected Q_SLOTS:
-    void networkReplyFinished(QNetworkReply * reply);
+    void processScriptValue(QScriptValue value);
+    QString name;
+    QString date;
+    QString avatar;
+    QString jid;
 
-private:
-    class Private;
-    Private * const d;
+
+public Q_SLOTS:
+    void finishedJsonRead(const QString & data);
+    void reload();
+    void linkClicked(const QUrl & url);
+
 };
 
-} // namespace CustomWidgets
-
-#endif // COMMON_FUNCTIONS_H_

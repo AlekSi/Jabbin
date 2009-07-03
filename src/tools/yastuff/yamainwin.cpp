@@ -37,6 +37,12 @@
 #include <QMenuItem>
 #include <QMessageBox>
 #include <Q3PtrList>
+#include <QtScript/QScriptValue>
+#include <QtScript/QScriptValueIterator>
+#include <QtScript/QScriptEngine>
+
+//TODO: removi
+#include "tools/customwidgets/generic/customwidgetscommon.h"
 
 #include "im.h"
 #include "common.h"
@@ -306,6 +312,7 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
         ui_.callDialog->setParent(NULL);
         ui_.roster->setParent(NULL);
         ui_.servicesPanel->setParent(NULL);
+        ui_.socialPanel->setParent(NULL);
 	while (ui_.mainTabWidget->count()) {
 		ui_.mainTabWidget->removeTab(0);
 	}
@@ -319,6 +326,11 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
         iconDial.addPixmap(QPixmap(QString::fromUtf8(":/customicons/CalPad-Icon16x16.png")), QIcon::Normal, QIcon::Off);
         iconDial.addPixmap(QPixmap(QString::fromUtf8(":/customwidgets/generic/data/blank.png")), QIcon::Disabled, QIcon::Off);
         ui_.mainTabWidget->addTab(ui_.callDialog, iconDial, tr("&Dial"));
+
+        QIcon iconSocial;
+        iconSocial.addPixmap(QPixmap(QString::fromUtf8(":/iconsets/roster/roster-tabs/social.png")), QIcon::Normal, QIcon::Off);
+        iconSocial.addPixmap(QPixmap(QString::fromUtf8(":/customwidgets/generic/data/blank.png")), QIcon::Disabled, QIcon::Off);
+        ui_.mainTabWidget->addTab(ui_.socialPanel, iconSocial, QString("&Social"));
 
         QIcon iconServices;
         iconServices.addPixmap(QPixmap(QString::fromUtf8(":/iconsets/roster/roster-tabs/services.png")), QIcon::Normal, QIcon::Off);

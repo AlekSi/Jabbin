@@ -381,7 +381,7 @@ roster, #callDialog, servicesPanel {
       <item>
        <widget class="QTabWidget" name="mainTabWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>3</number>
         </property>
         <property name="usesScrollButtons">
          <bool>true</bool>
@@ -494,6 +494,16 @@ roster, #callDialog, servicesPanel {
          <attribute name="title">
           <string>&amp;Social</string>
          </attribute>
+         <widget class="SocialPanel" name="socialPanel" native="true">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>40</y>
+            <width>251</width>
+            <height>441</height>
+           </rect>
+          </property>
+         </widget>
         </widget>
        </widget>
       </item>
@@ -570,6 +580,12 @@ roster, #callDialog, servicesPanel {
    <class>CustomWidgets::HttpLabel</class>
    <extends>QLabel</extends>
    <header>tools/customwidgets/generic/httplabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SocialPanel</class>
+   <extends>QWidget</extends>
+   <header>tools/customwidgets/socialpanel.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

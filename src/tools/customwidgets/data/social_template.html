@@ -1,0 +1,93 @@
+<html>
+<head>
+  <style>
+    body, div, div {
+      font-size: 10pt;
+      font-family: sans;
+      padding: 0px;
+    }
+
+    a {
+      padding-top: 8px;
+      color: black;
+      display: block;
+      text-decoration: none;
+    }
+
+    a:HOVER {
+      background-color: #d5e6f3;
+    }
+
+    div.item {
+      padding-bottom: 8px;
+      border-bottom: 1px solid silver;
+    }
+
+    div.item div {
+      padding: 0px 4px;
+    }
+
+    div.item div.bottom {
+      clear: both;
+    }
+
+    div.service {
+      float: left;
+    }
+
+    div.service img {
+      width: 16px;
+    }
+
+    div.avatar {
+      float: right;
+    }
+
+    div.avatar img {
+      width: 32px;
+      height: 32px;
+    }
+
+    span.name {
+      font-size: 12pt;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    span.time {
+      font-size: 10pt;
+      color: gray;
+    }
+
+    div.title {
+      clear: left;
+      margin-left: 26px;
+      font-weight: bold;
+    }
+
+    div.content {
+      clear: left;
+      margin-left: 26px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ITEM:BEGIN -->
+<a href="$LINK">
+  <div class="item">
+    <div class="service"><img src="$SERVICE" /></div>
+    <div class="avatar"><img src="$AVATAR" /></div>
+    <div class="head">
+      <span class="name">$NAME</span>
+      <span class="time">$TIME</span>
+    </div>
+    <div class="title">$TITLE</div>
+    <div class="content">$CONTENT</div>
+    <div class="bottom"></div>
+  </div>
+</a>
+<!-- ITEM:END -->
+
+</body>
+</html>

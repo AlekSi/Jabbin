@@ -39,7 +39,7 @@ yapsi_activex_server {
 	win32: RC_FILE = ../win32/psi_win32.rc
 }
 
-QT += xml network qt3support phonon
+QT += xml network qt3support phonon script webkit
 
 #CONFIG += use_crash
 CONFIG += console

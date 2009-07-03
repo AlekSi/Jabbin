@@ -22,6 +22,11 @@
 #include <QTextStream>
 #include <QDebug>
 
+#include <QUrl>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+
 namespace CustomWidgets {
 
 QString Common::readFile(const QString & fileName)
@@ -42,6 +47,30 @@ QString Common::readFile(const QString & fileName)
     }
 
     return result;
+}
+
+// HttpReader
+class HttpReader::Private {
+public:
+    QNetworkAccessManager manager;
+};
+
+HttpReader::HttpReader()
+    : d(new Private())
+{
+    connect(&(d->manager), SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(networkReplyFinished(QNetworkReply*)));
+}
+
+void HttpReader::read(const QUrl & url)
+{
+    d->manager.get(QNetworkRequest(url));
+}
+
+void HttpReader::networkReplyFinished(QNetworkReply * reply)
+{
+    QByteArray data = reply->readAll();
+    emit finished(data.trimmed());
 }
 
 } // namespace CustomWidgets

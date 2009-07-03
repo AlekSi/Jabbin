@@ -15,6 +15,7 @@ SOURCES += \
 	$$PWD/../../customwidgets/emoticonspopupbutton.cpp \
 	$$PWD/../../customwidgets/selfmood.cpp \
 	$$PWD/../../customwidgets/selfavatar.cpp \
+	$$PWD/../../customwidgets/socialpanel.cpp \
 	$$PWD/../../customwidgets/generic/styledwindow.cpp \
 	$$PWD/../../customwidgets/generic/httplabel.cpp \
 	$$PWD/../../customwidgets/generic/advancedlineedit.cpp \
@@ -50,6 +51,8 @@ HEADERS += \
 	$$PWD/../../customwidgets/emoticonspopupbutton_p.h \
 	$$PWD/../../customwidgets/selfmood.h \
 	$$PWD/../../customwidgets/selfavatar.h \
+	$$PWD/../../customwidgets/socialpanel.h \
+	$$PWD/../../customwidgets/socialpanel_p.h \
 	$$PWD/../../customwidgets/generic/styledwindow.h \
 	$$PWD/../../customwidgets/generic/httplabel.h \
 	$$PWD/../../customwidgets/generic/advancedlineedit.h \

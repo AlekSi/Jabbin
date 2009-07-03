@@ -48,6 +48,7 @@
     <file>data/calldialog_history.png</file>
     <file>data/calldialog_dial.png</file>
     <file>data/calldialog_addressbook.png</file>
+    <file>data/social_template.html</file>
     <file>generic/data/blank.png</file>
     <file>generic/data/clearlineedit.png</file>
     <file>generic/data/dialpad_style.css</file>
