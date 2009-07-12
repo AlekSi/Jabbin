@@ -65,6 +65,7 @@ public:
 
 protected:
     void showEvent(QShowEvent * event);
+    void timerEvent(QTimerEvent * event);
 
 private:
     class Private;

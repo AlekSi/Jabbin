@@ -22,6 +22,7 @@
 #include <QWebView>
 #include <QStackedLayout>
 #include <QScriptValue>
+#include <QBasicTimer>
 
 class SocialPanel::Private: public QObject {
     Q_OBJECT
@@ -39,6 +40,7 @@ public:
     QString date;
     QString avatar;
     QString jid;
+    QBasicTimer timer;
 
 
 public Q_SLOTS:

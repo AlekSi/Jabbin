@@ -29,6 +29,9 @@
 #include <QScriptValue>
 #include <QScriptValueIterator>
 #include <QDesktopServices>
+#include <QWebSettings>
+
+#define TIMER_INTERVAL 300000
 
 using XMPP::Jid;
 
@@ -199,8 +202,22 @@ SocialPanel * SocialPanel::instance()
 
 void SocialPanel::init(PsiAccount * account)
 {
+    QWebSettings::setOfflineStoragePath(path + "offline/");
+    QWebSettings::setMaximumPagesInCache(100);
+
     d->account = account;
     d->reload();
+    d->timer.start(TIMER_INTERVAL, this);
+}
+
+void SocialPanel::timerEvent(QTimerEvent * event)
+{
+    if (event->timerId() == d->timer.timerId()) {
+        d->timer.stop();
+        d->reload();
+        d->timer.start(TIMER_INTERVAL, this);
+    }
+    QWidget::timerEvent(event);
 }
 
 void SocialPanel::showEvent(QShowEvent * event)
