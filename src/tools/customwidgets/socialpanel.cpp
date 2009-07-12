@@ -110,6 +110,31 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
     QString itemPattern = items[1];
 
     QScriptValueIterator it(value.property("data"));
+
+    if (!value.property("data").isValid()) {
+        QString item = itemPattern;
+        html += item
+            .replace("$NAME", "")
+            .replace("$TIME", "")
+            .replace("$TITLE", "")
+            .replace("$CONTENT", tr("Corrupt data retrieved from the server"))
+            .replace("$AVATAR", "")
+            .replace("$LINK", "http://www.jabbin.com")
+            .replace("$SERVICE", "http://www.jabbin.com/life/images/icons/error.png")
+        ;
+    } else if (!it.hasNext()) {
+        QString item = itemPattern;
+        html += item
+            .replace("$NAME", "")
+            .replace("$TIME", "")
+            .replace("$TITLE", "")
+            .replace("$CONTENT", tr("No items in your friend's lifestreams at the moment"))
+            .replace("$AVATAR", "")
+            .replace("$LINK", "http://www.jabbin.com")
+            .replace("$SERVICE", "http://www.jabbin.com/life/images/icons/error.png")
+        ;
+    }
+
     while (it.hasNext()) {
         QString item = itemPattern;
         qDebug() << "#################################";
