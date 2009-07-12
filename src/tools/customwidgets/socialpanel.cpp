@@ -50,8 +50,6 @@ void SocialPanel::Private::processScriptValue(QScriptValue value)
         name = contact->name();
     }
 
-    qDebug() << "## name ##" << name << "####";
-
     // date
     QDateTime dateObject
         = QDateTime::fromString(
@@ -59,12 +57,10 @@ void SocialPanel::Private::processScriptValue(QScriptValue value)
                 "yyyy-MM-dd hh:mm:ss"
         );
     date = dateObject.toString(Qt::DefaultLocaleShortDate);
-    qDebug() << "## date ##" << date << "####";
 
     // avatar
     avatar = account->avatarFactory()->getCachedAvatarFileName(
             XMPP::Jid(jid));
-    qDebug() << "## avatar ##" << avatar << "####";
 }
 
 SocialPanel::Private::Private()
@@ -79,6 +75,8 @@ void SocialPanel::Private::reload()
     if (!account) {
         return;
     }
+
+    timer.stop();
 
     web->setHtml("Loading...");
 
@@ -176,21 +174,24 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
 
         for (int i = 1; i <= 5; i++) {
             if (page == current_page) {
-                pager += "<span>" + QString::number(i) + "</span>";
+                pager += "<span>" + QString::number(page) + "</span>";
             } else {
-                pager += "<a href=\"go://" + QString::number(i) + "\">" +
-                     QString::number(i) + "</a>";
+                pager += "<a href=\"go://" + QString::number(page) + "\">" +
+                     QString::number(page) + "</a>";
             }
             page++;
-            if (page > totalPages) break;
+            if (page > totalPages) {
+               break;
+            }
         }
+        page--;
+
+        if (page < totalPages) { pager += "..."; }
 
         if (current_page < totalPages) {
             pager += "<a href=\"go://next\">&gt;</a>";
             pager += "<a href=\"go://last\">&gt;&gt;</a>";
         }
-
-        if (page < totalPages) { pager += "..."; }
 
         pager = "<div class=\"pager\">" + pager + "</div>";
 
@@ -200,17 +201,12 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
 
     while (it.hasNext()) {
         QString item = itemPattern;
-        qDebug() << "#################################";
         it.next();
         QScriptValue itemValue = it.value();
         processScriptValue(itemValue);
 
-        qDebug() << it.name() << ": " << itemValue.toString();
-
         QString title = itemValue.property("item_title").toString();
         QString content = itemValue.property("item_content").toString();
-        qDebug() << "## title ##" << title << "####";
-        qDebug() << "## content ##" << content << "####";
         if (content.isEmpty()) {
             content = title;
         }
@@ -221,9 +217,6 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
         QString domain = itemValue.property("feed_domain").toString();
         domain.replace(QRegExp("[.](com|org)"), "");
         domain.replace(".", "");
-        qDebug() << "## domain ##" << domain << "####";
-        qDebug() << "## link ##" <<
-             itemValue.property("item_permalink").toString() << "####";
 
         html += item
             .replace("$NAME", name)
@@ -234,25 +227,16 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
             .replace("$LINK", itemValue.property("item_permalink").toString())
             .replace("$SERVICE", "http://www.jabbin.com/life/images/icons/" + domain + ".png")
         ;
-
-        QScriptValueIterator inner(itemValue);
-        while (inner.hasNext()) {
-            qDebug() << "    ####";
-            qDebug() << inner.name() << ": "
-                     << inner.value().toString();
-            if (inner.name().isEmpty()) break;
-        }
     }
 
     html += items[2];
 
     html = html.replace("$PAGER", pager);
 
-    qDebug() << "################################# finishedJsonRead";
     web->setHtml(html);
     web->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-    connect(web, SIGNAL(linkClicked(const QUrl &)),
-            this, SLOT(linkClicked(const QUrl &)));
+
+    timer.start(TIMER_INTERVAL, this);
 }
 
 SocialPanel * SocialPanel::m_instance = NULL;
@@ -282,6 +266,9 @@ void SocialPanel::init(PsiAccount * account)
     d->account = account;
     d->reload();
     d->timer.start(TIMER_INTERVAL, this);
+
+    connect(d->web, SIGNAL(linkClicked(const QUrl &)),
+            d, SLOT(linkClicked(const QUrl &)));
 }
 
 void SocialPanel::timerEvent(QTimerEvent * event)
