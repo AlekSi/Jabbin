@@ -21,6 +21,7 @@
 #include "socialpanel_p.h"
 #include "generic/customwidgetscommon.h"
 #include "psicontact.h"
+#include "applicationinfo.h"
 
 #include "avatars.h"
 #include <QDebug>
@@ -30,6 +31,8 @@
 #include <QScriptValueIterator>
 #include <QDesktopServices>
 #include <QWebSettings>
+#include <QNetworkDiskCache>
+#include <QDir>
 
 #define TIMER_INTERVAL 300000
 
@@ -202,7 +205,18 @@ SocialPanel * SocialPanel::instance()
 
 void SocialPanel::init(PsiAccount * account)
 {
-    QWebSettings::setOfflineStoragePath(path + "offline/");
+    QString path = ApplicationInfo::homeDir() + "/webcache/";
+    QDir().mkpath(path);
+
+    QWebSettings::setOfflineStoragePath(path);
+
+    QNetworkDiskCache * diskCache = new QNetworkDiskCache(this);
+    diskCache->setCacheDirectory(path);
+
+    QNetworkAccessManager * networkAccessManager = new QNetworkAccessManager();
+    networkAccessManager->setCache(diskCache);
+    d->web->page()->setNetworkAccessManager(networkAccessManager);
+
     QWebSettings::setMaximumPagesInCache(100);
 
     d->account = account;
