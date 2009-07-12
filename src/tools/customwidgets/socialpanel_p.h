@@ -41,6 +41,8 @@ public:
     QString avatar;
     QString jid;
     QBasicTimer timer;
+    int currentPage;
+    int totalPages;
 
 
 public Q_SLOTS:

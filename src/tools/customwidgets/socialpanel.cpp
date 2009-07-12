@@ -67,11 +67,6 @@ void SocialPanel::Private::processScriptValue(QScriptValue value)
     qDebug() << "## avatar ##" << avatar << "####";
 }
 
-QString getAvatar(QScriptValue value)
-{
-    return "";
-}
-
 SocialPanel::Private::Private()
 {
     connect(&httpreader, SIGNAL(finished(const QString &)),
@@ -85,8 +80,10 @@ void SocialPanel::Private::reload()
         return;
     }
 
+    web->setHtml("Loading...");
+
     QUrl url(
-        "http://www.jabbin.com/life/services/" + account->jid().user() + "/friends/json/p/1"
+        "http://www.jabbin.com/life/services/" + account->jid().user() + "/friends/json/p/" + QString::number(currentPage)
         );
     qDebug() << "SocialPanel::Private::reload: " << url;
 
@@ -95,7 +92,23 @@ void SocialPanel::Private::reload()
 
 void SocialPanel::Private::linkClicked(const QUrl & url)
 {
-    QDesktopServices::openUrl(url);
+    qDebug() << url.scheme() << url.authority();
+    if (url.scheme() == "go") {
+        QString command = url.authority();
+        if (command == "first") {
+            currentPage = 1;
+        } else if (command == "previous") {
+            currentPage--;
+        } else if (command == "next") {
+            currentPage++;
+        } else if (command == "last") {
+            currentPage = totalPages;
+        } else {
+            currentPage = command.toInt();
+        }
+        reload();
+    } else
+        QDesktopServices::openUrl(url);
 }
 
 void SocialPanel::Private::finishedJsonRead(const QString & data)
@@ -116,6 +129,7 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
     QString itemPattern = items[1];
 
     QScriptValueIterator it(value.property("data"));
+    QString pager = "";
 
     if (!value.property("data").isValid()) {
         QString item = itemPattern;
@@ -139,7 +153,50 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
             .replace("$LINK", "http://www.jabbin.com")
             .replace("$SERVICE", "http://www.jabbin.com/life/images/icons/error.png")
         ;
+    } else {
+        QScriptValue meta = value.property("meta");
+        int total_records = meta.property("total_records").toInt32();
+        int items_per_page = meta.property("items_per_page").toInt32();
+        int current_page = meta.property("current_page").toInt32();
+
+        totalPages = total_records / items_per_page;
+        while (totalPages * items_per_page < total_records) {
+            totalPages++;
+        }
+
+        if (current_page > 1) {
+            pager += "<a href=\"go://first\">&lt;&lt;</a>";
+            pager += "<a href=\"go://previous\">&lt;</a>";
+        }
+
+        int page = current_page - 2;
+        if (page < 1) { page = 1; }
+
+        if (page > 1) { pager += "..."; }
+
+        for (int i = 1; i <= 5; i++) {
+            if (page == current_page) {
+                pager += "<span>" + QString::number(i) + "</span>";
+            } else {
+                pager += "<a href=\"go://" + QString::number(i) + "\">" +
+                     QString::number(i) + "</a>";
+            }
+            page++;
+            if (page > totalPages) break;
+        }
+
+        if (current_page < totalPages) {
+            pager += "<a href=\"go://next\">&gt;</a>";
+            pager += "<a href=\"go://last\">&gt;&gt;</a>";
+        }
+
+        if (page < totalPages) { pager += "..."; }
+
+        pager = "<div class=\"pager\">" + pager + "</div>";
+
     }
+
+
 
     while (it.hasNext()) {
         QString item = itemPattern;
@@ -189,6 +246,8 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
 
     html += items[2];
 
+    html = html.replace("$PAGER", pager);
+
     qDebug() << "################################# finishedJsonRead";
     web->setHtml(html);
     web->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
@@ -205,6 +264,7 @@ SocialPanel * SocialPanel::instance()
 
 void SocialPanel::init(PsiAccount * account)
 {
+    d->currentPage = 1;
     QString path = ApplicationInfo::homeDir() + "/webcache/";
     QDir().mkpath(path);
 
@@ -247,8 +307,6 @@ SocialPanel::SocialPanel(QWidget * parent)
     d->web = new QWebView(this);
     d->layout = new QStackedLayout(this);
     d->layout->addWidget(d->web);
-
-    d->web->setHtml("Loading...");
 }
 
 SocialPanel::~SocialPanel()

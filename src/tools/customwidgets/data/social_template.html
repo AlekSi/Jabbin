@@ -73,9 +73,36 @@
     img[src=""] {
       display: none;
     }
+
+    div.pager {
+      border: 1px gray;
+      background: silver;
+      text-align: center;
+    }
+
+    div.pager span {
+      padding-left: 8px;
+      padding-right: 8px;
+      font-weight: bold;
+      background: white;
+    }
+
+    div.pager a {
+      display: inline;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    div.pager a:HOVER {
+      display: inline;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
   </style>
 </head>
 <body>
+
+$PAGER
 
 <!-- ITEM:BEGIN -->
 <a href="$LINK">
@@ -92,6 +119,8 @@
   </div>
 </a>
 <!-- ITEM:END -->
+
+$PAGER
 
 </body>
 </html>
