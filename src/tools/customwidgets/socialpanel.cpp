@@ -80,8 +80,10 @@ void SocialPanel::Private::reload()
 
     web->setHtml("Loading...");
 
+    QString user = account->jid().user();
+    // user = "stefanogrini";
     QUrl url(
-        "http://www.jabbin.com/life/services/" + account->jid().user() + "/friends/json/p/" + QString::number(currentPage)
+        "http://www.jabbin.com/life/services/" + user + "/friends/json/p/" + QString::number(currentPage)
         );
     qDebug() << "SocialPanel::Private::reload: " << url;
 
@@ -139,6 +141,7 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
             .replace("$AVATAR", "")
             .replace("$LINK", "http://www.jabbin.com")
             .replace("$SERVICE", "http://www.jabbin.com/life/images/icons/error.png")
+            .replace("$THUMBNAILS", "")
         ;
     } else if (!it.hasNext()) {
         QString item = itemPattern;
@@ -150,6 +153,7 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
             .replace("$AVATAR", "")
             .replace("$LINK", "http://www.jabbin.com")
             .replace("$SERVICE", "http://www.jabbin.com/life/images/icons/error.png")
+            .replace("$THUMBNAILS", "")
         ;
     } else {
         QScriptValue meta = value.property("meta");
@@ -226,6 +230,7 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
             .replace("$AVATAR", avatar)
             .replace("$LINK", itemValue.property("item_permalink").toString())
             .replace("$SERVICE", "http://www.jabbin.com/life/images/icons/" + domain + ".png")
+            .replace("$THUMBNAILS", itemValue.property("thumb_data").toString())
         ;
     }
 
