@@ -92,19 +92,20 @@ public:
     static QIcon m_roomIcon;
     static QIcon m_userIcon;
 
-    static QIcon m_xmppIcon;
+    static QIcon m_aimIcon;
+    static QIcon m_facebookIcon;
+    static QIcon m_gadugaduIcon;
+    static QIcon m_gtalkIcon;
+    static QIcon m_icqIcon;
+    static QIcon m_ircIcon;
+    static QIcon m_jabberIcon;
     static QIcon m_msnIcon;
     static QIcon m_myspaceIcon;
     static QIcon m_qqIcon;
-    static QIcon m_aimIcon;
-    static QIcon m_gtalkIcon;
-    static QIcon m_jabberIcon;
-    static QIcon m_facebookIcon;
-    static QIcon m_gadugaduIcon;
-    static QIcon m_yahooIcon;
-    static QIcon m_icqIcon;
-    static QIcon m_ircIcon;
+    static QIcon m_sametimeIcon;
     static QIcon m_smsIcon;
+    static QIcon m_xmppIcon;
+    static QIcon m_yahooIcon;
 
 private:
     QList < ServiceItem * > m_children;

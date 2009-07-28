@@ -22,5 +22,6 @@
     <file>data/services/xmpp.png</file>
     <file>data/services/yahoo.png</file>
     <file>data/services/sms.png</file>
+    <file>data/services/sametime.png</file>
   </qresource>
 </RCC>

@@ -42,19 +42,20 @@ QIcon ServiceItem::m_serverIcon;   // = QIcon(":/services/data/list.png");
 QIcon ServiceItem::m_roomIcon;     // = QIcon(":/services/data/users.png");
 QIcon ServiceItem::m_userIcon;     // = QIcon(":/services/data/user.png");
 
-QIcon ServiceItem::m_xmppIcon;     // = QIcon(":/services/data/services/xmpp.png");
+QIcon ServiceItem::m_aimIcon;      // = QIcon(":/services/data/services/aim.png");
+QIcon ServiceItem::m_facebookIcon; // = QIcon(":/services/data/services/facebook.png");
+QIcon ServiceItem::m_gadugaduIcon; // = QIcon(":/services/data/services/gadu-gadu.png");
+QIcon ServiceItem::m_gtalkIcon;    // = QIcon(":/services/data/services/gtalk.png");
+QIcon ServiceItem::m_icqIcon;      // = QIcon(":/services/data/services/icq.png");
+QIcon ServiceItem::m_ircIcon;      // = QIcon(":/services/data/services/irc.png");
+QIcon ServiceItem::m_jabberIcon;   // = QIcon(":/services/data/services/jabber.png");
 QIcon ServiceItem::m_msnIcon;      // = QIcon(":/services/data/services/msn.png");
 QIcon ServiceItem::m_myspaceIcon;  // = QIcon(":/services/data/services/myspace.png");
 QIcon ServiceItem::m_qqIcon;       // = QIcon(":/services/data/services/qq.png");
-QIcon ServiceItem::m_aimIcon;      // = QIcon(":/services/data/services/aim.png");
-QIcon ServiceItem::m_gtalkIcon;    // = QIcon(":/services/data/services/gtalk.png");
-QIcon ServiceItem::m_jabberIcon;   // = QIcon(":/services/data/services/jabber.png");
-QIcon ServiceItem::m_facebookIcon; // = QIcon(":/services/data/services/facebook.png");
-QIcon ServiceItem::m_gadugaduIcon; // = QIcon(":/services/data/services/gadu-gadu.png");
-QIcon ServiceItem::m_yahooIcon;    // = QIcon(":/services/data/services/yahoo.png");
-QIcon ServiceItem::m_icqIcon;      // = QIcon(":/services/data/services/icq.png");
-QIcon ServiceItem::m_ircIcon;      // = QIcon(":/services/data/services/irc.png");
+QIcon ServiceItem::m_sametimeIcon; // = QIcon(":/services/data/services/sametime.png");
 QIcon ServiceItem::m_smsIcon;      // = QIcon(":/services/data/services/sms.png");
+QIcon ServiceItem::m_xmppIcon;     // = QIcon(":/services/data/services/xmpp.png");
+QIcon ServiceItem::m_yahooIcon;    // = QIcon(":/services/data/services/yahoo.png");
 
 ServiceItem::ServiceItem(ServiceItem * parent, DiscoItem data)
     : QObject(parent), m_parent(parent), m_icon(), m_title(),
@@ -461,19 +462,20 @@ void ServiceItem::initIcons()
     ServiceItem::m_roomIcon     = QIcon(":/services/data/users.png");
     ServiceItem::m_userIcon     = QIcon(":/services/data/user.png");
 
-    ServiceItem::m_xmppIcon     = QIcon(":/services/data/services/xmpp.png");
+    ServiceItem::m_aimIcon      = QIcon(":/services/data/services/aim.png");
+    ServiceItem::m_facebookIcon = QIcon(":/services/data/services/facebook.png");
+    ServiceItem::m_gadugaduIcon = QIcon(":/services/data/services/gadu-gadu.png");
+    ServiceItem::m_gtalkIcon    = QIcon(":/services/data/services/gtalk.png");
+    ServiceItem::m_icqIcon      = QIcon(":/services/data/services/icq.png");
+    ServiceItem::m_ircIcon      = QIcon(":/services/data/services/irc.png");
+    ServiceItem::m_jabberIcon   = QIcon(":/services/data/services/jabber.png");
     ServiceItem::m_msnIcon      = QIcon(":/services/data/services/msn.png");
     ServiceItem::m_myspaceIcon  = QIcon(":/services/data/services/myspace.png");
     ServiceItem::m_qqIcon       = QIcon(":/services/data/services/qq.png");
-    ServiceItem::m_aimIcon      = QIcon(":/services/data/services/aim.png");
-    ServiceItem::m_gtalkIcon    = QIcon(":/services/data/services/gtalk.png");
-    ServiceItem::m_jabberIcon   = QIcon(":/services/data/services/jabber.png");
-    ServiceItem::m_facebookIcon = QIcon(":/services/data/services/facebook.png");
-    ServiceItem::m_gadugaduIcon = QIcon(":/services/data/services/gadu-gadu.png");
-    ServiceItem::m_yahooIcon    = QIcon(":/services/data/services/yahoo.png");
-    ServiceItem::m_icqIcon      = QIcon(":/services/data/services/icq.png");
-    ServiceItem::m_ircIcon      = QIcon(":/services/data/services/irc.png");
+    ServiceItem::m_sametimeIcon = QIcon(":/services/data/services/sametime.png");
     ServiceItem::m_smsIcon      = QIcon(":/services/data/services/sms.png");
+    ServiceItem::m_xmppIcon     = QIcon(":/services/data/services/xmpp.png");
+    ServiceItem::m_yahooIcon    = QIcon(":/services/data/services/yahoo.png");
 }
 
 ServiceItem * ServicesModel::Private::findItem(const Jid & jid)
@@ -875,5 +877,11 @@ QIcon ServicesModel::iconForTransportType(const QString & type)
         return ServiceItem::m_jabberIcon;
     else if (type == "yahoo")
         return ServiceItem::m_yahooIcon;
+    else if (type == "facebook")
+        return ServiceItem::m_facebookIcon;
+    else if (type == "myspaceim")
+        return ServiceItem::m_myspaceIcon;
+    else if (type == "sametime")
+        return ServiceItem::m_sametimeIcon;
     return QIcon();
 }
