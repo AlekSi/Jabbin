@@ -89,6 +89,7 @@ void YaLoginPage::accountCountChanged()
 
 		connect(account, SIGNAL(updatedActivity()), this, SLOT(updatedActivity()));
 		connect(account, SIGNAL(connectionError(const QString&)), this, SLOT(connectionError(const QString&)));
+		connect(account, SIGNAL(disconnected()), this, SLOT(disconnected()));
 		accounts << account;
 	}
 
@@ -174,6 +175,12 @@ void YaLoginPage::setShouldBeVisible(bool shouldBeVisible)
 void YaLoginPage::connectionError(const QString& error)
 {
 	ui_.errorLabel->setText(error);
+}
+
+void YaLoginPage::disconnected()
+{
+        qDebug() << "YaLoginPage::disconnected";
+	setShouldBeVisible(true);
 }
 
 void YaLoginPage::signIn()

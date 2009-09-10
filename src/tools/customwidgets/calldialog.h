@@ -135,6 +135,8 @@ public Q_SLOTS:
      */
     void dialpadButtonClicked(char key);
 
+    void callButtonClicked();
+
     void accepted(const Jid & );
     void rejected(const Jid & );
     void terminated(const Jid & );

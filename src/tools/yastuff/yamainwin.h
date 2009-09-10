@@ -114,6 +114,7 @@ private slots:
 	void moodChanged();
 	void statusSelected();
 	void statusSelected(XMPP::Status::Type);
+        void signoutRequested();
 	void dndEnabledActionTriggered();
 	void staysOnTopTriggered();
 

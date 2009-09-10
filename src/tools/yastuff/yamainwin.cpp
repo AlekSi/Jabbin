@@ -546,6 +546,7 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 	ui_.selfMood->setStatusText(psi_->lastLoggedInStatusText());
 	connect(ui_.selfMood, SIGNAL(statusChanged(XMPP::Status::Type)), SLOT(statusSelected(XMPP::Status::Type)));
 	connect(ui_.selfMood, SIGNAL(statusChanged(const QString&)), SLOT(statusSelected()));
+	connect(ui_.selfMood, SIGNAL(signoutRequested()), SLOT(signoutRequested()));
 
 	// ui_.tabbedNotifier->setEventNotifier(ui_.eventNotifier);
 	// ui_.tabbedNotifier->setMinimumSize(MAX_NOTIFIER_WIDTH, 0);
@@ -952,7 +953,12 @@ void YaMainWin::statusSelected(XMPP::Status::Type statusType)
 	}
 #endif
 
+}
 
+void YaMainWin::signoutRequested()
+{
+    qDebug() << "###################### SIGNOUT";
+    account()->logout();
 }
 
 void YaMainWin::dndEnabledActionTriggered()

@@ -50,6 +50,7 @@ private slots:
 	void connectionError(const QString&);
 	void accountCountChanged();
 	void updatedActivity();
+        void disconnected();
 
 	void updateFocus();
 	void textChanged();

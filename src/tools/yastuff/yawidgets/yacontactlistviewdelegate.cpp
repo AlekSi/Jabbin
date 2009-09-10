@@ -363,6 +363,7 @@ void YaContactListViewDelegate::realDrawContact(QPainter* painter, const QStyleO
 	drawEditorBackground(painter, option, index);
 	doAvatar(painter, option, index);
 
+
         // do we draw the phone icon?
         if (index.data(ContactListModel::CallableRole).toBool()) {
                 QRect phoneIconRect = QRect(0, 0, 16, 16);
@@ -382,7 +383,16 @@ void YaContactListViewDelegate::realDrawContact(QPainter* painter, const QStyleO
 	QStyleOptionViewItemV2 n_o = nameStyle(selected, statusType(index), Ya::VisualUtil::RosterStyleNormal, hovered());
 
 	if (drawStatusIcon(statusType(index))) {
-		QPixmap statusPixmap = Ya::VisualUtil::rosterStatusPixmap(statusType(index));
+                QString type = index.data(ContactListModel::JidRole).toString();
+                if (type.contains("\\40")) {
+                        type = type.
+                            replace(QRegExp("^[^@]*@"), QString()).
+                            replace(QRegExp("[.].*$"), QString());
+                } else {
+                        type = "";
+                }
+
+		QPixmap statusPixmap = Ya::VisualUtil::rosterStatusPixmap(statusType(index), type);
 		QRect statusPixmapRect(nameRect);
 		statusPixmapRect.setSize(statusPixmap.size());
 		statusPixmapRect.moveTop(nameRect.top() + n_o.fontMetrics.ascent() - statusPixmapRect.height() + 1);

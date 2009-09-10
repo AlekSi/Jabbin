@@ -425,6 +425,7 @@ public:
 	bool usingSecurityLayer() const;
 	QStringList groupList() const;
 	void updateEntry(const UserListItem& u);
+	void logout(bool fast=false, const Status &s = Status("", "Logged out", 0, false));
 
 #ifdef YAPSI
 	bool isYaAccount() const;
@@ -447,7 +448,6 @@ private:
 	Private *d;
 
 	void login();
-	void logout(bool fast=false, const Status &s = Status("", "Logged out", 0, false));
 
 	void deleteAllDialogs();
 	void stateChanged();

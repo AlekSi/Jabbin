@@ -28,6 +28,7 @@
 #include <QDebug>
 
 #define SET_CUSTOM_MOOD -1
+#define SIGN_OUT -2
 
 using CustomWidgets::AdvancedLineEdit;
 using CustomWidgets::WidgetExpander;
@@ -109,6 +110,10 @@ public:
         menu->addSeparator();
         menu->addAction(tr("Set custom mood..."))
             ->setData(QVariant(SET_CUSTOM_MOOD));
+
+        menu->addSeparator();
+        menu->addAction(tr("Sign out"))
+            ->setData(QVariant(SIGN_OUT));
     }
 
     void popupMenu() {
@@ -123,6 +128,12 @@ public:
         int result = SET_CUSTOM_MOOD;
         if (chosen) {
             result = chosen->data().toInt();
+        }
+
+        if (result == SIGN_OUT) {
+            emit q->signoutRequested();
+            qDebug() << "################### SIGNING OUT ###########";
+            return;
         }
 
         if (result != SET_CUSTOM_MOOD) {

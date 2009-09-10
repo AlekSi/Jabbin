@@ -53,6 +53,9 @@ CallDialog::Private::Private(CallDialog * parent)
 
     connect(dialpad, SIGNAL(buttonClicked(char)),
             parent, SLOT(dialpadButtonClicked(char)));
+    connect(buttonCall, SIGNAL(clicked()),
+            parent, SLOT(callButtonClicked()));
+
     connect(JabbinNotifications::instance(), SIGNAL(notificationFinished(int, const QString &)),
             this, SLOT(notificationFinished(int, const QString &)));
     stacked->setCurrentWidget(pageDialpad);
@@ -116,13 +119,15 @@ void CallDialog::Private::setStatus(Status value)
         case Calling:
             qDebug() << "CallDialog::setStatus: calling";
             frameInCall->setTitle(tr("Calling ..."));
-            frameInCall->setMessage(JIDTEXT);
             if (phone == QString()) {
-                qDebug() << "CallDialog::setStatus:#" << caller;
+                qDebug() << "CallDialog::setStatus: " << caller;
+                frameInCall->setMessage(JIDTEXT);
                 if (caller) {
                     caller->call(jid);
                 }
             } else {
+                qDebug() << "CallDialog::setStatus: phone: " << caller;
+                frameInCall->setMessage(phone);
                 ((JingleVoiceCaller *) caller)->sendDTMF(jid, phone);
             }
             callhistory->addEntry(JIDTEXT, jid.full(), CallHistoryModel::Sent);
@@ -304,6 +309,11 @@ CallDialog::~CallDialog()
 void CallDialog::dialpadButtonClicked(char symbol) {
     d->editPhoneNumber->setText(
         d->editPhoneNumber->text() + symbol);
+}
+
+void CallDialog::callButtonClicked()
+{
+    d->call("phone://" + d->editPhoneNumber->text());
 }
 
 void CallDialog::changeSpeakerVolume(int val)

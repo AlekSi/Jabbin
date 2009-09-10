@@ -52,6 +52,7 @@ public Q_SLOTS:
 Q_SIGNALS:
     void statusChanged(const QString & status);
     void statusChanged(XMPP::Status::Type type);
+    void signoutRequested();
 
 private:
     class Private;

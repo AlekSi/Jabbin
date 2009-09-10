@@ -1607,12 +1607,12 @@ void PsiAccount::logout(bool fast, const Status &s)
 	d->loginStatus = Status(Status::Offline);
 	stateChanged();
 
-#ifdef YAPSI
-	disconnect();
-#else
+// #ifdef YAPSI
+// 	disconnect();
+// #else
 	// Using 100msecs; See note on disconnect()
 	QTimer::singleShot(100, this, SLOT(disconnect()));
-#endif
+// #endif
 }
 
 // skz note: I had to split logout() because server seem to need some time to store status

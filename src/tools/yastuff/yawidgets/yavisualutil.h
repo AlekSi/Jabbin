@@ -81,7 +81,7 @@ public:
 	static QPixmap statusPixmap(XMPP::Status::Type status, bool hover);
 	static QColor statusColor(XMPP::Status::Type status, bool hovered);
 	static QColor rosterToolTipStatusColor(XMPP::Status::Type status);
-	static QPixmap rosterStatusPixmap(XMPP::Status::Type status);
+	static QPixmap rosterStatusPixmap(XMPP::Status::Type status, const QString & type = QString());
 
 	enum Borders {
 		NoBorders   = 0,

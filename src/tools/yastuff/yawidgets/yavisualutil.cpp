@@ -364,24 +364,43 @@ QColor VisualUtil::rosterToolTipStatusColor(XMPP::Status::Type status)
 	return result;
 }
 
-QPixmap VisualUtil::rosterStatusPixmap(XMPP::Status::Type status)
+QPixmap VisualUtil::rosterStatusPixmap(XMPP::Status::Type status, const QString & type)
 {
+        QString prefix = type;
+        if (prefix == "gtalk" || prefix == "xmpp") {
+                prefix = "jabber";
+        } else if (
+            prefix != "msn" &&
+            prefix != "aim" &&
+            prefix != "yahoo" &&
+            prefix != "jabber" &&
+            prefix != "gadugadu"
+            ) {
+                prefix = "";
+        }
+
+        if (prefix == "") {
+		prefix = ":iconsets/roster/default/icon-";
+        } else {
+		prefix = ":iconsets/roster/crystal-" + prefix + "/";
+        }
+
 	QPixmap result;
 	switch (status) {
 	case XMPP::Status::Offline:
-		result = QPixmap(":iconsets/roster/default/icon-offline.png");
+		result = QPixmap(prefix + "offline.png");
 		break;
 	case XMPP::Status::XA:
 	case XMPP::Status::Away:
-		result = QPixmap(":iconsets/roster/default/icon-away.png");
+		result = QPixmap(prefix + "away.png");
 		break;
 	case XMPP::Status::DND:
-		result = QPixmap(":iconsets/roster/default/icon-busy.png");
+		result = QPixmap(prefix + "dnd.png");
 		break;
 	case XMPP::Status::FFC:
 	case XMPP::Status::Online:
 	case XMPP::Status::Invisible:
-		result = QPixmap(":iconsets/roster/default/icon-online.png");
+		result = QPixmap(prefix + "online.png");
 		break;
 #ifdef YAPSI
 	case XMPP::Status::Blocked:

@@ -23,5 +23,35 @@
     <file>iconsets/roster/default/icon-offline.png</file>
     <file>iconsets/roster/default/icon-online.png</file>
     <file>iconsets/roster/default/icon-warning.png</file>
+
+    <file>iconsets/roster/crystal-aim/offline.png</file>
+    <file>iconsets/roster/crystal-aim/away.png</file>
+    <file>iconsets/roster/crystal-aim/dnd.png</file>
+    <file>iconsets/roster/crystal-aim/online.png</file>
+
+    <file>iconsets/roster/crystal-gadugadu/offline.png</file>
+    <file>iconsets/roster/crystal-gadugadu/away.png</file>
+    <file>iconsets/roster/crystal-gadugadu/dnd.png</file>
+    <file>iconsets/roster/crystal-gadugadu/online.png</file>
+
+    <file>iconsets/roster/crystal-icq/offline.png</file>
+    <file>iconsets/roster/crystal-icq/away.png</file>
+    <file>iconsets/roster/crystal-icq/dnd.png</file>
+    <file>iconsets/roster/crystal-icq/online.png</file>
+
+    <file>iconsets/roster/crystal-msn/offline.png</file>
+    <file>iconsets/roster/crystal-msn/away.png</file>
+    <file>iconsets/roster/crystal-msn/dnd.png</file>
+    <file>iconsets/roster/crystal-msn/online.png</file>
+
+    <file>iconsets/roster/crystal-yahoo/offline.png</file>
+    <file>iconsets/roster/crystal-yahoo/away.png</file>
+    <file>iconsets/roster/crystal-yahoo/dnd.png</file>
+    <file>iconsets/roster/crystal-yahoo/online.png</file>
+
+    <file>iconsets/roster/crystal-jabber/offline.png</file>
+    <file>iconsets/roster/crystal-jabber/away.png</file>
+    <file>iconsets/roster/crystal-jabber/dnd.png</file>
+    <file>iconsets/roster/crystal-jabber/online.png</file>
   </qresource>
 </RCC>
