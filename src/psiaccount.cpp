@@ -1465,6 +1465,7 @@ void PsiAccount::autoLogin()
 // logs on with the active account settings
 void PsiAccount::login()
 {
+        qDebug() << "PsiAccount::login: ";
 	PsiLogger::instance()->log(QString("%1 PsiAccount(%2)::login(); doReconnect = %3; isActive = %4").arg(LOG_THIS)
 	                           .arg(name())
 	                           .arg(doReconnect)
@@ -1566,6 +1567,14 @@ void PsiAccount::login()
 
 	Jid j = d->jid.withResource((d->acc.opt_automatic_resource ? localHostName() : d->acc.resource ));
 	d->client->connectToServer(d->stream, j);
+}
+
+void PsiAccount::signout() {
+    setStatus(XMPP::Status::Offline);
+    // logout();
+    // v_isActive = false;
+    // doReconnect = true;
+    emit disconnected();
 }
 
 // disconnect or stop reconnecting

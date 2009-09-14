@@ -245,6 +245,9 @@ void CallDialog::Private::call(const QString & who)
     if (who.startsWith("phone://")) {
         phone = who;
         phone.remove(0, 8);
+        if (phone == QString()) {
+            return;
+        }
     } else {
         phone = QString();
         jid = XMPP::Jid(who);

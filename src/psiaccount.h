@@ -425,7 +425,7 @@ public:
 	bool usingSecurityLayer() const;
 	QStringList groupList() const;
 	void updateEntry(const UserListItem& u);
-	void logout(bool fast=false, const Status &s = Status("", "Logged out", 0, false));
+	void signout();
 
 #ifdef YAPSI
 	bool isYaAccount() const;
@@ -470,6 +470,7 @@ private:
 	void verifyStatus(const Jid &j, const Status &s);
 	void sentInitialPresence();
 	void requestAvatarsForAllContacts();
+	void logout(bool fast=false, const Status &s = Status("", "Logged out", 0, false));
 
 	void processChatsHelper(const Jid& jid, bool removeEvents);
 	void processChats(const Jid &);

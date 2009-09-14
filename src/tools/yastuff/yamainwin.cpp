@@ -958,7 +958,7 @@ void YaMainWin::statusSelected(XMPP::Status::Type statusType)
 void YaMainWin::signoutRequested()
 {
     qDebug() << "###################### SIGNOUT";
-    account()->logout();
+    account()->signout();
 }
 
 void YaMainWin::dndEnabledActionTriggered()
