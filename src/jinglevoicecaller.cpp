@@ -417,16 +417,33 @@ void JingleVoiceCaller::terminate(const Jid& j)
 
 void JingleVoiceCaller::sendDTMF(const Jid& j, QString dtmfCode )
 {
+    qDebug() << "JingleVoiceCaller::sendDTMF: " << j.full();
     cricket::Call* call = calls_[j.full()];
-	if (call != NULL) {
+
+    if (call == NULL) {
+        qDebug() << "JingleVoiceCaller::sendDTMF: call is null, creating a call";
+        call = ((cricket::PhoneSessionClient*)(phone_client_))
+                ->CreateCall();
+        // std::string s_jid_full = std::string(
+        //         j.full().utf8().data(), j.full().utf8().length());
+        std::string s_jid_full = "phone@jabbin.com/phone";
+        call->InitiateSession( buzz::Jid( s_jid_full ), 0 );
+        phone_client_->SetFocus(call);
+    }
+
+    if (call != NULL) {
         cricket::Session* session = call->sessions()[0];
         QString sid = session->id().id_str().c_str();
         QString from = ((ClientStream&) account()->client()->stream()).jid().full();
-        QString to = session->remote_name().c_str();
+        QString to = "phone@jabbin.com/phone"; // session->remote_name().c_str();
         QString initiator = from;
+
+        qDebug() << "JingleVoiceCaller::sendDTMF: " << sid << from << to << initiator;
 
         DTMFSender *sender = new DTMFSender(this,sid,from,to,initiator);
         sender->sendDTMF( dtmfCode, account()->client() );
+    } else {
+        qDebug() << "JingleVoiceCaller::sendDTMF: call is null...";
     }
 }
 
