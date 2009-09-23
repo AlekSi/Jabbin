@@ -229,6 +229,7 @@ public:
 signals:
 	void connectionError(const QString& errorInfo);
 	void disconnected();
+        void signedout();
 	void reconnecting();
 	void updatedActivity();
 	void updatedAccount();

@@ -1574,7 +1574,8 @@ void PsiAccount::signout() {
     // logout();
     // v_isActive = false;
     // doReconnect = true;
-    emit disconnected();
+    // emit disconnected();
+    emit signedout();
 }
 
 // disconnect or stop reconnecting

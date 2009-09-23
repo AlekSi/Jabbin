@@ -89,7 +89,7 @@ void YaLoginPage::accountCountChanged()
 
 		connect(account, SIGNAL(updatedActivity()), this, SLOT(updatedActivity()));
 		connect(account, SIGNAL(connectionError(const QString&)), this, SLOT(connectionError(const QString&)));
-		connect(account, SIGNAL(disconnected()), this, SLOT(disconnected()));
+		connect(account, SIGNAL(signedout()), this, SLOT(disconnected()));
 		accounts << account;
 	}
 
