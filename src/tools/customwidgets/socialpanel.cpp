@@ -22,6 +22,7 @@
 #include "generic/customwidgetscommon.h"
 #include "psicontact.h"
 #include "applicationinfo.h"
+#include "contacttooltip.h"
 
 #include "avatars.h"
 #include <QDebug>
@@ -59,6 +60,8 @@ void SocialPanel::Private::processScriptValue(QScriptValue value)
     date = dateObject.toString(Qt::DefaultLocaleShortDate);
 
     // avatar
+    qDebug() << "SocialPanel::Private::processScriptValue:"
+                << jid;
     avatar = account->avatarFactory()->getCachedAvatarFileName(
             XMPP::Jid(jid));
 }
@@ -92,7 +95,7 @@ void SocialPanel::Private::reload()
 
 void SocialPanel::Private::linkClicked(const QUrl & url)
 {
-    qDebug() << url.scheme() << url.authority();
+    qDebug() << "SocialPanel::Private::linkClicked" << url << " -- " << url.scheme() << url.authority() << url.path();
     if (url.scheme() == "go") {
         QString command = url.authority();
         if (command == "first") {
@@ -107,8 +110,35 @@ void SocialPanel::Private::linkClicked(const QUrl & url)
             currentPage = command.toInt();
         }
         reload();
+    } else if (url.scheme() == "action") {
+        // nothing
     } else
         QDesktopServices::openUrl(url);
+}
+
+void SocialPanel::Private::linkHovered(const QString & urlString)
+{
+    QUrl url(urlString);
+    qDebug() << "SocialPanel::Private::linkHovered" << url << " -- " << url.scheme() << url.authority() << url.path();
+    if (url.scheme() == "action") {
+        QString command = url.authority();
+        if (command == "usertooltip") {
+            QRect windowRect = QRect(web->window()->mapToGlobal(web->window()->rect().topLeft()),
+                    web->window()->mapToGlobal(web->window()->rect().bottomRight()));
+            QRect globalRect = QRect(web->mapToGlobal(web->rect().topLeft()),
+                    web->mapToGlobal(web->rect().bottomRight()));
+
+            globalRect.setRight(windowRect.right());
+
+            PsiContact * contact = account->findContact(XMPP::Jid(url.path().replace("/", "")));
+
+            globalRect.setTop(QCursor::pos().y());
+            globalRect.setHeight(10);
+
+            ContactTooltip::instance()->showContact(contact, globalRect);
+        }
+
+    }
 }
 
 void SocialPanel::Private::finishedJsonRead(const QString & data)
@@ -139,6 +169,7 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
             .replace("$TITLE", "")
             .replace("$CONTENT", tr("Corrupt data retrieved from the server"))
             .replace("$AVATAR", "")
+            .replace("$JID", "")
             .replace("$LINK", "http://www.jabbin.com")
             .replace("$SERVICE", "http://www.jabbin.com/life/images/icons/error.png")
             .replace("$THUMBNAILS", "")
@@ -151,6 +182,7 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
             .replace("$TITLE", "")
             .replace("$CONTENT", tr("No items in your friend's lifestreams at the moment"))
             .replace("$AVATAR", "")
+            .replace("$JID", "")
             .replace("$LINK", "http://www.jabbin.com")
             .replace("$SERVICE", "http://www.jabbin.com/life/images/icons/error.png")
             .replace("$THUMBNAILS", "")
@@ -228,6 +260,7 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
             .replace("$TITLE", title)
             .replace("$CONTENT", content)
             .replace("$AVATAR", avatar)
+            .replace("$JID", jid)
             .replace("$LINK", itemValue.property("item_permalink").toString())
             .replace("$SERVICE", "http://www.jabbin.com/life/images/icons/" + domain + ".png")
             .replace("$THUMBNAILS", itemValue.property("thumb_data").toString())
@@ -274,6 +307,8 @@ void SocialPanel::init(PsiAccount * account)
 
     connect(d->web, SIGNAL(linkClicked(const QUrl &)),
             d, SLOT(linkClicked(const QUrl &)));
+    connect(d->web->page(), SIGNAL(linkHovered(const QString &, const QString &, const QString &)),
+            d, SLOT(linkHovered(const QString &)));
 }
 
 void SocialPanel::timerEvent(QTimerEvent * event)
@@ -297,7 +332,11 @@ SocialPanel::SocialPanel(QWidget * parent)
     m_instance = this;
 
     d->web = new QWebView(this);
-    d->layout = new QStackedLayout(this);
+    d->layout = new QVBoxLayout(this);
+    d->layout->setContentsMargins(0, 0, 0, 0);
+    d->layout->setSpacing(0);
+
+    d->layout->addWidget(new QPushButton(this));
     d->layout->addWidget(d->web);
 }
 

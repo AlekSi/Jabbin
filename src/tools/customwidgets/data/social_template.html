@@ -29,6 +29,7 @@
 
     div.item div.bottom {
       clear: both;
+      margin-left: 26px;
     }
 
     div.service {
@@ -49,7 +50,7 @@
     }
 
     span.name {
-      font-size: 12pt;
+      font-size: 10pt;
       font-weight: bold;
       margin-bottom: 8px;
     }
@@ -93,6 +94,10 @@
       padding-right: 8px;
     }
 
+    div.avatar a {
+      display: inline;
+    }
+
     div.pager a:HOVER {
       display: inline;
       padding-left: 8px;
@@ -108,15 +113,20 @@
 <a href="$LINK">
   <div class="item">
     <div class="service"><img src="$SERVICE" /></div>
-    <div class="avatar"><img src="$AVATAR" /></div>
+    <div class="avatar">
+      <a href="action://usertooltip/$JID">
+        <img src="$AVATAR" onmouseover="window.location=&quot;action://usertooltip/$JID&quot;" />
+      </a>
+    </div>
     <div class="head">
       <span class="name">$NAME</span>
-      <span class="time">$TIME</span>
     </div>
     <div class="title">$TITLE</div>
     <div class="content">$CONTENT</div>
     <div class="thumbnails">$THUMBNAILS</div>
-    <div class="bottom"></div>
+    <div class="bottom">
+      <span class="time">$TIME</span>
+    </div>
   </div>
 </a>
 <!-- ITEM:END -->

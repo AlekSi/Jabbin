@@ -20,7 +20,7 @@
 #include "socialpanel.h"
 #include "generic/customwidgetscommon.h"
 #include <QWebView>
-#include <QStackedLayout>
+#include <QVBoxLayout>
 #include <QScriptValue>
 #include <QBasicTimer>
 
@@ -33,7 +33,7 @@ public:
     CustomWidgets::HttpReader httpreader;
 
     QWebView * web;
-    QStackedLayout * layout;
+    QVBoxLayout * layout;
 
     void processScriptValue(QScriptValue value);
     QString name;
@@ -49,6 +49,7 @@ public Q_SLOTS:
     void finishedJsonRead(const QString & data);
     void reload();
     void linkClicked(const QUrl & url);
+    void linkHovered(const QString & url);
 
 };
 
