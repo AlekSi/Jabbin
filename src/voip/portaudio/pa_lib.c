@@ -33,7 +33,7 @@
 
 /* Modification History:
  PLB20010422 - apply Mike Berry's changes for CodeWarrior on PC
- PLB20010820 - fix dither and shift for recording PaUInt8 format 
+ PLB20010820 - fix dither and shift for recording PaUInt8 format
 */
 
 #include <stdio.h>
@@ -507,7 +507,7 @@ long PaConvert_TriangularDither( void )
     randSeed2 = (randSeed2 * 196314165) + 907633515;
     /* Generate triangular distribution about 0.
      * Shift before adding to prevent overflow which would skew the distribution.
-     * Also shift an extra bit for the high pass filter. 
+     * Also shift an extra bit for the high pass filter.
      */
 #define DITHER_SHIFT  ((32 - PA_DITHER_BITS) + 1)
     current = (((long)randSeed1)>>DITHER_SHIFT) + (((long)randSeed2)>>DITHER_SHIFT);
@@ -747,6 +747,7 @@ long Pa_CallConvertInt16( internalPortAudioStream   *past,
 /*************************************************************************/
 PaError Pa_Initialize( void )
 {
+    printf("Pa_Init ... ###############");
     if( gInitCount++ > 0 ) return paNoError;
     ResetTraceMessages();
     return PaHost_Init();

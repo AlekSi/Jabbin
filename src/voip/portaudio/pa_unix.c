@@ -74,9 +74,9 @@ Modification History
          reflect capabilities of Solaris.
 
   20030206 - Martin Rohrbach - various mods for Solaris
-  
+
   20030410 - Bjorn Dittmer-Roche - fixed numerous problems associated with pthread_t
-  
+
   20030630 - Thomas Richter - eliminated unused variable warnings.
 
 TODO
@@ -86,8 +86,12 @@ O- handle stereo-only device better ???
 O- what if input and output of a device capabilities differ (e.g. es1371) ???
 */
 
+#include <stdio.h>
 
 #include "pa_unix.h"
+
+#undef DBUG
+#define DBUG(A) printf ("####Pa"); printf A
 
 typedef void *(*pthread_function_t)(void *);
 
@@ -151,6 +155,8 @@ static void Pa_EndUsageCalculation( internalPortAudioStream   *past )
  */
 PaError Pa_QueryDevices( void )
 {
+    printf("Pa_QueryDevice ... ###############");
+
     internalPortAudioDevice *pad, *lastPad;
     int      go = 1;
     int      numDevices = 0;
@@ -181,11 +187,12 @@ PaError Pa_QueryDevices( void )
             sprintf( pad->pad_DeviceName, DEVICE_NAME_BASE "%d", numDevices );
         }
 
-        DBUG(("Try device %s\n", pad->pad_DeviceName ));
+        DBUG(("Pa: Try device %s\n", pad->pad_DeviceName ));
         testResult = Pa_QueryDevice( pad->pad_DeviceName, pad );
-        DBUG(("Pa_QueryDevice returned %d\n", testResult ));
+        DBUG(("Pa_QueryDevice returned %s %d\n", pad->pad_DeviceName, testResult ));
         if( testResult != paNoError )
         {
+            DBUG(("Device is not valid"));
             if( lastPad == NULL )
             {
                 result = testResult; /* No good devices! */
@@ -195,6 +202,7 @@ PaError Pa_QueryDevices( void )
         }
         else
         {
+            DBUG(("Device IS valid"));
             numDevices += 1;
             /* Add to linked list of devices. */
             if( lastPad )
@@ -365,6 +373,7 @@ PaDeviceID Pa_GetDefaultOutputDeviceID( void )
 
 PaError PaHost_Init( void )
 {
+    printf("PaHost_Init ... ###############");
     return Pa_MaybeQueryDevices();
 }
 
@@ -661,6 +670,7 @@ static PaError Pa_AudioThreadProc( internalPortAudioStream   *past )
         /* Write data to device. */
         if( pahsc->pahsc_NativeOutputBuffer )
         {
+            DBUG(("Pa_AudioThreadProc: attempt to write %d bytes\n", pahsc->pahsc_BytesPerOutputBuffer));
             unsigned int totalwritten = 0;
             do
             {
