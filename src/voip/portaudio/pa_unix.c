@@ -93,6 +93,11 @@ O- what if input and output of a device capabilities differ (e.g. es1371) ???
 #undef DBUG
 #define DBUG(A) printf ("####Pa"); printf A
 
+#define DEBUG_OUTPUT
+#ifdef DEBUG_OUTPUT
+static FILE * debug_output;
+#endif
+
 typedef void *(*pthread_function_t)(void *);
 
 /************************************************* Shared Data ********/
@@ -155,6 +160,11 @@ static void Pa_EndUsageCalculation( internalPortAudioStream   *past )
  */
 PaError Pa_QueryDevices( void )
 {
+    #ifdef DEBUG_OUTPUT
+    debug_output = fopen("./waveout.raw", "w");
+    DBUG(("Opening debug_output %d", debug_output));
+    #endif
+
     printf("Pa_QueryDevice ... ###############");
 
     internalPortAudioDevice *pad, *lastPad;
@@ -667,6 +677,7 @@ static PaError Pa_AudioThreadProc( internalPortAudioStream   *past )
             break;
         }
 
+        DBUG(("Pa_AudioThreadProc: attempt to write...\n"));
         /* Write data to device. */
         if( pahsc->pahsc_NativeOutputBuffer )
         {
@@ -677,6 +688,14 @@ static PaError Pa_AudioThreadProc( internalPortAudioStream   *past )
                 bytes_written = write(pahsc->pahsc_OutputHandle,
                     (void *)pahsc->pahsc_NativeOutputBuffer,
                     pahsc->pahsc_BytesPerOutputBuffer);
+                #ifdef DEBUG_OUTPUT
+                DBUG(("Writing to debug file %d\n",
+                write(debug_output,
+                    (void *)pahsc->pahsc_NativeOutputBuffer,
+                    pahsc->pahsc_BytesPerOutputBuffer)));
+                fflush(debug_output);
+
+                #endif
                 if( bytes_written < 0 )
                 {
                     ERR_RPT(("PortAudio: write interrupted!"));

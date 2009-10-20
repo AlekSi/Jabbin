@@ -367,23 +367,26 @@ QColor VisualUtil::rosterToolTipStatusColor(XMPP::Status::Type status)
 QPixmap VisualUtil::rosterStatusPixmap(XMPP::Status::Type status, const QString & type)
 {
         QString prefix = type;
-        if (prefix == "gtalk" || prefix == "xmpp") {
-                prefix = "jabber";
+        if (prefix == "xmpp" || prefix.isEmpty()) {
+            prefix = "jabber";
         } else if (
-            prefix != "msn" &&
             prefix != "aim" &&
-            prefix != "yahoo" &&
+            prefix != "facebook" &&
+            prefix != "gadugadu" &&
+            prefix != "gtalk" &&
+            prefix != "icq" &&
             prefix != "jabber" &&
-            prefix != "gadugadu"
+            prefix != "jabbin" &&
+            prefix != "msn" &&
+            prefix != "myspace" &&
+            prefix != "qq" &&
+            prefix != "yahoo"
+
             ) {
-                prefix = "";
+                prefix = "jabbin";
         }
 
-        if (prefix == "") {
-		prefix = ":iconsets/roster/default/icon-";
-        } else {
-		prefix = ":iconsets/roster/crystal-" + prefix + "/";
-        }
+	prefix = ":iconsets/roster/" + prefix + "/";
 
 	QPixmap result;
 	switch (status) {

@@ -384,7 +384,11 @@ void YaContactListViewDelegate::realDrawContact(QPainter* painter, const QStyleO
 
 	if (drawStatusIcon(statusType(index))) {
                 QString type = index.data(ContactListModel::JidRole).toString();
-                if (type.contains("\\40")) {
+                if (type.contains("@jabbin.com")) {
+                    type = "jabbin";
+                } else if (type.contains("@gmail.com")) {
+                    type = "gtalk";
+                } else if (type.contains("\\40")) {
                         type = type.
                             replace(QRegExp("^[^@]*@"), QString()).
                             replace(QRegExp("[.].*$"), QString());

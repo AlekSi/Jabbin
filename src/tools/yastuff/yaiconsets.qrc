@@ -15,6 +15,7 @@
     <file>iconsets/roster/roster-big/offline.png</file>
     <file>iconsets/roster/roster-big/online.png</file>
     <file>iconsets/roster/roster-big/warning.png</file>
+
     <file>iconsets/roster/default/icondef.xml</file>
     <file>iconsets/roster/default/icon-away.png</file>
     <file>iconsets/roster/default/icon-busy.png</file>
@@ -24,34 +25,92 @@
     <file>iconsets/roster/default/icon-online.png</file>
     <file>iconsets/roster/default/icon-warning.png</file>
 
-    <file>iconsets/roster/crystal-aim/offline.png</file>
-    <file>iconsets/roster/crystal-aim/away.png</file>
-    <file>iconsets/roster/crystal-aim/dnd.png</file>
-    <file>iconsets/roster/crystal-aim/online.png</file>
-
-    <file>iconsets/roster/crystal-gadugadu/offline.png</file>
-    <file>iconsets/roster/crystal-gadugadu/away.png</file>
-    <file>iconsets/roster/crystal-gadugadu/dnd.png</file>
-    <file>iconsets/roster/crystal-gadugadu/online.png</file>
-
-    <file>iconsets/roster/crystal-icq/offline.png</file>
-    <file>iconsets/roster/crystal-icq/away.png</file>
-    <file>iconsets/roster/crystal-icq/dnd.png</file>
-    <file>iconsets/roster/crystal-icq/online.png</file>
-
-    <file>iconsets/roster/crystal-msn/offline.png</file>
-    <file>iconsets/roster/crystal-msn/away.png</file>
-    <file>iconsets/roster/crystal-msn/dnd.png</file>
-    <file>iconsets/roster/crystal-msn/online.png</file>
-
-    <file>iconsets/roster/crystal-yahoo/offline.png</file>
-    <file>iconsets/roster/crystal-yahoo/away.png</file>
-    <file>iconsets/roster/crystal-yahoo/dnd.png</file>
-    <file>iconsets/roster/crystal-yahoo/online.png</file>
-
-    <file>iconsets/roster/crystal-jabber/offline.png</file>
-    <file>iconsets/roster/crystal-jabber/away.png</file>
-    <file>iconsets/roster/crystal-jabber/dnd.png</file>
-    <file>iconsets/roster/crystal-jabber/online.png</file>
+    <file>iconsets/roster/aim/ask.png</file>
+    <file>iconsets/roster/aim/away.png</file>
+    <file>iconsets/roster/aim/chatty.png</file>
+    <file>iconsets/roster/aim/dnd.png</file>
+    <file>iconsets/roster/aim/invisible.png</file>
+    <file>iconsets/roster/aim/noauth.png</file>
+    <file>iconsets/roster/aim/offline.png</file>
+    <file>iconsets/roster/aim/online.png</file>
+    <file>iconsets/roster/facebook/ask.png</file>
+    <file>iconsets/roster/facebook/away.png</file>
+    <file>iconsets/roster/facebook/chatty.png</file>
+    <file>iconsets/roster/facebook/dnd.png</file>
+    <file>iconsets/roster/facebook/invisible.png</file>
+    <file>iconsets/roster/facebook/noauth.png</file>
+    <file>iconsets/roster/facebook/offline.png</file>
+    <file>iconsets/roster/facebook/online.png</file>
+    <file>iconsets/roster/gadugadu/ask.png</file>
+    <file>iconsets/roster/gadugadu/away.png</file>
+    <file>iconsets/roster/gadugadu/chatty.png</file>
+    <file>iconsets/roster/gadugadu/dnd.png</file>
+    <file>iconsets/roster/gadugadu/invisible.png</file>
+    <file>iconsets/roster/gadugadu/noauth.png</file>
+    <file>iconsets/roster/gadugadu/offline.png</file>
+    <file>iconsets/roster/gadugadu/online.png</file>
+    <file>iconsets/roster/gtalk/ask.png</file>
+    <file>iconsets/roster/gtalk/away.png</file>
+    <file>iconsets/roster/gtalk/chatty.png</file>
+    <file>iconsets/roster/gtalk/dnd.png</file>
+    <file>iconsets/roster/gtalk/invisible.png</file>
+    <file>iconsets/roster/gtalk/noauth.png</file>
+    <file>iconsets/roster/gtalk/offline.png</file>
+    <file>iconsets/roster/gtalk/online.png</file>
+    <file>iconsets/roster/icq/ask.png</file>
+    <file>iconsets/roster/icq/away.png</file>
+    <file>iconsets/roster/icq/chatty.png</file>
+    <file>iconsets/roster/icq/dnd.png</file>
+    <file>iconsets/roster/icq/invisible.png</file>
+    <file>iconsets/roster/icq/noauth.png</file>
+    <file>iconsets/roster/icq/offline.png</file>
+    <file>iconsets/roster/icq/online.png</file>
+    <file>iconsets/roster/jabber/away.png</file>
+    <file>iconsets/roster/jabber/chatty.png</file>
+    <file>iconsets/roster/jabber/dnd.png</file>
+    <file>iconsets/roster/jabber/invisible.png</file>
+    <file>iconsets/roster/jabber/noauth.png</file>
+    <file>iconsets/roster/jabber/offline.png</file>
+    <file>iconsets/roster/jabber/online.png</file>
+    <file>iconsets/roster/jabbin/ask.png</file>
+    <file>iconsets/roster/jabbin/away.png</file>
+    <file>iconsets/roster/jabbin/chatty.png</file>
+    <file>iconsets/roster/jabbin/dnd.png</file>
+    <file>iconsets/roster/jabbin/invisible.png</file>
+    <file>iconsets/roster/jabbin/noauth.png</file>
+    <file>iconsets/roster/jabbin/offline.png</file>
+    <file>iconsets/roster/jabbin/online.png</file>
+    <file>iconsets/roster/msn/ask.png</file>
+    <file>iconsets/roster/msn/away.png</file>
+    <file>iconsets/roster/msn/chatty.png</file>
+    <file>iconsets/roster/msn/dnd.png</file>
+    <file>iconsets/roster/msn/invisible.png</file>
+    <file>iconsets/roster/msn/noauth.png</file>
+    <file>iconsets/roster/msn/offline.png</file>
+    <file>iconsets/roster/msn/online.png</file>
+    <file>iconsets/roster/myspace/ask.png</file>
+    <file>iconsets/roster/myspace/away.png</file>
+    <file>iconsets/roster/myspace/chatty.png</file>
+    <file>iconsets/roster/myspace/dnd.png</file>
+    <file>iconsets/roster/myspace/invisible.png</file>
+    <file>iconsets/roster/myspace/noauth.png</file>
+    <file>iconsets/roster/myspace/offline.png</file>
+    <file>iconsets/roster/myspace/online.png</file>
+    <file>iconsets/roster/qq/ask.png</file>
+    <file>iconsets/roster/qq/away.png</file>
+    <file>iconsets/roster/qq/chatty.png</file>
+    <file>iconsets/roster/qq/dnd.png</file>
+    <file>iconsets/roster/qq/invisible.png</file>
+    <file>iconsets/roster/qq/noauth.png</file>
+    <file>iconsets/roster/qq/offline.png</file>
+    <file>iconsets/roster/qq/online.png</file>
+    <file>iconsets/roster/yahoo/ask.png</file>
+    <file>iconsets/roster/yahoo/away.png</file>
+    <file>iconsets/roster/yahoo/chatty.png</file>
+    <file>iconsets/roster/yahoo/dnd.png</file>
+    <file>iconsets/roster/yahoo/invisible.png</file>
+    <file>iconsets/roster/yahoo/noauth.png</file>
+    <file>iconsets/roster/yahoo/offline.png</file>
+    <file>iconsets/roster/yahoo/online.png</file>
   </qresource>
 </RCC>
