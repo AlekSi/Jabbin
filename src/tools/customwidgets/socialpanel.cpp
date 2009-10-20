@@ -41,14 +41,19 @@ using XMPP::Jid;
 
 void SocialPanel::Private::processScriptValue(QScriptValue value)
 {
-    jid = value.property("feed_user").toString() + "@jabbin.com";
+    name = value.property("feed_user").toString();
+    if (name.contains("@jabbin.com")) {
+        name = name.replace(QRegExp("@jabbin[.]com.*$"), "");
+    }
+
+    jid = name + "@jabbin.com";
 
     // name
-    name = value.property("feed_user").toString();
 
     PsiContact * contact = account->findContact(XMPP::Jid(jid));
     if (contact) {
         name = contact->name();
+        name = name.replace("@jabbin.com", QString());
     }
 
     // date
@@ -241,8 +246,12 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
         QScriptValue itemValue = it.value();
         processScriptValue(itemValue);
 
-        QString title = itemValue.property("item_title").toString();
+        QString title = itemValue.property("title").toString();
+        if (title == "null") title = QString();
+
         QString content = itemValue.property("item_content").toString();
+        if (content == "null") content = QString();
+
         if (content.isEmpty()) {
             content = title;
         }
