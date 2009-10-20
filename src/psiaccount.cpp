@@ -3873,6 +3873,21 @@ void PsiAccount::actionDefault(const Jid &j)
 	if(!u)
 		return;
 
+        if (PsiOptions::instance()->getOption("options.general.contact.doubleclick.call").toBool()) {
+            const UserResourceList & list = u->userResourceList();
+            bool callable = false;
+            foreach (UserResource res, list) {
+                if (capsManager()->features(
+                            u->jid().withResource(res.name())).canVoice()) {
+                    callable = true;
+                }
+            }
+            if (callable) {
+                openCall(j);
+                return;
+            }
+        }
+
 #ifndef YAPSI
 	if(d->eventQueue->count(u->jid()) > 0)
 		openNextEvent(*u, UserAction);
