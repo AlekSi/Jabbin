@@ -34,6 +34,7 @@
 #include <QWebSettings>
 #include <QNetworkDiskCache>
 #include <QDir>
+#include <QToolButton>
 
 #define TIMER_INTERVAL 300000
 
@@ -91,12 +92,39 @@ void SocialPanel::Private::reload()
     QString user = account->jid().user();
     // user = "stefanogrini";
     QUrl url(
-        "http://www.jabbin.com/life/services/" + user + "/friends/json/p/" + QString::number(currentPage)
+        "http://www.jabbin.com/life/services/" + user + "/friends/" + filter + "json/p/" + QString::number(currentPage)
         );
     qDebug() << "SocialPanel::Private::reload: " << url;
 
     httpreader.read(url);
 }
+
+void SocialPanel::Private::setFilter(const QString & item)
+{
+    if (item == tr("All")) {
+        filter = QString();
+    } else {
+        filter = item + "/";
+    }
+    currentPage = 1;
+    reload();
+}
+
+void SocialPanel::Private::buttonMoodClicked()
+{
+    setFilter("mood");
+}
+
+void SocialPanel::Private::buttonActivityClicked()
+{
+    setFilter("activity");
+}
+
+void SocialPanel::Private::buttonStatusClicked()
+{
+    setFilter("status");
+}
+
 
 void SocialPanel::Private::linkClicked(const QUrl & url)
 {
@@ -260,8 +288,16 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
         }
 
         QString domain = itemValue.property("feed_domain").toString();
-        domain.replace(QRegExp("[.](com|org)"), "");
-        domain.replace(".", "");
+
+        if (!domain.contains("http://jabber.org/protocol/")) {
+            domain.replace(QRegExp("[.](com|org)"), "");
+            domain.replace(".", "");
+            domain = "http://www.jabbin.com/life/images/icons/" + domain + ".png";
+        } else {
+            domain.replace("http://jabber.org/protocol/", "");
+            domain = "qrc:/customwidgets/data/social/" + domain + ".png";
+            qDebug() << "Social icon: " << domain;
+        }
 
         html += item
             .replace("$NAME", name)
@@ -271,7 +307,7 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
             .replace("$AVATAR", avatar)
             .replace("$JID", jid)
             .replace("$LINK", itemValue.property("item_permalink").toString())
-            .replace("$SERVICE", "http://www.jabbin.com/life/images/icons/" + domain + ".png")
+            .replace("$SERVICE", domain)
             .replace("$THUMBNAILS", itemValue.property("thumb_data").toString())
         ;
     }
@@ -345,7 +381,64 @@ SocialPanel::SocialPanel(QWidget * parent)
     d->layout->setContentsMargins(0, 0, 0, 0);
     d->layout->setSpacing(0);
 
-    d->layout->addWidget(new QPushButton(this));
+    QFrame * topFrame = new QFrame(this);
+    topFrame->setName("topFrame");
+    topFrame->setStyleSheet("\
+            QFrame#topFrame { background: white; border: none; border-bottom: 1px solid silver; }\
+            QToolButton { border: none; }");
+
+    QHBoxLayout * layout = new QHBoxLayout(topFrame);
+    layout->setSpacing(0);
+    layout->setContentsMargins(4, 4, 4, 4);
+
+    QToolButton * button = new QToolButton(topFrame);
+    button->setIcon(QIcon(":/customwidgets/data/social/status.png"));
+    button->setToolTip(tr("Status"));
+    layout->addWidget(button);
+    connect(button, SIGNAL(clicked()), d, SLOT(buttonStatusClicked()));
+
+    button = new QToolButton(topFrame);
+    button->setIcon(QIcon(":/customwidgets/data/social/mood.png"));
+    button->setToolTip(tr("Mood"));
+    layout->addWidget(button);
+    connect(button, SIGNAL(clicked()), d, SLOT(buttonMoodClicked()));
+
+    button = new QToolButton(topFrame);
+    button->setIcon(QIcon(":/customwidgets/data/social/activity.png"));
+    button->setToolTip(tr("Activity"));
+    layout->addWidget(button);
+    connect(button, SIGNAL(clicked()), d, SLOT(buttonActivityClicked()));
+
+    layout->addStretch();
+
+    QLabel * label = new QLabel(topFrame);
+    label->setText(tr("Show:"));
+    layout->addWidget(label);
+    layout->addSpacing(10);
+
+    QComboBox * combo = new QComboBox(topFrame);
+    layout->addWidget(combo);
+    connect(combo, SIGNAL(activated(const QString &)), d, SLOT(setFilter(const QString &)));
+
+    QStringList services;
+    services
+        << "flickr"
+        << "twitter"
+        << "identi.ca"
+        << "youtube"
+        << "digg"
+        << "delicious"
+        << "last.fm"
+        << "Slideshare";
+
+    combo->addItem(tr("All"));
+    combo->insertSeparator(1);
+
+    foreach (QString service, services) {
+        combo->addItem(service);
+    }
+
+    d->layout->addWidget(topFrame);
     d->layout->addWidget(d->web);
 }
 

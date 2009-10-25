@@ -43,6 +43,7 @@ public:
     QBasicTimer timer;
     int currentPage;
     int totalPages;
+    QString filter;
 
 
 public Q_SLOTS:
@@ -50,6 +51,11 @@ public Q_SLOTS:
     void reload();
     void linkClicked(const QUrl & url);
     void linkHovered(const QString & url);
+
+    void setFilter(const QString & item);
+    void buttonMoodClicked();
+    void buttonActivityClicked();
+    void buttonStatusClicked();
 
 };
 

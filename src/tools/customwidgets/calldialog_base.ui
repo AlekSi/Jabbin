@@ -274,7 +274,7 @@
                  </property>
                  <property name="icon">
                   <iconset resource="customwidgets.qrc">
-                   <normaloff>:/customwidgets/data/delete.png</normaloff>:/customwidgets/data/delete.png</iconset>
+                   <normaloff>:/customwidgets/data/callhistory/trashcan.png</normaloff>:/customwidgets/data/callhistory/trashcan.png</iconset>
                  </property>
                 </widget>
                </item>
