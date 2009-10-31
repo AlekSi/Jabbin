@@ -25,6 +25,7 @@
 #include <QListView>
 #include <QLabel>
 #include <QDateTime>
+#include "psiaccount.h"
 
 class CallHistoryModel;
 
@@ -55,6 +56,8 @@ public:
 
     CallHistoryModel(QListView * list = NULL);
     ~CallHistoryModel();
+
+    void init(PsiAccount * account);
 
     void addEntry(const QString & name, const QString & id, Status status, QDateTime time = QDateTime());
     void updateLastEntryStatus(Status status);

@@ -388,13 +388,13 @@ void YaContactListViewDelegate::realDrawContact(QPainter* painter, const QStyleO
                     type = "jabbin";
                 } else if (type.contains("@gmail.com")) {
                     type = "gtalk";
-                } else if (type.contains("\\40")) {
-                        type = type.
+                } else /*if (type.contains("\\40"))*/ {
+                    type = type.
                             replace(QRegExp("^[^@]*@"), QString()).
                             replace(QRegExp("[.].*$"), QString());
-                } else {
+                } /* else {
                         type = "";
-                }
+                } */
 
 		QPixmap statusPixmap = Ya::VisualUtil::rosterStatusPixmap(statusType(index), type);
 		QRect statusPixmapRect(nameRect);

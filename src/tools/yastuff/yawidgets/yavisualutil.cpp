@@ -405,19 +405,23 @@ QPixmap VisualUtil::rosterStatusPixmap(XMPP::Status::Type status, const QString 
 	case XMPP::Status::Invisible:
 		result = QPixmap(prefix + "online.png");
 		break;
-#ifdef YAPSI
-	case XMPP::Status::Blocked:
-		result = QPixmap(":iconsets/roster/default/icon-lock.png");
-		break;
-	case XMPP::Status::Reconnecting:
-		result = QPixmap(":iconsets/roster/default/icon-invisible.png");
-		break;
-	case XMPP::Status::NotAuthorizedToSeeStatus:
-		result = QPixmap(":iconsets/roster/default/icon-warning.png");
-		break;
-#endif
+//	case XMPP::Status::NotAuthorizedToSeeStatus:
 	default:
-		Q_ASSERT(false);
+		result = QPixmap(prefix + "noauth.png");
+		break;
+// #ifdef YAPSI
+// 	case XMPP::Status::Blocked:
+// 		result = QPixmap(":iconsets/roster/default/icon-lock.png");
+// 		break;
+// 	case XMPP::Status::Reconnecting:
+// 		result = QPixmap(":iconsets/roster/default/icon-invisible.png");
+// 		break;
+// 	// case XMPP::Status::NotAuthorizedToSeeStatus:
+// 	// 	result = QPixmap(":iconsets/roster/default/icon-warning.png");
+// 	// 	break;
+// #endif
+// 	default:
+// 		Q_ASSERT(false);
 	}
 
 	return result;

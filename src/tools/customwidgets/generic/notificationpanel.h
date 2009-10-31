@@ -68,6 +68,8 @@ public:
 
     void setPixmap(const QPixmap & pixmap);
 
+    void setIcon(const QIcon & icon);
+
 Q_SIGNALS:
     /**
      * This signal is emitted when a button is clicked

@@ -23,6 +23,8 @@
 #include "generic/customwidgetscommon.h"
 #include "jabbinnotifications.h"
 #include "jinglevoicecaller.h"
+#include "psicontact.h"
+#include "avatars.h"
 
 #include <QRegExpValidator>
 #include <QRegExp>
@@ -117,11 +119,44 @@ void CallDialog::Private::setStatus(Status value)
         case Normal:
             break;
         case Calling:
+            // declaring variables in switch construct
+            {
+
+            QString name = JIDTEXT;
+            PsiContact * contact = account->findContact(XMPP::Jid(JIDTEXT));
+            if (contact) {
+                name = contact->name();
+            }
+            name = name.replace("@jabbin.com", QString());
+
             qDebug() << "CallDialog::setStatus: calling";
             frameInCall->setTitle(tr("Calling ..."));
             if (phone == QString()) {
                 qDebug() << "CallDialog::setStatus: " << caller;
-                frameInCall->setMessage(JIDTEXT);
+                frameInCall->setMessage(name);
+                QPixmap pixmap;
+                frameInCall->setPixmap(pixmap);
+
+                if (contact && !contact->picture().isNull()) {
+                    frameInCall->setIcon(contact->picture());
+                } else {
+                    pixmap = account->avatarFactory()->getAvatar(XMPP::Jid(JIDTEXT));
+                    qDebug() << "Setting in call avatar" << pixmap.size();
+                    if (pixmap.isNull()) {
+                        qDebug() << "Avatar was null, trying " << JIDTEXT <<
+                            account->avatarFactory()->getCachedAvatarFileName(
+                                XMPP::Jid(JIDTEXT));
+
+                        pixmap = QPixmap(account->avatarFactory()->getCachedAvatarFileName(
+                                XMPP::Jid(JIDTEXT)));
+                    }
+                    if (pixmap.isNull()) {
+                        qDebug() << "Avatar was null";
+                        pixmap = QPixmap(":/customwidgets/data/phone.png");
+                    }
+                    frameInCall->setPixmap(pixmap);
+                }
+
                 if (caller) {
                     caller->call(jid);
                 }
@@ -130,7 +165,11 @@ void CallDialog::Private::setStatus(Status value)
                 frameInCall->setMessage(phone);
                 ((JingleVoiceCaller *) caller)->sendDTMF(jid, phone);
             }
-            callhistory->addEntry(JIDTEXT, jid.full(), CallHistoryModel::Sent);
+
+            callhistory->addEntry(name, jid.full(), CallHistoryModel::Sent);
+
+            }
+
             break;
         case InCall:
             qDebug() << "CallDialog::setStatus: in call";
@@ -274,6 +313,7 @@ void CallDialog::init(const Jid & jid, PsiAccount * account, VoiceCaller * calle
     qDebug() << "CallDialog::init" << jid.full() << account << caller;
     d->jid = jid;
     d->account = account;
+    d->callhistory->init(account);
 
     if (caller != d->caller) {
         if (d->caller) {

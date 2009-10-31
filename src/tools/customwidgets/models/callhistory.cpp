@@ -106,13 +106,14 @@ void CallHistoryItemEditor::toPhoneBook()
 class CallHistoryModel::Private {
 public:
     Private(QListView * m_list, QAbstractItemModel * m_model)
-        : list(m_list)
+        : list(m_list), account(NULL)
     {
         new CallHistoryItemEditor(list, m_model);
     }
 
     QList < CallHistoryItem > items;
     QListView * list;
+    PsiAccount * account;
     CallHistoryItemDelegate * delegate;
 };
 
@@ -198,6 +199,11 @@ CallHistoryModel::~CallHistoryModel()
 void CallHistoryModel::call(const QString & who)
 {
     emit callRequested(who);
+}
+
+void CallHistoryModel::init(PsiAccount * account)
+{
+    d->account = account;
 }
 
 void CallHistoryModel::addEntry(const QString & name, const QString & id,
@@ -385,6 +391,7 @@ void CallHistoryModel::load()
             if (reader.name() == "event") {
                 item.name = reader.attributes().value("name").toString();
                 item.id = reader.attributes().value("id").toString();
+                qDebug() << "CallHistoryModel::load()" << item.name << item.id;
                 item.time = QDateTime::fromString((reader.attributes().value("time").toString()), Qt::ISODate);
                 item.status = (Status) reader.attributes().value("status").toString().toInt();
                 d->items.append(item);

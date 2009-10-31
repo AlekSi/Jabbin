@@ -92,7 +92,7 @@ void SocialPanel::Private::reload()
     QString user = account->jid().user();
     // user = "stefanogrini";
     QUrl url(
-        "http://www.jabbin.com/life/services/" + user + "/friends/" + filter + "json/p/" + QString::number(currentPage)
+        "http://www.jabbin.com/life/services/" + user + "/friends/" + filter + "/json/p/" + QString::number(currentPage)
         );
     qDebug() << "SocialPanel::Private::reload: " << url;
 
@@ -101,28 +101,29 @@ void SocialPanel::Private::reload()
 
 void SocialPanel::Private::setFilter(const QString & item)
 {
-    if (item == tr("All")) {
-        filter = QString();
-    } else {
-        filter = item + "/";
-    }
+    filter = item.toLower();
+    // if (item == tr("All")) {
+    //     filter = QString();
+    // } else {
+    //     filter = item + "/";
+    // }
     currentPage = 1;
     reload();
 }
 
 void SocialPanel::Private::buttonMoodClicked()
 {
-    setFilter("mood");
+    QDesktopServices::openUrl(QUrl("http://www.jabbin.com/life/#mood_container"));
 }
 
 void SocialPanel::Private::buttonActivityClicked()
 {
-    setFilter("activity");
+    QDesktopServices::openUrl(QUrl("http://www.jabbin.com/life/#activity_container"));
 }
 
 void SocialPanel::Private::buttonStatusClicked()
 {
-    setFilter("status");
+    QDesktopServices::openUrl(QUrl("http://www.jabbin.com/life/#status_container"));
 }
 
 
@@ -306,7 +307,7 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
             .replace("$CONTENT", content)
             .replace("$AVATAR", avatar)
             .replace("$JID", jid)
-            .replace("$LINK", itemValue.property("item_permalink").toString())
+            .replace("$LINK", itemValue.property("permalink").toString())
             .replace("$SERVICE", domain)
             .replace("$THUMBNAILS", itemValue.property("thumb_data").toString())
         ;
@@ -347,13 +348,15 @@ void SocialPanel::init(PsiAccount * account)
     QWebSettings::setMaximumPagesInCache(100);
 
     d->account = account;
-    d->reload();
     d->timer.start(TIMER_INTERVAL, this);
 
     connect(d->web, SIGNAL(linkClicked(const QUrl &)),
             d, SLOT(linkClicked(const QUrl &)));
     connect(d->web->page(), SIGNAL(linkHovered(const QString &, const QString &, const QString &)),
             d, SLOT(linkHovered(const QString &)));
+
+    d->setFilter("All");
+    d->reload();
 }
 
 void SocialPanel::timerEvent(QTimerEvent * event)
@@ -429,10 +432,15 @@ SocialPanel::SocialPanel(QWidget * parent)
         << "digg"
         << "delicious"
         << "last.fm"
-        << "Slideshare";
+        << "slideshare";
 
-    combo->addItem(tr("All"));
+    combo->addItem("All");
     combo->insertSeparator(1);
+
+    combo->addItem("Mood");
+    combo->addItem("Status");
+    combo->addItem("Activity");
+    combo->insertSeparator(5);
 
     foreach (QString service, services) {
         combo->addItem(service);

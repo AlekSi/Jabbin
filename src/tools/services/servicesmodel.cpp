@@ -344,6 +344,8 @@ QIcon XmppServiceItem::_defaultIcon()
     if (!m_discoItem.identities().isEmpty()) {
         DiscoItem::Identity id = m_discoItem.identities().first();
 
+        qDebug() << "XmppServiceItem::_defaultIcon" <<
+            id.name << id.type;
         QIcon icon = ServicesModel::iconForTransportType(id.type);
         if (!icon.isNull())
             return icon;
@@ -861,6 +863,8 @@ QIcon ServicesModel::iconForTransportType(const QString & type)
         return ServiceItem::m_ircIcon;
     else if (type == "gadu-gadu")
         return ServiceItem::m_gadugaduIcon;
+    else if (type == "gtalk")
+        return ServiceItem::m_gtalkIcon;
     else if (type == "icq")
         return ServiceItem::m_icqIcon;
     else if (type == "lcs")

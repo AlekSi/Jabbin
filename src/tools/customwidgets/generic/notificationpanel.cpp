@@ -84,4 +84,9 @@ void NotificationPanel::setPixmap(const QPixmap & pixmap)
     d->labelImage->setPixmap(pixmap);
 }
 
+void NotificationPanel::setIcon(const QIcon & icon)
+{
+    d->labelImage->setPixmap(icon.pixmap(64, 64));
+}
+
 } // namespace CustomWidgets
