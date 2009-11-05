@@ -68,7 +68,7 @@ Patching the 3rd party libraries
 Patch the third-party libraries with the
   linux/0001-3rd_party_libs_linux_gcc_4x-ivan.patch
 
-run patch p0 <   linux/0001-3rd_party_libs_linux_gcc_4x-ivan.patch
+run patch -p0 <   linux/0001-3rd_party_libs_linux_gcc_4x-ivan.patch
 
 Building libjingle
 ------------------
