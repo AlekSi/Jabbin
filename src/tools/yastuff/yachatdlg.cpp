@@ -576,7 +576,9 @@ void YaChatDlg::showContactHistory()
 void YaChatDlg::showContactProfile()
 {
 	PsiContact* contact = account()->findContact(jid().bare());
-        contact->userInfo();
+	if (contact) {
+		contact->userInfo();
+	}
 
 	// FIXME: won't work after contact was deleted
 	// if (contact) {
