@@ -576,12 +576,14 @@ void YaChatDlg::showContactHistory()
 void YaChatDlg::showContactProfile()
 {
 	PsiContact* contact = account()->findContact(jid().bare());
+        contact->userInfo();
+
 	// FIXME: won't work after contact was deleted
-	if (contact) {
-		QRect rect = ui_.contactToolTipArea->geometry();
-		rect.moveTopLeft(ui_.contactToolTipArea->mapToGlobal(QPoint()));
-		ContactTooltip::instance()->showContact(contact, rect);
-	}
+	// if (contact) {
+	// 	QRect rect = ui_.contactToolTipArea->geometry();
+	// 	rect.moveTopLeft(ui_.contactToolTipArea->mapToGlobal(QPoint()));
+	// 	ContactTooltip::instance()->showContact(contact, rect);
+	// }
 }
 
 bool YaChatDlg::eventFilter(QObject* obj, QEvent* e)

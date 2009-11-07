@@ -383,7 +383,7 @@ QPixmap VisualUtil::rosterStatusPixmap(XMPP::Status::Type status, const QString 
             prefix != "yahoo"
 
             ) {
-                prefix = "jabbin";
+                prefix = "jabber";
         }
 
 	prefix = ":iconsets/roster/" + prefix + "/";
