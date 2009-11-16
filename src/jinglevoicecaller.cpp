@@ -48,6 +48,7 @@
 #include "jinglevoicecaller.h"
 #include "psiaccount.h"
 #include "dtmfsender.h"
+#include <QUuid>
 
 // #include "callslog.h"
 
@@ -147,6 +148,7 @@ void JingleClientSlots::sendStanza( const buzz::XmlElement *stanza )
 
     st.replace("cli:iq","iq");
     st.replace(":cli=","=");
+    qDebug() << "JingleClientSlots::sendStanza:" << st;
     voiceCaller_->sendStanza(st);
 }
 
@@ -434,8 +436,19 @@ void JingleVoiceCaller::sendDTMF(const Jid& j, QString dtmfCode )
 void JingleVoiceCaller::sendStanza(const char* stanza)
 {
     QString s = stanza;
-    s = s.replace("><",">\n<");
-    qDebug( QString("Send stanza:\n%1\n\n").arg(s) );
+
+    if (QRegExp("<iq[^>]* id=").indexIn(s) == -1) {
+        s = s.replace("<iq ",
+            QString("<iq id=\"") +
+            QString::number(QDateTime::currentDateTime().toTime_t(), 16) +
+            QString::number(rand(), 16) + "\" ");
+    }
+
+    //if (!s.contains("</iq>") && !s.endsWith("/>")) {
+    //    s += "</id>";
+    //}
+
+    qDebug() << "JingleVoiceCaller::sendStanza: " << s;
 
     account()->client()->send(QString(stanza));
 }
