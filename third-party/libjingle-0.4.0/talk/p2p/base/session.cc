@@ -68,6 +68,7 @@ Session::Session(SessionManager *session_manager, const std::string& name,
   remote_description_ = NULL;
   transport_ = NULL;
   compatibility_mode_ = false;
+  enableReceivedAcceptFlags = 0;
 }
 
 Session::~Session() {
@@ -123,7 +124,7 @@ bool Session::Initiate(const std::string &to,
     elems.push_back(elem);
   }
 
-  if (extra_xml != NULL) {       
+  if (extra_xml != NULL) {
     std::vector<buzz::XmlElement*>::iterator iter = extra_xml->begin();
     for (std::vector<buzz::XmlElement*>::iterator iter = extra_xml->begin();
         iter != extra_xml->end();
@@ -131,7 +132,7 @@ bool Session::Initiate(const std::string &to,
       elems.push_back(new buzz::XmlElement(**iter));
     }
   }
-      
+
   SendSessionMessage("initiate", elems);
 
   SetState(Session::STATE_SENTINITIATE);
@@ -489,6 +490,21 @@ void Session::SetState(State state) {
   }
 }
 
+void Session::EnableReceivedAccept(bool receivedAccept) {
+  ASSERT(session_manager_->signaling_thread()->IsCurrent());
+
+  if (receivedAccept) {
+    // setting flag that we've recvd accept msg
+    enableReceivedAcceptFlags |= 1;
+  }
+
+  if (enableReceivedAcceptFlags == 1 | 2 | 4) {
+    SetState(STATE_RECEIVEDACCEPT);
+    enableReceivedAcceptFlags = 0;
+  }
+
+}
+
 void Session::SetError(Error error) {
   ASSERT(session_manager_->signaling_thread()->IsCurrent());
   if (error != error_) {
@@ -559,7 +575,7 @@ void Session::OnTransportSendMessage(Transport* transport,
         ASSERT(elem->Name() == kQnP2pCandidate);
 
         // Convert this candidate to an old style candidate (namespace change)
-        buzz::XmlElement* legacy_candidate = new buzz::XmlElement(*elem);        
+        buzz::XmlElement* legacy_candidate = new buzz::XmlElement(*elem);
         legacy_candidate->SetName(kQnLegacyCandidate);
         candidates.push_back(legacy_candidate);
       }
@@ -742,7 +758,8 @@ bool Session::OnAcceptMessage(const buzz::XmlElement* stanza,
   if (!FindRemoteSessionDescription(stanza, session))
     return false;
 
-  SetState(STATE_RECEIVEDACCEPT);
+  EnableReceivedAccept(STATE_RECEIVEDACCEPT);
+  // SetState(STATE_RECEIVEDACCEPT);
   return true;
 }
 
@@ -775,7 +792,7 @@ bool Session::OnRedirectMessage(const buzz::XmlElement* stanza,
   XmlElements elems;
   elems.push_back(client_->TranslateSessionDescription(description_));
   if (redirect_cookie)
-    elems.push_back(new buzz::XmlElement(*redirect_cookie)); 
+    elems.push_back(new buzz::XmlElement(*redirect_cookie));
   SendSessionMessage("initiate", elems);
 
   // Clear the connection timeout (if any).  We will start the connection
@@ -821,7 +838,7 @@ bool Session::OnTransportAcceptMessage(const buzz::XmlElement* stanza,
       Transport* transport = GetTransport(elem->Name().Namespace());
       if (transport) {
         if (transport_elem) {  // trying to accept two transport?
-          SignalErrorMessage(this, stanza, buzz::QN_STANZA_BAD_REQUEST, 
+          SignalErrorMessage(this, stanza, buzz::QN_STANZA_BAD_REQUEST,
                              "modify", "transport-accept has two answers",
                              NULL);
           return false;
@@ -858,6 +875,8 @@ bool Session::OnTransportAcceptMessage(const buzz::XmlElement* stanza,
   }
   candidates_.clear();
 
+  // setting flag that we've recvd transport accept message
+  enableReceivedAcceptFlags |= 2;
   return true;
 }
 
@@ -874,6 +893,8 @@ bool Session::OnTransportInfoMessage(const buzz::XmlElement* stanza,
       }
     }
   }
+  // setting flag that we've recvd transport info message
+  enableReceivedAcceptFlags |= 4;
   return true;
 }
 

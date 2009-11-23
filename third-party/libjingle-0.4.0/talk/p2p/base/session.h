@@ -129,7 +129,7 @@ class Session : public talk_base::MessageHandler, public sigslot::has_slots<> {
   // When a session was created by us, we are the initiator, and we send the
   // initiate message when this method is invoked.  The extra_xml parameter is
   // a list of elements that will get inserted inside <Session> ... </Session>
-  bool Initiate(const std::string &to, std::vector<buzz::XmlElement*>* extra_xml, 
+  bool Initiate(const std::string &to, std::vector<buzz::XmlElement*>* extra_xml,
                 const SessionDescription *description);
 
   // When we receive a session initiation from another client, we create a
@@ -218,6 +218,10 @@ class Session : public talk_base::MessageHandler, public sigslot::has_slots<> {
 
   // Updates the state, signaling if necessary.
   void SetState(State state);
+
+  // Updates the state, signaling if necessary.
+  char enableReceivedAcceptFlags;
+  void EnableReceivedAccept(bool receivedAccept);
 
   // Updates the error state, signaling if necessary.
   void SetError(Error error);
