@@ -758,7 +758,7 @@ bool Session::OnAcceptMessage(const buzz::XmlElement* stanza,
   if (!FindRemoteSessionDescription(stanza, session))
     return false;
 
-  EnableReceivedAccept(STATE_RECEIVEDACCEPT);
+  EnableReceivedAccept(true);
   // SetState(STATE_RECEIVEDACCEPT);
   return true;
 }
@@ -877,6 +877,7 @@ bool Session::OnTransportAcceptMessage(const buzz::XmlElement* stanza,
 
   // setting flag that we've recvd transport accept message
   enableReceivedAcceptFlags |= 2;
+  EnableReceivedAccept(false);
   return true;
 }
 
@@ -895,6 +896,7 @@ bool Session::OnTransportInfoMessage(const buzz::XmlElement* stanza,
   }
   // setting flag that we've recvd transport info message
   enableReceivedAcceptFlags |= 4;
+  EnableReceivedAccept(false);
   return true;
 }
 
