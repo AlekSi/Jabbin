@@ -43,6 +43,11 @@ const uint32 MSG_TIMEOUT = 1;
 const uint32 MSG_ERROR = 2;
 const uint32 MSG_STATE = 3;
 
+const uint32 FLAG_ACCEPT = 1;
+const uint32 FLAG_TRANSPORT_ACCEPT = 2;
+const uint32 FLAG_TRANSPORT_INFO = 4;
+const uint32 FLAG_TRANSPORT_ALL = 4 + 2 + 1;
+
 // This will be initialized at run time to hold the list of default transports.
 std::string* gDefaultTransports = NULL;
 size_t gNumDefaultTransports = 0;
@@ -490,15 +495,12 @@ void Session::SetState(State state) {
   }
 }
 
-void Session::EnableReceivedAccept(bool receivedAccept) {
+void Session::EnableReceivedAccept(int flag) {
   ASSERT(session_manager_->signaling_thread()->IsCurrent());
 
-  if (receivedAccept) {
-    // setting flag that we've recvd accept msg
-    enableReceivedAcceptFlags |= 1;
-  }
+  enableReceivedAcceptFlags |= flag;
 
-  if (enableReceivedAcceptFlags == 1 | 2 | 4) {
+  if (enableReceivedAcceptFlags == FLAG_TRANSPORT_ALL) {
     SetState(STATE_RECEIVEDACCEPT);
     enableReceivedAcceptFlags = 0;
   }
@@ -758,7 +760,7 @@ bool Session::OnAcceptMessage(const buzz::XmlElement* stanza,
   if (!FindRemoteSessionDescription(stanza, session))
     return false;
 
-  EnableReceivedAccept(true);
+  EnableReceivedAccept(FLAG_ACCEPT);
   // SetState(STATE_RECEIVEDACCEPT);
   return true;
 }
@@ -876,8 +878,7 @@ bool Session::OnTransportAcceptMessage(const buzz::XmlElement* stanza,
   candidates_.clear();
 
   // setting flag that we've recvd transport accept message
-  enableReceivedAcceptFlags |= 2;
-  EnableReceivedAccept(false);
+  EnableReceivedAccept(FLAG_TRANSPORT_ACCEPT);
   return true;
 }
 
@@ -895,8 +896,7 @@ bool Session::OnTransportInfoMessage(const buzz::XmlElement* stanza,
     }
   }
   // setting flag that we've recvd transport info message
-  enableReceivedAcceptFlags |= 4;
-  EnableReceivedAccept(false);
+  EnableReceivedAccept(FLAG_TRANSPORT_INFO);
   return true;
 }
 

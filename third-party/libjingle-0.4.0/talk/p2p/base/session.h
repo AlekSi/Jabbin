@@ -221,7 +221,7 @@ class Session : public talk_base::MessageHandler, public sigslot::has_slots<> {
 
   // Updates the state, signaling if necessary.
   char enableReceivedAcceptFlags;
-  void EnableReceivedAccept(bool receivedAccept);
+  void EnableReceivedAccept(int flag);
 
   // Updates the error state, signaling if necessary.
   void SetError(Error error);
