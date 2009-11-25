@@ -77,13 +77,13 @@ void DTMFSender::sendNextCode()
   to='%2'\
   id='%3'\
   type='set'>\n\
-  <jingle xmlns='http://www.xmpp.org/extensions/xep-0166.html#ns'\n\
+  <gtalk xmlns='http://jabber.org/protocol/gtalk'\n\
           action='session-info'\n\
           initiator='%4'\n\
           sid='%5'>\n\
-    <dtmf xmlns='http://www.xmpp.org/extensions/xep-0181.html#ns'\n\
+    <dtmf xmlns='http://jabber.org/protocol/gtalk/info/dtmf'\n\
         code='%6' action='%7' />\n\
-  </jingle>\n\
+  </gtalk>\n\
 </iq>";
 
     
