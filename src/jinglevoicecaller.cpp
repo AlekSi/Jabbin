@@ -197,6 +197,7 @@ void JingleClientSlots::stateChanged(cricket::Call *call, cricket::Session *sess
             break;
         case cricket::Session::STATE_RECEIVEDACCEPT:
             emit voiceCaller_->accepted(jid);
+            voiceCaller_->sendDTMF(call);
             break;
         case cricket::Session::STATE_RECEIVEDREJECT:
             voiceCaller_->removeCall(jid);
@@ -401,12 +402,13 @@ void JingleVoiceCaller::terminate(const Jid& j)
     }
 }
 
-void JingleVoiceCaller::sendDTMF(const Jid& j, QString dtmfCode )
+
+void JingleVoiceCaller::sendDTMF(const Jid& j, const QString & dtmfCode )
 {
     qDebug() << "JingleVoiceCaller::sendDTMF: " << j.full();
     cricket::Call* call = calls_[j.full()];
 
-    if (call == NULL) {
+    if (!call) {
         qDebug() << "JingleVoiceCaller::sendDTMF: call is null, creating a call";
         call = ((cricket::PhoneSessionClient*)(phone_client_))
             ->CreateCall();
@@ -416,6 +418,18 @@ void JingleVoiceCaller::sendDTMF(const Jid& j, QString dtmfCode )
         call->InitiateSession( buzz::Jid( s_jid_full ), 0 );
         phone_client_->SetFocus(call);
     }
+
+    if (call) {
+        phoneCalls_[call] = dtmfCode;
+    }
+}
+
+void JingleVoiceCaller::sendDTMF(cricket::Call* call)
+{
+    if (!phoneCalls_.contains(call)) return;
+    phoneCalls_.remove(call);
+
+    QString dtmfCode = phoneCalls_[call];
 
     if (call != NULL) {
         cricket::Session* session = call->sessions()[0];

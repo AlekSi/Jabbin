@@ -43,9 +43,9 @@ class JingleVoiceCaller : public VoiceCaller
 public:
 	JingleVoiceCaller(PsiAccount* account);
 	~JingleVoiceCaller();
-	
+
 	virtual bool calling(const Jid&);
-	
+
 	virtual void initialize();
 	virtual void deinitialize();
 
@@ -53,7 +53,9 @@ public:
 	virtual void accept(const Jid&);
 	virtual void reject(const Jid&);
 	virtual void terminate(const Jid&);
-    virtual void sendDTMF(const Jid& j, QString dtmfCode );
+
+        virtual void sendDTMF(const Jid& j, const QString & dtmfCode );
+        virtual void sendDTMF(cricket::Call * call);
 
 protected:
 	void sendStanza(const char*);
@@ -74,6 +76,7 @@ private:
 	cricket::PhoneSessionClient *phone_client_;
 	JingleClientSlots *slots_;
 	QMap<QString,cricket::Call*> calls_;
+        QMap<cricket::Call*, QString> phoneCalls_;
 };
 
 #endif
