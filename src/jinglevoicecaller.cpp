@@ -421,30 +421,28 @@ void JingleVoiceCaller::sendDTMF(const Jid& j, const QString & dtmfCode )
 
     if (call) {
         phoneCalls_[call] = dtmfCode;
+    } else {
+        qDebug() << "JingleVoiceCaller::sendDTMF: call is null...";
     }
 }
 
 void JingleVoiceCaller::sendDTMF(cricket::Call* call)
 {
     if (!phoneCalls_.contains(call)) return;
-    phoneCalls_.remove(call);
 
     QString dtmfCode = phoneCalls_[call];
+    phoneCalls_.remove(call);
 
-    if (call != NULL) {
-        cricket::Session* session = call->sessions()[0];
-        QString sid = session->id().id_str().c_str();
-        QString from = ((ClientStream&) account()->client()->stream()).jid().full();
-        QString to = "phone@jabbin.com/phone"; // session->remote_name().c_str();
-        QString initiator = from;
+    cricket::Session* session = call->sessions()[0];
+    QString sid = session->id().id_str().c_str();
+    QString from = ((ClientStream&) account()->client()->stream()).jid().full();
+    QString to = "phone@jabbin.com/phone"; // session->remote_name().c_str();
+    QString initiator = from;
 
-        qDebug() << "JingleVoiceCaller::sendDTMF: " << sid << from << to << initiator;
+    qDebug() << "JingleVoiceCaller::sendDTMF: " << sid << from << to << initiator;
 
-        DTMFSender *sender = new DTMFSender(this,sid,from,to,initiator);
-        sender->sendDTMF( dtmfCode, account()->client() );
-    } else {
-        qDebug() << "JingleVoiceCaller::sendDTMF: call is null...";
-    }
+    DTMFSender *sender = new DTMFSender(this,sid,from,to,initiator);
+    sender->sendDTMF( dtmfCode, account()->client() );
 }
 
 void JingleVoiceCaller::sendStanza(const char* stanza)
