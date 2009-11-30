@@ -116,9 +116,9 @@ void SocialPanel::Private::buttonMoodClicked()
     QDesktopServices::openUrl(QUrl("http://www.jabbin.com/life/#mood_container"));
 }
 
-void SocialPanel::Private::buttonActivityClicked()
+void SocialPanel::Private::buttonLifestreamClicked()
 {
-    QDesktopServices::openUrl(QUrl("http://www.jabbin.com/life/#activity_container"));
+    QDesktopServices::openUrl(QUrl("http://www.jabbin.com/life/networks"));
 }
 
 void SocialPanel::Private::buttonStatusClicked()
@@ -401,16 +401,10 @@ SocialPanel::SocialPanel(QWidget * parent)
     connect(button, SIGNAL(clicked()), d, SLOT(buttonStatusClicked()));
 
     button = new QToolButton(topFrame);
-    button->setIcon(QIcon(":/customwidgets/data/social/mood.png"));
-    button->setToolTip(tr("Mood"));
+    button->setIcon(QIcon(":/customwidgets/data/social/lifestream.png"));
+    button->setToolTip(tr("Add a new feed"));
     layout->addWidget(button);
-    connect(button, SIGNAL(clicked()), d, SLOT(buttonMoodClicked()));
-
-    button = new QToolButton(topFrame);
-    button->setIcon(QIcon(":/customwidgets/data/social/activity.png"));
-    button->setToolTip(tr("Activity"));
-    layout->addWidget(button);
-    connect(button, SIGNAL(clicked()), d, SLOT(buttonActivityClicked()));
+    connect(button, SIGNAL(clicked()), d, SLOT(buttonLifestreamClicked()));
 
     layout->addStretch();
 

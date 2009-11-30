@@ -51,7 +51,7 @@
             <enum>QTabWidget::West</enum>
            </property>
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <property name="iconSize">
             <size>
@@ -61,7 +61,7 @@
            </property>
            <widget class="QWidget" name="tabDialpad">
             <attribute name="icon">
-             <iconset resource="../../../iconsets/custom/customicons.qrc">
+             <iconset resource="customwidgets.qrc">
               <normaloff>:/customwidgets/data/calldialog_dial.png</normaloff>:/customwidgets/data/calldialog_dial.png</iconset>
             </attribute>
             <attribute name="title">
@@ -192,25 +192,25 @@
                  </spacer>
                 </item>
                 <item>
-                 <widget class="QLabel" name="labelRates">
-                  <property name="text">
-                   <string>&lt;a href=&quot;http://www.jabbin.com/rates&quot;&gt;Check out how much you can save with Jabbin's call rates&lt;/a&gt;</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                  <property name="wordWrap">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item>
                  <widget class="QLabel" name="labelRefill">
                   <property name="text">
                    <string>&lt;a href=&quot;http://www.jabbin.com/recharge&quot;&gt;Refill your account&lt;/a&gt;</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="labelRates">
+                  <property name="text">
+                   <string>&lt;a href=&quot;http://www.jabbin.com/rates&quot;&gt;Call rates&lt;/a&gt;</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>

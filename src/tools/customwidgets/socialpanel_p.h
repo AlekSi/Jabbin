@@ -54,8 +54,9 @@ public Q_SLOTS:
 
     void setFilter(const QString & item);
     void buttonMoodClicked();
-    void buttonActivityClicked();
+  //  void buttonActivityClicked();
     void buttonStatusClicked();
+	void buttonLifestreamClicked();
 
 };
 

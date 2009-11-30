@@ -152,7 +152,7 @@ void CallDialog::Private::setStatus(Status value)
                     }
                     if (pixmap.isNull()) {
                         qDebug() << "Avatar was null";
-                        pixmap = QPixmap(":/customwidgets/data/phone.png");
+                        pixmap = QPixmap(":/customwidgets/data/default_avatar.png");
                     }
                     frameInCall->setPixmap(pixmap);
                 }
