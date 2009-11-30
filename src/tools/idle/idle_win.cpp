@@ -24,10 +24,10 @@
 #include <windows.h>
 
 #if defined(Q_OS_WIN32) && !defined(Q_CC_GNU)
-typedef struct tagLASTINPUTINFO {
-	UINT cbSize;
-	DWORD dwTime;
-} LASTINPUTINFO, *PLASTINPUTINFO;
+//typedef struct tagLASTINPUTINFO {
+//	UINT cbSize;
+//	DWORD dwTime;
+//} LASTINPUTINFO, *PLASTINPUTINFO;
 #endif
 
 class IdlePlatform::Private
