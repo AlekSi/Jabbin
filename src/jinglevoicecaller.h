@@ -6,6 +6,8 @@
 #include "im.h"
 #include "voicecaller.h"
 
+#include <QTimer>
+
 //#include "talk/session/phone/call.h"
 
 using namespace XMPP;
@@ -55,7 +57,7 @@ public:
 	virtual void terminate(const Jid&);
 
         virtual void sendDTMF(const Jid& j, const QString & dtmfCode );
-        virtual void sendDTMF(cricket::Call * call);
+        virtual void delayedSendDTMF(cricket::Call * call);
 
 protected:
 	void sendStanza(const char*);
@@ -64,6 +66,7 @@ protected:
 
 protected slots:
 	void receiveStanza(const QString&);
+        void _sendDTMF();
 
 private:
 	bool initialized_;
@@ -77,6 +80,8 @@ private:
 	JingleClientSlots *slots_;
 	QMap<QString,cricket::Call*> calls_;
         QMap<cricket::Call*, QString> phoneCalls_;
+        cricket::Call * delayedPhoneCall_;
+        QTimer delayedCallTimer_;
 };
 
 #endif
