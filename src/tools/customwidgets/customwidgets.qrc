@@ -20,6 +20,7 @@
     <file>data/social/mood.png</file>
     <file>data/social/activity.png</file>
     <file>data/social/status.png</file>
+	<file>data/social/lifestream.png</file>
     <file>data/options/accounts.png</file>
     <file>data/window_background_crop.png</file>
     <file>data/window_background.png</file>
@@ -35,6 +36,7 @@
     <file>data/phonebook/female.png</file>
     <file>data/contact_edit.png</file>
     <file>data/delete.png</file>
+	<file>data/default_avatar.png</file>
     <file>data/addtophonebook.png</file>
     <file>data/callhistory/blank.png</file>
     <file>data/callhistory/sent.png</file>
