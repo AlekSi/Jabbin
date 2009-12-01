@@ -314,7 +314,7 @@ QVariant CallHistoryModel::data(const QModelIndex & index, int role) const
             return d->items.at(i).name + " ("
                 + d->items.at(i).time.toString() + ")";
         case CallHistoryItem::PrettyDisplay:
-            return "<span style=\"font-size: 12pt; font-weight:bold;\">" + d->items.at(i).name + "</span><br>\n"
+            return "<span style=\"font-size: 10pt; font-weight:bold;\">" + d->items.at(i).name + "</span><br>\n"
                 + "<span style=\"font-size: 8pt; color: grey;\">" + d->items.at(i).time.toString() + "</span>";
         case Qt::DecorationRole:
             switch (d->items.at(i).status) {

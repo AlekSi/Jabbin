@@ -211,8 +211,8 @@ void JingleClientSlots::stateChanged(cricket::Call *call, cricket::Session *sess
             emit voiceCaller_->terminated(jid);
             break;
         case cricket::Session::STATE_INPROGRESS:
-            voiceCaller_->delayedSendDTMF(call);
             emit voiceCaller_->in_progress(jid);
+            voiceCaller_->sendDTMF(call);
         default:
             break;
     }
@@ -241,13 +241,13 @@ JingleVoiceCaller::JingleVoiceCaller(PsiAccount* acc) : VoiceCaller(acc)
 
     initialized_ = false;
 
-    delayedCallTimer_.setSingleShot(true);
-    delayedCallTimer_.setInterval(1000);
-    delayedPhoneCall_ = NULL;
+//    delayedCallTimer_.setSingleShot(true);
+//    delayedCallTimer_.setInterval(1000);
+//    delayedPhoneCall_ = NULL;
 
-    qDebug() << "JingleVoiceCaller::JingleVoiceCaller - connecting timer";
-    connect(& delayedCallTimer_, SIGNAL(timeout()),
-            this, SLOT(_sendDTMF()));
+//    qDebug() << "JingleVoiceCaller::JingleVoiceCaller - connecting timer";
+//    connect(& delayedCallTimer_, SIGNAL(timeout()),
+//            this, SLOT(_sendDTMF()));
 }
 
 void JingleVoiceCaller::initialize()
@@ -435,18 +435,15 @@ void JingleVoiceCaller::sendDTMF(const Jid& j, const QString & dtmfCode )
     }
 }
 
-void JingleVoiceCaller::delayedSendDTMF(cricket::Call* call)
+/*void JingleVoiceCaller::delayedSendDTMF(cricket::Call* call)
 {
     delayedPhoneCall_ = call;
     delayedCallTimer_.start();
-}
+}*/
 
-void JingleVoiceCaller::_sendDTMF()
+void JingleVoiceCaller::sendDTMF(cricket::Call* call)
 {
-    if (!phoneCalls_.contains(delayedPhoneCall_)) return;
-
-    cricket::Call * call = delayedPhoneCall_;
-    delayedPhoneCall_ = NULL;
+    if (!phoneCalls_.contains(call)) return;
 
     QString dtmfCode = phoneCalls_[call];
     phoneCalls_.remove(call);
