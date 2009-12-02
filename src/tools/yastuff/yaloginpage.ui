@@ -33,7 +33,7 @@
        <item>
         <widget class="YaLinkButton" name="registerButton">
          <property name="text">
-          <string>Register</string>
+          <string>Don't have an account? Sign Up !</string>
          </property>
         </widget>
        </item>

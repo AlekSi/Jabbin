@@ -293,7 +293,7 @@ PsiAccount* YaLoginPage::getAccount() const
 
 void YaLoginPage::registerAccount()
 {
-	DesktopUtil::openYaUrl("http://www.jabbin.com/register");
+	DesktopUtil::openYaUrl("http://www.telecom64.eu/intranet/billing/clientiSchede/registrazionejabbin.php?reseller=45");
 }
 
 void YaLoginPage::paintEvent(QPaintEvent*)
