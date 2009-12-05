@@ -24,6 +24,7 @@
 #include <QItemDelegate>
 #include <QListView>
 #include <QLabel>
+#include "psiaccount.h"
 
 class PhoneBookModel;
 
@@ -59,6 +60,8 @@ public:
 
     PhoneBookModel(QListView * list = NULL, QLineEdit * filter = NULL);
     ~PhoneBookModel();
+
+    void init(PsiAccount * account);
 
     // Override
     int rowCount(const QModelIndex & parent = QModelIndex()) const;

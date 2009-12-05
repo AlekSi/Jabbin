@@ -41,7 +41,7 @@
 #define EDITOR_COLOR_S "235, 244, 250"
 #define EDITOR_COLOR QColor(235, 244, 250)
 
-#define CALLHISTORYFILE ApplicationInfo::homeDir() + "/callhistory.xml"
+#define CALLHISTORYFILE ApplicationInfo::homeDir() + "/callhistory.xml-" + d->account->name()
 
 // CallHistoryItem
 CallHistoryItem::CallHistoryItem()
@@ -184,7 +184,6 @@ void CallHistoryItemDelegate::paint(QPainter * painter, const QStyleOptionViewIt
 CallHistoryModel::CallHistoryModel(QListView * parent)
     : QAbstractListModel(parent), d(new Private(parent, this))
 {
-    load();
 
     d->list->setModel(this);
     d->list->installEventFilter(this);
@@ -204,6 +203,7 @@ void CallHistoryModel::call(const QString & who)
 void CallHistoryModel::init(PsiAccount * account)
 {
     d->account = account;
+    load();
 }
 
 void CallHistoryModel::addEntry(const QString & name, const QString & id,
@@ -399,6 +399,7 @@ void CallHistoryModel::load()
         }
     }
     emit modelEmpty(d->items.size() == 0);
+    reset();
 }
 
 void CallHistoryModel::save()

@@ -43,7 +43,7 @@
 #define EDITOR_COLOR_S "235, 244, 250"
 #define EDITOR_COLOR QColor(235, 244, 250)
 
-#define PHONEBOOKFILE ApplicationInfo::homeDir() + "/phonebook.xml"
+#define PHONEBOOKFILE ApplicationInfo::homeDir() + "/phonebook.xml-" + d->account->name()
 
 // PhoneBookItem
 PhoneBookItem::PhoneBookItem(QString _name, PhoneBookModel::Gender _gender,
@@ -241,6 +241,7 @@ public:
     PhoneBookItemDelegate * delegate;
     PhoneBookItemEditor * editor;
     QSortFilterProxyModel * proxyModel;
+    PsiAccount * account;
 };
 
 // PhoneBookItemDelegate::Private
@@ -310,10 +311,15 @@ void PhoneBookItemDelegate::paint(QPainter * painter, const QStyleOptionViewItem
 }
 
 // PhoneBookModel
+void PhoneBookModel::init(PsiAccount * account)
+{
+    d->account = account;
+    load();
+}
+
 PhoneBookModel::PhoneBookModel(QListView * parent, QLineEdit * filter)
     : QAbstractListModel(parent), d(new Private(parent))
 {
-    load();
 
     d->proxyModel = new QSortFilterProxyModel(parent);
     d->proxyModel->setSourceModel(this);
@@ -500,6 +506,7 @@ void PhoneBookModel::load()
             }
         }
     }
+    reset();
 }
 
 void PhoneBookModel::save()

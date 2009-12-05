@@ -278,7 +278,11 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
         QString title = itemValue.property("title").toString();
         if (title == "null") title = QString();
 
-        QString content = itemValue.property("item_content").toString();
+        QString content = itemValue.property("item_name").toString();
+        if (content == "null" || content.isEmpty()) {
+            content = itemValue.property("item_content").toString();
+        }
+
         if (content == "null") content = QString();
 
         if (content.isEmpty()) {
@@ -289,6 +293,7 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
         }
 
         QString domain = itemValue.property("feed_domain").toString();
+        qDebug() << "SocialPanel::finishedJsonRead: Social domain: " << domain;
 
         if (!domain.contains("http://jabber.org/protocol/")) {
             domain.replace(QRegExp("[.](com|org)"), "");
@@ -297,9 +302,9 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
         } else {
             domain.replace("http://jabber.org/protocol/", "");
             domain = "qrc:/customwidgets/data/social/" + domain + ".png";
-            qDebug() << "Social icon: " << domain;
         }
 
+        qDebug() << "SocialPanel::finishedJsonRead: Social domain: " << domain;
         html += item
             .replace("$NAME", name)
             .replace("$TIME", date)

@@ -304,6 +304,7 @@ public:
 		, avatarFactory(0)
 		, voiceCaller(0)
 		, tabManager(0)
+                , reconnDelay(5000)
 #ifdef GOOGLE_FT
 		, googleFTManager(0)
 #endif
@@ -361,6 +362,8 @@ public:
 
 	// Tune
 	Tune lastTune;
+
+	int reconnDelay;
 
 	// Ad-hoc commands
 	AHCServerManager* ahcManager;
@@ -2074,7 +2077,19 @@ void PsiAccount::cs_error(int err)
 
 	// Auto-Reconnect?
 	if((d->acc.opt_reconn && reconn) || (err == -1)) {
-		int delay = 5000; // reconnect in 5 seconds
+		int delay = d->reconnDelay;
+
+		switch (delay) {
+			case 5000:
+				d->reconnDelay = 10000;
+			case 10000:
+				d->reconnDelay = 15000;
+			case 15000:
+				d->reconnDelay = 600000;
+			default :
+				d->reconnDelay = 5000;
+		}
+
 		if (err == -1) {
 			delay = 300;
 		}

@@ -314,6 +314,7 @@ void CallDialog::init(const Jid & jid, PsiAccount * account, VoiceCaller * calle
     d->jid = jid;
     d->account = account;
     d->callhistory->init(account);
+    d->phonebook->init(account);
 
     if (caller != d->caller) {
         if (d->caller) {
