@@ -121,6 +121,11 @@ void SocialPanel::Private::buttonLifestreamClicked()
     QDesktopServices::openUrl(QUrl("http://www.jabbin.com/life/networks"));
 }
 
+void SocialPanel::Private::buttonSearchClicked()
+{
+    QDesktopServices::openUrl(QUrl("http://www.jabbin.com/life/search"));
+}
+
 void SocialPanel::Private::buttonStatusClicked()
 {
     QDesktopServices::openUrl(QUrl("http://www.jabbin.com/life/#status_container"));
@@ -410,6 +415,12 @@ SocialPanel::SocialPanel(QWidget * parent)
     button->setToolTip(tr("Add a new feed"));
     layout->addWidget(button);
     connect(button, SIGNAL(clicked()), d, SLOT(buttonLifestreamClicked()));
+	
+    button = new QToolButton(topFrame);
+    button->setIcon(QIcon(":/customwidgets/data/social/search.png"));
+    button->setToolTip(tr("Search"));
+    layout->addWidget(button);
+    connect(button, SIGNAL(clicked()), d, SLOT(buttonSearchClicked()));
 
     layout->addStretch();
 
