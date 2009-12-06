@@ -57,6 +57,7 @@ public Q_SLOTS:
   //  void buttonActivityClicked();
     void buttonStatusClicked();
 	void buttonLifestreamClicked();
+    void buttonSearchClicked();
 
 };
 
