@@ -45,7 +45,7 @@
 // QSettings::SystemScope vs QSettings::UserScope
 #define QSettingsScope QSettings::SystemScope
 
-static const QString autoStartRegistryKey = "/CurrentVersion/Run/jabbin.exe";
+//static const QString autoStartRegistryKey = "SOFTWARE/Microsoft/Windows/CurrentVersion/Run/Jabbin";
 
 OptionsDialog::Private::Private(OptionsDialog * parent)
     : q(parent), controller(NULL),
@@ -311,8 +311,8 @@ void OptionsDialog::load()
 
 #if defined(Q_WS_WIN)
     // TODO: needs testing
-    QSettings autoStartSettings(QSettings::NativeFormat, QSettingsScope, "Microsoft", "Windows");
-    d->checkAutostart->setChecked(autoStartSettings.contains(autoStartRegistryKey));
+	QSettings sysreg("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+    d->checkAutostart->setChecked(sysreg.contains(qApp->applicationName()));
 #elif defined(Q_WS_X11)
     QString home = QDir::homePath();
     // gnome (and possibly others)
@@ -437,19 +437,20 @@ void OptionsDialog::save()
     bool autostart = d->checkAutostart->isChecked();
 #if defined(Q_WS_WIN)
     // TODO: needs testing
-    QSettings autoStartSettings(QSettings::NativeFormat, QSettingsScope, "Microsoft", "Windows");
+	QSettings sysreg("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+
+//	QSettings autoStartSettings(QSettings::NativeFormat, QSettingsScope, "Microsoft", "Windows");
     qDebug() << "OptionsDialog::save()"
-             << autoStartRegistryKey
+//           << autoStartRegistryKey
              << QCoreApplication::applicationFilePath()
-             << autostart
-             << autoStartSettings.isWritable();
-    if (autostart) {
-        autoStartSettings.remove(autoStartRegistryKey);
+             << autostart;
+//           << autoStartSettings.isWritable();
+
+	if (autostart) {
+		sysreg.setValue(qApp->applicationName(), QString("\"%1\"").arg(QCoreApplication::applicationFilePath()).replace('/', '\\'));
     } else {
-        autoStartSettings.setValue(autoStartRegistryKey,
-            QCoreApplication::applicationFilePath());
+		sysreg.remove(qApp->applicationName());
     }
-    autoStartSettings.sync();
 #elif defined(Q_WS_X11)
     QString home = QDir::homePath();
     if (autostart) {
