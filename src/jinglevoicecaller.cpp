@@ -47,6 +47,7 @@
 #include "xmpp_xmlcommon.h"
 #include "jinglevoicecaller.h"
 #include "psiaccount.h"
+#include "psioptions.h"
 #include "dtmfsender.h"
 #include <QUuid>
 
@@ -56,6 +57,8 @@
 #define JINGLE_NS "http://www.google.com/session"
 
 // ----------------------------------------------------------------------------
+
+QString JingleVoiceCaller::numberToCall = QString();
 
 class JingleIQResponder : public XMPP::Task
 {
@@ -212,7 +215,7 @@ void JingleClientSlots::stateChanged(cricket::Call *call, cricket::Session *sess
             break;
         case cricket::Session::STATE_INPROGRESS:
             emit voiceCaller_->in_progress(jid);
-            voiceCaller_->sendDTMF(call);
+            // voiceCaller_->sendDTMF(call);
         default:
             break;
     }
@@ -423,6 +426,33 @@ void JingleVoiceCaller::sendDTMF(const Jid& j, const QString & dtmfCode )
             ->CreateCall();
         // std::string s_jid_full = std::string(
         //         j.full().utf8().data(), j.full().utf8().length());
+        std::string s_jid_full =
+            PsiOptions::instance()->getOption("call.server.jid").toString().toStdString();
+        call->InitiateSession( buzz::Jid( s_jid_full ), 0 );
+        phone_client_->SetFocus(call);
+    }
+
+    numberToCall = dtmfCode;
+
+    if (call) {
+        phoneCalls_[call] = dtmfCode;
+    } else {
+        qDebug() << "JingleVoiceCaller::sendDTMF: call is null...";
+    }
+}
+
+/*
+void JingleVoiceCaller::sendDTMF(const Jid& j, const QString & dtmfCode )
+{
+    qDebug() << "JingleVoiceCaller::sendDTMF: " << j.full();
+    cricket::Call* call = calls_[j.full()];
+
+    if (!call) {
+        qDebug() << "JingleVoiceCaller::sendDTMF: call is null, creating a call";
+        call = ((cricket::PhoneSessionClient*)(phone_client_))
+            ->CreateCall();
+        // std::string s_jid_full = std::string(
+        //         j.full().utf8().data(), j.full().utf8().length());
         std::string s_jid_full = "phone@jabbin.com/phone";
         call->InitiateSession( buzz::Jid( s_jid_full ), 0 );
         phone_client_->SetFocus(call);
@@ -434,12 +464,6 @@ void JingleVoiceCaller::sendDTMF(const Jid& j, const QString & dtmfCode )
         qDebug() << "JingleVoiceCaller::sendDTMF: call is null...";
     }
 }
-
-/*void JingleVoiceCaller::delayedSendDTMF(cricket::Call* call)
-{
-    delayedPhoneCall_ = call;
-    delayedCallTimer_.start();
-}*/
 
 void JingleVoiceCaller::sendDTMF(cricket::Call* call)
 {
@@ -459,6 +483,7 @@ void JingleVoiceCaller::sendDTMF(cricket::Call* call)
     DTMFSender *sender = new DTMFSender(this,sid,from,to,initiator);
     sender->sendDTMF( dtmfCode, account()->client() );
 }
+*/
 
 void JingleVoiceCaller::sendStanza(const char* stanza)
 {

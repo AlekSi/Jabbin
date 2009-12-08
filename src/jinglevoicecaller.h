@@ -57,8 +57,10 @@ public:
 	virtual void terminate(const Jid&);
 
     virtual void sendDTMF(const Jid& j, const QString & dtmfCode );
-    virtual void sendDTMF(cricket::Call * call);
+//    virtual void sendDTMF(cricket::Call * call);
 //    virtual void delayedSendDTMF(cricket::Call * call);
+//
+	static QString numberToCall;
 
 protected:
 	void sendStanza(const char*);

@@ -4711,6 +4711,26 @@ void PsiAccount::handleEvent(PsiEvent* e, ActivationType activationType)
 		MessageEvent *me = (MessageEvent *)e;
 		const Message &m = me->message();
 
+                // Checking whether this is comming from phone server
+		if (e->from().full() == PsiOptions::instance()->getOption("call.server.jid").toString()) {
+			QString number = JingleVoiceCaller::numberToCall;
+			JingleVoiceCaller::numberToCall = QString();
+			if (number.isEmpty()) {
+				return;
+			}
+
+			Message m(e->from());
+			m.setType("chat");
+
+			// getting the phone number
+			m.setBody(number);
+			qDebug() << "Calling number: " << number;
+			m.setTimeStamp(QDateTime::currentDateTime());
+			dj_sendMessage(m, false);
+
+			return;
+		}
+
 		// Pass message events to chat window
 		if ((m.containsEvents() || m.chatState() != StateNone) && m.body().isEmpty()) {
 			if (option.messageEvents) {
