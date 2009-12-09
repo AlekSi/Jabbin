@@ -408,6 +408,7 @@ void JingleVoiceCaller::accept(const Jid& j)
     qDebug("jinglevoicecaller.cpp: Accepting call");
     cricket::Call* call = calls_[j.full()];
     if (call != NULL) {
+		qDebug() << "Call is null?" << call;
         call->AcceptSession(call->sessions()[0]);
         phone_client_->SetFocus(call);
     }
@@ -418,6 +419,7 @@ void JingleVoiceCaller::reject(const Jid& j)
     qDebug("jinglevoicecaller.cpp: Rejecting call");
     cricket::Call* call = calls_[j.full()];
     if (call != NULL) {
+		qDebug() << "Call is null?" << call;
         call->RejectSession(call->sessions()[0]);
         calls_.remove(j.full());
     }
@@ -428,7 +430,8 @@ void JingleVoiceCaller::terminate(const Jid& j)
     qDebug(QString("jinglevoicecaller.cpp: Terminating call to %1").arg(j.full()));
     cricket::Call* call = calls_[j.full()];
     if (call != NULL) {
-        call->Terminate();
+		qDebug() << "Call is null?" << call;
+		call->Terminate();
         calls_.remove(j.full());
     }
 }
@@ -502,7 +505,8 @@ void JingleVoiceCaller::registerCall(const Jid& jid, cricket::Call* call)
     qDebug("jinglevoicecaller.cpp: Registering call\n");
     if (!calls_.contains(jid.full())) {
         calls_[jid.full()] = call;
-    }
+		qDebug() << "Call is null?" << call;
+	}
     else {
         qWarning("jinglevoicecaller.cpp: Auto-rejecting call because another call is currently open");
         call->RejectSession(call->sessions()[0]);
