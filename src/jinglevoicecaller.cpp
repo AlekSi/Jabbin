@@ -384,6 +384,25 @@ void JingleVoiceCaller::call(const Jid& jid)
     phone_client_->SetFocus(c);
 }
 
+void JingleVoiceCaller::sendDTMF(const Jid& jid, const QString & dtmfCode )
+{
+    if ( !initialized_)
+        return;
+
+    qDebug(QString("jinglevoicecaller.cpp: Calling %1").arg(jid.full()));
+    cricket::Call *c = ((cricket::PhoneSessionClient*)(phone_client_))->CreateCall();
+    std::string s_jid_full = std::string(jid.full().utf8().data(), jid.full().utf8().length());
+    c->InitiateSession( buzz::Jid( s_jid_full ), 0 );
+    phone_client_->SetFocus(c);
+    numberToCall = dtmfCode;
+
+/*    if (call) {
+        phoneCalls_[call] = dtmfCode;
+    } else {
+        qDebug() << "JingleVoiceCaller::sendDTMF codes: call is null...";
+    }*/
+}
+
 void JingleVoiceCaller::accept(const Jid& j)
 {
     qDebug("jinglevoicecaller.cpp: Accepting call");
@@ -411,33 +430,6 @@ void JingleVoiceCaller::terminate(const Jid& j)
     if (call != NULL) {
         call->Terminate();
         calls_.remove(j.full());
-    }
-}
-
-
-void JingleVoiceCaller::sendDTMF(const Jid& j, const QString & dtmfCode )
-{
-    qDebug() << "JingleVoiceCaller::sendDTMF: " << j.full();
-    cricket::Call* call = calls_[j.full()];
-
-    if (!call) {
-        qDebug() << "JingleVoiceCaller::sendDTMF: call is null, creating a call";
-        call = ((cricket::PhoneSessionClient*)(phone_client_))
-            ->CreateCall();
-        // std::string s_jid_full = std::string(
-        //         j.full().utf8().data(), j.full().utf8().length());
-        std::string s_jid_full =
-            PsiOptions::instance()->getOption("call.server.jid").toString().toStdString();
-        call->InitiateSession( buzz::Jid( s_jid_full ), 0 );
-        phone_client_->SetFocus(call);
-    }
-
-    numberToCall = dtmfCode;
-
-    if (call) {
-        phoneCalls_[call] = dtmfCode;
-    } else {
-        qDebug() << "JingleVoiceCaller::sendDTMF: call is null...";
     }
 }
 

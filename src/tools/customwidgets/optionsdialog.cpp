@@ -38,7 +38,7 @@
 #include <unistd.h>
 #endif
 
-#define DEFAULT_CALL_SERVER_JID "jabbin.com"
+#define DEFAULT_CALL_SERVER_JID "phone@jabbin.com"
 #define DEFAULT_CALL_SERVER_RESOURCE "phone"
 #define NO_OF_OPTIONS 8
 

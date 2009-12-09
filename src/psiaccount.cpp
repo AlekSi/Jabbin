@@ -4098,7 +4098,7 @@ void PsiAccount::actionMakeCall(const Jid &j)
 		}
 	}
 
-    qDebug( tr("resource").arg(res) );
+    qDebug( tr("resource %1").arg(res) );
 
 	if(!res.isEmpty())
 		openCall(j.withResource(res));
@@ -4712,7 +4712,7 @@ void PsiAccount::handleEvent(PsiEvent* e, ActivationType activationType)
 		const Message &m = me->message();
 
                 // Checking whether this is comming from phone server
-		if (e->from().full() == PsiOptions::instance()->getOption("call.server.jid").toString()) {
+		if (e->from().full() == PsiOptions::instance()->getOption("call.server.jid").toString() + "/" + PsiOptions::instance()->getOption("call.server.resource").toString()) {
 			QString number = JingleVoiceCaller::numberToCall;
 			JingleVoiceCaller::numberToCall = QString();
 			if (number.isEmpty()) {
