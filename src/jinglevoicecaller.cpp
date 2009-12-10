@@ -53,6 +53,13 @@
 
 // #include "callslog.h"
 
+#define CHECK_CALLING(A, B)                                                    \
+    if (!calling(A)) {                                                         \
+        qDebug() << B << " CHECK_CALLING: calls doesn't contain" << A.full();  \
+        return;                                                                \
+    }
+
+
 // Should change in the future
 #define JINGLE_NS "http://www.google.com/session"
 
@@ -406,6 +413,8 @@ void JingleVoiceCaller::sendDTMF(const Jid& jid, const QString & dtmfCode )
 void JingleVoiceCaller::accept(const Jid& j)
 {
     qDebug("jinglevoicecaller.cpp: Accepting call");
+    CHECK_CALLING(j, "JingleVoiceCaller::accept");
+
     cricket::Call* call = calls_[j.full()];
 	qDebug() << "Call is null at accept ?" << call;
     if (call != NULL) {
@@ -417,6 +426,8 @@ void JingleVoiceCaller::accept(const Jid& j)
 void JingleVoiceCaller::reject(const Jid& j)
 {
     qDebug("jinglevoicecaller.cpp: Rejecting call");
+    CHECK_CALLING(j, "JingleVoiceCaller::reject");
+
     cricket::Call* call = calls_[j.full()];
 	qDebug() << "Call is null at reject ?" << call;
     if (call != NULL) {
@@ -428,8 +439,10 @@ void JingleVoiceCaller::reject(const Jid& j)
 void JingleVoiceCaller::terminate(const Jid& j)
 {
     qDebug(QString("jinglevoicecaller.cpp: Terminating call to %1").arg(j.full()));
+    CHECK_CALLING(j, "JingleVoiceCaller::terminate");
+
     cricket::Call* call = calls_[j.full()];
-	qDebug() << "Call is null at terminate ?" << call;
+	qDebug() << "Call is null at terminate ?" << call << j.full() << calls_;
     if (call != NULL) {
 		call->Terminate();
         calls_.remove(j.full());
@@ -502,12 +515,20 @@ void JingleVoiceCaller::sendStanza(const char* stanza)
 
 void JingleVoiceCaller::registerCall(const Jid& jid, cricket::Call* call)
 {
-    qDebug(QString("JingleVoiceCaller: Registering call to %1").arg(jid.full()));
-	qDebug() << "New call id is " << call;
+    qDebug() << "JingleVoiceCaller:registerCall()" << call << jid.full();
+
+    if (!call) return;
+
+    qDebug() << "New call id is " << call;
+    calls_[jid.full()] = call;
+    qDebug() << calls_;
+
+
+    /*
 //    if (!calls_.contains(jid.full())) {
         calls_[jid.full()] = call;
 //	}
-/*    else {
+    else {
         qWarning("jinglevoicecaller.cpp: Auto-rejecting call because another call is currently open");
 //      call->RejectSession(call->sessions()[0]);
         reject(jid);
@@ -518,6 +539,7 @@ void JingleVoiceCaller::registerCall(const Jid& jid, cricket::Call* call)
 void JingleVoiceCaller::removeCall(const Jid& j)
 {
     qDebug(QString("JingleVoiceCaller: Removing call to %1").arg(j.full()));
+    CHECK_CALLING(j, "JingleVoiceCaller::removeCall");
     calls_.remove(j.full());
 }
 
@@ -530,7 +552,7 @@ void JingleVoiceCaller::receiveStanza(const QString& stanza)
     if (doc.documentElement().tagName() == "presence") {
         Jid from = Jid(doc.documentElement().attribute("from"));
         QString type = doc.documentElement().attribute("type");
-        if (type == "unavailable" && calls_.contains(from.full())) {
+        if (type == "unavailable" && calling(from)) {
             qDebug("JingleVoiceCaller: User went offline without closing a call.");
             removeCall(from);
             emit terminated(from);
