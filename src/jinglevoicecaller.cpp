@@ -523,16 +523,12 @@ void JingleVoiceCaller::registerCall(const Jid& jid, cricket::Call* call)
     calls_[jid.full()] = call;
     qDebug() << calls_;
 
-
-    /*
-//    if (!calls_.contains(jid.full())) {
+    if (!calls_.contains(jid.full())) {
         calls_[jid.full()] = call;
-//	}
-    else {
+	}
+/*    else {
         qWarning("jinglevoicecaller.cpp: Auto-rejecting call because another call is currently open");
-//      call->RejectSession(call->sessions()[0]);
-        reject(jid);
-        emit terminated(jid);
+        call->RejectSession(call->sessions()[0]);
 	}*/
 }
 

@@ -25,6 +25,7 @@
 #include "psievent.h"
 
 #define N_INCOMING_CALL      "options.notification.incoming_call"
+#define N_OUTGOING_CALL      "options.notification.outgoing_call"
 #define N_UPDATE_AVAILABLE   "options.notification.update_available"
 #define N_CHAT_REQUEST       "options.notification.chat_request"
 #define N_STATUS_REQUEST     "options.notification.status_request"

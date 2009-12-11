@@ -132,6 +132,8 @@ int JabbinNotifications::createNotification(
             actions["accept"] = tr("Accept");
             actions["reject"] = tr("Reject");
             timeout = 0;
+        } else if (type == N_OUTGOING_CALL) {
+            message = tr("%Outgoing call to %1").arg(data.at(0));
         } else if (type == N_UPDATE_AVAILABLE) {
             message = tr("There is a new version of Jabbin available - %1").arg(data.at(0));
             actions["download"] = tr("Download");

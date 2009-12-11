@@ -138,6 +138,8 @@ void CallDialog::Private::setStatus(Status value)
             QPixmap pixmap;
             frameInCall->setPixmap(pixmap);
 
+//			notificationId = JabbinNotifications::instance()->createNotification(N_OUTGOING_CALL, JIDTEXT);
+
             if (contact && !contact->picture().isNull()) {
                 frameInCall->setIcon(contact->picture());
             } else {

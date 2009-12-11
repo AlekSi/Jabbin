@@ -4729,7 +4729,7 @@ void PsiAccount::handleEvent(PsiEvent* e, ActivationType activationType)
 			m.setTimeStamp(QDateTime::currentDateTime());
 			dj_sendMessage(m, false);
 
-			// return;
+		    return;
 		}
 
 		// Pass message events to chat window

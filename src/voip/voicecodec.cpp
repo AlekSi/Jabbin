@@ -30,7 +30,7 @@ CodecsManager::CodecsManager()
 
     qDebug() << "CodecsManager::CodecsManager() installing codecs";
     installCodecFactory( new PCMUCodecFactory() );
-    installCodecFactory( new SpeexCodecFactory() );
+//    installCodecFactory( new SpeexCodecFactory() );
 }
 
 CodecsManager::~CodecsManager()

@@ -35,6 +35,11 @@
 				<sound type="QString" >${"resourcesDir"}/sound/ringing.mp3</sound>
 				<tooltip type="bool" >true</tooltip>
 			</incoming_call>
+			<outgoing_call>
+				<popupjabbin type="bool" >false</popupjabbin>
+				<sound type="QString" >${"resourcesDir"}/sound/ringing.mp3</sound>
+				<tooltip type="bool" >false</tooltip>
+			</outgoing_call>
 			<incomming_file>
 				<popupjabbin type="bool" >false</popupjabbin>
 				<sound type="QString" ></sound>
