@@ -19,6 +19,8 @@
 
 #define MIN_REPEAT_INTERVAL 1000
 
+#define PHONON_DISABLED 0
+
 #include "phononsoundplayer.h"
 #include <QApplication>
 #include <QTimer>
@@ -64,6 +66,8 @@ SoundPlayer * SoundPlayer::instance()
 
 void SoundPlayer::playContinuosSound(QString file, int msec)
 {
+    if (PHONON_DISABLED) return;
+
     if (d->music) {
         delete d->music;
     }
@@ -90,6 +94,8 @@ void SoundPlayer::playContinuosSound(QString file, int msec)
 
 void SoundPlayer::totalTimeChanged(qint64 i)
 {
+    if (PHONON_DISABLED) return;
+
     // This is called when Phonon loads
     // our sound file - provides info about
     // the length of the sound
@@ -100,6 +106,8 @@ void SoundPlayer::totalTimeChanged(qint64 i)
 
 void SoundPlayer::rewind()
 {
+    if (PHONON_DISABLED) return;
+
     if (!d->music) {
         return;
     }
@@ -115,6 +123,8 @@ void SoundPlayer::rewind()
 
 void SoundPlayer::replay()
 {
+    if (PHONON_DISABLED) return;
+
     d->interval -= d->soundLength;
     if (d->interval < 0) {
         d->timer.stop();
@@ -130,6 +140,8 @@ void SoundPlayer::replay()
 
 void SoundPlayer::stop()
 {
+    if (PHONON_DISABLED) return;
+
     if (!d || !d->music) {
         return;
     }
