@@ -233,6 +233,8 @@ void JingleClientSlots::setJingleInfo(const std::string &relay_token,
         const std::vector<talk_base::SocketAddress> &stun_addresses)
 {
     voiceCaller_->port_allocator_->SetStunHosts(stun_addresses);
+
+//  TURN could be useful in symmetric NAT but very bandwidth expensive
     voiceCaller_->port_allocator_->SetRelayHosts(relay_addresses);
     voiceCaller_->port_allocator_->SetRelayToken(relay_token);
 }
@@ -288,20 +290,18 @@ void JingleVoiceCaller::initialize()
 
         //DKZM NOTE:why THIS server?
         //It's one of gtalk's (libjingle default)
-        stun_addr_ = new talk_base::SocketAddress("64.233.167.126",19302);
+        stun_addr_ = new talk_base::SocketAddress("stun.jabbin.com",3478);
 
-        //stun_addr_ = new cricket::SocketAddress("192.245.12.229",19302); // stunserver.org
-        //stun_addr_ = new cricket::SocketAddress("stun.fwdnet.net",19302);
+        //stun_addr_ = new cricket::SocketAddress("stun.ekiga.net",3478);
+        //stun_addr_ = new cricket::SocketAddress("stun.fwdnet.net",3478);
         network_manager_ = new talk_base::NetworkManager();
 
-        /*port_allocator_ = new cricket::BasicPortAllocator(network_manager_,
-          stun_addr_,
-          NULL); // relay server
-          */
-        port_allocator_ = new cricket::HttpPortAllocator( network_manager_, "call" );
+//        port_allocator_ = new cricket::BasicPortAllocator(network_manager_,stun_addr_,NULL); // relay server
+ 
+        port_allocator_ = new cricket::HttpPortAllocator( network_manager_, "call" ); // relay server
 
         std::vector<talk_base::SocketAddress> stun_addresses;
-        stun_addresses.push_back( talk_base::SocketAddress("64.233.167.126",19302) );
+        stun_addresses.push_back( talk_base::SocketAddress("stun.jabbin.com",3478) );
 
         port_allocator_->SetStunHosts(stun_addresses);
 
