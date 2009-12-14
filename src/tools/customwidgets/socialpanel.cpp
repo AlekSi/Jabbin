@@ -81,7 +81,7 @@ SocialPanel::Private::Private()
 
 void SocialPanel::Private::reload()
 {
-    if (!account) {
+    if (!account || !account->isConnected()) {
         return;
     }
 
@@ -415,7 +415,7 @@ SocialPanel::SocialPanel(QWidget * parent)
     button->setToolTip(tr("Add a new feed"));
     layout->addWidget(button);
     connect(button, SIGNAL(clicked()), d, SLOT(buttonLifestreamClicked()));
-	
+
     button = new QToolButton(topFrame);
     button->setIcon(QIcon(":/customwidgets/data/social/search.png"));
     button->setToolTip(tr("Search"));
