@@ -24,7 +24,7 @@
    <item>
     <widget class="QStackedWidget" name="stacked">
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="pageDialpad">
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -51,7 +51,7 @@
             <enum>QTabWidget::West</enum>
            </property>
            <property name="currentIndex">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="iconSize">
             <size>
@@ -78,157 +78,208 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="labelPhoneNumber">
-               <property name="text">
-                <string>Enter a phone number</string>
-               </property>
-               <property name="buddy">
-                <cstring>editPhoneNumber</cstring>
-               </property>
+              <widget class="QStackedWidget" name="stackedDialpad">
+               <widget class="QWidget" name="pageDialpadIn">
+                <layout class="QVBoxLayout" name="verticalLayout_11">
+                 <item>
+                  <widget class="QLabel" name="labelPhoneNumber">
+                   <property name="text">
+                    <string>Enter a phone number</string>
+                   </property>
+                   <property name="buddy">
+                    <cstring>editPhoneNumber</cstring>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="CustomWidgets::AdvancedLineEdit" name="editPhoneNumber">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>32</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>32</height>
+                    </size>
+                   </property>
+                   <property name="toolTip">
+                    <string>Example: 00 + country code + area code + number</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="CustomWidgets::Dialpad" name="dialpad">
+                   <property name="minimumSize">
+                    <size>
+                     <width>150</width>
+                     <height>200</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_2">
+                   <item>
+                    <spacer name="horizontalSpacer">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="buttonCall">
+                     <property name="minimumSize">
+                      <size>
+                       <width>97</width>
+                       <height>31</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Call</string>
+                     </property>
+                     <property name="icon">
+                      <iconset resource="customwidgets.qrc">
+                       <normaloff>:/customwidgets/data/phone.png</normaloff>:/customwidgets/data/phone.png</iconset>
+                     </property>
+                     <property name="default">
+                      <bool>true</bool>
+                     </property>
+                     <property name="flat">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_2">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="QFrame" name="frame_2">
+                   <layout class="QVBoxLayout" name="verticalLayout_9">
+                    <property name="spacing">
+                     <number>16</number>
+                    </property>
+                    <item>
+                     <spacer name="verticalSpacer_4">
+                      <property name="orientation">
+                       <enum>Qt::Vertical</enum>
+                      </property>
+                      <property name="sizeType">
+                       <enum>QSizePolicy::Minimum</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>20</width>
+                        <height>10</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="labelRefill">
+                      <property name="text">
+                       <string>&lt;a href=&quot;http://www.jabbin.com/recharge&quot;&gt;Refill your account&lt;/a&gt;</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLabel" name="labelRates">
+                      <property name="text">
+                       <string>&lt;a href=&quot;http://www.jabbin.com/rates&quot;&gt;Call rates&lt;/a&gt;</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
+                      <property name="wordWrap">
+                       <bool>true</bool>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>202</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="pageError">
+                <layout class="QVBoxLayout" name="verticalLayout_12">
+                 <item>
+                  <widget class="QLabel" name="label_2">
+                   <property name="text">
+                    <string/>
+                   </property>
+                   <property name="pixmap">
+                    <pixmap resource="customwidgets.qrc">:/customwidgets/data/options/notifications.png</pixmap>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label">
+                   <property name="text">
+                    <string>The phone srever is currently under maintenance, so calling is disabled.</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="verticalSpacer_5">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>530</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
               </widget>
-             </item>
-             <item>
-              <widget class="CustomWidgets::AdvancedLineEdit" name="editPhoneNumber">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>32</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>32</height>
-                </size>
-               </property>
-               <property name="toolTip">
-                <string>Example: 00 + country code + area code + number</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="CustomWidgets::Dialpad" name="dialpad">
-               <property name="minimumSize">
-                <size>
-                 <width>150</width>
-                 <height>200</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_2">
-               <item>
-                <spacer name="horizontalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QPushButton" name="buttonCall">
-                 <property name="minimumSize">
-                  <size>
-                   <width>97</width>
-                   <height>31</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Call</string>
-                 </property>
-                 <property name="icon">
-                  <iconset resource="customwidgets.qrc">
-                   <normaloff>:/customwidgets/data/phone.png</normaloff>:/customwidgets/data/phone.png</iconset>
-                 </property>
-                 <property name="default">
-                  <bool>true</bool>
-                 </property>
-                 <property name="flat">
-                  <bool>true</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_2">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QFrame" name="frame_2">
-               <layout class="QVBoxLayout" name="verticalLayout_9">
-                <property name="spacing">
-                 <number>16</number>
-                </property>
-                <item>
-                 <spacer name="verticalSpacer_4">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Minimum</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>10</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QLabel" name="labelRefill">
-                  <property name="text">
-                   <string>&lt;a href=&quot;http://www.jabbin.com/recharge&quot;&gt;Refill your account&lt;/a&gt;</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="labelRates">
-                  <property name="text">
-                   <string>&lt;a href=&quot;http://www.jabbin.com/rates&quot;&gt;Call rates&lt;/a&gt;</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                  <property name="wordWrap">
-                   <bool>true</bool>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <spacer name="verticalSpacer">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
              </item>
             </layout>
            </widget>
@@ -480,49 +531,6 @@ QListView::item:selected {
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="pageError">
-      <layout class="QVBoxLayout" name="verticalLayout_10">
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string/>
-         </property>
-         <property name="pixmap">
-          <pixmap resource="customwidgets.qrc">:/customwidgets/data/options/notifications.png</pixmap>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>The phone srever is currently not online, so calling is disabled.</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_5">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>554</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
     </widget>
    </item>
    <item>
@@ -649,9 +657,6 @@ QListView::item:selected {
    <container>1</container>
   </customwidget>
  </customwidgets>
- <tabstops>
-  <tabstop>buttonCall</tabstop>
- </tabstops>
  <resources>
   <include location="customwidgets.qrc"/>
   <include location="../../../iconsets/custom/customicons.qrc"/>

@@ -318,9 +318,9 @@ void CallDialog::Private::phoneServerChangedPresence()
         << phoneServer->status().isAvailable();
 
     if (!phoneServer->status().isAvailable()) {
-        stacked->setCurrentWidget(pageError);
-    } else if (stacked->currentWidget() == pageError) {
-        stacked->setCurrentWidget(pageDialpad);
+        stackedDialpad->setCurrentWidget(pageError);
+    } else if (stackedDialpad->currentWidget() == pageError) {
+        stackedDialpad->setCurrentWidget(pageDialpadIn);
     }
 
 }
