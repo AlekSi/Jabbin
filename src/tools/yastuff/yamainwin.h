@@ -139,7 +139,8 @@ private slots:
 	void dockActivated();
 	void activateToShowError(YaInformer* informer);
 
-	void toggleAccounts();
+// ivan: we have disabled accounts tab
+//	void toggleAccounts();
 	void togglePreferences();
 
 protected slots:

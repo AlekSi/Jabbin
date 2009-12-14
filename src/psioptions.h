@@ -32,7 +32,7 @@ namespace XMPP {
 class QString;
 class QTimer;
 
-class PsiOptions : public OptionsTree//, QObject
+class PsiOptions : public OptionsTree //, QObject
 {
 	Q_OBJECT
 public:
@@ -42,6 +42,8 @@ public:
 	void load(XMPP::Client* client);
 	bool save(QString file);
 	void autoSave(bool autoSave, QString autoFile = "");
+
+	QVariant getOption(const QString& name) const;
 
 private:
 	PsiOptions();
@@ -54,6 +56,6 @@ private:
 	QString autoFile_;
 	QTimer *autoSaveTimer_;
 	static PsiOptions* instance_;
-}; 
+};
 
 #endif /* _PSIOPTIONS_H_ */

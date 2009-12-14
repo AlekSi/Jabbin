@@ -54,6 +54,8 @@ public:
     CallHistoryModel * callhistory;
     CallDialog * q;
 
+    PsiContact * phoneServer;
+
     int notificationId;
 
 public Q_SLOTS:
@@ -61,6 +63,8 @@ public Q_SLOTS:
     void call(const QString & who);
     void notificationFinished(int id, const QString & action);
     void openUrl(const QString & url);
+
+    void phoneServerChangedPresence();
 
 };
 

@@ -312,9 +312,40 @@ CallDialog * CallDialog::instance()
     return m_instance;
 }
 
+void CallDialog::Private::phoneServerChangedPresence()
+{
+    qDebug() << "CallDialog::Private::phoneServerChangedPresence:"
+        << phoneServer->status().isAvailable();
+
+    if (!phoneServer->status().isAvailable()) {
+        stacked->setCurrentWidget(pageError);
+    } else if (stacked->currentWidget() == pageError) {
+        stacked->setCurrentWidget(pageDialpad);
+    }
+
+}
+
 void CallDialog::init(const Jid & jid, PsiAccount * account, VoiceCaller * caller)
 {
     qDebug() << "CallDialog::init" << jid.full() << account << caller;
+    QString phoneServerJid = PsiOptions::instance()->getOption("call.server.jid").toString();
+
+    d->phoneServer = account->findContact(phoneServerJid);
+    if (!d->phoneServer) {
+        QStringList groups;
+        groups << "Transports";
+
+        account->dj_add(phoneServerJid, "Phone", groups, true);
+        d->phoneServer = account->findContact(phoneServerJid);
+    }
+
+    if (d->phoneServer) {
+        connect(d->phoneServer, SIGNAL(updated()),
+                d, SLOT(phoneServerChangedPresence()));
+    } else {
+
+    }
+
     d->jid = jid;
     d->account = account;
     d->callhistory->init(account);

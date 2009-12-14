@@ -46,7 +46,8 @@ public Q_SLOTS:
     void ok();
 
     void openPreferences();
-    void openAccounts();
+    // ivan: we have disabled accounts tab
+    // void openAccounts();
 
     void load();
     void save();

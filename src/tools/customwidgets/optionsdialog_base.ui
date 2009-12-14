@@ -1226,6 +1226,7 @@ p, li { white-space: pre-wrap; }
           </item>
          </layout>
         </widget>
+        <!--
         <widget class="QWidget" name="tabAccounts">
          <attribute name="icon">
           <iconset resource="customwidgets.qrc">
@@ -1458,7 +1459,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
          </layout>
-        </widget>
+        </widget> -->
        </widget>
       </item>
       <item>

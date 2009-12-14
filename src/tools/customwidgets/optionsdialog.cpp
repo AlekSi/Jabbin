@@ -66,8 +66,10 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
     labelChatBackground->setVisible(false);
     labelStatusAway->setVisible(false);
     editStatusAway->setVisible(false);
-    groupServiceDiscovery->setVisible(false);
-    groupAccounts->setVisible(false);
+
+    // ivan: we have disabled accounts tab
+    // groupServiceDiscovery->setVisible(false);
+    // groupAccounts->setVisible(false);
 
     // Init
     tabs->setViewType(CustomWidgets::AdvancedTabBar::ListView);
@@ -148,10 +150,11 @@ OptionsDialog::Private::Private(OptionsDialog * parent)
             this, SLOT(tableNotificationsUpdate()));
     connect(checkPopupJabbin, SIGNAL(clicked()),
             this, SLOT(tableNotificationsUpdate()));
-    connect(buttonServiceProvidersAdd, SIGNAL(clicked()),
-            this, SLOT(buttonServiceProvidersAddClicked()));
-    connect(buttonServiceProvidersRemove, SIGNAL(clicked()),
-            this, SLOT(buttonServiceProvidersRemoveClicked()));
+    // ivan: we have disabled accounts tab
+    // connect(buttonServiceProvidersAdd, SIGNAL(clicked()),
+    //         this, SLOT(buttonServiceProvidersAddClicked()));
+    // connect(buttonServiceProvidersRemove, SIGNAL(clicked()),
+    //         this, SLOT(buttonServiceProvidersRemoveClicked()));
 
     // audio devices
     foreach (Phonon::AudioOutputDevice dev, Phonon::BackendCapabilities::availableAudioOutputDevices()) {
@@ -227,24 +230,25 @@ void OptionsDialog::Private::tableNotificationsUpdate()
 
 }
 
-void OptionsDialog::Private::buttonServiceProvidersAddClicked()
-{
-    listServiceProviders->addItem("");
-    QListWidgetItem * item =
-            listServiceProviders->item(listServiceProviders->count() - 1);
-    item->setFlags( item->flags() | Qt::ItemIsEditable );
+// ivan: we have disabled accounts tab
+// void OptionsDialog::Private::buttonServiceProvidersAddClicked()
+// {
+//     listServiceProviders->addItem("");
+//     QListWidgetItem * item =
+//             listServiceProviders->item(listServiceProviders->count() - 1);
+//     item->setFlags( item->flags() | Qt::ItemIsEditable );
+//
+//     listServiceProviders->editItem(item);
+// }
 
-    listServiceProviders->editItem(item);
-}
-
-void OptionsDialog::Private::buttonServiceProvidersRemoveClicked()
-{
-    qDebug() << "buttonServiceProvidersRemoveClicked()";
-    foreach (QListWidgetItem * item, listServiceProviders->selectedItems()) {
-        qDebug() << "deleting " << item->text();
-        delete item;
-    }
-}
+// void OptionsDialog::Private::buttonServiceProvidersRemoveClicked()
+// {
+//     qDebug() << "buttonServiceProvidersRemoveClicked()";
+//     foreach (QListWidgetItem * item, listServiceProviders->selectedItems()) {
+//         qDebug() << "deleting " << item->text();
+//         delete item;
+//     }
+// }
 
 void OptionsDialog::Private::buttonNotificationSoundBrowseClicked()
 {
@@ -395,30 +399,32 @@ void OptionsDialog::load()
     }
 
     // Accounts page
+    // ivan: we have disabled accounts tab
     //define getOption(A, B) PsiOptions::instance()->getOption(A).to##B ()
-    QString svalue = getOption("call.server.jid", String);
-    if (svalue.isEmpty()) {
-        svalue = DEFAULT_CALL_SERVER_JID;
-    }
-    d->editPhoneServicesServer->setText(svalue);
+    // ivan: we have disabled accounts tab
+    // QString svalue = getOption("call.server.jid", String);
+    // if (svalue.isEmpty()) {
+    //     svalue = DEFAULT_CALL_SERVER_JID;
+    // }
+    // d->editPhoneServicesServer->setText(svalue);
 
-    svalue = getOption("call.server.resource", String);
-    if (svalue.isEmpty()) {
-        svalue = DEFAULT_CALL_SERVER_RESOURCE;
-    }
-    d->editPhoneServicesName->setText(svalue);
+    // svalue = getOption("call.server.resource", String);
+    // if (svalue.isEmpty()) {
+    //     svalue = DEFAULT_CALL_SERVER_RESOURCE;
+    // }
+    // d->editPhoneServicesName->setText(svalue);
 
     // Lists
-    QVariantList lvalue = getOption("service.providers.list", List);
-    d->listServiceProviders->clear();
+    // QVariantList lvalue = getOption("service.providers.list", List);
+    // d->listServiceProviders->clear();
 
-    int i = 0;
-    foreach (QVariant service, lvalue) {
-        d->listServiceProviders->addItem(service.toString());
-        QListWidgetItem * item = d->listServiceProviders->item(i);
-        item->setFlags( item->flags() | Qt::ItemIsEditable );
-        i++;
-    }
+    // int i = 0;
+    // foreach (QVariant service, lvalue) {
+    //     d->listServiceProviders->addItem(service.toString());
+    //     QListWidgetItem * item = d->listServiceProviders->item(i);
+    //     item->setFlags( item->flags() | Qt::ItemIsEditable );
+    //     i++;
+    // }
 
 #undef getOption
 }
@@ -511,24 +517,25 @@ void OptionsDialog::save()
     }
 
     // Accounts page
-    QString svalue = d->editPhoneServicesServer->text();
-    if (svalue.isEmpty()) {
-        svalue = DEFAULT_CALL_SERVER_JID;
-    }
-    setOption("call.server.jid", svalue);
+    // ivan: we have disabled accounts tab
+    // QString svalue = d->editPhoneServicesServer->text();
+    // if (svalue.isEmpty()) {
+    //     svalue = DEFAULT_CALL_SERVER_JID;
+    // }
+    // setOption("call.server.jid", svalue);
 
-    svalue = d->editPhoneServicesName->text();
-    if (svalue.isEmpty()) {
-        svalue = DEFAULT_CALL_SERVER_RESOURCE;
-    }
-    setOption("call.server.resource", svalue);
+    // svalue = d->editPhoneServicesName->text();
+    // if (svalue.isEmpty()) {
+    //     svalue = DEFAULT_CALL_SERVER_RESOURCE;
+    // }
+    // setOption("call.server.resource", svalue);
 
-    QVariantList lvalue;
-    for (int i = 0; i < d->listServiceProviders->count(); i++) {
-        lvalue << d->listServiceProviders->item(i)->text();
-    }
-    setOption("service.providers.list", QVariant(lvalue));
-    qDebug() << PsiOptions::instance()->getOption("service.providers.list");
+    // QVariantList lvalue;
+    // for (int i = 0; i < d->listServiceProviders->count(); i++) {
+    //     lvalue << d->listServiceProviders->item(i)->text();
+    // }
+    // setOption("service.providers.list", QVariant(lvalue));
+    // qDebug() << PsiOptions::instance()->getOption("service.providers.list");
 
     //
     if (d->controller)
@@ -550,11 +557,12 @@ void OptionsDialog::openPreferences()
     show();
 }
 
-void OptionsDialog::openAccounts()
-{
-    d->tabs->setCurrentWidget(d->tabAccounts);
-    show();
-}
+// ivan: we have disabled accounts tab
+// void OptionsDialog::openAccounts()
+// {
+//     d->tabs->setCurrentWidget(d->tabAccounts);
+//     show();
+// }
 
 void OptionsDialog::setController(PsiCon * controller)
 {

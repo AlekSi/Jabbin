@@ -297,7 +297,7 @@ void JingleVoiceCaller::initialize()
         network_manager_ = new talk_base::NetworkManager();
 
 //        port_allocator_ = new cricket::BasicPortAllocator(network_manager_,stun_addr_,NULL); // relay server
- 
+
         port_allocator_ = new cricket::HttpPortAllocator( network_manager_, "call" ); // relay server
 
         std::vector<talk_base::SocketAddress> stun_addresses;
@@ -523,13 +523,12 @@ void JingleVoiceCaller::registerCall(const Jid& jid, cricket::Call* call)
     calls_[jid.full()] = call;
     qDebug() << calls_;
 
-    if (!calls_.contains(jid.full())) {
-        calls_[jid.full()] = call;
-	}
-/*    else {
-        qWarning("jinglevoicecaller.cpp: Auto-rejecting call because another call is currently open");
-        call->RejectSession(call->sessions()[0]);
-	}*/
+//    if (!calls_.contains(jid.full())) {
+//        calls_[jid.full()] = call;
+//    } else {
+//        qWarning("jinglevoicecaller.cpp: Auto-rejecting call because another call is currently open");
+//        call->RejectSession(call->sessions()[0]);
+//    }
 }
 
 void JingleVoiceCaller::removeCall(const Jid& j)

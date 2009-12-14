@@ -36,21 +36,21 @@ class OptionsStorageTask : public Task
 {
 public:
 	OptionsStorageTask(Task* parent) : Task(parent) { }
-	
+
 	// TODO
 	void set(/* ... */) {
 		iq_ = createIQ(doc(), "set", "", id());
-		
+
 		QDomElement prvt = doc()->createElement("query");
 		prvt.setAttribute("xmlns", "jabber:iq:private");
 		iq_.appendChild(prvt);
 
 		// ...
 	}
-	
+
 	void get() {
 		iq_ = createIQ(doc(), "get", "", id());
-		
+
 		QDomElement prvt = doc()->createElement("query");
 		prvt.setAttribute("xmlns", "jabber:iq:private");
 		iq_.appendChild(prvt);
@@ -83,7 +83,7 @@ public:
 		}
 		return true;
 	}
-	
+
 	const QDomElement& options() const {
 		return options_;
 	}
@@ -106,6 +106,23 @@ PsiOptions* PsiOptions::instance()
 	return instance_;
 }
 
+
+QVariant PsiOptions::getOption(const QString & name) const
+{
+        // testing for option overrides
+        if (name == "call.server.jid") {
+                return QString("phone@jabbin.com");
+        }
+
+        if (name == "call.server.resource") {
+                return QString("phone");
+        }
+
+        // end overrides
+
+        return OptionsTree::getOption(name);
+}
+
 /**
  * Loads the options present in the xml config file named.
  * \param file Name of the xml config file to load
@@ -117,7 +134,7 @@ bool PsiOptions::load(QString file)
 }
 
 /**
- * Loads the options stored in the private storage of 
+ * Loads the options stored in the private storage of
  * the given client connection.
  * \param client the client whose private storage should be checked
  */
@@ -178,7 +195,7 @@ PsiOptions::~PsiOptions()
 
 /**
  * Sets whether to automatically save the options each time they change
- * 
+ *
  * \param autoSave Enable/disable the feature
  * \param autoFile File to automatically save to (not needed when disabling the feature)
  */

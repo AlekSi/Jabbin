@@ -525,9 +525,11 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 	eventNotifierInformer->notifier()->setController(psi_);
 	ui_.statusBar->addInformer(eventNotifierInformer);
 
-	if (!PsiOptions::instance()->getOption("options.ui.account.single").toBool()) {
-		ShortcutManager::connect("appwide.activate-account-informer", this, SLOT(toggleAccounts()));
-	}
+
+        // ivan: we have disabled accounts tab
+	// if (!PsiOptions::instance()->getOption("options.ui.account.single").toBool()) {
+	// 	ShortcutManager::connect("appwide.activate-account-informer", this, SLOT(toggleAccounts()));
+	// }
 
 	// we need to instantiate YaManageAccounts because it's responsible for showing
 	// account connection errors
@@ -1149,11 +1151,12 @@ void YaMainWin::createPreferences()
 	preferences_->setController(psi_);
 }
 
-void YaMainWin::toggleAccounts()
-{
-	togglePreferences();
-	preferences_->openAccounts();
-}
+// ivan: we have disabled accounts tab
+// void YaMainWin::toggleAccounts()
+// {
+// 	togglePreferences();
+// 	preferences_->openAccounts();
+// }
 
 void YaMainWin::togglePreferences()
 {

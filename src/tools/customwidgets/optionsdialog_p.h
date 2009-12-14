@@ -37,8 +37,8 @@ public Q_SLOTS:
     void buttonNotificationSoundBrowseClicked();
     void buttonSampleTooltipClicked();
 
-    void buttonServiceProvidersAddClicked();
-    void buttonServiceProvidersRemoveClicked();
+    // void buttonServiceProvidersAddClicked();
+    // void buttonServiceProvidersRemoveClicked();
 
 public:
     QIcon iconNotification;
