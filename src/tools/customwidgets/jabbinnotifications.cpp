@@ -174,9 +174,11 @@ int JabbinNotifications::createNotification(
                 ;
         }
 
-        d->notifications[id].player = new SoundPlayer(NULL);
-        d->notifications[id].player->playContinuosSound(value,
-            (type == N_INCOMING_CALL) ? 60000 : 10);
+        if (!PHONON_DISABLED) {
+            d->notifications[id].player = new SoundPlayer(NULL);
+            d->notifications[id].player->playContinuosSound(value,
+                (type == N_INCOMING_CALL) ? 60000 : 10);
+        }
     }
 
     if (getOption(type + ".popupjabbin", Bool)) {
@@ -195,9 +197,12 @@ void JabbinNotifications::endNotification(int id)
             CustomWidgets::Notifications::instance()->deleteNotification(
                   d->notifications[id].tooltipId);
         }
-        if (d->notifications[id].player) {
-            d->notifications[id].player->stop();
-            d->notifications[id].player->deleteLater();
+
+        if (!PHONON_DISABLED) {
+            if (d->notifications[id].player) {
+                d->notifications[id].player->stop();
+                d->notifications[id].player->deleteLater();
+            }
         }
     }
 }

@@ -23,6 +23,8 @@
 #ifndef PHONON_SOUND_PLAYER_H
 #define PHONON_SOUND_PLAYER_H
 
+#define PHONON_DISABLED 1
+
 #include <QObject>
 
 class SoundPlayer: public QObject {

@@ -19,8 +19,6 @@
 
 #define MIN_REPEAT_INTERVAL 1000
 
-#define PHONON_DISABLED 0
-
 #include "phononsoundplayer.h"
 #include <QApplication>
 #include <QTimer>
