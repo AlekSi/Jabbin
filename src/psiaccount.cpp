@@ -2078,16 +2078,22 @@ void PsiAccount::cs_error(int err)
 	// Auto-Reconnect?
 	if((d->acc.opt_reconn && reconn) || (err == -1)) {
 		int delay = d->reconnDelay;
+                qDebug() << "PsiAccount::auto reconnect"
+                        << delay;
 
 		switch (delay) {
 			case 5000:
 				d->reconnDelay = 10000;
+                                break;
 			case 10000:
 				d->reconnDelay = 15000;
+                                break;
 			case 15000:
 				d->reconnDelay = 600000;
+                                break;
 			default :
 				d->reconnDelay = 5000;
+                                break;
 		}
 
 		if (err == -1) {

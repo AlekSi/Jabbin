@@ -68,6 +68,7 @@ void SoundPlayer::playContinuosSound(QString file, int msec)
 
     if (d->music) {
         delete d->music;
+        d->music = NULL;
     }
 
     if (file == "!beep") {
