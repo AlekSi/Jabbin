@@ -290,7 +290,7 @@ void JingleVoiceCaller::initialize()
 
         //DKZM NOTE:why THIS server?
         //It's one of gtalk's (libjingle default)
-        stun_addr_ = new talk_base::SocketAddress("64.233.167.126",19302);
+        stun_addr_ = new talk_base::SocketAddress("64.233.167.126",19302);  // this is the relay server
 
         //stun_addr_ = new talk_base::SocketAddress("stun.jabbin.com",3478);
         //stun_addr_ = new cricket::SocketAddress("stun.ekiga.net",3478);
@@ -302,7 +302,7 @@ void JingleVoiceCaller::initialize()
         port_allocator_ = new cricket::HttpPortAllocator( network_manager_, "call" ); // relay server
 
         std::vector<talk_base::SocketAddress> stun_addresses;
-        stun_addresses.push_back( talk_base::SocketAddress("stun.jabbin.com",3478) );
+        stun_addresses.push_back( talk_base::SocketAddress("stun.jabbin.com",3478) ); // this is the stun server
         port_allocator_->SetStunHosts(stun_addresses);
 
     }
