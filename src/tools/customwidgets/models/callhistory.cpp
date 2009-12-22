@@ -42,6 +42,7 @@
 #define EDITOR_COLOR QColor(235, 244, 250)
 
 #define CALLHISTORYFILE ApplicationInfo::homeDir() + "/callhistory.xml-" + d->account->name()
+#define HISTORY_SIZE_LIMIT 10
 
 // CallHistoryItem
 CallHistoryItem::CallHistoryItem()
@@ -217,6 +218,11 @@ void CallHistoryModel::addEntry(const QString & name, const QString & id,
     beginInsertRows(QModelIndex(), row, row);
     d->items.prepend(CallHistoryItem(name, id, time, status));
     endInsertRows();
+
+    if (d->items.count() > HISTORY_SIZE_LIMIT) {
+        removeRows(HISTORY_SIZE_LIMIT, d->items.count() - HISTORY_SIZE_LIMIT, QModelIndex());
+    }
+
     emit modelEmpty(d->items.size() == 0);
     save();
 }
