@@ -34,7 +34,7 @@
 int call_dlg_mic_level = 100;
 int call_dlg_dsp_level = 100;
 
-// #define JIDTEXT ((phone == QString())? phone : (jid.bare()))
+// #define JIDTEXT ((phone.isEmpty())? phone : (jid.bare()))
 #define JIDTEXT jid.bare()
 
 using XMPP::Jid;
@@ -130,15 +130,15 @@ void CallDialog::Private::setStatus(Status value)
             }
             name = name.replace("@jabbin.com", QString());
 
-			qDebug() << "CallDialog::setStatus: calling";
+            qDebug() << "CallDialog::setStatus: calling";
             frameInCall->setTitle(tr("Calling ..."));
 
-			qDebug() << "CallDialog::setStatus: " << caller;
+            qDebug() << "CallDialog::setStatus: " << caller;
             frameInCall->setMessage(name);
             QPixmap pixmap;
             frameInCall->setPixmap(pixmap);
 
-//			notificationId = JabbinNotifications::instance()->createNotification(N_OUTGOING_CALL, JIDTEXT);
+            // notificationId = JabbinNotifications::instance()->createNotification(N_OUTGOING_CALL, JIDTEXT);
 
             if (contact && !contact->picture().isNull()) {
                 frameInCall->setIcon(contact->picture());
@@ -161,13 +161,13 @@ void CallDialog::Private::setStatus(Status value)
             }
 
             if (caller) {
-	            if (phone == QString()) {
-		            caller->call(jid);
-	            } else {
-		            qDebug() << "CallDialog::setStatus: phone: " << caller;
-		            frameInCall->setMessage(phone);
-			        ((JingleVoiceCaller *) caller)->sendDTMF(jid, phone);
-				}
+                if (phone == QString()) {
+                    caller->call(jid);
+                } else {
+                    qDebug() << "CallDialog::setStatus: phone: " << caller;
+                    frameInCall->setMessage(phone);
+                    ((JingleVoiceCaller *) caller)->sendDTMF(jid, phone);
+                }
             }
             callhistory->addEntry(name, jid.full(), CallHistoryModel::Sent);
 
@@ -290,7 +290,7 @@ void CallDialog::Private::call(const QString & who)
         if (phone == QString()) {
             return;
         }
-		jid = PsiOptions::instance()->getOption("call.server.jid").toString() + "/" + PsiOptions::instance()->getOption("call.server.resource").toString();
+        jid = PsiOptions::instance()->getOption("call.server.jid").toString() + "/" + PsiOptions::instance()->getOption("call.server.resource").toString();
     } else {
         phone = QString();
         jid = XMPP::Jid(who);

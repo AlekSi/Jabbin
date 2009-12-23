@@ -254,7 +254,7 @@
                  <item>
                   <widget class="QLabel" name="label">
                    <property name="text">
-                    <string>The phone srever is currently under maintenance, so calling is disabled.</string>
+                    <string>The phone server is currently under maintenance, so calling is disabled.</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
