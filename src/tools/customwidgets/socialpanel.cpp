@@ -72,7 +72,8 @@ void SocialPanel::Private::processScriptValue(QScriptValue value)
             XMPP::Jid(jid));
 }
 
-SocialPanel::Private::Private()
+SocialPanel::Private::Private(SocialPanel * parent)
+    : q(parent)
 {
     connect(&httpreader, SIGNAL(finished(const QString &)),
             this, SLOT(finishedJsonRead(const QString &)));
@@ -81,11 +82,13 @@ SocialPanel::Private::Private()
 
 void SocialPanel::Private::reload()
 {
+    timer.stop();
+
     if (!account || !account->isConnected()) {
+        web->setHtml("Account offline");
+        timer.start(1000, q);
         return;
     }
-
-    timer.stop();
 
     web->setHtml("Loading...");
 
@@ -374,7 +377,9 @@ void SocialPanel::timerEvent(QTimerEvent * event)
     if (event->timerId() == d->timer.timerId()) {
         d->timer.stop();
         d->reload();
-        d->timer.start(TIMER_INTERVAL, this);
+        if (!d->timer.isActive()) {
+            d->timer.start(TIMER_INTERVAL, this);
+        }
     }
     QWidget::timerEvent(event);
 }
@@ -385,7 +390,7 @@ void SocialPanel::showEvent(QShowEvent * event)
 }
 
 SocialPanel::SocialPanel(QWidget * parent)
-    : QWidget(parent), d(new Private())
+    : QWidget(parent), d(new Private(this))
 {
     m_instance = this;
 

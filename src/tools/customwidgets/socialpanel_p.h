@@ -27,7 +27,7 @@
 class SocialPanel::Private: public QObject {
     Q_OBJECT
 public:
-    Private();
+    Private(SocialPanel * parent);
 
     PsiAccount * account;
     CustomWidgets::HttpReader httpreader;
@@ -44,6 +44,8 @@ public:
     int currentPage;
     int totalPages;
     QString filter;
+
+    SocialPanel * const q;
 
 
 public Q_SLOTS:
