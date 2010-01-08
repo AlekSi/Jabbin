@@ -80,7 +80,8 @@ namespace cricket {
 HttpPortAllocator::HttpPortAllocator(talk_base::NetworkManager* network_manager, const std::string &user_agent)
   : BasicPortAllocator(network_manager), agent_(user_agent) {
   relay_hosts_.push_back("relay.l.google.com");
-  stun_hosts_.push_back(talk_base::SocketAddress("stun.jabbin.com",3478));
+//  stun_hosts_.push_back(talk_base::SocketAddress("stun.jabbin.com",3479));
+  stun_hosts_.push_back(talk_base::SocketAddress("stun.l.google.com",19302));
 }
 
 HttpPortAllocator::~HttpPortAllocator() {
