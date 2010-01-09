@@ -287,24 +287,25 @@ void SocialPanel::Private::finishedJsonRead(const QString & data)
         if (title == "null") title = QString();
 
         QString content = itemValue.property("item_name").toString();
+		
         if (content == "null" || content.isEmpty()) {
             content = itemValue.property("item_content").toString();
         }
 
         if (content == "null") content = QString();
 
-        if (content.isEmpty()) {
-            content = title;
+        if (title.isEmpty()) {
+            title = content;
         }
-        if (title.contains(content) || content.contains(title)) {
-            title = QString();
-        }
+      //  if (title.contains(content) || content.contains(title)) {
+        //    title = QString();
+        //}
 
         QString domain = itemValue.property("feed_domain").toString();
         qDebug() << "SocialPanel::finishedJsonRead: Social domain: " << domain;
 
         if (!domain.contains("http://jabber.org/protocol/")) {
-            domain.replace(QRegExp("[.](com|org)"), "");
+            domain.replace(QRegExp("[.](com|org|net|it|us)"), "");
             domain.replace(".", "");
             domain = "http://www.jabbin.com/life/images/icons/" + domain + ".png";
         } else {

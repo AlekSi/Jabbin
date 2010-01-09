@@ -158,6 +158,7 @@ void CallDialog::Private::setStatus(Status value)
                     pixmap = QPixmap(":/customwidgets/data/default_avatar.png");
                 }
                 frameInCall->setPixmap(pixmap);
+
             }
 
             if (caller) {
