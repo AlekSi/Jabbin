@@ -44,7 +44,7 @@
 #include "common.h"
 #include "iconset.h"
 
-const static QString FRIENDS_GROUP = QString::fromUtf8("Jabberout friends");
+const static QString FRIENDS_GROUP = QString::fromUtf8("Jabbin friends");
 const static QChar FRIENDS_MARKER = QChar(0x263A); // ☺
 const static QChar BUZZ_MARKER = QChar(0x2009); // n space
 const static QString BUZZ_MESSAGE = QString::fromUtf8("/me ") + "%1" + BUZZ_MARKER;

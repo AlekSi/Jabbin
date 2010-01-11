@@ -312,7 +312,7 @@ void PsiContactList::loadAccounts(const UserAccountList &_list)
 		}
 	}
 
-	// Jabberout account **must** be the first one
+	// Jabbin account **must** be the first one
 	Q_ASSERT(accounts_.isEmpty());
 	loadAccount(acc);
 	Q_ASSERT(accounts_.count() == 1);

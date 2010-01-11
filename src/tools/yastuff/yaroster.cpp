@@ -359,14 +359,14 @@ public:
 
 		addTextLabel(QStringList()
 			<< QString::fromUtf8("Welcome")
-			<< QString::fromUtf8("You can now start using Jabberout service!")
+			<< QString::fromUtf8("You can now start using Jabbin service!")
 			<< QString("")
-			<< QString::fromUtf8("Jabberout is more than just an IM. You can chat/speak with your friends and update them with your moods and your blog")
+			<< QString::fromUtf8("Jabbin is more than just an IM. You can chat/speak with your friends and update them with your moods and your blog")
 		);
 
 		addPixmap(":images/addcontact.png");
 
-		addYaRuLabel(QString::fromUtf8("After adding your Jabberout account you can start adding your friends to your contact list"));
+		addYaRuLabel(QString::fromUtf8("After adding your Jabbin account you can start adding your friends to your contact list"));
 
 		vbox()->addStretch();
 
@@ -403,7 +403,7 @@ public:
 
 		vbox()->addSpacing(10);
 
-		addYaRuLabel(QString::fromUtf8("You can find new friends on <a href=\"yachat://find-friends\"></a> — Jabberout service."));
+		addYaRuLabel(QString::fromUtf8("You can find new friends on <a href=\"yachat://find-friends\"></a> — Jabbin service."));
 
 		vbox()->addStretch();
 
