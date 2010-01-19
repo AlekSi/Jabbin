@@ -164,13 +164,14 @@ void CallDialog::Private::setStatus(Status value)
             if (caller) {
                 if (phone == QString()) {
                     caller->call(jid);
+                    // callhistory->addEntry(name, jid.full(), CallHistoryModel::Sent);
                 } else {
                     qDebug() << "CallDialog::setStatus: phone: " << caller;
                     frameInCall->setMessage(phone);
+                    // callhistory->addEntry(name, phone, CallHistoryModel::Sent);
                     ((JingleVoiceCaller *) caller)->sendDTMF(jid, phone);
                 }
             }
-            callhistory->addEntry(name, jid.full(), CallHistoryModel::Sent);
 
             }
 
@@ -285,18 +286,24 @@ void CallDialog::Private::doAction(const QString & buttonData)
 void CallDialog::Private::call(const QString & who)
 {
     qDebug() << "we want to call:" << who;
+    QString name;
+
     if (who.startsWith("phone://")) {
         phone = who;
         phone.remove(0, 8);
         if (phone == QString()) {
             return;
         }
+        name = phone;
         jid = PsiOptions::instance()->getOption("call.server.jid").toString() + "/" + PsiOptions::instance()->getOption("call.server.resource").toString();
     } else {
         phone = QString();
         jid = XMPP::Jid(who);
+        name = who;
+        name.replace("@jabbin.com", QString());
     }
     qDebug() << phone;
+    callhistory->addEntry(name, who, CallHistoryModel::Sent);
     setStatus(Calling);
 }
 

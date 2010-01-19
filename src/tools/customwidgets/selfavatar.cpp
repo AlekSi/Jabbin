@@ -238,9 +238,12 @@ void SelfAvatar::setAvatar(const QIcon & avatar)
     }
 }
 
+void SelfAvatar::setVCardFinished()
+{
+}
+
 void SelfAvatar::accountCountChanged()
 {
-    // TODO
 }
 
 void SelfAvatar::accountActivityChanged()

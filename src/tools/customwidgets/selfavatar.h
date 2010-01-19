@@ -40,6 +40,7 @@ public Q_SLOTS:
     void setAvatar(const QIcon & avatar);
     void accountCountChanged();
     void accountActivityChanged();
+    void setVCardFinished();
 
 protected:
     // Overridden

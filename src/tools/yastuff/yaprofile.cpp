@@ -40,7 +40,7 @@
 using namespace XMPP;
 
 /** \todo Make this configurable */
-static const QString S_URL_TEMPLATE = "http://www.jabbin.com/%1/";
+static const QString S_URL_TEMPLATE = "http://www.jabbin.com/life/%1/";
 static const QString S_PHOTOS_URL_TEMPLATE = "http://www.jabbin.com/blog/%1/";
 static const QString S_SELF_NICK_TEMPLATE = "<span style='color: red;'>%2</span><span style='color: black;'>%3</span><!--%1-->";
 static const QString S_NICK_TEMPLATE = "<a href='%1'><span style='color: red;'>%2</span><span style='color: black;'>%3</span>";

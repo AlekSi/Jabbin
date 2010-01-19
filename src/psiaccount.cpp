@@ -2082,22 +2082,22 @@ void PsiAccount::cs_error(int err)
                         << delay;
 
 		switch (delay) {
-			case 5000:
-				d->reconnDelay = 10000;
-                                break;
-			case 10000:
-				d->reconnDelay = 15000;
-                                break;
 			case 15000:
+				d->reconnDelay = 30000;
+                                break;
+			case 30000:
+				d->reconnDelay = 120000;
+                                break;
+			case 120000:
 				d->reconnDelay = 600000;
                                 break;
 			default :
-				d->reconnDelay = 5000;
+				d->reconnDelay = 15000;
                                 break;
 		}
 
 		if (err == -1) {
-			delay = 300;
+			delay = 5000;
 		}
 		JabbinNotifications::instance()->createNotification(
 			N_CONNECTION_ERROR, QString::number(delay));
