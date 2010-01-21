@@ -119,7 +119,7 @@ SpeexDecoder::~SpeexDecoder()
 
 int SpeexEncoder::encode( const short *data, int size, char **res, int *samplesProcessed )
 {
-    qDebug("speex encode %d samples", size);
+//    qDebug("speex encode %d samples", size);
 
     *samplesProcessed = 0;
 
@@ -160,7 +160,7 @@ int SpeexEncoder::encode( const short *data, int size, char **res, int *samplesP
 
 int SpeexDecoder::decode( const char *data, int size, short **res )
 {
-    qDebug("speex decode %d bytes", size);
+//    qDebug("speex decode %d bytes", size);
 
     short output_frame[FRAME_SIZE];
 
