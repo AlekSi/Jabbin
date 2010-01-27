@@ -23,6 +23,7 @@
 #include <qstring.h>
 #include <qstringlist.h>
 #include <q3cstring.h>
+#include <QDebug>
 
 #include <QImage>
 #include <qdom.h>
@@ -568,9 +569,12 @@ bool VCard::fromXml(const QDomElement &q)
 			d->prefixName = subTagText(i, "PREFIX");
 			d->suffixName = subTagText(i, "SUFFIX");
 		}
-		else if ( tag == "NICKNAME" )
+		else if ( tag == "NICKNAME" ) {
 			d->nickName = i.text().stripWhiteSpace();
+			//qDebug() << "VCard NICK " << d->nickName;
+		}
 		else if ( tag == "PHOTO" ) {
+			//qDebug() << "VCard PHOTO " + subTagText(i, "BINVAL");
 			d->photo = QCA::Base64().stringToArray(subTagText(i, "BINVAL").replace("\n","")).toByteArray();
 			d->photoURI = subTagText(i, "EXTVAL");
 		}

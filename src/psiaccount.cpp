@@ -1720,6 +1720,9 @@ void PsiAccount::cs_connected()
 	if(bs->inherits("BSocket") || bs->inherits("XMPP::BSocket")) {
 		d->localAddress = ((BSocket *)bs)->address();
 	}
+
+	qDebug() << "Register requestUpdateCaps call";
+	QTimer::singleShot(2000, this, SLOT(requestUpdateCaps()));
 }
 
 void PsiAccount::cs_securityLayerActivated(int layer)
@@ -2449,7 +2452,7 @@ void PsiAccount::client_resourceAvailable(const Jid &j, const Resource &r)
 
 		if ((popupType == PopupOnline && option.ppOnline) || (popupType == PopupStatusChange && option.ppStatus)) {
 			PsiPopup *popup = new PsiPopup(pt, this);
-			popup->setData(j, r, u);
+		popup->setData(j, r, u);
 		}
 #if defined(Q_WS_MAC) && defined(HAVE_GROWL)
 		PsiGrowlNotifier::instance()->popup(this, pt, j, r, u);
@@ -3033,6 +3036,16 @@ void PsiAccount::sentInitialPresence()
 	}
 #endif
 #endif
+}
+
+void PsiAccount::requestUpdateCaps()
+{
+    qDebug() << "requestUpdateCaps called";
+    foreach (PsiContact * contact, contactList()) {
+        qDebug() << "requestUpdateCaps calls updateCaps for"
+	    << contact->jid().bare();
+        contact->updateCaps();
+    }
 }
 
 void PsiAccount::capsChanged(const Jid& j)

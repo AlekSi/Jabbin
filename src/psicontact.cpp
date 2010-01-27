@@ -951,6 +951,23 @@ bool PsiContact::isCallable() const
     return false;
 }
 
+void PsiContact::updateCaps()
+{
+    if (!isOnline()) return;
+    if (!isCallable()) return;
+
+    const UserResourceList & list = d->u_.userResourceList();
+    foreach (const UserResource & res, list) {
+        qDebug() << "PsiContact::updateCaps:" << jid().bare();
+        account()->capsManager()->updateCaps(
+            jid(),
+            res.status().capsNode(),
+            res.status().capsVersion(),
+            res.status().capsExt()
+        );
+    }
+}
+
 bool PsiContact::isHidden() const
 {
 	return false;

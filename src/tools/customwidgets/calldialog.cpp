@@ -36,6 +36,7 @@ int call_dlg_dsp_level = 100;
 
 // #define JIDTEXT ((phone.isEmpty())? phone : (jid.bare()))
 #define JIDTEXT jid.bare()
+#define DISPLAY_CALL_TEXT ((phone.isEmpty()) ? jid.bare() : phone )
 
 using XMPP::Jid;
 
@@ -162,7 +163,7 @@ void CallDialog::Private::setStatus(Status value)
             }
 
             if (caller) {
-                if (phone == QString()) {
+                if (phone.isEmpty()) {
                     caller->call(jid);
                     // callhistory->addEntry(name, jid.full(), CallHistoryModel::Sent);
                 } else {
@@ -179,15 +180,18 @@ void CallDialog::Private::setStatus(Status value)
         case InCall:
             qDebug() << "CallDialog::setStatus: in call";
             frameInCall->setTitle(QString());
-            frameInCall->setMessage(JIDTEXT);
+            frameInCall->setMessage(DISPLAY_CALL_TEXT);
             time.start();
             timer.start(1000, q);
             break;
         case Terminating:
             qDebug() << "CallDialog::setStatus: terminating";
             frameInCall->setTitle(tr("Ending call ..."));
-            frameInCall->setMessage(JIDTEXT);
+            frameInCall->setMessage(DISPLAY_CALL_TEXT);
             caller->terminate(jid);
+
+            phone.clear();
+
             break;
         case Incoming:
             qDebug() << "CallDialog::setStatus: incoming";
@@ -291,13 +295,13 @@ void CallDialog::Private::call(const QString & who)
     if (who.startsWith("phone://")) {
         phone = who;
         phone.remove(0, 8);
-        if (phone == QString()) {
+        if (phone.isEmpty()) {
             return;
         }
         name = phone;
         jid = PsiOptions::instance()->getOption("call.server.jid").toString() + "/" + PsiOptions::instance()->getOption("call.server.resource").toString();
     } else {
-        phone = QString();
+        phone = QString::null;
         jid = XMPP::Jid(who);
         name = who;
         name.replace("@jabbin.com", QString());

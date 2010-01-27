@@ -57,6 +57,8 @@ public:
 	virtual bool isHidden() const;
 	virtual bool isCallable() const;
 
+	virtual void updateCaps();
+
 	void activate();
 
 	virtual void setEditing(bool editing);

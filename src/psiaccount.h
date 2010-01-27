@@ -251,6 +251,7 @@ signals:
 
 public slots:
 	void setStatus(const XMPP::Status &, bool withStatus = false);
+	void requestUpdateCaps();
 
 	void capsChanged(const Jid&);
 	void tuneStopped();
