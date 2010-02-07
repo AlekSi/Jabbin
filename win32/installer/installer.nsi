@@ -40,7 +40,7 @@ SetCompressor lzma
 !insertmacro MUI_PAGE_WELCOME
 
 ; License page
-!insertmacro MUI_PAGE_LICENSE "Licence.txt"
+!insertmacro MUI_PAGE_LICENSE "..\..\COPYING"
 
 ; Directory page
 !insertmacro MUI_PAGE_DIRECTORY
