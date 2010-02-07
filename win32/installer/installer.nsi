@@ -84,6 +84,19 @@ Section "Main program file"
   ${CreateShortCut} "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\jabbin.exe"
 SectionEnd
 
+Section "Sounds"
+  ${SetOutPath} "$INSTDIR\sound"
+  SetOverwrite ifnewer
+  ${File} "..\..\sound\" "chat1.wav"
+  ${File} "..\..\sound\" "chat2.wav"
+  ${File} "..\..\sound\" "ft_complete.wav"
+  ${File} "..\..\sound\" "ft_incoming.wav"
+  ${File} "..\..\sound\" "offline.wav"
+  ${File} "..\..\sound\" "online.wav"
+  ${File} "..\..\sound\" "ringing.mp3"
+  ${File} "..\..\sound\" "send.wav"
+SectionEnd
+
 ; Comment whole section if you use static linking
 Section "Qt libs"
   ${SetOutPath} "$SYSDIR"
