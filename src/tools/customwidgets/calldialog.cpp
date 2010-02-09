@@ -50,11 +50,11 @@ CallDialog::Private::Private(CallDialog * parent)
     editPhoneNumber->setEmptyText(tr("Enter phone number"));
     editPhoneNumber->setValidator(new QRegExpValidator(QRegExp("[+]?[0-9*#]*"), parent));
 
-    connect(labelRefill, SIGNAL(linkActivated(const QString &)),
+/*    connect(labelRefill, SIGNAL(linkActivated(const QString &)),
             this, SLOT(openUrl(const QString &)));
     connect(labelRates, SIGNAL(linkActivated(const QString &)),
             this, SLOT(openUrl(const QString &)));
-
+*/
     connect(dialpad, SIGNAL(buttonClicked(char)),
             parent, SLOT(dialpadButtonClicked(char)));
     connect(buttonCall, SIGNAL(clicked()),

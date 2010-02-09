@@ -195,29 +195,6 @@
                       </property>
                      </spacer>
                     </item>
-                    <item>
-                     <widget class="QLabel" name="labelRefill">
-                      <property name="text">
-                       <string>&lt;a href=&quot;http://www.jabbin.com/recharge&quot;&gt;Refill your account&lt;/a&gt;</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLabel" name="labelRates">
-                      <property name="text">
-                       <string>&lt;a href=&quot;http://www.jabbin.com/rates&quot;&gt;Call rates&lt;/a&gt;</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignCenter</set>
-                      </property>
-                      <property name="wordWrap">
-                       <bool>true</bool>
-                      </property>
-                     </widget>
-                    </item>
                    </layout>
                   </widget>
                  </item>
