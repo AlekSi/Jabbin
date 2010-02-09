@@ -1,0 +1,7 @@
+select :
+
+install NSIS
+copy qt libraries inside a qt folder
+copy speex library inside a speed folder
+copy expat library inside an expat folder
+Compile NSI scripts
