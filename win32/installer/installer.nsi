@@ -15,8 +15,8 @@
 
 
 !define PRODUCT_NAME "Jabbin"
-!define PRODUCT_VERSION "2.0"
-!define PRODUCT_PUBLISHER "Jabberout"
+!define PRODUCT_VERSION "3.0 beta"
+!define PRODUCT_PUBLISHER "Jabbin"
 !define PRODUCT_WEB_SITE "http://www.jabbin.com"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\jabbin.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
