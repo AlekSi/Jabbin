@@ -89,6 +89,7 @@ Section "Main program file"
   ${SetOutPath} "$INSTDIR"
   SetOverwrite ifnewer
   ${File} "" "jabbin.exe"
+  ${File} "" "jabbin.url"
   ${CreateDirectory} "$SMPROGRAMS\${PRODUCT_NAME}"
   ${CreateShortCut} "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\jabbin.exe"
   ${CreateShortCut} "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\jabbin.exe"
@@ -97,14 +98,42 @@ SectionEnd
 Section "Sounds"
   ${SetOutPath} "$INSTDIR\sound"
   SetOverwrite ifnewer
-  ${File} "..\..\sound\" "chat1.wav"
-  ${File} "..\..\sound\" "chat2.wav"
-  ${File} "..\..\sound\" "ft_complete.wav"
-  ${File} "..\..\sound\" "ft_incoming.wav"
-  ${File} "..\..\sound\" "offline.wav"
-  ${File} "..\..\sound\" "online.wav"
-  ${File} "..\..\sound\" "ringing.mp3"
-  ${File} "..\..\sound\" "send.wav"
+  ${File} "..\..\sound\" "*.wav"
+  ${File} "..\..\sound\" "*.mp3"
+SectionEnd
+
+Section "Iconsets"
+  SetOverwrite ifnewer
+  ${SetOutPath} "$INSTDIR\iconsets"
+
+  ${SetOutPath} "$INSTDIR\iconsets\custom"
+  ${File} "..\..\iconsets\custom\" "*.png"
+  ${File} "..\..\iconsets\custom\" "*.qrc"
+
+  ${SetOutPath} "$INSTDIR\iconsets\emoticons"
+
+  ${SetOutPath} "$INSTDIR\iconsets\emoticons\default"
+  ${File} "..\..\iconsets\emoticons\default\" "*.png"
+  ${File} "..\..\iconsets\emoticons\default\" "*.xml"
+  
+  ${SetOutPath} "$INSTDIR\iconsets\images"
+  ${File} "..\..\iconsets\images\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\images"
+  ${File} "..\..\iconsets\images\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster"
+  ${File} "..\..\iconsets\roster\" "*.jisp"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\default"
+  ${File} "..\..\iconsets\roster\default\" "*.png"
+  ${File} "..\..\iconsets\roster\default\" "*.xml"
+
+  ${SetOutPath} "$INSTDIR\iconsets\system"
+
+  ${SetOutPath} "$INSTDIR\iconsets\system\default"
+  ${File} "..\..\iconsets\system\default\" "*.png"
+  ${File} "..\..\iconsets\system\default\" "*.xml"
 SectionEnd
 
 ; Comment whole section if you use static linking
@@ -141,7 +170,9 @@ SectionEnd
 ; VS 2008 SP1: http://www.microsoft.com/downloads/details.aspx?familyid=A5C84275-3B97-4AB7-A40D-3802B2AF5FC2
 ; Also it's possible to build app that will run without this package... You may try if you want, see links above.
 Section "Visual Studio Redistributable Package"
-  ; TODO
+  ${SetOutPath} "$TEMP"
+  ${File} "" "vcredist_x86.exe"
+  ExecWait '"$TEMP\vcredist_x86.exe" /q'
 SectionEnd
 
 Section -AdditionalIcons
