@@ -87,14 +87,42 @@ SectionEnd
 Section "Sounds"
   ${SetOutPath} "$INSTDIR\sound"
   SetOverwrite ifnewer
-  ${File} "..\..\sound\" "chat1.wav"
-  ${File} "..\..\sound\" "chat2.wav"
-  ${File} "..\..\sound\" "ft_complete.wav"
-  ${File} "..\..\sound\" "ft_incoming.wav"
-  ${File} "..\..\sound\" "offline.wav"
-  ${File} "..\..\sound\" "online.wav"
-  ${File} "..\..\sound\" "ringing.mp3"
-  ${File} "..\..\sound\" "send.wav"
+  ${File} "..\..\sound\" "*.wav"
+  ${File} "..\..\sound\" "*.mp3"
+SectionEnd
+
+Section "Iconsets"
+  SetOverwrite ifnewer
+  ${SetOutPath} "$INSTDIR\iconsets"
+
+  ${SetOutPath} "$INSTDIR\iconsets\custom"
+  ${File} "..\..\iconsets\custom\" "*.png"
+  ${File} "..\..\iconsets\custom\" "*.qrc"
+
+  ${SetOutPath} "$INSTDIR\iconsets\emoticons"
+
+  ${SetOutPath} "$INSTDIR\iconsets\emoticons\default"
+  ${File} "..\..\iconsets\emoticons\default\" "*.png"
+  ${File} "..\..\iconsets\emoticons\default\" "*.xml"
+  
+  ${SetOutPath} "$INSTDIR\iconsets\images"
+  ${File} "..\..\iconsets\images\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\images"
+  ${File} "..\..\iconsets\images\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster"
+  ${File} "..\..\iconsets\roster\" "*.jisp"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\default"
+  ${File} "..\..\iconsets\roster\default\" "*.png"
+  ${File} "..\..\iconsets\roster\default\" "*.xml"
+
+  ${SetOutPath} "$INSTDIR\iconsets\system"
+
+  ${SetOutPath} "$INSTDIR\iconsets\system\default"
+  ${File} "..\..\iconsets\system\default\" "*.png"
+  ${File} "..\..\iconsets\system\default\" "*.xml"
 SectionEnd
 
 ; Comment whole section if you use static linking
