@@ -79,6 +79,7 @@ Section "Main program file"
   ${SetOutPath} "$INSTDIR"
   SetOverwrite ifnewer
   ${File} "" "jabbin.exe"
+  ${File} "" "jabbin.url"
   ${CreateDirectory} "$SMPROGRAMS\${PRODUCT_NAME}"
   ${CreateShortCut} "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\jabbin.exe"
   ${CreateShortCut} "$DESKTOP\${PRODUCT_NAME}.lnk" "$INSTDIR\jabbin.exe"
