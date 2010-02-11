@@ -106,34 +106,29 @@ Section "Iconsets"
   SetOverwrite ifnewer
   ${SetOutPath} "$INSTDIR\iconsets"
 
-  ${SetOutPath} "$INSTDIR\iconsets\custom"
-  ${File} "..\..\iconsets\custom\" "*.png"
-  ${File} "..\..\iconsets\custom\" "*.qrc"
+  ${SetOutPath} "$INSTDIR\iconsets\chatwindow"
+  ${File} "..\..\iconsets\chatwindow\" "*.png"
 
   ${SetOutPath} "$INSTDIR\iconsets\emoticons"
 
-  ${SetOutPath} "$INSTDIR\iconsets\emoticons\default"
-  ${File} "..\..\iconsets\emoticons\default\" "*.png"
-  ${File} "..\..\iconsets\emoticons\default\" "*.xml"
+  ${SetOutPath} "$INSTDIR\iconsets\emoticons\yaemo"
+  ${File} "..\..\iconsets\emoticons\yaemo\" "*.png"
+  ${File} "..\..\iconsets\emoticons\yaemo\" "*.xml"
   
-  ${SetOutPath} "$INSTDIR\iconsets\images"
-  ${File} "..\..\iconsets\images\" "*.png"
-
-  ${SetOutPath} "$INSTDIR\iconsets\images"
-  ${File} "..\..\iconsets\images\" "*.png"
+  ${SetOutPath} "$INSTDIR\iconsets\emoticons\yaemomidget"
+  ${File} "..\..\iconsets\emoticons\yaemomidget\" "*.png"
+  ${File} "..\..\iconsets\emoticons\yaemomidget\" "*.xml"
 
   ${SetOutPath} "$INSTDIR\iconsets\roster"
-  ${File} "..\..\iconsets\roster\" "*.jisp"
+  ${File} "..\..\iconsets\roster\" "*.png"
 
   ${SetOutPath} "$INSTDIR\iconsets\roster\default"
   ${File} "..\..\iconsets\roster\default\" "*.png"
   ${File} "..\..\iconsets\roster\default\" "*.xml"
 
-  ${SetOutPath} "$INSTDIR\iconsets\system"
-
-  ${SetOutPath} "$INSTDIR\iconsets\system\default"
-  ${File} "..\..\iconsets\system\default\" "*.png"
-  ${File} "..\..\iconsets\system\default\" "*.xml"
+  ${SetOutPath} "$INSTDIR\iconsets\roster\roster-big"
+  ${File} "..\..\iconsets\roster\roster-big\" "*.png"
+  ${File} "..\..\iconsets\roster\roster-big\" "*.xml"
 SectionEnd
 
 ; Comment whole section if you use static linking
