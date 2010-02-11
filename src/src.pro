@@ -6,22 +6,23 @@ EXPATPATH = c:\expat-2.0.1
 # Configuration
 TEMPLATE = app
 TARGET   = jabbin
-CONFIG  += qt thread x11 qt3support console debug
+CONFIG  += qt thread x11 qt3support
+#console
 
 # code coverage
-coverage.CONFIG += recursive
-QMAKE_EXTRA_TARGETS += coverage
+#coverage.CONFIG += recursive
+#QMAKE_EXTRA_TARGETS += coverage
 
-CONFIG(debug,debug|release) {
-    QMAKE_EXTRA_TARGETS += cov_cxxflags cov_lflags
-    cov_cxxflags.target  = coverage
-    cov_cxxflags.depends = CXXFLAGS += -fprofile-arcs -ftest-coverage
-    cov_lflags.target  = coverage
-    cov_lflags.depends = LFLAGS += -fprofile-arcs -ftest-coverage
-    coverage.commands = @echo "Built with coverage support..."
-    build_pass|!debug_and_release:coverage.depends = all
-    QMAKE_CLEAN += $(OBJECTS_DIR)/*.gcda $(OBJECTS_DIR)/*.gcno
-}
+#CONFIG(debug,debug|release) {
+#    QMAKE_EXTRA_TARGETS += cov_cxxflags cov_lflags
+#    cov_cxxflags.target  = coverage
+#    cov_cxxflags.depends = CXXFLAGS += -fprofile-arcs -ftest-coverage
+#    cov_lflags.target  = coverage
+#    cov_lflags.depends = LFLAGS += -fprofile-arcs -ftest-coverage
+#    coverage.commands = @echo "Built with coverage support..."
+#    build_pass|!debug_and_release:coverage.depends = all
+#    QMAKE_CLEAN += $(OBJECTS_DIR)/*.gcda $(OBJECTS_DIR)/*.gcno
+#}
 
 # end code coverage
 
@@ -42,7 +43,7 @@ yapsi_activex_server {
 QT += xml network qt3support phonon script webkit
 
 #CONFIG += use_crash
-CONFIG += console
+#CONFIG += console
 CONFIG += pep
 CONFIG += jingle
 DEFINES += QT_STATICPLUGIN

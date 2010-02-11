@@ -1,27 +1,20 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "qca_psi", "C:/Documents and Settings/Administrator/Desktop/Jabbin/branches/jabbinbeta/third-party/qca\qca_psi.vcproj", "{79D9253B-57A1-337A-BD73-6C478CF998AA}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jabbin", "C:/Documents and Settings/Administrator/Desktop/Jabbin/branches/jabbinbeta/src\jabbin.vcproj", "{6B8D8415-275D-3BBD-AD33-4CA4E00FAB2B}"
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "psi", "psi.vcproj", "{E774342F-7FE6-37CE-B846-648601D657B8}"
 EndProject
 Global
-	GlobalSection(SolutionConfiguration) = preSolution
-		ConfigName.0 = Debug|Win32
-		ConfigName.1 = Release|Win32
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
 	EndGlobalSection
-	GlobalSection(ProjectDependencies) = postSolution
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E774342F-7FE6-37CE-B846-648601D657B8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E774342F-7FE6-37CE-B846-648601D657B8}.Debug|Win32.Build.0 = Debug|Win32
+		{E774342F-7FE6-37CE-B846-648601D657B8}.Release|Win32.ActiveCfg = Release|Win32
+		{E774342F-7FE6-37CE-B846-648601D657B8}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
-	GlobalSection(ProjectConfiguration) = postSolution
-		{79D9253B-57A1-337A-BD73-6C478CF998AA}.Debug|Win32.ActiveCfg = Debug|Win32
-		{79D9253B-57A1-337A-BD73-6C478CF998AA}.Debug|Win32.Build.0 = Debug|Win32
-		{79D9253B-57A1-337A-BD73-6C478CF998AA}.Release|Win32.ActiveCfg = Release|Win32
-		{79D9253B-57A1-337A-BD73-6C478CF998AA}.Release|Win32.Build.0 = Release|Win32
-		{6B8D8415-275D-3BBD-AD33-4CA4E00FAB2B}.Debug|Win32.ActiveCfg = Debug|Win32
-		{6B8D8415-275D-3BBD-AD33-4CA4E00FAB2B}.Debug|Win32.Build.0 = Debug|Win32
-		{6B8D8415-275D-3BBD-AD33-4CA4E00FAB2B}.Release|Win32.ActiveCfg = Release|Win32
-		{6B8D8415-275D-3BBD-AD33-4CA4E00FAB2B}.Release|Win32.Build.0 = Release|Win32
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-	EndGlobalSection
-	GlobalSection(ExtensibilityAddIns) = postSolution
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
