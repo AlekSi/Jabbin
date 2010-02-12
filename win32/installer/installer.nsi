@@ -122,13 +122,68 @@ Section "Iconsets"
   ${SetOutPath} "$INSTDIR\iconsets\roster"
   ${File} "..\..\iconsets\roster\" "*.png"
 
+  ${SetOutPath} "$INSTDIR\iconsets\roster\aim"
+  ${File} "..\..\iconsets\roster\aim\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\crystal-aim"
+  ${File} "..\..\iconsets\roster\crystal-aim\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\crystal-gadugadu"
+  ${File} "..\..\iconsets\roster\crystal-gadugadu\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\crystal-icq"
+  ${File} "..\..\iconsets\roster\crystal-icq\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\crystal-jabber"
+  ${File} "..\..\iconsets\roster\crystal-jabber\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\crystal-msn"
+  ${File} "..\..\iconsets\roster\crystal-msn\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\crystal-yahoo"
+  ${File} "..\..\iconsets\roster\crystal-yahoo\" "*.png"
+
   ${SetOutPath} "$INSTDIR\iconsets\roster\default"
   ${File} "..\..\iconsets\roster\default\" "*.png"
   ${File} "..\..\iconsets\roster\default\" "*.xml"
 
+  ${SetOutPath} "$INSTDIR\iconsets\roster\facebook"
+  ${File} "..\..\iconsets\roster\facebook\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\gadugadu"
+  ${File} "..\..\iconsets\roster\gadugadu\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\gtalk"
+  ${File} "..\..\iconsets\roster\gtalk\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\icq"
+  ${File} "..\..\iconsets\roster\icq\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\jabber"
+  ${File} "..\..\iconsets\roster\jabber\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\jabbin"
+  ${File} "..\..\iconsets\roster\jabbin\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\msn"
+  ${File} "..\..\iconsets\roster\msn\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\myspace"
+  ${File} "..\..\iconsets\roster\myspace\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\qq"
+  ${File} "..\..\iconsets\roster\qq\" "*.png"
+
   ${SetOutPath} "$INSTDIR\iconsets\roster\roster-big"
   ${File} "..\..\iconsets\roster\roster-big\" "*.png"
   ${File} "..\..\iconsets\roster\roster-big\" "*.xml"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\roster-tabs"
+  ${File} "..\..\iconsets\roster\roster-tabs\" "*.png"
+
+  ${SetOutPath} "$INSTDIR\iconsets\roster\yahoo"
+  ${File} "..\..\iconsets\roster\yahoo\" "*.png"
+
 SectionEnd
 
 ; Comment whole section if you use static linking
