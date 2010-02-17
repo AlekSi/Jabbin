@@ -1097,11 +1097,17 @@ PsiAccount::PsiAccount(const UserAccount &acc, PsiContactList *parent, CapsRegis
 
 	d->contactList->link(this);
 
+	// initUIItems();
+}
+
+void PsiAccount::initUIItems()
+{
 	ServicesPanel::instance()->init(this);
 	SocialPanel::instance()->init(this);
 	ServicesPopupButton::setAccount(this);
 	CallDialog::instance()->init(jid(), this, voiceCaller());
 }
+
 
 PsiAccount::~PsiAccount()
 {
@@ -1723,6 +1729,8 @@ void PsiAccount::cs_connected()
 
 	qDebug() << "Register requestUpdateCaps call";
 	QTimer::singleShot(2000, this, SLOT(requestUpdateCaps()));
+
+	initUIItems();
 }
 
 void PsiAccount::cs_securityLayerActivated(int layer)

@@ -340,6 +340,8 @@ public slots:
 	void invokeGCFile(const Jid &);
 
 private slots:
+	void initUIItems();
+
 	void tls_handshaken();
 	void cs_connected();
 	void cs_securityLayerActivated(int);

@@ -45,7 +45,7 @@ public:
         we->setChildWidget(ale);
 
         ale->installEventFilter(parent);
-        ale->setEmptyText(tr("Enter your mood"));
+        ale->setEmptyText(tr("Enter your status"));
 
         ale->setButtonFlag(AdvancedLineEdit::BeginButton,
                 AdvancedLineEdit::ShowAlways);

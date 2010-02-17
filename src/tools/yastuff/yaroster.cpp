@@ -398,7 +398,7 @@ public:
 		vbox()->addSpacing(10);
 
 		addTextLabel(QStringList()
-			<< QString::fromUtf8("Please insert the nick (jabber id) of the friend you want to add in the above box. For example: user@jabbin.com")
+			<< QString::fromUtf8("Please insert the nick (Jabber ID) of the friend you want to add in the above box. For example: user@jabbin.com")
 		);
 
 		vbox()->addSpacing(10);

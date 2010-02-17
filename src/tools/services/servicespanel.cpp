@@ -158,7 +158,8 @@ void ServicesPanel::Private::reloadItem()
 
 void ServicesPanel::Private::reloadAll()
 {
-    model->refresh(QModelIndex());
+    if (model)
+        model->refresh(QModelIndex());
 }
 
 ServicesPanel * ServicesPanel::m_instance = NULL;
@@ -171,6 +172,7 @@ ServicesPanel * ServicesPanel::instance()
 void ServicesPanel::init(PsiAccount * account)
 {
     d->account = account;
+    d->reloadAll();
 }
 
 void ServicesPanel::showEvent(QShowEvent * event) {
