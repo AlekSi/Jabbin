@@ -34,6 +34,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <cstdio>
 
 #include "talk/base/common.h"
 #include "talk/base/logging.h"
