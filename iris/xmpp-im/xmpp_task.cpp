@@ -19,6 +19,7 @@
 
 #include <QTimer>
 #include <qplatformdefs.h>
+#include <cstdio>
 
 #include "safedelete.h"
 #include "xmpp_task.h"
