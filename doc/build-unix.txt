@@ -1,7 +1,7 @@
 Requirements
 ------------
 
-* You need Qt 4.2 or higher to build Psi. If a packaged version of Qt is not
+* You need Qt 4.2 or higher to build Jabbin. If a packaged version of Qt is not
 available for your OS (or if you want debug symbols in your Qt libraries), you
 will need to build and install Qt 4.1 yourself. See the Qt instructions to find
 out how to do this.
@@ -82,15 +82,15 @@ Run the following commands inside the third-party/jrtplib directory
  qmake
  make
 
-Building Psi
-------------
+Building Jabbin
+---------------
 
-From the toplevel Psi source dir, run the following commands:
+From the toplevel Jabbin source dir, run the following commands:
 
- ./configure --prefix=/usr/local/psi
+ ./configure --prefix=/usr/local/jabbin
  make
  make install
 
-This should configure, build, and install Psi. See above on how to troubleshoot
+This should configure, build, and install Jabbin. See above on how to troubleshoot
 configure problems.
 
