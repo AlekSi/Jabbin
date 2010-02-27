@@ -75,6 +75,11 @@ bool YaLoginPage::shouldBeVisible()
 #ifdef YAPSI_ACTIVEX_SERVER
 	return false;
 #endif
+	// if (!contactList_ || !getLoginAccount())
+	// 	return shouldBeVisible_;
+	//if (!ui_.errorLabel->text().isEmpty() ||
+        //        !getLoginAccount()->isConnected())
+        //        return true;
 	return shouldBeVisible_;
 }
 
@@ -174,6 +179,11 @@ void YaLoginPage::setShouldBeVisible(bool shouldBeVisible)
 
 void YaLoginPage::connectionError(const QString& error)
 {
+        if (!error.isEmpty()) {
+                //getLoginAccount()->signout();
+                //disconnected();
+		QTimer::singleShot(500, this, SLOT(disconnected()));
+        }
 	ui_.errorLabel->setText(error);
 }
 
