@@ -103,6 +103,7 @@ public:
     static QIcon m_myspaceIcon;
     static QIcon m_qqIcon;
     static QIcon m_sametimeIcon;
+    static QIcon m_skypeIcon;
     static QIcon m_smsIcon;
     static QIcon m_xmppIcon;
     static QIcon m_yahooIcon;

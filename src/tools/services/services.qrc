@@ -23,5 +23,6 @@
     <file>data/services/yahoo.png</file>
     <file>data/services/sms.png</file>
     <file>data/services/sametime.png</file>
+    <file>data/services/skype.png</file>
   </qresource>
 </RCC>

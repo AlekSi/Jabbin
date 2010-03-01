@@ -53,6 +53,7 @@ QIcon ServiceItem::m_msnIcon;      // = QIcon(":/services/data/services/msn.png"
 QIcon ServiceItem::m_myspaceIcon;  // = QIcon(":/services/data/services/myspace.png");
 QIcon ServiceItem::m_qqIcon;       // = QIcon(":/services/data/services/qq.png");
 QIcon ServiceItem::m_sametimeIcon; // = QIcon(":/services/data/services/sametime.png");
+QIcon ServiceItem::m_skypeIcon;    // = QIcon(":/services/data/services/skype.png");
 QIcon ServiceItem::m_smsIcon;      // = QIcon(":/services/data/services/sms.png");
 QIcon ServiceItem::m_xmppIcon;     // = QIcon(":/services/data/services/xmpp.png");
 QIcon ServiceItem::m_yahooIcon;    // = QIcon(":/services/data/services/yahoo.png");
@@ -475,6 +476,7 @@ void ServiceItem::initIcons()
     ServiceItem::m_myspaceIcon  = QIcon(":/services/data/services/myspace.png");
     ServiceItem::m_qqIcon       = QIcon(":/services/data/services/qq.png");
     ServiceItem::m_sametimeIcon = QIcon(":/services/data/services/sametime.png");
+    ServiceItem::m_skypeIcon    = QIcon(":/services/data/services/skype.png");
     ServiceItem::m_smsIcon      = QIcon(":/services/data/services/sms.png");
     ServiceItem::m_xmppIcon     = QIcon(":/services/data/services/xmpp.png");
     ServiceItem::m_yahooIcon    = QIcon(":/services/data/services/yahoo.png");
@@ -605,6 +607,11 @@ ServicesModel::ServicesModel(PsiAccount * psiAccount, QObject * parent)
 PsiAccount * ServicesModel::psiAccount() const
 {
     return d->psiAccount;
+}
+
+void ServicesModel::setPsiAccount(PsiAccount * psiAccount)
+{
+    d->psiAccount = psiAccount;
 }
 
 ServicesModel::~ServicesModel()
@@ -887,5 +894,7 @@ QIcon ServicesModel::iconForTransportType(const QString & type)
         return ServiceItem::m_myspaceIcon;
     else if (type == "sametime")
         return ServiceItem::m_sametimeIcon;
+    else if (type == "skype")
+        return ServiceItem::m_skypeIcon;
     return QIcon();
 }

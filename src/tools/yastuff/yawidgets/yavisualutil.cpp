@@ -380,6 +380,7 @@ QPixmap VisualUtil::rosterStatusPixmap(XMPP::Status::Type status, const QString 
             prefix != "msn" &&
             prefix != "myspace" &&
             prefix != "qq" &&
+            prefix != "skype" &&
             prefix != "yahoo"
 
             ) {

@@ -49,6 +49,14 @@
     <file>iconsets/roster/gadugadu/noauth.png</file>
     <file>iconsets/roster/gadugadu/offline.png</file>
     <file>iconsets/roster/gadugadu/online.png</file>
+    <file>iconsets/roster/skype/ask.png</file>
+    <file>iconsets/roster/skype/away.png</file>
+    <file>iconsets/roster/skype/chatty.png</file>
+    <file>iconsets/roster/skype/dnd.png</file>
+    <file>iconsets/roster/skype/invisible.png</file>
+    <file>iconsets/roster/skype/noauth.png</file>
+    <file>iconsets/roster/skype/offline.png</file>
+    <file>iconsets/roster/skype/online.png</file>
     <file>iconsets/roster/gtalk/ask.png</file>
     <file>iconsets/roster/gtalk/away.png</file>
     <file>iconsets/roster/gtalk/chatty.png</file>

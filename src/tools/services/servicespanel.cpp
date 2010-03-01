@@ -171,7 +171,17 @@ ServicesPanel * ServicesPanel::instance()
 
 void ServicesPanel::init(PsiAccount * account)
 {
+    if (!account) return;
+
     d->account = account;
+    if (d->model) {
+        d->treeServices->setModel(0);
+        d->model = 0;
+
+        // delete d->model;
+        // d->model = new ServicesModel(account);
+        // d->treeServices->setModel(d->model);
+    }
     d->reloadAll();
 }
 
@@ -187,7 +197,8 @@ void ServicesPanel::showEvent(QShowEvent * event) {
     }
 
     d->treeServices->setFocus();
-    QWidget::showEvent(event);
+
+    if (event) QWidget::showEvent(event);
 }
 
 ServicesPanel::ServicesPanel(QWidget * parent)

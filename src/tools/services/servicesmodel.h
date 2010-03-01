@@ -81,6 +81,7 @@ public:
     Qt::DropActions supportedDropActions() const;
 
     PsiAccount * psiAccount() const;
+    void setPsiAccount(PsiAccount * account);
 
     void reloadItem(const QModelIndex & index);
 

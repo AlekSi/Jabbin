@@ -134,6 +134,7 @@ public:
 			services["msn"]		= QRegExp("^msn");
 			services["yahoo"]	= QRegExp("^yahoo");
 			services["sms"]		= QRegExp("^sms");
+			services["skype"]		= QRegExp("^skype");
 
 			bool found = false;
 
