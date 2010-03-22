@@ -1,20 +1,26 @@
 Requirements
 ------------
 
-* You need Qt 4.2 or higher to build Jabbin. 
+* You need Qt 4.4 or higher to build Jabbin.
 
 * You need QCA 2.0 and the QCA OpenSSL plugin, which you can get at
 		http://delta.affinix.com/qca/2.0/beta2
 
+* You need Speex library 1.2rc1 sources which you can get at
+		http://www.speex.org/downloads/ 
+
+* You need libexpat-2.0.1 which you can get at
+		http://sourceforge.net/projects/expat/ 
+
 * You need Microsoft DirectX SDK, which you can get at :
 		for Visual Studio 2005
 		http://www.microsoft.com/downloads/details.aspx?FamilyId=0BAF2B35-C656-4969-ACE8-E4C0C0716ADB&displaylang=en
-
 		for Visual Studio 2008
 		http://www.microsoft.com/downloads/details.aspx?FamilyID=e6e1c3df-a74f-4207-8586-711ebe331cdc&DisplayLang=en
 
-* If you want to use the QCA OpenSSL plugin on Windows, you will need to download and install the OpenSSL package from
+* You need to download and install the OpenSSL package (full package, about 7mb for 32 or 64bit) from
 		http://www.openssl.org/related/binaries.html
+
 
 
 Building Jabbin
@@ -46,11 +52,17 @@ It will take a while
 in case you get an error on the webkit compilation, delete :
 rm src/3rdparty/webkit/WebCore/tmp/moc/{debug,release}_shared/mocinclude.tmp
 
-download and install expat 2.0.1
+Install expat 2.0.1 sources and compile using win32 Visual Studio project file
 
-download and install speex1.2
+Install speex1.2rc1 sources and compile using win32 Visual Studio project files suitable for your IDE
 
-svn jabbin
+Install OpenSSL sources and compile
+
+download jabbin sources using SVN
+
+cd to jabbin sources directory
+
+qmake
 
 nmake release
 
@@ -59,6 +71,5 @@ in case you get an error on missing ui_test.h in src\tools\yastuff\yawidgets\new
 cd src\tools\yastuff\yawidgets\newselfavatar
 c:\qt\4.5.2\qt\bin\uic.exe -o ui_test.h test.ui
 
-to create jabbin project :
+to create Visual Studio project file after successfuly having built Jabbin :
 qmake -t vcapp
-
