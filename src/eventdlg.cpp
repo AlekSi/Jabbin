@@ -1967,6 +1967,7 @@ void EventDlg::updateEvent(PsiEvent *e)
 		}
 	}
 	else if (e->type() == PsiEvent::RosterExchange) {
+		qDebug("###################### Roster Exchange Event EVENT DLG");
 		RosterExchangeEvent *re = (RosterExchangeEvent *)e;
 		int additions = 0, deletions = 0, modifications = 0;
 		foreach(RosterExchangeItem item, re->rosterExchangeItems()) {

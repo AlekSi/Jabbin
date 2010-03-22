@@ -34,6 +34,7 @@ bool RosterItemExchangeTask::take(const QDomElement& e)
 		if(i.isNull())
 			continue;
 		if(i.tagName() == "x" && i.attribute("xmlns") == "http://jabber.org/protocol/rosterx") {
+			qDebug("Roster Exchange request with correct attribute");
 			Jid from(e.attribute("from"));
 			if (client()->roster().find(from,false) == client()->roster().end() && ignoreNonRoster_) {
 				// Send a not-authorized error
@@ -49,6 +50,7 @@ bool RosterItemExchangeTask::take(const QDomElement& e)
 				return true;
 			}
 
+			qDebug("Parsing items");
 			// Parse all items
 			RosterExchangeItems items;
 			for(QDomNode m = i.firstChild(); !m.isNull(); m = m.nextSibling()) {
@@ -66,6 +68,7 @@ bool RosterItemExchangeTask::take(const QDomElement& e)
 
 			emit rosterItemExchange(from,items);
 			setSuccess(true);
+			qDebug("Succesfully updated roster");
 			return true;
 		}
 	}

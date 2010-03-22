@@ -3,7 +3,7 @@
 
 
 #ifdef __MACH__
-typedef int socklen_t;
+typedef __darwin_socklen_t socklen_t;
 #endif
 
 #include <errno.h>
