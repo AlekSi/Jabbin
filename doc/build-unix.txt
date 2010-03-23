@@ -1,9 +1,9 @@
 Requirements
 ------------
 
-* You need Qt 4.2 or higher to build Jabbin. If a packaged version of Qt is not
+* You need Qt 4.4 or higher to build Jabbin. If a packaged version of Qt is not
 available for your OS (or if you want debug symbols in your Qt libraries), you
-will need to build and install Qt 4.1 yourself. See the Qt instructions to find
+will need to build and install Qt 4.4 yourself. See the Qt instructions to find
 out how to do this.
 
 * You need QCA 2.0 and the QCA OpenSSL plugin, which you can get at
@@ -14,6 +14,26 @@ The 'Building QCA' and 'Building QCA the OpenSSL plugin' sections can be
 skipped by downloading the sources of these packages, and unpackaging them
 in third-party/qca (see the INSTALL file for the exact location of each
 package).
+
+* You need Speex library 1.2rc1 sources which you can get at
+		http://www.speex.org/downloads/ 
+
+* You need libexpat-2.0.1 which you can get at
+		http://sourceforge.net/projects/expat/ 
+
+This is a list of packages needed to build Jabbin on Linux :
+libqt4-core
+libqt4-dev
+g++
+libqca2
+libqca2-dev
+libssl-dev
+zlib-bin
+libspeex-dev
+libphonon-dev
+libexpat1-dev
+libsm-dev
+libxext-dev
 
 
 Building QCA
