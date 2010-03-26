@@ -48,15 +48,11 @@ public:
 	u_int32_t GetRandom32();
 	double GetRandomDouble(); // returns random value between 0.0 and 1.0
 private:
-#ifdef RTP_SUPPORT_GNUDRAND
-	struct drand48_data drandbuffer;
-#else
 #ifdef RTP_SUPPORT_RANDR
 	unsigned int state;
 #else
 	static bool init;
 #endif // RTP_SUPPORT_RANDR
-#endif // RTP_SUPPORT_GNUDRAND
 };
 
 #endif // RTPRANDOM_H
