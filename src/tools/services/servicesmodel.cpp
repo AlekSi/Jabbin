@@ -533,7 +533,7 @@ void ServicesModel::Private::childrenAdded()
     if (modelStatus == Inserting) {
         q->endInsertRows();
     }
-    modelStatus == Normal;
+    modelStatus = Normal;
 }
 
 void ServicesModel::Private::childrenToBeRemoved(ServiceItem * item, int from, int count)
@@ -549,7 +549,7 @@ void ServicesModel::Private::childrenRemoved()
     if (modelStatus == Deleting) {
         q->endRemoveRows();
     }
-    modelStatus == Normal;
+    modelStatus = Normal;
 }
 
 void ServicesModel::Private::childrenToBeCleared(ServiceItem * item, int count)
@@ -565,7 +565,7 @@ void ServicesModel::Private::childrenCleared()
     if (modelStatus == Deleting) {
         q->endRemoveRows();
     }
-    modelStatus == Normal;
+    modelStatus = Normal;
 }
 
 QModelIndex ServicesModel::Private::indexOf(ServiceItem * item)
