@@ -1,5 +1,6 @@
-VOIP_CPP = voip
-SPEEXPATH = C:\speex-1.2rc1
+VOIP_CPP      = voip
+SPEEXPATH     = C:\speex-1.2rc1
+PORTAUDIOPATH = C:\portaudio
 
 tins:{
     DEFINES += TINS
@@ -7,22 +8,40 @@ tins:{
     SOURCES += $$VOIP_CPP/tins.cpp
 }
 
-INCLUDEPATH += $$VOIP_CPP ../third-party/jrtplib $$VOIP_CPP/portaudio
+INCLUDEPATH += $$VOIP_CPP ../third-party/jrtplib
 
 # unix:LIBS += -L../third-party/jrtplib -ljrtp
-unix:LIBS += ../third-party/jrtplib/libjrtp.a
+unix:LIBS   += ../third-party/jrtplib/libjrtp.a
 # -L../third-party/iLBC -liLBC
-unix:LIBS += -lspeex
-unix:LIBS += -lssl
+unix:LIBS   += -lspeex
+unix:LIBS   += -lssl
 
 #win32:LIBS += -ljthread
 
 win32 {
-  INCLUDEPATH += $$SPEEXPATH\include
-  LIBS += $$SPEEXPATH\lib\libspeex.lib
-  LIBS += ..\third-party\jrtplib\release\jrtp.lib
-#  LIBS += ..\third-party\iLBC\iLBC.lib
+    INCLUDEPATH  += $$SPEEXPATH\include
+    LIBS         += $$SPEEXPATH\lib\libspeex.lib
+
+    CONFIG(debug, debug|release)   { LIBS += ..\third-party\jrtplib\debug\jrtp.lib }
+    CONFIG(release, debug|release) { LIBS += ..\third-party\jrtplib\release\jrtp.lib }
+    
+    #LIBS += ..\third-party\iLBC\iLBC.lib
 }
+
+# PortAudio
+win32 {
+    CONFIG(debug, debug|release)   { LIBS += $$PORTAUDIOPATH\lib\debug\portaudio_x86.lib   }
+    CONFIG(release, debug|release) { LIBS += $$PORTAUDIOPATH\lib\release\portaudio_x86.lib }
+}
+unix {
+    LIBS += -lportaudio
+}
+mac {
+    LIBS += -lportaudio
+    # If portaudio is used as static
+	QMAKE_LFLAGS += -framework CoreAudio -framework AudioUnit -framework AudioToolbox -framework CoreFoundation -framework Carbon
+}
+INCLUDEPATH += $$PORTAUDIOPATH\include
 
 HEADERS += \
 #    $$VOIP_CPP/callslog.h \
@@ -55,22 +74,5 @@ SOURCES += \
     $$VOIP_CPP/mediastream.cpp \
     $$VOIP_CPP/jabbinmediaengine.cpp \
 #    $$VOIP_CPP/callslogdialogbase.cpp
-
-#portaudio
-
-HEADERS += \
-    $$VOIP_CPP/portaudio/pa_host.h \
-    $$VOIP_CPP/portaudio/pa_trace.h \
-    $$VOIP_CPP/portaudio/portaudio.h
-
-unix: HEADERS += $$VOIP_CPP/portaudio/pa_unix.h
-
-SOURCES += \
-    $$VOIP_CPP/portaudio/pa_convert.c \
-    $$VOIP_CPP/portaudio/pa_lib.c \
-    $$VOIP_CPP/portaudio/pa_trace.c
-
-unix: SOURCES += $$VOIP_CPP/portaudio/pa_unix.c $$VOIP_CPP/portaudio/pa_unix_oss.c
-win32:SOURCES += $$VOIP_CPP/portaudio/pa_win_wmme.c
 
 #INTERFACES += $$VOIP_CPP/callslogdialogbase.ui

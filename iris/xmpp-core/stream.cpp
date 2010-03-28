@@ -963,7 +963,8 @@ void ClientStream::processNext()
 				memcpy(cs.data(), a.data(), a.size());
 				printf("Need Send: {%s}\n", cs.data());
 #endif
-				d->ss->write(a);
+				if (d->ss != NULL) /* crashed on 'd->ss' after pushing Call on non-existing numbers after several times */
+					d->ss->write(a);
 				break;
 			}
 			case CoreProtocol::ERecvOpen: {

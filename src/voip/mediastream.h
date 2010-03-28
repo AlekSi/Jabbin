@@ -25,16 +25,13 @@
 
 namespace cricket {
     class MediaChannel;
+	class JabbinMediaEngine;
 };
-
-
 
 /*!
  \class MediaStream mediastream.h
  \brief stub
  */
-
-//class cricket::MediaChannel::NetworkInterface;
 
 class MediaStream : public QObject {
 Q_OBJECT
@@ -44,7 +41,6 @@ public:
 
     bool isRunning();
     
-
 public slots:   
     void start( Q3PtrQueue<QByteArray> *incomingPackets, cricket::MediaChannel *mediaChannel, int codecPayload);
     void stop();
@@ -61,16 +57,24 @@ signals:
     void micLevel( int mid, int max );
     void dspLevel( int mid, int max );
 
-
 public:    
 	class Private;
+
 private:
 	Private *d;
 
-    void processMicData(short* data, int size);
-    void processDspData(short* data, int size);
+	// Allow JabbinMediaEngine to access private
+	friend cricket::JabbinMediaEngine;
+
+	//! Initializes media-backend (opens audio devices, make them ready for streams management)
+	static bool _BackendInitialize();
+	
+	//! Destroys media-backend (closes opened audio devices)
+	static void _BackendDestroy();
+
+public:
+	void _MicLevel(int avrg, int peak) { emit micLevel(avrg, peak); }
+    void _DspLevel(int avrg, int peak) { emit dspLevel(avrg, peak); }
 }; 
 
 #endif // MEDIASTREAM_H
-
-

@@ -1,8 +1,12 @@
+exists(../../conf_windows.pri) {
+	include(../../conf_windows.pri)
+}
+
 TEMPLATE = lib
 QT      -= gui
-CONFIG += staticlib
+CONFIG  += staticlib
 DEFINES += QCA_STATIC
-TARGET = qca_psi
+TARGET   = qca_psi
 
 QCA_BASE = qca
 QCA_INCBASE = $$QCA_BASE/include

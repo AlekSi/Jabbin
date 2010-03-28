@@ -90,18 +90,22 @@ exists(../conf.pri) {
 }
 
 windows {
-	LIBS += -lWSock32 -lUser32 -lShell32 -lGdi32 -lAdvAPI32 -lsecur32 -lWS2_32 -liphlpapi -lwinmm
-	LIBS += $$EXPATPATH\win32\bin\release\libexpat.lib
-	DEFINES += QT_STATICPLUGIN
-	INCLUDEPATH += . # otherwise MSVC will fail to find "common.h" when compiling options/* stuff
-#	QTPLUGIN += qjpeg qgif
+	LIBS            += -lWSock32 -lUser32 -lShell32 -lGdi32 -lAdvAPI32 -lsecur32 -lWS2_32 -liphlpapi -lwinmm
+	
+    # Expat
+    CONFIG(debug, debug|release)   { LIBS += $$EXPATPATH\win32\bin\debug\libexpat.lib }
+    CONFIG(release, debug|release) { LIBS += $$EXPATPATH\win32\bin\release\libexpat.lib }
+	
+    DEFINES         += QT_STATICPLUGIN
+	INCLUDEPATH     += . # otherwise MSVC will fail to find "common.h" when compiling options/* stuff
+#	QTPLUGIN        += qjpeg qgif
 	QMAKE_CFLAGS	+= -GR -GX -DWIN32
 	QMAKE_CXXFLAGS	+= -GR -GX -DWIN32
 }
 
 unix {
-        DEFINES += DEVRAND
-        DEFINES += POSIX
+    DEFINES += DEVRAND
+    DEFINES += POSIX
 }
 
 # Configuration
@@ -199,6 +203,10 @@ win32 {
 #	}
 #
 	# buggy MSVC workaround
+    # !!! IT IS NOT BUGGY MSVC AND IT IS NOT WORKAROUND !!!
+    # this partially solves linker problems when static libraries are linked with mixed
+    # Runtime Library mode, mode of RTL must be the same for all
+    # So this line must be removed for production release.
 	win32-msvc|win32-msvc.net|win32-msvc2005: QMAKE_LFLAGS += /NODEFAULTLIB:libcmt.lib
 }
 

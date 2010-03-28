@@ -31,8 +31,8 @@
 #include <QRegExp>
 #include <QDebug>
 
-int call_dlg_mic_level = 100;
-int call_dlg_dsp_level = 100;
+volatile int call_dlg_mic_level = 100;
+volatile int call_dlg_dsp_level = 100;
 
 // #define JIDTEXT ((phone.isEmpty())? phone : (jid.bare()))
 #define JIDTEXT jid.bare()

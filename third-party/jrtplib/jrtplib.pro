@@ -1,11 +1,17 @@
+exists(../../conf_windows.pri) {
+	include(../../conf_windows.pri)
+}
+
 TEMPLATE = lib
 CONFIG += staticlib
 TARGET = jrtp
 INCLUDEPATH += . ../libjingle-0.4.0
 
-win32:DEFINES += WIN32
-win32:QMAKE_CFLAGS	+= -GR -GX -DWIN32
-win32:QMAKE_CXXFLAGS	+= -GR -GX -DWIN32
+windows {
+    DEFINES        += WIN32
+    QMAKE_CFLAGS   += -GR -GX -DWIN32
+    QMAKE_CXXFLAGS += -GR -GX -DWIN32
+}
 
 unix:{
         MOC_DIR        = .moc

@@ -4858,9 +4858,71 @@ void PsiAccount::handleEvent(PsiEvent* e, ActivationType activationType)
 		popupType = PsiPopup::AlertCall;
 	}
 	else if(e->type() == PsiEvent::RosterExchange) {
+
+		qDebug("###################### Roster Exchange Event EVENT DLG");
+		RosterExchangeEvent *re = (RosterExchangeEvent *)e;
+		int additions = 0, deletions = 0, modifications = 0;
+		foreach(RosterExchangeItem item, re->rosterExchangeItems()) {
+			switch(item.action()) {
+				case RosterExchangeItem::Add:
+					qDebug("###################### Roster Exchange Event ADD");
+					additions++;
+					break;
+				case RosterExchangeItem::Delete:
+					qDebug("###################### Roster Exchange Event Delete");
+					deletions++;
+					break;
+				case RosterExchangeItem::Modify:
+					qDebug("###################### Roster Exchange Event Modify");
+					modifications++;
+					break;
+			}
+		}
+		QString action;
+		if (additions > 0) {
+			if (additions > 1) 
+				action += QString(tr("%1 additions")).arg(additions);
+			else 
+				action += QString(tr("1 addition"));
+			if (deletions > 0 || modifications > 0)
+				action += ", ";
+		}
+		if (deletions > 0) {
+			if (deletions > 1) 
+				action += QString(tr("%1 deletions")).arg(deletions);
+			else 
+				action += QString(tr("1 deletion"));
+			if (modifications > 0)
+				action += ", ";
+		}
+		if (modifications > 0) {
+			if (modifications > 1) 
+				action += QString(tr("%1 modifications")).arg(modifications);
+			else 
+				action += QString(tr("1 modification"));
+		}
+
+		re->rosterExchangeItems();
+
+//		d->le_subj->setText("");
+//		QString body = QString(tr("<big>[System Message]</big><br>This user wants to modify your roster (%1). Click the button labelled \"Add/Auth\" to authorize the modification.")).arg(action);
+//		setHtml("<qt>" + body + "</qt>");
+//		d->rosterExchangeItems = re->rosterExchangeItems();
+
+//		d->pb_chat->show();
+//		d->pb_reply->hide();
+//		d->pb_quote->hide();
+
+//		d->pb_auth->setEnabled(true);
+//		d->pb_auth->show();
+//		d->pb_deny->show();
+
+
+/*		qDebug("###################### Roster Exchange Event");
 		RosterExchangeEvent* re = (RosterExchangeEvent*) e;
 		RosterExchangeItems items;
 		foreach(RosterExchangeItem item, re->rosterExchangeItems()) {
+			qDebug("###################### Received a valid roster exchange item");
 			if (validRosterExchangeItem(item))
 				items += item;
 		}
@@ -4870,6 +4932,7 @@ void PsiAccount::handleEvent(PsiEvent* e, ActivationType activationType)
 		}
 		re->setRosterExchangeItems(items);
 		soundType = eSystem;
+*/
 	}
 	else if (e->type() == PsiEvent::Auth) {
 		soundType = eSystem;
@@ -4990,7 +5053,7 @@ void PsiAccount::handleEvent(PsiEvent* e, ActivationType activationType)
 #endif
 		if (notificationEvent) {
 			//YaPopupNotification::notify(id, notificationEvent);
-                        JabbinNotifications::instance()->createNotification(notificationEvent);
+            JabbinNotifications::instance()->createNotification(notificationEvent);
 		}
 // #ifdef YAPSI_ACTIVEX_SERVER
 // 		if (notificationEvent && !notificationEvent->shownInOnline()) {

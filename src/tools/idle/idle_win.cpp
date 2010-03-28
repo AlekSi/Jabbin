@@ -24,11 +24,12 @@
 #include <windows.h>
 
 #if defined(Q_OS_WIN32) && !defined(Q_CC_GNU)
-// in case of VS2008 comment following lines
+#if (_WIN32_WINNT < 0x0500)
 typedef struct tagLASTINPUTINFO {
 	UINT cbSize;
 	DWORD dwTime;
 } LASTINPUTINFO, *PLASTINPUTINFO;
+#endif
 #endif
 
 class IdlePlatform::Private

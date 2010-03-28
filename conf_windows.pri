@@ -1,18 +1,21 @@
 # Windows build settings
-#CONFIG += debug
-CONFIG += release
-CONFIG += qca-static
-CONFIG += jingle
+CONFIG  += debug
+#CONFIG += release
+CONFIG  += qca-static
+CONFIG  += jingle
 
 OPENSSLPATH = C:
 
+# Console window
+CONFIG(debug, debug|release) { CONFIG += console }
+
 # OpenSSL
 qca-static {
-	DEFINES += HAVE_OPENSSL
-	DEFINES += OSSL_097
+	DEFINES       += HAVE_OPENSSL
+	DEFINES       += OSSL_097
 	OPENSSL_PREFIX = $$OPENSSLPATH/openssl
-	INCLUDEPATH += $$OPENSSL_PREFIX/include
-	LIBS += -L$$OPENSSL_PREFIX/lib
+	INCLUDEPATH   += $$OPENSSL_PREFIX/include
+	LIBS          += -L$$OPENSSL_PREFIX/lib
 }
 
 # SASL

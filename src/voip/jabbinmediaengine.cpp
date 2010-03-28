@@ -25,7 +25,6 @@
 #endif
 #include <fcntl.h>
 
-
 #ifndef WIN32
     #include <sys/socket.h>
     #include <netinet/in.h>
@@ -129,7 +128,11 @@ void JabbinMediaChannel::SetSend(bool send) {
 //float JabbinMediaChannel::GetCurrentQuality() { return 0.0; }
 int JabbinMediaChannel::GetOutputLevel() { return 12;  } // just a testing value
 
-JabbinMediaEngine::JabbinMediaEngine() {}
+JabbinMediaEngine::JabbinMediaEngine() 
+{
+	// Initialize media backend (to-do: use bool result to invalidate JabbinMediaEngine on failure)
+	MediaStream::_BackendInitialize();
+}
 JabbinMediaEngine::~JabbinMediaEngine() {}
 
 bool JabbinMediaEngine::Init() {
@@ -140,7 +143,10 @@ bool JabbinMediaEngine::Init() {
 return true;
 }
 
-void JabbinMediaEngine::Terminate() {
+void JabbinMediaEngine::Terminate() 
+{
+	// Destroy media backend and cleanup
+	MediaStream::_BackendDestroy();
 }
 
 MediaChannel *JabbinMediaEngine::CreateChannel() {

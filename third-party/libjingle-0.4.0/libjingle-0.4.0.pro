@@ -1,3 +1,7 @@
+exists(../../conf_windows.pri) {
+	include(../../conf_windows.pri)
+}
+
 TEMPLATE = lib
 CONFIG += staticlib
 TARGET = jingle
@@ -8,7 +12,6 @@ EXPATHDIR = c:\expat-2.0.1
 CONFIG += warn_off
 
 unix:debug: QMAKE_CXXFLAGS += -O0 -g3
-
 
 target.extra = true
 
@@ -37,10 +40,7 @@ win32 {
 # LIBS += $$EXPATHDIR\lib\libexpat.lib
   SOURCES += $$JINGLE_CPP/talk/base/winfirewall.cc \
 	$$JINGLE_CPP/talk/base/winping.cc \
-
-
 }
-
 
 OBJECTS_DIR = $$JINGLE_CPP/.obj
 

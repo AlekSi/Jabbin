@@ -88,20 +88,22 @@ jingle {
 	DEFINES += HAVE_JINGLE
 
 	JINGLE_CPP = $$PWD/../third-party/libjingle-0.4.0
-	win32 {
-	    LIBS += ../third-party/libjingle-0.4.0/Release/jingle.lib
-	}
+    
+    win32 {
+        CONFIG(debug, debug|release)   { LIBS += ../third-party/libjingle-0.4.0/Debug/jingle.lib }
+        CONFIG(release, debug|release) { LIBS += ../third-party/libjingle-0.4.0/Release/jingle.lib }    
+    }
 	unix {
 	    LIBS += ../third-party/libjingle-0.4.0/libjingle.a
-        }
+    }
 
 	include($$PWD/voip/voip.pri)
 
 	INCLUDEPATH += $$JINGLE_CPP
 
-	contains(DEFINES, HAVE_PORTAUDIO) {
-		LIBS += -framework CoreAudio -framework AudioToolbox
-	}
+	#contains(DEFINES, HAVE_PORTAUDIO) {
+	#	LIBS += -framework CoreAudio -framework AudioToolbox
+	#}
 }
 
 # include Iris XMPP library
