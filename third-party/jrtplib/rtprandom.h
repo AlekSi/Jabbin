@@ -7,7 +7,7 @@
 
   This library was developed at the "Expertisecentrum Digitale Media"
   (http://www.edm.luc.ac.be), a research center of the "Limburgs Universitair
-  Centrum" (http://www.luc.ac.be). The library is based upon work done for 
+  Centrum" (http://www.luc.ac.be). The library is based upon work done for
   my thesis at the School for Knowledge Technology (Belgium/The Netherlands).
 
   Permission is hereby granted, free of charge, to any person obtaining a
@@ -48,6 +48,13 @@ public:
 	u_int32_t GetRandom32();
 	double GetRandomDouble(); // returns random value between 0.0 and 1.0
 private:
+
+#ifndef __APPLE_CC__
+    #ifdef RTP_SUPPORT_GNUDRAND
+        struct drand48_data drandbuffer;
+    #endif
+#endif
+
 #ifdef RTP_SUPPORT_RANDR
 	unsigned int state;
 #else
