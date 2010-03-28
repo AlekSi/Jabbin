@@ -1,22 +1,34 @@
-Building Psi on Mac OS X
-------------------------
+Requirements
+------------
 
-To simply compile Psi, the same instructions apply as for other *nix 
-platforms:
+* You need Qt 4.4 or higher to build Jabbin. You can get QT from qt.nokia.com/downloads. If a packaged version of Qt is not available for your OS (or if you want debug symbols in your Qt libraries), you will need to build and install Qt 4.4 yourself. See the Qt instructions to find
+out how to do this.
+
+* download QCA2 binaries for MAC OS X from http://delta.affinix.com/qca/?ref=darwinports.com
+
+* copy the qca.framework folder to /Library/Frameworks and  crypto.prf file to /usr/local/Qt4.6/mkspecs/features/
+
+* download speex 1.2 http://www.speex.org/downloads/ and compile with ./configure, than make and sudo make install
+
+* download and compile portaudio svn co https://www.portaudio.com/repos/portaudio/trunk portaudio, compile with ./configure && make and cp portaudiosourcedirectory/include/portaudio.h jabbinsourcedirectory/src/voip 
+
+Build Jabbin
+------------
+
 1. First, configure the build using the 'configure' script, optionally
    adding parameters to specify where to find certain dependencies:
 	./configure
+   In case of permissions problems use chmod 755 configure
 2. Build the binary:
 	make
-After this, the built binary 'psi.app' will be available in src/.
-For more details, check 'doc/build-unix.txt'.
+After this, the built binary 'jabbin.app' will be available in src/.
 
 To make a distributable copy of your binary, do the following:
 1. As above, use configure to configure the build
 2. Alter the first lines of 'mac/Makefile' to reflect your setting
 3. Run 'make -C mac/'. 
-   This will create a distributable binary 'Psi.app' in 'mac/disk/'.
+   This will create a distributable binary 'Jabbin.app' in 'mac/disk/'.
 4. (OPTIONAL) Create a DMG image by running 'make -C mac/ dmg'. 
-   This will create a 'Psi-<VERSION>.dmg' file in 'mac/'.
+   This will create a 'Jabbin-<VERSION>.dmg' file in 'mac/'.
    You can create your own DMG template to make the resulting DMG
    look different. For more instructions on this, see 'mac/Makefile'.
