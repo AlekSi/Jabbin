@@ -21,6 +21,12 @@ package).
 * You need libexpat-2.0.1 which you can get at
 		http://sourceforge.net/projects/expat/ 
 
+* You need portaudio v19 which you can get with :
+		svn co https://www.portaudio.com/repos/portaudio/trunk portaudio
+		./configure
+		make
+		make install
+
 This is a list of packages needed to build Jabbin on Linux :
 libqt4-core
 libqt4-dev
@@ -58,9 +64,9 @@ To be able to run applications using QCA2, you will need to add
 /usr/local/qca2/lib to your LD_LIBRARY_PATH.
 
 
-
 Building the QCA OpenSSL plugin
 -------------------------------
+
 After unpacking the QCA OpenSSL plugin's sources, run the following commands
 
  ./configure
@@ -70,9 +76,9 @@ After unpacking the QCA OpenSSL plugin's sources, run the following commands
 See above on how to troubleshoot configure problems.
 
 
-
 Building the QCA GnuPG plugin
 -------------------------------
+
 After unpacking the QCA GnuPG plugin's sources, run the following commands
 
  ./configure
@@ -90,17 +96,22 @@ Patch the third-party libraries with the
 
 run patch -p0 <   linux/0001-3rd_party_libs_linux_gcc_4x-ivan.patch
 
+
 Building libjingle
 ------------------
+
 Run the following commands inside the third-party/libjingle-0.4.0 directory
  qmake
  make
 
+
 Building libjrtp
 ------------------
+
 Run the following commands inside the third-party/jrtplib directory
  qmake
  make
+
 
 Building Jabbin
 ---------------
@@ -113,4 +124,3 @@ From the toplevel Jabbin source dir, run the following commands:
 
 This should configure, build, and install Jabbin. See above on how to troubleshoot
 configure problems.
-
