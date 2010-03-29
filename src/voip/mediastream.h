@@ -64,7 +64,7 @@ private:
 	Private *d;
 
 	// Allow JabbinMediaEngine to access private
-	friend cricket::JabbinMediaEngine;
+	friend class cricket::JabbinMediaEngine;
 
 	//! Initializes media-backend (opens audio devices, make them ready for streams management)
 	static bool _BackendInitialize();

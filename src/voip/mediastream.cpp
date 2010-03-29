@@ -84,6 +84,8 @@ typedef unsigned int			md_uint32;
 //! Restrict (to-do: add corresponding GCC define)
 #if defined(_MSC_VER) || (defined(_INTEL_COMPILER) || defined(_ICC))
 	#define md_restrict __restrict
+#else
+	#define md_restrict
 #endif
 
 //! Local defines
