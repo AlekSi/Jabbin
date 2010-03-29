@@ -19,7 +19,16 @@ Build Jabbin
    adding parameters to specify where to find certain dependencies:
 	./configure
    In case of permissions problems use chmod 755 configure
-2. Build the binary:
+2. Build libjingle library :
+	cd third-party/libjingle-0.4.0
+	qmake-4.6 -spec macx-g++
+	make
+3. Build jrtp library :
+	cd third-party\jrtp
+	qmake-4.6 -spec macx-g++
+	make 
+3. Build the binary:
+	cd jabbinsources
 	make
 After this, the built binary 'jabbin.app' will be available in src/.
 
