@@ -402,7 +402,7 @@ static int audioCallback(const void *inputBuffer, void *outputBuffer, unsigned l
 	if (dataSize != 0)
 	{
 		// make sure data is aligned to frame size
-		const md_uint32 writeSize = MEDIA_ALIGN_BWD(dataSize, _MEDIA_FORMAT_FRAME_SIZE);
+		const md_uint32 writeSize = MEDIA_ALIGN_BWD<md_uint32>(dataSize, _MEDIA_FORMAT_FRAME_SIZE);
 		
 		// copy to output
 		memcpy(outputBuffer, d->dspBuffer->data(), writeSize);
@@ -654,7 +654,7 @@ void MediaStream::timerClick()
 
 	// lock mic buffer, transfer data to intermediary buffer
     d->micBuffer->lock();
-    md_uint32 micDataSamples = MEDIA_ALIGN_BWD(_MEDIA_BYTES_TO_SAMPLES(d->micBuffer->size()), _MEDIA_FORMAT_FRAME_SIZE);
+    md_uint32 micDataSamples = MEDIA_ALIGN_BWD<md_uint32>(_MEDIA_BYTES_TO_SAMPLES(d->micBuffer->size()), _MEDIA_FORMAT_FRAME_SIZE);
 	md_uint32 micDataSize    = _MEDIA_SAMPLES_TO_BYTES(micDataSamples);
 	if (micDataSamples != 0)
 	{
@@ -752,7 +752,7 @@ void MediaStream::timerClick()
 
 	// lock mic buffer, transfer data to intermediary buffer
     d->micBuffer->lock();
-    const md_uint32 micDataSamples = MEDIA_ALIGN_BWD(_MEDIA_BYTES_TO_SAMPLES(d->micBuffer->size()), _MEDIA_FORMAT_FRAME_SIZE);
+    const md_uint32 micDataSamples = MEDIA_ALIGN_BWD<md_uint32>(_MEDIA_BYTES_TO_SAMPLES(d->micBuffer->size()), _MEDIA_FORMAT_FRAME_SIZE);
 	const md_uint32 micDataSize    = _MEDIA_SAMPLES_TO_BYTES(micDataSamples);
 	if (micDataSamples != 0)
 	{
