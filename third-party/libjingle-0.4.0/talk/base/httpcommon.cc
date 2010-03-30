@@ -393,7 +393,7 @@ bool HttpDateToSeconds(const std::string& date, unsigned long* seconds) {
     }
     gmt = non_gmt + kTimeZoneOffsets[zindex] * 60 * 60;
   }
-#ifdef OSX
+#ifdef Q_OS_MAC
   tm *tm_for_timezone = localtime((time_t *)&gmt);
   *seconds = gmt + tm_for_timezone->tm_gmtoff;
 #else
