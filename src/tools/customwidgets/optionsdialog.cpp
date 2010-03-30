@@ -329,7 +329,8 @@ void OptionsDialog::load()
         d->checkAutostart->setCheckState(Qt::PartiallyChecked);
     }
 #else
-    ui_.startAutomatically->hide();
+//	FIX ME : DEFAULT ACTION FOR MAC OS
+//	ui_.startAutomatically->hide();
 #endif
 
     d->comboLanguage->setCurrentText(getOption("options.general.language", String));
