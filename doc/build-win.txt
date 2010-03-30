@@ -21,6 +21,21 @@ Requirements
 * You need to download and install the OpenSSL package (full package, about 7mb for 32 or 64bit) from
 		http://www.openssl.org/related/binaries.html
 
+* You need to download and build Portaudio from
+		svn co https://www.portaudio.com/repos/portaudio/trunk in c:\portaudio
+
+		optionally you can install ASIO SDK :
+		download ASIO SDK from http://www.steinberg.net/en/company/3rd_party_developer.html
+
+		copy ASIO SDK contents to portaudio/src/hostapi/asio folder (you could have to rename ASIOSDK2 to ASIOSDK to make the build works)
+
+		be sure that the Microsoft DirectX SDK include directory is included in  Tools > Options > Projects and Solutions > VC++ Directories > Include Files
+
+		be sure that the Microsoft DirectX SDK lib directory is included in  Tools > Options > Projects and Solutions > VC++ Directories > Lib Files
+
+		build portaudio using the portaudio VS project inside build\msvc directory
+
+		based on VS version and configuration copy build\msvc\win32\release\portaudio_x86.lib to c:\portaudio\lib
 
 
 Building Jabbin
