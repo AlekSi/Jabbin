@@ -54,7 +54,9 @@
 
 #define RTP_SUPPORT_PROBATION
 
+#ifndef __APPLE__
 #define RTP_SUPPORT_GNUDRAND
+#endif
 
 // Not using rand_r
 

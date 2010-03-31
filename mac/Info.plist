@@ -5,23 +5,23 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>yachat</string>
+	<string>jabbin</string>
 	<key>CFBundleGetInfoString</key>
-	<string>Jabbin 1.0</string>
+	<string>Jabbin 3.0</string>
 	<key>CFBundleIconFile</key>
 	<string>application.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>ru.yandex.yachat</string>
+	<string>jabbint</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Я.Онлайн</string>
+	<string>Jabbin</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
-	<string>yachat</string>
+	<string>jabbint</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>3.0</string>
 	<key>CSResourcesFileMapped</key>
 	<true/>
 	<key>SUFeedURL</key>

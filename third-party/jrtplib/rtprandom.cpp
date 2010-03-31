@@ -41,13 +41,13 @@
 
 #include "rtpdebug.h"
 
-#if !defined(RTP_SUPPORT_GNUDRAND) && !defined(RTP_SUPPORT_RANDR)
+#if (!defined(RTP_SUPPORT_GNUDRAND) && !defined(RTP_SUPPORT_RANDR))
 bool RTPRandom::init = false;
 #endif // WIN32
 
 RTPRandom::RTPRandom()
 {
-#if defined(RTP_SUPPORT_GNUDRAND) || defined(RTP_SUPPORT_RANDR)
+#if defined(RTP_SUPPORT_GNUDRAND) || defined(RTP_SUPPORT_RANDR) 
 	u_int32_t x;
 	void * addr = this;
 	void * ptr = &addr;
@@ -58,7 +58,7 @@ RTPRandom::RTPRandom()
 	x -= (u_int32_t)clock();
 	x ^= (u_int32_t)(y);
 
-#ifdef RTP_SUPPORT_GNUDRAND
+#ifdef RTP_SUPPORT_GNUDRAND 
 	srand48_r(x,&drandbuffer);
 #else
 	state = (unsigned int)x;
@@ -118,7 +118,7 @@ double RTPRandom::GetRandomDouble()
 }
 
 #else
-#ifdef RTP_SUPPORT_RANDR
+#ifdef RTP_SUPPORT_RANDR 
 
 u_int8_t RTPRandom::GetRandom8()
 {

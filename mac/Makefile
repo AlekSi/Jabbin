@@ -21,13 +21,13 @@ QCADIR=/usr/local
 GROWLDIR=/Library/Frameworks
 PSI_DIR=..
 
-EXECUTABLE_NAME=yachat
-NAME=YaChat
-VOLUME_NAME=Я.Онлайн
-VERSION=0.12-devel_$(shell date +"%Y%m%d")_tabs
-#VERSION=0.11-RC1_tab
+EXECUTABLE_NAME=jabbin
+NAME=Jabbin
+VOLUME_NAME=Jabbin
+VERSION=3.0-beta_$(shell date +"%Y%m%d")_tabs
+#VERSION=3.0
 
-APPFILE_NAME=Я.Онлайн.app
+APPFILE_NAME=Jabbin.app
 FILES=$(APPFILE_NAME)
 DISK_DIR=disk
 ifneq ($(BUILD),no)

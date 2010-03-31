@@ -49,7 +49,7 @@ public:
 	double GetRandomDouble(); // returns random value between 0.0 and 1.0
 private:
 
-#ifndef Q_OS_MAC
+#ifndef __APPLE__ 
     #ifdef RTP_SUPPORT_GNUDRAND
         struct drand48_data drandbuffer;
     #endif
