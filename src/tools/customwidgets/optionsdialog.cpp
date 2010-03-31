@@ -329,6 +329,7 @@ void OptionsDialog::load()
         d->checkAutostart->setCheckState(Qt::PartiallyChecked);
     }
 #else
+    d->checkAutostart->setVisible(false);
 //	FIX ME : DEFAULT ACTION FOR MAC OS
 //	ui_.startAutomatically->hide();
 #endif
