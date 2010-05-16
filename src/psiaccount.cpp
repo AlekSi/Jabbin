@@ -2093,22 +2093,22 @@ void PsiAccount::cs_error(int err)
                         << delay;
 
 		switch (delay) {
-			case 15000:
-				d->reconnDelay = 30000;
-                                break;
 			case 30000:
+				d->reconnDelay = 60000;
+                                break;
+			case 60000:
 				d->reconnDelay = 120000;
                                 break;
 			case 120000:
 				d->reconnDelay = 600000;
                                 break;
 			default :
-				d->reconnDelay = 15000;
+				d->reconnDelay = 30000;
                                 break;
 		}
 
 		if (err == -1) {
-			delay = 5000;
+			delay = 15000;
 		}
 		JabbinNotifications::instance()->createNotification(
 			N_CONNECTION_ERROR, QString::number(delay));
@@ -2873,7 +2873,7 @@ void PsiAccount::setStatus(const Status &_s,  bool withPriority)
 		Roster::ConstIterator rit = d->acc.roster.begin();
 		for ( ; rit != d->acc.roster.end(); ++rit) {
 			const RosterItem &i = *rit;
-			if ( i.jid().user().isEmpty() /*&& i.jid().resource() == "registered"*/ ) // it is very likely then, that it's transport
+			if ( i.jid().node().isEmpty() /*&& i.jid().resource() == "registered"*/ ) // it is very likely then, that it's transport
 				new BlockTransportPopup(d->blockTransportPopupList, i.jid());
 		}
 	}
@@ -3190,9 +3190,11 @@ QString PsiAccount::localHostName()
 bool PsiAccount::validRosterExchangeItem(const RosterExchangeItem& item)
 {
 	if (item.action() == RosterExchangeItem::Add) {
+		qDebug("###################### Line 3193 valid RosterExchange Item, action ADD");
 		return (d->client->roster().find(item.jid(),true) == d->client->roster().end());
 	}
 	else if (item.action() == RosterExchangeItem::Delete) {
+		qDebug("###################### Line 3193 valid RosterExchange Item, action Delete");
 		LiveRoster::ConstIterator i = d->client->roster().find(item.jid(),true);
 		if (i == d->client->roster().end())
 			return false;
@@ -3204,6 +3206,7 @@ bool PsiAccount::validRosterExchangeItem(const RosterExchangeItem& item)
 		return true;
 	}
 	else if (item.action() == RosterExchangeItem::Modify) {
+		qDebug("###################### Line 3193 valid RosterExchange Item, action Modify");
 		// TODO
 		return false;
 	}
@@ -4620,17 +4623,20 @@ void PsiAccount::dj_remove(const Jid &j)
 
 void PsiAccount::dj_rosterExchange(const RosterExchangeItems& items)
 {
+	qDebug("###################### Line 4623 Roster Exchange Event received");
 	foreach(RosterExchangeItem item, items) {
+
 		if (!validRosterExchangeItem(item))
 			continue;
 
 		if (item.action() == RosterExchangeItem::Add) {
+			qDebug("###################### Line 4629 Roster Exchange ADD");
 			if (d->client->roster().find(item.jid(),true) == d->client->roster().end()) {
 				dj_add(item.jid(),item.name(),item.groups(),true);
 			}
 		}
 		else if (item.action() == RosterExchangeItem::Delete) {
-			//dj_remove(item.jid());
+			dj_remove(item.jid());
 		}
 		else if (item.action() == RosterExchangeItem::Modify) {
 			// TODO
@@ -4859,9 +4865,23 @@ void PsiAccount::handleEvent(PsiEvent* e, ActivationType activationType)
 	}
 	else if(e->type() == PsiEvent::RosterExchange) {
 
-		qDebug("###################### Roster Exchange Event EVENT DLG");
-		RosterExchangeEvent *re = (RosterExchangeEvent *)e;
-		int additions = 0, deletions = 0, modifications = 0;
+		qDebug("###################### Roster Exchange Event PSI Account");
+		RosterExchangeEvent* re = (RosterExchangeEvent*) e;
+		RosterExchangeItems items;
+		foreach(RosterExchangeItem item, re->rosterExchangeItems()) {
+			if (validRosterExchangeItem(item))
+				items += item;
+		}
+		if (items.isEmpty()) {
+			delete e;
+			return;
+		}
+		re->setRosterExchangeItems(items);
+		dj_rosterExchange(items);
+		soundType = eSystem;
+
+/*		int additions = 0, deletions = 0, modifications = 0;
+
 		foreach(RosterExchangeItem item, re->rosterExchangeItems()) {
 			switch(item.action()) {
 				case RosterExchangeItem::Add:
@@ -4904,34 +4924,18 @@ void PsiAccount::handleEvent(PsiEvent* e, ActivationType activationType)
 
 		re->rosterExchangeItems();
 
-//		d->le_subj->setText("");
-//		QString body = QString(tr("<big>[System Message]</big><br>This user wants to modify your roster (%1). Click the button labelled \"Add/Auth\" to authorize the modification.")).arg(action);
-//		setHtml("<qt>" + body + "</qt>");
-//		d->rosterExchangeItems = re->rosterExchangeItems();
+		d->le_subj->setText("");
+		QString body = QString(tr("<big>[System Message]</big><br>This user wants to modify your roster (%1). Click the button labelled \"Add/Auth\" to authorize the modification.")).arg(action);
+		setHtml("<qt>" + body + "</qt>");
+		d->rosterExchangeItems = re->rosterExchangeItems();
 
-//		d->pb_chat->show();
-//		d->pb_reply->hide();
-//		d->pb_quote->hide();
+		d->pb_chat->show();
+		d->pb_reply->hide();
+		d->pb_quote->hide();
 
-//		d->pb_auth->setEnabled(true);
-//		d->pb_auth->show();
-//		d->pb_deny->show();
-
-
-/*		qDebug("###################### Roster Exchange Event");
-		RosterExchangeEvent* re = (RosterExchangeEvent*) e;
-		RosterExchangeItems items;
-		foreach(RosterExchangeItem item, re->rosterExchangeItems()) {
-			qDebug("###################### Received a valid roster exchange item");
-			if (validRosterExchangeItem(item))
-				items += item;
-		}
-		if (items.isEmpty()) {
-			delete e;
-			return;
-		}
-		re->setRosterExchangeItems(items);
-		soundType = eSystem;
+		d->pb_auth->setEnabled(true);
+		d->pb_auth->show();
+		d->pb_deny->show();
 */
 	}
 	else if (e->type() == PsiEvent::Auth) {

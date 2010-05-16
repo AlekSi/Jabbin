@@ -1152,13 +1152,19 @@ void YaRosterContactsTab::addContactTextEntered(const QString& text)
 	Jid jid(c);
 	jid = jid.bare();
 
-	QRegExp invalidJidRx(".*@.*@.*|\\s");
-	if (invalidJidRx.indexIn(c) != -1 || jid.node().isEmpty() || jid.host().isEmpty()) {
+	if(!jid.isValid()) {
 		addContactListView()->setError(tr("Invalid Jabber ID: %1")
 		                               .arg(c));
 		return;
 	}
 
+/*	QRegExp invalidJidRx(".*@.*@.*|\\s");
+	if (invalidJidRx.indexIn(c) != -1 || jid.node().isEmpty() || jid.host().isEmpty()) {
+		addContactListView()->setError(tr("Invalid Jabber ID: %1")
+		                               .arg(c));
+		return;
+	}
+*/
 	PsiAccount* acc = 0;
 	foreach(PsiAccount* account, contactList->sortedEnabledAccounts()) {
 		if (!account->isAvailable())

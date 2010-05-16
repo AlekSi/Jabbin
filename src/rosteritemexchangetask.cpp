@@ -37,6 +37,7 @@ bool RosterItemExchangeTask::take(const QDomElement& e)
 			qDebug("Roster Exchange request with correct attribute");
 			Jid from(e.attribute("from"));
 			if (client()->roster().find(from,false) == client()->roster().end() && ignoreNonRoster_) {
+				qDebug("Invalid roster Exchange request");
 				// Send a not-authorized error
 				QDomElement iq = createIQ(doc(), "error", e.attribute("from"), e.attribute("id"));
 				QDomElement error = doc()->createElement("error");
