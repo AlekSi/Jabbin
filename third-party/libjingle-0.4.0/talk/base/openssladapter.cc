@@ -240,7 +240,7 @@ OpenSSLAdapter::~OpenSSLAdapter() {
 int
 OpenSSLAdapter::StartSSL(const char* hostname, bool restartable) {
   if (state_ != SSL_NONE)
-    return -1; 
+    return -1;
 
   ssl_host_name_ = hostname;
   restartable_ = restartable;
@@ -641,7 +641,7 @@ OpenSSLAdapter::SSLPostConnectionCheck(SSL* ssl, const char* host) {
     int extension_nid = OBJ_obj2nid(X509_EXTENSION_get_object(extension));
 
     if (extension_nid == NID_subject_alt_name) {
-      X509V3_EXT_METHOD* meth = X509V3_EXT_get(extension);
+      X509V3_EXT_METHOD* meth = const_cast < X509V3_EXT_METHOD * > ( X509V3_EXT_get(extension));
       if (!meth)
         break;
 
@@ -693,7 +693,7 @@ OpenSSLAdapter::SSLPostConnectionCheck(SSL* ssl, const char* host) {
     ok = true;
   }
 
-  if (ok) 
+  if (ok)
     ok = (SSL_get_verify_result(ssl) == X509_V_OK);
 
   if (!ok && ignore_bad_cert()) {
@@ -773,7 +773,7 @@ OpenSSLAdapter::SSLVerifyCallback(int ok, X509_STORE_CTX* store) {
 SSL_CTX*
 OpenSSLAdapter::SetupSSLContext() {
   SSL_CTX* ctx = SSL_CTX_new(TLSv1_client_method());
-  if (ctx == NULL) 
+  if (ctx == NULL)
 	  return NULL;
 
   // Add the root cert to the SSL context
