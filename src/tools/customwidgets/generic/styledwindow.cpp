@@ -342,10 +342,6 @@ bool StyledWindow::eventFilter(QObject * object, QEvent * event)
                     geometry.setBottom(geometry.bottom() + delta.y());
                 }
 
-                #ifdef Q_WS_WIN
-                geometry.moveTop(geometry.top() - 16);
-                #endif
-
                 setGeometry(geometry);
             }
         }
@@ -362,7 +358,13 @@ bool StyledWindow::eventFilter(QObject * object, QEvent * event)
                 d->resizeFlags = 0;
                 d->titlebarItems[Title]->setCursor(Qt::ArrowCursor);
             } else if (event->type() == QEvent::MouseMove && d->resizeFlags) {
-                move(d->originalWindowGeometry.topLeft() + QCursor::pos()
+                QPoint position = QCursor::pos();
+
+                #ifdef Q_WS_WIN
+                position.setY(position.y() - 16);
+                #endif
+
+                move(d->originalWindowGeometry.topLeft() + position
                         - d->originalMouseCoordinate);
             }
         } else if ((coordinate = d->titlebarItems.key((QToolButton *)object, Title)) != Title) {
