@@ -341,6 +341,11 @@ bool StyledWindow::eventFilter(QObject * object, QEvent * event)
                 if (Private::Bottom & d->resizeFlags) {
                     geometry.setBottom(geometry.bottom() + delta.y());
                 }
+
+                #ifdef Q_WS_WIN
+                geometry.moveTop(geometry.top() - 16);
+                #endif
+
                 setGeometry(geometry);
             }
         }
