@@ -361,7 +361,7 @@ bool StyledWindow::eventFilter(QObject * object, QEvent * event)
                 QPoint position = QCursor::pos();
 
                 #ifdef Q_WS_WIN
-                position.setY(position.y() - 16);
+                position.setY(position.y() - 23);
                 #endif
 
                 move(d->originalWindowGeometry.topLeft() + position
