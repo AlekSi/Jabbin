@@ -190,6 +190,8 @@ void YaLoginPage::connectionError(const QString& error)
 void YaLoginPage::disconnected()
 {
         qDebug() << "YaLoginPage::disconnected";
+        qDebug() << getLoginAccount()->currentConnectionErrorCondition() << getLoginAccount()->currentConnectionError();
+
 	setShouldBeVisible(true);
 }
 
