@@ -192,7 +192,12 @@ void YaLoginPage::disconnected()
         qDebug() << "YaLoginPage::disconnected";
         qDebug() << getLoginAccount()->currentConnectionErrorCondition() << getLoginAccount()->currentConnectionError();
 
-	setShouldBeVisible(true);
+        // heuristic white-listing
+        if (getLoginAccount()->currentConnectionError().isEmpty()) {
+            setShouldBeVisible(true);
+        } else {
+            setShouldBeVisible(false);
+        }
 }
 
 void YaLoginPage::signIn()
