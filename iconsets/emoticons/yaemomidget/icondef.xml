@@ -1,272 +1,223 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <icondef>
 	<meta>
-		<name>YaEmoMidget Smilies</name>
+		<name>Jabbin</name>
 		<version>1.0</version>
-		<description>Icons © Yandex</description>
-		<creation>2008-08-28</creation>
-		<home>http://yandex.ru</home>
-		<author www='http://www.yandex.ru'>Yandex</author>
-	</meta>
+		<description>Default Jabbin  iconset</description>
+		<creation>2003-07-08</creation>
+		<home>http://www.jabbin.com</home>
+		<author email='life@jabbin.com'>Jabbin team</author>
+		</meta>
 
 	<!-- Normal icons -->
-	<icon>
-		<text>:-)</text>
-		<text>:)</text>
-		<text>(-:</text>
-		<text>(:</text>
-		<text>=)</text>
-		<text>:smile:</text>
-		<text>(smile)</text>
-		<object mime='image/png'>smile.png</object>
-		<x xmlns='ya:description'>Улыбка</x>
-	</icon>
+
+
 
 	<icon>
-		<text>;-)</text>
-		<text>;)</text>
-		<text>(-;</text>
-		<text>(;</text>
-		<text>:wink:</text>
-		<text>(wink)</text>
-		<object mime='image/png'>wink.png</object>
-		<x xmlns='ya:description'>Подмигивание</x>
-	</icon>
 
-	<icon>
-		<text>:-P</text>
-		<text>:-p</text>
-		<text>:P</text>
-		<text>:p</text>
-		<text>:razz:</text>
-		<text>(razz)</text>
-		<object mime='image/png'>tongue.png</object>
-		<x xmlns='ya:description'>Показать язык</x>
-	</icon>
+	<object mime='image/png'>angel.png</object>
+ 	 <text>O:-)</text>
+ 	 <text>o:-)</text>
+ 	 <text>0:-)</text>
+     </icon> 
 
-	<icon>
-		<text>:-D</text>
-		<text>:-d</text>
-		<text>:D</text>
-		<text>:d</text>
-		<text>:-></text>
-		<text>:></text>
-		<text>:-))</text>
-		<text>:-)))</text>
-		<text>:-))))</text>
-		<text>:-)))))</text>
-		<text>:-))))))</text>
-		<text>:-)))))))</text>
-		<text>:-))))))))</text>
-		<text>:-)))))))))</text>
-		<text>:-))))))))))</text>
-		<text>:))</text>
-		<text>:)))</text>
-		<text>:))))</text>
-		<text>:)))))</text>
-		<text>:))))))</text>
-		<text>:)))))))</text>
-		<text>:))))))))</text>
-		<text>:)))))))))</text>
-		<text>:))))))))))</text>
-		<text>:grin:</text>
-		<text>(grin)</text>
-		<text>:lol:</text>
-		<text>(lol)</text>
-		<object mime='image/png'>lol.png</object>
-		<x xmlns='ya:description'>Смех</x>
-	</icon>
+     <icon>
+<object mime='image/png'>curl-lip.png</object>
+ 	 <text>:-)</text>
+ 	 <text>=)</text>
+	 <text>:)</text>
+ 	</icon> <icon>
 
-	<icon>
-		<text>:-(</text>
-		<text>:(</text>
-		<text>)-:</text>
-		<text>):</text>
-		<text>:sad:</text>
-		<text>(sad)</text>
-		<object mime='image/png'>sad.png</object>
-		<x xmlns='ya:description'>Грусть</x>
-	</icon>
+<object mime='image/png'>sad.png</object>
+  <text>:-(</text>
+  <text>=(</text>
+  <text>:(</text>
+</icon> <icon>
 
-	<icon>
-		<text>;-(</text>
-		<text>;(</text>
-		<text>)-;</text>
-		<text>);</text>
-		<object mime='image/png'>sad_wink.png</object>
-		<x xmlns='ya:description'>Огорчение</x>
-	</icon>
+<object mime='image/png'>wink.png</object>
+  <text>;)</text>
+  </icon> <icon>
+  
+<object mime='image/png'>tongue.png</object>
+  <text>:-P</text>
+</icon> <icon>
 
-	<icon>
-		<text>:-O</text>
-		<text>:-o</text>
-		<text>:O</text>
-		<text>:o</text>
-		<text>8-O</text>
-		<text>8-o</text>
-		<text>:O</text>
-		<text>:eek:</text>
-		<text>:surprised:</text>
-		<text>(eek)</text>
-		<text>(surprised)</text>
-		<object mime='image/png'>woot.png</object>
-		<x xmlns='ya:description'>Изумление</x>
-	</icon>
+<object mime='image/png'>glasses-cool.png</object>
+  <text>8-)</text>
+</icon> <icon>
 
-	<icon>
-		<text>:-@</text>
-		<text>:@</text>
-		<object mime='image/png'>wow.png</object>
-		<x xmlns='ya:description'>Испуг</x>
-	</icon>
+<object mime='image/png'>laugh.png</object>
+  <text>:-D</text>
+  </icon> <icon>
 
-	<icon>
-		<text>:-$</text>
-		<text>:$</text>
-		<text>(D)</text>
-		<text>(d)</text>
-		<text>%)</text>
-		<object mime='image/png'>sick.png</object>
-		<x xmlns='ya:description'>Болею</x>
-	</icon>
+<object mime='image/png'>embarrassed.png</object>
+  <text>:-[</text>
+  </icon> <icon>
 
-	<icon>
-		<text>B-)</text>
-		<text>B)</text>
-		<text>8-)</text>
-		<text>8)</text>
-		<text>:cool:</text>
-		<text>(cool)</text>
-		<object mime='image/png'>glasses.png</object>
-		<x xmlns='ya:description'>Здорово</x>
-	</icon>
+<object mime='image/png'>shout.png</object>
+  <text>=-O</text>
+  </icon> <icon>
 
-	<icon>
-		<text>o_O</text>
-		<text>O_o</text>
-		<text>o_o</text>
-		<text>O_O</text>
-		<text>:oops:</text>
-		<text>(oops)</text>
-		<object mime='image/png'>brainsucker.png</object>
-		<x xmlns='ya:description'>Недоумение</x>
-	</icon>
+<object mime='image/png'>kiss.png</object>
+  <text>:-*</text>
+</icon> <icon>
 
-	<icon>
-		<text>:-|</text>
-		<text>:|</text>
-		<text>:-/</text>
-		<text>:/</text>
-		<text>:-\</text>
-		<text>:\</text>
-		<object mime='image/png'>hmm.png</object>
-		<x xmlns='ya:description'>Амбивалентность</x>
-	</icon>
+<object mime='image/png'>crying.png</object>
+  <text>:'(</text>
+</icon> <icon>
 
-	<icon>
-		<text>|~|D</text>
-		<text>(H)</text>
-		<text>(h)</text>
-		<text>(B)</text>
-		<text>(b)</text>
-		<text>:beer:</text>
-		<text>(beer)</text>
-		<object mime='image/png'>beer.png</object>
-		<x xmlns='ya:description'>Пиво</x>
-	</icon>
+<object mime='image/png'>shut-mouth.png</object>
+  <text>:-X</text>
+</icon> <icon>
 
-	<icon>
-		<text>&gt;:-)</text>
-		<text>&gt;:)</text>
-		<text>:evil:</text>
-		<text>(evil)</text>
-		<text>:mad:</text>
-		<text>(mad)</text>
-		<object mime='image/png'>evil.png</object>
-		<x xmlns='ya:description'>Озорник</x>
-	</icon>
+<object mime='image/png'>freaked-out.png</object>
+  <text>>:o</text>
+</icon> <icon>
 
-	<icon>
-		<text>&lt;3</text>
-		<text>:-*</text>
-		<text>(L)</text>
-		<text>(l)</text>
-		<text>(U)</text>
-		<text>(u)</text>
-		<text>:love:</text>
-		<text>:loved:</text>
-		<text>(love)</text>
-		<text>(loved)</text>
-		<object mime='image/png'>love.png</object>
-		<x xmlns='ya:description'>Сердце</x>
-	</icon>
+<object mime='image/png'>thinking.png</object>
+  <text>:-|</text>
+</icon> <icon>
 
-	<!-- <icon>
-		<text>:'-(</text>
-		<text>:'(</text>
-		<text>;-(</text>
-		<text>;(</text>
+<object mime='image/png'>arrogant.png</object>
+  <text>:-\</text>
+ </icon> <icon>
 
-		<object mime='image/png'>smile_18.png</object>
-		<x xmlns='ya:description'></x>
-	</icon> -->
+<object mime='image/png'>giggle.png</object>
+  <text>*JOKINGLY*</text>
+</icon> <icon>
 
-	<icon>
-		<text>(+1)</text>
-		<text>+1!</text>
-		<object mime='image/png'>+1.png</object>
-		<x xmlns='ya:description'>Отлично!</x>
-	</icon>
+<object mime='image/png'>devil.png</object>
+  <text>]:-></text>
+</icon> <icon>
 
-	<icon>
-		<text>(-1)</text>
-		<text>-1!</text>
-		<object mime='image/png'>-1.png</object>
-		<x xmlns='ya:description'>Плохо</x>
-	</icon>
+<object mime='image/png'>musical-note.png</object>
+  <text>[:-}</text>
+</icon> <icon>
 
-	<icon>
-		<text>[:]||[:]</text>
-		<text>[:]|||[:]</text>
-		<text>[:]||||[:]</text>
-		<text>:]||[:</text>
-		<text>:]|||[:</text>
-		<text>:]||||[:</text>
-		<text>:||:</text>
-		<text>:|||:</text>
-		<text>:||||:</text>
-		<object mime='image/png'>boyan1.png</object>
-		<x xmlns='ya:description'>Баян</x>
-	</icon>
+<object mime='image/png'>cute.png</object>
+  <text>*KISSED*</text>
+</icon> <icon>
 
-	<icon>
-		<text>[:]|||||[:]</text>
-		<text>[:]||||||[:]</text>
-		<text>[:]|||||||[:]</text>
-		<text>:]|||||[:</text>
-		<text>:]||||||[:</text>
-		<text>:]|||||||[:</text>
-		<text>:|||||:</text>
-		<text>:||||||:</text>
-		<text>:|||||||:</text>
-		<x xmlns='ya:user-selectable'>false</x>
-		<object mime='image/png'>boyan2.png</object>
-		<x xmlns='ya:description'>Большой баян</x>
-	</icon>
+<object mime='image/png'>sick.png</object>
+  <text>:-!</text>
+</icon> <icon>
 
-	<icon>
-		<text>[:]||||||||[:]</text>
-		<text>[:]|||||||||[:]</text>
-		<text>[:]||||||||||[:]</text>
-		<text>:]||||||||[:</text>
-		<text>:]|||||||||[:</text>
-		<text>:]||||||||||[:</text>
-		<text>:||||||||:</text>
-		<text>:|||||||||:</text>
-		<text>:||||||||||:</text>
-		<x xmlns='ya:user-selectable'>false</x>
-		<object mime='image/png'>boyan3.png</object>
-		<x xmlns='ya:description'>Огромный баян</x>
-	</icon>
+<object mime='image/png'>sleepy.png</object>
+	<text>*TIRED*</text>
+</icon> <icon>
+
+<object mime='image/png'>terror.png</object>
+  <text>*STOP*</text>
+</icon> <icon>
+
+<object mime='image/png'>handshake.png</object>
+  <text>*KISSING*</text>
+</icon> <icon>
+
+<object mime='image/png'>rose.png</object>
+  <text>@}->--</text>
+</icon> <icon>
+
+<object mime='image/png'>good.png</object>
+  <text>*THUMBS UP*</text>
+</icon> <icon>
+
+<object mime='image/png'>beer.png</object>
+  <text>*DRINK*</text>
+</icon> <icon>
+
+<object mime='image/png'>love.png</object>
+  <text>*IN LOVE*</text>
+</icon> <icon>
+
+<object mime='image/png'>bomb.png</object>
+  <text>@=</text>
+</icon> <icon>
+
+<object mime='image/png'>question.png</object>
+  <text>*HELP*</text>
+</icon> <icon>
+
+<object mime='image/png'>cowboy.png</object>
+  <text>\m/</text>
+</icon> <icon>
+
+<object mime='image/png'>hypnotized.png</object>
+  <text>%)</text>
+</icon> <icon>
+
+<object mime='image/png'>fingers-crossed.png</object>
+  <text>*OK*</text>
+</icon> <icon>
+
+<object mime='image/png'>alien.png</object>
+  <text>*WASSUP*</text>
+</icon> <icon>
+
+<object mime='image/png'>disapointed.png</object>
+  <text>*SORRY*</text>
+</icon> <icon>
+
+<object mime='image/png'>clap.png</object>
+  <text>*BRAVO*</text>
+</icon> <icon>
+
+<object mime='image/png'>rotfl.png</object>
+  <text>*ROFL*</text>
+</icon> <icon>
+
+<object mime='image/png'>dont-know.png</object>
+  <text>*PARDON*</text>
+</icon> <icon>
+
+<object mime='image/png'>confused.png</object>
+  <text>*NO*</text>
+</icon> <icon>
+
+<object mime='image/png'>silly.png</object>
+  <text>*CRAZY*</text>
+</icon> <icon>
+
+<object mime='image/png'>doh.png</object>
+  <text>*DONT_KNOW*</text>
+</icon> <icon>
+
+<object mime='image/png'>party.png</object>
+  <text>*DANCE*</text>
+</icon> <icon>
+
+<object mime='image/png'>dance.png</object>
+  <text>*YAHOO*</text>
+</icon> <icon>
+
+<object mime='image/png'>victory.png</object>
+  <text>*HI*</text>
+</icon> <icon>
+
+<object mime='image/png'>go-away.png</object>
+  <text>*BYE*</text>
+</icon> <icon>
+
+<object mime='image/png'>smirk.png</object>
+  <text>*YES*</text>
+</icon> <icon>
+
+<object mime='image/png'>sarcastic.png</object>
+  <text>;D</text>
+</icon> <icon>
+
+<object mime='image/png'>pissed-off.png</object>
+  <text>*WALL*</text>
+</icon> <icon>
+
+<object mime='image/png'>mail.png</object>
+  <text>*WRITE*</text>
+</icon> <icon>
+
+<object mime='image/png'>tremble.png</object>
+  <text>*SCRATCH*</text>
+</icon>
+
 
 </icondef>
+
