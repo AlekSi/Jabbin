@@ -88,16 +88,23 @@ void YaLoginPage::accountCountChanged()
 
 	Q_ASSERT(contactList_);
 	foreach(PsiAccount* account, knownAccounts_) {
+		disconnect(account, SIGNAL(connectionError(QString)), this, SLOT(connectionError(QString)));
 		disconnect(account, SIGNAL(updatedActivity()), this, SLOT(updatedActivity()));
 	}
 
 	foreach(PsiAccount* account, contactList_->accounts()) {
+		connect(account, SIGNAL(connectionError(QString)), this, SLOT(connectionError(QString)));
 		connect(account, SIGNAL(updatedActivity()), this, SLOT(updatedActivity()));
 		accounts << account;
 	}
 
 	knownAccounts_ = accounts;
 	updatedActivity();
+}
+
+void YaLoginPage::connectionError(const QString &error)
+{
+	ui_.errorLabel->setText(error);
 }
 
 void YaLoginPage::updatedActivity()

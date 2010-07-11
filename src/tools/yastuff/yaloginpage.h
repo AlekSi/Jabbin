@@ -48,6 +48,7 @@ protected:
 
 private slots:
 	void accountCountChanged();
+	void connectionError(const QString &error);
 	void updatedActivity();
 
 	void updateFocus();
