@@ -1578,15 +1578,6 @@ void PsiAccount::login()
 	d->client->connectToServer(d->stream, j);
 }
 
-void PsiAccount::signout() {
-    setStatus(XMPP::Status::Offline);
-    // logout();
-    // v_isActive = false;
-    // doReconnect = true;
-    // emit disconnected();
-    emit signedout();
-}
-
 // disconnect or stop reconnecting
 void PsiAccount::logout(bool fast, const Status &s)
 {
@@ -1649,7 +1640,7 @@ void PsiAccount::disconnect()
 		d->client->close();
 		cleanupStream();
 
-		disconnected();
+		emit disconnected();
 	}
 }
 
@@ -1851,7 +1842,7 @@ void PsiAccount::cs_warning(int w)
 		v_isActive = false;
 		d->loginStatus = Status(Status::Offline);
 		stateChanged();
-		disconnected();
+		emit disconnected();
 	}
 
 	if (showNoTlsWarning) {
@@ -2124,7 +2115,7 @@ void PsiAccount::cs_error(int err)
 	v_isActive = false;
 	d->loginStatus = Status(Status::Offline);
 	stateChanged();
-	disconnected();
+	emit disconnected();
 
 #ifndef YAPSI
 	bool printAccountName = d->psi->contactList()->enabledAccounts().count() > 1;

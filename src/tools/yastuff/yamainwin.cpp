@@ -959,8 +959,12 @@ void YaMainWin::statusSelected(XMPP::Status::Type statusType)
 
 void YaMainWin::signoutRequested()
 {
-    qDebug() << "###################### SIGNOUT";
-    account()->signout();
+	qDebug() << "###################### SIGNOUT";
+	foreach (PsiAccount *acc, psi_->contactList()->enabledAccounts()) {
+		if (acc->isAvailable()) {
+			acc->changeStatus(STATUS_OFFLINE);
+		}
+	}
 }
 
 void YaMainWin::dndEnabledActionTriggered()

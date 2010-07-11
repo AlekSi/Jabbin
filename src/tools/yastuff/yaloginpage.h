@@ -47,10 +47,8 @@ protected:
 	void paintEvent(QPaintEvent*);
 
 private slots:
-	void connectionError(const QString&);
 	void accountCountChanged();
 	void updatedActivity();
-        void disconnected();
 
 	void updateFocus();
 	void textChanged();
@@ -62,7 +60,6 @@ private slots:
 private:
 	PsiContactList* contactList_;
 	bool shouldBeVisible_;
-	bool disabled_;
 	Ui::YaLoginPage ui_;
 	QList<PsiAccount*> knownAccounts_;
 

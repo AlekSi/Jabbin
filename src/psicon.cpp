@@ -813,8 +813,9 @@ void PsiCon::deinit()
 	LOG_TRACE;
 
 #ifdef YAPSI
-	delete yaToasterCentral_;
-	yaToasterCentral_ = 0;
+	if (yaToasterCentral_) {
+		delete yaToasterCentral_;
+	}
 #endif
 
 	// this deletes all dialogs except for mainwin
@@ -823,14 +824,22 @@ void PsiCon::deinit()
 	d->idle.stop();
 
 	// shut down all accounts
-	UserAccountList acc = d->contactList->getUserAccountList();
-	delete d->contactList;
+	if (d->contactList) {
+		UserAccountList acc = d->contactList->getUserAccountList();
+		// save profile
+		d->saveProfile(acc);
+		delete d->contactList;
+	}
 
 	// delete s5b server
-	delete d->s5bServer;
+	if (d->s5bServer) {
+		delete d->s5bServer;
+	}
 
 #ifdef FILETRANSFER
-	delete d->ftwin;
+	if (d->ftwin) {
+		delete d->ftwin;
+	}
 #endif
 
 	if(d->mainwin) {
@@ -839,10 +848,10 @@ void PsiCon::deinit()
 	}
 
 	// TuneController
-	delete d->tuneController;
+	if (d->tuneController) {
+		delete d->tuneController;
+	}
 
-	// save profile
-	d->saveProfile(acc);
 	LOG_TRACE;
 
 	GlobalShortcutManager::clear();

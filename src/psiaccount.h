@@ -229,7 +229,6 @@ public:
 signals:
 	void connectionError(const QString& errorInfo);
 	void disconnected();
-        void signedout();
 	void reconnecting();
 	void updatedActivity();
 	void updatedAccount();
@@ -429,7 +428,6 @@ public:
 	bool usingSecurityLayer() const;
 	QStringList groupList() const;
 	void updateEntry(const UserListItem& u);
-	void signout();
 
 #ifdef YAPSI
 	bool isYaAccount() const;

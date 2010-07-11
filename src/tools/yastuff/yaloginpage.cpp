@@ -35,7 +35,6 @@ YaLoginPage::YaLoginPage()
 	: QWidget(0)
 	, contactList_(0)
 	, shouldBeVisible_(true)
-	, disabled_(false)
 {
 	ui_.setupUi(this);
 	connect(ui_.signIn, SIGNAL(clicked()), SLOT(signIn()));
@@ -88,13 +87,12 @@ void YaLoginPage::accountCountChanged()
 	QList<PsiAccount*> accounts;
 
 	Q_ASSERT(contactList_);
-	foreach(PsiAccount* account, contactList_->accounts()) {
-		if (knownAccounts_.contains(account))
-			continue;
+	foreach(PsiAccount* account, knownAccounts_) {
+		disconnect(account, SIGNAL(updatedActivity()), this, SLOT(updatedActivity()));
+	}
 
+	foreach(PsiAccount* account, contactList_->accounts()) {
 		connect(account, SIGNAL(updatedActivity()), this, SLOT(updatedActivity()));
-		connect(account, SIGNAL(connectionError(const QString&)), this, SLOT(connectionError(const QString&)));
-		connect(account, SIGNAL(signedout()), this, SLOT(disconnected()));
 		accounts << account;
 	}
 
@@ -119,11 +117,6 @@ void YaLoginPage::updatedActivity()
 				shouldBeVisible = false;
 		}
 	}
-
-	if (!shouldBeVisible)
-		disabled_ = true;
-	if (disabled_)
-		shouldBeVisible = false;
 
 	setShouldBeVisible(shouldBeVisible);
 }
@@ -177,29 +170,6 @@ void YaLoginPage::setShouldBeVisible(bool shouldBeVisible)
 	}
 }
 
-void YaLoginPage::connectionError(const QString& error)
-{
-        if (!error.isEmpty()) {
-                //getLoginAccount()->signout();
-                //disconnected();
-		QTimer::singleShot(500, this, SLOT(disconnected()));
-        }
-	ui_.errorLabel->setText(error);
-}
-
-void YaLoginPage::disconnected()
-{
-        qDebug() << "YaLoginPage::disconnected";
-        qDebug() << getLoginAccount()->currentConnectionErrorCondition() << getLoginAccount()->currentConnectionError();
-
-        // heuristic white-listing
-        if (getLoginAccount()->currentConnectionError().isEmpty()) {
-            setShouldBeVisible(true);
-        } else {
-            setShouldBeVisible(false);
-        }
-}
-
 void YaLoginPage::signIn()
 {
 	ui_.errorLabel->setText(QString());
@@ -214,11 +184,6 @@ void YaLoginPage::signIn()
 		account = contactList_->psi()->createAccount();
 	}
 	Q_ASSERT(account);
-
-	foreach(PsiAccount* acc, contactList_->accounts()) {
-		disconnect(acc, SIGNAL(connectionError(const QString&)), this, SLOT(connectionError(const QString&)));
-	}
-	connect(account, SIGNAL(connectionError(const QString&)), this, SLOT(connectionError(const QString&)));
 
 	UserAccount acc = account->userAccount();
 	acc.jid  = jid;

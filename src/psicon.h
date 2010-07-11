@@ -195,7 +195,7 @@ private:
 	YaOnline* yaOnline_;
 #endif
 #ifdef YAPSI
-	YaToasterCentral* yaToasterCentral_;
+	QPointer<YaToasterCentral> yaToasterCentral_;
 #endif
 
 	void deleteAllDialogs();
