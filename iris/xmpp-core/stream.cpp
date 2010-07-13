@@ -62,7 +62,7 @@
 #include "td.h"
 #endif
 
-//#define XMPP_DEBUG
+#define XMPP_DEBUG
 
 using namespace XMPP;
 
@@ -716,7 +716,7 @@ void ClientStream::sasl_nextStep(const QByteArray &stepData)
 void ClientStream::sasl_needParams(const QCA::SASL::Params& p)
 {
 #ifdef XMPP_DEBUG
-	printf("need params: %d,%d,%d,%d\n", p.user, p.authzid, p.pass, p.realm);
+	//printf("need params: %d,%d,%d,%d\n", p.user, p.authzid, p.pass, p.realm);
 #endif
 	/*if(p.authzid && !p.user) {
 		d->sasl->setAuthzid(d->jid.bare());
