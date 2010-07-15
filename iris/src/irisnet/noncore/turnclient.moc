@@ -1,0 +1,130 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'turnclient.cpp'
+**
+** Created: Thu Jul 15 01:35:26 2010
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'turnclient.cpp' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 62
+#error "This file was generated using the moc from 4.6.3. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_XMPP__TurnClient__Private[] = {
+
+ // content:
+       4,       // revision
+       0,       // classname
+       0,    0, // classinfo
+      20,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: signature, parameters, type, tag, flags
+      27,   26,   26,   26, 0x08,
+      42,   26,   26,   26, 0x08,
+      64,   26,   26,   26, 0x08,
+      90,   26,   26,   26, 0x08,
+     113,  105,   26,   26, 0x08,
+     136,  134,   26,   26, 0x08,
+     150,   26,   26,   26, 0x08,
+     167,   26,   26,   26, 0x08,
+     183,   26,   26,   26, 0x08,
+     207,   26,   26,   26, 0x08,
+     220,   26,   26,   26, 0x08,
+     256,  232,   26,   26, 0x08,
+     306,   26,   26,   26, 0x08,
+     333,  328,   26,   26, 0x08,
+     357,   26,   26,   26, 0x08,
+     376,   26,   26,   26, 0x08,
+     395,  134,   26,   26, 0x08,
+     437,   26,   26,   26, 0x08,
+     467,   26,   26,   26, 0x08,
+     494,  328,   26,   26, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_XMPP__TurnClient__Private[] = {
+    "XMPP::TurnClient::Private\0\0bs_connected()\0"
+    "bs_connectionClosed()\0bs_delayedCloseFinished()\0"
+    "bs_readyRead()\0written\0bs_bytesWritten(int)\0"
+    "e\0bs_error(int)\0tls_handshaken()\0"
+    "tls_readyRead()\0tls_readyReadOutgoing()\0"
+    "tls_closed()\0tls_error()\0"
+    "packet,toAddress,toPort\0"
+    "pool_outgoingMessage(QByteArray,QHostAddress,int)\0"
+    "pool_needAuthParams()\0line\0"
+    "pool_debugLine(QString)\0allocate_started()\0"
+    "allocate_stopped()\0"
+    "allocate_error(XMPP::StunAllocate::Error)\0"
+    "allocate_permissionsChanged()\0"
+    "allocate_channelsChanged()\0"
+    "allocate_debugLine(QString)\0"
+};
+
+const QMetaObject XMPP::TurnClient::Private::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_XMPP__TurnClient__Private,
+      qt_meta_data_XMPP__TurnClient__Private, 0 }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &XMPP::TurnClient::Private::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *XMPP::TurnClient::Private::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *XMPP::TurnClient::Private::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_XMPP__TurnClient__Private))
+        return static_cast<void*>(const_cast< Private*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int XMPP::TurnClient::Private::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: bs_connected(); break;
+        case 1: bs_connectionClosed(); break;
+        case 2: bs_delayedCloseFinished(); break;
+        case 3: bs_readyRead(); break;
+        case 4: bs_bytesWritten((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: bs_error((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: tls_handshaken(); break;
+        case 7: tls_readyRead(); break;
+        case 8: tls_readyReadOutgoing(); break;
+        case 9: tls_closed(); break;
+        case 10: tls_error(); break;
+        case 11: pool_outgoingMessage((*reinterpret_cast< const QByteArray(*)>(_a[1])),(*reinterpret_cast< const QHostAddress(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 12: pool_needAuthParams(); break;
+        case 13: pool_debugLine((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 14: allocate_started(); break;
+        case 15: allocate_stopped(); break;
+        case 16: allocate_error((*reinterpret_cast< XMPP::StunAllocate::Error(*)>(_a[1]))); break;
+        case 17: allocate_permissionsChanged(); break;
+        case 18: allocate_channelsChanged(); break;
+        case 19: allocate_debugLine((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        default: ;
+        }
+        _id -= 20;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE

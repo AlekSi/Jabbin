@@ -1,0 +1,7 @@
+QMAKE_PRL_BUILD_DIR = /home/rion/projects/jabbin/iris/src/irisnet/noncore
+QMAKE_PRO_INPUT = noncore.pro
+QMAKE_PRL_TARGET = libirisnet.a
+QMAKE_PRL_DEFINES = IRISNET_STATIC
+QMAKE_PRL_CONFIG = include_source_dir lex yacc warn_on uic resources qt warn_on release incremental link_prl exceptions no_mocdepend release stl qt_no_framework staticlib create_prl release separate_debug_info qca-static dbus release no_tests irisnetcore_bundle static staticlib moc thread
+QMAKE_PRL_VERSION = 1.0.0
+QMAKE_PRL_LIBS = -L/usr/lib64/qt4  -lssl -lcrypto -lz -lXss -laspell -lQtNetwork -L/usr/lib64 -L/usr/lib64/qt4 -lQtCore -lgthread-2.0 -lrt -lglib-2.0 -lpthread  

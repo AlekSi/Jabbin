@@ -1,0 +1,302 @@
+/****************************************************************************
+** Meta object code from reading C++ file 's5b.cpp'
+**
+** Created: Thu Jul 15 01:35:38 2010
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 's5b.cpp' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 62
+#error "This file was generated using the moc from 4.6.3. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_XMPP__S5BManager__Item[] = {
+
+ // content:
+       4,       // revision
+       0,       // classname
+       0,    0, // classinfo
+      13,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       6,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      24,   23,   23,   23, 0x05,
+      40,   35,   23,   23, 0x05,
+      68,   23,   23,   23, 0x05,
+      83,   23,   23,   23, 0x05,
+     106,   23,   23,   23, 0x05,
+     118,   23,   23,   23, 0x05,
+
+ // slots: signature, parameters, type, tag, flags
+     129,   23,   23,   23, 0x08,
+     145,  143,   23,   23, 0x08,
+     163,  143,   23,   23, 0x08,
+     182,   23,   23,   23, 0x08,
+     199,   23,   23,   23, 0x08,
+     214,   23,   23,   23, 0x08,
+     235,   23,   23,   23, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_XMPP__S5BManager__Item[] = {
+    "XMPP::S5BManager::Item\0\0accepted()\0"
+    "list\0tryingHosts(StreamHostList)\0"
+    "proxyConnect()\0waitingForActivation()\0"
+    "connected()\0error(int)\0jt_finished()\0"
+    "b\0conn_result(bool)\0proxy_result(bool)\0"
+    "proxy_finished()\0sc_readyRead()\0"
+    "sc_bytesWritten(int)\0sc_error(int)\0"
+};
+
+const QMetaObject XMPP::S5BManager::Item::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_XMPP__S5BManager__Item,
+      qt_meta_data_XMPP__S5BManager__Item, 0 }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &XMPP::S5BManager::Item::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *XMPP::S5BManager::Item::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *XMPP::S5BManager::Item::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_XMPP__S5BManager__Item))
+        return static_cast<void*>(const_cast< Item*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int XMPP::S5BManager::Item::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: accepted(); break;
+        case 1: tryingHosts((*reinterpret_cast< const StreamHostList(*)>(_a[1]))); break;
+        case 2: proxyConnect(); break;
+        case 3: waitingForActivation(); break;
+        case 4: connected(); break;
+        case 5: error((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: jt_finished(); break;
+        case 7: conn_result((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 8: proxy_result((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 9: proxy_finished(); break;
+        case 10: sc_readyRead(); break;
+        case 11: sc_bytesWritten((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 12: sc_error((*reinterpret_cast< int(*)>(_a[1]))); break;
+        default: ;
+        }
+        _id -= 13;
+    }
+    return _id;
+}
+
+// SIGNAL 0
+void XMPP::S5BManager::Item::accepted()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, 0);
+}
+
+// SIGNAL 1
+void XMPP::S5BManager::Item::tryingHosts(const StreamHostList & _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+
+// SIGNAL 2
+void XMPP::S5BManager::Item::proxyConnect()
+{
+    QMetaObject::activate(this, &staticMetaObject, 2, 0);
+}
+
+// SIGNAL 3
+void XMPP::S5BManager::Item::waitingForActivation()
+{
+    QMetaObject::activate(this, &staticMetaObject, 3, 0);
+}
+
+// SIGNAL 4
+void XMPP::S5BManager::Item::connected()
+{
+    QMetaObject::activate(this, &staticMetaObject, 4, 0);
+}
+
+// SIGNAL 5
+void XMPP::S5BManager::Item::error(int _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 5, _a);
+}
+static const uint qt_meta_data_XMPP__S5BConnector__Item[] = {
+
+ // content:
+       4,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       4,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       1,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      26,   25,   25,   25, 0x05,
+
+ // slots: signature, parameters, type, tag, flags
+      39,   25,   25,   25, 0x08,
+      54,   25,   25,   25, 0x08,
+      68,   25,   25,   25, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_XMPP__S5BConnector__Item[] = {
+    "XMPP::S5BConnector::Item\0\0result(bool)\0"
+    "sc_connected()\0sc_error(int)\0trySendUDP()\0"
+};
+
+const QMetaObject XMPP::S5BConnector::Item::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_XMPP__S5BConnector__Item,
+      qt_meta_data_XMPP__S5BConnector__Item, 0 }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &XMPP::S5BConnector::Item::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *XMPP::S5BConnector::Item::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *XMPP::S5BConnector::Item::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_XMPP__S5BConnector__Item))
+        return static_cast<void*>(const_cast< Item*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int XMPP::S5BConnector::Item::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: result((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 1: sc_connected(); break;
+        case 2: sc_error((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: trySendUDP(); break;
+        default: ;
+        }
+        _id -= 4;
+    }
+    return _id;
+}
+
+// SIGNAL 0
+void XMPP::S5BConnector::Item::result(bool _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+static const uint qt_meta_data_XMPP__S5BServer__Item[] = {
+
+ // content:
+       4,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       5,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       1,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      23,   22,   22,   22, 0x05,
+
+ // slots: signature, parameters, type, tag, flags
+      36,   22,   22,   22, 0x08,
+      48,   46,   22,   22, 0x08,
+      83,   72,   22,   22, 0x08,
+     122,   22,   22,   22, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_XMPP__S5BServer__Item[] = {
+    "XMPP::S5BServer::Item\0\0result(bool)\0"
+    "doError()\0m\0sc_incomingMethods(int)\0"
+    "_host,port\0sc_incomingConnectRequest(QString,int)\0"
+    "sc_error(int)\0"
+};
+
+const QMetaObject XMPP::S5BServer::Item::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_XMPP__S5BServer__Item,
+      qt_meta_data_XMPP__S5BServer__Item, 0 }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &XMPP::S5BServer::Item::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *XMPP::S5BServer::Item::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *XMPP::S5BServer::Item::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_XMPP__S5BServer__Item))
+        return static_cast<void*>(const_cast< Item*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int XMPP::S5BServer::Item::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: result((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 1: doError(); break;
+        case 2: sc_incomingMethods((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: sc_incomingConnectRequest((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 4: sc_error((*reinterpret_cast< int(*)>(_a[1]))); break;
+        default: ;
+        }
+        _id -= 5;
+    }
+    return _id;
+}
+
+// SIGNAL 0
+void XMPP::S5BServer::Item::result(bool _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
+}
+QT_END_MOC_NAMESPACE

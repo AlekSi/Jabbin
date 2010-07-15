@@ -1,0 +1,264 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'netinterface.cpp'
+**
+** Created: Thu Jul 15 01:35:22 2010
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'netinterface.cpp' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 62
+#error "This file was generated using the moc from 4.6.3. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_XMPP__NetTracker[] = {
+
+ // content:
+       4,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       2,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       1,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      18,   17,   17,   17, 0x05,
+
+ // slots: signature, parameters, type, tag, flags
+      28,   17,   17,   17, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_XMPP__NetTracker[] = {
+    "XMPP::NetTracker\0\0updated()\0c_updated()\0"
+};
+
+const QMetaObject XMPP::NetTracker::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_XMPP__NetTracker,
+      qt_meta_data_XMPP__NetTracker, 0 }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &XMPP::NetTracker::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *XMPP::NetTracker::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *XMPP::NetTracker::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_XMPP__NetTracker))
+        return static_cast<void*>(const_cast< NetTracker*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int XMPP::NetTracker::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: updated(); break;
+        case 1: c_updated(); break;
+        default: ;
+        }
+        _id -= 2;
+    }
+    return _id;
+}
+
+// SIGNAL 0
+void XMPP::NetTracker::updated()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, 0);
+}
+static const uint qt_meta_data_XMPP__NetTrackerThread[] = {
+
+ // content:
+       4,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       1,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      24,   23,   23,   23, 0x05,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_XMPP__NetTrackerThread[] = {
+    "XMPP::NetTrackerThread\0\0updated()\0"
+};
+
+const QMetaObject XMPP::NetTrackerThread::staticMetaObject = {
+    { &QThread::staticMetaObject, qt_meta_stringdata_XMPP__NetTrackerThread,
+      qt_meta_data_XMPP__NetTrackerThread, 0 }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &XMPP::NetTrackerThread::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *XMPP::NetTrackerThread::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *XMPP::NetTrackerThread::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_XMPP__NetTrackerThread))
+        return static_cast<void*>(const_cast< NetTrackerThread*>(this));
+    return QThread::qt_metacast(_clname);
+}
+
+int XMPP::NetTrackerThread::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QThread::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: updated(); break;
+        default: ;
+        }
+        _id -= 1;
+    }
+    return _id;
+}
+
+// SIGNAL 0
+void XMPP::NetTrackerThread::updated()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, 0);
+}
+static const uint qt_meta_data_XMPP__NetInterfacePrivate[] = {
+
+ // content:
+       4,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_XMPP__NetInterfacePrivate[] = {
+    "XMPP::NetInterfacePrivate\0"
+};
+
+const QMetaObject XMPP::NetInterfacePrivate::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_XMPP__NetInterfacePrivate,
+      qt_meta_data_XMPP__NetInterfacePrivate, 0 }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &XMPP::NetInterfacePrivate::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *XMPP::NetInterfacePrivate::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *XMPP::NetInterfacePrivate::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_XMPP__NetInterfacePrivate))
+        return static_cast<void*>(const_cast< NetInterfacePrivate*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int XMPP::NetInterfacePrivate::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    return _id;
+}
+static const uint qt_meta_data_XMPP__NetInterfaceManagerPrivate[] = {
+
+ // content:
+       4,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       2,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: signature, parameters, type, tag, flags
+      34,   33,   33,   33, 0x0a,
+      52,   33,   33,   33, 0x0a,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_XMPP__NetInterfaceManagerPrivate[] = {
+    "XMPP::NetInterfaceManagerPrivate\0\0"
+    "tracker_updated()\0update()\0"
+};
+
+const QMetaObject XMPP::NetInterfaceManagerPrivate::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_XMPP__NetInterfaceManagerPrivate,
+      qt_meta_data_XMPP__NetInterfaceManagerPrivate, 0 }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &XMPP::NetInterfaceManagerPrivate::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *XMPP::NetInterfaceManagerPrivate::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *XMPP::NetInterfaceManagerPrivate::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_XMPP__NetInterfaceManagerPrivate))
+        return static_cast<void*>(const_cast< NetInterfaceManagerPrivate*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int XMPP::NetInterfaceManagerPrivate::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: tracker_updated(); break;
+        case 1: update(); break;
+        default: ;
+        }
+        _id -= 2;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE

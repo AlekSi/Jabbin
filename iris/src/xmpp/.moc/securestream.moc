@@ -1,0 +1,167 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'securestream.cpp'
+**
+** Created: Thu Jul 15 01:35:36 2010
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'securestream.cpp' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 62
+#error "This file was generated using the moc from 4.6.3. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_SecureLayer[] = {
+
+ // content:
+       4,       // revision
+       0,       // classname
+       0,    0, // classinfo
+      21,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       5,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      13,   12,   12,   12, 0x05,
+      29,   12,   12,   12, 0x05,
+      51,   12,   12,   12, 0x05,
+      73,   12,   12,   12, 0x05,
+      95,   12,   12,   12, 0x05,
+
+ // slots: signature, parameters, type, tag, flags
+     106,   12,   12,   12, 0x08,
+     123,   12,   12,   12, 0x08,
+     150,  139,   12,   12, 0x08,
+     177,   12,   12,   12, 0x08,
+     192,  190,   12,   12, 0x08,
+     207,   12,   12,   12, 0x08,
+     224,   12,   12,   12, 0x08,
+     249,   12,   12,   12, 0x08,
+     262,   12,   12,   12, 0x08,
+     293,   12,   12,   12, 0x08,
+     332,   12,   12,   12, 0x08,
+     359,   12,   12,   12, 0x08,
+     380,   12,   12,   12, 0x08,
+     398,   12,   12,   12, 0x08,
+     420,  418,   12,   12, 0x08,
+     466,  453,   12,   12, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_SecureLayer[] = {
+    "SecureLayer\0\0tlsHandshaken()\0"
+    "tlsClosed(QByteArray)\0readyRead(QByteArray)\0"
+    "needWrite(QByteArray)\0error(int)\0"
+    "tls_handshaken()\0tls_readyRead()\0"
+    "plainBytes\0tls_readyReadOutgoing(int)\0"
+    "tls_closed()\0x\0tls_error(int)\0"
+    "sasl_readyRead()\0sasl_readyReadOutgoing()\0"
+    "sasl_error()\0compressionHandler_readyRead()\0"
+    "compressionHandler_readyReadOutgoing()\0"
+    "compressionHandler_error()\0"
+    "tlsHandler_success()\0tlsHandler_fail()\0"
+    "tlsHandler_closed()\0a\0"
+    "tlsHandler_readyRead(QByteArray)\0"
+    "a,plainBytes\0tlsHandler_readyReadOutgoing(QByteArray,int)\0"
+};
+
+const QMetaObject SecureLayer::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_SecureLayer,
+      qt_meta_data_SecureLayer, 0 }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &SecureLayer::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *SecureLayer::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *SecureLayer::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_SecureLayer))
+        return static_cast<void*>(const_cast< SecureLayer*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int SecureLayer::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: tlsHandshaken(); break;
+        case 1: tlsClosed((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
+        case 2: readyRead((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
+        case 3: needWrite((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
+        case 4: error((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 5: tls_handshaken(); break;
+        case 6: tls_readyRead(); break;
+        case 7: tls_readyReadOutgoing((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 8: tls_closed(); break;
+        case 9: tls_error((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 10: sasl_readyRead(); break;
+        case 11: sasl_readyReadOutgoing(); break;
+        case 12: sasl_error(); break;
+        case 13: compressionHandler_readyRead(); break;
+        case 14: compressionHandler_readyReadOutgoing(); break;
+        case 15: compressionHandler_error(); break;
+        case 16: tlsHandler_success(); break;
+        case 17: tlsHandler_fail(); break;
+        case 18: tlsHandler_closed(); break;
+        case 19: tlsHandler_readyRead((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
+        case 20: tlsHandler_readyReadOutgoing((*reinterpret_cast< const QByteArray(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        default: ;
+        }
+        _id -= 21;
+    }
+    return _id;
+}
+
+// SIGNAL 0
+void SecureLayer::tlsHandshaken()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, 0);
+}
+
+// SIGNAL 1
+void SecureLayer::tlsClosed(const QByteArray & _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+
+// SIGNAL 2
+void SecureLayer::readyRead(const QByteArray & _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 2, _a);
+}
+
+// SIGNAL 3
+void SecureLayer::needWrite(const QByteArray & _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 3, _a);
+}
+
+// SIGNAL 4
+void SecureLayer::error(int _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 4, _a);
+}
+QT_END_MOC_NAMESPACE

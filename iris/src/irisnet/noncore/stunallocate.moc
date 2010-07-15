@@ -1,0 +1,277 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'stunallocate.cpp'
+**
+** Created: Thu Jul 15 01:35:26 2010
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'stunallocate.cpp' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 62
+#error "This file was generated using the moc from 4.6.3. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_XMPP__StunAllocatePermission[] = {
+
+ // content:
+       4,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       6,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       2,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      30,   29,   29,   29, 0x05,
+      47,   38,   29,   29, 0x05,
+
+ // slots: signature, parameters, type, tag, flags
+     112,   98,   29,   29, 0x08,
+     153,  144,   29,   29, 0x08,
+     189,  187,   29,   29, 0x08,
+     231,   29,   29,   29, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_XMPP__StunAllocatePermission[] = {
+    "XMPP::StunAllocatePermission\0\0ready()\0"
+    "e,reason\0error(XMPP::StunAllocatePermission::Error,QString)\0"
+    "transactionId\0trans_createMessage(QByteArray)\0"
+    "response\0trans_finished(XMPP::StunMessage)\0"
+    "e\0trans_error(XMPP::StunTransaction::Error)\0"
+    "timer_timeout()\0"
+};
+
+const QMetaObject XMPP::StunAllocatePermission::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_XMPP__StunAllocatePermission,
+      qt_meta_data_XMPP__StunAllocatePermission, 0 }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &XMPP::StunAllocatePermission::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *XMPP::StunAllocatePermission::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *XMPP::StunAllocatePermission::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_XMPP__StunAllocatePermission))
+        return static_cast<void*>(const_cast< StunAllocatePermission*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int XMPP::StunAllocatePermission::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: ready(); break;
+        case 1: error((*reinterpret_cast< XMPP::StunAllocatePermission::Error(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 2: trans_createMessage((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
+        case 3: trans_finished((*reinterpret_cast< const XMPP::StunMessage(*)>(_a[1]))); break;
+        case 4: trans_error((*reinterpret_cast< XMPP::StunTransaction::Error(*)>(_a[1]))); break;
+        case 5: timer_timeout(); break;
+        default: ;
+        }
+        _id -= 6;
+    }
+    return _id;
+}
+
+// SIGNAL 0
+void XMPP::StunAllocatePermission::ready()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, 0);
+}
+
+// SIGNAL 1
+void XMPP::StunAllocatePermission::error(XMPP::StunAllocatePermission::Error _t1, const QString & _t2)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+static const uint qt_meta_data_XMPP__StunAllocateChannel[] = {
+
+ // content:
+       4,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       6,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       2,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      27,   26,   26,   26, 0x05,
+      44,   35,   26,   26, 0x05,
+
+ // slots: signature, parameters, type, tag, flags
+     106,   92,   26,   26, 0x08,
+     147,  138,   26,   26, 0x08,
+     183,  181,   26,   26, 0x08,
+     225,   26,   26,   26, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_XMPP__StunAllocateChannel[] = {
+    "XMPP::StunAllocateChannel\0\0ready()\0"
+    "e,reason\0error(XMPP::StunAllocateChannel::Error,QString)\0"
+    "transactionId\0trans_createMessage(QByteArray)\0"
+    "response\0trans_finished(XMPP::StunMessage)\0"
+    "e\0trans_error(XMPP::StunTransaction::Error)\0"
+    "timer_timeout()\0"
+};
+
+const QMetaObject XMPP::StunAllocateChannel::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_XMPP__StunAllocateChannel,
+      qt_meta_data_XMPP__StunAllocateChannel, 0 }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &XMPP::StunAllocateChannel::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *XMPP::StunAllocateChannel::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *XMPP::StunAllocateChannel::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_XMPP__StunAllocateChannel))
+        return static_cast<void*>(const_cast< StunAllocateChannel*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int XMPP::StunAllocateChannel::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: ready(); break;
+        case 1: error((*reinterpret_cast< XMPP::StunAllocateChannel::Error(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 2: trans_createMessage((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
+        case 3: trans_finished((*reinterpret_cast< const XMPP::StunMessage(*)>(_a[1]))); break;
+        case 4: trans_error((*reinterpret_cast< XMPP::StunTransaction::Error(*)>(_a[1]))); break;
+        case 5: timer_timeout(); break;
+        default: ;
+        }
+        _id -= 6;
+    }
+    return _id;
+}
+
+// SIGNAL 0
+void XMPP::StunAllocateChannel::ready()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, 0);
+}
+
+// SIGNAL 1
+void XMPP::StunAllocateChannel::error(XMPP::StunAllocateChannel::Error _t1, const QString & _t2)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+static const uint qt_meta_data_XMPP__StunAllocate__Private[] = {
+
+ // content:
+       4,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       8,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: signature, parameters, type, tag, flags
+      29,   28,   28,   28, 0x08,
+      53,   39,   28,   28, 0x08,
+      94,   85,   28,   28, 0x08,
+     128,   28,   28,   28, 0x08,
+     150,  141,   28,   28, 0x08,
+     206,   28,   28,   28, 0x08,
+     222,  141,   28,   28, 0x08,
+     280,  278,   28,   28, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_XMPP__StunAllocate__Private[] = {
+    "XMPP::StunAllocate::Private\0\0refresh()\0"
+    "transactionId\0trans_createMessage(QByteArray)\0"
+    "response\0trans_finished(XMPP::StunMessage)\0"
+    "perm_ready()\0e,reason\0"
+    "perm_error(XMPP::StunAllocatePermission::Error,QString)\0"
+    "channel_ready()\0"
+    "channel_error(XMPP::StunAllocateChannel::Error,QString)\0"
+    "e\0trans_error(XMPP::StunTransaction::Error)\0"
+};
+
+const QMetaObject XMPP::StunAllocate::Private::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_XMPP__StunAllocate__Private,
+      qt_meta_data_XMPP__StunAllocate__Private, 0 }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &XMPP::StunAllocate::Private::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *XMPP::StunAllocate::Private::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *XMPP::StunAllocate::Private::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_XMPP__StunAllocate__Private))
+        return static_cast<void*>(const_cast< Private*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int XMPP::StunAllocate::Private::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: refresh(); break;
+        case 1: trans_createMessage((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
+        case 2: trans_finished((*reinterpret_cast< const XMPP::StunMessage(*)>(_a[1]))); break;
+        case 3: perm_ready(); break;
+        case 4: perm_error((*reinterpret_cast< XMPP::StunAllocatePermission::Error(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 5: channel_ready(); break;
+        case 6: channel_error((*reinterpret_cast< XMPP::StunAllocateChannel::Error(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
+        case 7: trans_error((*reinterpret_cast< XMPP::StunTransaction::Error(*)>(_a[1]))); break;
+        default: ;
+        }
+        _id -= 8;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE

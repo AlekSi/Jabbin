@@ -1,0 +1,209 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'icelocaltransport.cpp'
+**
+** Created: Thu Jul 15 01:35:27 2010
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'icelocaltransport.cpp' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 62
+#error "This file was generated using the moc from 4.6.3. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_XMPP__SafeUdpSocket[] = {
+
+ // content:
+       4,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       5,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       2,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      21,   20,   20,   20, 0x05,
+      39,   33,   20,   20, 0x05,
+
+ // slots: signature, parameters, type, tag, flags
+      61,   20,   20,   20, 0x08,
+      84,   78,   20,   20, 0x08,
+     110,   20,   20,   20, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_XMPP__SafeUdpSocket[] = {
+    "XMPP::SafeUdpSocket\0\0readyRead()\0count\0"
+    "datagramsWritten(int)\0sock_readyRead()\0"
+    "bytes\0sock_bytesWritten(qint64)\0"
+    "processWritten()\0"
+};
+
+const QMetaObject XMPP::SafeUdpSocket::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_XMPP__SafeUdpSocket,
+      qt_meta_data_XMPP__SafeUdpSocket, 0 }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &XMPP::SafeUdpSocket::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *XMPP::SafeUdpSocket::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *XMPP::SafeUdpSocket::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_XMPP__SafeUdpSocket))
+        return static_cast<void*>(const_cast< SafeUdpSocket*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int XMPP::SafeUdpSocket::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: readyRead(); break;
+        case 1: datagramsWritten((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: sock_readyRead(); break;
+        case 3: sock_bytesWritten((*reinterpret_cast< qint64(*)>(_a[1]))); break;
+        case 4: processWritten(); break;
+        default: ;
+        }
+        _id -= 5;
+    }
+    return _id;
+}
+
+// SIGNAL 0
+void XMPP::SafeUdpSocket::readyRead()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, 0);
+}
+
+// SIGNAL 1
+void XMPP::SafeUdpSocket::datagramsWritten(int _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
+}
+static const uint qt_meta_data_XMPP__IceLocalTransport__Private[] = {
+
+ // content:
+       4,       // revision
+       0,       // classname
+       0,    0, // classinfo
+      17,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: signature, parameters, type, tag, flags
+      34,   33,   33,   33, 0x08,
+      46,   33,   33,   33, 0x08,
+      57,   33,   33,   33, 0x08,
+      80,   74,   33,   33, 0x08,
+     131,  107,   33,   33, 0x08,
+     181,   33,   33,   33, 0x08,
+     208,  203,   33,   33, 0x08,
+     232,   33,   33,   33, 0x08,
+     252,  250,   33,   33, 0x08,
+     292,   33,   33,   33, 0x08,
+     309,   33,   33,   33, 0x08,
+     330,   33,   33,   33, 0x08,
+     344,   33,   33,   33, 0x08,
+     377,  361,   33,   33, 0x08,
+     419,  250,   33,   33, 0x08,
+     459,  455,   33,   33, 0x08,
+     493,  203,   33,   33, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_XMPP__IceLocalTransport__Private[] = {
+    "XMPP::IceLocalTransport::Private\0\0"
+    "postStart()\0postStop()\0sock_readyRead()\0"
+    "count\0sock_datagramsWritten(int)\0"
+    "packet,toAddress,toPort\0"
+    "pool_outgoingMessage(QByteArray,QHostAddress,int)\0"
+    "pool_needAuthParams()\0line\0"
+    "pool_debugLine(QString)\0binding_success()\0"
+    "e\0binding_error(XMPP::StunBinding::Error)\0"
+    "turn_connected()\0turn_tlsHandshaken()\0"
+    "turn_closed()\0turn_activated()\0"
+    "count,addr,port\0"
+    "turn_packetsWritten(int,QHostAddress,int)\0"
+    "turn_error(XMPP::TurnClient::Error)\0"
+    "buf\0turn_outgoingDatagram(QByteArray)\0"
+    "turn_debugLine(QString)\0"
+};
+
+const QMetaObject XMPP::IceLocalTransport::Private::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_XMPP__IceLocalTransport__Private,
+      qt_meta_data_XMPP__IceLocalTransport__Private, 0 }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &XMPP::IceLocalTransport::Private::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *XMPP::IceLocalTransport::Private::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *XMPP::IceLocalTransport::Private::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_XMPP__IceLocalTransport__Private))
+        return static_cast<void*>(const_cast< Private*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int XMPP::IceLocalTransport::Private::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        switch (_id) {
+        case 0: postStart(); break;
+        case 1: postStop(); break;
+        case 2: sock_readyRead(); break;
+        case 3: sock_datagramsWritten((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: pool_outgoingMessage((*reinterpret_cast< const QByteArray(*)>(_a[1])),(*reinterpret_cast< const QHostAddress(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 5: pool_needAuthParams(); break;
+        case 6: pool_debugLine((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 7: binding_success(); break;
+        case 8: binding_error((*reinterpret_cast< XMPP::StunBinding::Error(*)>(_a[1]))); break;
+        case 9: turn_connected(); break;
+        case 10: turn_tlsHandshaken(); break;
+        case 11: turn_closed(); break;
+        case 12: turn_activated(); break;
+        case 13: turn_packetsWritten((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< const QHostAddress(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
+        case 14: turn_error((*reinterpret_cast< XMPP::TurnClient::Error(*)>(_a[1]))); break;
+        case 15: turn_outgoingDatagram((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
+        case 16: turn_debugLine((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        default: ;
+        }
+        _id -= 17;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE
