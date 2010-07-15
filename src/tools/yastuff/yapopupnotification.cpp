@@ -87,14 +87,6 @@ void YaPopupNotification::notify(int id, PsiEvent* event)
 		}
 #endif
 
-#if defined(Q_WS_MAC) && defined(HAVE_GROWL)
-		PsiContact* contact = event->account()->findContact(event->from());
-		if (contact) {
-			QString contactName = Ya::contactName(contact->name(), contact->jid().bare());
-			PsiGrowlNotifier::instance()->moodChanged(event->account(), contact->jid(), contactName, moodEvent->mood());
-		}
-		return;
-#endif
 	}
 
 #ifdef YAPSI_ACTIVEX_SERVER

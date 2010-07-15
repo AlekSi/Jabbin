@@ -489,18 +489,6 @@ static QString status2name(int s)
 		name = "psi/connect";
 		break;
 
-#ifdef YAPSI
-	case XMPP::Status::Reconnecting:
-		name = "yapsi/reconnecting";
-		break;
-	case XMPP::Status::Blocked:
-		name = "yapsi/blocked";
-		break;
-	case XMPP::Status::NotAuthorizedToSeeStatus:
-		name = "yapsi/not-authorized";
-		break;
-#endif
-
 	case XMPP::Status::Online:
 	default:
 		name = "status/online";

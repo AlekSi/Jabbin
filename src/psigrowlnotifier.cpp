@@ -121,8 +121,8 @@ static QPixmap getAvatar(PsiAccount* account, const XMPP::Jid& jid)
 	QPixmap result = account->avatarFactory()->getAvatar(jid.bare());
 	if (result.isNull()) {
 		PsiContact* contact = account->findContact(jid);
-		XMPP::VCard::Gender gender = contact ? contact->gender() : XMPP::VCard::UnknownGender;
-		result = Ya::VisualUtil::noAvatarPixmapFileName(gender);
+		//XMPP::VCard::Gender gender = contact ? contact->gender() : XMPP::VCard::UnknownGender;
+		result = Ya::VisualUtil::noAvatarPixmapFileName();
 	}
 	return result;
 }
@@ -241,21 +241,5 @@ void PsiGrowlNotifier::notificationTimedOut(void* c)
 	NotificationContext* context = (NotificationContext*) c;
 	delete context;
 }
-
-#ifdef YAPSI
-void PsiGrowlNotifier::moodChanged(PsiAccount* account, const Jid& jid, const QString& name, const QString& mood)
-{
-	QString notifyName = QObject::tr("Mood Changed");
-	QString title = tr("%1 changed mood to:").arg(name);
-	QString desc = mood;
-#ifdef YAPSI
-	QPixmap icon = getAvatar(account, jid);
-#else
-	QPixmap icon = account->avatarFactory()->getAvatar(jid.bare());
-#endif
-	NotificationContext* context = new NotificationContext(account, jid);
-	gn_->notify(notifyName, title, desc, icon, false, this, SLOT(notificationClicked(void*)), SLOT(notificationTimedOut(void*)), context);
-}
-#endif
 
 PsiGrowlNotifier* PsiGrowlNotifier::instance_ = 0;

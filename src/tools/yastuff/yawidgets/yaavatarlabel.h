@@ -53,7 +53,6 @@ protected:
 
 	virtual QIcon avatar() const = 0;
 	virtual void paintAvatar(QPainter* painter);
-	virtual XMPP::VCard::Gender gender() const;
 
 private:
 	XMPP::Status::Type status_;

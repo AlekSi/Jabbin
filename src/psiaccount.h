@@ -239,7 +239,6 @@ signals:
 	void removeContact(const Jid &);
 	void nickChanged();
 #ifdef YAPSI
-	void moodChanged();
 	void lastMailNotify(const XMPP::Message&);
 	void lastMailNotify(const YaLastMail&);
 #endif
@@ -415,9 +414,6 @@ protected:
 private slots:
 	void eventFromXml(PsiEvent* e);
 	void simulateContactOffline(const XMPP::Jid& contact);
-#ifdef YAPSI
-	void moodChanged(const QString&);
-#endif
 
 private:
 	void handleEvent(PsiEvent* e, ActivationType activationType);

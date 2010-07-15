@@ -77,7 +77,6 @@ public:
 	const QString& username() const;
 	PsiAccount* account() const;
 	bool haveHistory() const;
-	XMPP::VCard::Gender gender() const;
 
 	void openProfile();
 

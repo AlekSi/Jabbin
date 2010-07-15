@@ -644,10 +644,7 @@ void YaRosterTipLabel::lastAvailableFinished()
 
 void YaRosterTipLabel::setVCard(XMPP::VCard vcard)
 {
-	if (vcard.gender() != XMPP::VCard::UnknownGender)
-		ui_.genderLabel->setPixmap(Ya::genderPixmap(vcard.gender()));
-	else
-		ui_.genderLabel->setPixmap(QPixmap());
+	ui_.genderLabel->setPixmap(QPixmap());
 
 	QStringList info;
 	if (vcard.age() > 0) {

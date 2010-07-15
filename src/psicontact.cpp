@@ -67,10 +67,6 @@ public:
 		showOnlineTemporarily_ = false;
 		reconnecting_ = false;
 
-		delayedMoodUpdateTimer_ = new QTimer(this);
-		delayedMoodUpdateTimer_->setInterval(60 * 1000);
-		delayedMoodUpdateTimer_->setSingleShot(true);
-		connect(delayedMoodUpdateTimer_, SIGNAL(timeout()), contact, SLOT(moodUpdate()));
 #endif
 
 		statusTimer_ = new QTimer(this);
@@ -195,42 +191,11 @@ void PsiContact::update(const UserListItem& u)
 	if (d->u_.priority() != d->u_.userResourceList().end())
 		status = (*d->u_.priority()).status();
 
-#ifdef YAPSI
-	moodUpdate();
-#endif
-
 	d->setStatus(status);
 
 	emit updated();
 	emit groupsChanged();
 }
-
-#ifdef YAPSI
-void PsiContact::startDelayedMoodUpdate(int timeoutInSecs)
-{
-	d->delayedMoodUpdateTimer_->setInterval((timeoutInSecs + 1) * 1000);
-	d->delayedMoodUpdateTimer_->start();
-}
-
-void PsiContact::moodUpdate()
-{
-	Status status = Status(Status::Offline);
-	if (d->u_.priority() != d->u_.userResourceList().end())
-		status = (*d->u_.priority()).status();
-
-	QString newMood = Ya::processMood(d->u_.yaMood(), status.status(), status.type());
-
-	if (status.isAvailable() &&
-	    // !status.status().isEmpty() &&
-	    newMood != d->u_.yaMood() &&
-	    !d->u_.isSelf() &&
-	    !isYaInformer())
-	{
-		// qWarning("mood changed: %s, '%s' (%s)", qPrintable(jid().full()), qPrintable(status.status()), qPrintable(d->u_.yaMood()));
-		emit moodChanged(newMood);
-	}
-}
-#endif
 
 /**
  * Triggers default action.
@@ -259,15 +224,6 @@ const QString& PsiContact::name() const
 	return d->name_;
 }
 
-XMPP::VCard::Gender PsiContact::gender() const
-{
-	const VCard* vcard = VCardFactory::instance()->vcard(jid());
-	if (vcard) {
-		return vcard->gender();
-	}
-	return XMPP::VCard::UnknownGender;
-}
-
 /**
  * Returns contact's Jabber ID.
  */
@@ -281,19 +237,6 @@ XMPP::Jid PsiContact::jid() const
  */
 Status PsiContact::status() const
 {
-#ifdef YAPSI
-	if (isBlocked()) {
-		return XMPP::Status(XMPP::Status::Blocked);
-	}
-
-	if (d->reconnecting_) {
-		return XMPP::Status(XMPP::Status::Reconnecting);
-	}
-
-	if (!authorizesToSeeStatus()) {
-		return XMPP::Status(XMPP::Status::NotAuthorizedToSeeStatus);
-	}
-#endif
 	return d->status_;
 }
 

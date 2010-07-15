@@ -49,10 +49,6 @@ public:
 	static PsiGrowlNotifier* instance();
 	void popup(PsiAccount* account, PsiPopup::PopupType type, const Jid& j, const Resource& r, const UserListItem* = 0, PsiEvent* = 0);
 
-#ifdef YAPSI
-	void moodChanged(PsiAccount* account, const Jid& jid, const QString& name, const QString& mood);
-#endif
-
 public slots:
 	void notificationClicked(void*);
 	void notificationTimedOut(void*);

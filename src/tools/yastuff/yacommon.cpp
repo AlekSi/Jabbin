@@ -84,16 +84,6 @@ QPixmap Ya::groupPixmap(QSize size, bool open, DecorationState state)
 	return QPixmap(QString(":/images/group/%1_%2.png").arg(group, s));
 }
 
-QPixmap Ya::genderPixmap(XMPP::VCard::Gender gender)
-{
-	QString fn = "gn";
-	if (gender == XMPP::VCard::Male)
-		fn = "gm";
-	else if (gender == XMPP::VCard::Female)
-		fn = "gw";
-	return QPixmap(QString(":/images/gender/%1.gif").arg(fn));
-}
-
 bool Ya::isYaInformer(PsiEvent* event)
 {
 	if (event->type() != PsiEvent::Message)

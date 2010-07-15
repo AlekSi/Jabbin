@@ -151,15 +151,6 @@ const QString& YaProfile::username() const
 	return jid().user();
 }
 
-XMPP::VCard::Gender YaProfile::gender() const
-{
-	const VCard* vcard = VCardFactory::instance()->vcard(jid());
-	if (vcard) {
-		return vcard->gender();
-	}
-	return XMPP::VCard::UnknownGender;
-}
-
 // void YaProfile::setName(const QString & neu)
 // {
 // 	// this is needed because we plan to emit nameSet

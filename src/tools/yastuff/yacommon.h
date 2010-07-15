@@ -68,7 +68,6 @@ namespace Ya {
 
 	const QString& ellipsis();
 	QPixmap groupPixmap(QSize size, bool open, DecorationState state);
-	QPixmap genderPixmap(XMPP::VCard::Gender gender);
 	bool isYaInformer(PsiEvent* event);
 	bool isYaJid(const XMPP::Jid&);
 	QString defaultFriendsGroup();

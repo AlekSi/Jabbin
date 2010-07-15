@@ -42,9 +42,6 @@ protected:
 	virtual QIcon avatar() const;
 	YaProfile* profile() const;
 
-	// reimplemented
-	virtual XMPP::VCard::Gender gender() const;
-
 private:
 	QPointer<YaProfile> profile_;
 };

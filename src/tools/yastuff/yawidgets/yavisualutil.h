@@ -99,9 +99,9 @@ public:
 
 	static QRegion roundedMask(QSize size, int cornerRadius, Borders borders);
 
-	static QString noAvatarPixmapFileName(XMPP::VCard::Gender gender);
-	static const QPixmap& noAvatarPixmap(XMPP::VCard::Gender gender);
-	static void drawAvatar(QPainter* painter, const QRect& rect, XMPP::Status::Type status, XMPP::VCard::Gender gender, const QIcon& avatar, bool useNoAvatarPixmap = true);
+	static QString noAvatarPixmapFileName();
+	static const QPixmap& noAvatarPixmap();
+	static void drawAvatar(QPainter* painter, const QRect& rect, XMPP::Status::Type status, const QIcon& avatar, bool useNoAvatarPixmap = true);
 	static void drawTextFadeOut(QPainter* painter, const QRect& rect, const QColor& background, int fadeOutSize = 30);
 
 	static void paintRosterBackground(QWidget* widget, QPainter* p);

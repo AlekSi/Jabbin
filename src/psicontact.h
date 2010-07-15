@@ -93,8 +93,6 @@ public:
 	virtual bool compare(const ContactListItem* other) const;
 	virtual bool isRemovable() const;
 
-	XMPP::VCard::Gender gender() const;
-
 	bool groupOperationPermitted(const QString& oldGroupName, const QString& newGroupName) const;
 	virtual QStringList groups() const;
 	virtual void setGroups(QStringList);
@@ -150,9 +148,6 @@ private slots:
 signals:
 	void updated();
 	void groupsChanged();
-#ifdef YAPSI
-	void moodChanged(const QString&);
-#endif
 
 	/**
 	 * This signal is emitted when PsiContact has entered its final

@@ -59,11 +59,3 @@ QIcon YaContactAvatarLabel::avatar() const
 	}
 	return result;
 }
-
-XMPP::VCard::Gender YaContactAvatarLabel::gender() const
-{
-	if (profile()) {
-		return profile()->gender();
-	}
-	return YaAvatarLabel::gender();
-}

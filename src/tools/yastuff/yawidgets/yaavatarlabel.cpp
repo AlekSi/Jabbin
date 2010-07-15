@@ -65,11 +65,6 @@ void YaAvatarLabel::paintEvent(QPaintEvent*)
 	drawFrame(&painter);
 }
 
-XMPP::VCard::Gender YaAvatarLabel::gender() const
-{
-	return XMPP::VCard::UnknownGender;
-}
-
 void YaAvatarLabel::paintAvatar(QPainter* painter)
 {
 	Ya::VisualUtil::drawAvatar(painter, rect(), status_, gender(), avatar());

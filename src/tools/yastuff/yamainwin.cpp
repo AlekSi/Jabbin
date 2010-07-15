@@ -699,10 +699,6 @@ void YaMainWin::accountCountChanged()
 		disconnect(account, SIGNAL(updateContact(const Jid &)), this, SLOT(accountContactsChanged()));
 		connect(account,    SIGNAL(updateContact(const Jid &)), this, SLOT(accountContactsChanged()));
 
-		disconnect(account, SIGNAL(moodChanged()), this, SLOT(moodChanged()));
-		connect(account,    SIGNAL(moodChanged()), this, SLOT(moodChanged()));
-
-
 		ui_.labelCredit->setUrl(QUrl(
 			"http://www.telecom64.eu/intranet/billing/callback/checkCredit.php?callerId=" + account->jid().bare()));
 		ui_.labelCredit->reload();
@@ -994,13 +990,6 @@ void YaMainWin::decorateButton(int)
 	dndEnabledAction_->setChecked(statusType() == XMPP::Status::DND);
 	ui_.selfMood->setStatusType(statusType());
 	statusMenu_->setStatus(statusType());
-}
-
-void YaMainWin::moodChanged()
-{
-	PsiAccount* account = static_cast<PsiAccount*>(sender());
-	if (account == this->account())
-		ui_.selfMood->setStatusText(account->mood());
 }
 
 void YaMainWin::updateReadNext(PsiIcon *, int)

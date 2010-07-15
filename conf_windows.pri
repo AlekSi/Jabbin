@@ -1,21 +1,24 @@
-# Windows build settings
-CONFIG  += debug
-#CONFIG += release
-CONFIG  += qca-static
-CONFIG  += jingle
+!exists(conf.pri) {
 
-OPENSSLPATH = C:
+# Windows build settings
+#CONFIG += release
+CONFIG  += debug
+CONFIG  += jingle
+#CONFIG += qca-static
+
+# tell iris to use our internal libz
+CONFIG += psi-zip
 
 # Console window
 CONFIG(debug, debug|release) { CONFIG += console }
 
 # OpenSSL
 qca-static {
-	DEFINES       += HAVE_OPENSSL
-	DEFINES       += OSSL_097
-	OPENSSL_PREFIX = $$OPENSSLPATH/openssl
-	INCLUDEPATH   += $$OPENSSL_PREFIX/include
-	LIBS          += -L$$OPENSSL_PREFIX/lib
+	DEFINES += HAVE_OPENSSL
+	DEFINES += OSSL_097
+	OPENSSL_PREFIX = C:/openssl
+	INCLUDEPATH += $$OPENSSL_PREFIX/include
+	LIBS += -L$$OPENSSL_PREFIX/lib
 }
 
 # SASL
@@ -33,3 +36,6 @@ contains(DEFINES, HAVE_ASPELL) {
 	LIBS += -L"$$ASPELL_PREFIX/lib"
 	LIBS += -laspell-15
 }
+
+}
+

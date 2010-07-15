@@ -111,7 +111,6 @@ private slots:
 	void accountCountChanged();
 	void accountActivityChanged();
 
-	void moodChanged();
 	void statusSelected();
 	void statusSelected(XMPP::Status::Type);
         void signoutRequested();

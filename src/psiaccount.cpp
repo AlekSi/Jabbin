@@ -142,7 +142,6 @@
 #include "yacommon.h"
 #include "globaleventqueue.h"
 #include "yapopupnotification.h"
-#include "xmpp_yalastmail.h"
 #include "yachatdlg.h"
 #include "yatoastercentral.h"
 #include "yarostertooltip.h"
@@ -454,9 +453,6 @@ private slots:
 		PsiContact* contact = new PsiContact(u, account);
 		contacts.append(contact);
 		connect(contact, SIGNAL(destroyed(PsiContact*)), SLOT(removeContact(PsiContact*)));
-#ifdef YAPSI
-		connect(contact, SIGNAL(moodChanged(const QString&)), account, SLOT(moodChanged(const QString&)));
-#endif
 		emit account->addedContact(contact);
 		return contact;
 	}
@@ -2296,16 +2292,7 @@ void PsiAccount::client_rosterItemUpdated(const RosterItem &r)
 	UserListItem *u = d->userList.find(r.jid());
 	if(u) {
 		u->setFlagForDelete(false);
-#ifdef YAPSI
-		QString yaMood = u->yaMood();
-		bool yaMoodSet = u->yaMoodSet();
-#endif
 		u->setRosterItem(r);
-#ifdef YAPSI
-		if (!yaMood.isEmpty() && r.yaMood().isEmpty() && yaMoodSet) {
-			u->setYaMood(yaMood, yaMoodSet);
-		}
-#endif
 	}
 	else {
 		// we don't have it at all, so add it
@@ -2474,17 +2461,6 @@ void PsiAccount::client_resourceAvailable(const Jid &j, const Resource &r)
 			}
 		}
 	}
-
-#ifdef YAPSI
-	if (d->client && d->client->jid().compare(j, true) && isYaAccount()) {
-		// need to be careful here, as we also get notifications of status
-		// changes initiated by ourselves
-		if (d->mood != r.status().status() && r.status().status() != d->loginStatus.status()) {
-			d->mood = r.status().status();
-			emit moodChanged();
-		}
-	}
-#endif
 }
 
 void PsiAccount::client_resourceUnavailable(const Jid &j, const Resource &r)
@@ -2606,14 +2582,6 @@ void PsiAccount::processIncomingMessage(const Message &_m)
 	// skip empty messages, but not if the message contains a data form
 	if(_m.body().isEmpty() && _m.urlList().isEmpty() && _m.invite().isEmpty() && !_m.containsEvents() && _m.chatState() == StateNone && _m.subject().isEmpty() && _m.rosterExchangeItems().isEmpty() && _m.mucInvites().isEmpty() &&  _m.getForm().fields().empty())
 		return;
-
-#ifdef YAPSI
-	if (!_m.lastMailNotify().isNull()) {
-		emit lastMailNotify(_m);
-		emit lastMailNotify(_m.lastMailNotify());
-		return;
-	}
-#endif
 
 	// skip headlines?
 	if(_m.type() == "headline" && option.ignoreHeadline)
@@ -5644,13 +5612,6 @@ void PsiAccount::slotCheckVCard()
 			nick = j->vcard().fullName();
 		}
 #endif
-
-#ifdef YAPSI
-		if (isYaAccount()) {
-			d->mood = j->vcard().mood();
-			emit moodChanged();
-		}
-#endif
 	}
 
 #ifndef YAPSI
@@ -6292,60 +6253,5 @@ QList<PsiAccount::xmlRingElem> PsiAccount::dumpRingbuf()
 {
 	return d->dumpRingbuf();
 }
-
-#ifdef YAPSI
-void PsiAccount::moodChanged(const QString& mood)
-{
-	PsiContact* contact = dynamic_cast<PsiContact*>(sender());
-	Q_ASSERT(contact);
-	if (!contact)
-		return;
-
-	if (mood.trimmed().isEmpty()) {
-		return;
-	}
-
-	{
-		static const int moodUpdateTimeoutSecs = 60;
-		QDateTime currentDateTime = QDateTime::currentDateTime();
-		QMutableHashIterator<QString, QDateTime> it(d->lastTimeMoodChanged_);
-		while (it.hasNext()) {
-			it.next();
-			if (it.value().secsTo(currentDateTime) > moodUpdateTimeoutSecs) {
-				it.remove();
-			}
-		}
-
-		if (d->lastTimeMoodChanged_.contains(contact->jid().bare())) {
-			contact->startDelayedMoodUpdate(moodUpdateTimeoutSecs - d->lastTimeMoodChanged_[contact->jid().bare()].secsTo(currentDateTime));
-			return;
-		}
-
-		d->lastTimeMoodChanged_[contact->jid().bare()] = currentDateTime;
-	}
-
-	bool moodSet = false;
-	foreach(UserListItem* u, findRelevant(contact->jid())) {
-		if (u->yaMoodSet()) {
-			moodSet = true;
-		}
-		u->setYaMood(mood, u->yaMoodSet() || (mood != u->yaMood()));
-	}
-
-	// we need to write updated yaMoods to the config.xml
-	updatedAccount();
-
-	if (!moodSet) {
-		return;
-	}
-
-	if (psi()->yaToasterCentral()->moodNotificationsDisabled(contact->jid())) {
-		return;
-	}
-
-	MoodEvent* moodEvent = new MoodEvent(contact->jid(), mood.trimmed(), this);
-	handleEvent(moodEvent, IncomingStanza);
-}
-#endif
 
 #include "psiaccount.moc"

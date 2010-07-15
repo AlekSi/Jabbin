@@ -414,8 +414,8 @@ QString YaOnline::avatarPath(PsiAccount* account, const XMPP::Jid& jid)
 	QString fileName = account->avatarFactory()->getCachedAvatarFileName(jid);
 	if (fileName.isEmpty() || !QFile::exists(fileName)) {
 		PsiContact* contact = account->findContact(jid);
-		XMPP::VCard::Gender gender = contact ? contact->gender() : XMPP::VCard::UnknownGender;
-		fileName = Ya::VisualUtil::noAvatarPixmapFileName(gender);
+		//XMPP::VCard::Gender gender = contact ? contact->gender() : XMPP::VCard::UnknownGender;
+		fileName = Ya::VisualUtil::noAvatarPixmapFileName();
 	}
 
 	QFileInfo fi(fileName);

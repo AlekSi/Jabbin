@@ -530,44 +530,22 @@ int Ya::VisualUtil::belowScreenGeometry()
 	return allScreens.boundingRect().bottom();
 }
 
-QString Ya::VisualUtil::noAvatarPixmapFileName(XMPP::VCard::Gender gender)
+QString Ya::VisualUtil::noAvatarPixmapFileName()
 {
-	switch (gender) {
-	case XMPP::VCard::UnknownGender:
-		return ":/images/gender/default_avatar.png";
-	case XMPP::VCard::Male:
-		return ":/images/avatars/avatar17.png";
-	case XMPP::VCard::Female:
-		return ":/images/avatars/avatar18.png";
-	}
-	Q_ASSERT(false);
-	return QString();
+	return ":/images/gender/default_avatar.png";
 }
 
-const QPixmap& VisualUtil::noAvatarPixmap(XMPP::VCard::Gender gender)
+const QPixmap& VisualUtil::noAvatarPixmap()
 {
 	static QPixmap pix_male;
 	static QPixmap pix_female;
 	static QPixmap pix_unknown;
-	switch (gender) {
-	case XMPP::VCard::UnknownGender:
-		if (pix_unknown.isNull())
-			pix_unknown = QPixmap(noAvatarPixmapFileName(gender));
-		return pix_unknown;
-	case XMPP::VCard::Male:
-		if (pix_male.isNull())
-			pix_male = QPixmap(noAvatarPixmapFileName(gender));
-		return pix_male;
-	case XMPP::VCard::Female:
-		if (pix_female.isNull())
-			pix_female = QPixmap(noAvatarPixmapFileName(gender));
-		return pix_female;
-	}
-	Q_ASSERT(false);
-	return QPixmap();
+	if (pix_unknown.isNull())
+		pix_unknown = QPixmap(noAvatarPixmapFileName(gender));
+	return pix_unknown;
 }
 
-void VisualUtil::drawAvatar(QPainter* painter, const QRect& avatarRect, XMPP::Status::Type status, XMPP::VCard::Gender gender, const QIcon& avatar, bool useNoAvatarPixmap)
+void VisualUtil::drawAvatar(QPainter* painter, const QRect& avatarRect, XMPP::Status::Type status, const QIcon& avatar, bool useNoAvatarPixmap)
 {
 	QIcon::Mode mode = QIcon::Normal;
 	painter->save();
@@ -581,7 +559,7 @@ void VisualUtil::drawAvatar(QPainter* painter, const QRect& avatarRect, XMPP::St
 
 	QIcon icon = avatar;
 	if (icon.isNull() /*&& useNoAvatarPixmap*/)
-		icon = Ya::VisualUtil::noAvatarPixmap(gender);
+		icon = Ya::VisualUtil::noAvatarPixmap();
 	QRect rect = avatarRect;
 	rect.setHeight(qMin(avatarRect.height(), icon.actualSize(avatarRect.size()).height()));
 	icon.paint(painter, rect, Qt::AlignCenter, mode, QIcon::On);

@@ -366,14 +366,6 @@ QVariant ContactListModel::contactData(const PsiContact* contact, int role)
 	else if (role == CallableRole) {
 		return QVariant(contact->isCallable());
 	}
-#ifdef YAPSI
-	else if (role == NotifyValueRole) {
-		return QVariant(contact->status().notifyValue());
-	}
-	else if (role == GenderRole) {
-		return QVariant(contact->gender());
-	}
-#endif
 
 	return contactListItemData(contact, role);
 }

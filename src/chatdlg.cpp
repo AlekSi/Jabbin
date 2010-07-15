@@ -901,9 +901,9 @@ void ChatDlg::appendMessage(const Message &m, bool local)
 	                                   ChatDlg::Spooled_None;
 #ifdef YAPSI
 	if (isEmoteMessage(m))
-		appendEmoteMessage(spooledType, m.timeStamp(), local, m.spamFlag(), txt);
+		appendEmoteMessage(spooledType, m.timeStamp(), local, 0, txt); // 0 = m.spamFlag() not in psi's iris
 	else
-		appendNormalMessage(spooledType, m.timeStamp(), local, m.spamFlag(), txt);
+		appendNormalMessage(spooledType, m.timeStamp(), local, 0, txt); // 0 = m.spamFlag() not in psi's iris
 #else
 	if (isEmoteMessage(m))
 		appendEmoteMessage(spooledType, m.timeStamp(), local, txt);
