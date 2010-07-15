@@ -107,7 +107,12 @@ void YaProfile::setAvatar(QPixmap avatar)
 	if (profileVCard)
 		vcard = *profileVCard;
 
-	vcard.setPhoto(avatar.toImage());
+	QByteArray ba;
+	QBuffer buffer(&ba);
+	buffer.open(QIODevice::WriteOnly);
+	avatar.save(&buffer, "PNG"); // TODO: maybe consider using different format?
+
+	vcard.setPhoto(ba);
 	const PsiAccount* a = account();
 	const VCard v = vcard;
 	VCardFactory::instance()->setVCard(a, v);

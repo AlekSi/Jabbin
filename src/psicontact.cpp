@@ -88,7 +88,6 @@ public:
 #ifdef YAPSI
 	bool showOnlineTemporarily_;
 	bool reconnecting_;
-	QTimer* delayedMoodUpdateTimer_;
 #endif
 
 	/**

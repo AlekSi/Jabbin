@@ -51,7 +51,6 @@ protected:
 	// reimplemented
 	virtual void mouseReleaseEvent(QMouseEvent* event);
 	virtual void paintAvatar(QPainter* painter);
-	virtual XMPP::VCard::Gender gender() const;
 	bool eventFilter(QObject* obj, QEvent* e);
 	void contextMenuEvent(QContextMenuEvent* e);
 

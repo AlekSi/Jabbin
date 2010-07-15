@@ -22,6 +22,7 @@
 #include <QMenu>
 #include <QDir>
 #include <QDebug>
+#include <QBuffer>
 #include <QList>
 #include <QFileDialog>
 
@@ -229,8 +230,13 @@ void SelfAvatar::setAvatar(const QIcon & avatar)
             if (currentVCard) {
                 vcard = *currentVCard;
             }
+            
+            QByteArray ba;
+			QBuffer buffer(&ba);
+			buffer.open(QIODevice::WriteOnly);
+			avatar.pixmap(64, 64).save(&buffer, "PNG"); // TODO: maybe consider using different format?
 
-            vcard.setPhoto(avatar.pixmap(64, 64).toImage());
+            vcard.setPhoto(ba);
 
             VCardFactory::instance()->setVCard(account, vcard,
                     this, SLOT(setVCardFinished()));

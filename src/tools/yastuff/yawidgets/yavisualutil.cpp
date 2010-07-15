@@ -267,17 +267,8 @@ QPixmap Ya::VisualUtil::statusPixmap(XMPP::Status::Type status, bool hover)
 		return PsiIconset::instance()->status(status).impix().pixmap();
 
 	switch (status) {
-#ifdef YAPSI
-	case XMPP::Status::Blocked:
-#endif
 	case XMPP::Status::Offline:
 		return QPixmap(":images/status-icons/offline_over.png");
-#ifdef YAPSI
-	case XMPP::Status::Reconnecting:
-		return QPixmap(":images/status-icons/yellow_over.png");
-	case XMPP::Status::NotAuthorizedToSeeStatus:
-		return QPixmap(":images/status-icons/violet_over.png");
-#endif
 	case XMPP::Status::XA:
 	case XMPP::Status::Away:
 		return QPixmap(":images/status-icons/away_over.png");
@@ -304,11 +295,6 @@ QColor VisualUtil::statusColor(XMPP::Status::Type status, bool hovered)
 	QColor result;
 	switch (status) {
 	case XMPP::Status::Offline:
-#ifdef YAPSI
-	case XMPP::Status::Blocked:
-	case XMPP::Status::Reconnecting:
-	case XMPP::Status::NotAuthorizedToSeeStatus:
-#endif
 		result = OFFLINE_COLOR;
 		break;
 	case XMPP::Status::XA:
@@ -339,11 +325,6 @@ QColor VisualUtil::rosterToolTipStatusColor(XMPP::Status::Type status)
 	switch (status) {
 	case XMPP::Status::Invisible:
 	case XMPP::Status::Offline:
-#ifdef YAPSI
-	case XMPP::Status::Blocked:
-	case XMPP::Status::Reconnecting:
-	case XMPP::Status::NotAuthorizedToSeeStatus:
-#endif
 		result = Qt::black;
 		break;
 	case XMPP::Status::XA:
@@ -541,7 +522,7 @@ const QPixmap& VisualUtil::noAvatarPixmap()
 	static QPixmap pix_female;
 	static QPixmap pix_unknown;
 	if (pix_unknown.isNull())
-		pix_unknown = QPixmap(noAvatarPixmapFileName(gender));
+		pix_unknown = QPixmap(noAvatarPixmapFileName());
 	return pix_unknown;
 }
 
@@ -549,9 +530,7 @@ void VisualUtil::drawAvatar(QPainter* painter, const QRect& avatarRect, XMPP::St
 {
 	QIcon::Mode mode = QIcon::Normal;
 	painter->save();
-	if (status == XMPP::Status::Offline ||
-	    status == XMPP::Status::Blocked ||
-	    status == XMPP::Status::NotAuthorizedToSeeStatus)
+	if (status == XMPP::Status::Offline)
 	{
 		painter->setOpacity(0.5);
 		mode = QIcon::Disabled;

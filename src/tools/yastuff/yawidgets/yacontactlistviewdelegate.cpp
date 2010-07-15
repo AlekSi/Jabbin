@@ -217,7 +217,6 @@ void YaContactListViewDelegate::doAvatar(QPainter* painter, const QStyleOptionVi
 	Ya::VisualUtil::drawAvatar(painter,
 	                           avatarRect(option.rect),
 	                           statusType(index),
-	                           XMPP::VCard::Gender(index.data(ContactListModel::GenderRole).toInt()),
 	                           avatar, false);
 }
 
@@ -603,10 +602,7 @@ bool YaContactListViewDelegate::drawStatusIcon(XMPP::Status::Type type) const
 	return drawStatusIcon() ||
 	       type == XMPP::Status::Away ||
 	       type == XMPP::Status::XA ||
-	       type == XMPP::Status::DND ||
-	       type == XMPP::Status::Blocked ||
-	       type == XMPP::Status::Reconnecting ||
-	       type == XMPP::Status::NotAuthorizedToSeeStatus;
+	       type == XMPP::Status::DND;
 }
 
 bool YaContactListViewDelegate::drawStatusIcon() const

@@ -647,6 +647,7 @@ void YaRosterTipLabel::setVCard(XMPP::VCard vcard)
 	ui_.genderLabel->setPixmap(QPixmap());
 
 	QStringList info;
+	/*
 	if (vcard.age() > 0) {
 		info << Ya::AgeFormatter::ageInYears(vcard.age());
 	}
@@ -654,17 +655,14 @@ void YaRosterTipLabel::setVCard(XMPP::VCard vcard)
 	if (!vcard.addressString().isEmpty()) {
 		info << vcard.addressString();
 	}
-
+	*/
 	QString text;
 	QColor color = Qt::black;
 	if (!info.isEmpty()) {
 		text = info.join(", ");
 	}
 	else {
-		if (vcard.gender() != XMPP::VCard::UnknownGender)
-			text = tr("Age and locality are not specified");
-		else
-			text = tr("Gender, age and locality are not specified");
+		text = tr("Gender, age and locality are not specified");
 
 		color = PsiOptions::instance()->getOption("options.ya.office-background").toBool() ?
 			Qt::gray : QColor(0x98, 0x8D, 0x5F);

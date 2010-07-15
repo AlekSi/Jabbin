@@ -100,7 +100,7 @@ QIcon YaInformerButton::informerIcon() const
 	if (!result.isNull())
 		return result;
 
-	return Ya::VisualUtil::noAvatarPixmap(XMPP::VCard::UnknownGender);
+	return Ya::VisualUtil::noAvatarPixmap();
 }
 
 bool YaInformerButton::informerOnline() const

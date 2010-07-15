@@ -207,9 +207,9 @@ QString Ya::statusFullText(XMPP::Status::Type status)
 	case XMPP::Status::Invisible:
 		result = QCoreApplication::instance()->translate("Ya", "Invisible");
 		break;
-	case XMPP::Status::NotAuthorizedToSeeStatus:
+	/*case XMPP::Status::NotAuthorizedToSeeStatus:
 		result = QCoreApplication::instance()->translate("Ya", "Not authorized");
-		break;
+		break;*/
 	default:
 		result = QString();
 		// Q_ASSERT(false);
@@ -239,12 +239,12 @@ QString Ya::statusDescription(XMPP::Status::Type type)
 	switch (type) {
 	case XMPP::Status::Offline:
 		return QCoreApplication::instance()->translate("Ya", "offline");
-	case XMPP::Status::Blocked:
+	/*case XMPP::Status::Blocked:
 		return QCoreApplication::instance()->translate("Ya", "blocked");
 	case XMPP::Status::Reconnecting:
 		return QCoreApplication::instance()->translate("Ya", "reconnecting");
 	case XMPP::Status::NotAuthorizedToSeeStatus:
-		return QCoreApplication::instance()->translate("Ya", "not authorized");
+		return QCoreApplication::instance()->translate("Ya", "not authorized");*/
 	case XMPP::Status::XA:
 	case XMPP::Status::Away:
 		return QCoreApplication::instance()->translate("Ya", "away");

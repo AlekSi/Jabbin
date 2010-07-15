@@ -23,6 +23,7 @@
 #include <QAbstractButton>
 #include <QCoreApplication>
 #include <QDir>
+#include <QBuffer>
 #include <QGridLayout>
 #include <QFileDialog>
 #include <QStyle>
@@ -447,7 +448,13 @@ void YaSelfAvatarLabel::pixmapSelected(QPixmap _av)
 			const VCard* currentVCard = VCardFactory::instance()->vcard(a->jid());
 			if (currentVCard)
 				vcard = *currentVCard;
-			vcard.setPhoto(av.toImage());
+			
+			QByteArray ba;
+			QBuffer buffer(&ba);
+			buffer.open(QIODevice::WriteOnly);
+			av.save(&buffer, "PNG"); // TODO: maybe consider using different format?
+			
+			vcard.setPhoto(ba);
 			uploadingVCardsCount_++;
 			VCardFactory::instance()->setVCard(a, vcard, this, SLOT(setVCardFinished()));
 			updateBusyWidget();
@@ -481,20 +488,6 @@ void YaSelfAvatarLabel::choosePixmap()
 		QPixmap avatar(file);
 		pixmapSelected(avatar);
 	}
-}
-
-XMPP::VCard::Gender YaSelfAvatarLabel::gender() const
-{
-	if (contactList()) {
-		PsiAccount* account = contactList()->defaultAccount();
-		if (account) {
-			const VCard* vcard = VCardFactory::instance()->vcard(account->jid());
-			if (vcard) {
-				return vcard->gender();
-			}
-		}
-	}
-	return YaAvatarLabel::gender();
 }
 
 void YaSelfAvatarLabel::paintAvatar(QPainter* painter)

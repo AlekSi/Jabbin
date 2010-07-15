@@ -154,10 +154,6 @@ HEADERS += \
 	$$PWD/accountinformermodel.h \
 	$$PWD/accountinformerdelegate.h \
 	$$PWD/accountinformerview.h \
-	$$PWD/yalastmailinformer.h \
-	$$PWD/yalastmailinformermodel.h \
-	$$PWD/yalastmailinformerdelegate.h \
-	$$PWD/yalastmailinformerview.h \
 	$$PWD/settingsbuttontest/yasettingsbutton.h \
 	$$PWD/yarotation.h \
 	$$PWD/yaofficebackgroundhelper.h \
@@ -219,10 +215,6 @@ SOURCES += \
 	$$PWD/accountinformermodel.cpp \
 	$$PWD/accountinformerdelegate.cpp \
 	$$PWD/accountinformerview.cpp \
-	$$PWD/yalastmailinformer.cpp \
-	$$PWD/yalastmailinformermodel.cpp \
-	$$PWD/yalastmailinformerdelegate.cpp \
-	$$PWD/yalastmailinformerview.cpp \
 	$$PWD/settingsbuttontest/yasettingsbutton.cpp \
 	$$PWD/yarotation.cpp \
 	$$PWD/yaofficebackgroundhelper.cpp \
@@ -236,5 +228,4 @@ SOURCES += \
 
 INTERFACES += \
 	$$PWD/../yaeventnotifier.ui \
-	$$PWD/yalastmailinformer.ui \
 	$$PWD/yamanageaccounts.ui

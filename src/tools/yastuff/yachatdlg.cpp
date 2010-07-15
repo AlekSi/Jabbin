@@ -367,9 +367,9 @@ void YaChatDlg::restoreLastMessages(unsigned int lastMessagesCount)
 		}
 
 		if (isEmoteMessage(spooledMessage.message))
-			appendEmoteMessage(Spooled_History, spooledMessage.timeStamp, spooledMessage.originLocal, spooledMessage.message.spamFlag(), messageText(spooledMessage.message));
+			appendEmoteMessage(Spooled_History, spooledMessage.timeStamp, spooledMessage.originLocal, 0, messageText(spooledMessage.message)); // 0 - spooledMessage.message.spamFlag()
 		else
-			appendNormalMessage(Spooled_History, spooledMessage.timeStamp, spooledMessage.originLocal, spooledMessage.message.spamFlag(), messageText(spooledMessage.message));
+			appendNormalMessage(Spooled_History, spooledMessage.timeStamp, spooledMessage.originLocal, 0, messageText(spooledMessage.message)); // 0 - spooledMessage.message.spamFlag()
 #endif
 	}
 }
@@ -513,7 +513,7 @@ void YaChatDlg::appendMessageFields(const Message& m)
 #ifndef YAPSI
 	appendNormalMessage(spooledType, m.timeStamp(), false, txt);
 #else
-	appendNormalMessage(spooledType, m.timeStamp(), false, m.spamFlag(), txt);
+	appendNormalMessage(spooledType, m.timeStamp(), false, 0, txt); //0 - m.spamFlag()
 #endif
 }
 

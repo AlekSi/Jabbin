@@ -68,7 +68,6 @@
 #include "statusmenu.h"
 #include "userlist.h"
 #include "jabbinabout.h"
-#include "yalastmailinformer.h"
 #include "yaeventnotifier.h"
 #include "shortcutmanager.h"
 #include "yasettingsbutton.h"
@@ -534,10 +533,6 @@ YaMainWin::YaMainWin(bool _onTop, bool _asTool, PsiCon* psi, const char* name)
 	// we need to instantiate YaManageAccounts because it's responsible for showing
 	// account connection errors
 	QTimer::singleShot(0, this, SLOT(createPreferences()));
-
-	YaLastMailInformer* lastMailInformer = new YaLastMailInformer(this);
-	lastMailInformer->setController(psi_);
-	ui_.statusBar->addInformer(lastMailInformer);
 
 	ui_.roster->setContactList(psi->contactList());
 	ui_.roster->setContactListViewportMenu(settingsMenu_);

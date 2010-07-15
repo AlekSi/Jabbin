@@ -74,7 +74,6 @@ public:
 	void showOnlineTemporarily();
 	void setReconnectingState(bool reconnecting);
 
-	void startDelayedMoodUpdate(int timeoutInSecs);
 #endif
 
 	virtual bool isFake() const;
@@ -141,9 +140,6 @@ public slots:
 
 private slots:
 	void avatarChanged(const Jid&);
-#ifdef YAPSI
-	void moodUpdate();
-#endif
 
 signals:
 	void updated();

@@ -318,8 +318,6 @@ void AccountInformerModel::updateAccount(PsiAccount* account)
 	XMPP::Status::Type status = account->status().type();
 	if (!account->isAvailable())
 		status = XMPP::Status::Offline;
-	if (account->isActive() && !account->isAvailable())
-		status = XMPP::Status::Reconnecting;
 	item->setData(QVariant(status), StatusTypeRole);
 	item->setData(QVariant(QString(account->userAccount().pass)), PasswordRole);
 	item->setData(QVariant(QIcon(account->avatarFactory()->getAvatar(account->jid()))), PictureRole);

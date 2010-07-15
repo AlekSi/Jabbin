@@ -102,7 +102,8 @@ public:
 	{
 		QPainter p(this);
 		// p.drawPixmap(0, 0, moodButton_->currentPixmap());
-		XMPP::Status::Type status = enableRotation_ ? XMPP::Status::Reconnecting : status_;
+		//XMPP::Status::Type status = enableRotation_ ? XMPP::Status::Reconnecting : status_;
+		XMPP::Status::Type status = status_;
 		p.drawPixmap(0, 0, Ya::VisualUtil::statusPixmap(status, underMouse() || isDown()));
 
 		p.drawPixmap(10, 4, downArrowPixmap());

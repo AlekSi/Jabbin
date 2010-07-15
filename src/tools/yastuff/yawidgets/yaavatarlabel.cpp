@@ -67,7 +67,7 @@ void YaAvatarLabel::paintEvent(QPaintEvent*)
 
 void YaAvatarLabel::paintAvatar(QPainter* painter)
 {
-	Ya::VisualUtil::drawAvatar(painter, rect(), status_, gender(), avatar());
+	Ya::VisualUtil::drawAvatar(painter, rect(), status_, avatar());
 }
 
 void YaAvatarLabel::setStatus(XMPP::Status::Type status)
