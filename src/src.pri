@@ -1,5 +1,5 @@
 # cutestuff
-include($$PWD/../cutestuff/cutestuff.pri)
+# include($$PWD/../cutestuff/cutestuff.pri)
 
 # modules
 include($$PWD/protocol/protocol.pri)

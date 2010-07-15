@@ -41,6 +41,9 @@
 #include <QtGui/qtextformat.h>
 #include <QtGui/qtextedit.h>
 #include <QtCore/qrect.h>
+#if QT_VERSION >= 0x040700
+#include <QtGui/qclipboard.h>
+#endif
 
 #ifdef QT3_SUPPORT
 #include <QtGui/qtextobject.h>
@@ -154,7 +157,11 @@ public Q_SLOTS:
 #ifndef QT_NO_CLIPBOARD
     void cut();
     void copy();
+#if QT_VERSION < 0x040700
     void paste();
+#else
+    void paste(QClipboard::Mode mode = QClipboard::Clipboard);
+#endif
 #endif
 
     void undo();

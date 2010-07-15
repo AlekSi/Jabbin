@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'filetransfer.h'
 **
-** Created: Thu Jul 15 15:30:27 2010
+** Created: Thu Jul 15 18:46:45 2010
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!
