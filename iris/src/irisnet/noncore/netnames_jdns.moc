@@ -1,8 +1,8 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'netnames_jdns.cpp'
 **
-** Created: Thu Jul 15 01:35:24 2010
-**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
+** Created: Thu Jul 15 15:29:27 2010
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -10,7 +10,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'netnames_jdns.cpp' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 62
-#error "This file was generated using the moc from 4.6.3. It"
+#error "This file was generated using the moc from 4.7.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -19,7 +19,7 @@ QT_BEGIN_MOC_NAMESPACE
 static const uint qt_meta_data_XMPP__JDnsGlobal[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        5,   14, // methods
@@ -96,7 +96,7 @@ void XMPP::JDnsGlobal::interfacesChanged()
 static const uint qt_meta_data_XMPP__JDnsNameProvider[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        5,   14, // methods
@@ -169,7 +169,7 @@ int XMPP::JDnsNameProvider::qt_metacall(QMetaObject::Call _c, int _id, void **_a
 static const uint qt_meta_data_XMPP__JDnsBrowse[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        3,   14, // methods
@@ -250,7 +250,7 @@ void XMPP::JDnsBrowse::unavailable(const QByteArray & _t1)
 static const uint qt_meta_data_XMPP__JDnsServiceResolve[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        6,   14, // methods
@@ -337,7 +337,7 @@ void XMPP::JDnsServiceResolve::error(JDnsSharedRequest::Error _t1)
 static const uint qt_meta_data_XMPP__JDnsPublishAddress[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        3,   14, // methods
@@ -409,7 +409,7 @@ void XMPP::JDnsPublishAddress::resultsReady()
 static const uint qt_meta_data_XMPP__JDnsPublishAddresses[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        4,   14, // methods
@@ -485,7 +485,7 @@ void XMPP::JDnsPublishAddresses::hostName(const QByteArray & _t1)
 static const uint qt_meta_data_XMPP__JDnsPublishExtra[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        2,   14, // methods
@@ -560,7 +560,7 @@ void XMPP::JDnsPublishExtra::error(JDnsSharedRequest::Error _t1)
 static const uint qt_meta_data_XMPP__JDnsPublish[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        7,   14, // methods
@@ -650,7 +650,7 @@ void XMPP::JDnsPublish::error(JDnsSharedRequest::Error _t1)
 static const uint qt_meta_data_XMPP__JDnsServiceProvider[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
       14,   14, // methods
@@ -746,7 +746,7 @@ int XMPP::JDnsServiceProvider::qt_metacall(QMetaObject::Call _c, int _id, void *
 static const uint qt_meta_data_XMPP__JDnsProvider[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods

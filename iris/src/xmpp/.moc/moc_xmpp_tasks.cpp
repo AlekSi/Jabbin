@@ -1,8 +1,8 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'xmpp_tasks.h'
 **
-** Created: Thu Jul 15 01:35:40 2010
-**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.3)
+** Created: Thu Jul 15 15:30:24 2010
+**      by: The Qt Meta Object Compiler version 62 (Qt 4.7.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -11,7 +11,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'xmpp_tasks.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 62
-#error "This file was generated using the moc from 4.6.3. It"
+#error "This file was generated using the moc from 4.7.0. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -20,7 +20,7 @@ QT_BEGIN_MOC_NAMESPACE
 static const uint qt_meta_data_XMPP__JT_Register[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -69,7 +69,7 @@ int XMPP::JT_Register::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 static const uint qt_meta_data_XMPP__JT_UnRegister[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        2,   14, // methods
@@ -131,7 +131,7 @@ int XMPP::JT_UnRegister::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 static const uint qt_meta_data_XMPP__JT_Roster[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -180,7 +180,7 @@ int XMPP::JT_Roster::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 static const uint qt_meta_data_XMPP__JT_PushRoster[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        1,   14, // methods
@@ -246,7 +246,7 @@ void XMPP::JT_PushRoster::roster(const Roster & _t1)
 static const uint qt_meta_data_XMPP__JT_Presence[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -295,7 +295,7 @@ int XMPP::JT_Presence::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 static const uint qt_meta_data_XMPP__JT_PushPresence[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        2,   14, // methods
@@ -371,7 +371,7 @@ void XMPP::JT_PushPresence::subscription(const Jid & _t1, const QString & _t2, c
 static const uint qt_meta_data_XMPP__JT_Message[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -420,7 +420,7 @@ int XMPP::JT_Message::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 static const uint qt_meta_data_XMPP__JT_PushMessage[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        1,   14, // methods
@@ -486,7 +486,7 @@ void XMPP::JT_PushMessage::message(const Message & _t1)
 static const uint qt_meta_data_XMPP__JT_GetServices[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -535,7 +535,7 @@ int XMPP::JT_GetServices::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 static const uint qt_meta_data_XMPP__JT_VCard[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -584,7 +584,7 @@ int XMPP::JT_VCard::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 static const uint qt_meta_data_XMPP__JT_Search[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -633,7 +633,7 @@ int XMPP::JT_Search::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 static const uint qt_meta_data_XMPP__JT_ClientVersion[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -682,7 +682,7 @@ int XMPP::JT_ClientVersion::qt_metacall(QMetaObject::Call _c, int _id, void **_a
 static const uint qt_meta_data_XMPP__JT_ServInfo[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -731,7 +731,7 @@ int XMPP::JT_ServInfo::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 static const uint qt_meta_data_XMPP__JT_Gateway[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -780,7 +780,7 @@ int XMPP::JT_Gateway::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 static const uint qt_meta_data_XMPP__JT_Browse[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -829,7 +829,7 @@ int XMPP::JT_Browse::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 static const uint qt_meta_data_XMPP__JT_DiscoItems[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods
@@ -878,7 +878,7 @@ int XMPP::JT_DiscoItems::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 static const uint qt_meta_data_XMPP__JT_DiscoPublish[] = {
 
  // content:
-       4,       // revision
+       5,       // revision
        0,       // classname
        0,    0, // classinfo
        0,    0, // methods

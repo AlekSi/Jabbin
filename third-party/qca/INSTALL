@@ -1,0 +1,36 @@
+Installing QCA
+--------------
+
+QCA requires Qt 4.2 or greater.
+
+For Unix/Linux/Mac:
+
+  ./configure
+  make
+  make install
+  /sbin/ldconfig, if necessary
+
+For Windows:
+
+  configure
+  nmake (or make)
+  installwin
+
+
+Notes
+-----
+  - On unix, use --prefix=$PWD to build in-place
+
+
+Building from SVN
+------------------
+First, install the 'qconf' program, at least version 1.5.  You can download
+the source here:
+  http://delta.affinix.com/qconf/
+
+Then, go into the QCA source tree and type 'qconf'.  You should now have a
+configure program to execute, just like from a normal source package.
+
+
+Please report problems to:
+  delta@lists.affinix.com

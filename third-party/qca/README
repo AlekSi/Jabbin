@@ -1,0 +1,75 @@
+Qt Cryptographic Architecture (QCA) version 2.0.2
+-------------------------------------------------
+Date: April 24th, 2009
+Website: http://delta.affinix.com/qca/
+Mailing List: Delta Project <delta@lists.affinix.com>
+
+Project Lead/Maintainer (2003-current):
+  Justin Karneges <justin@affinix.com>
+  (March 2007 - August 2007 under Barracuda Networks employment)
+
+Development, Documentation, Unittests (2004-current):
+  Brad Hards <bradh@frogmouth.net>
+
+Special Thanks:
+  Portugal Telecom (SAPO division), for sponsorship
+  Alon Bar-Lev, for smart card and design assistance
+  Jack Lloyd, for Botan and X.509 mentoring
+  L. Peter Deutsch, for the public domain MD5 implementation
+  Steve Reid, for the public domain SHA1 implementation
+  Jason Kim, for the CMS Signer graphics
+
+
+Install
+-------
+  For installation or compiling instructions, see the INSTALL file.
+
+
+License
+-------
+  This library is licensed under the Lesser GNU General Public License.  See
+  the COPYING file for more information.
+
+
+Changes
+-------
+  New in 2.0.2
+  - Bugfix release, forward and backward compatible with 2.0.x
+  - Fix compatibility with Qt 4.5 when QCA::Initializer appears before QApp
+  - Don't convert to secure memory when Hash::update(QByteArray) is used
+  - Use configure.exe instead of configwin.bat
+
+  New in 2.0.1
+  - Bugfix release, forward and backward compatible with 2.0.x
+  - Ability to build as a Mac framework (and build this way by default)
+  - On non-Mac Unix, the pkgconfig file is always qca2.pc, even in debug mode
+  - Certificates containing wildcards are now matched properly
+  - DirWatch/FileWatch now work
+  - Keystore writes now work
+  - Don't delete objects in their event handler (prevents Qt 4.4 warnings)
+  - Fix potential hang with TLS in server mode
+  - Windows version can be configured/installed using paths with spaces
+
+
+Description
+-----------
+
+  QCA is a library that provides an easy API for a range of cryptographic
+  features, including SSL/TLS, X.509 certificates, SASL, OpenPGP, smartcards,
+  and much more.
+
+  Functionality is supplied via plugins.  This is useful for avoiding
+  dependence on a particular crypto library and makes upgrading easier,
+  as there is no need to recompile your application when adding or
+  upgrading a crypto plugin.
+
+  In order for QCA to be of much use, you'll want to install some plugins.
+
+  QCA was originally created to support the security needs of the
+  Psi XMPP/Jabber client project ( http://psi-im.org/ ).
+
+  API Documentation is located in the 'apidocs' subdirectory.
+
+
+Have fun,
+-Justin
