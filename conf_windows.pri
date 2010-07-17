@@ -1,8 +1,8 @@
 !exists(conf.pri) {
 
 # Windows build settings
-#CONFIG += release
-CONFIG  += debug
+CONFIG += release
+#CONFIG  += debug
 CONFIG  += jingle
 #CONFIG += qca-static
 
@@ -16,7 +16,7 @@ CONFIG(debug, debug|release) { CONFIG += console }
 qca-static {
 	DEFINES += HAVE_OPENSSL
 	DEFINES += OSSL_097
-	OPENSSL_PREFIX = C:/openssl
+	OPENSSL_PREFIX = $$OPENSSL_PREFIX/openssl
 	INCLUDEPATH += $$OPENSSL_PREFIX/include
 	LIBS += -L$$OPENSSL_PREFIX/lib
 }
