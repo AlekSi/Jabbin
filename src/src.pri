@@ -67,6 +67,7 @@ qca-static {
 	include(../third-party/qca/qca-gnupg.pri)
 }
 else {
+	include(../third-party/qca/qca.pri)
 	CONFIG += crypto
 }
 
