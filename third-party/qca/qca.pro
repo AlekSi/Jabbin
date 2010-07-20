@@ -17,7 +17,7 @@ INCLUDEPATH += $$QCA_INC $$QCA_CPP
 
 windows {
 	# Explicitly remove d_and_r,  so the lib gets built in the right place
-	CONFIG -= debug_and_release
+	#CONFIG -= debug_and_release
 
 	# Set explicit targets, to ensure a correct name for MSVC
 }

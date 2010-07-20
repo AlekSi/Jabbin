@@ -1,8 +1,8 @@
-include(../conf.pri)
-windows:include(../conf_windows.pri)
+#include(../conf.pri)
+#windows:include(../conf_windows.pri)
 
 # don't build iris apps
-CONFIG += no_tests
+CONFIG += no_tests, psi-zip
 
 # use qca from psi if necessary
 qca-static {
@@ -11,6 +11,7 @@ qca-static {
 }
 else {
 	CONFIG += crypto
+	INCLUDEPATH += $$PWD/../third-party/qca/qca/include/QtCrypto
 }
 
 # use zlib from psi if necessary

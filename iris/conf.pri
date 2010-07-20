@@ -1,1 +1,1 @@
-include(../src/conf_iris.pri)
+include(../src/conf_iris.pri) 
