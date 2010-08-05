@@ -1,10 +1,8 @@
-!exists(conf.pri) {
-
 # Windows build settings
 CONFIG += release
 #CONFIG  += debug
 CONFIG  += jingle
-#CONFIG += qca-static
+CONFIG += qca-static
 
 # tell iris to use our internal libz
 CONFIG += psi-zip
@@ -12,10 +10,15 @@ CONFIG += psi-zip
 # Console window
 CONFIG(debug, debug|release) { CONFIG += console }
 
+EXPATHDIR = c:\expat-2.0.1
+PORTAUDIODIR = C:\projects\dependecies\portaudio
+SPEEXDIR = C:\projects\dependecies\speex-1.2rc1
+
 # OpenSSL
 qca-static {
 	DEFINES += HAVE_OPENSSL
 	DEFINES += OSSL_097
+	DEFINES += QCA_NO_PLUGINS
 	OPENSSL_PREFIX = $$OPENSSL_PREFIX/openssl
 	INCLUDEPATH += $$OPENSSL_PREFIX/include
 	LIBS += -L$$OPENSSL_PREFIX/lib
@@ -36,6 +39,15 @@ contains(DEFINES, HAVE_ASPELL) {
 	LIBS += -L"$$ASPELL_PREFIX/lib"
 	LIBS += -laspell-15
 }
+# qconf
 
-}
+PREFIX = /usr
+BINDIR = /usr/bin
+DATADIR = /usr/share
+
+DEFINES += HAVE_XSS HAVE_DNOTIFY HAVE_GETHOSTBYNAME_R HAVE_ASPELL HAVE_CONFIG
+LIBS += -lz -lXss -laspell
+CONFIG += dbus
+CONFIG += release
+PSI_DATADIR=/usr/share/yachat
 

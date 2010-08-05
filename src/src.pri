@@ -51,23 +51,22 @@ use_crash {
 qca-static {
 	# QCA
 	DEFINES += QCA_STATIC
-	include(../third-party/qca/qca.pri)
+	include($$PWD/../third-party/qca/qca.pri)
 
 	# QCA-OpenSSL
 	contains(DEFINES, HAVE_OPENSSL) {
-		include(../third-party/qca/qca-ossl.pri)
+		include($$PWD/../third-party/qca/qca-ossl.pri)
 	}
 
 	# QCA-SASL
 	contains(DEFINES, HAVE_CYRUSSASL) {
-		include(../third-party/qca/qca-cyrus-sasl.pri)
+		include($$PWD/../third-party/qca/qca-cyrus-sasl.pri)
 	}
 
 	# QCA-GnuPG
-	include(../third-party/qca/qca-gnupg.pri)
+	include($$PWD/../third-party/qca/qca-gnupg.pri)
 }
 else {
-	include(../third-party/qca/qca.pri)
 	CONFIG += crypto
 }
 

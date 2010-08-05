@@ -1,7 +1,6 @@
 #
 # Psi qmake profile
 #
-EXPATPATH = c:\expat-2.0.1
 
 # Configuration
 TEMPLATE = app
@@ -56,7 +55,9 @@ include(../qa/oldtest/unittest.pri)
 
 # qconf
 
-exists(../conf.pri) {
+include(../conf.pri)
+
+unix {
 	include(../conf.pri)
 
 	# Target
@@ -90,15 +91,18 @@ exists(../conf.pri) {
 }
 
 windows {
-	LIBS            += -lWSock32 -lUser32 -lShell32 -lGdi32 -lAdvAPI32 -lsecur32 -lWS2_32 -liphlpapi -lwinmm
+	include(../conf_windows.pri)
+
+	LIBS += -lWSock32 -lUser32 -lShell32 -lGdi32 -lAdvAPI32 -lsecur32 -lWS2_32 -liphlpapi -lwinmm
+	DEFINES += QT_STATICPLUGIN
+	DEFINES += NOMINMAX # suppress min/max #defines in windows headers
+	INCLUDEPATH += . # otherwise MSVC will fail to find "common.h" when compiling options/* stuff
+	#QTPLUGIN += qjpeg qgif
+
+	# Expat
+	CONFIG(debug, debug|release)   { LIBS += $$EXPATPATH\win32\bin\debug\libexpat.lib }
+	CONFIG(release, debug|release) { LIBS += $$EXPATPATH\win32\bin\release\libexpat.lib }
 	
-    # Expat
-    CONFIG(debug, debug|release)   { LIBS += $$EXPATPATH\win32\bin\debug\libexpat.lib }
-    CONFIG(release, debug|release) { LIBS += $$EXPATPATH\win32\bin\release\libexpat.lib }
-	
-    DEFINES         += QT_STATICPLUGIN
-	INCLUDEPATH     += . # otherwise MSVC will fail to find "common.h" when compiling options/* stuff
-#	QTPLUGIN        += qjpeg qgif
 	QMAKE_CFLAGS	+= -GR -GX -DWIN32
 	QMAKE_CXXFLAGS	+= -GR -GX -DWIN32
 }

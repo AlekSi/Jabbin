@@ -1,6 +1,6 @@
+include(../../conf.pri)
+
 VOIP_CPP      = voip
-SPEEXPATH     = C:\speex-1.2rc1
-PORTAUDIOPATH = C:\portaudio
 
 tins:{
     DEFINES += TINS
@@ -19,8 +19,8 @@ unix:LIBS   += -lssl
 #win32:LIBS += -ljthread
 
 win32 {
-    INCLUDEPATH  += $$SPEEXPATH\include
-    LIBS         += $$SPEEXPATH\lib\libspeex.lib
+    INCLUDEPATH  += $$SPEEXDIR\include
+    LIBS         += $$SPEEXDIR\lib\libspeex.lib
 
     CONFIG(debug, debug|release)   { LIBS += ..\third-party\jrtplib\debug\jrtp.lib }
     CONFIG(release, debug|release) { LIBS += ..\third-party\jrtplib\release\jrtp.lib }
@@ -30,8 +30,8 @@ win32 {
 
 # PortAudio
 win32 {
-    CONFIG(debug, debug|release)   { LIBS += $$PORTAUDIOPATH\lib\debug\portaudio_x86.lib   }
-    CONFIG(release, debug|release) { LIBS += $$PORTAUDIOPATH\lib\release\portaudio_x86.lib }
+    CONFIG(debug, debug|release)   { LIBS += $$PORTAUDIODIR\lib\debug\portaudio_x86.lib   }
+    CONFIG(release, debug|release) { LIBS += $$PORTAUDIODIR\lib\release\portaudio_x86.lib }
 }
 unix {
     LIBS += -lportaudio
@@ -41,7 +41,7 @@ mac {
     # If portaudio is used as static
 	QMAKE_LFLAGS += -framework CoreAudio -framework AudioUnit -framework AudioToolbox -framework CoreFoundation -framework Carbon
 }
-INCLUDEPATH += $$PORTAUDIOPATH\include
+INCLUDEPATH += $$PORTAUDIODIR\include
 
 HEADERS += \
 #    $$VOIP_CPP/callslog.h \

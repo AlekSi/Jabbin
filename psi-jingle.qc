@@ -27,11 +27,12 @@
   <dep type='aspell'/>
   <dep type='dnotify'/>
   <dep type='ghbnr'/>
-  <!-- <dep type='xmms'/> -->
   <dep type='google_ft'/>
   <dep type='jingle'/>
   <dep type='plugins'/>
-  <dep type='cppunit'/>
+  <dep type='tests'>
+    <disabled/>
+  </dep>
   <dep type='debug'>
 	<required/>
   </dep>

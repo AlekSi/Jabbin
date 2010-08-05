@@ -1,3 +1,8 @@
+EXPATHDIR = c:\expat-2.0.1
+
+exists(../../conf.pri) {
+	include(../../conf.pri)
+}
 exists(../../conf_windows.pri) {
 	include(../../conf_windows.pri)
 }
@@ -5,7 +10,6 @@ exists(../../conf_windows.pri) {
 TEMPLATE = lib
 CONFIG += staticlib
 TARGET = jingle
-EXPATHDIR = c:\expat-2.0.1
 
 #win32:CONFIG += debug
 #unix:CONFIG += debug
@@ -14,10 +18,6 @@ CONFIG += warn_off
 unix:debug: QMAKE_CXXFLAGS += -O0 -g3
 
 target.extra = true
-
-exists(../../conf.pri) {
-	include(../../conf.pri)
-}
 
 JINGLE_CPP = .
 INCLUDEPATH += $$JINGLE_CPP ../../src/voip
@@ -35,9 +35,9 @@ win32 {
   DEFINES += COMPILER_MSVC
   QMAKE_CFLAGS += -EHsc
   QMAKE_CXXFLAGS += -EHsc
-  INCLUDEPATH += $$EXPATHDIR\lib \
-        C:\openssl\include
-# LIBS += $$EXPATHDIR\lib\libexpat.lib
+  INCLUDEPATH += $$EXPATHDIR\Source\lib \
+        $$OPENSSL_PREFIX\openssl\include
+# LIBS += $$EXPATHDIR\Bin\libexpat.lib
   SOURCES += $$JINGLE_CPP/talk/base/winfirewall.cc \
 	$$JINGLE_CPP/talk/base/winping.cc \
 }
