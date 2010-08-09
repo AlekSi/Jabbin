@@ -100,8 +100,8 @@ windows {
 	#QTPLUGIN += qjpeg qgif
 
 	# Expat
-	CONFIG(debug, debug|release)   { LIBS += $$EXPATPATH\win32\bin\debug\libexpat.lib }
-	CONFIG(release, debug|release) { LIBS += $$EXPATPATH\win32\bin\release\libexpat.lib }
+	CONFIG(debug, debug|release)   { LIBS += $$EXPATHDIR\win32\bin\debug\libexpat.lib }
+	CONFIG(release, debug|release) { LIBS += $$EXPATHDIR\win32\bin\release\libexpat.lib }
 	
 	QMAKE_CFLAGS	+= -GR -GX -DWIN32
 	QMAKE_CXXFLAGS	+= -GR -GX -DWIN32

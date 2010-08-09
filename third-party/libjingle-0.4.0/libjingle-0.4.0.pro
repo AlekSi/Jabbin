@@ -35,7 +35,7 @@ win32 {
   DEFINES += COMPILER_MSVC
   QMAKE_CFLAGS += -EHsc
   QMAKE_CXXFLAGS += -EHsc
-  INCLUDEPATH += $$EXPATHDIR\Source\lib \
+  INCLUDEPATH += $$EXPATHDIR\lib \
         $$OPENSSL_PREFIX\openssl\include
 # LIBS += $$EXPATHDIR\Bin\libexpat.lib
   SOURCES += $$JINGLE_CPP/talk/base/winfirewall.cc \
