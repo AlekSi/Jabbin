@@ -13,13 +13,14 @@ CONFIG(debug, debug|release) { CONFIG += console }
 EXPATHDIR = C:\expat-2.0.1
 PORTAUDIODIR = C:\portaudio
 SPEEXDIR = C:\speex-1.2rc1
+OPENSSL_PREFIX = C:\openssl
 
 # OpenSSL
 qca-static {
 	DEFINES += HAVE_OPENSSL
 	DEFINES += OSSL_097
 	DEFINES += QCA_NO_PLUGINS
-	OPENSSL_PREFIX = $$OPENSSL_PREFIX/openssl
+	OPENSSL_PREFIX = $$OPENSSL_PREFIX
 	INCLUDEPATH += $$OPENSSL_PREFIX/include
 	LIBS += -L$$OPENSSL_PREFIX/lib
 }
@@ -39,16 +40,5 @@ contains(DEFINES, HAVE_ASPELL) {
 	LIBS += -L"$$ASPELL_PREFIX/lib"
 	LIBS += -laspell-15
 }
-# qconf
 
-PREFIX = /usr
-BINDIR = /usr/bin
-DATADIR = /usr/share
-
-DEFINES += HAVE_XSS HAVE_DNOTIFY HAVE_GETHOSTBYNAME_R HAVE_CONFIG
-#LIBS += -lXss
-#LIBS += -lz -lXss -laspell
-#CONFIG += dbus
-#CONFIG += release
-#PSI_DATADIR=/usr/share/yachat
-
+#DEFINES += HAVE_XSS HAVE_DNOTIFY HAVE_GETHOSTBYNAME_R HAVE_CONFIG
