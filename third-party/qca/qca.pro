@@ -17,8 +17,8 @@ INCLUDEPATH += $$QCA_INC $$QCA_CPP
 
 windows {
 	# Explicitly remove d_and_r,  so the lib gets built in the right place
-	CONFIG -= debug_and_release
-	CONFIG += release
+	# CONFIG -= debug_and_release
+	# CONFIG += release
 
 	# Set explicit targets, to ensure a correct name for MSVC
 }
@@ -81,7 +81,12 @@ mac: {
 	SOURCES += $$QCA_CPP/qca_systemstore_mac.cpp
 }
 
-include(../../conf.pri)
+exists(../../conf.pri) {
+	include(../../conf.pri)
+}
+exists(../../conf_windows.pri) {
+	include(../../conf_windows.pri)
+}
 
 qc_universal:contains(QT_CONFIG,x86):contains(QT_CONFIG,ppc) {
 	CONFIG += x86 ppc
