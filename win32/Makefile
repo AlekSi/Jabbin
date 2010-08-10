@@ -3,11 +3,12 @@
 #QCADIR=..\..\qca-2.0-beta1
 #QCA_OPENSSLDIR=..\..\qca-openssl
 ASPELLDIR=C:\aspell
-QTDIR=C:\Qt\4.5.2
+QTDIR=C:\Qt\4.5.2\qt
 #MINGWDIR=c:\MingW
-WINDOWSDIR=C:\Winnt
+OPENSSLDIR=C:\Openssl\bin
+PORTAUDIODIR=C:\Portaudio
 
-TARGET_DIR=psi
+TARGET_DIR=jabbin
 
 .PHONY: all
 all:
@@ -31,9 +32,10 @@ all:
 	tod ..\INSTALL $(TARGET_DIR)\Install.txt
 	rem -mkdir $(TARGET_DIR)\crypto
 	rem copy $(QCA_OPENSSLDIR)\release\qca-openssl.dll $(TARGET_DIR)\crypto
-	copy $(WINDOWSDIR)\system32\libeay32.dll $(TARGET_DIR)
-	copy $(WINDOWSDIR)\system32\ssleay32.dll $(TARGET_DIR)
-	-mkdir $(TARGET_DIR)\aspell
-	copy $(ASPELLDIR)\bin\aspell-15.dll $(TARGET_DIR)
-	xcopy /i /e /q /y $(ASPELLDIR)\dict $(TARGET_DIR)\aspell\dict
-	xcopy /i /e /q /y $(ASPELLDIR)\data $(TARGET_DIR)\aspell\data
+	copy $(OPENSSLDIR)\libeay32.dll $(TARGET_DIR)
+	copy $(OPENSSLDIR)\ssleay32.dll $(TARGET_DIR)
+	copy $(PORTAUDIODIR)\build\msvc\Win32\Release\portaudio_x86.dll $(TARGET_DIR)
+	rem -mkdir $(TARGET_DIR)\aspell
+	rem copy $(ASPELLDIR)\bin\aspell-15.dll $(TARGET_DIR)
+	rem xcopy /i /e /q /y $(ASPELLDIR)\dict $(TARGET_DIR)\aspell\dict
+	rem xcopy /i /e /q /y $(ASPELLDIR)\data $(TARGET_DIR)\aspell\data
