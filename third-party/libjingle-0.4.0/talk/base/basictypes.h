@@ -28,6 +28,10 @@
 #ifndef TALK_BASE_BASICTYPES_H__
 #define TALK_BASE_BASICTYPES_H__
 
+#ifdef __MINGW32__
+#include <inttypes.h>
+#endif
+
 #ifdef COMPILER_MSVC
 typedef __int64 int64;
 #else

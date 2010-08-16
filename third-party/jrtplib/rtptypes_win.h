@@ -4,6 +4,10 @@
 
 #include <sys/types.h>
 
+#ifdef __MINGW32__
+#include <inttypes.h>
+#endif
+
 #if defined(_MSC_VER)
 typedef unsigned long u_int32_t;
 typedef unsigned short u_int16_t;

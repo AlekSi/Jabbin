@@ -28,7 +28,11 @@
 #ifdef WIN32
 #define _WIN32_WINNT 0x0400
 #include <windows.h>
+#ifdef __MINGW32__
+#define __USE_MINGW_SNPRINTF
+#else
 #define snprintf _snprintf
+#endif
 #undef ERROR  // wingdi.h
 #endif
 

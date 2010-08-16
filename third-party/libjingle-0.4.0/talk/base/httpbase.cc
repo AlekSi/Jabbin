@@ -30,7 +30,11 @@
 #endif
 
 #ifdef WIN32
+#ifndef __MINGW32__
 #include "talk/base/win32.h"
+#else  // !WIN32
+#define SEC_E_CERT_EXPIRED (-2146893016)
+#endif  // !MINGW32
 #else  // !WIN32
 #define SEC_E_CERT_EXPIRED (-2146893016)
 #endif  // !WIN32

@@ -38,6 +38,11 @@ extern "C" {
 
 #define MSDEV_SET_THREAD_NAME  0x406D1388
 
+#ifdef __MINGW32__
+#define __try
+#define __except(x)
+#endif
+
 namespace talk_base {
 
 ThreadManager g_thmgr;

@@ -16,8 +16,8 @@ QCA_CPP = $$QCA_SRCBASE
 INCLUDEPATH += $$QCA_INC $$QCA_CPP
 
 windows {
-	# Explicitly remove d_and_r,  so the lib gets built in the right place
-	# CONFIG -= debug_and_release
+	# In case of MINGW32 explicitly remove d_and_r,  so the lib gets built in the right place
+	CONFIG -= debug_and_release
 	# CONFIG += release
 
 	# Set explicit targets, to ensure a correct name for MSVC

@@ -73,6 +73,7 @@ void InitRandom(const char *client_unique, size_t len) {
   unsigned long seed = GetRandomSeed();
 
 #ifdef WIN32
+#ifndef __MINGW32__
   bool success = false;
   HCRYPTPROV hProv = NULL;
   if (CryptAcquireContext(&hProv, NULL, NULL, PROV_RSA_FULL, 
@@ -88,6 +89,7 @@ void InitRandom(const char *client_unique, size_t len) {
     QueryPerformanceCounter(&big);
     seed = big.LowPart;
   }
+#endif
 #else
   seed = talk_base::Time();
 #endif

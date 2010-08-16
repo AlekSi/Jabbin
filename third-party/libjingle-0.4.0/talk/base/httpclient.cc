@@ -140,7 +140,7 @@ HttpCacheState HttpGetCacheState(const HttpRequestData& request,
   unsigned long corrected_received_age = apparent_age;
   if (response.hasHeader(HH_AGE, &s_temp)
       && HttpStringToInt(s_temp, &i_temp)) {
-    corrected_received_age = stdmax(apparent_age, i_temp);
+    corrected_received_age = std::max(apparent_age, i_temp);
   }
 
   unsigned long response_delay = response_time - request_time;

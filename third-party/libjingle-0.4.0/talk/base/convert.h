@@ -31,6 +31,11 @@
 #include <string>
 #include <windows.h>
 
+#ifdef __MINGW32__
+#include <malloc.h>
+#define NO_ATL
+#endif
+
 #ifndef NO_ATL
 #include <atlstr.h>
 #endif // NO_ATL

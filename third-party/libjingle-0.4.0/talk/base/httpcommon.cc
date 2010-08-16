@@ -773,6 +773,7 @@ HttpAuthResult HttpAuthenticate(
   }
 
 #ifdef WIN32
+#ifndef __MINGW32__
 #if 1
   bool want_negotiate = (_stricmp(auth_method.c_str(), "negotiate") == 0);
   bool want_ntlm = (_stricmp(auth_method.c_str(), "ntlm") == 0);
@@ -954,6 +955,7 @@ HttpAuthResult HttpAuthenticate(
     return HAR_RESPONSE;
   }
 #endif
+#endif // MINGW32
 #endif // WIN32
 
   return HAR_IGNORE;

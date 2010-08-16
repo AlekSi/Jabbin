@@ -145,7 +145,7 @@ StreamInterface* DiskCache::WriteResource(const std::string& id, size_t index) {
     return NULL;
   }
 
-  entry->streams = stdmax(entry->streams, index + 1);
+  entry->streams = std::max(entry->streams, index + 1);
   entry->size -= previous_size;
   total_size_ -= previous_size;
 
