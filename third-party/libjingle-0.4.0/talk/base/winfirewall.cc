@@ -32,6 +32,64 @@
 #define RELEASE(lpUnk) do \
 	{ if ((lpUnk) != NULL) { (lpUnk)->Release(); (lpUnk) = NULL; } } while (0)
 
+#ifndef CLSID_NetFwMgr
+#define MDEF_CLSID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
+	const CLSID name = { l, w1, w2, { b1, b2,  b3,  b4,  b5,  b6,  b7,  b8 } }
+
+	MDEF_CLSID(CLSID_NetFwMgr, 0x304ce942, 0x6e39, 0x40d8, 0x94, 0x3a, 0xb9, 0x13, 0xc4, 0x0c, 0x9c, 0xd4);
+	MDEF_CLSID(IID_INetFwMgr, 0xf7898af5, 0xcac4, 0x4632, 0xa2, 0xec, 0xda ,0x06, 0xe5, 0x11, 0x1a, 0xf2);
+#endif
+
+#ifndef CLSID_NetFwAuthorizedApplication
+#define MDEF_CLSID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) \
+	const CLSID name = { l, w1, w2, { b1, b2,  b3,  b4,  b5,  b6,  b7,  b8 } }
+
+	MDEF_CLSID(CLSID_NetFwAuthorizedApplication, 0x304ce942, 0x6e39, 0x40d8, 0x94, 0x3a, 0xb9, 0x13, 0xc4, 0x0c, 0x9c, 0xd4);
+	MDEF_CLSID(IID_INetFwAuthorizedApplication, 0xf7898af5, 0xcac4, 0x4632, 0xa2, 0xec, 0xda ,0x06, 0xe5, 0x11, 0x1a, 0xf2);
+#endif
+
+char *CStrFromBSTR(int codePage, BSTR bstr)
+{
+    UINT len = SysStringLen(bstr);
+    if( len > 0 )
+    {
+        size_t mblen = WideCharToMultiByte(codePage,
+                0, bstr, len, NULL, 0, NULL, NULL);
+        if( mblen > 0 )
+        {
+            char *buffer = (char *)CoTaskMemAlloc(mblen+1);
+            ZeroMemory(buffer, mblen+1);
+            if( WideCharToMultiByte(codePage, 0, bstr, len, buffer, mblen, NULL, NULL) )
+            {
+                buffer[mblen] = '\0';
+                return buffer;
+            }
+        }
+    }
+    return NULL;
+};
+
+BSTR BSTRFromCStr(int codePage, const char *s)
+{
+    int wideLen = MultiByteToWideChar(codePage, 0, s, -1, NULL, 0);
+    if( wideLen )
+    {
+        WCHAR* wideStr = (WCHAR*)CoTaskMemAlloc(wideLen*sizeof(WCHAR));
+        if( NULL != wideStr )
+        {
+            BSTR bstr;
+
+            ZeroMemory(wideStr, wideLen*sizeof(WCHAR));
+            MultiByteToWideChar(codePage, 0, s, -1, wideStr, wideLen);
+            bstr = SysAllocString(wideStr);
+            free(wideStr);
+
+            return bstr;
+        }
+    }
+    return NULL;
+};
+
 namespace talk_base {
 
 //////////////////////////////////////////////////////////////////////
@@ -49,10 +107,13 @@ bool
 WinFirewall::Initialize() {
   if (mgr_)
     return true;
-
-  HRESULT hr = CoCreateInstance(__uuidof(NetFwMgr),
-                                0, CLSCTX_INPROC_SERVER,
-                                __uuidof(INetFwMgr),
+//  Visual Studio
+//  HRESULT hr = CoCreateInstance(__uuidof(NetFwMgr),
+    HRESULT hr = CoCreateInstance(CLSID_NetFwMgr,
+				0, CLSCTX_INPROC_SERVER,
+//  Visual Studio
+//                                __uuidof(INetFwMgr),
+				IID_INetFwMgr,
                                 reinterpret_cast<void **>(&mgr_));
   if (SUCCEEDED(hr) && (mgr_ != NULL))
     hr = mgr_->get_LocalPolicy(&policy_);
@@ -88,7 +149,7 @@ WinFirewall::Authorized(const char * filename, bool * known) {
     return false;
 
   VARIANT_BOOL fwEnabled = VARIANT_FALSE;
-  _bstr_t bfilename = filename;
+  BSTR bfilename = BSTRFromCStr(CP_ACP, filename);
 
   INetFwAuthorizedApplications * apps = NULL;
   HRESULT hr = profile_->get_AuthorizedApplications(&apps);
@@ -117,14 +178,20 @@ WinFirewall::AddApplication(const char * filename, const char * friendly_name,
   HRESULT hr = profile_->get_AuthorizedApplications(&apps);
   if (SUCCEEDED(hr) && (apps != NULL)) {
     INetFwAuthorizedApplication * app = NULL;
-    hr = CoCreateInstance(__uuidof(NetFwAuthorizedApplication),
-                          0, CLSCTX_INPROC_SERVER,
-                          __uuidof(INetFwAuthorizedApplication),
+//  Visual Studio
+//  hr = CoCreateInstance(__uuidof(NetFwAuthorizedApplication),
+    hr = CoCreateInstance(CLSID_NetFwAuthorizedApplication,
+			  0, CLSCTX_INPROC_SERVER,
+//  Visual Studio
+//                         __uuidof(INetFwAuthorizedApplication),
+			  IID_INetFwAuthorizedApplication,
                           reinterpret_cast<void **>(&app));
     if (SUCCEEDED(hr) && (app != NULL)) {
-      _bstr_t bstr = filename;
+      BSTR bstr = BSTRFromCStr(CP_ACP, filename);
+
       hr = app->put_ProcessImageFileName(bstr);
-      bstr = friendly_name;
+//    FIXME!!!!!!!!!!
+//    bstr = friendly_name;
       if (SUCCEEDED(hr))
         hr = app->put_Name(bstr);
       if (SUCCEEDED(hr))

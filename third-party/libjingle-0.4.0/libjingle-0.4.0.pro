@@ -33,8 +33,8 @@ win32 {
   DEFINES += _CRT_SECURE_NO_DEPRECATE
 
   DEFINES += COMPILER_MSVC
-  QMAKE_CFLAGS += -EHsc
-  QMAKE_CXXFLAGS += -EHsc
+#  QMAKE_CFLAGS += -EHsc
+#  QMAKE_CXXFLAGS += -EHsc
   INCLUDEPATH += $$EXPATHDIR\lib \
         $$OPENSSL_PREFIX\openssl\include
 # LIBS += $$EXPATHDIR\Bin\libexpat.lib
@@ -83,7 +83,7 @@ SOURCES += \
 
 unix:SOURCES += $$JINGLE_CPP/talk/base/unixfilesystem.cc
 win32:SOURCES += $$JINGLE_CPP/talk/base/win32filesystem.cc
-win32:SOURCES += $$JINGLE_CPP/talk/base/schanneladapter.cc
+#win32:SOURCES += $$JINGLE_CPP/talk/base/schanneladapter.cc
 
 
 # Not needed ?

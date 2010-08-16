@@ -26,6 +26,7 @@
  */
 
 #ifdef WIN32
+#define _WIN32_IE 0x0400
 #include "talk/base/win32.h"
 #include <shellapi.h>
 #include <shlobj.h>
@@ -36,6 +37,10 @@
 #include "talk/base/pathutils.h"
 #include "talk/base/stringutils.h"
 #include "talk/base/urlencode.h"
+
+#ifdef __MINGW32__
+#define __T(x) L ## x
+#endif
 
 namespace talk_base {
 

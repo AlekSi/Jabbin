@@ -51,7 +51,9 @@
 #include "talk/base/stringutils.h"
 
 #ifdef WIN32
+#ifndef __MINGW32__
 #include "talk/base/sec_buffer.h"
+#endif // MINGW32
 #endif // WIN32
 
 namespace talk_base {
