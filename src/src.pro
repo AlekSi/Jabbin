@@ -6,7 +6,6 @@
 TEMPLATE = app
 TARGET   = jabbin
 CONFIG  += qt thread x11 qt3support
-#console
 
 # code coverage
 #coverage.CONFIG += recursive
@@ -103,8 +102,10 @@ windows {
 	CONFIG(debug, debug|release)   { LIBS += $$EXPATHDIR\win32\bin\debug\libexpat.lib }
 	CONFIG(release, debug|release) { LIBS += $$EXPATHDIR\win32\bin\release\libexpat.lib }
 	
-	QMAKE_CFLAGS	+= -GR -GX -DWIN32
-	QMAKE_CXXFLAGS	+= -GR -GX -DWIN32
+#	QMAKE_CFLAGS	+= -GR -GX -DWIN32
+#	QMAKE_CXXFLAGS	+= -GR -GX -DWIN32
+	QMAKE_CFLAGS	+= -DWIN32
+	QMAKE_CXXFLAGS	+= -DWIN32
 }
 
 unix {
