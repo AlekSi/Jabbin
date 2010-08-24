@@ -6,10 +6,6 @@ exists(../../conf.pri) {
 	include(../../conf.pri)
 }
 
-exists(../../conf_windows.pri) {
-	include(../../conf_windows.pri)
-}
-
 TEMPLATE = lib
 CONFIG += staticlib
 TARGET = jrtp
@@ -18,8 +14,10 @@ INCLUDEPATH += . ../libjingle-0.4.0
 windows {
     INCLUDEPATH += $$PORTAUDIODIR\include
     DEFINES        += WIN32
-    QMAKE_CFLAGS   += -GR -GX -DWIN32
-    QMAKE_CXXFLAGS += -GR -GX -DWIN32
+    *-msvc* {
+        QMAKE_CFLAGS   += -GR -GX -DWIN32
+        QMAKE_CXXFLAGS += -GR -GX -DWIN32
+    }
 }
 
 unix:{
