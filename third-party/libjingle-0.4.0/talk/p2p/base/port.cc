@@ -284,7 +284,7 @@ bool Port::GetStunMessage(const char* data, size_t size,
 
   if (stun_msg->type() == STUN_BINDING_REQUEST) {
     if ((remote_frag_len < 0)
-        || (std::memcmp(username_attr->bytes(),
+        || (memcmp(username_attr->bytes(),
                         username_frag_.c_str(), username_frag_.size()) != 0)) {
       LOG_J(LS_ERROR, this) << "Received STUN request with bad username";
       SendBindingErrorResponse(stun_msg.get(), addr, STUN_ERROR_BAD_REQUEST,
@@ -297,7 +297,7 @@ bool Port::GetStunMessage(const char* data, size_t size,
   } else if ((stun_msg->type() == STUN_BINDING_RESPONSE)
       || (stun_msg->type() == STUN_BINDING_ERROR_RESPONSE)) {
     if ((remote_frag_len < 0)
-        || (std::memcmp(username_attr->bytes() + remote_frag_len,
+        || (memcmp(username_attr->bytes() + remote_frag_len,
                         username_frag_.c_str(), username_frag_.size()) != 0)) {
        LOG_J(LS_ERROR, this) << "Received STUN response with bad username";
       // Do not send error response to a response
@@ -796,7 +796,7 @@ void Connection::OnConnectionRequestResponse(StunMessage *response, uint32 rtt) 
   if (valid) {
     std::string username_fragment = port_->username_fragment();
     int offset = (int)(username_attr->length() - username_fragment.size());
-    if (std::memcmp(username_attr->bytes() + offset,
+    if (memcmp(username_attr->bytes() + offset,
         username_fragment.c_str(), username_fragment.size()) != 0) {
       LOG_J(LS_ERROR, this) << "Received STUN response with bad username";
       valid = false;

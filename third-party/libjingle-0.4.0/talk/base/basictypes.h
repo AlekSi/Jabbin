@@ -32,7 +32,7 @@
 #include <inttypes.h>
 #endif
 
-#ifdef COMPILER_MSVC
+#ifdef COMPILER_MSVC || defined(__MINGW32__)
 typedef __int64 int64;
 #else
 typedef long long int64;
@@ -41,7 +41,7 @@ typedef long int32;
 typedef short int16;
 typedef char int8;
 
-#ifdef COMPILER_MSVC
+#ifdef COMPILER_MSVC || defined(__MINGW32__)
 typedef unsigned __int64 uint64;
 typedef __int64 int64;
 #else

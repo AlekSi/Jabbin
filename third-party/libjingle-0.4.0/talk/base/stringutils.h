@@ -28,8 +28,11 @@
 #ifndef TALK_BASE_STRINGUTILS_H__
 #define TALK_BASE_STRINGUTILS_H__
 
+using namespace std;
+
 #include <ctype.h>
 #include <stdarg.h>
+#include <string.h>
 #include <stdio.h>
 #ifdef WIN32
 #include <wchar.h>
@@ -281,7 +284,7 @@ struct Traits<char> {
 template<>
 struct Traits<wchar_t> {
   typedef std::wstring string;
-  inline static const wchar_t* Traits<wchar_t>::empty_str() { return L""; }
+  inline static const wchar_t* empty_str() { return L""; }
 };
 
 #endif  // WIN32

@@ -1,10 +1,8 @@
 EXPATHDIR = c:\expat-2.0.1
+OPENSSL_PREFIX = c:\openssl
 
 exists(../../conf.pri) {
 	include(../../conf.pri)
-}
-exists(../../conf_windows.pri) {
-	include(../../conf_windows.pri)
 }
 
 TEMPLATE = lib
@@ -17,11 +15,13 @@ CONFIG += warn_off
 
 unix:debug: QMAKE_CXXFLAGS += -O0 -g3
 
-target.extra = true
+#target.extra = true
 
 JINGLE_CPP = .
 INCLUDEPATH += $$JINGLE_CPP ../../src/voip
 unix:DEFINES += POSIX
+
+message($$DEFINES)
 
 win32 {
   DEFINES += WIN32
@@ -32,12 +32,12 @@ win32 {
   DEFINES += _SCL_SECURE_NO_DEPRECATE
   DEFINES += _CRT_SECURE_NO_DEPRECATE
 
-  DEFINES += COMPILER_MSVC
+  #DEFINES += COMPILER_MSVC
 #  QMAKE_CFLAGS += -EHsc
 #  QMAKE_CXXFLAGS += -EHsc
-  INCLUDEPATH += $$EXPATHDIR\lib \
-        $$OPENSSL_PREFIX\openssl\include
-# LIBS += $$EXPATHDIR\Bin\libexpat.lib
+  INCLUDEPATH += $$EXPATHDIR/Source/lib \
+        $$OPENSSL_PREFIX/openssl/include
+  LIBS += -L$$EXPATHDIR/Bin -lexpat
   SOURCES += $$JINGLE_CPP/talk/base/winfirewall.cc \
 	$$JINGLE_CPP/talk/base/winping.cc \
 }

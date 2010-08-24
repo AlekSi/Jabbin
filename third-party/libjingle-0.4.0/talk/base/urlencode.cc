@@ -1,3 +1,6 @@
+#include <string.h>
+#include <stdlib.h>
+
 #include "talk/base/common.h"
 #include "talk/base/urlencode.h"
 
