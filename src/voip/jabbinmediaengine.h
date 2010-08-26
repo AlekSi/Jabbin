@@ -23,7 +23,7 @@
 #include "talk/session/phone/mediaengine.h"
 #include "talk/session/phone/codec.h"
 
-#include <Qt3Support/Q3PtrQueue>
+#include <QQueue>
 
 class MediaStream;
 
@@ -51,7 +51,7 @@ class JabbinMediaChannel : public MediaChannel {
 
  private:
   MediaStream *mediaStream;
-  Q3PtrQueue<QByteArray> incomingPackets;
+  QQueue<QByteArray> incomingPackets;
 
   //pthread_t thread_;
   //int fd_;

@@ -4,7 +4,7 @@
 
 //DKZM TEMP:for Sleep
 //We need cross-platform sleep here
-#ifdef WIN32
+#ifdef Q_OS_WIN
 #include <windows.h>
 #else
 //this is Linux or Mac OS X (i.e.FreeBSD userspace)
@@ -100,7 +100,7 @@ void DTMFSender::sendNextCode()
 
     d->client->send( stanza );
 	//DKZM Temp Hack,Win32-only, linux support will be added later
-#ifdef WIN32
+#ifdef Q_OS_WIN
 	::Sleep(100);
 #else
 	::usleep(100*1000);//microseconds

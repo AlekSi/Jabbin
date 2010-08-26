@@ -126,7 +126,7 @@ public:
 		PsiIcon *icon = (PsiIcon *)IconsetFactory::iconPtr(iconName);
 
 		// second level -- transport icon
-		if ( jid.user().isEmpty() || option.useTransportIconsForContacts ) {
+                if ( jid.node().isEmpty() || option.useTransportIconsForContacts ) {
 			QMap<QString, QRegExp> services;
 			services["aim"]		= QRegExp("^aim");
 			services["gadugadu"]	= QRegExp("^gg");
@@ -141,7 +141,7 @@ public:
 			QMap<QString, QRegExp>::Iterator it = services.begin();
 			for ( ; it != services.end(); ++it) {
 				QRegExp rx = it.data();
-				if ( rx.search(jid.host()) != -1 ) {
+                                if ( rx.search(jid.domain()) != -1 ) {
 					// get the iconset name of the current service
 					QMap<QString, QString>::Iterator it2 = option.serviceRosterIconset.find(it.key());
 					if ( it2 != option.serviceRosterIconset.end() ) {
@@ -159,7 +159,7 @@ public:
 			}
 
 			// let's try the default transport iconset then...
-			if ( !found && jid.user().isEmpty() ) {
+                        if ( !found && jid.node().isEmpty() ) {
 				Iconset *is = psi->roster.find(option.serviceRosterIconset["transport"]);
 				if ( is ) {
 					PsiIcon *i = (PsiIcon *)is->icon(iconName);
@@ -173,7 +173,7 @@ public:
 		QMap<QString, QString>::Iterator it = option.customRosterIconset.begin();
 		for ( ; it != option.customRosterIconset.end(); ++it) {
 			QRegExp rx = QRegExp(it.key());
-			if ( rx.search(jid.userHost()) != -1 ) {
+                        if ( rx.search(jid.bare()) != -1 ) {
 				Iconset *is = psi->roster.find(it.data());
 				if ( is ) {
 					PsiIcon *i = (PsiIcon *)is->icon(iconName);

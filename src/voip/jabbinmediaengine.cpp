@@ -48,7 +48,7 @@ JabbinMediaChannel::JabbinMediaChannel()
   dying_ = false;
   SetInterface( NULL );
 
-  qDebug( "Network interface: %d", (void *)network_interface() );
+  qDebug( "Network interface: %p", (void *)network_interface() );
 
   mediaStream = new MediaStream(0);
 }
@@ -74,10 +74,10 @@ void JabbinMediaChannel::SetCodec(int pt) {
 */
   pt_ = pt;
   qDebug("set codec: , payload type: %d", pt_);
-  qDebug( "Network interface: %d", (void *)network_interface() );
+  qDebug( "Network interface: %p", (void *)network_interface() );
 
   mediaStream->stop();
-  mediaStream->start( &incomingPackets, this, pt_ );
+  mediaStream->start( incomingPackets, this, pt_ );
 }
 
 void JabbinMediaChannel::SetCodecs(const std::vector<Codec> &codecs)
@@ -108,8 +108,8 @@ void JabbinMediaChannel::OnPacketReceived(const void *data, int len)
   }
 
   if (play_ && buf[1] != 13) { // 13 == comfort noise
-      QByteArray *ba = new QByteArray(len);
-      memcpy( ba->data(), data, len );
+      QByteArray ba(len);
+      memcpy( ba.data(), data, len );
       incomingPackets.enqueue( ba );
       //DKZM:to free debug log
       //qDebug("enqueue incoming packet, size %d", len);

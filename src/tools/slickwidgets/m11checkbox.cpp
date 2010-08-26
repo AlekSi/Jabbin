@@ -22,7 +22,7 @@
 
 #include "m11checkbox.h"
 
-static char * combo_on_xpm[] = {
+static const char * combo_on_xpm[] = {
 "12 12 2 1",
 "   c None",
 ".  c #000000",
@@ -39,7 +39,7 @@ static char * combo_on_xpm[] = {
 ".          .",
 "............"};
 
-static char * combo_off_xpm[] = {
+static const char * combo_off_xpm[] = {
 "12 12 2 1",
 "   c None",
 ".  c #000000",
@@ -56,7 +56,7 @@ static char * combo_off_xpm[] = {
 ".          .",
 "............"};
 
-static char * combo_onoff_xpm[] = {
+static const char * combo_onoff_xpm[] = {
 "12 12 2 1",
 "   c None",
 ".  c #000000",

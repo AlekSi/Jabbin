@@ -89,13 +89,15 @@ jingle {
 
 	JINGLE_CPP = $$PWD/../third-party/libjingle-0.4.0
     
-    win32 {
-        CONFIG(debug, debug|release)   { LIBS += ../third-party/libjingle-0.4.0/Debug/jingle.lib }
-        CONFIG(release, debug|release) { LIBS += ../third-party/libjingle-0.4.0/Release/jingle.lib }    
-    }
+	win32 {
+		CONFIG(debug, debug|release)   { LIBS += ../third-party/libjingle-0.4.0/debug/libjingle.a }
+		CONFIG(release, debug|release) { LIBS += ../third-party/libjingle-0.4.0/release/libjingle.a }
+		#CONFIG(debug, debug|release)   { LIBS += ../third-party/libjingle-0.4.0/Debug/jingle.lib }
+		#CONFIG(release, debug|release) { LIBS += ../third-party/libjingle-0.4.0/Release/jingle.lib }
+	}
 	unix {
-	    LIBS += ../third-party/libjingle-0.4.0/libjingle.a
-    }
+		LIBS += ../third-party/libjingle-0.4.0/libjingle.a
+	}
 
 	include($$PWD/voip/voip.pri)
 

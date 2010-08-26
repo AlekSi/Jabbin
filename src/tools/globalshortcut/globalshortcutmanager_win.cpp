@@ -55,7 +55,7 @@ public:
 	 */
 	bool winEvent(MSG* m, long* result)
 	{
-		if (m->message == WM_HOTKEY && m->wParam == id_) {
+                if (m->message == WM_HOTKEY && m->wParam == (unsigned)id_) {
 			emit trigger_->activated();
 			return true;
 		}

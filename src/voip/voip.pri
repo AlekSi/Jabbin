@@ -19,19 +19,24 @@ unix:LIBS   += -lssl
 #win32:LIBS += -ljthread
 
 win32 {
-    INCLUDEPATH  += $$SPEEXDIR\include
-    LIBS         += $$SPEEXDIR\lib\libspeex.lib
+	DEFINES += WIN32
 
-    CONFIG(debug, debug|release)   { LIBS += ..\third-party\jrtplib\debug\jrtp.lib }
-    CONFIG(release, debug|release) { LIBS += ..\third-party\jrtplib\release\jrtp.lib }
-    
+	INCLUDEPATH  += $$SPEEXDIR/include
+	LIBS         += $$SPEEXDIR/libspeex/.libs/libspeex.a
+
+	#CONFIG(debug, debug|release)   { LIBS += ..\third-party\jrtplib\debug\jrtp.lib }
+	#CONFIG(release, debug|release) { LIBS += ..\third-party\jrtplib\release\jrtp.lib }
+	CONFIG(debug, debug|release)   { LIBS += -L..\third-party\jrtplib\debug\ -ljrtp }
+	CONFIG(release, debug|release) { LIBS += -L..\third-party\jrtplib\release\ -ljrtp }
+
     #LIBS += ..\third-party\iLBC\iLBC.lib
-}
 
 # PortAudio
-win32 {
-    CONFIG(debug, debug|release)   { LIBS += $$PORTAUDIODIR\lib\debug\portaudio_x86.lib   }
-    CONFIG(release, debug|release) { LIBS += $$PORTAUDIODIR\lib\release\portaudio_x86.lib }
+	INCLUDEPATH += $$PORTAUDIODIR\include
+
+	#CONFIG(debug, debug|release)   { LIBS += $$PORTAUDIODIR\lib\debug\portaudio_x86.lib   }
+	#CONFIG(release, debug|release) { LIBS += $$PORTAUDIODIR\lib\release\portaudio_x86.lib }
+	LIBS += -L$$PORTAUDIODIR/lib/.libs/ -lportaudio
 }
 unix {
     LIBS += -lportaudio
@@ -41,7 +46,6 @@ mac {
     # If portaudio is used as static
 	QMAKE_LFLAGS += -framework CoreAudio -framework AudioUnit -framework AudioToolbox -framework CoreFoundation -framework Carbon
 }
-INCLUDEPATH += $$PORTAUDIODIR\include
 
 HEADERS += \
 #    $$VOIP_CPP/callslog.h \

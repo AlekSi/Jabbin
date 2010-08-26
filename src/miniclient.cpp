@@ -89,7 +89,7 @@ void MiniClient::connectToServer(const Jid &jid, bool legacy_ssl_probe, bool leg
 				if (useHost)
 					u.addQueryItem("server",host + ':' + QString::number(port));
 				else
-					u.addQueryItem("server",jid.host());
+                                        u.addQueryItem("server",jid.domain());
 			}
 			p.setHttpPoll(pi.settings.host, pi.settings.port, u.toString());
 			p.setPollInterval(2);
@@ -162,7 +162,7 @@ void MiniClient::tls_handshaken()
 		while(1) {
 			int n = QMessageBox::warning(0,
 				tr("Server Authentication"),
-				tr("The %1 certificate failed the authenticity test.").arg(j.host()) + '\n' + tr("Reason: %1.").arg(str),
+                                tr("The %1 certificate failed the authenticity test.").arg(j.domain()) + '\n' + tr("Reason: %1.").arg(str),
 				tr("&Details..."),
 				tr("Co&ntinue"),
 				tr("&Cancel"), 0, 2);
@@ -195,7 +195,7 @@ void MiniClient::cs_securityLayerActivated(int)
 void MiniClient::cs_needAuthParams(bool user, bool password, bool realm)
 {
 	if(user) 
-		stream->setUsername(j.user());
+                stream->setUsername(j.node());
 	if(password)
 		stream->setPassword(pass);
 	if(realm)
@@ -205,7 +205,7 @@ void MiniClient::cs_needAuthParams(bool user, bool password, bool realm)
 
 void MiniClient::cs_authenticated()
 {
-	_client->start(j.host(), j.user(), "", "");
+        _client->start(j.domain(), j.node(), "", "");
 
 	if (!stream->old() && auth) {
 		JT_Session *j = new JT_Session(_client->rootTask());

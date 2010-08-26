@@ -14,7 +14,7 @@ INCLUDEPATH += . ../libjingle-0.4.0
 windows {
     INCLUDEPATH += $$PORTAUDIODIR\include
     DEFINES        += WIN32
-    *-msvc* {
+    win32-msvc* {
         QMAKE_CFLAGS   += -GR -GX -DWIN32
         QMAKE_CXXFLAGS += -GR -GX -DWIN32
     }

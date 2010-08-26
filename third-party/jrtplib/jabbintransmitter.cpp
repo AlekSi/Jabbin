@@ -20,9 +20,6 @@
 
 #include "jabbintransmitter.h"
 
-#include <Qt3Support/Q3CString>
-#include <Qt3Support/Q3PtrQueue>
-
 #include <string>
 #include <vector>
 
@@ -39,12 +36,11 @@ class JabbinTransmitter::Private
 {
 public:
     Private() {
-        incomingPackets = 0;
         mediaChannel = 0;
         rtpPacketsCount = 0;
     }
 
-    Q3PtrQueue<QByteArray> *incomingPackets;
+    QQueue<QByteArray> incomingPackets;
     cricket::MediaChannel *mediaChannel;
 
     int rtpPacketsCount;
@@ -195,7 +191,7 @@ int JabbinTransmitter::SetMaximumPacketSize(size_t s) { return 0; }
 
 bool JabbinTransmitter::NewDataAvailable()
 {
-    return !d->incomingPackets->isEmpty();
+    return !d->incomingPackets.isEmpty();
 }
 
 RTPRawPacket*  JabbinTransmitter::GetNextPacket()
@@ -203,17 +199,15 @@ RTPRawPacket*  JabbinTransmitter::GetNextPacket()
     if ( !NewDataAvailable() )
         return 0;
 
-    QByteArray *data = d->incomingPackets->dequeue();
-    int recvlen = data->size();
+    QByteArray data = d->incomingPackets.dequeue();
+    int recvlen = data.size();
     u_int8_t *datacopy =  new u_int8_t[recvlen+1];
-    memcpy(datacopy, data->data() ,recvlen);
+    memcpy(datacopy, data.data() ,recvlen);
 
     //RTPIPv4Address *addr = new RTPIPv4Address();
     RTPTime curtime = RTPTime::CurrentTime();
 
     RTPRawPacket *packet = new  RTPRawPacket(datacopy,recvlen,0,curtime,true);
-
-    delete data;
 
     return packet;
 }

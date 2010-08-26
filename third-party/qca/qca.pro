@@ -84,9 +84,6 @@ mac: {
 exists(../../conf.pri) {
 	include(../../conf.pri)
 }
-exists(../../conf_windows.pri) {
-	include(../../conf_windows.pri)
-}
 
 qc_universal:contains(QT_CONFIG,x86):contains(QT_CONFIG,ppc) {
 	CONFIG += x86 ppc

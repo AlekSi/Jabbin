@@ -1,5 +1,5 @@
-EXPATHDIR = c:\expat-2.0.1
-OPENSSL_PREFIX = c:\openssl
+EXPATHDIR = c:/expat-2.0.1
+OPENSSL_PREFIX = c:/openssl
 
 exists(../../conf.pri) {
 	include(../../conf.pri)

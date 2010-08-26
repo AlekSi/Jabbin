@@ -24,7 +24,7 @@ CONFIG  += qt thread x11 qt3support
 
 # end code coverage
 
-windows: include(../conf_windows.pri)
+windows: include(../conf.pri)
 
 yapsi_activex_server {
 	CONFIG  += qaxserver qaxcontainer
@@ -51,10 +51,6 @@ DEFINES += QT_STATICPLUGIN
 # generated files
 include(../qa/valgrind/valgrind.pri)
 include(../qa/oldtest/unittest.pri)
-
-# qconf
-
-include(../conf.pri)
 
 unix {
 	include(../conf.pri)
@@ -99,8 +95,9 @@ windows {
 	#QTPLUGIN += qjpeg qgif
 
 	# Expat
-	CONFIG(debug, debug|release)   { LIBS += $$EXPATHDIR\win32\bin\debug\libexpat.lib }
-	CONFIG(release, debug|release) { LIBS += $$EXPATHDIR\win32\bin\release\libexpat.lib }
+        #CONFIG(debug, debug|release)   { LIBS += $$EXPATHDIR\win32\bin\debug\libexpat.lib }
+        #CONFIG(release, debug|release) { LIBS += $$EXPATHDIR\win32\bin\release\libexpat.lib }
+        LIBS += -L$$EXPATHDIR/Bin -lexpat
 	
 #	QMAKE_CFLAGS	+= -GR -GX -DWIN32
 #	QMAKE_CXXFLAGS	+= -GR -GX -DWIN32

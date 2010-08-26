@@ -20,8 +20,8 @@
 #ifndef MEDIASTREAM_H
 #define MEDIASTREAM_H
 
-#include <qobject.h>
-#include <Qt3Support/Q3PtrQueue>
+#include <QObject>
+#include <QQueue>
 
 namespace cricket {
     class MediaChannel;
@@ -42,7 +42,7 @@ public:
     bool isRunning();
     
 public slots:   
-    void start( Q3PtrQueue<QByteArray> *incomingPackets, cricket::MediaChannel *mediaChannel, int codecPayload);
+    void start( QQueue<QByteArray> incomingPackets, cricket::MediaChannel *mediaChannel, int codecPayload);
     void stop();
     
     void timerClick();

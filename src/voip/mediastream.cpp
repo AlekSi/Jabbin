@@ -426,7 +426,7 @@ static int audioCallback(const void *inputBuffer, void *outputBuffer, unsigned l
 }
 
 // ---------------------------------------------------------------------------------------------
-void MediaStream::start(Q3PtrQueue<QByteArray> *incomingPackets, cricket::MediaChannel *mediaChannel, 
+void MediaStream::start(QQueue<QByteArray> incomingPackets, cricket::MediaChannel *mediaChannel,
 						int codecPayload)
 {
 	// check PA lib initialized

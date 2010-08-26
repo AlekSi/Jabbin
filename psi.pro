@@ -1,7 +1,6 @@
 TEMPLATE = subdirs
 
 include(conf.pri)
-windows:include(conf_windows.pri)
 
 jingle {
 	SUBDIRS += third-party/libjingle-0.4.0

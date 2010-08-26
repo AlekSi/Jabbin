@@ -169,7 +169,7 @@ void JingleClientSlots::requestSignaling()
 
 void JingleClientSlots::stateChanged(cricket::Call *call, cricket::Session *session, cricket::Session::State state)
 {
-    char* stateNames[] = {
+    const char* stateNames[] = {
         "STATE_INIT = 0",
         "STATE_SENTINITIATE, sent initiate, waiting for Accept or Reject",
         "STATE_RECEIVEDINITIATE, received an initiate. Call Accept or Reject",

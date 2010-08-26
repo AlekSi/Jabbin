@@ -2,9 +2,9 @@
 
 #define JABBIN_TRANSMITTER_H
 
+#include <QQueue>
+#include <QByteArray>
 #include "rtptransmitter.h"
-#include <Qt3Support/Q3CString>
-#include <Qt3Support/Q3PtrQueue>
 
 namespace cricket {
 class MediaChannel;
@@ -85,7 +85,7 @@ public:
 
 
     //void *incomingPackets; //QPtrQueue<QByteArray> *
-    Q3PtrQueue<QByteArray> * incomingPackets;
+    QQueue<QByteArray> incomingPackets;
     //cricket::MediaChannel::NetworkInterface *iface;
     //void *iface;           //cricket::MediaChannel::NetworkInterface *
     cricket::MediaChannel *mediaChannel;

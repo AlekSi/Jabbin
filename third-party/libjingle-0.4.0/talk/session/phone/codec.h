@@ -40,7 +40,7 @@ struct Codec {
 
  // Creates a codec with the given parameters.
   Codec(int pt, const std::string& nm, int cr, int br, int cs, int pr) : 
-    id(pt), name(nm), clockrate(cr), preference(pr), bitrate(br), channels(cs) {}
+    id(pt), name(nm), clockrate(cr), bitrate(br), channels(cs), preference(pr) {}
   // Ranks codecs by their preferences.
 };
 

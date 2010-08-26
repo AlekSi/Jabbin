@@ -29,7 +29,7 @@ using namespace XMPP;
 
 class PsiCon;
 class PsiAccount;
-class XMPP::Jid;
+//class XMPP::Jid;
 class PsiContact;
 
 class PsiContactList : public QObject

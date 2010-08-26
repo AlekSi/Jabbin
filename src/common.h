@@ -147,19 +147,19 @@ struct Options
 	bool useTransportIconsForContacts;
 
 	// roster sorting styles
-	typedef enum Roster_ContactSortStyle {
+        enum Roster_ContactSortStyle {
 		ContactSortStyle_Status = 0,
 		ContactSortStyle_Alpha
 	};
 	Roster_ContactSortStyle rosterContactSortStyle;
 
-	typedef enum Roster_GroupSortStyle {
+        enum Roster_GroupSortStyle {
 		GroupSortStyle_Alpha = 0,
 		GroupSortStyle_Rank
 	};
 	Roster_GroupSortStyle rosterGroupSortStyle;
 
-	typedef enum Roster_AccountSortStyle {
+        enum Roster_AccountSortStyle {
 		AccountSortStyle_Alpha = 0,
 		AccountSortStyle_Rank
 	};

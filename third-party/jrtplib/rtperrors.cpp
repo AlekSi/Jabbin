@@ -37,7 +37,7 @@
 struct RTPErrorInfo
 {
 	int code;
-	char *description;
+        const char *description;
 };
 
 static RTPErrorInfo ErrorDescriptions[]=

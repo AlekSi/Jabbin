@@ -115,7 +115,7 @@ void TabbableWidget::setJid(const Jid& j)
 
 const QString& TabbableWidget::getDisplayName()
 {
-	return jid_.user();
+        return jid_.node();
 }
 
 void TabbableWidget::closed()
