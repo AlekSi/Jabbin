@@ -1159,7 +1159,7 @@ void YaRosterContactsTab::addContactTextEntered(const QString& text)
 	}
 
 /*	QRegExp invalidJidRx(".*@.*@.*|\\s");
-	if (invalidJidRx.indexIn(c) != -1 || jid.node().isEmpty() || jid.host().isEmpty()) {
+	if (invalidJidRx.indexIn(c) != -1 || jid.node().isEmpty() || jid.domain().isEmpty()) {
 		addContactListView()->setError(tr("Invalid Jabber ID: %1")
 		                               .arg(c));
 		return;
@@ -1169,9 +1169,9 @@ void YaRosterContactsTab::addContactTextEntered(const QString& text)
 	foreach(PsiAccount* account, contactList->sortedEnabledAccounts()) {
 		if (!account->isAvailable())
 			continue;
-//		if (jid.host() != "yandex-team.ru")
+//		if (jid.domain() != "yandex-team.ru")
 //			continue;
-		if (account->jid().host() == jid.host()) {
+		if (account->jid().domain() == jid.domain()) {
 			acc = account;
 			break;
 		}
@@ -1243,7 +1243,7 @@ void YaRosterContactsTab::vcardFinished()
 	}
 
 	XMPP::JT_VCard* j = static_cast<XMPP::JT_VCard*>(sender());
-	QString nick = j->jid().user();
+	QString nick = j->jid().node();
 	if (j->success() && j->statusCode() == Task::ErrDisc) {
 		if (!j->vcard().nickName().isEmpty()) {
 			nick = j->vcard().nickName();

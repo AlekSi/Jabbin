@@ -92,7 +92,7 @@ void SocialPanel::Private::reload()
 
     web->setHtml("Loading...");
 
-    QString user = account->jid().user();
+    QString user = account->jid().node();
     // user = "stefanogrini";
     QUrl url(
         "http://www.jabbin.com/life/services/" + user + "/friends/" + filter + "/json/p/" + QString::number(currentPage)

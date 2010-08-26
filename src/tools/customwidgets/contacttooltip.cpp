@@ -133,7 +133,7 @@ void ContactTooltip::showContact(PsiContact * contact, const QRect & parent)
     if (contact->name() != contact->jid().bare()) {
         d->labelName->setText(contact->name());
     } else {
-        d->labelName->setText(contact->jid().user());
+        d->labelName->setText(contact->jid().node());
     }
     d->labelStatus->setText(Ya::statusFullText(contact->status().type()));
     if (!contact->picture().isNull()) {

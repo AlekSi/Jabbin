@@ -59,7 +59,7 @@ QIcon ServiceItem::m_xmppIcon;     // = QIcon(":/services/data/services/xmpp.png
 QIcon ServiceItem::m_yahooIcon;    // = QIcon(":/services/data/services/yahoo.png");
 
 ServiceItem::ServiceItem(ServiceItem * parent, DiscoItem data)
-    : QObject(parent), m_parent(parent), m_icon(), m_title(),
+	: QObject(parent), m_title(), m_icon(), m_parent(parent),
       m_itemLoaded(false), m_childrenLoaded(false), m_discoItem(data),
       m_type(ServicesModel::Generic)
 {
@@ -230,7 +230,7 @@ void ServiceItem::notifyUpdated()
 // XmppServiceItem
 XmppServiceItem::XmppServiceItem(ServiceItem * parent, QString server)
     : ServiceItem(parent, DiscoItem()),
-      m_waitingForInfo(false), contact(NULL)
+	  contact(NULL), m_waitingForInfo(false)
 {
     m_discoItem.setJid(server.stripWhiteSpace());
     m_discoItem.setNode(QString());
@@ -239,7 +239,7 @@ XmppServiceItem::XmppServiceItem(ServiceItem * parent, QString server)
 
 XmppServiceItem::XmppServiceItem(ServiceItem * parent, DiscoItem item)
     : ServiceItem(parent, item),
-      m_waitingForInfo(false), contact(NULL)
+	  contact(NULL), m_waitingForInfo(false)
 {
     if (parent) {
         m_type = parent->type() + 1;
@@ -598,7 +598,7 @@ ServicesModel::ServicesModel(PsiAccount * psiAccount, QObject * parent)
 
     qDebug() << "Setting service domain to" <<
         psiAccount->jid().domain();
-    d->root->addService(psiAccount->jid().host());
+	d->root->addService(psiAccount->jid().domain());
 
     // DiscoDlg * dlg = new DiscoDlg(psiAccount, psiAccount->jid(), QString());
     // dlg->show();

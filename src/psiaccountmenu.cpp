@@ -95,7 +95,7 @@ public:
 private:
 	void sendAnnounceMessage(QString destination)
 	{
-		Jid j = account->jid().host() + '/' + destination;
+		Jid j = account->jid().domain() + '/' + destination;
 		account->actionSendMessage(j);
 	}
 
@@ -112,7 +112,7 @@ private slots:
 
 	void serviceDiscovery()
 	{
-		XMPP::Jid j = account->jid().host();
+		XMPP::Jid j = account->jid().domain();
 		account->actionDisco(j, "");
 	}
 
@@ -134,7 +134,7 @@ private slots:
 	void onlineUsers()
 	{
 		// FIXME: will it still work on XMPP servers?
-		XMPP::Jid j = account->jid().host() + '/' + "admin";
+		XMPP::Jid j = account->jid().domain() + '/' + "admin";
 		account->actionDisco(j, "");
 	}
 
@@ -155,7 +155,7 @@ private slots:
 
 	void deleteMOTD()
 	{
-		Jid j = account->jid().host() + '/' + "announce/motd/delete";
+		Jid j = account->jid().domain() + '/' + "announce/motd/delete";
 		Message m;
 		m.setTo(j);
 		account->dj_sendMessage(m, false);

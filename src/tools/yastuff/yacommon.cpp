@@ -99,7 +99,7 @@ bool Ya::isYaInformer(PsiEvent* event)
 
 bool Ya::isYaJid(const XMPP::Jid& jid)
 {
-	return jid.host() == "jabbin.com";
+	return jid.domain() == "jabbin.com";
 }
 
 static const QChar& friendsChar()
@@ -474,7 +474,7 @@ const QString Ya::history(const PsiAccount* me, const XMPP::Jid& interlocutor)
 const void Ya::showHistory(const PsiAccount* me, const XMPP::Jid& interlocutor)
 {
 	Q_ASSERT(me);
-	QFile file(QDir::tempPath() + "/" + STR_YAPSI_HISTORY.arg(interlocutor.user().toLower()).arg(interlocutor.host().toLower()));
+	QFile file(QDir::tempPath() + "/" + STR_YAPSI_HISTORY.arg(interlocutor.node().toLower()).arg(interlocutor.domain().toLower()));
 	if (file.open(QFile::WriteOnly)) {
 		QTextStream out(&file);
 		out.setCodec("UTF-8");

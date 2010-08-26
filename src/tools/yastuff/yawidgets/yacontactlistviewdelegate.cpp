@@ -127,7 +127,7 @@ void YaContactListViewDelegate::drawName(QPainter* painter, const QStyleOptionVi
 			o2.rect.setLeft(o2.rect.left() + o2.fontMetrics.width(jid.node()));
 			o2.palette.setColor(QPalette::HighlightedText, Qt::gray);
 			o2.palette.setColor(QPalette::Text, Qt::gray);
-			drawText(painter, o2, o2.rect, QString("@") + jid.host(), index);
+			drawText(painter, o2, o2.rect, QString("@") + jid.domain(), index);
 		}
 #endif
 		return;

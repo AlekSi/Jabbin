@@ -269,7 +269,7 @@ PsiAccount* YaLoginPage::getAccount() const
 	Q_ASSERT(contactList_);
 
 	foreach(PsiAccount* account, contactList_->accounts()) {
-		if (account->jid().userHost() == login())
+		if (account->jid().bare() == login())
 			return account;
 	}
 

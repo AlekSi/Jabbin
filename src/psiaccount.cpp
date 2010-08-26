@@ -2255,7 +2255,7 @@ void PsiAccount::getBookmarks_success(const QList<URLBookmark>&, const QList<Con
 		return;
 
 	foreach(ConferenceBookmark c, conferences) {
-		if (!findDialog<GCMainDlg*>(Jid(c.jid().userHost())) && c.autoJoin()) {
+		if (!findDialog<GCMainDlg*>(Jid(c.jid().bare())) && c.autoJoin()) {
 			QString nick = c.nick();
 			if (nick.isEmpty())
 				nick = d->jid.node();
@@ -2592,7 +2592,7 @@ void PsiAccount::processIncomingMessage(const Message &_m)
 		if (!GCMainDlg::mucEnabled())
 			return;
 
-		GCMainDlg *w = findDialog<GCMainDlg*>(Jid(_m.from().userHost()));
+		GCMainDlg *w = findDialog<GCMainDlg*>(Jid(_m.from().bare()));
 		if(w)
 			w->message(_m);
 		return;
@@ -2626,7 +2626,7 @@ void PsiAccount::processIncomingMessage(const Message &_m)
 			if (!GCMainDlg::mucEnabled())
 				return;
 
-			GCMainDlg *w = findDialog<GCMainDlg*>(Jid(_m.from().userHost()));
+			GCMainDlg *w = findDialog<GCMainDlg*>(Jid(_m.from().bare()));
 			if(!w)
 			{
 				return;

@@ -32,11 +32,12 @@ win32 {
     #LIBS += ..\third-party\iLBC\iLBC.lib
 
 # PortAudio
-	INCLUDEPATH += $$PORTAUDIODIR\include
+	INCLUDEPATH += $$PORTAUDIODIR/include
 
 	#CONFIG(debug, debug|release)   { LIBS += $$PORTAUDIODIR\lib\debug\portaudio_x86.lib   }
 	#CONFIG(release, debug|release) { LIBS += $$PORTAUDIODIR\lib\release\portaudio_x86.lib }
-	LIBS += -L$$PORTAUDIODIR/lib/.libs/ -lportaudio
+	LIBS += -L$$PORTAUDIODIR/lib/.libs -lportaudio
+	LIBS += -liphlpapi -lwinmm
 }
 unix {
     LIBS += -lportaudio

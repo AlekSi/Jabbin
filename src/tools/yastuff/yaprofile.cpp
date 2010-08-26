@@ -52,7 +52,7 @@ static const QString S_NICK_TEMPLATE = "<a href='%1'><span style='color: red;'>%
 YaProfile::YaProfile(PsiAccount* account, const XMPP::Jid& jid)
 	: QObject(account)
 	, account_(account)
-	, jid_(jid.userHost())
+	, jid_(jid.bare())
 	, lastMessage_(QDateTime::currentDateTime().addDays(-1))
 {
 	init();
@@ -153,7 +153,7 @@ QString YaProfile::name() const
 
 const QString& YaProfile::username() const
 {
-	return jid().user();
+	return jid().node();
 }
 
 // void YaProfile::setName(const QString & neu)

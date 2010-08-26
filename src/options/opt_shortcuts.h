@@ -39,13 +39,13 @@ public:
 	void applyOptions(Options *opt);
 	void restoreOptions(const Options *opt);
 
-	typedef enum Kind {
+	enum Kind {
 		TopLevelItem = 1,
 		ShortcutItem,
 		KeyItem
 	};
 
-	bool stretchable() const {return true;};
+	bool stretchable() const {return true;}
 
 private slots:
 	void onAdd();

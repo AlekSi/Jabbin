@@ -113,8 +113,8 @@ bool AccountInformerModel::setData(const QModelIndex& index, const QVariant& dat
 			}
 			else {
 				XMPP::Jid jid(data.toString());
-				if (!jid.user().isEmpty() && !jid.host().isEmpty() && jid.resource().isEmpty()) {
-					ua.jid = jid.userHost();
+				if (!jid.node().isEmpty() && !jid.domain().isEmpty() && jid.resource().isEmpty()) {
+					ua.jid = jid.bare();
 				}
 			}
 			account->setUserAccount(ua);
@@ -313,7 +313,7 @@ void AccountInformerModel::updateAccount(PsiAccount* account)
 {
 	Q_ASSERT(accounts_.contains(account));
 	QStandardItem* item = accounts_[account];
-	item->setText(account->jid().userHost());
+	item->setText(account->jid().bare());
 	item->setData(QVariant(account->enabled()), EnabledRole);
 	XMPP::Status::Type status = account->status().type();
 	if (!account->isAvailable())

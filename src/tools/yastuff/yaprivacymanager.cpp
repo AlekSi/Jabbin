@@ -30,7 +30,7 @@ static const QString BLOCKED_LIST_NAME = "blocked";
 
 static XMPP::Jid processJid(const XMPP::Jid& jid)
 {
-	return jid.userHost();
+	return jid.bare();
 }
 
 static bool privacyListItemForJid(const PrivacyListItem& item, const Jid& jid)

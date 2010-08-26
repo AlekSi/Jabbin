@@ -91,11 +91,11 @@ public:
 #endif
 
 	/**
-	 * Returns userHost of the base jid combined with \param resource.
+	 * Returns bare of the base jid combined with \param resource.
 	 */
 	Jid jidForResource(const QString& resource)
 	{
-		QString s = u_.jid().userHost();
+		QString s = u_.jid().bare();
 		if (!resource.isEmpty()) {
 			s += '/';
 			s += resource;

@@ -69,7 +69,7 @@ public:
 	static WPARAM raiseCommand;	// = 1
 
 	// WM_COPYDATA
-	static const int stringListMessage = 1;
+	static const unsigned stringListMessage = 1;
 
 	bool sendMessage(const QString &to, UINT message, WPARAM wParam, LPARAM lParam) const;
 	bool winEvent(MSG *msg, long *result);
