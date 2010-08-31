@@ -27,6 +27,9 @@
 
 #include "talk/base/win32.h"
 #define SECURITY_WIN32
+#ifdef __MINGW32__
+#include <winerror.h>
+#endif
 #include <security.h>
 #include <schannel.h>
 

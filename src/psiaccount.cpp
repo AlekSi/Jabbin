@@ -301,8 +301,8 @@ public:
 		, rcSetOptionsServer(0)
 		, rcForwardServer(0)
 		, avatarFactory(0)
-		, voiceCaller(0)
 		, reconnDelay(5000)
+		, voiceCaller(0)
 		, tabManager(0)
 #ifdef GOOGLE_FT
 		, googleFTManager(0)
@@ -3372,9 +3372,8 @@ void PsiAccount::simulateContactOffline(UserListItem *u)
 		for(UserResourceList::ConstIterator rit = rl.begin(); rit != rl.end(); ++rit) {
 			const UserResource &r = *rit;
 			Jid j = u->jid();
-			if(u->jid().resource().isEmpty())
-				j.setResource(r.name());
-			client_resourceUnavailable(j, r);
+			client_resourceUnavailable(j.resource().isEmpty()?
+									   j.withResource(r.name()):j, r);
 		}
 	}
 	u->setLastUnavailableStatus(makeStatus(STATUS_OFFLINE,""));
@@ -3396,10 +3395,9 @@ void PsiAccount::simulateRosterOffline()
 		UserResourceList rl = u->userResourceList();
 		for(UserResourceList::ConstIterator rit = rl.begin(); rit != rl.end(); ++rit) {
 			Jid j = u->jid();
-			if(u->jid().resource().isEmpty())
-				j.setResource((*rit).name());
 			u->setPresenceError("");
-			client_resourceUnavailable(j, *rit);
+			client_resourceUnavailable(j.resource().isEmpty()?
+									   j.withResource((*rit).name()) : j, *rit);
 		}
 	}
 
@@ -3594,9 +3592,7 @@ void PsiAccount::cpUpdate(const UserListItem &u, const QString &rname, bool from
 
 	d->updateEntry(u);
 	emit updateContact(u);
-	Jid j = u.jid();
-	if(!rname.isEmpty())
-		j.setResource(rname);
+	Jid j = rname.isEmpty()? u.jid() : u.jid().withResource(rname);
 	emit updateContact(j);
 	emit updateContact(j, fromPresence);
 	d->psi->updateContactGlobal(this, j);
@@ -3824,7 +3820,7 @@ void PsiAccount::actionExecuteCommand(const Jid& j, const QString& node)
 	if(j.resource().isEmpty()) {
 		UserListItem *u = find(j);
 		if(u && u->isAvailable())
-			j2.setResource((*u->userResourceList().priority()).name());
+			j2 = j2.withResource((*u->userResourceList().priority()).name());
 	}
 
 	actionExecuteCommandSpecific(j2, node);

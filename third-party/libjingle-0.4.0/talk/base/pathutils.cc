@@ -26,7 +26,6 @@
  */
 
 #ifdef WIN32
-#define _WIN32_IE 0x0400
 #include "talk/base/win32.h"
 #include <shellapi.h>
 #include <shlobj.h>

@@ -21,8 +21,6 @@ JINGLE_CPP = .
 INCLUDEPATH += $$JINGLE_CPP ../../src/voip
 unix:DEFINES += POSIX
 
-message($$DEFINES)
-
 win32 {
   DEFINES += WIN32
   DEFINES += _WINDOWS
@@ -74,16 +72,18 @@ SOURCES += \
 	$$JINGLE_CPP/talk/base/httpclient.cc \
 	$$JINGLE_CPP/talk/base/diskcache.cc \
 	$$JINGLE_CPP/talk/base/firewallsocketserver.cc \
-	$$JINGLE_CPP/talk/base/openssladapter.cc \
 	$$JINGLE_CPP/talk/base/pathutils.cc \
 	$$JINGLE_CPP/talk/base/fileutils.cc \
 	$$JINGLE_CPP/talk/base/tarstream.cc \
 	$$JINGLE_CPP/talk/base/urlencode.cc \
 	$$JINGLE_CPP/talk/base/time.cc
 
-unix:SOURCES += $$JINGLE_CPP/talk/base/unixfilesystem.cc
+unix {
+	SOURCES += $$JINGLE_CPP/talk/base/unixfilesystem.cc \
+				$$JINGLE_CPP/talk/base/openssladapter.cc
+}
 win32:SOURCES += $$JINGLE_CPP/talk/base/win32filesystem.cc
-#win32:SOURCES += $$JINGLE_CPP/talk/base/schanneladapter.cc
+win32:SOURCES += $$JINGLE_CPP/talk/base/schanneladapter.cc
 
 
 # Not needed ?

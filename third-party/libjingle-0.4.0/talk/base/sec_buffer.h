@@ -30,6 +30,9 @@
 #ifndef TALK_BASE_SEC_BUFFER_H__
 #define TALK_BASE_SEC_BUFFER_H__
 
+#include <assert.h>
+#include <security.h>
+
 namespace talk_base {
 
 // A base class for CSecBuffer<T>. Contains
@@ -98,7 +101,7 @@ class CSecBuffer: public CSecBufferBase {
 
     // This class must not extend the size of SecBuffer, since
     // we use arrays of CSecBuffer in CSecBufferBundle below
-    cassert(sizeof(CSecBuffer<SSPIFree> == sizeof(SecBuffer)));
+	//cassert(sizeof(CSecBuffer<SSPIFree> == sizeof(SecBuffer)));
   }
 };
 
