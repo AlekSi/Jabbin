@@ -8,7 +8,7 @@ DEFINES += YAPSI
 # DEFINES += YAPSI_YARU_FRIENDS
 
 # DEFINES += YAPSI_FANCY_DELETE_CONFIRMATIONS
-# INTERFACES += \
+# FORMS += \
 # 	$$PWD/yamulticontactconfirmationtiplabel.ui
 # HEADERS += \
 # 	$$PWD/yamulticontactconfirmationtiplabel.h \
@@ -118,7 +118,7 @@ RESOURCES += \
 	$$PWD/yaiconsets.qrc \
 	$$PWD/../../../iconsets/custom/customicons.qrc
 
-INTERFACES += \
+FORMS += \
 	$$PWD/yaloginpage.ui \
 	$$PWD/yamainwindow.ui \
 	$$PWD/yachatdialog.ui \
@@ -133,5 +133,5 @@ HEADERS -= \
 SOURCES -= \
 	$$PWD/../../accountmodifydlg.cpp
 
-INTERFACES -= \
+FORMS -= \
 	$$PWD/../../accountmodify.ui

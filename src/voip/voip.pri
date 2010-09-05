@@ -26,8 +26,8 @@ win32 {
 
 	#CONFIG(debug, debug|release)   { LIBS += ..\third-party\jrtplib\debug\jrtp.lib }
 	#CONFIG(release, debug|release) { LIBS += ..\third-party\jrtplib\release\jrtp.lib }
-	CONFIG(debug, debug|release)   { LIBS += -L..\third-party\jrtplib\debug\ -ljrtp }
-	CONFIG(release, debug|release) { LIBS += -L..\third-party\jrtplib\release\ -ljrtp }
+	CONFIG(debug, debug|release)   { LIBS += -L../third-party/jrtplib/debug -ljrtp }
+	CONFIG(release, debug|release) { LIBS += -L../third-party/jrtplib/release -ljrtp }
 
     #LIBS += ..\third-party\iLBC\iLBC.lib
 
@@ -80,4 +80,4 @@ SOURCES += \
     $$VOIP_CPP/jabbinmediaengine.cpp \
 #    $$VOIP_CPP/callslogdialogbase.cpp
 
-#INTERFACES += $$VOIP_CPP/callslogdialogbase.ui
+#FORMS += $$VOIP_CPP/callslogdialogbase.ui

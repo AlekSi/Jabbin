@@ -35,7 +35,7 @@ win32 {
 #  QMAKE_CXXFLAGS += -EHsc
   INCLUDEPATH += $$EXPATHDIR/Source/lib \
         $$OPENSSL_PREFIX/openssl/include
-  LIBS += -L$$EXPATHDIR/Bin -lexpat
+  LIBS += -L$$EXPATHDIR/Bin -lexpat -loleaut32 -lole32 -lsecur32
   SOURCES += $$JINGLE_CPP/talk/base/winfirewall.cc \
 	$$JINGLE_CPP/talk/base/winping.cc \
 }

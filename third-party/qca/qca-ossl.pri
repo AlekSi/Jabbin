@@ -1,5 +1,5 @@
 SOURCES += $$PWD/qca-ossl/qca-ossl.cpp
 
 windows {
-	LIBS += -lgdi32 -lwsock32 -llibeay32 -lssleay32
+	LIBS += -lssl -lcrypto -lws2_32 -lgdi32 -lcrypt32
 }

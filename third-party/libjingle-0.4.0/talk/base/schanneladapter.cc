@@ -634,7 +634,7 @@ SChannelAdapter::Close() {
     sb_in[0].BufferType = SECBUFFER_TOKEN;
     sb_in[0].cbBuffer = sizeof(token);
     sb_in[0].pvBuffer = &token;
-    ApplyControlToken(&impl_->ctx, sb_in.desc());
+	ApplyControlToken(&impl_->ctx, sb_in.desc());
     // TODO: In theory, to do a nice shutdown, we need to begin shutdown
     // negotiation with more calls to InitializeSecurityContext.  Since the
     // socket api doesn't support nice shutdown at this point, we don't bother.

@@ -403,7 +403,7 @@ groupchat {
 		$$PWD/groupchatdlg.cpp \
 		$$PWD/gcuserview.cpp
 
-	INTERFACES += \
+	FORMS += \
 		$$PWD/groupchatdlg.ui
 }
 
@@ -438,7 +438,7 @@ mac {
 }
 
 # Qt Designer interfaces
-INTERFACES += \
+FORMS += \
 	$$PWD/profileopen.ui \
 	$$PWD/profilemanage.ui \
 	$$PWD/profilenew.ui \

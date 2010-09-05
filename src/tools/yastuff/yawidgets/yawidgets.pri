@@ -79,7 +79,7 @@ HEADERS += \
 	$$PWD/../../customwidgets/generic/tooltipwindow.h \
 	$$PWD/../../customwidgets/generic/customwidgetscommon.h
 
-INTERFACES += \
+FORMS += \
 	$$PWD/../../customwidgets/generic/dialpad_base.ui \
 	$$PWD/../../customwidgets/generic/notificationpanel_base.ui \
 	$$PWD/../../services/servicespanel_base.ui \
@@ -226,6 +226,6 @@ SOURCES += \
 	$$PWD/fadingmultilinelabeltest/fadingmultilinelabel.cpp \
 	$$PWD/yachatsendbutton.cpp
 
-INTERFACES += \
+FORMS += \
 	$$PWD/../yaeventnotifier.ui \
 	$$PWD/yamanageaccounts.ui

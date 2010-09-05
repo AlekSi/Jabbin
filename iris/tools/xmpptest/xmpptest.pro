@@ -7,4 +7,4 @@ QT += xml network
 include(../../iris.pri)
 
 SOURCES += xmpptest.cpp
-INTERFACES += test.ui
+FORMS += test.ui

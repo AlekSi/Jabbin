@@ -5,7 +5,7 @@ HEADERS += \
 SOURCES += \
 	$$PWD/optionstab.cpp \
 	$$PWD/optionsdlg.cpp 
-INTERFACES += \
+FORMS += \
 	$$PWD/ui_options.ui
 
 
@@ -40,7 +40,7 @@ SOURCES += \
 
 SOURCES += $$PWD/opt_tree.cpp
 
-INTERFACES += \
+FORMS += \
 	$$PWD/opt_application.ui \
 	$$PWD/opt_chat.ui \
 	$$PWD/opt_events.ui \
@@ -59,7 +59,7 @@ INTERFACES += \
 	$$PWD/opt_shortcuts.ui
 
 psi_plugins {
-	INTERFACES += $$PWD/opt_plugins.ui
+	FORMS += $$PWD/opt_plugins.ui
 	SOURCES += $$PWD/opt_plugins.cpp
 	HEADERS += $$PWD/opt_plugins.h
 }
