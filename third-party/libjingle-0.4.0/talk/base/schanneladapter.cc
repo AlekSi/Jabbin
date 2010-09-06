@@ -28,6 +28,8 @@
 #include "talk/base/win32.h"
 #define SECURITY_WIN32
 #ifdef __MINGW32__
+typedef struct _SYSTEMTIME *PSYSTEMTIME;
+typedef struct _SYSTEMTIME *LPSYSTEMTIME;
 #include <winerror.h>
 #endif
 #include <security.h>
@@ -41,6 +43,23 @@
 #include "talk/base/schanneladapter.h"
 #include "talk/base/sec_buffer.h"
 #include "talk/base/thread.h"
+
+#ifdef __MINGW32__
+#define SECPKG_ATTR_SUPPORTED_ALGS 0x56
+#define SECPKG_ATTR_CIPHER_STRENGTHS 0x57
+
+#define SECBUFFER_NEGOTIATION_INFO 8
+#define SECBUFFER_MECHLIST 11
+#define SECBUFFER_MECHLIST_SIGNATURE 12
+#define SECBUFFER_TARGET 13
+#define SECBUFFER_CHANNEL_BINDINGS 14
+
+typedef struct _SecPkgCred_CipherStrengths {
+  DWORD dwMinimumCipherStrength;
+  DWORD dwMaximumCipherStrength;
+} SecPkgCred_CipherStrengths,*PSecPkgCred_CipherStrengths;
+
+#endif
 
 namespace talk_base {
 
@@ -634,7 +653,7 @@ SChannelAdapter::Close() {
     sb_in[0].BufferType = SECBUFFER_TOKEN;
     sb_in[0].cbBuffer = sizeof(token);
     sb_in[0].pvBuffer = &token;
-    ApplyControlToken(&impl_->ctx, sb_in.desc());
+//	ApplyControlToken(&impl_->ctx, sb_in.desc());
     // TODO: In theory, to do a nice shutdown, we need to begin shutdown
     // negotiation with more calls to InitializeSecurityContext.  Since the
     // socket api doesn't support nice shutdown at this point, we don't bother.
