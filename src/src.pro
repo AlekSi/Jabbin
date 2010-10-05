@@ -31,11 +31,19 @@ yapsi_activex_server {
 	contains(CONFIG, static): DEFINES += QT_NODLL
 
 	# DEF_FILE = ../win32/jabbinpsiserver.def
-	RC_FILE  = ../win32/jabbinpsiserver.rc
+	contains(QMAKE_HOST.arch, x86_64) {
+		RC_FILE  = ../win64/jabbinpsiserver.rc
+	} else {
+		RC_FILE  = ../win32/jabbinpsiserver.rc
+	}
 }
 
-!yapsi_activex_server {
-	win32: RC_FILE = ../win32/psi_win32.rc
+!yapsi_activex_server:win32 {
+	contains(QMAKE_HOST.arch, x86_64) {
+		RC_FILE = ../win64/psi.rc
+	} else {
+		RC_FILE = ../win32/psi.rc
+	}
 }
 
 QT += xml network qt3support phonon script webkit

@@ -1,0 +1,4 @@
+IDI_ICON1 ICON DISCARDABLE "../win32/jabbin.ico"
+1 24 "psi.manifest"
+
+#include "../win32/jabbinpsi_version.rc"
