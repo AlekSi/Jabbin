@@ -16,16 +16,22 @@ public:
 	QString checkString() const { return QString(); }
 	bool exec()
 	{
-		conf->addExtra(QString("PSI_DATADIR=%1/yachat").arg(conf->getenv("DATADIR")));
+#ifdef Q_OS_WIN
+		return true;
+#else
+		conf->addExtra(QString("PSI_LIBDIR=%1/jabbin").arg(conf->getenv("LIBDIR")));
+		conf->addExtra(QString("PSI_DATADIR=%1/jabbin").arg(conf->getenv("DATADIR")));
 
 		QFile file("src/config.h");
 		if ( file.open(QIODevice::WriteOnly | QIODevice::Text) ) {
 			QTextStream stream( &file );
-			stream << "#define PSI_DATADIR \"" << conf->getenv("DATADIR") << "/yachat\"" << endl;
+			stream << "#define PSI_LIBDIR \"" << conf->getenv("LIBDIR") << "/jabbin\"" << endl;
+			stream << "#define PSI_DATADIR \"" << conf->getenv("DATADIR") << "/jabbin\"" << endl;
 		}
-		
+
 		conf->addDefine("HAVE_CONFIG");
-		
+
 		return true;
+#endif
 	}
 };

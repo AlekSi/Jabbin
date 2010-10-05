@@ -73,10 +73,10 @@ public:
 			if(QFile::exists(conf->getenv("PREFIX") + "/certs/rootcerts.pem"))
 				path = "$$PREFIX/certs/rootcerts.pem";
 			else
-				path = "$$DATADIR/yachat/certs/rootcerts.pem";
+				path = "$$DATADIR/jabbin/certs/rootcerts.pem";
 
 			QString extra =
-			"qcasharedfiles.path = $$DATADIR/yachat\n"
+			"qcasharedfiles.path = $$DATADIR/jabbin\n"
 			"qcasharedfiles.files = third-party/qca/qca/certs\n"
 			"INSTALLS += qcasharedfiles\n";
 			conf->addExtra(extra);

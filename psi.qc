@@ -3,8 +3,12 @@
   <profile>psi.pro</profile>
   <sharename>psi</sharename>
   <moddir>qcm</moddir>
+  <libdir/>
   <datadir/>
   <dep type='qt4'>
+    <required/>
+  </dep>
+  <dep type='buildmodeapp'>
     <required/>
   </dep>
   <dep type='bundled-qca' />
@@ -19,21 +23,22 @@
     <disabled/>  
   </dep>
   <dep type='certstore'>
-	<required/>
+    <required/>
   </dep>
   <dep type='qdbus'/>
   <dep type='growl'/>
+  <!--<dep type='sparkle'/>-->
   <dep type='xss'/>
-  <dep type='dnotify'/>
-  <dep type='ghbnr'/>
   <dep type='aspell'/>
-  <dep type='tests'>
-    <disabled/>
+  <dep type='enchant'/>
+  <dep type='spell'>
+    <required/>
   </dep>
-  <dep type='debug'>
-	<required/>
-  </dep>
+  <dep type='plugins'><disabled/></dep>
   <dep type='conf'>
-	<required/>
+    <required/>
+  </dep>
+  <dep type='recursiveprl'>
+    <required/>
   </dep>
 </qconf>
