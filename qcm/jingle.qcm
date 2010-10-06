@@ -34,9 +34,9 @@ public:
 		QString s;
 		
 		// Check if Jingle was enabled explicitly
-		s = conf->getenv("QC_ENABLE_JINGLE");
-		if(s.isEmpty())
-			return false;
+		//s = conf->getenv("QC_ENABLE_JINGLE");
+		//if(s.isEmpty())
+		//	return false;
 		
 		// Expat
 		s = conf->getenv("QC_WITH_EXPAT_INC");

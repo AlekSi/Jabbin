@@ -25,6 +25,9 @@
   <dep type='certstore'>
     <required/>
   </dep>
+  <dep type='jingle'>
+    <required/>
+  </dep>
   <dep type='qdbus'/>
   <dep type='growl'/>
   <!--<dep type='sparkle'/>-->
